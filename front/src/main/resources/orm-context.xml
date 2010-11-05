@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<util:properties id="jdbcProperties" location="classpath:hibernate.properties"/>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		  p:dataSource-ref="dataSource" p:hibernateProperties="jdbcProperties">
+		<property name="annotatedClasses">
+			<list>
+				<value>com.noname.domain.Translation</value>
+
+				<value>com.noname.domain.security.Account</value>
+				<value>com.noname.domain.security.Role</value>
+				<value>com.noname.domain.security.Permission</value>
+
+				<value>com.noname.domain.common.Level</value>
+				<value>com.noname.domain.common.Card</value>
+				<value>com.noname.domain.common.Effect</value>
+				<value>com.noname.domain.common.EffectCard</value>
+				<value>com.noname.domain.common.Summon</value>
+				<value>com.noname.domain.common.SummonCard</value>
+
+				<value>com.noname.domain.player.Hero</value>
+				<value>com.noname.domain.player.HeroCard</value>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate"
+		  p:sessionFactory-ref="sessionFactory"/>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		  p:dataSource-ref="dataSource"/>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		  p:sessionFactory-ref="sessionFactory"/>
+
+	<bean id="entityRepository" class="ga.domain.repository.hibernate.HibernateEntityRepository"
+		  p:hibernateTemplate-ref="hibernateTemplate">
+		<property name="filterProcessor">
+			<bean class="ga.domain.repository.CompositeFilterProcessor">
+				<constructor-arg>
+					<list>
+						<bean class="ga.domain.repository.DefaultFilterProcessor"/>
+						<bean class="ga.domain.i18n.TranslationFilterProcessor"/>
+
+						<!--<bean class="itdep.services.NamedEntityFilterProcessor"/>-->
+						<!--<bean class="itdep.services.CodedEntityFilterProcessor"/>-->
+
+						<!--<bean class="itdep.services.security.AccountFilterProcessor"/>-->
+					</list>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

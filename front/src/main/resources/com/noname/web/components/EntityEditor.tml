@@ -1,0 +1,10 @@
+<div t:id="panel"
+	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	 xmlns:c="tapestry-library:common">
+
+	<div t:id="details">
+		<div t:id="viewStack">
+			<t:body/>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<html t:type="layout" title="hero-create-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<t:form t:id="createForm">
+	<t:entityeditor state="literal:add" object="record" actions="create,cancel">
+		<c:detailsrow property="name" validate="required"/>
+
+		<c:detailsrow property="rating" editable="false"/>
+		<c:detailsrow property="level">${record.level:description}</c:detailsrow>
+
+		<c:detailsrow property="attack" editable="false"/>
+		<c:detailsrow property="defence" editable="false"/>
+
+		<p:createMenuItem>
+			<t:linksubmit event="create">${message:create-label}</t:linksubmit>
+		</p:createMenuItem>
+	</t:entityeditor>
+</t:form>
+
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="">
+	<Resource name="jdbc/nonamedb" auth="Container" type="javax.sql.DataSource"
+			  driverClassName="com.mysql.jdbc.Driver"
+			  url="jdbc:mysql://localhost:3306/nonamedb"
+			  username="root" password="123"
+			  maxActive="150" maxIdle="15" maxWait="10000"
+			/>
+</Context>

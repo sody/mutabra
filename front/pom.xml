@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.noname</groupId>
+		<artifactId>noname-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<name>NoName Game Front Module</name>
+	<groupId>com.noname</groupId>
+	<artifactId>noname-front</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/config</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>src/test/config</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<classifier>${jdbc.profile}</classifier>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<configuration>
+					<contextPath>/noname</contextPath>
+					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
+					<jettyEnvXml>${project.build.directory}/classes/jetty-env.xml</jettyEnvXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.noname</groupId>
+			<artifactId>noname-back</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.greata</groupId>
+			<artifactId>greatage-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.greata</groupId>
+			<artifactId>greatage-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.greata</groupId>
+			<artifactId>greatage-domain</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.greata</groupId>
+			<artifactId>greatage-tapestry</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-ioc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-spring</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

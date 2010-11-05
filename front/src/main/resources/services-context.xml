@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<bean id="translationService" class="com.noname.services.TranslationServiceImpl">
+		<constructor-arg ref="entityRepository"/>
+		<property name="translator" ref="translator"/>
+	</bean>
+
+	<bean id="translator" class="ga.domain.i18n.TranslatorImpl">
+		<constructor-arg ref="translationService"/>
+	</bean>
+
+	<bean id="accountService" class="com.noname.services.security.AccountServiceImpl">
+		<constructor-arg ref="entityRepository"/>
+	</bean>
+
+	<bean id="levelService" class="com.noname.services.common.LevelServiceImpl">
+		<constructor-arg ref="entityRepository"/>
+		<constructor-arg ref="translationService"/>
+	</bean>
+
+	<bean id="cardService" class="com.noname.services.common.CardServiceImpl">
+		<constructor-arg ref="entityRepository"/>
+		<constructor-arg ref="translationService"/>
+	</bean>
+
+	<bean id="heroService" class="com.noname.services.player.HeroServiceImpl">
+		<constructor-arg ref="entityRepository"/>
+		<property name="levelService" ref="levelService"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.noname</groupId>
+		<artifactId>noname-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<name>NoName Game Database Module</name>
+	<groupId>com.noname</groupId>
+	<artifactId>noname-db</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-plugin</artifactId>
+				<configuration>
+					<driver>${jdbc.driver}</driver>
+					<url>${jdbc.url}</url>
+					<username>${jdbc.username}</username>
+					<password>${jdbc.password}</password>
+					<changeLogFile>${liquibase.url}</changeLogFile>
+					<rollbackCount>1</rollbackCount>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>hsqldb</id>
+			<properties>
+				<liquibase.url>src/update/hsqldb/project-changelog.xml</liquibase.url>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>mysql</id>
+			<properties>
+				<liquibase.url>src/update/mysql/project-changelog.xml</liquibase.url>
+			</properties>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,17 @@
+package drools.sample
+
+import ga.security.acl.drools.DroolsAccessControlEntry;
+
+rule "sampleRule"
+when
+	$ace : DroolsAccessControlEntry(granted == false)
+then
+	$ace.grant();
+end
+
+rule "sampleRule 1"
+when
+	$ace : DroolsAccessControlEntry(granted == false, authority == "one", permission =="read")
+then
+	$ace.grant();
+end
