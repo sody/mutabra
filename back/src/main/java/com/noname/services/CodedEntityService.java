@@ -1,11 +1,15 @@
 package com.noname.services;
 
 import com.noname.domain.CodedEntity;
-import ga.domain.i18n.TranslatableEntityService;
+
+import java.util.Locale;
 
 /**
  * @author Ivan Khalopik
  */
 public interface CodedEntityService<E extends CodedEntity>
-		extends BaseEntityService<E>, TranslatableEntityService<E> {
+		extends BaseEntityService<E> {
+
+	E get(final Long pk, final Locale locale);
+
 }

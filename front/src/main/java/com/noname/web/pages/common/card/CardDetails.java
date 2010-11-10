@@ -3,20 +3,20 @@ package com.noname.web.pages.common.card;
 import com.noname.domain.common.*;
 import com.noname.services.common.CardService;
 import com.noname.services.common.LevelService;
-import ga.tapestry.commonlib.base.pages.TranslatableEntityDetailsPage;
-import ga.tapestry.internal.SelectModelBuilder;
+import com.noname.web.base.pages.CodedEntityDetailsPage;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
+import org.greatage.tapestry.internal.SelectModelBuilder;
 
 import java.util.List;
 
 /**
  * @author Ivan Khalopik
  */
-public class CardDetails extends TranslatableEntityDetailsPage<Card> {
+public class CardDetails extends CodedEntityDetailsPage<Card> {
 
 	@Inject
 	private LevelService levelService;

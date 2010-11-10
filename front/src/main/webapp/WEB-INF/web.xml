@@ -11,15 +11,6 @@
 	</context-param>
 
 	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/web-context.xml,
-			classpath:orm-context.xml,
-			classpath:services-context.xml,
-		</param-value>
-	</context-param>
-
-	<context-param>
 		<param-name>tapestry.app-package</param-name>
 		<param-value>com.noname.web</param-value>
 	</context-param>
@@ -34,24 +25,15 @@
 		<param-value>/</param-value>
 	</context-param>
 
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
-
-	<filter>
-		<filter-name>hibernateFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
-	</filter>
+	<context-param>
+		<param-name>greatage.module</param-name>
+		<param-value>com.noname.web.services.ServicesModule</param-value>
+	</context-param>
 
 	<filter>
 		<filter-name>game</filter-name>
-		<filter-class>org.apache.tapestry5.spring.TapestrySpringFilter</filter-class>
+		<filter-class>org.greatage.tapestry.internal.GreatAgeTapestryFilter</filter-class>
 	</filter>
-
-	<filter-mapping>
-		<filter-name>hibernateFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>game</filter-name>

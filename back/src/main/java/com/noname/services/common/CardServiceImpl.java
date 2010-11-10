@@ -5,8 +5,8 @@ import com.noname.domain.common.CardType;
 import com.noname.domain.common.EffectCard;
 import com.noname.domain.common.SummonCard;
 import com.noname.services.CodedEntityServiceImpl;
-import ga.domain.i18n.TranslationService;
-import ga.domain.repository.EntityRepository;
+import com.noname.services.TranslationService;
+import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik

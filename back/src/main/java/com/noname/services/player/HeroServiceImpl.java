@@ -4,7 +4,7 @@ import com.noname.domain.player.Hero;
 import com.noname.domain.security.Account;
 import com.noname.services.BaseEntityServiceImpl;
 import com.noname.services.common.LevelService;
-import ga.domain.repository.EntityRepository;
+import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "EFFECT")
 public class Effect extends CodedEntity {
 
-	@Type(type = "ga.hibernate.OrderedEnumUserType", parameters = {@Parameter(name = "enumClass", value = "com.noname.domain.common.TargetType")})
+	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType", parameters = {@Parameter(name = "enumClass", value = "com.noname.domain.common.TargetType")})
 	@Column(name = "TARGET_TYPE", nullable = false)
 	private TargetType targetType;
 

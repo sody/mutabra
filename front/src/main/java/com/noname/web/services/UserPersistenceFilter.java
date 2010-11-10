@@ -1,7 +1,7 @@
 package com.noname.web.services;
 
-import ga.security.context.UserContext;
 import org.apache.tapestry5.services.*;
+import org.greatage.security.context.UserContext;
 
 import java.io.IOException;
 

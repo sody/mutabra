@@ -1,14 +1,5 @@
 package com.noname.web.services;
 
-import ga.security.acl.AccessControlManager;
-import ga.security.acl.drools.DroolsAccessControlManager;
-import ga.security.auth.*;
-import ga.security.context.PermissionResolver;
-import ga.security.context.PermissionResolverImpl;
-import ga.security.context.UserContext;
-import ga.security.context.UserContextImpl;
-import ga.tapestry.internal.SecuredAnnotationWorker;
-import ga.tapestry.internal.SecurityExceptionHandler;
 import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.*;
@@ -17,6 +8,15 @@ import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.*;
 import org.drools.compiler.DroolsParserException;
 import org.drools.io.ResourceFactory;
+import org.greatage.security.acl.AccessControlManager;
+import org.greatage.security.acl.drools.DroolsAccessControlManager;
+import org.greatage.security.auth.*;
+import org.greatage.security.context.PermissionResolver;
+import org.greatage.security.context.PermissionResolverImpl;
+import org.greatage.security.context.UserContext;
+import org.greatage.security.context.UserContextImpl;
+import org.greatage.tapestry.internal.SecuredAnnotationWorker;
+import org.greatage.tapestry.internal.SecurityExceptionHandler;
 
 import java.io.IOException;
 import java.util.Arrays;

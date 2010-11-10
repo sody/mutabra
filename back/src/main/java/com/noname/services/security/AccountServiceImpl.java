@@ -2,7 +2,7 @@ package com.noname.services.security;
 
 import com.noname.domain.security.Account;
 import com.noname.services.BaseEntityServiceImpl;
-import ga.domain.repository.EntityRepository;
+import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik

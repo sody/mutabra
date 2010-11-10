@@ -1,11 +1,11 @@
 package com.noname.services;
 
 import com.noname.domain.BaseEntity;
-import ga.domain.services.GenericEntityService;
+import org.greatage.domain.EntityService;
 
 /**
  * @author Ivan Khalopik
  */
 public interface BaseEntityService<E extends BaseEntity>
-		extends GenericEntityService<E> {
+		extends EntityService<Long, E> {
 }

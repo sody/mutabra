@@ -10,7 +10,12 @@ import java.util.Locale;
  */
 @Entity
 @Table(name = "TRANSLATION")
-public class Translation extends BaseEntity implements ga.domain.i18n.Translation {
+public class Translation extends BaseEntity {
+	public static final String TYPE_PROPERTY = "type";
+	public static final String CODE_PROPERTY = "code";
+	public static final String VARIANT_PROPERTY = "variant";
+	public static final String LOCALE_PROPERTY = "locale";
+	public static final String VALUE_PROPERTY = "value";
 
 	@Column(name = "BASENAME", nullable = false)
 	private String type;

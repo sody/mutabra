@@ -1,11 +1,11 @@
 package com.noname.web.components;
 
 import com.noname.domain.Translation;
-import ga.tapestry.commonlib.base.components.AbstractComponent;
 import org.apache.tapestry5.ComponentAction;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
+import org.greatage.tapestry.commonlib.base.components.AbstractComponent;
 
 import java.util.List;
 import java.util.Map;

@@ -1,10 +1,10 @@
 package com.noname.services;
 
 import com.noname.domain.BaseEntity;
-import ga.domain.repository.GenericEntityFilter;
+import org.greatage.domain.EntityFilter;
 
 /**
  * @author Ivan Khalopik
  */
-public interface BaseEntityFilter<E extends BaseEntity> extends GenericEntityFilter<E> {
+public interface BaseEntityFilter<E extends BaseEntity> extends EntityFilter<Long, E> {
 }

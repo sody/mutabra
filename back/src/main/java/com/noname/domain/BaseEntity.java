@@ -1,7 +1,6 @@
 package com.noname.domain;
 
-import ga.domain.AbstractEntity;
-import ga.domain.GenericEntity;
+import org.greatage.domain.AbstractEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,7 +10,7 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
-public class BaseEntity extends AbstractEntity<Long> implements GenericEntity {
+public class BaseEntity extends AbstractEntity<Long> {
 
 	@Id
 	@GeneratedValue(generator = "common")

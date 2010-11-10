@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Table(name = "CARD")
 public class Card extends CodedEntity {
 
-	@Type(type = "ga.hibernate.OrderedEnumUserType", parameters = {@Parameter(name = "enumClass", value = "com.noname.domain.common.CardType")})
+	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType", parameters = {@Parameter(name = "enumClass", value = "com.noname.domain.common.CardType")})
 	@Column(name = "CARD_TYPE", nullable = false)
 	private CardType type;
 

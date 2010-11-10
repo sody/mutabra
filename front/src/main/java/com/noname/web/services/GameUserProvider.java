@@ -2,8 +2,8 @@ package com.noname.web.services;
 
 import com.noname.domain.security.Account;
 import com.noname.services.security.AccountService;
-import ga.security.auth.DefaultAuthenticationProvider;
-import ga.security.auth.PasswordEncoder;
+import org.greatage.security.auth.DefaultAuthenticationProvider;
+import org.greatage.security.auth.PasswordEncoder;
 
 /**
  * @author Ivan Khalopik

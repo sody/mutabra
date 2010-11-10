@@ -1,8 +1,5 @@
 package com.noname.domain;
 
-import ga.domain.i18n.TranslatableEntity;
-import ga.domain.i18n.Translation;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
@@ -14,7 +11,7 @@ import java.util.Map;
  * @author Ivan Khalopik
  */
 @MappedSuperclass
-public class CodedEntity extends BaseEntity implements TranslatableEntity {
+public class CodedEntity extends BaseEntity implements Translatable {
 
 	@Column(name = "CODE", nullable = false)
 	private String code;

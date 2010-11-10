@@ -5,7 +5,7 @@
 package com.noname.web.services;
 
 import com.noname.domain.security.Account;
-import ga.security.auth.DefaultAuthentication;
+import org.greatage.security.auth.DefaultAuthentication;
 
 /**
  * @author Ivan Khalopik

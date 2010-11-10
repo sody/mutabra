@@ -1,16 +1,6 @@
 package com.noname.web.services;
 
-import ga.domain.GenericEntity;
-import ga.domain.i18n.Translator;
-import ga.domain.repository.EntityRepository;
-import ga.domain.services.EntityService;
-import ga.tapestry.grid.EntityDataSource;
-import ga.tapestry.internal.EntityEncoderFactory;
-import ga.tapestry.internal.HibernateClassResolver;
-import ga.tapestry.internal.I18nPropertyConduitSource;
-import ga.tapestry.internal.SpringMessages;
-import ga.tapestry.select.EntitySelectModel;
-import ga.tapestry.services.ClassResolver;
+import com.noname.domain.BaseEntity;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
@@ -21,7 +11,13 @@ import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.*;
 import org.apache.tapestry5.services.PropertyConduitSource;
 import org.apache.tapestry5.services.ValueEncoderFactory;
-import org.springframework.context.MessageSource;
+import org.greatage.domain.EntityRepository;
+import org.greatage.domain.EntityService;
+import org.greatage.tapestry.grid.EntityDataSource;
+import org.greatage.tapestry.internal.EntityEncoderFactory;
+import org.greatage.tapestry.internal.HibernateClassResolver;
+import org.greatage.tapestry.select.EntitySelectModel;
+import org.greatage.tapestry.services.ClassResolver;
 
 /**
  * @author Ivan Khalopik
@@ -38,7 +34,7 @@ public class GameModule {
 	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
 											 final TypeCoercer typeCoercer,
 											 final EntityRepository repository) {
-		configuration.add(GenericEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
+		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
 	}
 
 	public PropertyConduitSource decoratePropertyConduitSource(PropertyConduitSource conduitSource,
@@ -55,12 +51,6 @@ public class GameModule {
 
 	public void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
 									  @Builtin final ThreadLocale threadLocale) {
-		configuration.add(new CoercionTuple<MessageSource, Messages>(MessageSource.class, Messages.class, new Coercion<MessageSource, Messages>() {
-			public Messages coerce(MessageSource input) {
-				return new SpringMessages(input, threadLocale.getLocale());
-			}
-		}));
-
 		configuration.add(new CoercionTuple<EntityService, EntityDataSource>(EntityService.class, EntityDataSource.class, new Coercion<EntityService, EntityDataSource>() {
 			@SuppressWarnings({"unchecked"})
 			public EntityDataSource coerce(final EntityService entityService) {

@@ -2,8 +2,8 @@ package com.noname.services.common;
 
 import com.noname.domain.common.Level;
 import com.noname.services.CodedEntityServiceImpl;
-import ga.domain.i18n.TranslationService;
-import ga.domain.repository.EntityRepository;
+import com.noname.services.TranslationService;
+import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik

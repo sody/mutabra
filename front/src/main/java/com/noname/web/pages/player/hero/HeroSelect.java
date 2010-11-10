@@ -2,7 +2,7 @@ package com.noname.web.pages.player.hero;
 
 import com.noname.domain.player.Hero;
 import com.noname.services.player.HeroService;
-import ga.tapestry.commonlib.base.pages.AbstractPage;
+import com.noname.web.base.pages.AbstractPage;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
 

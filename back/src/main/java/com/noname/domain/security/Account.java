@@ -1,7 +1,7 @@
 package com.noname.domain.security;
 
 import com.noname.domain.BaseEntity;
-import ga.util.CollectionUtils;
+import org.greatage.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.Date;

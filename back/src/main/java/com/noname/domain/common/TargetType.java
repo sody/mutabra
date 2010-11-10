@@ -1,6 +1,6 @@
 package com.noname.domain.common;
 
-import ga.hibernate.OrderedEnum;
+import org.greatage.hibernate.type.OrderedEnum;
 
 /**
  * @author Ivan Khalopik

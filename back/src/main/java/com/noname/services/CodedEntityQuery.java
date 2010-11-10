@@ -1,16 +1,27 @@
 package com.noname.services;
 
 import com.noname.domain.CodedEntity;
-import ga.domain.i18n.TranslatableEntityQuery;
 
 /**
  * @author Ivan Khalopik
  */
 public class CodedEntityQuery<E extends CodedEntity, Q extends CodedEntityQuery<E, Q>>
-		extends TranslatableEntityQuery<E, Q>
+		extends BaseEntityQuery<E, Q>
 		implements CodedEntityFilter<E> {
+
+	private String code;
 
 	public CodedEntityQuery(final Class<E> entityClass) {
 		super(entityClass);
+	}
+
+	@Override
+	public String getCode() {
+		return code;
+	}
+
+	Q withCode(final String code) {
+		this.code = code;
+		return query();
 	}
 }

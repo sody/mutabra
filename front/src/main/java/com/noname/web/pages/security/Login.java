@@ -1,17 +1,17 @@
 package com.noname.web.pages.security;
 
+import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.pages.Index;
 import com.noname.web.services.GameUser;
-import ga.security.auth.Authentication;
-import ga.security.auth.AuthenticationException;
-import ga.security.auth.AuthenticationManager;
-import ga.security.auth.DefaultAuthenticationToken;
-import ga.security.context.UserContext;
-import ga.tapestry.commonlib.base.pages.AbstractPage;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.security.auth.Authentication;
+import org.greatage.security.auth.AuthenticationException;
+import org.greatage.security.auth.AuthenticationManager;
+import org.greatage.security.auth.DefaultAuthenticationToken;
+import org.greatage.security.context.UserContext;
 
 /**
  * @author Ivan Khalopik

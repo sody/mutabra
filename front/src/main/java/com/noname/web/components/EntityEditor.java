@@ -1,14 +1,14 @@
 package com.noname.web.components;
 
-import ga.tapestry.StateConstants;
-import ga.tapestry.commonlib.base.components.AbstractComponent;
-import ga.tapestry.commonlib.components.Details;
-import ga.tapestry.commonlib.components.Panel;
-import ga.tapestry.commonlib.components.ViewStack;
+import com.noname.web.services.StateConstants;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
+import org.greatage.tapestry.commonlib.base.components.AbstractComponent;
+import org.greatage.tapestry.commonlib.components.Details;
+import org.greatage.tapestry.commonlib.components.Panel;
+import org.greatage.tapestry.commonlib.components.ViewStack;
 
 /**
  * @author Ivan Khalopik

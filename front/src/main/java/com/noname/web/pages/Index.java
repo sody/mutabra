@@ -1,6 +1,6 @@
 package com.noname.web.pages;
 
-import ga.tapestry.commonlib.base.pages.AbstractPage;
+import com.noname.web.base.pages.AbstractPage;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.ioc.annotations.Inject;

@@ -1,11 +1,6 @@
 package com.noname.web.components;
 
-import ga.domain.GenericEntity;
-import ga.tapestry.commonlib.base.components.AbstractComponent;
-import ga.tapestry.commonlib.components.Grid;
-import ga.tapestry.commonlib.components.GridTable;
-import ga.tapestry.commonlib.components.Menu;
-import ga.tapestry.commonlib.components.Panel;
+import com.noname.domain.BaseEntity;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.Component;
@@ -13,6 +8,11 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.tapestry.commonlib.base.components.AbstractComponent;
+import org.greatage.tapestry.commonlib.components.Grid;
+import org.greatage.tapestry.commonlib.components.GridTable;
+import org.greatage.tapestry.commonlib.components.Menu;
+import org.greatage.tapestry.commonlib.components.Panel;
 
 /**
  * @author Ivan Khalopik
@@ -21,7 +21,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 public class EntityGrid extends AbstractComponent {
 
 	@Parameter
-	private GenericEntity row;
+	private BaseEntity row;
 
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private Object rowActions;
@@ -72,15 +72,15 @@ public class EntityGrid extends AbstractComponent {
 		return searchString;
 	}
 
-	public void setSearchString(String searchString) {
+	public void setSearchString(final String searchString) {
 		this.searchString = searchString;
 	}
 
-	public GenericEntity getRow() {
+	public BaseEntity getRow() {
 		return row;
 	}
 
-	public void setRow(GenericEntity row) {
+	public void setRow(final BaseEntity row) {
 		this.row = row;
 	}
 
