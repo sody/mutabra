@@ -1,7 +1,6 @@
 package com.noname.web.pages.player.hero;
 
 import com.noname.domain.player.Hero;
-import com.noname.domain.security.Account;
 import com.noname.services.player.HeroService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.GameUser;
@@ -41,13 +40,14 @@ public class HeroCreate extends AbstractPage {
 	}
 
 	void onActivate() {
-		final Account account = userContext.getUser().getAccount();
-		record = heroService.createHero(account);
+		record = heroService.create();
 	}
 
 	Object onCreate() {
 		if (createForm.isValid()) {
-			heroService.save(getRecord());
+			final Hero hero = getRecord();
+			hero.setAccount(userContext.getUser().getAccount());
+			heroService.save(hero);
 			return onCancel();
 		}
 		return null;

@@ -16,28 +16,28 @@
 		<c:container class="header">
 			<c:box style="float: right;">
 				<t:if test="authorized">
-					<t:delegate to="block:authorized"/>
+					<c:formatter format="authorized" context="userContext.user.name" raw="true"/>
+					<t:eventlink event="logout" style="margin-left: 5px;">${message:logout-label}</t:eventlink>
 					<p:else>
-						<t:delegate to="block:unauthorized"/>
+						${message:unauthorized}
+						<t:eventlink event="login">${message:login-label}</t:eventlink>
 					</p:else>
 				</t:if>
 			</c:box>
 
-			<t:block id="unauthorized">
-				${message:unauthorized}
-				<t:eventlink event="login">${message:login-label}</t:eventlink>
-			</t:block>
-			<t:block id="authorized">
-				<c:formatter format="authorized" context="userContext.user.name" raw="true"/>
-				<t:eventlink event="logout" style="margin-left: 5px;">${message:logout-label}</t:eventlink>
-			</t:block>
 		</c:container>
 	</div>
 
 	<div class="unit c-5">
 		<div class="column">
-			<t:menu.adminmenu/>
-			<t:menu.usermenu/>
+			<t:if test="authorized">
+				<t:menu.adminmenu/>
+				<t:menu.usermenu/>
+				<p:else>
+					<t:loginform/>
+				</p:else>
+			</t:if>
+
 		</div>
 
 		<div class="column s-3">
@@ -55,7 +55,7 @@
 
 	<div class="unit">
 		<c:container class="footer">
-			Copyright © 2008 Great Age Group. All rights reserved.
+			Copyright © 2010 Great Age Group. All rights reserved.
 			<br/>
 			<a href="mailto:ikhalopik@gmail.com">Contact Us</a>
 		</c:container>

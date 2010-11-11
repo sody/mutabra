@@ -4,20 +4,7 @@
 	  xmlns:p="tapestry:parameter">
 
 <c:container align="center">
-
-<t:form t:id="loginForm">
-	<c:panel title="message:login-label" actions="login" skin="login">
-		<dl class="container details">
-			<dt>${message:email-label}</dt>
-			<dd><t:textfield value="email" validate="required"/></dd>
-			<dt>${message:password-label}</dt>
-			<dd><t:passwordfield value="password" validate="required"/></dd>
-		</dl>
-		<p:loginMenuItem>
-			<t:linksubmit event="login">${message:login-label}</t:linksubmit>
-		</p:loginMenuItem>
-	</c:panel>
-</t:form>
+	<t:loginform/>
 </c:container>
 
 </html>

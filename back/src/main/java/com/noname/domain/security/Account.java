@@ -1,6 +1,7 @@
 package com.noname.domain.security;
 
 import com.noname.domain.BaseEntity;
+import com.noname.domain.player.Hero;
 import org.greatage.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -35,6 +36,8 @@ public class Account extends BaseEntity {
 			inverseJoinColumns = @JoinColumn(name = "ID_ROLE", nullable = false))
 	private Set<Role> roles = new HashSet<Role>();
 
+	@OneToMany(mappedBy = "account")
+	private Set<Hero> heroes = new HashSet<Hero>();
 
 	public String getEmail() {
 		return email;
@@ -80,24 +83,8 @@ public class Account extends BaseEntity {
 		this.roles = roles;
 	}
 
-	public boolean isEnabled() {
-		return true;
-	}
-
-	public boolean isExpired() {
-		return false;
-	}
-
-	public boolean isLocked() {
-		return false;
-	}
-
-	public boolean isPasswordExpired() {
-		return false;
-	}
-
-	public String getAuthority() {
-		return null;
+	public Set<Hero> getHeroes() {
+		return heroes;
 	}
 
 	public List<String> createAuthorities() {

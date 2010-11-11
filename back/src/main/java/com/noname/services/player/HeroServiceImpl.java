@@ -1,7 +1,6 @@
 package com.noname.services.player;
 
 import com.noname.domain.player.Hero;
-import com.noname.domain.security.Account;
 import com.noname.services.BaseEntityServiceImpl;
 import com.noname.services.common.LevelService;
 import org.greatage.domain.EntityRepository;
@@ -21,9 +20,8 @@ public class HeroServiceImpl
 	}
 
 	@Override
-	public Hero createHero(final Account account) {
-		final Hero hero = create();
-		hero.setAccount(account);
+	public Hero create() {
+		final Hero hero = new Hero();
 		hero.setLevel(levelService.getDefaultLevel());
 		hero.setAttack(10);
 		hero.setDefence(10);

@@ -2,16 +2,9 @@ package drools.sample
 
 import org.greatage.security.acl.drools.DroolsAccessControlEntry;
 
-rule "sampleRule"
+rule "adminRule"
 when
-	$ace : DroolsAccessControlEntry(granted == false)
-then
-	$ace.grant();
-end
-
-rule "sampleRule 1"
-when
-	$ace : DroolsAccessControlEntry(granted == false, authority == "one", permission =="read")
+	$ace : DroolsAccessControlEntry(granted == false, authority == "admin@example.com")
 then
 	$ace.grant();
 end

@@ -17,6 +17,7 @@ import com.noname.services.common.LevelService;
 import com.noname.services.common.LevelServiceImpl;
 import com.noname.services.player.HeroService;
 import com.noname.services.player.HeroServiceImpl;
+import com.noname.services.security.AccountFilterProcessor;
 import com.noname.services.security.AccountService;
 import com.noname.services.security.AccountServiceImpl;
 import org.greatage.domain.*;
@@ -30,9 +31,7 @@ import org.greatage.ioc.annotations.Bind;
 import org.greatage.ioc.annotations.Build;
 import org.greatage.ioc.annotations.Configure;
 import org.greatage.ioc.annotations.Intercept;
-import org.greatage.ioc.proxy.CGLibProxyFactory;
 import org.greatage.ioc.proxy.MethodAdvice;
-import org.greatage.ioc.proxy.ProxyFactory;
 import org.greatage.ioc.resource.Resource;
 import org.greatage.ioc.resource.ResourceLocator;
 import org.hibernate.SessionFactory;
@@ -111,6 +110,7 @@ public class ServicesModule {
 	public void configureEntityFilterProcessor(final OrderedConfiguration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(BaseFilterProcessor.class, "Base");
 		configuration.addInstance(TranslationFilterProcessor.class, "Translation");
+		configuration.addInstance(AccountFilterProcessor.class, "Account");
 	}
 
 	@Intercept(BaseEntityService.class)

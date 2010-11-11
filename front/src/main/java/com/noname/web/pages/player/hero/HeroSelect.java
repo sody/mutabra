@@ -1,25 +1,28 @@
 package com.noname.web.pages.player.hero;
 
 import com.noname.domain.player.Hero;
-import com.noname.services.player.HeroService;
 import com.noname.web.base.pages.AbstractPage;
+import com.noname.web.services.GameUser;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.security.annotations.Secured;
+import org.greatage.security.context.UserContext;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Ivan Khalopik
  */
+@Secured
 public class HeroSelect extends AbstractPage {
-
-	@Inject
-	private HeroService heroService;
 
 	@InjectPage
 	private HeroCreate heroCreatePage;
 
-	private List<Hero> heroes;
+	@Inject
+	private UserContext<GameUser> userContext;
+
+	private Set<Hero> heroes;
 
 	private Hero row;
 
@@ -31,12 +34,12 @@ public class HeroSelect extends AbstractPage {
 		this.row = row;
 	}
 
-	public List<Hero> getHeroes() {
+	public Set<Hero> getHeroes() {
 		return heroes;
 	}
 
 	void setupRender() {
-		heroes = heroService.getEntities();
+		heroes = userContext.getUser().getAccount().getHeroes();
 	}
 
 	Object onCreate() {
