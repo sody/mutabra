@@ -1,4 +1,4 @@
-package com.noname.web.services;
+package com.noname.web.services.security;
 
 import com.noname.domain.security.Account;
 import com.noname.services.security.AccountService;

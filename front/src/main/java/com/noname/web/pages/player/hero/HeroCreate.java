@@ -3,7 +3,7 @@ package com.noname.web.pages.player.hero;
 import com.noname.domain.player.Hero;
 import com.noname.services.player.HeroService;
 import com.noname.web.base.pages.AbstractPage;
-import com.noname.web.services.GameUser;
+import com.noname.web.services.security.GameUser;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.corelib.components.Form;

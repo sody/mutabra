@@ -1,4 +1,4 @@
-package com.noname.web.services;
+package com.noname.web.services.domain;
 
 import com.noname.domain.Translation;
 import com.noname.domain.common.*;
@@ -20,6 +20,8 @@ import com.noname.services.player.HeroServiceImpl;
 import com.noname.services.security.AccountFilterProcessor;
 import com.noname.services.security.AccountService;
 import com.noname.services.security.AccountServiceImpl;
+import com.noname.web.services.i18n.Translator;
+import com.noname.web.services.i18n.TranslatorImpl;
 import org.greatage.domain.*;
 import org.greatage.domain.hibernate.HibernateExecutor;
 import org.greatage.domain.hibernate.HibernateExecutorImpl;

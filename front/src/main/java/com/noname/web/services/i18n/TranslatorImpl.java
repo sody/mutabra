@@ -1,4 +1,4 @@
-package com.noname.web.services;
+package com.noname.web.services.i18n;
 
 import com.noname.domain.Translatable;
 import com.noname.services.TranslationService;

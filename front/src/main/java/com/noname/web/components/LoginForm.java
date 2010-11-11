@@ -1,7 +1,7 @@
 package com.noname.web.components;
 
 import com.noname.web.pages.player.hero.HeroSelect;
-import com.noname.web.services.GameUser;
+import com.noname.web.services.security.GameUser;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;

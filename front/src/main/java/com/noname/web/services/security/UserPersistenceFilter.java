@@ -1,4 +1,4 @@
-package com.noname.web.services;
+package com.noname.web.services.security;
 
 import org.apache.tapestry5.services.*;
 import org.greatage.security.context.UserContext;

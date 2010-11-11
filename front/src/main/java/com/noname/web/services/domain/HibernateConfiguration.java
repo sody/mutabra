@@ -1,4 +1,4 @@
-package com.noname.web.services;
+package com.noname.web.services.domain;
 
 import org.hibernate.cfg.Configuration;
 

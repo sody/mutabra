@@ -2,7 +2,7 @@
  * Copyright 2000 - 2009 Ivan Khalopik. All Rights Reserved.
  */
 
-package com.noname.web.services;
+package com.noname.web.services.i18n;
 
 import com.noname.domain.Translatable;
 
