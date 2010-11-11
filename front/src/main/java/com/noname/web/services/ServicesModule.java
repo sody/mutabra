@@ -30,7 +30,9 @@ import org.greatage.ioc.annotations.Bind;
 import org.greatage.ioc.annotations.Build;
 import org.greatage.ioc.annotations.Configure;
 import org.greatage.ioc.annotations.Intercept;
+import org.greatage.ioc.proxy.CGLibProxyFactory;
 import org.greatage.ioc.proxy.MethodAdvice;
+import org.greatage.ioc.proxy.ProxyFactory;
 import org.greatage.ioc.resource.Resource;
 import org.greatage.ioc.resource.ResourceLocator;
 import org.hibernate.SessionFactory;
@@ -49,8 +51,8 @@ public class ServicesModule {
 	@Bind
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(HibernateExecutor.class, HibernateExecutorImpl.class).withScope(ScopeConstants.THREAD);
-		binder.bind(EntityFilterProcessor.class, CompositeFilterProcessor.class).withScope(ScopeConstants.GLOBAL);
-		binder.bind(EntityRepository.class, HibernateRepository.class).withScope(ScopeConstants.GLOBAL);
+		binder.bind(EntityFilterProcessor.class, CompositeFilterProcessor.class);
+		binder.bind(EntityRepository.class, HibernateRepository.class);
 
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
 		binder.bind(AccountService.class, AccountServiceImpl.class);

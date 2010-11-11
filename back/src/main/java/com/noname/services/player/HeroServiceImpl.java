@@ -13,13 +13,10 @@ public class HeroServiceImpl
 		extends BaseEntityServiceImpl<Hero, HeroQuery>
 		implements HeroService {
 
-	private LevelService levelService;
+	private final LevelService levelService;
 
-	public HeroServiceImpl(final EntityRepository repository) {
+	public HeroServiceImpl(final EntityRepository repository, final LevelService levelService) {
 		super(repository, Hero.class, HeroQuery.class);
-	}
-
-	public void setLevelService(final LevelService levelService) {
 		this.levelService = levelService;
 	}
 

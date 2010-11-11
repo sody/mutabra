@@ -1,6 +1,6 @@
 package drools.sample
 
-import ga.security.acl.drools.DroolsAccessControlEntry;
+import org.greatage.security.acl.drools.DroolsAccessControlEntry;
 
 rule "sampleRule"
 when

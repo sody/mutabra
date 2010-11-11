@@ -89,7 +89,7 @@ public class SecurityModule {
 
 	public void contributeComponentClassTransformWorker(
 			final OrderedConfiguration<ComponentClassTransformWorker> configuration) {
-		configuration.addInstance("PageActivationSecurityContext", SecuredAnnotationWorker.class, "before:OnEvent");
+		configuration.addInstance("PageSecurity", SecuredAnnotationWorker.class, "before:OnEvent");
 	}
 
 	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
