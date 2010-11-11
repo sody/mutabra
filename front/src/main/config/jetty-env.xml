@@ -31,8 +31,8 @@
 		<Arg>mail/Session</Arg>
 		<Arg>
 			<New class="org.mortbay.naming.factories.MailSessionReference">
-				<Set name="user">great.age@gmail.com</Set>
-				<Set name="password">admin</Set>
+				<Set name="user">great.age.game@gmail.com</Set>
+				<Set name="password">greatagegame</Set>
 				<Set name="properties">
 					<New class="java.util.Properties">
 						<Put name="mail.smtp.host">smtp.gmail.com</Put>

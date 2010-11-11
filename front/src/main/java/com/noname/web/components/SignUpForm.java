@@ -33,7 +33,7 @@ public class SignUpForm {
 
 	Object onSignUp() {
 		if (signUpForm.isValid()) {
-			//todo: registration
+			accountService.createAccount(email);
 		}
 		return SignUp.class;
 	}

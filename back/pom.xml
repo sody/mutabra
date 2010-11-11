@@ -48,5 +48,12 @@
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

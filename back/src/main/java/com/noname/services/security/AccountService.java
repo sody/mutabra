@@ -10,4 +10,6 @@ public interface AccountService extends BaseEntityService<Account> {
 
 	Account getAccount(String username);
 
+	void createAccount(String email);
+
 }

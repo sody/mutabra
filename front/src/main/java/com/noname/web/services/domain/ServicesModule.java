@@ -7,10 +7,7 @@ import com.noname.domain.player.HeroCard;
 import com.noname.domain.security.Account;
 import com.noname.domain.security.Permission;
 import com.noname.domain.security.Role;
-import com.noname.services.BaseEntityService;
-import com.noname.services.TranslationFilterProcessor;
-import com.noname.services.TranslationService;
-import com.noname.services.TranslationServiceImpl;
+import com.noname.services.*;
 import com.noname.services.common.CardService;
 import com.noname.services.common.CardServiceImpl;
 import com.noname.services.common.LevelService;
@@ -39,6 +36,9 @@ import org.greatage.ioc.resource.ResourceLocator;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.mail.Session;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -61,6 +61,13 @@ public class ServicesModule {
 		binder.bind(CardService.class, CardServiceImpl.class);
 		binder.bind(HeroService.class, HeroServiceImpl.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
+	}
+
+	@Build
+	public MailService buildMailService() throws NamingException {
+		final InitialContext context = new InitialContext();
+		final Session session = (Session) context.lookup("mail/Session");
+		return new MailServiceImpl(session);
 	}
 
 	@Build
