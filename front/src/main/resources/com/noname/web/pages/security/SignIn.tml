@@ -1,0 +1,28 @@
+<html t:type="simplelayout" title="login-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<c:container align="center">
+	<t:form t:id="signInForm">
+		<c:panel actions="signIn,signUp" style="width: 300px;">
+			<div class="t-beaneditor-row">
+				<t:label for="email"/>
+				<t:textfield t:id="email" value="email" validate="required"/>
+			</div>
+			<div class="t-beaneditor-row">
+				<t:label for="password"/>
+				<t:passwordfield t:id="password" value="password" validate="required"/>
+			</div>
+			<div class="t-beaneditor-row">
+				<t:label for="remember"/>
+				<t:checkbox t:id="remember" value="remember"/>
+			</div>
+			<p:signInMenuItem>
+				<t:linksubmit event="signIn">${message:signIn-label}</t:linksubmit>
+			</p:signInMenuItem>
+		</c:panel>
+	</t:form>
+</c:container>
+
+</html>

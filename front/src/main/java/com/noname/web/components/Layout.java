@@ -4,8 +4,6 @@
 
 package com.noname.web.components;
 
-import com.noname.web.pages.Index;
-import com.noname.web.pages.security.Login;
 import com.noname.web.services.security.GameUser;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
@@ -42,14 +40,4 @@ public class Layout extends AbstractComponent {
 	public String getTitle() {
 		return title;
 	}
-
-	Object onLogin() {
-		return Login.class;
-	}
-
-	Object onLogout() {
-		userContext.setUser(null);
-		return Index.class;
-	}
-
 }

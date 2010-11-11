@@ -16,7 +16,6 @@ import org.greatage.security.context.PermissionResolverImpl;
 import org.greatage.security.context.UserContext;
 import org.greatage.security.context.UserContextImpl;
 import org.greatage.tapestry.internal.SecuredAnnotationWorker;
-import org.greatage.tapestry.internal.SecurityExceptionHandler;
 
 import java.io.IOException;
 import java.util.Arrays;

@@ -11,7 +11,10 @@
 	<div class="column">
 		<c:box>
 			${message:content-text}
+			<br/>
+			<t:signupform/>
 		</c:box>
+
 	</div>
 </div>
 </html>

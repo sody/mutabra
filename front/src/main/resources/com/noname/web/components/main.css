@@ -6,6 +6,7 @@
 div.header {
 	border-bottom: 1px solid #DDDDFF;
 	padding: 10px 20px;
+	height: 50px;
 }
 
 div.header:after {
@@ -34,8 +35,9 @@ div.content {
 	padding: 20px;
 }
 
-.login > {
-	width: 320px;
+table.signIn td {
+	padding-bottom: 3px;
+	padding-left: 10px;
 }
 
 div.transparent {

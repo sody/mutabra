@@ -14,18 +14,12 @@
 <c:container>
 	<div class="unit">
 		<c:container class="header">
-			<div style="float: right;">
-				<t:signinform/>
-			</div>
 		</c:container>
 	</div>
 
 	<div class="unit c-5">
 		<div class="column">
 			<t:menu.openmenu/>
-			<t:if test="authorized">
-				<t:menu.usermenu/>
-			</t:if>
 		</div>
 
 		<div class="column s-3">
@@ -37,10 +31,6 @@
 
 		<div class="column">
 			<c:localemenu/>
-			<t:if test="authorized">
-				<br/>
-				<t:menu.adminmenu/>
-			</t:if>
 		</div>
 
 	</div>

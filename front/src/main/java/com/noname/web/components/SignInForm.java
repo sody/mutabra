@@ -1,6 +1,8 @@
 package com.noname.web.components;
 
+import com.noname.web.pages.Index;
 import com.noname.web.pages.player.hero.HeroSelect;
+import com.noname.web.pages.security.SignIn;
 import com.noname.web.services.security.GameUser;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
@@ -16,7 +18,7 @@ import org.greatage.security.context.UserContext;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class LoginForm {
+public class SignInForm {
 
 	@Property
 	private String email;
@@ -24,8 +26,11 @@ public class LoginForm {
 	@Property
 	private String password;
 
+	@Property
+	private boolean remember;
+
 	@Component
-	private Form loginForm;
+	private Form signInForm;
 
 	@Inject
 	private AuthenticationManager authenticationManager;
@@ -33,17 +38,30 @@ public class LoginForm {
 	@Inject
 	private UserContext<GameUser> userContext;
 
-	Object onLogin() {
-		if (loginForm.isValid()) {
+	public boolean isAuthorized() {
+		return userContext.getUser() != null;
+	}
+
+	public String getUser() {
+		return userContext.getUser().getName();
+	}
+
+	Object onSignOut() {
+		userContext.setUser(null);
+		return Index.class;
+	}
+
+	Object onSignIn() {
+		if (signInForm.isValid()) {
 			try {
 				final DefaultAuthenticationToken token = new DefaultAuthenticationToken(email, password);
 				final Authentication authentication = authenticationManager.authenticate(token);
 				userContext.setUser((GameUser) authentication);
 				return HeroSelect.class;
 			} catch (AuthenticationException e) {
-				loginForm.recordError(e.getMessage());
+				signInForm.recordError(e.getMessage());
 			}
 		}
-		return null;
+		return SignIn.class;
 	}
 }
