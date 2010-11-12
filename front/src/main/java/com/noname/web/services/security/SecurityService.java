@@ -12,6 +12,8 @@ import org.greatage.security.auth.PasswordEncoder;
 import org.greatage.security.context.UserContext;
 import org.greatage.util.StringUtils;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Date;
 
 /**
@@ -67,14 +69,18 @@ public class SecurityService {
 		if (accountService.getAccount(email) != null) {
 			throw new SecurityException("Account already exists");
 		} else {
-			final String password = passwordEncoder.encode(email);
-			final String token = passwordEncoder.encode("some_token");
+			final String password = generateRandomString();
+			final String token = generateRandomString();
+
 			final Account account = accountService.create();
 			account.setEmail(email);
-			account.setPassword(password);
+			account.setPassword(passwordEncoder.encode(email));
 			account.setToken(token);
+			account.setRegistered(new Date());
+
 			final Link link = linkSource.createPageRenderLinkWithContext(Activate.class, email, token);
-			final String message = String.format("Hello Mr., New account was created for you, (login: %s, password: %s). To activate your account please follow the link: %s", email, password, link.toAbsoluteURI());
+			final String message = String.format("Hello Mr., New account was created for you, (login: %s, password: %s, activation token: %s). To activate your account please follow the link: %s", email, password, token, link.toAbsoluteURI());
+
 			mailService.send(email, "New game account", message);
 			accountService.save(account);
 		}
@@ -91,5 +97,14 @@ public class SecurityService {
 
 	public void signOut() {
 		userContext.setUser(null);
+	}
+
+	public String generateRandomString() {
+		return new BigInteger(130, new SecureRandom()).toString(32);
+	}
+
+	public static void main(String[] args) {
+		final String s = new BigInteger(130, new SecureRandom()).toString(32);
+		System.out.println(s);
 	}
 }
