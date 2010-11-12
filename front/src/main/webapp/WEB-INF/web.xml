@@ -27,7 +27,7 @@
 
 	<context-param>
 		<param-name>greatage.module</param-name>
-		<param-value>com.noname.web.services.domain.ServicesModule</param-value>
+		<param-value>com.noname.web.services.ServicesModule</param-value>
 	</context-param>
 
 	<filter>

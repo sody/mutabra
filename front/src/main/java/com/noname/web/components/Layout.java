@@ -4,7 +4,9 @@
 
 package com.noname.web.components;
 
+import com.noname.web.pages.Index;
 import com.noname.web.services.security.GameUser;
+import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Import;
@@ -29,15 +31,23 @@ public class Layout extends AbstractComponent {
 	@Inject
 	private UserContext<GameUser> userContext;
 
-	public UserContext getUserContext() {
-		return userContext;
+	@Inject
+	private SecurityService securityService;
+
+	public String getUser() {
+		return userContext.getUser().getName();
 	}
 
-	public boolean isAuthorized() {
-		return userContext.getUser() != null;
+	public boolean isAuthenticated() {
+		return securityService.isAuthenticated();
 	}
 
 	public String getTitle() {
 		return title;
+	}
+
+	Object onSignOut() {
+		securityService.signOut();
+		return Index.class;
 	}
 }

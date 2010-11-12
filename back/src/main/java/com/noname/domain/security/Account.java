@@ -30,6 +30,9 @@ public class Account extends BaseEntity {
 	@Column(name = "LAST_LOGIN_DATE", nullable = true, insertable = false)
 	private Date lastLogin;
 
+	@Column(name = "TOKEN", nullable = true)
+	private String token;
+
 	@ManyToMany
 	@JoinTable(name = "ACCOUNT_ROLE",
 			joinColumns = @JoinColumn(name = "ID_ACCOUNT", nullable = false),
@@ -43,7 +46,7 @@ public class Account extends BaseEntity {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 
@@ -55,7 +58,7 @@ public class Account extends BaseEntity {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -63,7 +66,7 @@ public class Account extends BaseEntity {
 		return registered;
 	}
 
-	public void setRegistered(Date registered) {
+	public void setRegistered(final Date registered) {
 		this.registered = registered;
 	}
 
@@ -71,15 +74,23 @@ public class Account extends BaseEntity {
 		return lastLogin;
 	}
 
-	public void setLastLogin(Date lastLogin) {
+	public void setLastLogin(final Date lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(final String token) {
+		this.token = token;
 	}
 
 	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(final Set<Role> roles) {
 		this.roles = roles;
 	}
 

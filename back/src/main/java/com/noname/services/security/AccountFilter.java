@@ -8,6 +8,6 @@ import com.noname.services.BaseEntityFilter;
  */
 public interface AccountFilter extends BaseEntityFilter<Account> {
 
-	String getUserName();
+	String getEmail();
 
 }

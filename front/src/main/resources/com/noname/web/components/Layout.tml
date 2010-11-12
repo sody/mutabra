@@ -15,7 +15,23 @@
 	<div class="unit">
 		<c:container class="header">
 			<div style="float: right;">
-				<t:signinform/>
+				<t:if test="authenticated">
+					<table class="dialog">
+						<tr>
+							<td>${message:welcome}</td>
+						</tr>
+						<tr>
+							<td><span style="font-weight: bold;">${user}</span></td>
+							<td>
+								<t:eventlink event="signOut">${message:signOut-label}</t:eventlink>
+							</td>
+						</tr>
+					</table>
+
+					<p:else>
+						<t:signinform/>
+					</p:else>
+				</t:if>
 			</div>
 		</c:container>
 	</div>
@@ -23,7 +39,7 @@
 	<div class="unit c-5">
 		<div class="column">
 			<t:menu.openmenu/>
-			<t:if test="authorized">
+			<t:if test="authenticated">
 				<t:menu.usermenu/>
 			</t:if>
 		</div>
@@ -37,8 +53,7 @@
 
 		<div class="column">
 			<c:localemenu/>
-			<t:if test="authorized">
-				<br/>
+			<t:if test="authenticated">
 				<t:menu.adminmenu/>
 			</t:if>
 		</div>

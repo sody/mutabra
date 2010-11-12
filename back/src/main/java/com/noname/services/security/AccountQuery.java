@@ -13,13 +13,13 @@ public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> impleme
 		super(Account.class);
 	}
 
-	public AccountQuery withUserName(final String userName) {
+	public AccountQuery withEmail(final String userName) {
 		this.userName = userName;
 		return query();
 	}
 
 	@Override
-	public String getUserName() {
+	public String getEmail() {
 		return userName;
 	}
 }

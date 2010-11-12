@@ -1,5 +1,6 @@
 package com.noname.web.services.security;
 
+import com.noname.web.pages.security.SignIn;
 import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.*;
@@ -16,6 +17,9 @@ import org.greatage.security.context.PermissionResolverImpl;
 import org.greatage.security.context.UserContext;
 import org.greatage.security.context.UserContextImpl;
 import org.greatage.tapestry.internal.SecuredAnnotationWorker;
+import org.greatage.tapestry.internal.SecurityExceptionHandler;
+import org.greatage.tapestry.internal.UserPersistenceFilter;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -35,6 +39,7 @@ public class SecurityModule {
 		binder.bind(PermissionResolver.class, PermissionResolverImpl.class);
 		binder.bind(AccessControlManager.class, DroolsAccessControlManager.class);
 		binder.bind(UserContext.class, UserContextImpl.class).scope(ScopeConstants.PERTHREAD);
+		binder.bind(SecurityService.class, SecurityService.class);
 	}
 
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
@@ -92,8 +97,10 @@ public class SecurityModule {
 	}
 
 	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
-																   final ResponseRenderer renderer) {
-		return new SecurityExceptionHandler(handler, renderer);
+																   final ResponseRenderer renderer,
+																   final ComponentClassResolver resolver,
+																   final Logger logger) {
+		return new SecurityExceptionHandler(handler, renderer, resolver, SignIn.class, logger);
 	}
 
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {

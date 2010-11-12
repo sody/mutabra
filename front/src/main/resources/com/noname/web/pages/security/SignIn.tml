@@ -5,6 +5,8 @@
 
 <c:container align="center">
 	<t:form t:id="signInForm">
+		<t:errors/>
+
 		<c:panel actions="signIn,signUp" style="width: 300px;">
 			<div class="t-beaneditor-row">
 				<t:label for="email"/>

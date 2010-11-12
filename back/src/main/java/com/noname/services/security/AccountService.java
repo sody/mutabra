@@ -8,8 +8,6 @@ import com.noname.services.BaseEntityService;
  */
 public interface AccountService extends BaseEntityService<Account> {
 
-	Account getAccount(String username);
-
-	void createAccount(String email);
+	Account getAccount(String email);
 
 }

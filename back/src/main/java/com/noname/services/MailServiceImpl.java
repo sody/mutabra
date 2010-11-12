@@ -14,9 +14,11 @@ import java.util.Date;
  */
 public class MailServiceImpl implements MailService {
 	private final Session session;
+	private final String email;
 
-	public MailServiceImpl(Session session) {
+	public MailServiceImpl(final Session session, final String email) {
 		this.session = session;
+		this.email = email;
 	}
 
 	@Override
@@ -25,11 +27,13 @@ public class MailServiceImpl implements MailService {
 			final Transport transport = session.getTransport("smtp");
 			transport.connect();
 			final Message msg = new MimeMessage(session);
-			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			msg.setFrom(new InternetAddress(email));
 			msg.setSentDate(new Date());
 			msg.setSubject(subject);
 			msg.setText(message);
 			transport.sendMessage(msg, msg.getAllRecipients());
+			transport.close();
 		} catch (MessagingException e) {
 			e.printStackTrace();  //todo: change with exception processing
 		}

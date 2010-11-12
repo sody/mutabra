@@ -17,8 +17,8 @@ public class AccountFilterProcessor extends BaseEntityFilterProcessor<Account, A
 
 	@Override
 	protected void processFilter(final EntityCriteria criteria, final AccountFilter filter) {
-		if (!StringUtils.isEmpty(filter.getUserName())) {
-			criteria.add(criteria.getProperty(Account.EMAIL_PROPERTY).eq(filter.getUserName()));
+		if (!StringUtils.isEmpty(filter.getEmail())) {
+			criteria.add(criteria.getProperty(Account.EMAIL_PROPERTY).eq(filter.getEmail()));
 		}
 	}
 }
