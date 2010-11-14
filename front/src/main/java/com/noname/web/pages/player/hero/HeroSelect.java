@@ -12,6 +12,7 @@ import java.util.Set;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Secured
 public class HeroSelect extends AbstractPage {

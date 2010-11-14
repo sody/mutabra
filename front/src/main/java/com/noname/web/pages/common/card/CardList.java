@@ -5,10 +5,13 @@ import com.noname.services.common.CardService;
 import com.noname.web.base.pages.EntityListPage;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.security.annotations.Secured;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
+@Secured
 public class CardList extends EntityListPage<Card> {
 
 	@Inject

@@ -13,6 +13,7 @@ import org.greatage.security.context.UserContext;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Secured
 public class HeroCreate extends AbstractPage {

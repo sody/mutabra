@@ -1,0 +1,37 @@
+<html t:type="layout" title="races-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<t:form t:id="detailsForm">
+	<t:entityeditor object="record" state="state" actions="save,cancel" viewActions="edit,cancel">
+		<p:view>
+			<c:detailsrow property="id">${record.id}</c:detailsrow>
+			<c:detailsrow property="code"/>
+			<c:detailsrow property="description">${record:description}</c:detailsrow>
+		</p:view>
+
+		<p:edit>
+			<c:detailsrow property="id">${record.id}</c:detailsrow>
+			<c:detailsrow property="code" editable="false"/>
+			<t:translationeditor translations="record.translations" editable="prop:editable"/>
+		</p:edit>
+
+		<p:add>
+			<c:detailsrow property="code" validate="required"/>
+			<t:translationeditor translations="record.translations" editable="prop:editable"/>
+		</p:add>
+
+		<p:saveMenuItem>
+			<t:linksubmit event="save">${message:save-label}</t:linksubmit>
+		</p:saveMenuItem>
+	</t:entityeditor>
+</t:form>
+
+<t:entitygrid source="dataSource" row="row" showIdColumn="true"
+			  rowActions="view,edit,delete" actions="add">
+	<c:gridcolumn property="code" width="100"/>
+	<c:gridcolumn property="description">${row:description}</c:gridcolumn>
+</t:entitygrid>
+
+</html>

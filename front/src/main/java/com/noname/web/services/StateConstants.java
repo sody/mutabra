@@ -2,6 +2,7 @@ package com.noname.web.services;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public abstract class StateConstants {
 	public static final String VIEW_STATE = "view";

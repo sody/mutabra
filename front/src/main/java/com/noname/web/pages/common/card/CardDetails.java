@@ -9,13 +9,16 @@ import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
+import org.greatage.security.annotations.Secured;
 import org.greatage.tapestry.internal.SelectModelBuilder;
 
 import java.util.List;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
+@Secured
 public class CardDetails extends CodedEntityDetailsPage<Card> {
 
 	@Inject

@@ -6,5 +6,6 @@
 
 	<include file="20101101-changelog.xml" relativeToChangelogFile="true"/>
 	<include file="20101112-changelog.xml" relativeToChangelogFile="true"/>
+	<include file="20101114-changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

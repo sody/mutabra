@@ -99,12 +99,7 @@ public class SecurityService {
 		userContext.setUser(null);
 	}
 
-	public String generateRandomString() {
+	private String generateRandomString() {
 		return new BigInteger(130, new SecureRandom()).toString(32);
-	}
-
-	public static void main(String[] args) {
-		final String s = new BigInteger(130, new SecureRandom()).toString(32);
-		System.out.println(s);
 	}
 }

@@ -12,6 +12,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class Index extends AbstractPage {
 
