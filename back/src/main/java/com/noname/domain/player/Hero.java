@@ -2,6 +2,7 @@ package com.noname.domain.player;
 
 import com.noname.domain.BaseEntity;
 import com.noname.domain.common.Level;
+import com.noname.domain.common.Race;
 import com.noname.domain.security.Account;
 
 import javax.persistence.*;
@@ -21,6 +22,10 @@ public class Hero extends BaseEntity {
 
 	@Column(name = "NAME", nullable = false)
 	private String name;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_RACE", nullable = false)
+	private Race race;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_LEVEL", nullable = false)
@@ -60,6 +65,14 @@ public class Hero extends BaseEntity {
 
 	public void setRating(final long rating) {
 		this.rating = rating;
+	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
 	}
 
 	public Level getLevel() {

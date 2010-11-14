@@ -1,15 +1,21 @@
 package com.noname.web.pages.player.hero;
 
+import com.noname.domain.common.Race;
 import com.noname.domain.player.Hero;
+import com.noname.services.common.RaceService;
 import com.noname.services.player.HeroService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.security.GameUser;
+import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.annotations.Secured;
 import org.greatage.security.context.UserContext;
+import org.greatage.tapestry.internal.SelectModelBuilder;
+
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -22,7 +28,13 @@ public class HeroCreate extends AbstractPage {
 	private HeroService heroService;
 
 	@Inject
+	private RaceService raceService;
+
+	@Inject
 	private UserContext<GameUser> userContext;
+
+	@Inject
+	private SelectModelBuilder selectModelBuilder;
 
 	@InjectPage
 	private HeroSelect heroSelectPage;
@@ -30,7 +42,17 @@ public class HeroCreate extends AbstractPage {
 	@Component
 	private Form createForm;
 
+	private SelectModel raceModel;
+
 	private Hero record;
+
+	public SelectModel getRaceModel() {
+		if (raceModel == null) {
+			final List<Race> races = raceService.getEntities();
+			raceModel = selectModelBuilder.buildFormatted(Race.class, races, "%s", "this:description");
+		}
+		return raceModel;
+	}
 
 	public Hero getRecord() {
 		return record;

@@ -25,4 +25,24 @@
 		</rollback>
 	</changeSet>
 
+	<changeSet id="01" author="ikhalopik@gmail.com" context="schema">
+		<addColumn tableName="HERO">
+			<column name="ID_RACE" type="INTEGER" defaultValueNumeric="1">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+
+		<dropDefaultValue tableName="HERO" columnName="ID_RACE"/>
+
+		<addForeignKeyConstraint constraintName="FK_HERO_RACE"
+								 baseTableName="HERO" baseColumnNames="ID_RACE"
+								 referencedTableName="RACE" referencedColumnNames="ID"/>
+
+		<rollback>
+			<dropForeignKeyConstraint baseTableName="HERO" constraintName="FK_HERO_RACE"/>
+			<dropColumn tableName="HERO" columnName="ID_RACE"/>
+		</rollback>
+	</changeSet>
+
+
 </databaseChangeLog>

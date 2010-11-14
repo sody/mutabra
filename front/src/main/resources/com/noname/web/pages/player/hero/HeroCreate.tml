@@ -8,6 +8,10 @@
 		<c:detailsrow property="name" validate="required"/>
 
 		<c:detailsrow property="rating" editable="false"/>
+		<c:detailsrow property="race">
+			<t:select t:id="raceSelect" value="record.race" model="raceModel"
+					  validate="required"/>
+		</c:detailsrow>
 		<c:detailsrow property="level">${record.level:description}</c:detailsrow>
 
 		<c:detailsrow property="attack" editable="false"/>
