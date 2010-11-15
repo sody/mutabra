@@ -3,6 +3,10 @@ package com.noname.web.base.pages;
 import com.noname.domain.BaseEntity;
 import com.noname.services.BaseEntityService;
 
+/**
+ * @author Ivan Khalopik
+ * @since 1.0
+ */
 public abstract class AbstractEntityPage<E extends BaseEntity>
 		extends AbstractPage {
 

@@ -8,18 +8,32 @@
 		<t:errors/>
 
 		<c:panel actions="signIn,signUp" style="width: 300px;">
-			<div class="t-beaneditor-row">
-				<t:label for="email"/>
-				<t:textfield t:id="email" value="email" validate="required"/>
-			</div>
-			<div class="t-beaneditor-row">
-				<t:label for="password"/>
-				<t:passwordfield t:id="password" value="password" validate="required"/>
-			</div>
-			<div class="t-beaneditor-row">
-				<t:label for="remember"/>
-				<t:checkbox t:id="remember" value="remember"/>
-			</div>
+			<table class="details">
+				<tr>
+					<td>
+						<t:label for="email"/>
+					</td>
+					<td>
+						<t:textfield t:id="email" value="email" validate="required"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<t:label for="password"/>
+					</td>
+					<td>
+						<t:passwordfield t:id="password" value="password" validate="required"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<t:label for="remember"/>
+					</td>
+					<td>
+						<t:checkbox t:id="remember" value="remember"/>
+					</td>
+				</tr>
+			</table>
 			<p:signInMenuItem>
 				<t:linksubmit event="signIn">${message:signIn-label}</t:linksubmit>
 			</p:signInMenuItem>

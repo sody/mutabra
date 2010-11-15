@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public abstract class EntityDetailsPage<E extends BaseEntity>
 		extends AbstractEntityPage<E> {
@@ -30,7 +31,7 @@ public abstract class EntityDetailsPage<E extends BaseEntity>
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(final String state) {
 		this.state = state;
 	}
 
@@ -38,7 +39,7 @@ public abstract class EntityDetailsPage<E extends BaseEntity>
 		return recordId;
 	}
 
-	public void setRecordId(Long recordId) {
+	public void setRecordId(final Long recordId) {
 		this.recordId = recordId;
 	}
 
@@ -46,28 +47,16 @@ public abstract class EntityDetailsPage<E extends BaseEntity>
 		return record;
 	}
 
-	public void setRecord(E record) {
+	public void setRecord(final E record) {
 		this.record = record;
 	}
 
-	public boolean isEditable() {
-		return StateConstants.ADD_STATE.equals(getState()) || StateConstants.EDIT_STATE.equals(getState());
-	}
+	protected abstract Object getListPage();
 
-	protected abstract Object getList();
-
-	protected void onActivate(String state, Long recordId) {
+	protected void onActivate(final String state, final Long recordId) {
 		setState(state);
-		if (StateConstants.ADD_STATE.equals(state)) {
-			setRecordId(null);
-			setRecord(create());
-		} else if (StateConstants.VIEW_STATE.equals(state) || StateConstants.EDIT_STATE.equals(state)) {
-			setRecordId(recordId);
-			setRecord(get(recordId));
-		} else {
-			setRecordId(null);
-			setRecord(null);
-		}
+		setRecordId(recordId);
+		setRecord(recordId != null ? get(recordId) : create());
 	}
 
 	protected List<?> onPassivate() {
@@ -75,12 +64,12 @@ public abstract class EntityDetailsPage<E extends BaseEntity>
 	}
 
 	protected Object onCancel() {
-		return getList();
+		return getListPage();
 	}
 
 	protected void onAdd() {
 		setRecordId(null);
-		setState(StateConstants.ADD_STATE);
+		setState(StateConstants.EDIT_STATE);
 	}
 
 	protected void onEdit() {
@@ -101,6 +90,6 @@ public abstract class EntityDetailsPage<E extends BaseEntity>
 
 	protected Object onDelete() {
 		delete(getRecord());
-		return onCancel();
+		return getListPage();
 	}
 }

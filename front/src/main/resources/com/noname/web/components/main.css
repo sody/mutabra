@@ -44,3 +44,17 @@ div.transparent {
 	background-color: transparent;
 	border-style: none;
 }
+
+table.details {
+	width: 90%;
+}
+
+table.details tr {
+	height: 20px;
+}
+
+table.details th {
+	width: 30%;
+	text-align: right;
+	padding-right: 10px;
+}

@@ -4,31 +4,70 @@
 	  xmlns:p="tapestry:parameter">
 
 <t:form t:id="detailsForm">
-	<t:entityeditor object="record" state="state" actions="save,cancel" viewActions="edit,cancel">
+	<c:viewstack state="state">
 		<p:view>
-			<c:detailsrow property="id">${record.id}</c:detailsrow>
-			<c:detailsrow property="code"/>
-			<c:detailsrow property="description">${record:description}</c:detailsrow>
-			<c:detailsrow property="rating"/>
+			<c:panel actions="edit,cancel">
+				<table class="details">
+					<tr>
+						<th>${message:id-label}</th>
+						<td>${record.id}</td>
+					</tr>
+					<tr>
+						<th>${message:code-label}</th>
+						<td>${record.code}</td>
+					</tr>
+					<tr>
+						<th>${message:description-label}</th>
+						<td>${record:description}</td>
+					</tr>
+					<tr>
+						<th>${message:rating-label}</th>
+						<td>${record.rating}</td>
+					</tr>
+				</table>
+			</c:panel>
 		</p:view>
 
 		<p:edit>
-			<c:detailsrow property="id">${record.id}</c:detailsrow>
-			<c:detailsrow property="code" editable="false"/>
-			<t:translationeditor translations="record.translations" editable="prop:editable"/>
-			<c:detailsrow property="rating" validate="required"/>
+			<c:panel actions="save,cancel">
+				<table class="details">
+					<t:if test="!record.new">
+						<tr>
+							<th>${message:id-label}</th>
+							<td>${record.id}</td>
+						</tr>
+					</t:if>
+					<tr>
+						<th>
+							<t:label for="code"/>
+						</th>
+						<td>
+							<t:textfield t:id="code" value="record.code" validate="required"/>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<t:label for="description"/>
+						</th>
+						<td>
+							<t:textfield t:id="description" value="record.translations.get('description').value" validate="required"/>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<t:label for="rating"/>
+						</th>
+						<td>
+							<t:textfield t:id="rating" value="record.rating" validate="required"/>
+						</td>
+					</tr>
+				</table>
+				<p:saveMenuItem>
+					<t:linksubmit event="save">${message:save-label}</t:linksubmit>
+				</p:saveMenuItem>
+			</c:panel>
 		</p:edit>
-
-		<p:add>
-			<c:detailsrow property="code" validate="required"/>
-			<t:translationeditor translations="record.translations" editable="prop:editable"/>
-			<c:detailsrow property="rating" validate="required"/>
-		</p:add>
-
-		<p:saveMenuItem>
-			<t:linksubmit event="save">${message:save-label}</t:linksubmit>
-		</p:saveMenuItem>
-	</t:entityeditor>
+	</c:viewstack>
 </t:form>
 
 <t:entitygrid source="dataSource" row="row" showIdColumn="true"

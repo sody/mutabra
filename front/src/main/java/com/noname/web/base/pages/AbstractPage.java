@@ -6,35 +6,20 @@ package com.noname.web.base.pages;
 
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.Response;
 
 import java.util.Locale;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public abstract class AbstractPage {
-
-	@Inject
-	private Request request;
-
-	@Inject
-	private Response response;
 
 	@Inject
 	private Messages messages;
 
 	@Inject
 	private Locale locale;
-
-	protected Request getRequest() {
-		return request;
-	}
-
-	public Response getResponse() {
-		return response;
-	}
 
 	public Messages getMessages() {
 		return messages;

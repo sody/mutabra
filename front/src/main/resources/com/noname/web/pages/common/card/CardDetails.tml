@@ -1,4 +1,4 @@
-<html t:type="layout"
+<html t:type="layout" title="card-title"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
@@ -6,129 +6,36 @@
 <t:unless test="typeSelected">
 	<t:form t:id="selectTypeForm">
 		<c:box>
-			<dl class="container details">
-				<dt>${message:selectType-label}</dt>
-				<dd>
-					<t:select t:id="typeSelect" value="type" validate="required" blankOption="always"
-							  t:mixins="common/formsubmit"/>
-				</dd>
-			</dl>
+			<table class="details">
+				<tr>
+					<td>
+						<t:label for="typeSelect"/>
+					</td>
+					<td>
+						<t:select t:id="typeSelect" value="type" validate="required" blankOption="always" t:mixins="common/formsubmit"/>
+					</td>
+				</tr>
+			</table>
 		</c:box>
 	</t:form>
 	<p:else>
 		<t:form t:id="detailsForm">
-			<t:entityeditor object="record" state="state" actions="save,cancel" viewActions="edit,cancel">
+			<c:viewstack state="state">
 				<p:view>
-					<c:box>
-						<c:detailsrow property="id">${record.id}</c:detailsrow>
-						<c:detailsrow property="type">${record.type}</c:detailsrow>
-						<c:detailsrow property="code"/>
-						<c:detailsrow property="description">${record:description}</c:detailsrow>
-						<c:detailsrow property="level">${record.level:description}</c:detailsrow>
-					</c:box>
-					<t:if test="effectCard">
-						<c:box>
-							<c:details object="effectCardRecord.effect" editable="false">
-								<c:detailsrow property="id">${effectCardRecord.effect.id}</c:detailsrow>
-								<c:detailsrow property="code"/>
-								<c:detailsrow
-										property="description">${effectCardRecord.effect:description}</c:detailsrow>
-								<c:detailsrow property="targetType"/>
-								<c:detailsrow property="attack"/>
-								<c:detailsrow property="defence"/>
-							</c:details>
-						</c:box>
-					</t:if>
-					<t:if test="summonCard">
-						<c:box>
-							<c:details object="summonCardRecord.summon" editable="false">
-								<c:detailsrow property="id">${summonCardRecord.summon.id}</c:detailsrow>
-								<c:detailsrow property="code"/>
-								<c:detailsrow
-										property="description">${summonCardRecord.summon:description}</c:detailsrow>
-								<c:detailsrow property="attack"/>
-								<c:detailsrow property="defence"/>
-							</c:details>
-						</c:box>
-					</t:if>
+					<c:panel actions="edit,cancel">
+						<t:common.cardeditor card="record" state="state"/>
+					</c:panel>
 				</p:view>
 
 				<p:edit>
-					<c:box>
-						<c:detailsrow property="id">${record.id}</c:detailsrow>
-						<c:detailsrow property="type">${record.type}</c:detailsrow>
-						<c:detailsrow property="code" editable="false"/>
-						<t:translationeditor translations="record.translations" editable="prop:editable"/>
-						<c:detailsrow property="level">
-							<t:select t:id="levelSelect" value="record.level" model="levelModel"
-									  validate="required"/>
-						</c:detailsrow>
-					</c:box>
-					<t:if test="effectCard">
-						<c:box>
-							<c:details object="effectCardRecord.effect" editable="true">
-								<c:detailsrow property="id">${effectCardRecord.effect.id}</c:detailsrow>
-								<c:detailsrow property="code" editable="false"/>
-								<t:translationeditor translations="effectCardRecord.effect.translations"
-													 editable="prop:editable"/>
-								<c:detailsrow property="targetType" validate="required"/>
-								<c:detailsrow property="attack" validate="required"/>
-								<c:detailsrow property="defence" validate="required"/>
-							</c:details>
-						</c:box>
-					</t:if>
-					<t:if test="summonCard">
-						<c:box>
-							<c:details object="summonCardRecord.summon" editable="true">
-								<c:detailsrow property="id">${summonCardRecord.summon.id}</c:detailsrow>
-								<c:detailsrow property="code" editable="false"/>
-								<t:translationeditor translations="summonCardRecord.summon.translations"
-													 editable="prop:editable"/>
-								<c:detailsrow property="attack" validate="required"/>
-								<c:detailsrow property="defence" validate="required"/>
-							</c:details>
-						</c:box>
-					</t:if>
+					<c:panel actions="save,cancel">
+						<t:common.cardeditor card="record" state="state"/>
+						<p:saveMenuItem>
+							<t:linksubmit event="save">${message:save-label}</t:linksubmit>
+						</p:saveMenuItem>
+					</c:panel>
 				</p:edit>
-
-				<p:add>
-					<c:box>
-						<c:detailsrow property="type">${record.type}</c:detailsrow>
-						<c:detailsrow property="code" validate="required"/>
-						<t:translationeditor translations="record.translations" editable="prop:editable"/>
-						<c:detailsrow property="level">
-							<t:delegate to="component:levelSelect"/>
-						</c:detailsrow>
-					</c:box>
-					<t:if test="effectCard">
-						<c:box>
-							<c:details object="effectCardRecord.effect" editable="true">
-								<c:detailsrow property="code" validate="required"/>
-								<t:translationeditor translations="effectCardRecord.effect.translations"
-													 editable="prop:editable"/>
-								<c:detailsrow property="targetType" validate="required"/>
-								<c:detailsrow property="attack" validate="required"/>
-								<c:detailsrow property="defence" validate="required"/>
-							</c:details>
-						</c:box>
-					</t:if>
-					<t:if test="summonCard">
-						<c:box>
-							<c:details object="summonCardRecord.summon" editable="true">
-								<c:detailsrow property="code" validate="required"/>
-								<t:translationeditor translations="summonCardRecord.summon.translations"
-													 editable="prop:editable"/>
-								<c:detailsrow property="attack" validate="required"/>
-								<c:detailsrow property="defence" validate="required"/>
-							</c:details>
-						</c:box>
-					</t:if>
-				</p:add>
-
-				<p:saveMenuItem>
-					<t:linksubmit event="save">${message:save-label}</t:linksubmit>
-				</p:saveMenuItem>
-			</t:entityeditor>
+			</c:viewstack>
 		</t:form>
 	</p:else>
 </t:unless>

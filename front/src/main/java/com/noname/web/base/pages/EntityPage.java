@@ -11,6 +11,7 @@ import org.greatage.tapestry.grid.EntityDataSource;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public abstract class EntityPage<E extends BaseEntity>
 		extends EntityDetailsPage<E> {
@@ -26,7 +27,7 @@ public abstract class EntityPage<E extends BaseEntity>
 		return row;
 	}
 
-	public void setRow(E row) {
+	public void setRow(final E row) {
 		this.row = row;
 	}
 
@@ -37,20 +38,20 @@ public abstract class EntityPage<E extends BaseEntity>
 		return dataSource;
 	}
 
-	protected void onView(long id) {
+	protected void onView(final long id) {
 		setRecordId(id);
 	}
 
-	protected void onEdit(long id) {
+	protected void onEdit(final long id) {
 		setRecordId(id);
 	}
 
-	protected void onDelete(long id) {
+	protected void onDelete(final long id) {
 		final E entity = get(id);
 		setRecord(entity);
 	}
 
-	protected Object getList() {
+	protected Object getListPage() {
 		setRecordId(null);
 		setState(null);
 		return null;

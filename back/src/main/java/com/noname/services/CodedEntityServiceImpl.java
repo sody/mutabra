@@ -4,6 +4,7 @@ import com.noname.domain.CodedEntity;
 import com.noname.domain.Translation;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
+import org.greatage.util.I18nUtils;
 
 import java.util.Locale;
 import java.util.Map;
@@ -16,7 +17,10 @@ public class CodedEntityServiceImpl<E extends CodedEntity, Q extends CodedEntity
 		implements CodedEntityService<E> {
 	private final TranslationService translationService;
 
-	public CodedEntityServiceImpl(EntityRepository repository, TranslationService translationService, Class<E> entityClass, Class<Q> queryClass) {
+	public CodedEntityServiceImpl(final EntityRepository repository,
+								  final TranslationService translationService,
+								  final Class<E> entityClass,
+								  final Class<Q> queryClass) {
 		super(repository, entityClass, queryClass);
 		this.translationService = translationService;
 	}
@@ -25,45 +29,69 @@ public class CodedEntityServiceImpl<E extends CodedEntity, Q extends CodedEntity
 	public E create() {
 		final E entity = super.create();
 		if (entity != null) {
-			final Map<String, Translation> translations = translationService.getTranslations(entity, Locale.ROOT);
-			entity.setTranslations(translations);
+			initializeTranslations(entity, I18nUtils.ROOT_LOCALE);
 		}
 		return entity;
 	}
 
 	@Override
-	public E get(Long pk) {
-		return get(pk, null);
+	public E get(final Long pk) {
+		return get(pk, I18nUtils.ROOT_LOCALE);
 	}
 
-	public E get(Long pk, Locale locale) {
+	public E get(final Long pk, final Locale locale) {
 		final E entity = super.get(pk);
 		if (entity != null) {
-			final Map<String, Translation> translations = translationService.getTranslations(entity, locale);
-			entity.setTranslations(translations);
+			initializeTranslations(entity, locale);
 		}
 		return entity;
 	}
 
 	@Override
 	@Transactional
-	public void save(E entity) {
+	public void save(final E entity) {
 		super.save(entity);
-		translationService.saveTranslations(entity, entity.getTranslations());
+		saveTranslations(entity);
 	}
 
 	@Override
 	@Transactional
-	public void update(E entity) {
+	public void update(final E entity) {
 		super.update(entity);
-		translationService.saveTranslations(entity, entity.getTranslations());
+		saveTranslations(entity);
 	}
 
 	@Override
 	@Transactional
-	public void saveOrUpdate(E entity) {
+	public void saveOrUpdate(final E entity) {
 		super.saveOrUpdate(entity);
+		saveTranslations(entity);
+	}
+
+	@Override
+	@Transactional
+	public void delete(final E entity) {
+		super.delete(entity);
+		deleteTranslations(entity);
+	}
+
+	protected void deleteTranslations(final E entity) {
+		for (Translation translation : entity.getTranslations().values()) {
+			translationService.delete(translation);
+		}
+	}
+
+
+	protected void saveTranslations(final E entity) {
 		translationService.saveTranslations(entity, entity.getTranslations());
 	}
 
+	protected void initializeTranslations(final E entity, final Locale locale) {
+		final Map<String, Translation> translations = translationService.getTranslations(entity, locale);
+		entity.setTranslations(translations);
+	}
+
+	protected TranslationService getTranslationService() {
+		return translationService;
+	}
 }

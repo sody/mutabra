@@ -4,23 +4,45 @@
 	  xmlns:p="tapestry:parameter">
 
 <t:form t:id="createForm">
-	<t:entityeditor state="literal:add" object="record" actions="create,cancel">
-		<c:detailsrow property="name" validate="required"/>
-
-		<c:detailsrow property="rating" editable="false"/>
-		<c:detailsrow property="race">
-			<t:select t:id="raceSelect" value="record.race" model="raceModel"
-					  validate="required"/>
-		</c:detailsrow>
-		<c:detailsrow property="level">${record.level:description}</c:detailsrow>
-
-		<c:detailsrow property="attack" editable="false"/>
-		<c:detailsrow property="defence" editable="false"/>
-
+	<c:panel actions="create,cancel">
+		<table class="details">
+			<tr>
+				<th>
+					<t:label for="name"/>
+				</th>
+				<td>
+					<t:textfield t:id="name" value="record.name" validate="required"/>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<t:label for="race"/>
+				</th>
+				<td>
+					<t:select t:id="race" value="record.race" model="raceModel" validate="required"/>
+				</td>
+			</tr>
+			<tr>
+				<th>${message:rating-label}</th>
+				<td>${record.rating}</td>
+			</tr>
+			<tr>
+				<th>${message:level-label}</th>
+				<td>${record.level:description}</td>
+			</tr>
+			<tr>
+				<th>${message:attack-label}</th>
+				<td>${record.attack}</td>
+			</tr>
+			<tr>
+				<th>${message:defence-label}</th>
+				<td>${record.defence}</td>
+			</tr>
+		</table>
 		<p:createMenuItem>
 			<t:linksubmit event="create">${message:create-label}</t:linksubmit>
 		</p:createMenuItem>
-	</t:entityeditor>
+	</c:panel>
 </t:form>
 
 </html>

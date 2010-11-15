@@ -8,10 +8,16 @@
 		<t:errors/>
 
 		<c:panel actions="signUp,signIn" style="width: 300px;">
-			<div class="t-beaneditor-row">
-				<t:label for="email"/>
-				<t:textfield t:id="email" value="email" validate="required"/>
-			</div>
+			<table class="details">
+				<tr>
+					<td>
+						<t:label for="email"/>
+					</td>
+					<td>
+						<t:textfield t:id="email" value="email" validate="required"/>
+					</td>
+				</tr>
+			</table>
 			<p:signUpMenuItem>
 				<t:linksubmit event="signUp">${message:signUp-label}</t:linksubmit>
 			</p:signUpMenuItem>

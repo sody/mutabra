@@ -10,6 +10,7 @@ import org.greatage.tapestry.grid.EntityDataSource;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public abstract class EntityListPage<E extends BaseEntity>
 		extends AbstractEntityPage<E> {
@@ -22,7 +23,7 @@ public abstract class EntityListPage<E extends BaseEntity>
 		return row;
 	}
 
-	public void setRow(E row) {
+	public void setRow(final E row) {
 		this.row = row;
 	}
 
@@ -33,21 +34,21 @@ public abstract class EntityListPage<E extends BaseEntity>
 		return dataSource;
 	}
 
-	protected abstract Object getDetails(String state, Long recordId);
+	protected abstract Object getDetails(final String state, final Long recordId);
 
 	protected Object onAdd() {
-		return getDetails(StateConstants.ADD_STATE, null);
+		return getDetails(StateConstants.EDIT_STATE, null);
 	}
 
-	protected Object onEdit(long id) {
+	protected Object onEdit(final long id) {
 		return getDetails(StateConstants.EDIT_STATE, id);
 	}
 
-	protected Object onView(long id) {
+	protected Object onView(final long id) {
 		return getDetails(StateConstants.VIEW_STATE, id);
 	}
 
-	protected void onDelete(long id) {
+	protected void onDelete(final long id) {
 		final E entity = get(id);
 		delete(entity);
 	}
