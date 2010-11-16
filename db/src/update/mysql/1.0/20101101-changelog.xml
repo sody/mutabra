@@ -161,7 +161,7 @@
 
 	<changeSet id="06" author="ikhalopik@gmail.com" context="init">
 		<insert tableName="ACCOUNT">
-			<column name="ID" valueNumeric="0"/>
+			<column name="ID" valueNumeric="1"/>
 			<column name="EMAIL" value="admin@example.com"/>
 			<column name="PASSWORD" value="21232f297a57a5a743894a0e4a801fc3"/>
 		</insert>
