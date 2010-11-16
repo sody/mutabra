@@ -2,11 +2,11 @@ package com.noname.web.pages.player.hero;
 
 import com.noname.domain.player.Hero;
 import com.noname.web.base.pages.AbstractPage;
-import com.noname.web.services.security.GameUser;
+import com.noname.web.services.AuthorityConstants;
+import com.noname.web.services.SecurityService;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.annotations.Secured;
-import org.greatage.security.context.UserContext;
+import org.greatage.security.annotations.Authority;
 
 import java.util.Set;
 
@@ -14,14 +14,14 @@ import java.util.Set;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Secured
+@Authority(AuthorityConstants.ROLE_USER)
 public class HeroSelect extends AbstractPage {
 
 	@InjectPage
 	private HeroCreate heroCreatePage;
 
 	@Inject
-	private UserContext<GameUser> userContext;
+	private SecurityService securityService;
 
 	private Set<Hero> heroes;
 
@@ -40,7 +40,7 @@ public class HeroSelect extends AbstractPage {
 	}
 
 	void setupRender() {
-		heroes = userContext.getUser().getAccount().getHeroes();
+		heroes = securityService.getAccount().getHeroes();
 	}
 
 	Object onCreate() {

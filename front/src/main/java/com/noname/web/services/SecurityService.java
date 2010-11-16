@@ -1,4 +1,4 @@
-package com.noname.web.services.security;
+package com.noname.web.services;
 
 import com.noname.domain.security.Account;
 import com.noname.services.MailService;
@@ -6,10 +6,10 @@ import com.noname.services.security.AccountService;
 import com.noname.web.pages.security.Activate;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.services.PageRenderLinkSource;
-import org.greatage.security.auth.AuthenticationManager;
-import org.greatage.security.auth.DefaultAuthenticationToken;
-import org.greatage.security.auth.PasswordEncoder;
-import org.greatage.security.context.UserContext;
+import org.greatage.security.AuthenticationManager;
+import org.greatage.security.DefaultAuthenticationToken;
+import org.greatage.security.PasswordEncoder;
+import org.greatage.security.UserContext;
 import org.greatage.util.StringUtils;
 
 import java.math.BigInteger;
@@ -41,6 +41,10 @@ public class SecurityService {
 		this.userContext = userContext;
 		this.authenticationManager = authenticationManager;
 		this.linkSource = linkSource;
+	}
+
+	public Account getAccount() {
+		return userContext.getUser().getAccount();
 	}
 
 	public boolean isAuthenticated() {

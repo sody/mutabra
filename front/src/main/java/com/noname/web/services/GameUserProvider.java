@@ -1,10 +1,10 @@
-package com.noname.web.services.security;
+package com.noname.web.services;
 
 import com.noname.domain.security.Account;
 import com.noname.services.security.AccountService;
-import org.greatage.security.auth.AuthenticationException;
-import org.greatage.security.auth.DefaultAuthenticationProvider;
-import org.greatage.security.auth.PasswordEncoder;
+import org.greatage.security.AuthenticationException;
+import org.greatage.security.DefaultAuthenticationProvider;
+import org.greatage.security.PasswordEncoder;
 import org.greatage.util.StringUtils;
 
 /**

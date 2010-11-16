@@ -5,14 +5,12 @@
 package com.noname.web.components;
 
 import com.noname.web.pages.Index;
-import com.noname.web.services.security.GameUser;
-import com.noname.web.services.security.SecurityService;
+import com.noname.web.services.SecurityService;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.context.UserContext;
 import org.greatage.tapestry.commonlib.base.components.AbstractComponent;
 
 /**
@@ -29,13 +27,10 @@ public class Layout extends AbstractComponent {
 	}
 
 	@Inject
-	private UserContext<GameUser> userContext;
-
-	@Inject
 	private SecurityService securityService;
 
 	public String getUser() {
-		return userContext.getUser().getName();
+		return securityService.getAccount().getEmail();
 	}
 
 	public boolean isAuthenticated() {

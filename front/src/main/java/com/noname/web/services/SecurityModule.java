@@ -1,21 +1,20 @@
-package com.noname.web.services.security;
+package com.noname.web.services;
 
 import com.noname.web.pages.security.SignIn;
-import org.apache.tapestry5.ioc.*;
-import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.Resource;
+import org.apache.tapestry5.ioc.ScopeConstants;
+import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.services.*;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.*;
-import org.drools.compiler.DroolsParserException;
+import org.drools.builder.KnowledgeBuilder;
+import org.drools.builder.KnowledgeBuilderError;
+import org.drools.builder.KnowledgeBuilderFactory;
+import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
-import org.greatage.security.acl.AccessControlManager;
-import org.greatage.security.acl.drools.DroolsAccessControlManager;
-import org.greatage.security.auth.*;
-import org.greatage.security.context.PermissionResolver;
-import org.greatage.security.context.PermissionResolverImpl;
-import org.greatage.security.context.UserContext;
-import org.greatage.security.context.UserContextImpl;
+import org.greatage.security.*;
+import org.greatage.security.drools.DroolsAccessControlManager;
 import org.greatage.tapestry.internal.SecuredAnnotationWorker;
 import org.greatage.tapestry.internal.SecurityExceptionHandler;
 import org.greatage.tapestry.internal.UserPersistenceFilter;
@@ -24,41 +23,24 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class SecurityModule {
-	private static final String SECURITY_ENCODE_ALGORITHM = "security.encode-algorithm";
-	private static final String SECURITY_KNOWLEDGE_DIRECTORY = "security.knowledge-directory";
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(AuthenticationManager.class, AuthenticationManagerImpl.class);
-		binder.bind(PermissionResolver.class, PermissionResolverImpl.class);
-		binder.bind(AccessControlManager.class, DroolsAccessControlManager.class);
+		binder.bind(SecurityChecker.class, SecurityCheckerImpl.class);
 		binder.bind(UserContext.class, UserContextImpl.class).scope(ScopeConstants.PERTHREAD);
+		binder.bind(AccessControlManager.class, DroolsAccessControlManager.class);
 		binder.bind(SecurityService.class, SecurityService.class);
-	}
-
-	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
-		configuration.add(SECURITY_ENCODE_ALGORITHM, "MD5");
-		configuration.add(SECURITY_KNOWLEDGE_DIRECTORY, "security");
-	}
-
-	public KnowledgeBuilderConfiguration buildKnowledgeBuilderConfiguration(final Map<String, String> knowledgeBuilderProperties) {
-		final KnowledgeBuilderConfiguration configuration = KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
-		for (Map.Entry<String, String> entry : knowledgeBuilderProperties.entrySet()) {
-			configuration.setProperty(entry.getKey(), entry.getValue());
-		}
-		return configuration;
 	}
 
 	public KnowledgeBase buildKnowledgeBase(
 			final Collection<String> resources,
-			final KnowledgeBuilderConfiguration configuration,
-			final AssetSource assetSource) throws DroolsParserException, IOException {
+			final AssetSource assetSource) throws IOException {
 		final KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
 		for (String resource : resources) {
@@ -72,24 +54,25 @@ public class SecurityModule {
 				sb.append("Error at lines ").append(Arrays.toString(error.getErrorLines())).append(":").append("\n");
 				sb.append(error.getMessage()).append("\n");
 			}
-			throw new DroolsParserException(sb.toString());
+			throw new RuntimeException(sb.toString());
 		}
 		final KnowledgeBase knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
 		knowledgeBase.addKnowledgePackages(builder.getKnowledgePackages());
 		return knowledgeBase;
 	}
 
-	public void contributeKnowledgeBase(final Configuration<String> configuration) {
+	public void contributeKnowledgeBase(final org.apache.tapestry5.ioc.Configuration<String> configuration) {
 		configuration.add("classpath:security/sample-security-rules.drl");
 	}
 
-	public PasswordEncoder buildPasswordEncoder(@Symbol(SECURITY_ENCODE_ALGORITHM) final String algorithm) {
-		return new MessageDigestPasswordEncoder(algorithm, false);
+	public PasswordEncoder buildPasswordEncoder() {
+		return new MessageDigestPasswordEncoder("MD5", false);
 	}
 
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration) {
 		configuration.addInstance("default", GameUserProvider.class);
 	}
+
 
 	public void contributeComponentClassTransformWorker(
 			final OrderedConfiguration<ComponentClassTransformWorker> configuration) {

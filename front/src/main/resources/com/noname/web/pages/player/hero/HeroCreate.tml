@@ -15,11 +15,9 @@
 				</td>
 			</tr>
 			<tr>
-				<th>
-					<t:label for="race"/>
-				</th>
+				<th>${message:race-label}</th>
 				<td>
-					<t:select t:id="race" value="record.race" model="raceModel" validate="required"/>
+					<t:game.raceselect race="record.race"/>
 				</td>
 			</tr>
 			<tr>

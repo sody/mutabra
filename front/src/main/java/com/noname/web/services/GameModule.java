@@ -3,7 +3,6 @@ package com.noname.web.services;
 import com.noname.domain.BaseEntity;
 import com.noname.web.services.i18n.I18nPropertyConduitSource;
 import com.noname.web.services.i18n.Translator;
-import com.noname.web.services.security.SecurityModule;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;

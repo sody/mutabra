@@ -2,7 +2,7 @@ package com.noname.web.mixins;
 
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.context.PermissionResolver;
+import org.greatage.security.SecurityChecker;
 
 /**
  * @author Ivan Khalopik
@@ -17,9 +17,15 @@ public class Secured {
 	private String permission;
 
 	@Inject
-	private PermissionResolver permissionResolver;
+	private SecurityChecker securityChecker;
 
 	boolean setupRender() {
-		return permissionResolver.isGranted(securedObject, permission);
+		try {
+			securityChecker.checkPermission(securedObject, permission);
+		} catch (Exception e) {
+			return false;
+		}
+
+		return true;
 	}
 }

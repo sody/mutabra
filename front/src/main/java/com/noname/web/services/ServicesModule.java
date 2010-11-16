@@ -34,7 +34,7 @@ import javax.naming.NamingException;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Dependency(HibernateModule.class)
+@Dependency({HibernateModule.class})
 public class ServicesModule {
 
 	@Bind
@@ -81,6 +81,7 @@ public class ServicesModule {
 	}
 
 	@Intercept(BaseEntityService.class)
+	@Order("Transaction")
 	public MethodAdvice interceptServices(final HibernateExecutor executor) {
 		return new TransactionalAdvice(executor);
 	}

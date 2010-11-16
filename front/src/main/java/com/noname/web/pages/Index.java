@@ -2,7 +2,7 @@ package com.noname.web.pages;
 
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.pages.security.SignUp;
-import com.noname.web.services.security.SecurityService;
+import com.noname.web.services.SecurityService;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Path;
