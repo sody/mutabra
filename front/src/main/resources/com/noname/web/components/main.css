@@ -58,3 +58,32 @@ table.details th {
 	text-align: right;
 	padding-right: 10px;
 }
+
+.invisible {
+	display: none;
+}
+
+.disabled {
+	opacity: 0.5;
+}
+
+div.previous,
+div.next,
+div.item {
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+
+div.previous {
+	background: transparent url("left_arrow.png");
+}
+
+div.next {
+	background: transparent url("right_arrow.png");
+}
+
+div.item {
+	text-align: center;
+}
+

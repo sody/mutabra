@@ -1,0 +1,14 @@
+<div class="container"
+	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	 xmlns:c="tapestry-library:common">
+
+	<t:hidden id="${clientId}" value="inherit:value" encoder="inherit:encoder"/>
+
+	<div id="${previousId}" class="previous"></div>
+	<t:loop source="inherit:source" value="row">
+		<div id="${rowId}" class="${rowClass}">
+			<t:body/>
+		</div>
+	</t:loop>
+	<div id="${nextId}" class="next"></div>
+</div>
