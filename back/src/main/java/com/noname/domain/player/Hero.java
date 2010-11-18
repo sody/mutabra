@@ -1,6 +1,7 @@
 package com.noname.domain.player;
 
 import com.noname.domain.BaseEntity;
+import com.noname.domain.common.Face;
 import com.noname.domain.common.Level;
 import com.noname.domain.common.Race;
 import com.noname.domain.security.Account;
@@ -22,6 +23,10 @@ public class Hero extends BaseEntity {
 
 	@Column(name = "NAME", nullable = false)
 	private String name;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_FACE", nullable = false)
+	private Face face;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_RACE", nullable = false)
@@ -65,6 +70,14 @@ public class Hero extends BaseEntity {
 
 	public void setRating(final long rating) {
 		this.rating = rating;
+	}
+
+	public Face getFace() {
+		return face;
+	}
+
+	public void setFace(final Face face) {
+		this.face = face;
 	}
 
 	public Race getRace() {

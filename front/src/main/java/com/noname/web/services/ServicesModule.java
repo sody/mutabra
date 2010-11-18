@@ -41,6 +41,7 @@ public class ServicesModule {
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
 		binder.bind(AccountService.class, AccountServiceImpl.class);
+		binder.bind(FaceService.class, FaceServiceImpl.class);
 		binder.bind(RaceService.class, RaceServiceImpl.class);
 		binder.bind(LevelService.class, LevelServiceImpl.class);
 		binder.bind(CardService.class, CardServiceImpl.class);
@@ -62,6 +63,7 @@ public class ServicesModule {
 		configuration.add(Role.class);
 		configuration.add(Permission.class);
 
+		configuration.add(Face.class);
 		configuration.add(Race.class);
 		configuration.add(Level.class);
 		configuration.add(Card.class);

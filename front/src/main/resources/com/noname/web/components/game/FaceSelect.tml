@@ -1,0 +1,10 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter"
+		xmlns:c="tapestry-library:common">
+
+	<c:selector source="faces" value="face" row="row">
+		<img src="${faceImage}" alt="${row:description}"/>
+	</c:selector>
+
+</t:container>

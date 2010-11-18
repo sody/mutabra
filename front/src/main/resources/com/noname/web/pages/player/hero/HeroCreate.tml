@@ -15,6 +15,12 @@
 				</td>
 			</tr>
 			<tr>
+				<th>${message:face-label}</th>
+				<td>
+					<t:game.faceselect face="record.face"/>
+				</td>
+			</tr>
+			<tr>
 				<th>${message:race-label}</th>
 				<td>
 					<t:game.raceselect race="record.race"/>
