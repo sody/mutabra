@@ -4,7 +4,7 @@
 		xmlns:c="tapestry-library:common">
 
 	<c:selector source="races" value="race" row="row">
-		${row:description}
+		<img src="${raceImage}" alt="${row:description}"/>
 	</c:selector>
 
 </t:container>
