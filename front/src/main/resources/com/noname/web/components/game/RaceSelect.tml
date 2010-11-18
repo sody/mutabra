@@ -3,9 +3,8 @@
 		xmlns:p="tapestry:parameter"
 		xmlns:c="tapestry-library:common">
 
-	<t:selector source="races" value="race" row="row">
+	<c:selector source="races" value="race" row="row">
 		${row:description}
-	</t:selector>
-	<!--<t:select t:id="race" value="race" model="raceModel" validate="required"/>-->
+	</c:selector>
 
 </t:container>
