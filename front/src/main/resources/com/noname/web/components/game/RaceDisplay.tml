@@ -3,8 +3,6 @@
 		xmlns:p="tapestry:parameter"
 		xmlns:c="tapestry-library:common">
 
-	<c:selector source="faces" value="face" row="row">
-		<t:game.facedisplay face="row"/>
-	</c:selector>
+	<img src="${raceImage}" alt="${race.code}" title="${race:description}"/>
 
 </t:container>

@@ -31,7 +31,7 @@ public class HeroSelect extends AbstractPage {
 		return row;
 	}
 
-	public void setRow(Hero row) {
+	public void setRow(final Hero row) {
 		this.row = row;
 	}
 
@@ -45,5 +45,17 @@ public class HeroSelect extends AbstractPage {
 
 	Object onCreate() {
 		return heroCreatePage;
+	}
+
+	Object onEnter(final long id) {
+		return null; //todo: implement this
+	}
+
+	Object onSettings(final long id) {
+		return null; //todo: implement this
+	}
+
+	Object onDelete(final long id) {
+		return null; //todo: implement this
 	}
 }
