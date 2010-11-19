@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Face extends CodedEntity {
 
 	public Face() {
-		super("face", TranslationType.STANDARD);
+		super("FACE", TranslationType.STANDARD);
 	}
 
 }

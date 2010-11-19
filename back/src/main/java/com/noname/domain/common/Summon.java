@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "SUMMON")
@@ -21,7 +22,7 @@ public class Summon extends CodedEntity {
 	private int defence;
 
 	public Summon() {
-		super("summon", TranslationType.STANDARD);
+		super("SUMMON", TranslationType.STANDARD);
 	}
 
 	public int getAttack() {

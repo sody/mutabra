@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "EFFECT")
@@ -27,7 +28,7 @@ public class Effect extends CodedEntity {
 	private int defence;
 
 	public Effect() {
-		super("effect", TranslationType.STANDARD);
+		super("EFFECT", TranslationType.STANDARD);
 	}
 
 	public TargetType getTargetType() {

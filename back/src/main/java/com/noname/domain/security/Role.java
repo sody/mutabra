@@ -9,6 +9,7 @@ import java.util.Set;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "ROLE")
@@ -16,7 +17,7 @@ public class Role extends CodedEntity {
 	private static final String ROLE_PREFIX = "ROLE_";
 
 	public Role() {
-		super("role", TranslationType.STANDARD);
+		super("ROLE", TranslationType.STANDARD);
 	}
 
 	@ManyToMany(mappedBy = "roles")

@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @DiscriminatorValue(value = "1")

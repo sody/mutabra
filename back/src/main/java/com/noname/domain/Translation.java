@@ -7,6 +7,7 @@ import java.util.Locale;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "TRANSLATION")

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "LEVEL")
@@ -18,7 +19,7 @@ public class Level extends CodedEntity {
 	private long rating;
 
 	public Level() {
-		super("level", TranslationType.STANDARD);
+		super("LEVEL", TranslationType.STANDARD);
 	}
 
 	public long getRating() {

@@ -7,19 +7,19 @@ import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class LevelServiceImpl
 		extends CodedEntityServiceImpl<Level, LevelQuery>
 		implements LevelService {
 
-	private static final long DEFAULT_LEVEL_ID = 1l;
+	private static final String NEWBIE_LEVEL_CODE = "NEWBIE";
 
 	public LevelServiceImpl(final EntityRepository repository, final TranslationService translationService) {
 		super(repository, translationService, Level.class, LevelQuery.class);
 	}
 
-	@Override
 	public Level getDefaultLevel() {
-		return get(DEFAULT_LEVEL_ID);
+		return get(NEWBIE_LEVEL_CODE);
 	}
 }

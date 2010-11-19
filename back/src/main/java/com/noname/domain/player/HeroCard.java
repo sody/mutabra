@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "HERO_CARD")

@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,7 +32,7 @@ public class Card extends CodedEntity {
 	}
 
 	protected Card(final CardType type) {
-		super("card", TranslationType.STANDARD);
+		super("CARD", TranslationType.STANDARD);
 		this.type = type;
 	}
 

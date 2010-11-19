@@ -5,6 +5,7 @@ import com.noname.services.CodedEntityQuery;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class CardQuery extends CodedEntityQuery<Card, CardQuery> implements CardFilter {
 

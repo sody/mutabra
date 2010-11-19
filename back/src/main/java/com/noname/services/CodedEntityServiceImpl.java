@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class CodedEntityServiceImpl<E extends CodedEntity, Q extends CodedEntityQuery<E, Q>>
 		extends BaseEntityServiceImpl<E, Q>
@@ -34,13 +35,23 @@ public class CodedEntityServiceImpl<E extends CodedEntity, Q extends CodedEntity
 		return entity;
 	}
 
-	@Override
-	public E get(final Long pk) {
-		return get(pk, I18nUtils.ROOT_LOCALE);
+	public E get(final Long pk, final Locale locale) {
+		final E entity = get(pk);
+		if (entity != null) {
+			initializeTranslations(entity, locale);
+		}
+		return entity;
 	}
 
-	public E get(final Long pk, final Locale locale) {
-		final E entity = super.get(pk);
+	public E get(final String code) {
+		if (code == null) {
+			return null;
+		}
+		return createQuery().withCode(code).unique();
+	}
+
+	public E get(final String code, final Locale locale) {
+		final E entity = get(code);
 		if (entity != null) {
 			initializeTranslations(entity, locale);
 		}

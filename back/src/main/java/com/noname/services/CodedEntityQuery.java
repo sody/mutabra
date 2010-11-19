@@ -4,6 +4,7 @@ import com.noname.domain.CodedEntity;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class CodedEntityQuery<E extends CodedEntity, Q extends CodedEntityQuery<E, Q>>
 		extends BaseEntityQuery<E, Q>

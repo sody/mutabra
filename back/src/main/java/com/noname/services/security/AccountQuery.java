@@ -5,6 +5,7 @@ import com.noname.services.BaseEntityQuery;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> implements AccountFilter {
 	private String userName;

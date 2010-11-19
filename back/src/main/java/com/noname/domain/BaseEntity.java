@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @MappedSuperclass
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)

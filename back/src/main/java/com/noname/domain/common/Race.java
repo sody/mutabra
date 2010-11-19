@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Race extends CodedEntity {
 
 	public Race() {
-		super("race", TranslationType.STANDARD);
+		super("RACE", TranslationType.STANDARD);
 	}
 
 }

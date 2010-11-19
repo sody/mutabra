@@ -5,6 +5,7 @@ import java.util.Collection;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public interface Translatable extends Serializable {
 

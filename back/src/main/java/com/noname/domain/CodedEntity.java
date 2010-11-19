@@ -9,9 +9,11 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @MappedSuperclass
 public class CodedEntity extends BaseEntity implements Translatable {
+	public static final String CODE_PROPERTY = "code";
 
 	@Column(name = "CODE", nullable = false)
 	private String code;
@@ -26,12 +28,12 @@ public class CodedEntity extends BaseEntity implements Translatable {
 	private final Map<String, Translation> translations = new HashMap<String, Translation>();
 
 	protected CodedEntity(final String type, final Collection<String> variants) {
-		this.type = type;
+		this.type = type.toUpperCase();
 		this.variants = variants;
 	}
 
-	protected CodedEntity(final String basename, final TranslationType translationType) {
-		this(basename, translationType.getVariants());
+	protected CodedEntity(final String type, final TranslationType translationType) {
+		this(type, translationType.getVariants());
 	}
 
 	public String getCode() {

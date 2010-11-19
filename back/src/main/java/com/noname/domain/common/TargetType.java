@@ -4,6 +4,7 @@ import org.greatage.hibernate.type.OrderedEnum;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public enum TargetType implements OrderedEnum {
 	UNKNOWN(0),

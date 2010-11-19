@@ -22,7 +22,7 @@ public class Permission extends CodedEntity {
 	private Set<Role> roles = new HashSet<Role>();
 
 	public Permission() {
-		super("permission", TranslationType.STANDARD);
+		super("PERMISSION", TranslationType.STANDARD);
 	}
 
 	public Set<Role> getRoles() {

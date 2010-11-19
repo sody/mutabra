@@ -5,13 +5,11 @@ import com.noname.domain.player.Hero;
 import org.greatage.util.CollectionUtils;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @Entity
 @Table(name = "ACCOUNT")
@@ -33,6 +31,21 @@ public class Account extends BaseEntity {
 	@Column(name = "TOKEN", nullable = true)
 	private String token;
 
+	@Column(name = "NAME", nullable = true, insertable = false)
+	private String name;
+
+	@Column(name = "PLACE", nullable = true, insertable = false)
+	private String place;
+
+	@Column(name = "LOCALE", nullable = true, insertable = false)
+	private Locale locale;
+
+	@Column(name = "TIMEZONE", nullable = true, insertable = false)
+	private TimeZone timeZone;
+
+	@Column(name = "DELETED_AT", nullable = true, insertable = false)
+	private Date deletedAt;
+
 	@ManyToMany
 	@JoinTable(name = "ACCOUNT_ROLE",
 			joinColumns = @JoinColumn(name = "ID_ACCOUNT", nullable = false),
@@ -48,10 +61,6 @@ public class Account extends BaseEntity {
 
 	public void setEmail(final String email) {
 		this.email = email;
-	}
-
-	public String getName() {
-		return email;
 	}
 
 	public String getPassword() {
@@ -84,6 +93,46 @@ public class Account extends BaseEntity {
 
 	public void setToken(final String token) {
 		this.token = token;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(final String place) {
+		this.place = place;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(final Locale locale) {
+		this.locale = locale;
+	}
+
+	public TimeZone getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(final TimeZone timeZone) {
+		this.timeZone = timeZone;
+	}
+
+	public Date getDeletedAt() {
+		return deletedAt;
+	}
+
+	public void setDeletedAt(final Date deletedAt) {
+		this.deletedAt = deletedAt;
 	}
 
 	public Set<Role> getRoles() {
