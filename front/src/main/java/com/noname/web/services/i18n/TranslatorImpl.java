@@ -2,9 +2,9 @@ package com.noname.web.services.i18n;
 
 import com.noname.domain.Translatable;
 import com.noname.services.TranslationService;
-import org.greatage.cache.Cache;
-import org.greatage.cache.MultiKey;
-import org.greatage.cache.SimpleCache;
+import org.greatage.ioc.cache.Cache;
+import org.greatage.ioc.cache.MultiKey;
+import org.greatage.ioc.cache.SimpleCache;
 import org.greatage.util.I18nUtils;
 
 import java.util.HashMap;
