@@ -1,0 +1,8 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter"
+		xmlns:c="tapestry-library:common">
+
+	<t:select model="timeZoneModel" value="inherit:timeZone" blankOption="always"/>
+
+</t:container>

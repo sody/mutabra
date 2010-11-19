@@ -1,4 +1,4 @@
-<html t:type="simplelayout" title="login-title"
+<html t:type="simplelayout" title="signIn-title"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
@@ -10,25 +10,25 @@
 		<c:panel actions="signIn,signUp" style="width: 300px;">
 			<table class="details">
 				<tr>
-					<td>
+					<th>
 						<t:label for="email"/>
-					</td>
+					</th>
 					<td>
 						<t:textfield t:id="email" value="email" validate="required"/>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<th>
 						<t:label for="password"/>
-					</td>
+					</th>
 					<td>
 						<t:passwordfield t:id="password" value="password" validate="required"/>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<th>
 						<t:label for="remember"/>
-					</td>
+					</th>
 					<td>
 						<t:checkbox t:id="remember" value="remember"/>
 					</td>

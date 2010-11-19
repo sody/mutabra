@@ -4,6 +4,7 @@
 			 xmlns:c="tapestry-library:common">
 	<c:menu skin="panel-v">
 		<c:menuitem page="player/hero/select" label="message:heroes-title"/>
+		<c:menuitem page="security/settings" label="message:settings-title"/>
 	</c:menu>
 
 </c:container>
