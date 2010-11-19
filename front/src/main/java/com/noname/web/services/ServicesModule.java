@@ -11,9 +11,7 @@ import com.noname.services.*;
 import com.noname.services.common.*;
 import com.noname.services.player.HeroService;
 import com.noname.services.player.HeroServiceImpl;
-import com.noname.services.security.AccountFilterProcessor;
-import com.noname.services.security.AccountService;
-import com.noname.services.security.AccountServiceImpl;
+import com.noname.services.security.*;
 import com.noname.web.services.i18n.Translator;
 import com.noname.web.services.i18n.TranslatorImpl;
 import org.greatage.domain.EntityFilterProcessor;
@@ -40,6 +38,7 @@ public class ServicesModule {
 	@Bind
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
+		binder.bind(RoleService.class, RoleServiceImpl.class);
 		binder.bind(AccountService.class, AccountServiceImpl.class);
 		binder.bind(FaceService.class, FaceServiceImpl.class);
 		binder.bind(RaceService.class, RaceServiceImpl.class);
@@ -78,6 +77,7 @@ public class ServicesModule {
 
 	@Configure(value = EntityFilterProcessor.class, serviceId = "HibernateFilterProcessor")
 	public void configureHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
+		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);
 		configuration.addInstance(AccountFilterProcessor.class);
 	}

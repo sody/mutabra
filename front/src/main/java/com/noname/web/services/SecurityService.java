@@ -14,7 +14,6 @@ import org.greatage.util.StringUtils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.Date;
 
 /**
  * @author Ivan Khalopik
@@ -61,9 +60,7 @@ public class SecurityService {
 			} else if (!token.equals(account.getToken())) {
 				throw new SecurityException("Wrong activation parameters");
 			} else {
-				account.setToken(null);
-				account.setLastLogin(new Date());
-				accountService.update(account);
+				accountService.activateAccount(account);
 				userContext.setUser(new GameUser(account));
 			}
 		}
@@ -76,26 +73,18 @@ public class SecurityService {
 			final String password = generateRandomString();
 			final String token = generateRandomString();
 
-			final Account account = accountService.create();
-			account.setEmail(email);
-			account.setPassword(passwordEncoder.encode(email));
-			account.setToken(token);
-			account.setRegistered(new Date());
-
 			final Link link = linkSource.createPageRenderLinkWithContext(Activate.class, email, token);
 			final String message = String.format("Hello Mr., New account was created for you, (login: %s, password: %s, activation token: %s). To activate your account please follow the link: %s", email, password, token, link.toAbsoluteURI());
 
 			mailService.send(email, "New game account", message);
-			accountService.save(account);
+			accountService.createAccount(email, passwordEncoder.encode(password), token);
 		}
 	}
 
 	public void signIn(final String email, final String password) {
 		final DefaultAuthenticationToken token = new DefaultAuthenticationToken(email, password);
 		final GameUser user = (GameUser) authenticationManager.authenticate(token);
-		final Account account = user.getAccount();
-		account.setLastLogin(new Date());
-		accountService.save(account);
+		accountService.updateLastLogin(user.getAccount());
 		userContext.setUser(user);
 	}
 

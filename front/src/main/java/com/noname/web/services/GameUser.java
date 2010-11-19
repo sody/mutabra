@@ -15,7 +15,7 @@ public class GameUser extends DefaultAuthentication {
 	private final Account account;
 
 	public GameUser(final Account account) throws IllegalArgumentException {
-		super(account.getName(), account.getPassword(), account.createAuthorities());
+		super(account.getEmail(), account.getPassword(), account.createAuthorities());
 		this.account = account;
 	}
 
