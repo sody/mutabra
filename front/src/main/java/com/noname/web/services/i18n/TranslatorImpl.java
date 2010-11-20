@@ -3,6 +3,7 @@ package com.noname.web.services.i18n;
 import com.noname.domain.Translatable;
 import com.noname.services.TranslationService;
 import org.greatage.ioc.cache.Cache;
+import org.greatage.ioc.cache.CacheSource;
 import org.greatage.ioc.cache.MultiKey;
 import org.greatage.ioc.cache.SimpleCache;
 import org.greatage.util.I18nUtils;
@@ -19,7 +20,7 @@ public class TranslatorImpl implements Translator {
 	//todo: add settings to cache
 	private final Cache<MultiKey, Map<String, String>> cache = new SimpleCache<MultiKey, Map<String, String>>();
 
-	public TranslatorImpl(TranslationService translationService) {
+	public TranslatorImpl(final TranslationService translationService, final CacheSource cacheSource) {
 		this.translationService = translationService;
 	}
 

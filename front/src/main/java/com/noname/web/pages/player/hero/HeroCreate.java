@@ -6,7 +6,7 @@ import com.noname.services.common.RaceService;
 import com.noname.services.player.HeroService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.SecurityService;
+import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;

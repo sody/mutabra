@@ -1,31 +1,36 @@
 package com.noname.web.services;
 
 import com.noname.domain.BaseEntity;
+import com.noname.web.pages.security.SignIn;
 import com.noname.web.services.i18n.I18nPropertyConduitSource;
 import com.noname.web.services.i18n.Translator;
+import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.services.*;
-import org.apache.tapestry5.services.PropertyConduitSource;
-import org.apache.tapestry5.services.ValueEncoderFactory;
+import org.apache.tapestry5.services.*;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.EntityService;
 import org.greatage.tapestry.grid.EntityDataSource;
-import org.greatage.tapestry.internal.EntityEncoderFactory;
-import org.greatage.tapestry.internal.HibernateClassResolver;
+import org.greatage.tapestry.internal.*;
 import org.greatage.tapestry.select.EntitySelectModel;
 import org.greatage.tapestry.services.ClassResolver;
+import org.slf4j.Logger;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@SubModule(SecurityModule.class)
 public class GameModule {
+
+	public static void bind(final ServiceBinder binder) {
+		binder.bind(SecurityService.class, SecurityService.class);
+	}
 
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
@@ -66,4 +71,21 @@ public class GameModule {
 			}
 		}));
 	}
+
+	public void contributeComponentClassTransformWorker(
+			final OrderedConfiguration<ComponentClassTransformWorker> configuration) {
+		configuration.addInstance("PageSecurity", SecuredAnnotationWorker.class, "before:OnEvent");
+	}
+
+	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
+																   final ResponseRenderer renderer,
+																   final ComponentClassResolver resolver,
+																   final Logger logger) {
+		return new SecurityExceptionHandler(handler, renderer, resolver, SignIn.class, logger);
+	}
+
+	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
+		configuration.addInstance("SecurityContextInitializer", UserPersistenceFilter.class);
+	}
+
 }

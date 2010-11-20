@@ -3,7 +3,7 @@ package com.noname.web.pages.player.hero;
 import com.noname.domain.player.Hero;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.SecurityService;
+import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.annotations.Authority;

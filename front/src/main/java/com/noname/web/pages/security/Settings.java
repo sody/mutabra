@@ -4,7 +4,7 @@ import com.noname.domain.security.Account;
 import com.noname.services.security.AccountService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.GameUser;
+import com.noname.web.services.security.GameUser;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;

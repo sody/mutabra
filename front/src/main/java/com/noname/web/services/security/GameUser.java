@@ -2,7 +2,7 @@
  * Copyright 2000 - 2009 Ivan Khalopik. All Rights Reserved.
  */
 
-package com.noname.web.services;
+package com.noname.web.services.security;
 
 import com.noname.domain.security.Account;
 import org.greatage.security.DefaultAuthentication;

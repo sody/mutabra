@@ -5,7 +5,7 @@
 package com.noname.web.components;
 
 import com.noname.web.pages.Index;
-import com.noname.web.services.SecurityService;
+import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Import;
