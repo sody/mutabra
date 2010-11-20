@@ -9,6 +9,7 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.security.PasswordEncoder;
 import org.greatage.security.UserContext;
 import org.greatage.security.annotations.Authority;
 
@@ -21,6 +22,9 @@ public class Settings extends AbstractPage {
 
 	@Inject
 	private AccountService accountService;
+
+	@Inject
+	private PasswordEncoder passwordEncoder;
 
 	@Inject
 	private UserContext<GameUser> userContext;
@@ -55,7 +59,15 @@ public class Settings extends AbstractPage {
 	}
 
 	void onChangePassword() {
-		//todo: add implementation
+		if (changePasswordForm.isValid()) {
+			if (!password.equals(confirmPassword)) {
+				changePasswordForm.recordError("Different passwords typed");
+			} else {
+				final String hash = passwordEncoder.encode(password);
+				account.setPassword(hash);
+				accountService.update(account);
+			}
+		}
 	}
 
 	void onChangeInformation() {
