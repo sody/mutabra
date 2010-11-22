@@ -4,13 +4,12 @@ import com.noname.domain.security.Account;
 import com.noname.services.security.AccountService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.security.GameUser;
+import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.PasswordEncoder;
-import org.greatage.security.UserContext;
 import org.greatage.security.annotations.Authority;
 
 /**
@@ -27,7 +26,7 @@ public class Settings extends AbstractPage {
 	private PasswordEncoder passwordEncoder;
 
 	@Inject
-	private UserContext<GameUser> userContext;
+	private SecurityService securityService;
 
 	@Component
 	private Form changeEmailForm;
@@ -51,7 +50,7 @@ public class Settings extends AbstractPage {
 	private String confirmPassword;
 
 	void onActivate() {
-		account = userContext.getUser().getAccount();
+		account = securityService.getAccount();
 	}
 
 	void onChangeEmail() {

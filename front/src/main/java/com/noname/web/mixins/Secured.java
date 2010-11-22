@@ -21,7 +21,7 @@ public class Secured {
 
 	boolean setupRender() {
 		try {
-			securityChecker.checkPermission(securedObject, permission);
+			securityChecker.check(securedObject, permission);
 		} catch (Exception e) {
 			return false;
 		}

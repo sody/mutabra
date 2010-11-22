@@ -6,6 +6,6 @@ import org.greatage.ioc.annotations.Dependency;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Dependency({ServicesModule.class, SecurityModule.class})
+@Dependency({ServicesModule.class, GameSecurityModule.class})
 public class GAModule {
 }

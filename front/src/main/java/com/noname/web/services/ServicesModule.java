@@ -55,8 +55,8 @@ public class ServicesModule {
 		return new MailServiceImpl(session, "haba.haba.game@gmail.com");
 	}
 
-	@Configure(value = HibernateConfiguration.class, serviceId = "HibernateAnnotationConfiguration")
-	public void configureHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
+	@Contribute(value = HibernateConfiguration.class, serviceId = "HibernateAnnotationConfiguration")
+	public void contributeHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
 		configuration.add(Translation.class);
 		configuration.add(Account.class);
 		configuration.add(Role.class);
@@ -75,8 +75,8 @@ public class ServicesModule {
 		configuration.add(HeroCard.class);
 	}
 
-	@Configure(value = EntityFilterProcessor.class, serviceId = "HibernateFilterProcessor")
-	public void configureHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
+	@Contribute(value = EntityFilterProcessor.class, serviceId = "HibernateFilterProcessor")
+	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);
 		configuration.addInstance(AccountFilterProcessor.class);

@@ -9,7 +9,7 @@ import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.greatage.security.AuthenticationManager;
 import org.greatage.security.DefaultAuthenticationToken;
 import org.greatage.security.PasswordEncoder;
-import org.greatage.security.UserContext;
+import org.greatage.security.SecurityContext;
 import org.greatage.util.StringUtils;
 
 import java.math.BigInteger;
@@ -23,31 +23,31 @@ public class SecurityService {
 	private final AccountService accountService;
 	private final PasswordEncoder passwordEncoder;
 	private final MailService mailService;
-	private final UserContext<GameUser> userContext;
+	private final SecurityContext securityContext;
 	private final AuthenticationManager authenticationManager;
 	private final PageRenderLinkSource linkSource;
 
 	public SecurityService(final AccountService accountService,
 						   final MailService mailService,
 						   final PasswordEncoder passwordEncoder,
-						   final UserContext<GameUser> userContext,
+						   final SecurityContext securityContext,
 						   final AuthenticationManager authenticationManager,
 						   final PageRenderLinkSource linkSource) {
 
 		this.accountService = accountService;
 		this.mailService = mailService;
 		this.passwordEncoder = passwordEncoder;
-		this.userContext = userContext;
+		this.securityContext = securityContext;
 		this.authenticationManager = authenticationManager;
 		this.linkSource = linkSource;
 	}
 
 	public Account getAccount() {
-		return userContext.getUser().getAccount();
+		return accountService.getAccount(securityContext.getAuthentication().getName());
 	}
 
 	public boolean isAuthenticated() {
-		return userContext.getUser() != null;
+		return securityContext.getAuthentication() != null;
 	}
 
 	public void activate(final String email, final String token) {
@@ -61,7 +61,7 @@ public class SecurityService {
 				throw new SecurityException("Wrong activation parameters");
 			} else {
 				accountService.activateAccount(account);
-				userContext.setUser(new GameUser(account));
+				securityContext.setAuthentication(new GameUser(account));
 			}
 		}
 	}
@@ -85,11 +85,11 @@ public class SecurityService {
 		final DefaultAuthenticationToken token = new DefaultAuthenticationToken(email, password);
 		final GameUser user = (GameUser) authenticationManager.authenticate(token);
 		accountService.updateLastLogin(user.getAccount());
-		userContext.setUser(user);
+		securityContext.setAuthentication(user);
 	}
 
 	public void signOut() {
-		userContext.setUser(null);
+		securityContext.setAuthentication(null);
 	}
 
 	private String generateRandomString() {
