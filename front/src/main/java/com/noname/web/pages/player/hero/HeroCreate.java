@@ -65,7 +65,7 @@ public class HeroCreate extends AbstractPage {
 	Object onCreate() {
 		if (createForm.isValid()) {
 			final Hero hero = getRecord();
-			hero.setAccount(getCurrentAccount());
+			hero.setAccount(getApplicationContext().getAccount());
 			heroService.save(hero);
 			return onCancel();
 		}

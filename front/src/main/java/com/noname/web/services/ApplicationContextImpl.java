@@ -1,8 +1,10 @@
 package com.noname.web.services;
 
+import com.noname.domain.player.Hero;
 import com.noname.domain.security.Account;
+import com.noname.services.player.HeroService;
 import com.noname.services.security.AccountService;
-import org.greatage.security.Authentication;
+import com.noname.web.services.security.GameUser;
 import org.greatage.security.SecurityContext;
 
 /**
@@ -12,22 +14,36 @@ import org.greatage.security.SecurityContext;
 public class ApplicationContextImpl implements ApplicationContext {
 	private final SecurityContext securityContext;
 	private final AccountService accountService;
+	private final HeroService heroService;
 
 	private Account account;
+	private Hero hero;
 
-	public ApplicationContextImpl(final SecurityContext securityContext, final AccountService accountService) {
+	public ApplicationContextImpl(final SecurityContext securityContext,
+								  final AccountService accountService,
+								  final HeroService heroService) {
 		this.securityContext = securityContext;
 		this.accountService = accountService;
+		this.heroService = heroService;
 	}
 
 	public Account getAccount() {
 		if (account == null) {
-			final Authentication authentication = securityContext.getAuthentication();
-			if (authentication != null) {
-				account = accountService.getAccount(authentication.getName());
+			final GameUser user = (GameUser) securityContext.getAuthentication();
+			if (user != null) {
+				account = accountService.get(user.getAccount().getId());
 			}
 		}
 		return account;
 	}
 
+	public Hero getHero() {
+		if (hero == null) {
+			final GameUser user = (GameUser) securityContext.getAuthentication();
+			if (user != null && user.getHero() != null) {
+				hero = heroService.get(user.getHero().getId());
+			}
+		}
+		return hero;
+	}
 }

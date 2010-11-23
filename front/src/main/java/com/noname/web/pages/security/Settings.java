@@ -46,7 +46,7 @@ public class Settings extends AbstractPage {
 	private String confirmPassword;
 
 	void onActivate() {
-		account = getCurrentAccount();
+		account = getApplicationContext().getAccount();
 	}
 
 	void onChangeEmail() {

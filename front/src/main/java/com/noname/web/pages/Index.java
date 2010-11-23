@@ -20,6 +20,6 @@ public class Index extends AbstractPage {
 	}
 
 	public boolean isAuthenticated() {
-		return getCurrentUser() != null;
+		return getSecurityContext().getAuthentication() != null;
 	}
 }

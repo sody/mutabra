@@ -1,5 +1,6 @@
 package com.noname.web.services;
 
+import com.noname.domain.player.Hero;
 import com.noname.domain.security.Account;
 
 /**
@@ -9,5 +10,7 @@ import com.noname.domain.security.Account;
 public interface ApplicationContext {
 
 	Account getAccount();
+
+	Hero getHero();
 
 }
