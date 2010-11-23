@@ -6,7 +6,6 @@ import com.noname.services.common.RaceService;
 import com.noname.services.player.HeroService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
@@ -29,9 +28,6 @@ public class HeroCreate extends AbstractPage {
 
 	@Inject
 	private RaceService raceService;
-
-	@Inject
-	private SecurityService securityService;
 
 	@Inject
 	private SelectModelBuilder selectModelBuilder;
@@ -69,7 +65,7 @@ public class HeroCreate extends AbstractPage {
 	Object onCreate() {
 		if (createForm.isValid()) {
 			final Hero hero = getRecord();
-			hero.setAccount(securityService.getAccount());
+			hero.setAccount(getCurrentAccount());
 			heroService.save(hero);
 			return onCancel();
 		}

@@ -23,13 +23,13 @@
 						<tr>
 							<td><span style="font-weight: bold;">${user}</span></td>
 							<td>
-								<t:eventlink event="signOut">${message:signOut-label}</t:eventlink>
+								<t:security.signoutlink/>
 							</td>
 						</tr>
 					</table>
 
 					<p:else>
-						<t:signinform/>
+						<t:security.signinform/>
 					</p:else>
 				</t:if>
 			</div>

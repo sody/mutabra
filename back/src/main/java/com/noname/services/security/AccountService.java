@@ -11,10 +11,10 @@ public interface AccountService extends BaseEntityService<Account> {
 
 	Account getAccount(String email);
 
+	void updateLastLogin(String email);
+
 	void createAccount(String email, String password, String token);
 
 	void activateAccount(Account account);
-
-	void updateLastLogin(Account account);
 
 }

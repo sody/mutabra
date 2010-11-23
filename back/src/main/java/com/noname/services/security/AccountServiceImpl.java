@@ -26,6 +26,14 @@ public class AccountServiceImpl
 		return createQuery().withEmail(email).unique();
 	}
 
+	public void updateLastLogin(final String email) {
+		final Account account = getAccount(email);
+		if (account != null) {
+			account.setLastLogin(new Date());
+			update(account);
+		}
+	}
+
 	public void createAccount(final String email, final String password, final String token) {
 		final Account account = create();
 		account.setEmail(email);
@@ -43,11 +51,6 @@ public class AccountServiceImpl
 		final Role role = roleService.getUserRole();
 		account.getRoles().clear();
 		account.getRoles().add(role);
-		update(account);
-	}
-
-	public void updateLastLogin(final Account account) {
-		account.setLastLogin(new Date());
 		update(account);
 	}
 }

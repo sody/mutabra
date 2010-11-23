@@ -3,9 +3,7 @@ package com.noname.web.pages.player.hero;
 import com.noname.domain.player.Hero;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.annotations.InjectPage;
-import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.annotations.Authority;
 
 import java.util.Set;
@@ -19,9 +17,6 @@ public class HeroSelect extends AbstractPage {
 
 	@InjectPage
 	private HeroCreate heroCreatePage;
-
-	@Inject
-	private SecurityService securityService;
 
 	private Set<Hero> heroes;
 
@@ -40,7 +35,7 @@ public class HeroSelect extends AbstractPage {
 	}
 
 	void setupRender() {
-		heroes = securityService.getAccount().getHeroes();
+		heroes = getCurrentAccount().getHeroes();
 	}
 
 	Object onCreate() {

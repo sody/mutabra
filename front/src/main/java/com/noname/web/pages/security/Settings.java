@@ -4,7 +4,6 @@ import com.noname.domain.security.Account;
 import com.noname.services.security.AccountService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.services.AuthorityConstants;
-import com.noname.web.services.security.SecurityService;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
@@ -24,9 +23,6 @@ public class Settings extends AbstractPage {
 
 	@Inject
 	private PasswordEncoder passwordEncoder;
-
-	@Inject
-	private SecurityService securityService;
 
 	@Component
 	private Form changeEmailForm;
@@ -50,7 +46,7 @@ public class Settings extends AbstractPage {
 	private String confirmPassword;
 
 	void onActivate() {
-		account = securityService.getAccount();
+		account = getCurrentAccount();
 	}
 
 	void onChangeEmail() {

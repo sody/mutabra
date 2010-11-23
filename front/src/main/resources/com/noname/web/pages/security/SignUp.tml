@@ -4,25 +4,7 @@
 	  xmlns:p="tapestry:parameter">
 
 <c:container align="center">
-	<t:form t:id="signUpForm">
-		<t:errors/>
-
-		<c:panel actions="signUp,signIn" style="width: 300px;">
-			<table class="details">
-				<tr>
-					<th>
-						<t:label for="email"/>
-					</th>
-					<td>
-						<t:textfield t:id="email" value="email" validate="required"/>
-					</td>
-				</tr>
-			</table>
-			<p:signUpMenuItem>
-				<t:linksubmit event="signUp">${message:signUp-label}</t:linksubmit>
-			</p:signUpMenuItem>
-		</c:panel>
-	</t:form>
+	<t:security.signuppanel/>
 </c:container>
 
 </html>

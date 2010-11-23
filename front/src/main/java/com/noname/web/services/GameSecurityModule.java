@@ -3,6 +3,8 @@ package com.noname.web.services;
 import com.noname.services.BaseEntityService;
 import com.noname.web.services.security.GameUserProvider;
 import org.greatage.ioc.OrderedConfiguration;
+import org.greatage.ioc.ScopeConstants;
+import org.greatage.ioc.ServiceBinder;
 import org.greatage.ioc.annotations.*;
 import org.greatage.ioc.proxy.MethodAdvice;
 import org.greatage.security.*;
@@ -13,6 +15,11 @@ import org.greatage.security.*;
  */
 @Dependency(SecurityModule.class)
 public class GameSecurityModule {
+
+	@Bind
+	public static void bind(final ServiceBinder binder) {
+		binder.bind(ApplicationContext.class, ApplicationContextImpl.class).withScope(ScopeConstants.THREAD);
+	}
 
 	@Build
 	public PasswordEncoder buildPasswordEncoder() {

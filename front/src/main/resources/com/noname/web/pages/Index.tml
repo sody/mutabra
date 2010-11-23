@@ -15,26 +15,7 @@
 			<br/>
 			<br/>
 			<t:if test="!authenticated">
-				<t:form t:id="signUpForm">
-
-					<t:errors/>
-
-					<table class="dialog">
-						<tr>
-							<td>
-								<t:label for="email"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<t:textfield t:id="email" value="email" validate="required"/>
-							</td>
-							<td>
-								<t:linksubmit event="signUp">${message:signUp-label}</t:linksubmit>
-							</td>
-						</tr>
-					</table>
-				</t:form>
+				<t:security.signupform/>
 			</t:if>
 		</c:box>
 
