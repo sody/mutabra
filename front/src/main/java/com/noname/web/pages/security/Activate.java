@@ -1,10 +1,10 @@
 package com.noname.web.pages.security;
 
 import com.noname.domain.security.Account;
+import com.noname.game.User;
 import com.noname.services.security.AccountService;
 import com.noname.web.base.pages.AbstractPage;
 import com.noname.web.pages.player.hero.HeroCreate;
-import com.noname.web.services.security.GameUser;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.util.StringUtils;
@@ -30,7 +30,7 @@ public class Activate extends AbstractPage {
 				resultMessage = "Wrong activation parameters";
 			} else {
 				accountService.activateAccount(account);
-				getSecurityContext().setAuthentication(new GameUser(account));
+				getSecurityContext().setAuthentication(new User(account));
 				return HeroCreate.class;
 			}
 		}

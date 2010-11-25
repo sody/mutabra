@@ -1,7 +1,7 @@
 package com.noname.web.services;
 
 import com.noname.services.BaseEntityService;
-import com.noname.web.services.security.GameUserProvider;
+import com.noname.services.security.UserProvider;
 import org.greatage.ioc.OrderedConfiguration;
 import org.greatage.ioc.ScopeConstants;
 import org.greatage.ioc.ServiceBinder;
@@ -28,7 +28,7 @@ public class GameSecurityModule {
 
 	@Contribute(AuthenticationManager.class)
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration) {
-		configuration.addInstance(GameUserProvider.class, "default");
+		configuration.addInstance(UserProvider.class, "default");
 	}
 
 	@Intercept(BaseEntityService.class)

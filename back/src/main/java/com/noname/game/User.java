@@ -2,43 +2,36 @@
  * Copyright 2000 - 2009 Ivan Khalopik. All Rights Reserved.
  */
 
-package com.noname.web.services.security;
+package com.noname.game;
 
 import com.noname.domain.player.Hero;
 import com.noname.domain.security.Account;
-import com.noname.web.services.AuthorityConstants;
 import org.greatage.security.DefaultAuthentication;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class GameUser extends DefaultAuthentication {
+public class User extends DefaultAuthentication {
 	private final Account account;
 	private final Hero hero;
 
-	private String status;
+	private UserStatus status;
 
-	public GameUser(final Account account) {
+	public User(final Account account) {
 		this(account, null);
 	}
 
-	public GameUser(final Account account, final Hero hero) throws IllegalArgumentException {
+	public User(final Account account, final Hero hero) throws IllegalArgumentException {
 		super(account.getEmail(), account.getPassword(), account.createAuthorities());
 		this.account = account;
 		this.hero = hero;
-		this.status = AuthorityConstants.STATUS_AUTHENTICATED;
-		getAuthorities().add(status);
+		this.status = hero != null ? UserStatus.STATUS_PLAYING : UserStatus.STATUS_LOGGED;
+		getAuthorities().add(status.name());
 	}
 
-	public String getStatus() {
+	public UserStatus getStatus() {
 		return status;
-	}
-
-	public void setStatus(final String status) {
-		getAuthorities().remove(this.status);
-		this.status = status;
-		getAuthorities().add(status);
 	}
 
 	public Account getAccount() {

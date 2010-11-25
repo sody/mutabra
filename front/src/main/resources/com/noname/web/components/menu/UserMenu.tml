@@ -4,8 +4,11 @@
 			 xmlns:c="tapestry-library:common">
 	<t:security.authority authority="ROLE_USER">
 		<c:menu skin="panel-v">
-			<t:security.authority authority="STATUS_AUTHENTICATED">
+			<t:security.authority authority="STATUS_LOGGED">
 				<c:menuitem page="player/hero/select" label="message:heroes-title"/>
+			</t:security.authority>
+			<t:security.authority authority="STATUS_PLAYING">
+				<c:menuitem page="player/home" label="message:player-home-title"/>
 			</t:security.authority>
 			<c:menuitem page="security/settings" label="message:settings-title"/>
 		</c:menu>

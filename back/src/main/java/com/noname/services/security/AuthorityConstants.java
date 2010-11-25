@@ -1,4 +1,4 @@
-package com.noname.web.services;
+package com.noname.services.security;
 
 /**
  * @author Ivan Khalopik
@@ -9,6 +9,6 @@ public abstract class AuthorityConstants {
 	public static final String ROLE_USER = "ROLE_USER";
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 
-	public static final String STATUS_AUTHENTICATED = "STATUS_AUTHENTICATED";
-	public static final String STATUS_PLAYER = "STATUS_PLAYER";
+	public static final String STATUS_LOGGED = "STATUS_LOGGED";
+	public static final String STATUS_PLAYING = "STATUS_PLAYING";
 }
