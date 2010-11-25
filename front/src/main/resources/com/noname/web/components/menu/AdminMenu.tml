@@ -2,16 +2,18 @@
 			 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter"
 			 xmlns:c="tapestry-library:common">
-	<br/>
-	<c:menu skin="panel-v">
-		<c:menugroup label="message:security-label"/>
-		<c:menugroup label="message:common-label">
-			<c:menuitem page="common/faces" label="message:faces-title"/>
-			<c:menuitem page="common/races" label="message:races-title"/>
-			<c:menuitem page="common/levels" label="message:levels-title"/>
-			<c:menuitem page="common/card/list" label="message:cards-title"/>
-		</c:menugroup>
-	</c:menu>
-	<br/>
+	<t:security.authority authority="ROLE_ADMIN">
+		<br/>
+		<c:menu skin="panel-v">
+			<c:menugroup label="message:security-label"/>
+			<c:menugroup label="message:common-label">
+				<c:menuitem page="common/faces" label="message:faces-title"/>
+				<c:menuitem page="common/races" label="message:races-title"/>
+				<c:menuitem page="common/levels" label="message:levels-title"/>
+				<c:menuitem page="common/card/list" label="message:cards-title"/>
+			</c:menugroup>
+		</c:menu>
+		<br/>
+	</t:security.authority>
 
 </c:container>

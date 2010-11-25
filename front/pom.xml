@@ -89,22 +89,7 @@
 
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
-			<artifactId>tapestry-ioc</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-upload</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
 		</dependency>
 
 		<dependency>
@@ -114,15 +99,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>3.0.2.RELEASE</version>
-		</dependency>
-
-		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4.1</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

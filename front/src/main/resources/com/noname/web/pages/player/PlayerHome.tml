@@ -1,6 +1,20 @@
-<html t:type="layout" title="player-title"
+<html t:type="layout" title="player-home-title"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
+
+<c:box>
+	<div class="column">
+		<t:game.facedisplay face="hero.face"/>
+	</div>
+	<div class="column">
+		<div>${message:name-label}: ${hero.name}</div>
+		<div>${message:level-label}: ${hero.level:description}</div>
+		<div>${message:rating-label}: ${hero.rating}</div>
+
+		<div>${message:attack-label}: ${hero.attack}</div>
+		<div>${message:defence-label}: ${hero.defence}</div>
+	</div>
+</c:box>
 
 </html>

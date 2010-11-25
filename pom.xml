@@ -66,11 +66,16 @@
 				<version>${ga.version}</version>
 			</dependency>
 
-
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
 				<version>${servlet.api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>${mail.api.version}</version>
 			</dependency>
 
 			<dependency>
@@ -87,13 +92,19 @@
 
 			<dependency>
 				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-core</artifactId>
+				<artifactId>tapestry-ioc</artifactId>
+				<exclusions>
+					<exclusion>
+						<groupId>javassist</groupId>
+						<artifactId>javassist</artifactId>
+					</exclusion>
+				</exclusions>
 				<version>${tapestry.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-ioc</artifactId>
+				<artifactId>tapestry-core</artifactId>
 				<version>${tapestry.version}</version>
 			</dependency>
 
@@ -134,9 +145,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>javassist</groupId>
+				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>3.11.0.GA</version>
+				<version>${javassist.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -349,12 +360,14 @@
 
 		<slf4j.version>1.5.8</slf4j.version>
 		<servlet.api.version>2.5</servlet.api.version>
+		<mail.api.version>1.4.1</mail.api.version>
 
 		<hibernate.version>3.6.0.Final</hibernate.version>
 		<tapestry.version>5.2.2</tapestry.version>
-		<testng.version>5.12.1</testng.version>
+		<testng.version>5.14.2</testng.version>
 
 		<drools.version>5.0.1</drools.version>
+		<javassist.version>3.14.0-GA</javassist.version>
 
 		<release.url>${project.build.directory}/repository</release.url>
 		<log.dir>${project.build.directory}/log</log.dir>

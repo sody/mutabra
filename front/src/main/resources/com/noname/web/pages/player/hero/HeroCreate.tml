@@ -26,22 +26,6 @@
 					<t:game.raceselect race="record.race"/>
 				</td>
 			</tr>
-			<tr>
-				<th>${message:rating-label}</th>
-				<td>${record.rating}</td>
-			</tr>
-			<tr>
-				<th>${message:level-label}</th>
-				<td>${record.level:description}</td>
-			</tr>
-			<tr>
-				<th>${message:attack-label}</th>
-				<td>${record.attack}</td>
-			</tr>
-			<tr>
-				<th>${message:defence-label}</th>
-				<td>${record.defence}</td>
-			</tr>
 		</table>
 		<p:createMenuItem>
 			<t:linksubmit event="create">${message:create-label}</t:linksubmit>

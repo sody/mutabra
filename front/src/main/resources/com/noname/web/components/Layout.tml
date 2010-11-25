@@ -39,9 +39,7 @@
 	<div class="unit c-5">
 		<div class="column">
 			<t:menu.openmenu/>
-			<t:if test="authenticated">
-				<t:menu.usermenu/>
-			</t:if>
+			<t:menu.usermenu/>
 		</div>
 
 		<div class="column s-3">
@@ -53,9 +51,7 @@
 
 		<div class="column">
 			<c:localemenu/>
-			<t:if test="authenticated">
-				<t:menu.adminmenu/>
-			</t:if>
+			<t:menu.adminmenu/>
 		</div>
 
 	</div>

@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(AuthorityConstants.ROLE_USER)
+@Authority(AuthorityConstants.STATUS_AUTHENTICATED)
 public class HeroSelect extends AbstractPage {
 
 	@Inject
@@ -58,7 +58,7 @@ public class HeroSelect extends AbstractPage {
 		final Hero hero = heroService.get(id);
 		if (user != null && hero != null) {
 			final GameUser newUser = new GameUser(user.getAccount(), hero);
-			newUser.getAuthorities().add(AuthorityConstants.ROLE_PLAYER);
+			newUser.setStatus(AuthorityConstants.STATUS_PLAYER);
 			getSecurityContext().setAuthentication(newUser);
 			return PlayerHome.class;
 		}
