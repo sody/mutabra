@@ -9,6 +9,8 @@ import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.security.Authentication;
+import org.greatage.security.AuthorityConstants;
 import org.greatage.security.SecurityContext;
 import org.greatage.tapestry.commonlib.base.components.AbstractComponent;
 
@@ -30,11 +32,12 @@ public class Layout extends AbstractComponent {
 	private SecurityContext securityContext;
 
 	public String getUser() {
-		return securityContext.getAuthentication().getName();
+		return securityContext.getCurrentUser().getName();
 	}
 
 	public boolean isAuthenticated() {
-		return securityContext.getAuthentication() != null;
+		final Authentication user = securityContext.getCurrentUser();
+		return user != null && !user.getAuthorities().contains(AuthorityConstants.STATUS_ANONYMOUS);
 	}
 
 	public String getTitle() {

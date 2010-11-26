@@ -2,16 +2,16 @@
 			 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter"
 			 xmlns:c="tapestry-library:common">
-	<t:security.authority authority="ROLE_USER">
+	<c:secured allow="ROLE_USER">
 		<c:menu skin="panel-v">
-			<t:security.authority authority="STATUS_LOGGED">
+			<c:secured allow="STATUS_LOGGED" deny="STATUS_PLAYING">
 				<c:menuitem page="player/hero/select" label="message:heroes-title"/>
-			</t:security.authority>
-			<t:security.authority authority="STATUS_PLAYING">
+			</c:secured>
+			<c:secured allow="STATUS_PLAYING">
 				<c:menuitem page="player/home" label="message:player-home-title"/>
-			</t:security.authority>
+			</c:secured>
 			<c:menuitem page="security/settings" label="message:settings-title"/>
 		</c:menu>
-	</t:security.authority>
+	</c:secured>
 
 </c:container>

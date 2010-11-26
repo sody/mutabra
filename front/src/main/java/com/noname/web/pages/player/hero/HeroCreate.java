@@ -11,7 +11,7 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.annotations.Authority;
+import org.greatage.security.annotations.Allow;
 import org.greatage.tapestry.internal.SelectModelBuilder;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(AuthorityConstants.ROLE_USER)
+@Allow(AuthorityConstants.ROLE_USER)
 public class HeroCreate extends AbstractPage {
 
 	@Inject

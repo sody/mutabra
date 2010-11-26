@@ -80,7 +80,6 @@ public class GameModule {
 
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
 		configuration.addInstance("SecurityContextInitializer", UserPersistenceFilter.class);
-		configuration.addInstance("UserInitializer", UserInitializationFilter.class, "after:SecurityContextInitializer");
 	}
 
 }

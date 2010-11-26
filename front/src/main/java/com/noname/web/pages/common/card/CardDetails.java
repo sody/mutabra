@@ -10,7 +10,7 @@ import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
-import org.greatage.security.annotations.Authority;
+import org.greatage.security.annotations.Allow;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(AuthorityConstants.ROLE_ADMIN)
+@Allow(AuthorityConstants.ROLE_ADMIN)
 public class CardDetails extends CodedEntityDetailsPage<Card> {
 
 	@Inject

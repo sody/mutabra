@@ -18,8 +18,4 @@ public class Index extends AbstractPage {
 	public Asset getLogo() {
 		return logo;
 	}
-
-	public boolean isAuthenticated() {
-		return getSecurityContext().getAuthentication() != null;
-	}
 }

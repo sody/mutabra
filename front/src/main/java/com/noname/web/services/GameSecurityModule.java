@@ -1,6 +1,9 @@
 package com.noname.web.services;
 
 import com.noname.services.BaseEntityService;
+import com.noname.services.security.AnonymousProvider;
+import com.noname.services.security.GameSecurityContext;
+import com.noname.services.security.GameSecurityContextImpl;
 import com.noname.services.security.UserProvider;
 import org.greatage.ioc.OrderedConfiguration;
 import org.greatage.ioc.ScopeConstants;
@@ -19,6 +22,7 @@ public class GameSecurityModule {
 	@Bind
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(ApplicationContext.class, ApplicationContextImpl.class).withScope(ScopeConstants.THREAD);
+		binder.bind(GameSecurityContext.class, GameSecurityContextImpl.class).withId(SecurityContext.class.getSimpleName()).override();
 	}
 
 	@Build
@@ -28,12 +32,13 @@ public class GameSecurityModule {
 
 	@Contribute(AuthenticationManager.class)
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration) {
-		configuration.addInstance(UserProvider.class, "default");
+		configuration.addInstance(AnonymousProvider.class, "anonymous");
+		configuration.addInstance(UserProvider.class, "password");
 	}
 
 	@Intercept(BaseEntityService.class)
 	@Order(value = "Security", constraints = "before:Transaction")
-	public MethodAdvice interceptServices(@Inject("AuthoritySecurityChecker") final SecurityChecker checker) {
-		return new AuthoritySecurityAdvice(checker);
+	public MethodAdvice interceptServices(final GameSecurityContext securityContext) {
+		return new AuthoritySecurityAdvice(securityContext);
 	}
 }

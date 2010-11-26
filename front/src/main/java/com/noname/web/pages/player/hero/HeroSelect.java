@@ -9,7 +9,8 @@ import com.noname.web.pages.player.PlayerHome;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.SecurityContext;
-import org.greatage.security.annotations.Authority;
+import org.greatage.security.annotations.Allow;
+import org.greatage.security.annotations.Deny;
 
 import java.util.Set;
 
@@ -17,7 +18,8 @@ import java.util.Set;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(AuthorityConstants.STATUS_LOGGED)
+@Deny(AuthorityConstants.STATUS_PLAYING)
+@Allow(AuthorityConstants.STATUS_LOGGED)
 public class HeroSelect extends AbstractPage {
 
 	@Inject
@@ -54,11 +56,11 @@ public class HeroSelect extends AbstractPage {
 	}
 
 	Object onEnter(final long id) {
-		final User user = (User) getSecurityContext().getAuthentication();
+		final User user = getUserService().getCurrentUser();
 		final Hero hero = heroService.get(id);
 		if (user != null && hero != null) {
 			final User newUser = new User(user.getAccount(), hero);
-			getSecurityContext().setAuthentication(newUser);
+			getUserService().initCurrentUser(newUser);
 			return PlayerHome.class;
 		}
 		return null;

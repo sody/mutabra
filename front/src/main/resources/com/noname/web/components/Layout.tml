@@ -15,7 +15,7 @@
 	<div class="unit">
 		<c:container class="header">
 			<div style="float: right;">
-				<t:if test="authenticated">
+				<c:secured allow="STATUS_LOGGED">
 					<table class="dialog">
 						<tr>
 							<td>${message:welcome}</td>
@@ -27,11 +27,10 @@
 							</td>
 						</tr>
 					</table>
-
-					<p:else>
-						<t:security.signinform/>
-					</p:else>
-				</t:if>
+				</c:secured>
+				<c:secured allow="STATUS_ANONYMOUS">
+					<t:security.signinform/>
+				</c:secured>
 			</div>
 		</c:container>
 	</div>

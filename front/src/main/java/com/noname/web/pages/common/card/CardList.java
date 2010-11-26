@@ -6,13 +6,13 @@ import com.noname.services.security.AuthorityConstants;
 import com.noname.web.base.pages.EntityListPage;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.annotations.Authority;
+import org.greatage.security.annotations.Allow;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(AuthorityConstants.ROLE_ADMIN)
+@Allow(AuthorityConstants.ROLE_ADMIN)
 public class CardList extends EntityListPage<Card> {
 
 	@Inject

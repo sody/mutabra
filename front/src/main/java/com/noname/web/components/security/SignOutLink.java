@@ -1,10 +1,8 @@
 package com.noname.web.components.security;
 
-import com.noname.game.User;
-import com.noname.services.security.UserService;
 import com.noname.web.pages.Index;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.SecurityContext;
+import org.greatage.security.AuthenticationManager;
 
 /**
  * @author Ivan Khalopik
@@ -13,15 +11,10 @@ import org.greatage.security.SecurityContext;
 public class SignOutLink {
 
 	@Inject
-	private SecurityContext securityContext;
-
-	@Inject
-	private UserService userService;
+	private AuthenticationManager authenticationManager;
 
 	Object onSignOut() {
-		final User user = (User) securityContext.getAuthentication();
-		userService.removeUser(user);
-		securityContext.setAuthentication(null);
+		authenticationManager.signOut();
 		return Index.class;
 	}
 

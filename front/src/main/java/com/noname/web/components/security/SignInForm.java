@@ -7,7 +7,7 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.AuthenticationManager;
-import org.greatage.security.DefaultAuthenticationToken;
+import org.greatage.security.PasswordAuthenticationToken;
 
 /**
  * @author Ivan Khalopik
@@ -33,8 +33,8 @@ public class SignInForm {
 	Object onSignIn() {
 		if (signInForm.isValid()) {
 			try {
-				final DefaultAuthenticationToken token = new DefaultAuthenticationToken(email, password);
-				authenticationManager.authenticate(token);
+				final PasswordAuthenticationToken token = new PasswordAuthenticationToken(email, password);
+				authenticationManager.signIn(token);
 				return HeroSelect.class;
 			} catch (RuntimeException ex) {
 				signInForm.recordError(ex.getMessage());

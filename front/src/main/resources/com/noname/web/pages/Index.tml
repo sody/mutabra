@@ -14,11 +14,10 @@
 			<br/>
 			<br/>
 			<br/>
-			<t:if test="!authenticated">
+			<c:secured allow="STATUS_LOGGED">
 				<t:security.signupform/>
-			</t:if>
+			</c:secured>
 		</c:box>
-
 	</div>
 </div>
 </html>

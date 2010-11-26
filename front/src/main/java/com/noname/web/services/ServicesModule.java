@@ -46,8 +46,6 @@ public class ServicesModule {
 		binder.bind(CardService.class, CardServiceImpl.class);
 		binder.bind(HeroService.class, HeroServiceImpl.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
-
-		binder.bind(UserService.class, UserServiceImpl.class);
 	}
 
 	@Build

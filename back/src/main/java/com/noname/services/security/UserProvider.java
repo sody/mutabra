@@ -3,14 +3,14 @@ package com.noname.services.security;
 import com.noname.domain.security.Account;
 import com.noname.game.User;
 import org.greatage.security.AuthenticationException;
-import org.greatage.security.DefaultAuthenticationProvider;
+import org.greatage.security.PasswordAuthenticationProvider;
 import org.greatage.security.PasswordEncoder;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class UserProvider extends DefaultAuthenticationProvider {
+public class UserProvider extends PasswordAuthenticationProvider<User> {
 	private final AccountService accountService;
 
 	public UserProvider(final PasswordEncoder passwordEncoder, final AccountService accountService) {

@@ -56,6 +56,12 @@
 					<contextPath>/noname</contextPath>
 					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
 					<jettyEnvXml>${project.build.directory}/classes/jetty-env.xml</jettyEnvXml>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8081</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
 				</configuration>
 			</plugin>
 		</plugins>

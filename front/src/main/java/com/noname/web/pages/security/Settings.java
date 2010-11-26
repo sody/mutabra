@@ -9,13 +9,13 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.PasswordEncoder;
-import org.greatage.security.annotations.Authority;
+import org.greatage.security.annotations.Allow;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(AuthorityConstants.ROLE_USER)
+@Allow(AuthorityConstants.STATUS_LOGGED)
 public class Settings extends AbstractPage {
 
 	@Inject

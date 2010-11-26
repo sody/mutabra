@@ -4,10 +4,10 @@
 
 package com.noname.web.base.pages;
 
+import com.noname.services.security.GameSecurityContext;
 import com.noname.web.services.ApplicationContext;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.SecurityContext;
 
 import java.util.Locale;
 
@@ -27,7 +27,7 @@ public abstract class AbstractPage {
 	private ApplicationContext applicationContext;
 
 	@Inject
-	private SecurityContext securityContext;
+	private GameSecurityContext securityContext;
 
 	public Messages getMessages() {
 		return messages;
@@ -46,7 +46,7 @@ public abstract class AbstractPage {
 		return applicationContext;
 	}
 
-	protected SecurityContext getSecurityContext() {
+	protected GameSecurityContext getUserService() {
 		return securityContext;
 	}
 }

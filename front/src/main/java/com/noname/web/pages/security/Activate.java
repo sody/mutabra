@@ -30,7 +30,7 @@ public class Activate extends AbstractPage {
 				resultMessage = "Wrong activation parameters";
 			} else {
 				accountService.activateAccount(account);
-				getSecurityContext().setAuthentication(new User(account));
+				getUserService().initCurrentUser(new User(account));
 				return HeroCreate.class;
 			}
 		}
