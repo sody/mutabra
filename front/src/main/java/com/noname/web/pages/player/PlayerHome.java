@@ -1,6 +1,7 @@
 package com.noname.web.pages.player;
 
 import com.noname.domain.player.Hero;
+import com.noname.game.BattleService;
 import com.noname.game.User;
 import com.noname.services.security.AuthorityConstants;
 import com.noname.services.security.GameSecurityContext;
@@ -21,6 +22,9 @@ public class PlayerHome extends AbstractPage {
 	@Inject
 	private GameSecurityContext securityContext;
 
+	@Inject
+	private BattleService battleService;
+
 	@Property
 	private User row;
 
@@ -38,7 +42,21 @@ public class PlayerHome extends AbstractPage {
 	void setupRender() {
 		hero = getApplicationContext().getHero();
 		users = securityContext.getPlayingUsers();
-		System.out.println("");
 	}
 
+	Object onCreateDuel(final String name) {
+		final User user = securityContext.getUser(name);
+		if (user != null && user.getHero() != null) {
+			battleService.createDuel(user);
+			return PlayerBattle.class;
+		}
+		return null;
+	}
+
+	Object onActivate() {
+		if (battleService.getCurrentBattle() != null) {
+			return PlayerBattle.class;
+		}
+		return null;
+	}
 }

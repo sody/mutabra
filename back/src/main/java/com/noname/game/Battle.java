@@ -1,6 +1,5 @@
 package com.noname.game;
 
-import com.noname.domain.player.Hero;
 import org.greatage.util.CollectionUtils;
 
 import java.util.Map;
@@ -10,27 +9,43 @@ import java.util.Map;
  * @since 1.0
  */
 public class Battle {
-	public Map<String, Locatable> field = CollectionUtils.newMap();
+	private final Map<String, Locatable> field = CollectionUtils.newConcurrentMap();
+	private final Map<String, Player> players = CollectionUtils.newConcurrentMap();
 
-	private Player first;
-	private Player second;
-
-	public void setFirstPlayer(final Hero hero, final String location) {
-		first = new Player(hero, location);
+	public Battle(final User... users) {
+		for (User user : users) {
+			this.players.put(user.getName(), new Player(this, user.getHero()));
+		}
 	}
 
-	public void setSecondPlayer(final Hero hero, final String location) {
-		second = new Player(hero, location);
+	public boolean isReady() {
+		for (Player player : players.values()) {
+			if (player.getLocation() == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void setLocatable(final String location, final Locatable locatable) {
+		field.put(location, locatable);
+	}
+
+	public Locatable getLocatable(final String location) {
+		return field.get(location);
+	}
+
+	public Player getPlayer(final String name) {
+		return players.get(name);
 	}
 
 	public void begin() {
-		field.put(first.getLocation(), first);
-		field.put(second.getLocation(), second);
 	}
 
 	public void beginRound() {
-		first.nextCard();
-		second.nextCard();
+		for (Player player : players.values()) {
+			player.nextCard();
+		}
 	}
 
 	public void endRound() {

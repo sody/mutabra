@@ -23,6 +23,9 @@
 		<div class="column">
 			<div>${message:name-label}: ${row.hero.name}</div>
 			<div>${message:account-label}: ${row.name}</div>
+			<div>
+				<t:eventlink event="createDuel" context="row.name">${message:duel}</t:eventlink>
+			</div>
 		</div>
 	</c:box>
 </t:loop>

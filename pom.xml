@@ -308,6 +308,19 @@
 		</plugins>
 	</build>
 
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>1.2</version>
+				<configuration>
+					<outputDirectory>${project.build.outputDirectory}/versions-report</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
 	<profiles>
 		<profile>
 			<id>hsqldb</id>

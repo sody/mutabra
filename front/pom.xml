@@ -24,7 +24,27 @@
 			</resource>
 			<resource>
 				<directory>src/main/config</directory>
+				<includes>
+					<include>hibernate.properties</include>
+					<include>log4j.xml</include>
+				</includes>
 				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/config</directory>
+				<includes>
+					<include>jetty-env.xml</include>
+				</includes>
+				<filtering>true</filtering>
+				<targetPath>${project.build.directory}/${project.build.finalName}/WEB-INF</targetPath>
+			</resource>
+			<resource>
+				<directory>src/main/config</directory>
+				<includes>
+					<include>context.xml</include>
+				</includes>
+				<filtering>true</filtering>
+				<targetPath>${project.build.directory}/${project.build.finalName}/META-INF</targetPath>
 			</resource>
 		</resources>
 
@@ -44,7 +64,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<classifier>${jdbc.profile}</classifier>
+					<!--<classifier>${jdbc.profile}</classifier>-->
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
@@ -55,7 +75,7 @@
 				<configuration>
 					<contextPath>/noname</contextPath>
 					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
-					<jettyEnvXml>${project.build.directory}/classes/jetty-env.xml</jettyEnvXml>
+					<jettyEnvXml>${project.build.directory}/${project.build.finalName}/WEB-INF/jetty-env.xml</jettyEnvXml>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 							<port>8081</port>

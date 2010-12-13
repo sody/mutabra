@@ -17,21 +17,26 @@ public class Player implements Locatable {
 	private final List<HeroCard> pack = CollectionUtils.newList();
 	private final List<HeroCard> slot = CollectionUtils.newList();
 
+	private final Battle battle;
 	private final Hero hero;
-	private final String location;
 
+	private String location;
 	private int health;
 
 	private PlayerAction action;
 
-	public Player(final Hero hero, final String location) {
+	public Player(final Battle battle, final Hero hero) {
+		this.battle = battle;
 		this.hero = hero;
-		this.location = location;
 		this.health = hero.getDefence();
 		pack.addAll(hero.getCards());
 		for (int i = 0; i < SLOT_SIZE - 1; i++) {
 			nextCard();
 		}
+	}
+
+	public Battle getBattle() {
+		return battle;
 	}
 
 	public Hero getHero() {
@@ -40,6 +45,11 @@ public class Player implements Locatable {
 
 	public String getLocation() {
 		return location;
+	}
+
+	public void setLocation(final String location) {
+		battle.setLocatable(location, this);
+		this.location = location;
 	}
 
 	public int getHealth() {

@@ -6,6 +6,9 @@ package com.noname.game;
  */
 public interface BattleService {
 
-	Battle getBattle();
+	Player getCurrentPlayer();
 
+	Battle getCurrentBattle();
+
+	Battle createDuel(User user);
 }
