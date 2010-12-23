@@ -5,8 +5,11 @@ import com.noname.game.BattleService;
 import com.noname.game.Player;
 import com.noname.services.security.AuthorityConstants;
 import com.noname.web.base.pages.AbstractPage;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.annotations.Allow;
+
+import java.util.Collection;
 
 /**
  * @author ivan.khalopik@tieto.com
@@ -18,19 +21,20 @@ public class PlayerBattle extends AbstractPage {
 	@Inject
 	private BattleService battleService;
 
+	@Property
 	private Battle battle;
+
+	@Property
 	private Player player;
 
-	public Battle getBattle() {
-		return battle;
-	}
+	private Collection<Player> players;
 
-	public Player getPlayer() {
-		return player;
+	public Collection<Player> getPlayers() {
+		return players;
 	}
 
 	void setupRender() {
 		battle = battleService.getCurrentBattle();
-		player = battleService.getCurrentPlayer();
+		players = battle.getAllPlayers();
 	}
 }

@@ -3,13 +3,15 @@
 	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
 
-<c:box>
-	<div class="column">
-		<t:game.facedisplay face="player.hero.face"/>
-	</div>
-	<div class="column">
-		<div>${message:health-label}: ${player.health}</div>
-	</div>
-</c:box>
+<t:loop source="players" value="player">
+	<c:box title="prop:player.hero.name">
+		<div class="column">
+			<t:game.facedisplay face="player.hero.face"/>
+		</div>
+		<div class="column">
+			<div>${message:health-label}: ${player.health}</div>
+		</div>
+	</c:box>
+</t:loop>
 
 </html>

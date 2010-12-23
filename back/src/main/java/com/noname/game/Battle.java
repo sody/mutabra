@@ -2,6 +2,7 @@ package com.noname.game;
 
 import org.greatage.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -33,6 +34,10 @@ public class Battle {
 
 	public Locatable getLocatable(final String location) {
 		return field.get(location);
+	}
+
+	public Collection<Player> getAllPlayers() {
+		return players.values();
 	}
 
 	public Player getPlayer(final String name) {
