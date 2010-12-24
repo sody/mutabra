@@ -1,0 +1,30 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter"
+		xmlns:c="tapestry-library:common">
+
+	<c:viewstack state="prop:size">
+		<p:big>
+			<c:box title="prop:hero.name">
+				<div class="column">
+					<t:game.facedisplay face="hero.face"/>
+				</div>
+				<div class="column">
+					<div>${message:account-label}: ${hero.account.email}</div>
+
+					<div>${message:name-label}: ${hero.name}</div>
+					<div>${message:level-label}: ${hero.level:description}</div>
+					<div>${message:rating-label}: ${hero.rating}</div>
+
+					<div>${message:attack-label}: ${hero.attack}</div>
+					<div>${message:defence-label}: ${hero.defence}</div>
+				</div>
+			</c:box>
+		</p:big>
+		<p:normal>
+			<c:box title="prop:hero.name" class="hero">
+				<t:game.facedisplay face="hero.face"/>
+			</c:box>
+		</p:normal>
+	</c:viewstack>
+</t:container>

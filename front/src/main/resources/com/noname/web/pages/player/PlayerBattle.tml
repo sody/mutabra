@@ -5,12 +5,8 @@
 
 <t:loop source="firstCommand.players" value="player">
 	<c:box title="prop:player.hero.name">
-		<div class="column">
-			<t:game.facedisplay face="player.hero.face"/>
-		</div>
-		<div class="column">
-			<div>${message:health-label}: ${player.health}</div>
-		</div>
+		<t:game.facedisplay face="player.hero.face"/>
+		<div>${message:health-label}: ${player.health}</div>
 	</c:box>
 </t:loop>
 
@@ -20,12 +16,8 @@
 
 <t:loop source="secondCommand.players" value="player">
 	<c:box title="prop:player.hero.name">
-		<div class="column">
-			<t:game.facedisplay face="player.hero.face"/>
-		</div>
-		<div class="column">
-			<div>${message:health-label}: ${player.health}</div>
-		</div>
+		<t:game.facedisplay face="player.hero.face"/>
+		<div>${message:health-label}: ${player.health}</div>
 	</c:box>
 </t:loop>
 
