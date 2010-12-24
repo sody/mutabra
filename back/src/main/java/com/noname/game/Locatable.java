@@ -6,6 +6,9 @@ package com.noname.game;
  */
 public interface Locatable {
 
-	String getLocation();
+	BattleField getField();
 
+	Location getLocation();
+
+	void setLocation(Location location);
 }

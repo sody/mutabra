@@ -1,5 +1,6 @@
 package com.noname.game;
 
+import com.noname.domain.player.Hero;
 import com.noname.services.security.GameSecurityContext;
 import org.greatage.util.CollectionUtils;
 
@@ -10,41 +11,36 @@ import java.util.Map;
  * @since 1.0
  */
 public class BattleServiceImpl implements BattleService {
-	private final Map<String, Battle> battles = CollectionUtils.newConcurrentMap();
-
 	private final GameSecurityContext securityContext;
+
+	private final Map<String, BattlePlayer> players = CollectionUtils.newConcurrentMap();
 
 	public BattleServiceImpl(final GameSecurityContext securityContext) {
 		this.securityContext = securityContext;
 	}
 
-	public Player getCurrentPlayer() {
-		final User currentUser = securityContext.getCurrentUser();
-		final Battle battle = getBattle(currentUser);
-		return battle.getPlayer(currentUser.getName());
-	}
-
-	public Battle getCurrentBattle() {
-		final User currentUser = securityContext.getCurrentUser();
-		return getBattle(currentUser);
-	}
-
-	public Battle createDuel(final User user) {
-		final User currentUser = securityContext.getCurrentUser();
-		if (getBattle(currentUser) == null && getBattle(user) == null) {
-			final Battle battle = new Battle(currentUser, user);
-			addBattle(currentUser, battle);
-			addBattle(user, battle);
-			return battle;
+	public void createDuel(final String name, final String rivalName) {
+		if (getPlayer(name) != null) {
+			throw new IllegalStateException(String.format("Already in battle: %s", name));
 		}
-		return null;
+		if (getPlayer(rivalName) != null) {
+			throw new IllegalStateException(String.format("Already in battle: %s", rivalName));
+		}
+		final Duel duel = new Duel();
+		duel.getFirstCommand().addPlayer(name, getHero(name));
+		duel.getSecondCommand().addPlayer(rivalName, getHero(rivalName));
+
+		players.put(name, duel.getFirstCommand().getPlayer(name));
+		players.put(rivalName, duel.getSecondCommand().getPlayer(rivalName));
 	}
 
-	private Battle getBattle(final User user) {
-		return battles.get(user.getName());
+	@Override
+	public BattlePlayer getPlayer(final String name) {
+		return players.get(name);
 	}
 
-	private void addBattle(final User user, final Battle battle) {
-		battles.put(user.getName(), battle);
+	private Hero getHero(String name) {
+		final User user = securityContext.getUser(name);
+		return user.getHero();
 	}
 }

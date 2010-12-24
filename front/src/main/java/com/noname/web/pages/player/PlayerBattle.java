@@ -1,9 +1,13 @@
 package com.noname.web.pages.player;
 
 import com.noname.game.Battle;
+import com.noname.game.BattleCommand;
+import com.noname.game.BattlePlayer;
 import com.noname.game.BattleService;
-import com.noname.game.Player;
+import com.noname.game.Duel;
+import com.noname.game.User;
 import com.noname.services.security.AuthorityConstants;
+import com.noname.services.security.GameSecurityContext;
 import com.noname.web.base.pages.AbstractPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -21,20 +25,24 @@ public class PlayerBattle extends AbstractPage {
 	@Inject
 	private BattleService battleService;
 
-	@Property
-	private Battle battle;
+	@Inject
+	private GameSecurityContext securityContext;
 
 	@Property
-	private Player player;
+	private BattleCommand firstCommand;
 
-	private Collection<Player> players;
+	@Property
+	private BattleCommand secondCommand;
 
-	public Collection<Player> getPlayers() {
-		return players;
-	}
+	@Property
+	private BattlePlayer player;
 
 	void setupRender() {
-		battle = battleService.getCurrentBattle();
-		players = battle.getAllPlayers();
+		final User currentUser = securityContext.getCurrentUser();
+		player = battleService.getPlayer(currentUser.getName());
+		final Battle battle = player.getCommand().getBattle();
+
+		firstCommand = ((Duel) battle).getFirstCommand();
+		secondCommand = ((Duel) battle).getSecondCommand();
 	}
 }
