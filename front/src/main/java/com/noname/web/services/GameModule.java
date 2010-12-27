@@ -7,6 +7,7 @@ import com.noname.web.services.i18n.Translator;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
+import org.apache.tapestry5.internal.test.EndOfRequestCleanupFilter;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
@@ -19,6 +20,8 @@ import org.greatage.tapestry.internal.*;
 import org.greatage.tapestry.select.EntitySelectModel;
 import org.greatage.tapestry.services.ClassResolver;
 import org.slf4j.Logger;
+
+import java.io.IOException;
 
 /**
  * @author Ivan Khalopik
@@ -79,6 +82,7 @@ public class GameModule {
 	}
 
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
+		configuration.addInstance("ThreadCleanup", ThreadCleanupFilter.class, "before:EndOfRequestCleanup");
 		configuration.addInstance("SecurityContextInitializer", UserPersistenceFilter.class);
 	}
 
