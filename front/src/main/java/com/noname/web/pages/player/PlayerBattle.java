@@ -32,12 +32,9 @@ public class PlayerBattle extends AbstractPage {
 	@Property
 	private BattleCommand secondCommand;
 
-	@Property
-	private BattlePlayer player;
-
 	void setupRender() {
 		final User currentUser = securityContext.getCurrentUser();
-		player = battleService.getPlayer(currentUser.getName());
+		final BattlePlayer player = battleService.getPlayer(currentUser.getName());
 		final Battle battle = player.getCommand().getBattle();
 
 		firstCommand = ((Duel) battle).getFirstCommand();

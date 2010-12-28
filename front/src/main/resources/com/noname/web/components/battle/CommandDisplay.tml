@@ -1,0 +1,16 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter"
+		xmlns:c="tapestry-library:common">
+
+	<div class="container">
+		<t:loop source="command.players" value="player">
+			<div class="column">
+				<t:game.herodisplay hero="player.hero" size="small">
+					<div>${message:health-label}: ${player.health}</div>
+				</t:game.herodisplay>
+			</div>
+		</t:loop>
+	</div>
+
+</t:container>

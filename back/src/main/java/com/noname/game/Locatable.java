@@ -8,6 +8,8 @@ public interface Locatable {
 
 	BattleField getField();
 
+	String getName();
+
 	Location getLocation();
 
 	void setLocation(Location location);

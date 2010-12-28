@@ -11,10 +11,9 @@ public class BattlePlayerImpl extends LocatableImpl implements BattlePlayer {
 	private final Hero hero;
 
 	private int health;
-	private Location location;
 
 	public BattlePlayerImpl(final BattleCommand command, final Hero hero) {
-		super(command.getField());
+		super(command.getField(), hero.getName());
 		this.command = command;
 		this.hero = hero;
 
@@ -24,11 +23,6 @@ public class BattlePlayerImpl extends LocatableImpl implements BattlePlayer {
 	@Override
 	public BattleCommand getCommand() {
 		return command;
-	}
-
-	@Override
-	public String getName() {
-		return hero.getName();
 	}
 
 	@Override

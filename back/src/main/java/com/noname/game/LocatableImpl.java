@@ -6,16 +6,23 @@ package com.noname.game;
  */
 public class LocatableImpl implements Locatable {
 	private final BattleField field;
+	private final String name;
 
 	private Location location;
 
-	public LocatableImpl(final BattleField field) {
+	public LocatableImpl(final BattleField field, final String name) {
 		this.field = field;
+		this.name = name;
 	}
 
 	@Override
 	public BattleField getField() {
 		return field;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	@Override

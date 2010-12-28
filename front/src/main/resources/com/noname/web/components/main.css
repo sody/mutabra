@@ -60,7 +60,7 @@ table.details th {
 }
 
 .t-selector div.previous {
-	background: transparent url("larrow.svg") repeat ;
+	background: transparent url("larrow.svg") repeat;
 	width: 64px;
 	height: 64px;
 }
@@ -99,4 +99,9 @@ table.details th {
 .t-selector.race div.next {
 	margin-top: 18px;
 	margin-bottom: 18px;
+}
+
+.location {
+	width: 64px;
+	height: 64px;
 }

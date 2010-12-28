@@ -21,7 +21,7 @@ public class BattleFieldImpl implements BattleField {
 			for (int i = 0; i < line.getSize(); i++) {
 				locatables.add(i, null);
 			}
-			this.locatables.put(line, CollectionUtils.<Locatable>newList());
+			this.locatables.put(line, locatables);
 		}
 	}
 

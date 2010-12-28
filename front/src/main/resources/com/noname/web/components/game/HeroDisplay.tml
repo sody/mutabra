@@ -22,11 +22,26 @@
 				<t:body/>
 			</c:box>
 		</p:big>
+
 		<p:normal>
 			<c:box title="prop:hero.name" class="hero">
-				<t:game.facedisplay face="hero.face" size="normal"/>
+				<div class="column">
+					<t:game.facedisplay face="hero.face" size="normal"/>
+				</div>
+				<div class="column">
+					<div>${message:account-label}: ${hero.account.email}</div>
+					<div>${message:name-label}: ${hero.name}</div>
+					<div>${message:level-label}: ${hero.level:description}</div>
+				</div>
 				<t:body/>
 			</c:box>
 		</p:normal>
+
+		<p:small>
+			<c:box title="prop:hero.name" class="hero">
+				<t:game.facedisplay face="hero.face" size="small"/>
+				<t:body/>
+			</c:box>
+		</p:small>
 	</c:viewstack>
 </t:container>

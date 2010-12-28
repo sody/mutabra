@@ -3,20 +3,18 @@
 	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
 
-<t:loop source="firstCommand.players" value="player">
-	<t:game.herodisplay hero="player.hero" size="normal">
-		<div>${message:health-label}: ${player.health}</div>
-	</t:game.herodisplay>
-</t:loop>
+<t:battle.commanddisplay command="firstCommand"/>
 
 <br/>
-<br/>
+
+<t:battle.fielddisplay field="firstCommand.field" position="top"/>
+
 <br/>
 
-<t:loop source="secondCommand.players" value="player">
-	<t:game.herodisplay hero="player.hero" size="normal">
-		<div>${message:health-label}: ${player.health}</div>
-	</t:game.herodisplay>
-</t:loop>
+<t:battle.fielddisplay field="secondCommand.field" position="bottom"/>
+
+<br/>
+
+<t:battle.commanddisplay command="secondCommand"/>
 
 </html>
