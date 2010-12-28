@@ -5,22 +5,11 @@
 
 <c:panel actions="create">
 	<t:loop source="heroes" value="row">
-		<c:box>
-			<div class="column">
-				<t:game.facedisplay face="row.face"/>
-			</div>
-			<div class="column">
-				<div>${message:name-label}: ${row.name}</div>
-				<div>${message:level-label}: ${row.level:description}</div>
-				<div>${message:rating-label}: ${row.rating}</div>
-
-				<div>${message:attack-label}: ${row.attack}</div>
-				<div>${message:defence-label}: ${row.defence}</div>
-			</div>
+		<t:game.herodisplay hero="row" size="big">
 			<div class="column" style="float:right;">
 				<c:menu context="prop:row" actions="enter,settings,delete"/>
 			</div>
-		</c:box>
+		</t:game.herodisplay>
 	</t:loop>
 </c:panel>
 

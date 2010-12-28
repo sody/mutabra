@@ -3,7 +3,7 @@ package com.noname.game;
 import java.util.List;
 
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 public interface BattleField {

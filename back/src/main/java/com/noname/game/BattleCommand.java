@@ -5,7 +5,7 @@ import com.noname.domain.player.Hero;
 import java.util.Collection;
 
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 public interface BattleCommand {

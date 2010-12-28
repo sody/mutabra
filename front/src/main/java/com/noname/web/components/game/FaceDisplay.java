@@ -2,6 +2,7 @@ package com.noname.web.components.game;
 
 import com.noname.domain.common.Face;
 import org.apache.tapestry5.Asset;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -17,13 +18,18 @@ public class FaceDisplay {
 	@Parameter(required = true)
 	private Face face;
 
+	@Property
+	@Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
+	private String size;
+
 	@Inject
 	private AssetSource assetSource;
 
 	public Asset getFaceImage() {
 		try {
 			return assetSource.getContextAsset("img/faces/" + face.getCode().toLowerCase() + ".png", null);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return null;
 		}
 	}

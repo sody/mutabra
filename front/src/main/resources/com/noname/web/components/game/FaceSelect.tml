@@ -4,7 +4,7 @@
 		xmlns:c="tapestry-library:common">
 
 	<c:selector source="faces" value="face" row="row" class="face">
-		<t:game.facedisplay face="row"/>
+		<t:game.facedisplay face="row" size="big"/>
 	</c:selector>
 
 </t:container>

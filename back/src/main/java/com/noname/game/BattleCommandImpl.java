@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 public class BattleCommandImpl implements BattleCommand {

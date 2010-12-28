@@ -13,10 +13,8 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.annotations.Allow;
 
-import java.util.Collection;
-
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 @Allow(AuthorityConstants.STATUS_PLAYING)

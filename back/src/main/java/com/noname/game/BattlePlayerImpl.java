@@ -3,7 +3,7 @@ package com.noname.game;
 import com.noname.domain.player.Hero;
 
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 public class BattlePlayerImpl extends LocatableImpl implements BattlePlayer {

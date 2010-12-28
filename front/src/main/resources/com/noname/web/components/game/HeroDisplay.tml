@@ -7,7 +7,7 @@
 		<p:big>
 			<c:box title="prop:hero.name">
 				<div class="column">
-					<t:game.facedisplay face="hero.face"/>
+					<t:game.facedisplay face="hero.face" size="big"/>
 				</div>
 				<div class="column">
 					<div>${message:account-label}: ${hero.account.email}</div>
@@ -19,11 +19,13 @@
 					<div>${message:attack-label}: ${hero.attack}</div>
 					<div>${message:defence-label}: ${hero.defence}</div>
 				</div>
+				<t:body/>
 			</c:box>
 		</p:big>
 		<p:normal>
 			<c:box title="prop:hero.name" class="hero">
-				<t:game.facedisplay face="hero.face"/>
+				<t:game.facedisplay face="hero.face" size="normal"/>
+				<t:body/>
 			</c:box>
 		</p:normal>
 	</c:viewstack>

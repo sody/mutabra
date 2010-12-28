@@ -1,7 +1,7 @@
 package com.noname.game;
 
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 public enum FieldLine {

@@ -7,7 +7,7 @@ import org.greatage.util.CollectionUtils;
 import java.util.Map;
 
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 public class BattleServiceImpl implements BattleService {
