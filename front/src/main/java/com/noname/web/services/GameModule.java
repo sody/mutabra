@@ -7,21 +7,33 @@ import com.noname.web.services.i18n.Translator;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
-import org.apache.tapestry5.internal.test.EndOfRequestCleanupFilter;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
-import org.apache.tapestry5.ioc.services.*;
-import org.apache.tapestry5.services.*;
+import org.apache.tapestry5.ioc.services.Builtin;
+import org.apache.tapestry5.ioc.services.Coercion;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.ThreadLocale;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
+import org.apache.tapestry5.services.ComponentClassResolver;
+import org.apache.tapestry5.services.ComponentClassTransformWorker;
+import org.apache.tapestry5.services.PropertyConduitSource;
+import org.apache.tapestry5.services.RequestExceptionHandler;
+import org.apache.tapestry5.services.RequestFilter;
+import org.apache.tapestry5.services.ResponseRenderer;
+import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.EntityService;
 import org.greatage.tapestry.grid.EntityDataSource;
-import org.greatage.tapestry.internal.*;
+import org.greatage.tapestry.internal.EntityEncoderFactory;
+import org.greatage.tapestry.internal.HibernateClassResolver;
+import org.greatage.tapestry.internal.SecuredAnnotationWorker;
+import org.greatage.tapestry.internal.SecurityExceptionHandler;
+import org.greatage.tapestry.internal.ThreadCleanupFilter;
+import org.greatage.tapestry.internal.UserPersistenceFilter;
 import org.greatage.tapestry.select.EntitySelectModel;
 import org.greatage.tapestry.services.ClassResolver;
 import org.slf4j.Logger;
-
-import java.io.IOException;
 
 /**
  * @author Ivan Khalopik
@@ -54,19 +66,21 @@ public class GameModule {
 
 	public void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
 									  @Builtin final ThreadLocale threadLocale) {
-		configuration.add(new CoercionTuple<EntityService, EntityDataSource>(EntityService.class, EntityDataSource.class, new Coercion<EntityService, EntityDataSource>() {
-			@SuppressWarnings({"unchecked"})
-			public EntityDataSource coerce(final EntityService entityService) {
-				return new EntityDataSource(entityService);
-			}
-		}));
+		configuration.add(new CoercionTuple<EntityService, EntityDataSource>(EntityService.class, EntityDataSource.class,
+				new Coercion<EntityService, EntityDataSource>() {
+					@SuppressWarnings( { "unchecked" })
+					public EntityDataSource coerce(final EntityService entityService) {
+						return new EntityDataSource(entityService);
+					}
+				}));
 
-		configuration.add(new CoercionTuple<EntityService, SelectModel>(EntityService.class, SelectModel.class, new Coercion<EntityService, SelectModel>() {
-			@SuppressWarnings({"unchecked"})
-			public SelectModel coerce(final EntityService entityService) {
-				return new EntitySelectModel(entityService);
-			}
-		}));
+		configuration.add(new CoercionTuple<EntityService, SelectModel>(EntityService.class, SelectModel.class,
+				new Coercion<EntityService, SelectModel>() {
+					@SuppressWarnings( { "unchecked" })
+					public SelectModel coerce(final EntityService entityService) {
+						return new EntitySelectModel(entityService);
+					}
+				}));
 	}
 
 	public void contributeComponentClassTransformWorker(
@@ -85,5 +99,4 @@ public class GameModule {
 		configuration.addInstance("ThreadCleanup", ThreadCleanupFilter.class, "before:EndOfRequestCleanup");
 		configuration.addInstance("SecurityContextInitializer", UserPersistenceFilter.class);
 	}
-
 }

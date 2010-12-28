@@ -22,7 +22,7 @@ public class RaceDisplay {
 
 	public Asset getRaceImage() {
 		try {
-			return assetSource.getContextAsset("img/races/" + race.getCode().toLowerCase() + ".png", null);
+			return assetSource.getContextAsset("img/races/" + race.getCode().toLowerCase() + ".svg", null);
 		} catch (Exception e) {
 			return null;
 		}

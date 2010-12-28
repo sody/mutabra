@@ -3,7 +3,7 @@
 		xmlns:p="tapestry:parameter"
 		xmlns:c="tapestry-library:common">
 
-	<c:selector source="races" value="race" row="row">
+	<c:selector source="races" value="race" row="row" class="race">
 		<t:game.racedisplay race="row"/>
 	</c:selector>
 

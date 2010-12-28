@@ -3,6 +3,6 @@
 		xmlns:p="tapestry:parameter"
 		xmlns:c="tapestry-library:common">
 
-	<img src="${raceImage}" alt="${race.code}" title="${race:description}"/>
+	<img src="${raceImage}" alt="${race:description}" title="${race:description}" width="100" height="100"/>
 
 </t:container>

@@ -376,7 +376,7 @@
 		<mail.api.version>1.4.1</mail.api.version>
 
 		<hibernate.version>3.6.0.Final</hibernate.version>
-		<tapestry.version>5.2.2</tapestry.version>
+		<tapestry.version>5.2.4</tapestry.version>
 		<testng.version>5.14.2</testng.version>
 
 		<drools.version>5.0.1</drools.version>
