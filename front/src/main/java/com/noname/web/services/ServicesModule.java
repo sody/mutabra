@@ -14,15 +14,19 @@ import com.noname.services.player.HeroServiceImpl;
 import com.noname.services.security.*;
 import com.noname.web.services.i18n.Translator;
 import com.noname.web.services.i18n.TranslatorImpl;
+import org.greatage.domain.DomainConstants;
 import org.greatage.domain.EntityFilterProcessor;
 import org.greatage.domain.TransactionalAdvice;
+import org.greatage.domain.hibernate.HibernateAnnotationConfiguration;
 import org.greatage.domain.hibernate.HibernateConfiguration;
 import org.greatage.domain.hibernate.HibernateExecutor;
 import org.greatage.domain.hibernate.HibernateModule;
 import org.greatage.ioc.Configuration;
+import org.greatage.ioc.MappedConfiguration;
 import org.greatage.ioc.ServiceBinder;
 import org.greatage.ioc.annotations.*;
 import org.greatage.ioc.proxy.MethodAdvice;
+import org.greatage.ioc.symbol.SymbolProvider;
 
 import javax.mail.Session;
 import javax.naming.InitialContext;
@@ -48,6 +52,11 @@ public class ServicesModule {
 		binder.bind(Translator.class, TranslatorImpl.class);
 	}
 
+	@Contribute(value = SymbolProvider.class)
+	public void contributeApplicationSymbolProvider(final MappedConfiguration<String, String> configuration) {
+		configuration.add(DomainConstants.HIBERNATE_PROPERTIES, "hibernate.properties");
+	}
+
 	@Build
 	public MailService buildMailService() throws NamingException {
 		final InitialContext context = new InitialContext();
@@ -55,7 +64,7 @@ public class ServicesModule {
 		return new MailServiceImpl(session, "haba.haba.game@gmail.com");
 	}
 
-	@Contribute(value = HibernateConfiguration.class, serviceId = "HibernateAnnotationConfiguration")
+	@Contribute(value = HibernateConfiguration.class, serviceId = "org.greatage.domain.hibernate.HibernateAnnotationConfiguration")
 	public void contributeHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
 		configuration.add(Translation.class);
 		configuration.add(Account.class);
@@ -75,7 +84,7 @@ public class ServicesModule {
 		configuration.add(HeroCard.class);
 	}
 
-	@Contribute(value = EntityFilterProcessor.class, serviceId = "HibernateFilterProcessor")
+	@Contribute(value = EntityFilterProcessor.class, serviceId = "org.greatage.domain.hibernate.HibernateFilterProcessor")
 	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);
