@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/maven-v4_0_0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>NoName Game Project</name>
 	<groupId>com.noname</groupId>
 	<artifactId>noname-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+
+	<name>NoName Game Project</name>
 
 	<modules>
 		<module>db</module>
@@ -177,21 +177,11 @@
 	<repositories>
 		<repository>
 			<id>jboss</id>
-			<url>http://repository.jboss.com/maven2/</url>
+			<url>https://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
 		<repository>
-			<id>apache-snapshot</id>
-			<url>http://repository.apache.org/snapshots/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>great-age-snapshot</id>
-			<url>http://great-age-repository.googlecode.com/svn/trunk/snapshot/</url>
+			<id>sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -375,7 +365,7 @@
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.1</mail.api.version>
 
-		<hibernate.version>3.6.0.Final</hibernate.version>
+		<hibernate.version>3.6.1.Final</hibernate.version>
 		<tapestry.version>5.2.4</tapestry.version>
 		<testng.version>5.14.2</testng.version>
 

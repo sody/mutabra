@@ -4,7 +4,7 @@ import com.noname.domain.Translatable;
 import com.noname.services.TranslationService;
 import org.greatage.ioc.cache.Cache;
 import org.greatage.ioc.cache.CacheSource;
-import org.greatage.ioc.cache.MultiKey;
+import org.greatage.util.CompositeKey;
 import org.greatage.util.I18nUtils;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class TranslatorImpl implements Translator {
 	private final TranslationService translationService;
 	//todo: add settings to cache
-	private final Cache<MultiKey, Map<String, String>> cache;
+	private final Cache<CompositeKey, Map<String, String>> cache;
 
 	public TranslatorImpl(final TranslationService translationService, final CacheSource cacheSource) {
 		this.translationService = translationService;
@@ -41,7 +41,7 @@ public class TranslatorImpl implements Translator {
 	}
 
 	public void updateCache(Translatable translatable, Locale locale, Map<String, String> messages) {
-		final MultiKey key = createKey(translatable, locale);
+		final CompositeKey key = createKey(translatable, locale);
 		cache.put(key, messages);
 	}
 
@@ -60,7 +60,7 @@ public class TranslatorImpl implements Translator {
 	}
 
 	private Map<String, String> getFromCache(Translatable translatable, Locale locale) {
-		final MultiKey key = createKey(translatable, locale);
+		final CompositeKey key = createKey(translatable, locale);
 		if (!cache.contains(key)) {
 			final Map<String, String> messages = translationService.getMessages(translatable, locale);
 			cache.put(key, messages);
@@ -68,7 +68,7 @@ public class TranslatorImpl implements Translator {
 		return cache.get(key);
 	}
 
-	private MultiKey createKey(Translatable translatable, Locale locale) {
-		return new MultiKey(translatable.getTranslationType(), translatable.getTranslationCode(), locale);
+	private CompositeKey createKey(Translatable translatable, Locale locale) {
+		return new CompositeKey(translatable.getTranslationType(), translatable.getTranslationCode(), locale);
 	}
 }
