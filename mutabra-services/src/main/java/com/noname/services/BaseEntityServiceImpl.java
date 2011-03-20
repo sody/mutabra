@@ -1,6 +1,6 @@
 package com.noname.services;
 
-import com.noname.domain.BaseEntity;
+import com.mutabra.domain.BaseEntity;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.EntityServiceImpl;
 

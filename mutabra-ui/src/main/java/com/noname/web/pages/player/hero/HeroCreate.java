@@ -1,7 +1,7 @@
 package com.noname.web.pages.player.hero;
 
-import com.noname.domain.common.Race;
-import com.noname.domain.player.Hero;
+import com.mutabra.domain.common.Race;
+import com.mutabra.domain.player.Hero;
 import com.noname.services.common.RaceService;
 import com.noname.services.player.HeroService;
 import com.noname.services.security.AuthorityConstants;
@@ -20,7 +20,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Allow(AuthorityConstants.ROLE_USER)
+//@Allow(AuthorityConstants.ROLE_USER)
 public class HeroCreate extends AbstractPage {
 
 	@Inject

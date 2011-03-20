@@ -1,7 +1,7 @@
 package com.noname.web.services;
 
-import com.noname.domain.player.Hero;
-import com.noname.domain.security.Account;
+import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.security.Account;
 
 /**
  * @author Ivan Khalopik

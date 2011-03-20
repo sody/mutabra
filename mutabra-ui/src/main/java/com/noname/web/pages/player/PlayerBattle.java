@@ -15,7 +15,7 @@ import java.util.Collection;
  * @author ivan.khalopik@tieto.com
  * @since 1.0
  */
-@Allow(AuthorityConstants.STATUS_PLAYING)
+//@Allow(AuthorityConstants.STATUS_PLAYING)
 public class PlayerBattle extends AbstractPage {
 
 	@Inject

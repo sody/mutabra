@@ -1,6 +1,6 @@
 package com.noname.web.base.pages;
 
-import com.noname.domain.BaseEntity;
+import com.mutabra.domain.BaseEntity;
 import com.noname.services.BaseEntityService;
 
 /**

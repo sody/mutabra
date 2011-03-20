@@ -1,7 +1,7 @@
 package com.noname.services;
 
-import com.noname.domain.CodedEntity;
-import com.noname.domain.Translation;
+import com.mutabra.domain.CodedEntity;
+import com.mutabra.domain.Translation;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
 import org.greatage.util.I18nUtils;

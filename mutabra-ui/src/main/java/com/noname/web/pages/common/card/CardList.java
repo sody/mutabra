@@ -1,6 +1,6 @@
 package com.noname.web.pages.common.card;
 
-import com.noname.domain.common.Card;
+import com.mutabra.domain.common.Card;
 import com.noname.services.common.CardService;
 import com.noname.services.security.AuthorityConstants;
 import com.noname.web.base.pages.EntityListPage;
@@ -12,7 +12,7 @@ import org.greatage.security.annotations.Allow;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Allow(AuthorityConstants.ROLE_ADMIN)
+//@Allow(AuthorityConstants.ROLE_ADMIN)
 public class CardList extends EntityListPage<Card> {
 
 	@Inject

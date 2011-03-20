@@ -1,6 +1,6 @@
 package com.noname.services.common;
 
-import com.noname.domain.common.Race;
+import com.mutabra.domain.common.Race;
 import com.noname.services.CodedEntityServiceImpl;
 import com.noname.services.TranslationService;
 import org.greatage.domain.EntityRepository;

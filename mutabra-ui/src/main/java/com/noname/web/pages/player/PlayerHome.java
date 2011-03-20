@@ -1,6 +1,6 @@
 package com.noname.web.pages.player;
 
-import com.noname.domain.player.Hero;
+import com.mutabra.domain.player.Hero;
 import com.noname.game.BattleService;
 import com.noname.game.User;
 import com.noname.services.security.AuthorityConstants;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Allow(AuthorityConstants.STATUS_PLAYING)
+//@Allow(AuthorityConstants.STATUS_PLAYING)
 public class PlayerHome extends AbstractPage {
 
 	@Inject

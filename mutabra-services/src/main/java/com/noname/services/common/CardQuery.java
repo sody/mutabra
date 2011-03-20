@@ -1,6 +1,6 @@
 package com.noname.services.common;
 
-import com.noname.domain.common.Card;
+import com.mutabra.domain.common.Card;
 import com.noname.services.CodedEntityQuery;
 
 /**

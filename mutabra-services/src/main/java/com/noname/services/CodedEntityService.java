@@ -1,6 +1,6 @@
 package com.noname.services;
 
-import com.noname.domain.CodedEntity;
+import com.mutabra.domain.CodedEntity;
 
 import java.util.Locale;
 

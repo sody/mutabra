@@ -1,6 +1,6 @@
 package com.noname.web.components.common;
 
-import com.noname.domain.common.Effect;
+import com.mutabra.domain.common.Effect;
 import org.apache.tapestry5.annotations.Parameter;
 
 /**

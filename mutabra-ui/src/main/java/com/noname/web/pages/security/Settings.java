@@ -1,6 +1,6 @@
 package com.noname.web.pages.security;
 
-import com.noname.domain.security.Account;
+import com.mutabra.domain.security.Account;
 import com.noname.services.security.AccountService;
 import com.noname.services.security.AuthorityConstants;
 import com.noname.web.base.pages.AbstractPage;
@@ -15,7 +15,7 @@ import org.greatage.security.annotations.Allow;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Allow(AuthorityConstants.STATUS_LOGGED)
+//@Allow(AuthorityConstants.STATUS_LOGGED)
 public class Settings extends AbstractPage {
 
 	@Inject

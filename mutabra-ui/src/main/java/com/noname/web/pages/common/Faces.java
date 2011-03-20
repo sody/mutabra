@@ -1,6 +1,6 @@
 package com.noname.web.pages.common;
 
-import com.noname.domain.common.Face;
+import com.mutabra.domain.common.Face;
 import com.noname.services.common.FaceService;
 import com.noname.services.security.AuthorityConstants;
 import com.noname.web.base.pages.CodedEntityPage;
@@ -11,7 +11,7 @@ import org.greatage.security.annotations.Allow;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Allow(AuthorityConstants.ROLE_ADMIN)
+//@Allow(AuthorityConstants.ROLE_ADMIN)
 public class Faces extends CodedEntityPage<Face> {
 
 	@Inject

@@ -1,6 +1,6 @@
 package com.noname.web.pages.player.hero;
 
-import com.noname.domain.player.Hero;
+import com.mutabra.domain.player.Hero;
 import com.noname.game.User;
 import com.noname.services.player.HeroService;
 import com.noname.services.security.AuthorityConstants;
@@ -18,8 +18,8 @@ import java.util.Set;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Deny(AuthorityConstants.STATUS_PLAYING)
-@Allow(AuthorityConstants.STATUS_LOGGED)
+//@Deny(AuthorityConstants.STATUS_PLAYING)
+//@Allow(AuthorityConstants.STATUS_LOGGED)
 public class HeroSelect extends AbstractPage {
 
 	@Inject

@@ -6,10 +6,10 @@ import com.noname.services.security.GameSecurityContext;
 import com.noname.services.security.GameSecurityContextImpl;
 import com.noname.services.security.UserProvider;
 import org.greatage.ioc.OrderedConfiguration;
-import org.greatage.ioc.ScopeConstants;
 import org.greatage.ioc.ServiceBinder;
 import org.greatage.ioc.annotations.*;
-import org.greatage.ioc.proxy.MethodAdvice;
+import org.greatage.ioc.proxy.Interceptor;
+import org.greatage.ioc.scope.ScopeConstants;
 import org.greatage.security.*;
 
 /**
@@ -36,9 +36,9 @@ public class GameSecurityModule {
 		configuration.addInstance(UserProvider.class, "password");
 	}
 
-	@Intercept(BaseEntityService.class)
+	@Decorate(BaseEntityService.class)
 	@Order(value = "Security", constraints = "before:Transaction")
-	public MethodAdvice interceptServices(final GameSecurityContext securityContext) {
+	public Interceptor interceptServices(final GameSecurityContext securityContext) {
 		return new AuthoritySecurityAdvice(securityContext);
 	}
 }

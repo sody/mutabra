@@ -1,6 +1,6 @@
 package com.noname.web.components.common;
 
-import com.noname.domain.common.*;
+import com.mutabra.domain.common.*;
 import com.noname.services.common.LevelService;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Parameter;
@@ -46,19 +46,19 @@ public class CardEditor {
 	}
 
 	public boolean isEffectCard() {
-		return card instanceof EffectCard;
+		return card.getType() == CardType.EFFECT;
 	}
 
 	public boolean isSummonCard() {
-		return card instanceof SummonCard;
+		return card.getType() == CardType.SUMMON;
 	}
 
 	public Effect getEffect() {
-		return ((EffectCard) card).getEffect();
+		return card.getEffect();
 	}
 
 	public Summon getSummon() {
-		return ((SummonCard) card).getSummon();
+		return card.getSummon();
 	}
 
 }

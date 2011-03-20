@@ -1,6 +1,6 @@
 package com.noname.web.components;
 
-import com.noname.domain.BaseEntity;
+import com.mutabra.domain.BaseEntity;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.Component;

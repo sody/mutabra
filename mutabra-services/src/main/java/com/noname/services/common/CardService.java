@@ -1,7 +1,7 @@
 package com.noname.services.common;
 
-import com.noname.domain.common.Card;
-import com.noname.domain.common.CardType;
+import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.CardType;
 import com.noname.services.CodedEntityService;
 
 /**

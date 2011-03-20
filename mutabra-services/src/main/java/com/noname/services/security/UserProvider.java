@@ -1,6 +1,6 @@
 package com.noname.services.security;
 
-import com.noname.domain.security.Account;
+import com.mutabra.domain.security.Account;
 import com.noname.game.User;
 import org.greatage.security.AuthenticationException;
 import org.greatage.security.PasswordAuthenticationProvider;

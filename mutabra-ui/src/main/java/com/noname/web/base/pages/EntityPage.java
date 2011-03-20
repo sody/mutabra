@@ -4,7 +4,7 @@
 
 package com.noname.web.base.pages;
 
-import com.noname.domain.BaseEntity;
+import com.mutabra.domain.BaseEntity;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.corelib.components.Form;
 import org.greatage.tapestry.grid.EntityDataSource;

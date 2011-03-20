@@ -1,7 +1,7 @@
 package com.noname.services;
 
-import com.noname.domain.Translatable;
-import com.noname.domain.Translation;
+import com.mutabra.domain.Translatable;
+import com.mutabra.domain.Translation;
 
 import java.util.Locale;
 import java.util.Map;

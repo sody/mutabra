@@ -1,6 +1,6 @@
 package com.noname.web.components.game;
 
-import com.noname.domain.common.Face;
+import com.mutabra.domain.common.Face;
 import com.noname.services.common.FaceService;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;

@@ -11,10 +11,11 @@
 	<name>Mutabra Project</name>
 
 	<modules>
-		<module>db</module>
+		<module>mutabra-db</module>
 		<module>mutabra-domain</module>
-		<module>back</module>
-		<module>front</module>
+		<module>mutabra-domain-hibernate</module>
+		<module>mutabra-services</module>
+		<module>mutabra-ui</module>
 	</modules>
 
 	<dependencyManagement>
@@ -27,13 +28,19 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-back</artifactId>
+				<artifactId>mutabra-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-front</artifactId>
+				<artifactId>mutabra-services</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

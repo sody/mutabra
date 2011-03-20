@@ -4,11 +4,15 @@
 
 package com.noname.game;
 
-import com.noname.domain.player.Hero;
-import com.noname.domain.security.Account;
+import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.Permission;
+import com.mutabra.domain.security.Role;
 import com.noname.services.security.AuthorityConstants;
 import org.greatage.security.PasswordAuthentication;
 import org.greatage.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -29,7 +33,7 @@ public class User extends PasswordAuthentication {
 	}
 
 	public User(final Account account, final Hero hero) throws IllegalArgumentException {
-		super(account.getEmail(), account.getPassword(), account.createAuthorities());
+		super(account.getEmail(), account.getPassword(), createAuthorities(account));
 		this.account = account;
 		this.hero = hero;
 		getAuthorities().add(AuthorityConstants.STATUS_LOGGED);
@@ -44,5 +48,17 @@ public class User extends PasswordAuthentication {
 
 	public Hero getHero() {
 		return hero;
+	}
+
+	private static List<String> createAuthorities(final Account account) {
+		final List<String> authorities = CollectionUtils.newList();
+		authorities.add(account.getEmail());
+		for (Role role : account.getRoles()) {
+			authorities.add(role.getAuthority());
+			for (Permission permission : role.getPermissions()) {
+				authorities.add(permission.getAuthority());
+			}
+		}
+		return authorities;
 	}
 }

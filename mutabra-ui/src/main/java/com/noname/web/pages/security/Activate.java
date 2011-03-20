@@ -1,6 +1,6 @@
 package com.noname.web.pages.security;
 
-import com.noname.domain.security.Account;
+import com.mutabra.domain.security.Account;
 import com.noname.game.User;
 import com.noname.services.security.AccountService;
 import com.noname.web.base.pages.AbstractPage;

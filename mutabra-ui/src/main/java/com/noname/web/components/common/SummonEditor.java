@@ -1,6 +1,6 @@
 package com.noname.web.components.common;
 
-import com.noname.domain.common.Summon;
+import com.mutabra.domain.common.Summon;
 import org.apache.tapestry5.annotations.Parameter;
 
 /**

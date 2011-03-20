@@ -1,12 +1,12 @@
 package com.noname.web.services;
 
-import com.noname.domain.Translation;
-import com.noname.domain.common.*;
-import com.noname.domain.player.Hero;
-import com.noname.domain.player.HeroCard;
-import com.noname.domain.security.Account;
-import com.noname.domain.security.Permission;
-import com.noname.domain.security.Role;
+import com.mutabra.domain.Translation;
+import com.mutabra.domain.common.*;
+import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.player.HeroCard;
+import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.Permission;
+import com.mutabra.domain.security.Role;
 import com.noname.services.*;
 import com.noname.services.common.*;
 import com.noname.services.player.HeroService;
@@ -22,7 +22,7 @@ import org.greatage.domain.hibernate.HibernateModule;
 import org.greatage.ioc.Configuration;
 import org.greatage.ioc.ServiceBinder;
 import org.greatage.ioc.annotations.*;
-import org.greatage.ioc.proxy.MethodAdvice;
+import org.greatage.ioc.proxy.Interceptor;
 
 import javax.mail.Session;
 import javax.naming.InitialContext;
@@ -55,7 +55,7 @@ public class ServicesModule {
 		return new MailServiceImpl(session, "haba.haba.game@gmail.com");
 	}
 
-	@Contribute(value = HibernateConfiguration.class, serviceId = "HibernateAnnotationConfiguration")
+	@Contribute(value = HibernateConfiguration.class, id = "HibernateAnnotationConfiguration")
 	public void contributeHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
 		configuration.add(Translation.class);
 		configuration.add(Account.class);
@@ -66,25 +66,23 @@ public class ServicesModule {
 		configuration.add(Race.class);
 		configuration.add(Level.class);
 		configuration.add(Card.class);
-		configuration.add(EffectCard.class);
 		configuration.add(Effect.class);
-		configuration.add(SummonCard.class);
 		configuration.add(Summon.class);
 
 		configuration.add(Hero.class);
 		configuration.add(HeroCard.class);
 	}
 
-	@Contribute(value = EntityFilterProcessor.class, serviceId = "HibernateFilterProcessor")
+	@Contribute(value = EntityFilterProcessor.class, id = "HibernateFilterProcessor")
 	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);
 		configuration.addInstance(AccountFilterProcessor.class);
 	}
 
-	@Intercept(BaseEntityService.class)
+	@Decorate(BaseEntityService.class)
 	@Order("Transaction")
-	public MethodAdvice interceptServices(final HibernateExecutor executor) {
+	public Interceptor decorateServices(final HibernateExecutor executor) {
 		return new TransactionalAdvice(executor);
 	}
 }

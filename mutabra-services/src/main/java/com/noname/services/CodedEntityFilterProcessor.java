@@ -1,6 +1,6 @@
 package com.noname.services;
 
-import com.noname.domain.CodedEntity;
+import com.mutabra.domain.CodedEntity;
 import org.greatage.domain.EntityCriteria;
 import org.greatage.util.StringUtils;
 

@@ -4,7 +4,7 @@
 
 package com.noname.web.services.i18n;
 
-import com.noname.domain.Translatable;
+import com.mutabra.domain.Translatable;
 
 import java.util.Locale;
 import java.util.Map;

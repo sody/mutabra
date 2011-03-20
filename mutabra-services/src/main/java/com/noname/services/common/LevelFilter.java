@@ -1,6 +1,6 @@
 package com.noname.services.common;
 
-import com.noname.domain.common.Level;
+import com.mutabra.domain.common.Level;
 import com.noname.services.CodedEntityFilter;
 
 /**

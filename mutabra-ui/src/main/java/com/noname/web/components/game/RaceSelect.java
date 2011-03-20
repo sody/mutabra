@@ -1,6 +1,6 @@
 package com.noname.web.components.game;
 
-import com.noname.domain.common.Race;
+import com.mutabra.domain.common.Race;
 import com.noname.services.common.RaceService;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;

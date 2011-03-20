@@ -1,6 +1,6 @@
 package com.noname.services.player;
 
-import com.noname.domain.player.Hero;
+import com.mutabra.domain.player.Hero;
 import com.noname.services.BaseEntityQuery;
 
 /**

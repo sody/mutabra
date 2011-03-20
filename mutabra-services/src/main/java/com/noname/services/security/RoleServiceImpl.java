@@ -1,6 +1,6 @@
 package com.noname.services.security;
 
-import com.noname.domain.security.Role;
+import com.mutabra.domain.security.Role;
 import com.noname.services.CodedEntityServiceImpl;
 import com.noname.services.TranslationService;
 import org.greatage.domain.EntityRepository;

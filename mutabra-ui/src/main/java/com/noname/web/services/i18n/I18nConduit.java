@@ -1,6 +1,6 @@
 package com.noname.web.services.i18n;
 
-import com.noname.domain.Translatable;
+import com.mutabra.domain.Translatable;
 import org.apache.tapestry5.PropertyConduit;
 import org.apache.tapestry5.internal.services.BasePropertyConduit;
 import org.apache.tapestry5.ioc.services.ThreadLocale;

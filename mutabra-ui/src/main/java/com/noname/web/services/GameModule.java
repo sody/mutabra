@@ -1,6 +1,6 @@
 package com.noname.web.services;
 
-import com.noname.domain.BaseEntity;
+import com.mutabra.domain.BaseEntity;
 import com.noname.web.pages.security.SignIn;
 import com.noname.web.services.i18n.I18nPropertyConduitSource;
 import com.noname.web.services.i18n.Translator;

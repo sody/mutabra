@@ -1,6 +1,6 @@
 package com.noname.services.common;
 
-import com.noname.domain.common.Face;
+import com.mutabra.domain.common.Face;
 import com.noname.services.CodedEntityQuery;
 
 /**

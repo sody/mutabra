@@ -1,7 +1,7 @@
 package com.noname.services.security;
 
-import com.noname.domain.security.Account;
-import com.noname.domain.security.Role;
+import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.Role;
 import com.noname.services.BaseEntityServiceImpl;
 import org.greatage.domain.EntityRepository;
 

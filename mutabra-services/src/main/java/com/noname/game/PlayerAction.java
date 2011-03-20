@@ -1,6 +1,6 @@
 package com.noname.game;
 
-import com.noname.domain.player.HeroCard;
+import com.mutabra.domain.player.HeroCard;
 
 /**
  * @author Ivan Khalopik

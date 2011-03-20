@@ -1,7 +1,7 @@
 package com.noname.game;
 
-import com.noname.domain.player.Hero;
-import com.noname.domain.player.HeroCard;
+import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.player.HeroCard;
 import org.greatage.util.CollectionUtils;
 
 import java.util.List;

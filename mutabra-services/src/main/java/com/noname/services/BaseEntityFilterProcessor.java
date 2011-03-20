@@ -1,9 +1,8 @@
 package com.noname.services;
 
-import com.noname.domain.BaseEntity;
+import com.mutabra.domain.BaseEntity;
 import org.greatage.domain.AbstractFilterProcessor;
 import org.greatage.domain.Entity;
-import org.greatage.domain.EntityCriteria;
 
 /**
  * @author Ivan Khalopik
