@@ -1,12 +1,13 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.Translation;
+import com.mutabra.domain.TranslationImpl;
 import com.mutabra.domain.common.*;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.player.HeroCard;
-import com.mutabra.domain.security.Account;
-import com.mutabra.domain.security.Permission;
-import com.mutabra.domain.security.Role;
+import com.mutabra.domain.player.HeroCardImpl;
+import com.mutabra.domain.player.HeroImpl;
+import com.mutabra.domain.security.*;
 import com.mutabra.services.*;
 import com.mutabra.services.common.*;
 import com.mutabra.services.player.HeroService;
@@ -57,23 +58,24 @@ public class ServicesModule {
 
 	@Contribute(value = HibernateAnnotationConfiguration.class)
 	public void contributeHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
-		configuration.add(Translation.class);
-		configuration.add(Account.class);
-		configuration.add(Role.class);
-		configuration.add(Permission.class);
+		configuration.add(TranslationImpl.class);
+		configuration.add(AccountImpl.class);
+		configuration.add(RoleImpl.class);
+		configuration.add(PermissionImpl.class);
 
-		configuration.add(Face.class);
-		configuration.add(Race.class);
-		configuration.add(Level.class);
-		configuration.add(Card.class);
-		configuration.add(Effect.class);
-		configuration.add(Summon.class);
+		configuration.add(FaceImpl.class);
+		configuration.add(RaceImpl.class);
+		configuration.add(LevelImpl.class);
+		configuration.add(CardImpl.class);
+		configuration.add(EffectImpl.class);
+		configuration.add(SummonImpl.class);
 
-		configuration.add(Hero.class);
-		configuration.add(HeroCard.class);
+		configuration.add(HeroImpl.class);
+		configuration.add(HeroCardImpl.class);
 	}
 
 	@Contribute(EntityFilterProcessor.class)
+	@Order("Entity")
 	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);

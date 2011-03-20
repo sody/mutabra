@@ -18,10 +18,10 @@ public class RoleImpl extends CodedEntityImpl implements Role {
 		super("ROLE", TranslationType.STANDARD);
 	}
 
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles", targetEntity = AccountImpl.class)
 	private Set<Account> accounts = new HashSet<Account>();
 
-	@ManyToMany
+	@ManyToMany(targetEntity = PermissionImpl.class)
 	@JoinTable(name = "ROLE_PERMISSION",
 			joinColumns = @JoinColumn(name = "ID_ROLE", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "ID_PERMISSION", nullable = false))

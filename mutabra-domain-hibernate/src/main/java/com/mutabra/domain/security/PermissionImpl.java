@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "PERMISSION")
 public class PermissionImpl extends CodedEntityImpl implements Permission {
 
-	@ManyToMany(mappedBy = "permissions")
+	@ManyToMany(mappedBy = "permissions", targetEntity = RoleImpl.class)
 	private Set<Role> roles = new HashSet<Role>();
 
 	public PermissionImpl() {

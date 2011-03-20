@@ -19,15 +19,15 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	@Column(name = "CARD_TYPE", nullable = false)
 	private CardType type;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = LevelImpl.class)
 	@JoinColumn(name = "ID_LEVEL", nullable = false)
 	private Level level;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = EffectImpl.class)
 	@JoinColumn(name = "ID_EFFECT", nullable = true)
 	private Effect effect;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = SummonImpl.class)
 	@JoinColumn(name = "ID_SUMMON", nullable = true)
 	private Summon summon;
 

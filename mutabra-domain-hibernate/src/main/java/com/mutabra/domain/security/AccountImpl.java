@@ -2,6 +2,7 @@ package com.mutabra.domain.security;
 
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.player.HeroImpl;
 
 import javax.persistence.*;
 import java.util.*;
@@ -44,13 +45,13 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Column(name = "DELETED_AT", nullable = true, insertable = false)
 	private Date deletedAt;
 
-	@ManyToMany
+	@ManyToMany(targetEntity = RoleImpl.class)
 	@JoinTable(name = "ACCOUNT_ROLE",
 			joinColumns = @JoinColumn(name = "ID_ACCOUNT", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "ID_ROLE", nullable = false))
 	private Set<Role> roles = new HashSet<Role>();
 
-	@OneToMany(mappedBy = "account")
+	@OneToMany(mappedBy = "account", targetEntity = HeroImpl.class)
 	private Set<Hero> heroes = new HashSet<Hero>();
 
 	public String getEmail() {

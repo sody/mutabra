@@ -2,6 +2,7 @@ package com.mutabra.domain.player;
 
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.CardImpl;
 
 import javax.persistence.*;
 
@@ -13,11 +14,11 @@ import javax.persistence.*;
 @Table(name = "HERO_CARD")
 public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
-	@ManyToOne
+	@ManyToOne(targetEntity = HeroImpl.class)
 	@JoinColumn(name = "ID_HERO", nullable = false)
 	private Hero hero;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = CardImpl.class)
 	@JoinColumn(name = "ID_CARD", nullable = false)
 	private Card card;
 

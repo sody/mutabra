@@ -1,10 +1,9 @@
 package com.mutabra.domain.player;
 
 import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.common.Face;
-import com.mutabra.domain.common.Level;
-import com.mutabra.domain.common.Race;
+import com.mutabra.domain.common.*;
 import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.AccountImpl;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,22 +17,22 @@ import java.util.Set;
 @Table(name = "HERO")
 public class HeroImpl extends BaseEntityImpl implements Hero {
 
-	@ManyToOne
+	@ManyToOne(targetEntity = AccountImpl.class)
 	@JoinColumn(name = "ID_ACCOUNT", nullable = false)
 	private Account account;
 
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = FaceImpl.class)
 	@JoinColumn(name = "ID_FACE", nullable = false)
 	private Face face;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = RaceImpl.class)
 	@JoinColumn(name = "ID_RACE", nullable = false)
 	private Race race;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = LevelImpl.class)
 	@JoinColumn(name = "ID_LEVEL", nullable = false)
 	private Level level;
 
@@ -46,7 +45,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	@Column(name = "DEFENCE", nullable = false)
 	private int defence;
 
-	@OneToMany(mappedBy = "hero")
+	@OneToMany(mappedBy = "hero", targetEntity = HeroCardImpl.class)
 	private Set<HeroCard> cards = new HashSet<HeroCard>();
 
 	public Account getAccount() {
