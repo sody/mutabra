@@ -12,7 +12,7 @@
 
 	<context-param>
 		<param-name>tapestry.app-package</param-name>
-		<param-value>com.noname.web</param-value>
+		<param-value>com.mutabra.web</param-value>
 	</context-param>
 
 	<context-param>
@@ -27,7 +27,7 @@
 
 	<context-param>
 		<param-name>greatage.module</param-name>
-		<param-value>com.noname.web.services.GAModule</param-value>
+		<param-value>com.mutabra.web.services.GAModule</param-value>
 	</context-param>
 
 	<filter>

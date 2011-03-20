@@ -1,0 +1,21 @@
+package com.mutabra.services;
+
+import com.mutabra.domain.Translation;
+
+import java.util.List;
+import java.util.Locale;
+
+/**
+ * @author Ivan Khalopik
+ */
+public interface TranslationFilter extends BaseEntityFilter<Translation> {
+
+	String getType();
+
+	Locale getLocale();
+
+	List<String> getCodes();
+
+	List<String> getVariants();
+
+}
