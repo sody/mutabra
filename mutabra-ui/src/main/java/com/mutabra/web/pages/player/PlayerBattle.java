@@ -1,16 +1,13 @@
 package com.mutabra.web.pages.player;
 
-import com.mutabra.game.Battle;
-import com.mutabra.game.BattleService;
-import com.mutabra.game.Player;
+import com.mutabra.game.*;
+import com.mutabra.services.security.GameSecurityContext;
 import com.mutabra.web.base.pages.AbstractPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import java.util.Collection;
-
 /**
- * @author ivan.khalopik@tieto.com
+ * @author Ivan Khalopik
  * @since 1.0
  */
 //@Allow(AuthorityConstants.STATUS_PLAYING)
@@ -19,20 +16,21 @@ public class PlayerBattle extends AbstractPage {
 	@Inject
 	private BattleService battleService;
 
-	@Property
-	private Battle battle;
+	@Inject
+	private GameSecurityContext securityContext;
 
 	@Property
-	private Player player;
+	private BattleCommand firstCommand;
 
-	private Collection<Player> players;
-
-	public Collection<Player> getPlayers() {
-		return players;
-	}
+	@Property
+	private BattleCommand secondCommand;
 
 	void setupRender() {
-		battle = battleService.getCurrentBattle();
-		players = battle.getAllPlayers();
+		final User currentUser = securityContext.getCurrentUser();
+		final BattlePlayer player = battleService.getPlayer(currentUser.getName());
+		final Battle battle = player.getCommand().getBattle();
+
+		firstCommand = ((Duel) battle).getFirstCommand();
+		secondCommand = ((Duel) battle).getSecondCommand();
 	}
 }

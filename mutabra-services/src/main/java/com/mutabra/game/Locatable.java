@@ -6,6 +6,11 @@ package com.mutabra.game;
  */
 public interface Locatable {
 
-	String getLocation();
+	BattleField getField();
 
+	String getName();
+
+	Location getLocation();
+
+	void setLocation(Location location);
 }

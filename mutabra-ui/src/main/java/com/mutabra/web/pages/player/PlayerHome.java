@@ -40,19 +40,22 @@ public class PlayerHome extends AbstractPage {
 	void setupRender() {
 		hero = getApplicationContext().getHero();
 		users = securityContext.getPlayingUsers();
+		users.remove(securityContext.getCurrentUser());
 	}
 
 	Object onCreateDuel(final String name) {
+		final User currentUser = securityContext.getCurrentUser();
 		final User user = securityContext.getUser(name);
 		if (user != null && user.getHero() != null) {
-			battleService.createDuel(user);
+			battleService.createDuel(currentUser.getName(), user.getName());
 			return PlayerBattle.class;
 		}
 		return null;
 	}
 
 	Object onActivate() {
-		if (battleService.getCurrentBattle() != null) {
+		final User currentUser = securityContext.getCurrentUser();
+		if (battleService.getPlayer(currentUser.getName()) != null) {
 			return PlayerBattle.class;
 		}
 		return null;

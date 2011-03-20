@@ -3,31 +3,13 @@
 	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
 
-<c:box>
-	<div class="column">
-		<t:game.facedisplay face="hero.face"/>
-	</div>
-	<div class="column">
-		<div>${message:name-label}: ${hero.name}</div>
-		<div>${message:level-label}: ${hero.level:description}</div>
-		<div>${message:rating-label}: ${hero.rating}</div>
-
-		<div>${message:attack-label}: ${hero.attack}</div>
-		<div>${message:defence-label}: ${hero.defence}</div>
-	</div>
-</c:box>
+<t:game.herodisplay hero="hero" size="big"/>
 
 <h1>${message:users-title}</h1>
 <t:loop source="users" value="row">
-	<c:box>
-		<div class="column">
-			<div>${message:name-label}: ${row.hero.name}</div>
-			<div>${message:account-label}: ${row.name}</div>
-			<div>
-				<t:eventlink event="createDuel" context="row.name">${message:duel}</t:eventlink>
-			</div>
-		</div>
-	</c:box>
+	<t:eventlink event="createDuel" context="row.name">
+		<t:game.herodisplay hero="row.hero" size="normal"/>
+	</t:eventlink>
 </t:loop>
 
 </html>

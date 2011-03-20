@@ -16,7 +16,7 @@ import com.mutabra.web.services.i18n.Translator;
 import com.mutabra.web.services.i18n.TranslatorImpl;
 import org.greatage.domain.EntityFilterProcessor;
 import org.greatage.domain.TransactionalAdvice;
-import org.greatage.domain.hibernate.HibernateConfiguration;
+import org.greatage.domain.hibernate.HibernateAnnotationConfiguration;
 import org.greatage.domain.hibernate.HibernateExecutor;
 import org.greatage.domain.hibernate.HibernateModule;
 import org.greatage.ioc.Configuration;
@@ -55,7 +55,7 @@ public class ServicesModule {
 		return new MailServiceImpl(session, "haba.haba.game@gmail.com");
 	}
 
-	@Contribute(value = HibernateConfiguration.class, id = "HibernateAnnotationConfiguration")
+	@Contribute(value = HibernateAnnotationConfiguration.class)
 	public void contributeHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
 		configuration.add(Translation.class);
 		configuration.add(Account.class);
@@ -73,8 +73,7 @@ public class ServicesModule {
 		configuration.add(HeroCard.class);
 	}
 
-	@Order("Entity")
-	@Contribute(value = EntityFilterProcessor.class, id = "HibernateFilterProcessor")
+	@Contribute(EntityFilterProcessor.class)
 	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);

@@ -195,16 +195,12 @@
 		<repository>
 			<id>sonatype-snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>
-		<repository>
-			<id>apache-snapshot</id>
-			<url>http://repository.apache.org/snapshots/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -235,25 +231,21 @@
 							<groupId>mysql</groupId>
 							<artifactId>mysql-connector-java</artifactId>
 							<version>${mysql.version}</version>
-							<scope>provided</scope>
 						</dependency>
 						<dependency>
 							<groupId>hsqldb</groupId>
 							<artifactId>hsqldb</artifactId>
 							<version>${hsqldb.version}</version>
-							<scope>provided</scope>
 						</dependency>
 						<dependency>
 							<groupId>commons-dbcp</groupId>
 							<artifactId>commons-dbcp</artifactId>
 							<version>1.2.2</version>
-							<scope>provided</scope>
 						</dependency>
 						<dependency>
 							<groupId>javax.mail</groupId>
 							<artifactId>mail</artifactId>
 							<version>1.4.1</version>
-							<scope>provided</scope>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -267,13 +259,11 @@
 							<groupId>mysql</groupId>
 							<artifactId>mysql-connector-java</artifactId>
 							<version>${mysql.version}</version>
-							<scope>provided</scope>
 						</dependency>
 						<dependency>
 							<groupId>hsqldb</groupId>
 							<artifactId>hsqldb</artifactId>
 							<version>${hsqldb.version}</version>
-							<scope>provided</scope>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -374,7 +364,7 @@
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.1</mail.api.version>
 
-		<hibernate.version>3.6.0.Final</hibernate.version>
+		<hibernate.version>3.6.1.Final</hibernate.version>
 		<tapestry.version>5.2.4</tapestry.version>
 		<testng.version>5.14.2</testng.version>
 
@@ -384,5 +374,4 @@
 		<release.url>file:///mutabra/release</release.url>
 		<log.dir>file:///mutabra/log</log.dir>
 	</properties>
-
 </project>

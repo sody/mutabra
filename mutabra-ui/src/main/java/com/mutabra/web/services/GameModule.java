@@ -51,19 +51,21 @@ public class GameModule {
 
 	public void contributeTypeCoercer(Configuration<CoercionTuple> configuration,
 									  @Builtin final ThreadLocale threadLocale) {
-		configuration.add(new CoercionTuple<EntityService, EntityDataSource>(EntityService.class, EntityDataSource.class, new Coercion<EntityService, EntityDataSource>() {
-			@SuppressWarnings({"unchecked"})
-			public EntityDataSource coerce(final EntityService entityService) {
-				return new EntityDataSource(entityService);
-			}
-		}));
+		configuration.add(new CoercionTuple<EntityService, EntityDataSource>(EntityService.class, EntityDataSource.class,
+				new Coercion<EntityService, EntityDataSource>() {
+					@SuppressWarnings({"unchecked"})
+					public EntityDataSource coerce(final EntityService entityService) {
+						return new EntityDataSource(entityService);
+					}
+				}));
 
-		configuration.add(new CoercionTuple<EntityService, SelectModel>(EntityService.class, SelectModel.class, new Coercion<EntityService, SelectModel>() {
-			@SuppressWarnings({"unchecked"})
-			public SelectModel coerce(final EntityService entityService) {
-				return new EntitySelectModel(entityService);
-			}
-		}));
+		configuration.add(new CoercionTuple<EntityService, SelectModel>(EntityService.class, SelectModel.class,
+				new Coercion<EntityService, SelectModel>() {
+					@SuppressWarnings({"unchecked"})
+					public SelectModel coerce(final EntityService entityService) {
+						return new EntitySelectModel(entityService);
+					}
+				}));
 	}
 
 	public void contributeComponentClassTransformWorker(
@@ -79,7 +81,7 @@ public class GameModule {
 	}
 
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
+		configuration.addInstance("ThreadCleanup", ThreadCleanupFilter.class, "before:EndOfRequestCleanup");
 		configuration.addInstance("SecurityContextInitializer", UserPersistenceFilter.class);
 	}
-
 }

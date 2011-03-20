@@ -1,8 +1,18 @@
-<t:container
-		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		xmlns:p="tapestry:parameter"
-		xmlns:c="tapestry-library:common">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+			 xmlns:p="tapestry:parameter"
+			 xmlns:c="tapestry-library:common">
 
-	<img src="${faceImage}" alt="${face.code}" title="${face:description}"/>
+	<c:viewstack state="prop:size">
+		<p:big>
+			<img src="${faceImage}" alt="${face.code}" title="${face:description}" width="200px" height="200px"/>
+		</p:big>
 
+		<p:normal>
+			<img src="${faceImage}" alt="${face.code}" title="${face:description}" width="100px" height="100px"/>
+		</p:normal>
+
+		<p:small>
+			<img src="${faceImage}" alt="${face.code}" title="${face:description}" width="64px" height="64px"/>
+		</p:small>
+	</c:viewstack>
 </t:container>

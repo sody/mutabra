@@ -6,9 +6,7 @@ package com.mutabra.game;
  */
 public interface BattleService {
 
-	Player getCurrentPlayer();
+	void createDuel(String name, String rivalName);
 
-	Battle getCurrentBattle();
-
-	Battle createDuel(User user);
+	BattlePlayer getPlayer(String name);
 }
