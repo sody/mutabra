@@ -1,17 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/maven-v4_0_0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>NoName Game Project</name>
-	<groupId>com.noname</groupId>
-	<artifactId>noname-parent</artifactId>
+	<groupId>com.mutabra</groupId>
+	<artifactId>mutabra-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>Mutabra Project</name>
+
 	<modules>
 		<module>db</module>
+		<module>mutabra-domain</module>
 		<module>back</module>
 		<module>front</module>
 	</modules>
@@ -19,20 +20,20 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.noname</groupId>
-				<artifactId>noname-db</artifactId>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-db</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.noname</groupId>
-				<artifactId>noname-back</artifactId>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-back</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.noname</groupId>
-				<artifactId>noname-front</artifactId>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-front</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -149,7 +150,6 @@
 				<artifactId>javassist</artifactId>
 				<version>${javassist.version}</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
@@ -180,6 +180,10 @@
 			<url>http://repository.jboss.com/maven2/</url>
 		</repository>
 		<repository>
+			<id>sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+		<repository>
 			<id>apache-snapshot</id>
 			<url>http://repository.apache.org/snapshots/</url>
 			<snapshots>
@@ -188,16 +192,6 @@
 			<releases>
 				<enabled>false</enabled>
 			</releases>
-		</repository>
-		<repository>
-			<id>great-age-snapshot</id>
-			<url>http://great-age-repository.googlecode.com/svn/trunk/snapshot/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
 		</repository>
 	</repositories>
 
@@ -366,6 +360,8 @@
 	</profiles>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 		<ga.version>1.1-SNAPSHOT</ga.version>
 
 		<mysql.version>5.1.10</mysql.version>

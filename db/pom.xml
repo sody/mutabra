@@ -5,17 +5,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.noname</groupId>
-		<artifactId>noname-parent</artifactId>
+		<groupId>com.mutabra</groupId>
+		<artifactId>mutabra-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<name>NoName Game Database Module</name>
-	<groupId>com.noname</groupId>
-	<artifactId>noname-db</artifactId>
+	<groupId>com.mutabra</groupId>
+	<artifactId>mutabra-db</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>Mutabra Database Module</name>
 
 	<build>
 		<plugins>
