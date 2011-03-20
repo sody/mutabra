@@ -96,6 +96,11 @@
 
 		<dependency>
 			<groupId>com.mutabra</groupId>
+			<artifactId>mutabra-domain-hibernate</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mutabra</groupId>
 			<artifactId>mutabra-services</artifactId>
 		</dependency>
 

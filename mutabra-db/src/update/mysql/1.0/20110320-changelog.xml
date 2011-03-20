@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<changeSet id="00" author="ikhalopik@gmail.com" context="init">
+		<insert tableName="ACCOUNT">
+			<column name="EMAIL" value="user@example.com"/>
+			<column name="PASSWORD" value="ee11cbb19052e40b07aac0ca060c23ee"/>
+		</insert>
+
+		<rollback>
+			<delete tableName="ACCOUNT">
+				<where>EMAIL='user@example.com'</where>
+			</delete>
+		</rollback>
+	</changeSet>
+
+	<changeSet id="01" author="ikhalopik@gmail.com" context="init">
+		<sql>
+			INSERT INTO ACCOUNT_ROLE(ID_ACCOUNT, ID_ROLE) VALUES(
+			(SELECT ID FROM ACCOUNT WHERE EMAIL='user@example.com'),
+			(SELECT ID FROM ROLE WHERE CODE='USER')
+			)
+		</sql>
+
+		<rollback>
+			<delete tableName="ACCOUNT_ROLE">
+				<where>ID_ACCOUNT=(SELECT ID FROM ACCOUNT WHERE EMAIL='user@example.com')</where>
+			</delete>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

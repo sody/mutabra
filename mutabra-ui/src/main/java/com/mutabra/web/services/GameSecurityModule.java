@@ -22,7 +22,7 @@ public class GameSecurityModule {
 	@Bind
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(ApplicationContext.class, ApplicationContextImpl.class).withScope(ScopeConstants.THREAD);
-		binder.bind(GameSecurityContext.class, GameSecurityContextImpl.class).withId(SecurityContext.class.getSimpleName()).override();
+		binder.bind(GameSecurityContext.class, GameSecurityContextImpl.class).withAlias(SecurityContext.class).override();
 	}
 
 	@Build

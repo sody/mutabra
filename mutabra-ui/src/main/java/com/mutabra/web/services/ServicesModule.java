@@ -73,6 +73,7 @@ public class ServicesModule {
 		configuration.add(HeroCard.class);
 	}
 
+	@Order("Entity")
 	@Contribute(value = EntityFilterProcessor.class, id = "HibernateFilterProcessor")
 	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
