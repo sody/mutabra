@@ -1,8 +1,0 @@
-<t:container
-		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		xmlns:p="tapestry:parameter"
-		xmlns:c="tapestry-library:common">
-
-	<img src="${faceImage}" alt="${face.code}" title="${face:description}"/>
-
-</t:container>
