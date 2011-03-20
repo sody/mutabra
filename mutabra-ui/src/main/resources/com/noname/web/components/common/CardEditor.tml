@@ -1,0 +1,80 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:c="tapestry-library:common"
+		xmlns:p="tapestry:parameter">
+
+	<c:viewstack state="state">
+		<p:view>
+			<table class="details">
+				<tr>
+					<th>${message:id-label}</th>
+					<td>${card.id}</td>
+				</tr>
+				<tr>
+					<th>${message:type-label}</th>
+					<td>${card.type}</td>
+				</tr>
+				<tr>
+					<th>${message:code-label}</th>
+					<td>${card.code}</td>
+				</tr>
+				<tr>
+					<th>${message:description-label}</th>
+					<td>${card:description}</td>
+				</tr>
+				<tr>
+					<th>${message:level-label}</th>
+					<td>${card.level:description}</td>
+				</tr>
+			</table>
+		</p:view>
+
+		<p:edit>
+			<table class="details">
+				<t:if test="!card.new">
+					<tr>
+						<th>${message:id-label}</th>
+						<td>${card.id}</td>
+					</tr>
+				</t:if>
+				<tr>
+					<th>${message:type-label}</th>
+					<td>${card.type}</td>
+				</tr>
+				<tr>
+					<th>
+						<t:label for="code"/>
+					</th>
+					<td>
+						<t:textfield t:id="code" value="card.code" validate="required"/>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<t:label for="description"/>
+					</th>
+					<td>
+						<t:textfield t:id="description" value="card.translations.get('description').value" validate="required"/>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<t:label for="level"/>
+					</th>
+					<td>
+						<t:select t:id="level" value="card.level" model="levelModel" validate="required"/>
+					</td>
+				</tr>
+			</table>
+		</p:edit>
+	</c:viewstack>
+
+	<t:if test="effectCard">
+		<t:common.effecteditor effect="effect" state="state"/>
+	</t:if>
+
+	<t:if test="summonCard">
+		<t:common.summoneditor summon="summon" state="state"/>
+	</t:if>
+
+</t:container>

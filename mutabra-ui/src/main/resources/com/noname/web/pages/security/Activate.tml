@@ -1,0 +1,10 @@
+<html t:type="simplelayout" title="activate-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<c:container align="center">
+	${resultMessage}
+</c:container>
+
+</html>

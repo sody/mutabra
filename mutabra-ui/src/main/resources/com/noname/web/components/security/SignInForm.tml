@@ -1,0 +1,29 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter"
+		xmlns:c="tapestry-library:common">
+
+	<t:form t:id="signInForm">
+		<table class="dialog">
+			<tr>
+				<td>
+					<t:label for="email"/>
+				</td>
+				<td>
+					<t:label for="password"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<t:textfield t:id="email" value="email" validate="required"/>
+				</td>
+				<td>
+					<t:passwordfield t:id="password" value="password" validate="required"/>
+				</td>
+				<td>
+					<t:linksubmit event="signIn">${message:signIn-label}</t:linksubmit>
+				</td>
+			</tr>
+		</table>
+	</t:form>
+</t:container>

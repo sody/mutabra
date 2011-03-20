@@ -1,0 +1,17 @@
+<html t:type="layout" title="player-home-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<t:loop source="players" value="player">
+	<c:box title="prop:player.hero.name">
+		<div class="column">
+			<t:game.facedisplay face="player.hero.face"/>
+		</div>
+		<div class="column">
+			<div>${message:health-label}: ${player.health}</div>
+		</div>
+	</c:box>
+</t:loop>
+
+</html>

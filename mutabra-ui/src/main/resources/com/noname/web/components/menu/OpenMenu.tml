@@ -1,0 +1,9 @@
+<c:container class="left"
+			 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+			 xmlns:p="tapestry:parameter"
+			 xmlns:c="tapestry-library:common">
+	<c:menu skin="panel-v">
+		<c:menuitem page="index" label="message:home-title"/>
+	</c:menu>
+
+</c:container>

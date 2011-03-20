@@ -1,0 +1,67 @@
+<html t:type="layout" title="faces-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<t:form t:id="detailsForm">
+	<c:viewstack state="state">
+		<p:view>
+			<c:panel actions="edit,cancel">
+				<table class="details">
+					<tr>
+						<th>${message:id-label}</th>
+						<td>${record.id}</td>
+					</tr>
+					<tr>
+						<th>${message:code-label}</th>
+						<td>${record.code}</td>
+					</tr>
+					<tr>
+						<th>${message:description-label}</th>
+						<td>${record:description}</td>
+					</tr>
+				</table>
+			</c:panel>
+		</p:view>
+
+		<p:edit>
+			<c:panel actions="save,cancel">
+				<table class="details">
+					<t:if test="!record.new">
+						<tr>
+							<th>${message:id-label}</th>
+							<td>${record.id}</td>
+						</tr>
+					</t:if>
+					<tr>
+						<th>
+							<t:label for="code"/>
+						</th>
+						<td>
+							<t:textfield t:id="code" value="record.code" validate="required"/>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<t:label for="description"/>
+						</th>
+						<td>
+							<t:textfield t:id="description" value="record.translations.get('description').value" validate="required"/>
+						</td>
+					</tr>
+				</table>
+				<p:saveMenuItem>
+					<t:linksubmit event="save">${message:save-label}</t:linksubmit>
+				</p:saveMenuItem>
+			</c:panel>
+		</p:edit>
+	</c:viewstack>
+</t:form>
+
+<t:entitygrid source="dataSource" row="row" showIdColumn="true"
+			  rowActions="view,edit,delete" actions="add">
+	<c:gridcolumn property="code" width="100"/>
+	<c:gridcolumn property="description">${row:description}</c:gridcolumn>
+</t:entitygrid>
+
+</html>

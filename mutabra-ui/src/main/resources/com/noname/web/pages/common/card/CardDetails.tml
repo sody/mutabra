@@ -1,0 +1,43 @@
+<html t:type="layout" title="card-title"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:c="tapestry-library:common"
+	  xmlns:p="tapestry:parameter">
+
+<t:unless test="typeSelected">
+	<t:form t:id="selectTypeForm">
+		<c:box>
+			<table class="details">
+				<tr>
+					<td>
+						<t:label for="typeSelect"/>
+					</td>
+					<td>
+						<t:select t:id="typeSelect" value="type" validate="required" blankOption="always" t:mixins="common/formsubmit"/>
+					</td>
+				</tr>
+			</table>
+		</c:box>
+	</t:form>
+	<p:else>
+		<t:form t:id="detailsForm">
+			<c:viewstack state="state">
+				<p:view>
+					<c:panel actions="edit,cancel">
+						<t:common.cardeditor card="record" state="state"/>
+					</c:panel>
+				</p:view>
+
+				<p:edit>
+					<c:panel actions="save,cancel">
+						<t:common.cardeditor card="record" state="state"/>
+						<p:saveMenuItem>
+							<t:linksubmit event="save">${message:save-label}</t:linksubmit>
+						</p:saveMenuItem>
+					</c:panel>
+				</p:edit>
+			</c:viewstack>
+		</t:form>
+	</p:else>
+</t:unless>
+
+</html>

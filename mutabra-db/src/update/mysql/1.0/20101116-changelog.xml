@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<changeSet id="00" author="ikhalopik@gmail.com" context="init">
+		<insert tableName="ROLE">
+			<column name="CODE" value="ADMIN"/>
+		</insert>
+		<insert tableName="ROLE">
+			<column name="CODE" value="USER"/>
+		</insert>
+
+		<rollback>
+			<delete tableName="ROLE">
+				<where>CODE='ADMIN' OR CODE='USER'</where>
+			</delete>
+		</rollback>
+	</changeSet>
+
+	<changeSet id="01" author="ikhalopik@gmail.com" context="init">
+		<sql>
+			INSERT INTO ACCOUNT_ROLE(ID_ACCOUNT, ID_ROLE) VALUES(1, (SELECT ID FROM ROLE WHERE CODE = 'ADMIN') );
+			INSERT INTO ACCOUNT_ROLE(ID_ACCOUNT, ID_ROLE) VALUES(1, (SELECT ID FROM ROLE WHERE CODE = 'USER') );
+		</sql>
+		<rollback>
+			<delete tableName="ACCOUNT_ROLE">
+				<where>ID_ACCOUNT=1</where>
+			</delete>
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
