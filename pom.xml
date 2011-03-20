@@ -34,6 +34,12 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-domain-hibernate</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mutabra</groupId>
 				<artifactId>mutabra-services</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -328,7 +334,7 @@
 			<properties>
 				<jdbc.profile>hsqldb</jdbc.profile>
 				<jdbc.driver>org.hsqldb.jdbcDriver</jdbc.driver>
-				<jdbc.url>jdbc:hsqldb:${project.build.directory}/db/gamedb;shutdown=true</jdbc.url>
+				<jdbc.url>jdbc:hsqldb:/mutabra/db/gamedb;shutdown=true</jdbc.url>
 				<jdbc.username>sa</jdbc.username>
 				<jdbc.password></jdbc.password>
 				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
@@ -352,16 +358,6 @@
 			<properties>
 				<maven.test.skip>true</maven.test.skip>
 				<maven.javadoc.skip>true</maven.javadoc.skip>
-				<release.url>${project.build.directory}/repository</release.url>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>release</id>
-			<properties>
-				<maven.test.skip>false</maven.test.skip>
-				<maven.javadoc.skip>false</maven.javadoc.skip>
-				<release.url>file:///repository/releases</release.url>
 			</properties>
 		</profile>
 	</profiles>
@@ -379,14 +375,14 @@
 		<mail.api.version>1.4.1</mail.api.version>
 
 		<hibernate.version>3.6.0.Final</hibernate.version>
-		<tapestry.version>5.2.2</tapestry.version>
+		<tapestry.version>5.2.4</tapestry.version>
 		<testng.version>5.14.2</testng.version>
 
 		<drools.version>5.0.1</drools.version>
 		<javassist.version>3.14.0-GA</javassist.version>
 
-		<release.url>${project.build.directory}/repository</release.url>
-		<log.dir>${project.build.directory}/log</log.dir>
+		<release.url>file:///mutabra/release</release.url>
+		<log.dir>file:///mutabra/log</log.dir>
 	</properties>
 
 </project>
