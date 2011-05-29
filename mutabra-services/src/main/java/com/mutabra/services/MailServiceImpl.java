@@ -21,7 +21,6 @@ public class MailServiceImpl implements MailService {
 		this.email = email;
 	}
 
-	@Override
 	public void send(final String to, final String subject, final String message) {
 		try {
 			final Transport transport = session.getTransport("smtp");

@@ -6,6 +6,7 @@ import org.greatage.domain.EntityServiceImpl;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class BaseEntityServiceImpl<E extends BaseEntity, Q extends BaseEntityQuery<E, Q>>
 		extends EntityServiceImpl<Long, E, Q>

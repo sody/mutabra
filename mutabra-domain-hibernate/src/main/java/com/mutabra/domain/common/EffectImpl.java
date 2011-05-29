@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @Table(name = "EFFECT")
 public class EffectImpl extends CodedEntityImpl implements Effect {
 
-	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType", parameters = {@Parameter(name = "enumClass", value = "com.mutabra.domain.common.TargetType")})
+	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType",
+			parameters = {@Parameter(name = "enumClass", value = "com.mutabra.domain.common.TargetType")})
 	@Column(name = "TARGET_TYPE", nullable = false)
 	private TargetType targetType;
 

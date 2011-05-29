@@ -9,6 +9,8 @@ import com.mutabra.services.CodedEntityService;
  */
 public interface LevelService extends CodedEntityService<Level> {
 
+	String NEWBIE_LEVEL_CODE = "NEWBIE";
+
 	Level getDefaultLevel();
 
 }

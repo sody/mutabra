@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public interface TranslationService extends BaseEntityService<Translation> {
 
@@ -16,6 +17,4 @@ public interface TranslationService extends BaseEntityService<Translation> {
 	Map<String, Translation> getTranslations(Translatable translatable, Locale locale);
 
 	void saveTranslations(Translatable translatable, Map<String, Translation> translations);
-
-
 }

@@ -7,12 +7,13 @@ import java.util.Locale;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public interface TranslationFilter extends BaseEntityFilter<Translation> {
 
 	String getType();
 
-	Locale getLocale();
+	List<Locale> getLocales();
 
 	List<String> getCodes();
 

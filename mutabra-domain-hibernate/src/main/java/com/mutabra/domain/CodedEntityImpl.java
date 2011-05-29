@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -23,9 +21,6 @@ public class CodedEntityImpl extends BaseEntityImpl implements CodedEntity {
 	@Transient
 	private final Collection<String> variants;
 
-	@Transient
-	private final Map<String, Translation> translations = new HashMap<String, Translation>();
-
 	protected CodedEntityImpl(final String type, final Collection<String> variants) {
 		this.type = type.toUpperCase();
 		this.variants = variants;
@@ -41,15 +36,6 @@ public class CodedEntityImpl extends BaseEntityImpl implements CodedEntity {
 
 	public void setCode(final String code) {
 		this.code = code;
-	}
-
-	public Map<String, Translation> getTranslations() {
-		return translations;
-	}
-
-	public void setTranslations(final Map<String, Translation> translations) {
-		this.translations.clear();
-		this.translations.putAll(translations);
 	}
 
 	public String getTranslationType() {

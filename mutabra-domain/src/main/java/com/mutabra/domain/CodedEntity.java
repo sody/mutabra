@@ -13,8 +13,4 @@ public interface CodedEntity extends BaseEntity, Translatable {
 	String getCode();
 
 	void setCode(String code);
-
-	Map<String, Translation> getTranslations();
-
-	void setTranslations(Map<String, Translation> translations);
 }

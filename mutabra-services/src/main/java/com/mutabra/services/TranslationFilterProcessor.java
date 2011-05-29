@@ -5,6 +5,7 @@ import org.greatage.domain.EntityCriteria;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class TranslationFilterProcessor extends BaseEntityFilterProcessor<Translation, TranslationFilter> {
 
@@ -17,8 +18,8 @@ public class TranslationFilterProcessor extends BaseEntityFilterProcessor<Transl
 		if (filter.getType() != null) {
 			criteria.add(criteria.getProperty(Translation.TYPE_PROPERTY).eq(filter.getType()));
 		}
-		if (filter.getLocale() != null) {
-			criteria.add(criteria.getProperty(Translation.LOCALE_PROPERTY).eq(filter.getLocale()));
+		if (filter.getLocales() != null) {
+			criteria.add(criteria.getProperty(Translation.LOCALE_PROPERTY).in(filter.getLocales()));
 		}
 		if (filter.getCodes() != null) {
 			criteria.add(criteria.getProperty(Translation.CODE_PROPERTY).in(filter.getCodes()));

@@ -5,6 +5,7 @@ import org.greatage.domain.EntityQuery;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class BaseEntityQuery<E extends BaseEntity, Q extends BaseEntityQuery<E, Q>>
 		extends EntityQuery<Long, E, Q>

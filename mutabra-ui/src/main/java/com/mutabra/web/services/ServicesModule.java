@@ -8,6 +8,8 @@ import com.mutabra.domain.player.HeroCard;
 import com.mutabra.domain.player.HeroCardImpl;
 import com.mutabra.domain.player.HeroImpl;
 import com.mutabra.domain.security.*;
+import com.mutabra.game.BattleService;
+import com.mutabra.game.BattleServiceImpl;
 import com.mutabra.services.*;
 import com.mutabra.services.common.*;
 import com.mutabra.services.player.HeroService;
@@ -18,14 +20,17 @@ import com.mutabra.web.services.i18n.TranslatorImpl;
 import org.greatage.domain.EntityFilterProcessor;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.TransactionalAdvice;
-import org.greatage.domain.hibernate.HibernateAnnotationConfiguration;
-import org.greatage.domain.hibernate.HibernateExecutor;
+import org.greatage.domain.annotations.Transactional;
+import org.greatage.domain.hibernate.HibernateConfiguration;
 import org.greatage.domain.hibernate.HibernateModule;
 import org.greatage.ioc.Configuration;
 import org.greatage.ioc.MappedConfiguration;
+import org.greatage.ioc.ServiceAdvice;
 import org.greatage.ioc.ServiceBinder;
 import org.greatage.ioc.annotations.*;
-import org.greatage.ioc.proxy.Interceptor;
+import org.greatage.security.AuthoritySecurityAdvice;
+import org.greatage.security.annotations.Allow;
+import org.greatage.security.annotations.Deny;
 
 import javax.mail.Session;
 import javax.naming.InitialContext;
@@ -35,7 +40,7 @@ import javax.naming.NamingException;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Dependency({HibernateModule.class})
+@Dependency({HibernateModule.class, GameSecurityModule.class})
 public class ServicesModule {
 
 	@Bind
@@ -49,6 +54,8 @@ public class ServicesModule {
 		binder.bind(CardService.class, CardServiceImpl.class);
 		binder.bind(HeroService.class, HeroServiceImpl.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
+
+		binder.bind(BattleService.class, BattleServiceImpl.class);
 	}
 
 	@Build
@@ -58,7 +65,8 @@ public class ServicesModule {
 		return new MailServiceImpl(session, "haba.haba.game@gmail.com");
 	}
 
-	@Contribute(value = HibernateAnnotationConfiguration.class)
+	@Contribute(HibernateConfiguration.class)
+	@Named("HibernateAnnotationConfiguration")
 	public void contributeHibernateAnnotationConfiguration(final Configuration<Class> configuration) {
 		configuration.add(TranslationImpl.class);
 		configuration.add(AccountImpl.class);
@@ -77,7 +85,6 @@ public class ServicesModule {
 	}
 
 	@Contribute(EntityFilterProcessor.class)
-	@Order("Entity")
 	public void contributeHibernateFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);
@@ -102,9 +109,10 @@ public class ServicesModule {
 		configuration.add(HeroCard.class, HeroCardImpl.class);
 	}
 
-	@Decorate(BaseEntityService.class)
-	@Order("Transaction")
-	public Interceptor decorateServices(final HibernateExecutor executor) {
-		return new TransactionalAdvice(executor);
+	@Intercept(BaseEntityService.class)
+	public void interceptServices(final ServiceAdvice advice) {
+		advice.addInstance(TransactionalAdvice.class, "Transaction").annotatedWith(Transactional.class);
+		advice.addInstance(AuthoritySecurityAdvice.class, "Allow", "before:Transaction").annotatedWith(Allow.class);
+		advice.addInstance(AuthoritySecurityAdvice.class, "Deny", "before:Allow").annotatedWith(Deny.class);
 	}
 }

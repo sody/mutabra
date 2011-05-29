@@ -32,7 +32,7 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(final String value) {
 		this.value = value;
 	}
 
@@ -40,7 +40,7 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(final String type) {
 		this.type = type;
 	}
 
@@ -48,7 +48,7 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(final String code) {
 		this.code = code;
 	}
 
@@ -56,7 +56,7 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 		return variant;
 	}
 
-	public void setVariant(String variant) {
+	public void setVariant(final String variant) {
 		this.variant = variant;
 	}
 
@@ -64,7 +64,7 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 		return locale;
 	}
 
-	public void setLocale(Locale locale) {
+	public void setLocale(final Locale locale) {
 		this.locale = locale;
 	}
 }

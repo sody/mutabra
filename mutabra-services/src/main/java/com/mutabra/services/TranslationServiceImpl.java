@@ -4,6 +4,8 @@ import com.mutabra.domain.Translatable;
 import com.mutabra.domain.Translation;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
+import org.greatage.util.CollectionUtils;
+import org.greatage.util.LocaleUtils;
 
 import java.util.*;
 
@@ -20,33 +22,39 @@ public class TranslationServiceImpl
 	}
 
 	public Map<String, String> getMessages(final Translatable translatable, final Locale locale) {
-		final List<Translation> translations = getEntities(translatable, locale);
-		final Map<String, String> result = new HashMap<String, String>();
-		for (Translation translation : translations) {
-			result.put(translation.getVariant(), translation.getValue());
+		final Map<String, String> messages = CollectionUtils.newMap();
+		for (Locale candidateLocale : LocaleUtils.getCandidateLocales(locale)) {
+			final Map<String, Translation> translations = getTranslations(translatable, candidateLocale);
+
+			boolean allFound = true;
+			for (String variant : translatable.getTranslationVariants()) {
+				if (!messages.containsKey(variant)) {
+					if (translations.containsKey(variant)) {
+						messages.put(variant, translations.get(variant).getValue());
+					} else {
+						allFound = false;
+					}
+				}
+			}
+			if (allFound) {
+				break;
+			}
 		}
-		return result;
+		return messages;
 	}
 
 	public Map<String, Translation> getTranslations(final Translatable translatable, final Locale locale) {
-		final List<Translation> translations = getEntities(translatable, locale);
-		final Map<String, Translation> mapped = new HashMap<String, Translation>();
+		final List<Translation> translations = createQuery()
+				.setType(translatable.getTranslationType())
+				.addLocale(locale)
+				.addCode(translatable.getTranslationCode())
+				.list();
+
+		final Map<String, Translation> mapped = CollectionUtils.newMap();
 		for (Translation translation : translations) {
 			mapped.put(translation.getVariant(), translation);
 		}
-
-		final Map<String, Translation> result = new HashMap<String, Translation>();
-		for (String variant : translatable.getTranslationVariants()) {
-			if (mapped.containsKey(variant)) {
-				result.put(variant, mapped.get(variant));
-			} else {
-				final Translation translation = create();
-				translation.setLocale(locale);
-				translation.setVariant(variant);
-				result.put(variant, translation);
-			}
-		}
-		return result;
+		return mapped;
 	}
 
 	@Transactional
@@ -56,16 +64,5 @@ public class TranslationServiceImpl
 			translation.setCode(translatable.getTranslationCode());
 			saveOrUpdate(translation);
 		}
-	}
-
-	private List<Translation> getEntities(final Translatable translatable, final Locale locale) {
-		if (translatable.getTranslationCode() == null) {
-			return Collections.emptyList();
-		}
-		return createQuery()
-				.setType(translatable.getTranslationType())
-				.setLocale(locale)
-				.addCode(translatable.getTranslationCode())
-				.list();
 	}
 }

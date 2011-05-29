@@ -27,7 +27,7 @@
 
 	<context-param>
 		<param-name>greatage.module</param-name>
-		<param-value>com.mutabra.web.services.GAModule</param-value>
+		<param-value>com.mutabra.web.services.ServicesModule</param-value>
 	</context-param>
 
 	<filter>

@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public interface Translator {
 
@@ -18,6 +19,6 @@ public interface Translator {
 
 	Map<String, String> translate(Translatable translatable, Locale locale);
 
-	void updateCache(Translatable translatable, Locale locale, Map<String, String> messages);
+	void invalidateCache(Translatable translatable);
 
 }

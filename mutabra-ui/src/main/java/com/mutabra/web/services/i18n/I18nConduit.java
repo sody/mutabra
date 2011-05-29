@@ -2,44 +2,55 @@ package com.mutabra.web.services.i18n;
 
 import com.mutabra.domain.Translatable;
 import org.apache.tapestry5.PropertyConduit;
-import org.apache.tapestry5.internal.services.BasePropertyConduit;
-import org.apache.tapestry5.ioc.services.ThreadLocale;
-import org.apache.tapestry5.ioc.services.TypeCoercer;
 
+import java.lang.annotation.Annotation;
 import java.util.Map;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
-public class I18nConduit extends BasePropertyConduit {
+public class I18nConduit implements PropertyConduit {
 	private final Translator translator;
-	private final ThreadLocale locale;
 	private final PropertyConduit conduit;
 	private final String variant;
+	private final String description;
 
-	public I18nConduit(Translator translator, TypeCoercer typeCoercer, ThreadLocale locale, PropertyConduit conduit, String variant, String description) {
-		super(conduit.getPropertyType(), null, conduit, description, typeCoercer);
-		this.translator = translator;
-		this.locale = locale;
+	public I18nConduit(final PropertyConduit conduit, final Translator translator, final String variant,
+					   final String description) {
 		this.conduit = conduit;
+		this.translator = translator;
 		this.variant = variant;
+		this.description = description;
 	}
 
-	public Object get(Object target) {
+	public Object get(final Object target) {
 		final Object instance = conduit.get(target);
 		if (instance == null) {
 			return "";
 		}
 		if (instance instanceof Translatable) {
 			final Translatable entity = (Translatable) instance;
-			final Map<String, String> properties = translator.translate(entity, locale.getLocale());
+			final Map<String, String> properties = translator.translate(entity);
 			return properties.get(variant);
 		}
 		throw new IllegalStateException("Only instances of Translatable can be translated");
 	}
 
-	public void set(Object instance, Object value) {
-		throw new IllegalStateException("I18n conduit is not updatable");
+	public void set(final Object instance, final Object value) {
+		throw new IllegalStateException("I18n conduit is read only");
 	}
 
+	public Class getPropertyType() {
+		return String.class;
+	}
+
+	public <T extends Annotation> T getAnnotation(final Class<T> clazz) {
+		return conduit.getAnnotation(clazz);
+	}
+
+	@Override
+	public String toString() {
+		return description;
+	}
 }

@@ -37,12 +37,10 @@ public class GameModule {
 		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
 	}
 
-	public PropertyConduitSource decoratePropertyConduitSource(PropertyConduitSource conduitSource,
-															   Translator translator,
-															   TypeCoercer typeCoercer,
-															   ThreadLocale threadLocale,
-															   StringInterner interner) {
-		return new I18nPropertyConduitSource(translator, typeCoercer, threadLocale, interner, conduitSource);
+	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
+															   final Translator translator,
+															   final StringInterner interner) {
+		return new I18nPropertyConduitSource(conduitSource, translator, interner);
 	}
 
 	public void contributeRealClassResolver(Configuration<ClassResolver> configuration) {

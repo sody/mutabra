@@ -7,6 +7,7 @@ import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 public class HeroServiceImpl
 		extends BaseEntityServiceImpl<Hero, HeroQuery>

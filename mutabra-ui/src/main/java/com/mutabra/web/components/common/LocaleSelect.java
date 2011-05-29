@@ -6,7 +6,7 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.greatage.tapestry.internal.SelectModelBuilder;
-import org.greatage.util.I18nUtils;
+import org.greatage.util.LocaleUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class LocaleSelect {
 	private List<Locale> getLocales() {
 		final List<Locale> locales = new ArrayList<Locale>();
 		for (String localeName : supportedLocales.split(",")) {
-			locales.add(I18nUtils.getLocale(localeName));
+			locales.add(LocaleUtils.parseLocale(localeName));
 		}
 		return locales;
 	}

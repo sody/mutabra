@@ -16,7 +16,6 @@ public class CodedEntityQuery<E extends CodedEntity, Q extends CodedEntityQuery<
 		super(entityClass);
 	}
 
-	@Override
 	public String getCode() {
 		return code;
 	}

@@ -15,7 +15,8 @@ import javax.persistence.*;
 @Table(name = "CARD")
 public class CardImpl extends CodedEntityImpl implements Card {
 
-	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType", parameters = {@Parameter(name = "enumClass", value = "com.mutabra.domain.common.CardType")})
+	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType",
+			parameters = {@Parameter(name = "enumClass", value = "com.mutabra.domain.common.CardType")})
 	@Column(name = "CARD_TYPE", nullable = false)
 	private CardType type;
 

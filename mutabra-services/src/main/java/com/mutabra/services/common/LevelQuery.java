@@ -19,7 +19,6 @@ public class LevelQuery extends CodedEntityQuery<Level, LevelQuery> implements L
 		return query();
 	}
 
-	@Override
 	public Long getRating() {
 		return rating;
 	}

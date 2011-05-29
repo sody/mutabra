@@ -11,8 +11,8 @@ import org.greatage.domain.EntityRepository;
  */
 public class FaceServiceImpl extends CodedEntityServiceImpl<Face, FaceQuery> implements FaceService {
 
-	public FaceServiceImpl(final EntityRepository repository, final TranslationService translationService) {
-		super(repository, translationService, Face.class, FaceQuery.class);
+	public FaceServiceImpl(final EntityRepository repository) {
+		super(repository, Face.class, FaceQuery.class);
 	}
 
 }

@@ -11,10 +11,5 @@ import java.util.Locale;
 public interface CodedEntityService<E extends CodedEntity>
 		extends BaseEntityService<E> {
 
-	E get(final Long pk, final Locale locale);
-
 	E get(final String code);
-
-	E get(final String code, final Locale locale);
-
 }
