@@ -19,7 +19,6 @@ public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> impleme
 		return query();
 	}
 
-	@Override
 	public String getEmail() {
 		return userName;
 	}

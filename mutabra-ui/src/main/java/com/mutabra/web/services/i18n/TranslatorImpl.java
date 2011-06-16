@@ -3,8 +3,8 @@ package com.mutabra.web.services.i18n;
 import com.mutabra.domain.Translatable;
 import com.mutabra.services.TranslationService;
 import org.apache.tapestry5.ioc.services.ThreadLocale;
-import org.greatage.ioc.cache.Cache;
-import org.greatage.ioc.cache.CacheSource;
+import org.greatage.inject.cache.Cache;
+import org.greatage.inject.cache.CacheSource;
 import org.greatage.util.CompositeKey;
 
 import java.util.Locale;

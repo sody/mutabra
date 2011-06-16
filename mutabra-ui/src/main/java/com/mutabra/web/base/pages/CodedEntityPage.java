@@ -13,6 +13,6 @@ public abstract class CodedEntityPage<E extends CodedEntity> extends EntityPage<
 
 	@Override
 	protected E get(final Long entityId) {
-		return entityId != null ? getEntityService().get(entityId, getLocale()) : null;
+		return super.get(entityId);
 	}
 }

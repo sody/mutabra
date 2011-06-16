@@ -14,8 +14,8 @@ public class RoleServiceImpl extends CodedEntityServiceImpl<Role, RoleQuery> imp
 	private static final String USER_ROLE_CODE = "USER";
 	private static final String PENDING_ROLE_CODE = "PENDING";
 
-	public RoleServiceImpl(final EntityRepository repository, final TranslationService translationService) {
-		super(repository, translationService, Role.class, RoleQuery.class);
+	public RoleServiceImpl(final EntityRepository repository) {
+		super(repository, Role.class, RoleQuery.class);
 	}
 
 	public Role getAdminRole() {

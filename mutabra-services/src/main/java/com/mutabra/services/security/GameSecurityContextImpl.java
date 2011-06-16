@@ -14,7 +14,6 @@ import java.util.Map;
 public class GameSecurityContextImpl extends SecurityContextImpl<User> implements GameSecurityContext {
 	private final Map<String, User> playingUsers = CollectionUtils.newConcurrentMap();
 
-	@Override
 	public List<User> getPlayingUsers() {
 		return CollectionUtils.newList(playingUsers.values());
 	}
