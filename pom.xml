@@ -14,6 +14,7 @@
 		<module>mutabra-db</module>
 		<module>mutabra-domain</module>
 		<module>mutabra-domain-hibernate</module>
+		<module>mutabra-domain-gae</module>
 		<module>mutabra-services</module>
 		<module>mutabra-ui</module>
 	</modules>
@@ -138,6 +139,24 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
 				<version>${hibernate.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-api-1.0-sdk</artifactId>
+				<version>${appengine.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.appengine.orm</groupId>
+				<artifactId>datanucleus-appengine</artifactId>
+				<version>1.0.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.jdo</groupId>
+				<artifactId>jdo-api</artifactId>
+				<version>3.0</version>
 			</dependency>
 
 			<dependency>
@@ -358,6 +377,8 @@
 		<mail.api.version>1.4.1</mail.api.version>
 
 		<hibernate.version>3.6.1.Final</hibernate.version>
+		<appengine.version>1.5.0.1</appengine.version>
+
 		<tapestry.version>5.3.0-SNAPSHOT</tapestry.version>
 		<testng.version>5.14.2</testng.version>
 
