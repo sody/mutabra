@@ -41,6 +41,12 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-domain-gae</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mutabra</groupId>
 				<artifactId>mutabra-services</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -79,6 +85,12 @@
 				<groupId>org.greatage</groupId>
 				<artifactId>greatage-tapestry</artifactId>
 				<version>${ga.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.jdo</groupId>
+				<artifactId>jdo-api</artifactId>
+				<version>${jdo.api.version}</version>
 			</dependency>
 
 			<dependency>
@@ -148,15 +160,39 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-api-labs</artifactId>
+				<version>${appengine.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-api-stubs</artifactId>
+				<version>${appengine.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-testing</artifactId>
+				<version>${appengine.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>com.google.appengine.orm</groupId>
 				<artifactId>datanucleus-appengine</artifactId>
 				<version>1.0.8</version>
 			</dependency>
 
 			<dependency>
-				<groupId>javax.jdo</groupId>
-				<artifactId>jdo-api</artifactId>
-				<version>3.0</version>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-core</artifactId>
+				<version>2.1.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-enhancer</artifactId>
+				<version>2.1.3</version>
 			</dependency>
 
 			<dependency>
@@ -386,5 +422,6 @@
 
 		<release.url>file:///mutabra/release</release.url>
 		<log.dir>file:///mutabra/log</log.dir>
+		<jdo.api.version>3.0</jdo.api.version>
 	</properties>
 </project>
