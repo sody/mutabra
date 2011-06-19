@@ -8,45 +8,31 @@ import com.mutabra.domain.player.HeroCard;
 import com.mutabra.domain.player.HeroCardImpl;
 import com.mutabra.domain.player.HeroImpl;
 import com.mutabra.domain.security.*;
-import org.greatage.domain.BaseFilterProcessor;
-import org.greatage.domain.CompositeFilterProcessor;
-import org.greatage.domain.EntityFilterProcessor;
+import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
 import org.greatage.domain.EntityRepository;
-import org.greatage.domain.jdo.JdoExecutor;
-import org.greatage.domain.jdo.JdoExecutorImpl;
-import org.greatage.domain.jdo.JdoRepository;
-import org.greatage.inject.Configuration;
 import org.greatage.inject.MappedConfiguration;
-import org.greatage.inject.ServiceBinder;
-import org.greatage.inject.annotations.Bind;
-import org.greatage.inject.annotations.Build;
 import org.greatage.inject.annotations.Contribute;
-import org.greatage.inject.annotations.Threaded;
+import org.greatage.inject.annotations.Dependency;
 
-import javax.jdo.JDOHelper;
+import javax.jdo.Constants;
 import javax.jdo.PersistenceManagerFactory;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
+@Dependency({JdoModule.class})
 public class DomainModule {
 
-	@Bind
-	public static void bind(final ServiceBinder binder) {
-		binder.bind(EntityFilterProcessor.class, CompositeFilterProcessor.class);
-		binder.bind(EntityRepository.class, JdoRepository.class);
-		binder.bind(JdoExecutor.class, JdoExecutorImpl.class).withScope(Threaded.class);
-	}
-
-	@Build
-	public PersistenceManagerFactory buildPersistenceManagerFactory() {
-		return JDOHelper.getPersistenceManagerFactory("transactions-optional");
-	}
-
-	@Contribute(EntityFilterProcessor.class)
-	public void contributeEntityFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
-		configuration.addInstance(BaseFilterProcessor.class);
+	@Contribute(PersistenceManagerFactory.class)
+	public void contributePersistenceManagerFactory(final MappedConfiguration<String, String> configuration) {
+		configuration.add(Constants.PROPERTY_PERSISTENCE_MANAGER_FACTORY_CLASS,
+				DatastoreJDOPersistenceManagerFactory.class.getName());
+		configuration.add(Constants.PROPERTY_CONNECTION_URL, "appengine");
+		configuration.add(Constants.OPTION_NONTRANSACTIONAL_READ, "true");
+		configuration.add(Constants.OPTION_NONTRANSACTIONAL_WRITE, "true");
+		configuration.add(Constants.OPTION_RETAIN_VALUES, "true");
+		configuration.add("datanucleus.appengine.autoCreateDatastoreTxns", "true");
 	}
 
 	@Contribute(EntityRepository.class)
