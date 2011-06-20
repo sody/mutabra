@@ -1,6 +1,8 @@
 package com.mutabra.domain.security;
 
+import com.google.appengine.api.datastore.Key;
 import com.mutabra.domain.CodedEntityImpl;
+import com.mutabra.domain.Keys;
 import com.mutabra.domain.TranslationType;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -18,22 +20,22 @@ public class RoleImpl extends CodedEntityImpl implements Role {
 		super("ROLE", TranslationType.STANDARD);
 	}
 
-	@Persistent
-	private Set<Account> accounts = new HashSet<Account>();
+	@Persistent(mappedBy = "roles")
+	private Set<Key> accounts = new HashSet<Key>();
 
 	@Persistent
-	private Set<Permission> permissions = new HashSet<Permission>();
+	private Set<Key> permissions = new HashSet<Key>();
 
 	public Set<Account> getAccounts() {
-		return accounts;
+		return Keys.getInstances(accounts, Account.class);
 	}
 
 	public Set<Permission> getPermissions() {
-		return permissions;
+		return Keys.getInstances(permissions, Permission.class);
 	}
 
-	public void setPermissions(Set<Permission> permissions) {
-		this.permissions = permissions;
+	public void setPermissions(final Set<Permission> permissions) {
+		this.permissions = Keys.getKeys(permissions);
 	}
 
 	public String getAuthority() {

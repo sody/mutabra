@@ -1,8 +1,11 @@
 package com.mutabra.domain.security;
 
+import com.google.appengine.api.datastore.Key;
 import com.mutabra.domain.BaseEntityImpl;
+import com.mutabra.domain.Keys;
 import com.mutabra.domain.player.Hero;
 
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import java.util.Date;
@@ -49,9 +52,9 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private Date deletedAt;
 
 	@Persistent
-	private Set<Role> roles = new HashSet<Role>();
+	private Set<Key> roles = new HashSet<Key>();
 
-	@Persistent
+	@NotPersistent
 	private Set<Hero> heroes = new HashSet<Hero>();
 
 	public String getEmail() {
@@ -135,11 +138,11 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	}
 
 	public Set<Role> getRoles() {
-		return roles;
+		return Keys.getInstances(roles, Role.class);
 	}
 
 	public void setRoles(final Set<Role> roles) {
-		this.roles = roles;
+		this.roles = Keys.getKeys(roles);
 	}
 
 	public Set<Hero> getHeroes() {

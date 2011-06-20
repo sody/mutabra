@@ -20,10 +20,10 @@ import javax.persistence.Table;
 public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
 	@Persistent
-	private Hero hero;
+	private HeroImpl hero;
 
 	@Persistent
-	private Card card;
+	private CardImpl card;
 
 	@Persistent
 	private long rating;
@@ -33,7 +33,7 @@ public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 	}
 
 	public void setHero(final Hero hero) {
-		this.hero = hero;
+		this.hero = (HeroImpl) hero;
 	}
 
 	public Card getCard() {
@@ -41,7 +41,7 @@ public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 	}
 
 	public void setCard(final Card card) {
-		this.card = card;
+		this.card = (CardImpl) card;
 	}
 
 	public long getRating() {

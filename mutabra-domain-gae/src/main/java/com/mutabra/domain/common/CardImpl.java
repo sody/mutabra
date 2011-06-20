@@ -17,13 +17,13 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	private CardType type;
 
 	@Persistent
-	private Level level;
+	private LevelImpl level;
 
 	@Persistent
-	private Effect effect;
+	private EffectImpl effect;
 
 	@Persistent
-	private Summon summon;
+	private SummonImpl summon;
 
 	public CardImpl() {
 		this(CardType.UNKNOWN);
@@ -47,7 +47,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	public void setLevel(final Level level) {
-		this.level = level;
+		this.level = (LevelImpl) level;
 	}
 
 	public Effect getEffect() {
@@ -55,7 +55,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	public void setEffect(final Effect effect) {
-		this.effect = effect;
+		this.effect = (EffectImpl) effect;
 	}
 
 	public Summon getSummon() {
@@ -63,6 +63,6 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	public void setSummon(final Summon summon) {
-		this.summon = summon;
+		this.summon = (SummonImpl) summon;
 	}
 }

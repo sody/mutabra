@@ -1,6 +1,9 @@
 package com.mutabra.domain;
 
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.NotPersistent;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import java.util.Collection;
 
@@ -8,6 +11,8 @@ import java.util.Collection;
  * @author Ivan Khalopik
  * @since 1.0
  */
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
 public class CodedEntityImpl extends BaseEntityImpl implements CodedEntity {
 
 	@Persistent

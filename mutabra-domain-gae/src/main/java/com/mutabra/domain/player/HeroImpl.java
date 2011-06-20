@@ -2,9 +2,13 @@ package com.mutabra.domain.player;
 
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.common.Face;
+import com.mutabra.domain.common.FaceImpl;
 import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.LevelImpl;
 import com.mutabra.domain.common.Race;
+import com.mutabra.domain.common.RaceImpl;
 import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.AccountImpl;
 
 import javax.jdo.annotations.Persistent;
 import javax.persistence.Entity;
@@ -21,19 +25,19 @@ import java.util.Set;
 public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	@Persistent
-	private Account account;
+	private AccountImpl account;
 
 	@Persistent
 	private String name;
 
 	@Persistent
-	private Face face;
+	private FaceImpl face;
 
 	@Persistent
-	private Race race;
+	private RaceImpl race;
 
 	@Persistent
-	private Level level;
+	private LevelImpl level;
 
 	@Persistent
 	private long rating;
@@ -52,7 +56,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setAccount(final Account account) {
-		this.account = account;
+		this.account = (AccountImpl) account;
 	}
 
 	public String getName() {
@@ -76,7 +80,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setFace(final Face face) {
-		this.face = face;
+		this.face = (FaceImpl) face;
 	}
 
 	public Race getRace() {
@@ -84,7 +88,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setRace(final Race race) {
-		this.race = race;
+		this.race = (RaceImpl) race;
 	}
 
 	public Level getLevel() {
@@ -92,7 +96,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setLevel(final Level level) {
-		this.level = level;
+		this.level = (LevelImpl) level;
 	}
 
 	public int getAttack() {

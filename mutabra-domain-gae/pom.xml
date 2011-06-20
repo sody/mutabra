@@ -31,19 +31,6 @@
 				<directory>src/test/resources</directory>
 			</testResource>
 		</testResources>
-
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<compilerArguments>
-						<processor>org.datanucleus.enhancer.EnhancerProcessor</processor>
-					</compilerArguments>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 
 	<dependencies>
@@ -74,12 +61,25 @@
 
 		<dependency>
 			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-enhancer</artifactId>
+			<artifactId>datanucleus-jpa</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.appengine.orm</groupId>
 			<artifactId>datanucleus-appengine</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-enhancer</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>3.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

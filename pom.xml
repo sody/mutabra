@@ -161,13 +161,19 @@
 			<dependency>
 				<groupId>org.datanucleus</groupId>
 				<artifactId>datanucleus-core</artifactId>
-				<version>1.1.6</version>
+				<version>${datanucleus.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-jpa</artifactId>
+				<version>${datanucleus.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.datanucleus</groupId>
 				<artifactId>datanucleus-enhancer</artifactId>
-				<version>${datanucleus.version}</version>
+				<version>${datanucleus.enhancer.version}</version>
 			</dependency>
 
 			<dependency>
@@ -418,7 +424,8 @@
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 
 		<appengine.version>1.5.0.1</appengine.version>
-		<datanucleus.version>1.1.4</datanucleus.version>
+		<datanucleus.version>1.1.5</datanucleus.version>
+		<datanucleus.enhancer.version>1.1.4</datanucleus.enhancer.version>
 		<datanucleus.appengine.version>1.0.8</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 

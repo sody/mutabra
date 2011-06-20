@@ -1,5 +1,6 @@
 package com.mutabra;
 
+import com.mutabra.domain.Keys;
 import org.greatage.domain.BaseFilterProcessor;
 import org.greatage.domain.CompositeFilterProcessor;
 import org.greatage.domain.EntityFilterProcessor;
@@ -33,7 +34,9 @@ public class JdoModule {
 
 	@Build
 	public PersistenceManagerFactory buildPersistenceManagerFactory(final Map<String, String> jdoConfiguration) {
-		return JDOHelper.getPersistenceManagerFactory(jdoConfiguration);
+		final PersistenceManagerFactory factory = JDOHelper.getPersistenceManagerFactory(jdoConfiguration);
+		Keys.init(factory);
+		return factory;
 	}
 
 	@Contribute(EntityFilterProcessor.class)
