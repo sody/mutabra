@@ -25,28 +25,16 @@
 		<param-value>/</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>greatage.module</param-name>
-		<param-value>com.mutabra.web.services.MainModule</param-value>
-	</context-param>
-
 	<filter>
-		<filter-name>game</filter-name>
-		<filter-class>org.greatage.tapestry.internal.GreatAgeTapestryFilter</filter-class>
+		<filter-name>mutabra</filter-name>
+		<filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>game</filter-name>
+		<filter-name>mutabra</filter-name>
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-
-	<resource-ref>
-		<res-ref-name>jdbc/nonamedb</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
-
 </web-app>

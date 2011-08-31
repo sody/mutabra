@@ -1,8 +1,0 @@
-<t:container
-		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		xmlns:p="tapestry:parameter"
-		xmlns:c="tapestry-library:common">
-
-	<t:select model="localeModel" value="inherit:locale" blankOption="always"/>
-
-</t:container>

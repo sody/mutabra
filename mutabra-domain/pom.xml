@@ -13,36 +13,29 @@
 	<groupId>com.mutabra</groupId>
 	<artifactId>mutabra-domain</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>Mutabra Domain Module</name>
+	<name>Mutabra Domain Modules</name>
 
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
+	<modules>
+		<module>mutabra-domain-common</module>
+		<module>mutabra-domain-api</module>
+		<module>mutabra-domain-services</module>
+	</modules>
 
-		<testSourceDirectory>src/test/java</testSourceDirectory>
-		<testResources>
-			<testResource>
-				<directory>src/test/resources</directory>
-			</testResource>
-		</testResources>
-	</build>
+	<profiles>
+		<profile>
+			<id>gae</id>
+			<modules>
+				<module>mutabra-domain-gae</module>
+			</modules>
+		</profile>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.greatage</groupId>
-			<artifactId>greatage-domain</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+		<profile>
+			<id>hibernate</id>
+			<modules>
+				<module>mutabra-domain-hibernate</module>
+			</modules>
+		</profile>
+	</profiles>
 </project>

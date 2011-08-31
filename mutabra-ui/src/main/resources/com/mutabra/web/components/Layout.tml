@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
 <head>
 	<title>${title}</title>
@@ -10,59 +9,41 @@
 </head>
 <body>
 
-<c:layout/>
-<c:container>
-	<div class="unit">
-		<c:container class="header">
-			<div style="float: right;">
-				<c:secured allow="STATUS_LOGGED">
-					<table class="dialog">
-						<tr>
-							<td>${message:welcome}</td>
-						</tr>
-						<tr>
-							<td><span style="font-weight: bold;">${user}</span></td>
-							<td>
-								<t:security.signoutlink/>
-							</td>
-						</tr>
-					</table>
-				</c:secured>
-				<c:secured allow="STATUS_ANONYMOUS">
-					<t:security.signinform/>
-				</c:secured>
-			</div>
-		</c:container>
+<div class="container">
+	<div class="unit header">
+		<div style="float: right;">
+			<table class="dialog">
+				<tr>
+					<td>${message:welcome}</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 	<div class="unit c-5">
 		<div class="column">
-			<t:menu.openmenu/>
-			<t:menu.usermenu/>
+			Menu Here
 		</div>
 
 		<div class="column s-3">
-			<c:container class="content">
+			<div class="container content">
 				<h1>${title}</h1>
 				<t:body/>
-			</c:container>
+			</div>
 		</div>
 
 		<div class="column">
-			<c:localemenu/>
-			<t:menu.adminmenu/>
+			Widgets Here
 		</div>
 
 	</div>
 
-	<div class="unit">
-		<c:container class="footer">
-			Copyright © 2010 Ivan Khalopik. All rights reserved.
-			<br/>
-			<a href="mailto:ikhalopik@gmail.com">Contact Us</a>
-		</c:container>
+	<div class="unit footer">
+		Copyright © 2010 Ivan Khalopik. All rights reserved.
+		<br/>
+		<a href="mailto:ikhalopik@gmail.com">Contact Us</a>
 	</div>
-</c:container>
+</div>
 
 </body>
 </html>

@@ -4,43 +4,37 @@
 
 package com.mutabra.web.components;
 
+import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.security.Authentication;
-import org.greatage.security.AuthorityConstants;
-import org.greatage.security.SecurityContext;
-import org.greatage.tapestry.commonlib.base.components.AbstractComponent;
+import org.apache.tapestry5.services.BindingSource;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Import(stylesheet = "main.css")
+@Import(stylesheet = {
+		"context:css/reset.css",
+		"context:css/base.css",
+		"context:css/fonts.css",
+		"context:css/layout.css",
+		"context:css/main.css"
+})
 public class Layout extends AbstractComponent {
+	private static final String PAGE_TITLE_PROPERTY = "title";
 
-	@Parameter(defaultPrefix = BindingConstants.MESSAGE)
+	@Property
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String title;
 
-	Binding defaultTitle() {
-		return newBinding("default title", getResources().getContainerResources(), BindingConstants.PROP, "title");
-	}
-
 	@Inject
-	private SecurityContext securityContext;
+	private BindingSource bindingSource;
 
-	public String getUser() {
-		return securityContext.getCurrentUser().getName();
-	}
-
-	public boolean isAuthenticated() {
-		final Authentication user = securityContext.getCurrentUser();
-		return user != null && !user.getAuthorities().contains(AuthorityConstants.STATUS_ANONYMOUS);
-	}
-
-	public String getTitle() {
-		return title;
+	Binding defaultTitle() {
+		return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
 	}
 }

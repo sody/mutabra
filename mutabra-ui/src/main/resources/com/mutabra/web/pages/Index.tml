@@ -1,6 +1,5 @@
 <html t:type="layout" title="home-title"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:c="tapestry-library:common"
 	  xmlns:p="tapestry:parameter">
 
 <div class="unit c-2">
@@ -9,15 +8,7 @@
 	</div>
 
 	<div class="column">
-		<c:box>
-			${message:content-text}
-			<br/>
-			<br/>
-			<br/>
-			<c:secured allow="STATUS_LOGGED">
-				<t:security.signupform/>
-			</c:secured>
-		</c:box>
+		${message:content-text}
 	</div>
 </div>
 </html>

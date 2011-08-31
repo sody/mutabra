@@ -11,11 +11,7 @@
 	<name>Mutabra Project</name>
 
 	<modules>
-		<module>mutabra-db</module>
 		<module>mutabra-domain</module>
-		<module>mutabra-domain-hibernate</module>
-		<module>mutabra-domain-gae</module>
-		<module>mutabra-services</module>
 		<module>mutabra-ui</module>
 	</modules>
 
@@ -25,13 +21,19 @@
 			<!-- Module versions -->
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-db</artifactId>
+				<artifactId>mutabra-domain-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-domain</artifactId>
+				<artifactId>mutabra-domain-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-domain-services</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -49,15 +51,10 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-services</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.mutabra</groupId>
 				<artifactId>mutabra-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
 
 			<!-- GreatAge dependencies -->
 			<dependency>
@@ -68,26 +65,18 @@
 
 			<dependency>
 				<groupId>org.greatage</groupId>
-				<artifactId>greatage-inject</artifactId>
-				<version>${ga.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.greatage</groupId>
-				<artifactId>greatage-domain</artifactId>
-				<version>${ga.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.greatage</groupId>
 				<artifactId>greatage-security</artifactId>
 				<version>${ga.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.greatage</groupId>
-				<artifactId>greatage-tapestry</artifactId>
-				<version>${ga.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.greatage</groupId>
+						<artifactId>greatage-inject</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.drools</groupId>
+						<artifactId>drools-api</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -97,13 +86,13 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>org.javassist</groupId>
+				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
 				<version>${javassist.version}</version>
 			</dependency>
@@ -125,6 +114,12 @@
 				<groupId>hsqldb</groupId>
 				<artifactId>hsqldb</artifactId>
 				<version>${hsqldb.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>1.0</version>
 			</dependency>
 
 			<!-- GAE module dependencies -->
@@ -186,30 +181,12 @@
 			<dependency>
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-ioc</artifactId>
-				<exclusions>
-					<exclusion>
-						<groupId>javassist</groupId>
-						<artifactId>javassist</artifactId>
-					</exclusion>
-				</exclusions>
 				<version>${tapestry.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-core</artifactId>
-				<version>${tapestry.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-upload</artifactId>
-				<version>${tapestry.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-test</artifactId>
 				<version>${tapestry.version}</version>
 			</dependency>
 
@@ -233,14 +210,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-
-	</dependencies>
 
 	<repositories>
 		<repository>
@@ -365,41 +334,15 @@
 		</plugins>
 	</build>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>1.2</version>
-				<configuration>
-					<outputDirectory>${project.build.outputDirectory}/versions-report</outputDirectory>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
-
 	<profiles>
 		<profile>
-			<id>hsqldb</id>
+			<id>hibernate</id>
 			<properties>
-				<jdbc.profile>hsqldb</jdbc.profile>
 				<jdbc.driver>org.hsqldb.jdbcDriver</jdbc.driver>
 				<jdbc.url>jdbc:hsqldb:/mutabra/db/gamedb;shutdown=true</jdbc.url>
 				<jdbc.username>sa</jdbc.username>
 				<jdbc.password></jdbc.password>
 				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>mysql</id>
-			<properties>
-				<jdbc.profile>mysql</jdbc.profile>
-				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-				<jdbc.url>jdbc:mysql://localhost:3306/gamedb</jdbc.url>
-				<jdbc.username>root</jdbc.username>
-				<jdbc.password>123</jdbc.password>
-				<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
 			</properties>
 		</profile>
 
@@ -414,12 +357,15 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<ga.version>1.1-SNAPSHOT</ga.version>
-		<slf4j.version>1.5.8</slf4j.version>
-		<javassist.version>3.14.0-GA</javassist.version>
+		<ga.version>1.0-SNAPSHOT</ga.version>
+		<slf4j.version>1.6.2</slf4j.version>
+		<logback.version>0.9.29</logback.version>
+		<javassist.version>3.12.1.GA</javassist.version>
+		<testng.version>6.2</testng.version>
 
-		<hibernate.version>3.6.1.Final</hibernate.version>
+		<hibernate.version>4.0.0.CR1</hibernate.version>
 		<mysql.version>5.1.10</mysql.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 
@@ -429,11 +375,9 @@
 		<datanucleus.appengine.version>1.0.8</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 
-		<tapestry.version>5.3.0-SNAPSHOT</tapestry.version>
+		<tapestry.version>5.3.0</tapestry.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.1</mail.api.version>
-
-		<testng.version>5.14.2</testng.version>
 
 		<release.url>file:///mutabra/release</release.url>
 		<log.dir>file:///mutabra/log</log.dir>
