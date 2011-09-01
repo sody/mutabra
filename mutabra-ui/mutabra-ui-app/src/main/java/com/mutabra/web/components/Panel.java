@@ -18,6 +18,7 @@ package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.PropertyOverrides;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
@@ -33,7 +34,15 @@ public class Panel extends AbstractComponent {
 	private String title;
 
 	@Property
+	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+	private String[] buttons;
+
+	@Property
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
 	private String className;
+
+	@Property
+	@Parameter(value = "this", allowNull = false)
+	private PropertyOverrides overrides;
 
 }

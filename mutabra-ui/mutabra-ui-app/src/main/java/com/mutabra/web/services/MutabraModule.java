@@ -1,9 +1,14 @@
 package com.mutabra.web.services;
 
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.services.Coercion;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
 
 /**
  * @author Ivan Khalopik
@@ -34,4 +39,13 @@ public class MutabraModule {
 //															   final StringInterner interner) {
 //		return new I18nPropertyConduitSource(conduitSource, translator, interner);
 //	}
+
+	@Contribute(TypeCoercer.class)
+	public void contributeTypeCoercer(final Configuration<CoercionTuple> configuration) {
+		configuration.add(CoercionTuple.create(String.class, String[].class, new Coercion<String, String[]>() {
+			public String[] coerce(String input) {
+				return input != null ? input.split(",") : new String[0];
+			}
+		}));
+	}
 }

@@ -10,6 +10,7 @@ import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.BindingSource;
 
@@ -24,6 +25,7 @@ import org.apache.tapestry5.services.BindingSource;
 		"context:css/layout.css",
 		"context:css/main.css"
 })
+@SupportsInformalParameters
 public class Layout extends AbstractComponent {
 	private static final String PAGE_TITLE_PROPERTY = "title";
 

@@ -34,10 +34,25 @@
 	<div class="unit c-5">
 		<div class="column">
 			<div class="container left">
-				<ul class="t-menu">
-					<li><t:pagelink page="index">${message:page.index.title}</t:pagelink></li>
-					<li><t:pagelink page="admin/roles">${message:page.roles.title}</t:pagelink></li>
+				<ul class="m-menu">
+					<li>
+						<t:pagelink page="index">${message:page.index.title}</t:pagelink>
+					</li>
+					<li>
+						<t:pagelink page="admin/roles">${message:page.roles.title}</t:pagelink>
+					</li>
 				</ul>
+
+				<t:menu items="index,roles">
+					<p:indexMenuItem>
+						<t:pagelink page="index">${message:page.index.title}</t:pagelink>
+					</p:indexMenuItem>
+					<p:rolesMenuItem>
+						<t:pagelink page="admin/roles">${message:page.roles.title}</t:pagelink>
+					</p:rolesMenuItem>
+				</t:menu>
+
+				<t:menu items="save,cancel"/>
 			</div>
 		</div>
 

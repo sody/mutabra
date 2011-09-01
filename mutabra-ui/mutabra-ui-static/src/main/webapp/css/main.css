@@ -36,8 +36,7 @@ div.content {
 }
 
 /* Menu styles */
-
-ul.t-menu {
+ul.m-menu {
 	background-color: #FFFFFF;
 	color: #000000;
 	border: 1px solid #BED6F8;
@@ -47,7 +46,7 @@ ul.t-menu {
 	list-style: none none inside;
 }
 
-ul.t-menu > li {
+ul.m-menu > li {
 	border: 1px solid #C0C0C0;
 	border-radius: 5px;
 	margin: 2px;
@@ -57,12 +56,12 @@ ul.t-menu > li {
 	line-height: 150%;
 }
 
-ul.t-menu > li:hover {
+ul.m-menu > li:hover {
 	background: #ECF4FE;
 }
 
-ul.t-menu > li > a,
-ul.t-menu > li > span {
+ul.m-menu > li > a,
+ul.m-menu > li > span {
 	padding: 3px 20px 3px 30px;
 	color: #000000;
 	display: block;
@@ -113,7 +112,7 @@ div.m-panel-footer > ul > li {
 div.m-panel-footer > ul > li {
 	border: 1px solid #C0C0C0;
 	border-radius: 5px;
-	margin: 10px;
+	margin: 10px 0 10px 10px;
 }
 
 div.m-panel-footer > ul > li:hover {

@@ -2,7 +2,7 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:panel title="test">
+<t:panel title="Test Panel" buttons="save,cancel">
 	<div class="unit c-2">
 		<div class="column">
 			<img align="middle" src="${logo}" alt="logo"/>
