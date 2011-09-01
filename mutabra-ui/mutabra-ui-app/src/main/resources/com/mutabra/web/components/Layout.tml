@@ -11,6 +11,7 @@
 
 <div class="container">
 	<div class="unit header">
+		<a href="/" class="logo">UTABRA</a>
 		<div style="float: right;">
 			<t:if test="${loggedIn}">
 				<table class="dialog">
