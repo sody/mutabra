@@ -6,20 +6,15 @@
 
 	<parent>
 		<groupId>com.mutabra</groupId>
-		<artifactId>mutabra-parent</artifactId>
+		<artifactId>mutabra-ui</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.mutabra</groupId>
-	<artifactId>mutabra-ui</artifactId>
+	<artifactId>mutabra-ui-static</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 
-	<name>Mutabra UI Aggregator</name>
-
-	<modules>
-		<module>mutabra-ui-static</module>
-		<module>mutabra-ui-app</module>
-	</modules>
+	<name>Mutabra UI Static Resources</name>
 
 </project>

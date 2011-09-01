@@ -15,7 +15,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Mutabra Domain Modules</name>
+	<name>Mutabra Domain Aggregator</name>
 
 	<modules>
 		<module>mutabra-domain-common</module>

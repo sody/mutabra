@@ -1,0 +1,131 @@
+/*
+ * Copyright 2000 - 2009 Ivan Khalopik. All Rights Reserved.
+ */
+
+/* Layout */
+div.header {
+	border-bottom: 1px solid #DDDDFF;
+	padding: 10px 20px;
+	height: 50px;
+}
+
+div.header:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+div.footer {
+	text-align: center;
+	clear: both;
+	background: #ddddff;
+	padding: 10px 20px;
+}
+
+div.left {
+	padding: 20px;
+}
+
+div.content {
+	background: url("../img/cell.gif") repeat;
+	min-height: 520px;
+	margin: 10px;
+	padding: 20px;
+}
+
+/* Menu styles */
+
+ul.t-menu {
+	background-color: #FFFFFF;
+	color: #000000;
+	border: 1px solid #BED6F8;
+	border-radius: 10px;
+	font-family: arial, verdana, sans-serif;
+	font-size: 11px;
+	list-style: none none inside;
+}
+
+ul.t-menu > li {
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	margin: 2px;
+	display: block;
+	position: relative;
+	cursor: pointer;
+	line-height: 150%;
+}
+
+ul.t-menu > li:hover {
+	background: #ECF4FE;
+}
+
+ul.t-menu > li > a,
+ul.t-menu > li > span {
+	padding: 3px 20px 3px 30px;
+	color: #000000;
+	display: block;
+	position: relative;
+	text-decoration: none;
+}
+
+/* Panel styles */
+div.m-panel {
+	background-color: #FFFFFF;
+	color: #000000;
+	border: 1px solid #BED6F8;
+	border-radius: 10px;
+	margin: 10px;
+	font-family: arial, verdana, sans-serif;
+	font-size: 11px;
+}
+
+div.m-panel-header {
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	margin: 2px;
+	font-weight: bold;
+	line-height: 150%;
+}
+
+div.m-panel-header > span {
+	padding: 5px 10px;
+	float: left;
+}
+
+div.m-panel-body {
+	padding: 10px;
+}
+
+div.m-panel-footer {
+	border-top: 1px solid #C0C0C0;
+}
+
+div.m-panel-footer > ul,
+div.m-panel-footer > ul > li {
+	border: 0;
+	margin: 0;
+	float: left;
+	list-style: none none inside;
+}
+
+div.m-panel-footer > ul > li {
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	margin: 10px;
+}
+
+div.m-panel-footer > ul > li:hover {
+	background: #ECF4FE;
+}
+
+div.m-panel-footer > ul > li > a,
+div.m-panel-footer > ul > li > span {
+	padding: 5px 10px;
+	color: #000000;
+	display: block;
+	position: relative;
+	text-decoration: none;
+	float: left;
+}

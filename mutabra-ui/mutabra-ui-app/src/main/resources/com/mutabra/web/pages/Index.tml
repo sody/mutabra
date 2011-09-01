@@ -1,0 +1,16 @@
+<html t:type="layout"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+<t:panel title="test">
+	<div class="unit c-2">
+		<div class="column">
+			<img align="middle" src="${logo}" alt="logo"/>
+		</div>
+
+		<div class="column">
+			${message:content-text}
+		</div>
+	</div>
+</t:panel>
+</html>

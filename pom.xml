@@ -51,32 +51,22 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-ui</artifactId>
+				<artifactId>mutabra-ui-static</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-ui-app</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
-
-			<!-- GreatAge dependencies -->
+			<!-- Common dependencies -->
 			<dependency>
 				<groupId>org.greatage</groupId>
 				<artifactId>greatage-common</artifactId>
 				<version>${ga.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.greatage</groupId>
-				<artifactId>greatage-security</artifactId>
-				<version>${ga.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.greatage</groupId>
-						<artifactId>greatage-inject</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.drools</groupId>
-						<artifactId>drools-api</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -188,6 +178,24 @@
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-core</artifactId>
 				<version>${tapestry.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-func</artifactId>
+				<version>${tapestry.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-json</artifactId>
+				<version>${tapestry.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.got5</groupId>
+				<artifactId>tapestry5-jquery</artifactId>
+				<version>2.6.0</version>
 			</dependency>
 
 			<dependency>
@@ -369,7 +377,7 @@
 		<mysql.version>5.1.10</mysql.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 
-		<appengine.version>1.5.0.1</appengine.version>
+		<appengine.version>1.5.2</appengine.version>
 		<datanucleus.version>1.1.5</datanucleus.version>
 		<datanucleus.enhancer.version>1.1.4</datanucleus.enhancer.version>
 		<datanucleus.appengine.version>1.0.8</datanucleus.appengine.version>
