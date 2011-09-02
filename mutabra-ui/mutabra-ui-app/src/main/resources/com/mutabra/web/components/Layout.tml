@@ -10,40 +10,26 @@
 <body>
 
 <div class="container">
-	<div class="unit header">
-		<a href="/" class="logo">UTABRA</a>
-		<div style="float: right;">
-			<t:if test="${loggedIn}">
-				<table class="dialog">
-					<tr>
-						<td>${message:welcome}</td>
-					</tr>
-					<tr>
-						<td><span style="font-weight: bold;">${user}</span></td>
-						<td>
-							<a href="#">${message:button.sign-out.title}</a>
-						</td>
-					</tr>
-				</table>
-				<p:else>
-					<a href="#">${message:button.sign-in.title}</a>
-				</p:else>
-			</t:if>
+	<div class="unit c-5 header">
+		<div class="column s-4">
+			<a href="/" class="logo">UTABRA</a>
+		</div>
+		<div class="column">
+			<div class="container user">
+				<ul class="container m-menu user">
+					<li><a href="#">${user}</a></li>
+					<li><a href="#">${message:button.sign-out.title}</a></li>
+				</ul>
+			</div>
+			<div class="container user">
+				<t:localemenu/>
+			</div>
 		</div>
 	</div>
 
 	<div class="unit c-5">
 		<div class="column">
 			<div class="container left">
-				<ul class="m-menu">
-					<li>
-						<t:pagelink page="index">${message:page.index.title}</t:pagelink>
-					</li>
-					<li>
-						<t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink>
-					</li>
-				</ul>
-
 				<t:menu items="index,roles">
 					<p:indexMenuItem>
 						<t:pagelink page="index">${message:page.index.title}</t:pagelink>

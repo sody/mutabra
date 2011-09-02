@@ -24,6 +24,7 @@ import org.apache.tapestry5.services.BindingSource;
 		"context:css/base.css",
 		"context:css/fonts.css",
 		"context:css/layout.css",
+		"context:css/flag.css",
 		"context:css/main.css"
 })
 @SupportsInformalParameters

@@ -31,12 +31,17 @@ div.header:after {
 
 a.logo {
 	background: url("../img/logo80x60.png") no-repeat;
+	margin-left: 30px;
 	padding-top: 40px;
 	padding-left: 80px;
 	font-size: 20px;
 	font-weight: bold;
-	color: #000000;
+	color: #333333;
 	float: left;
+}
+
+div.user {
+	margin: 10px;
 }
 
 div.footer {
@@ -80,13 +85,34 @@ ul.m-menu > li > span {
 	text-decoration: none;
 }
 
-/* Panel styles */
-div.m-panel {
-	background: #fee8ae;
-	border: 1px solid #c7a663;
-	border-radius: 20px;
-	margin: 10px;
-	padding: 20px;
+ul.m-menu.user {
+	margin: 0;
+	float: left;
+}
+
+ul.m-menu.user > li {
+	float: left;
+}
+
+ul.m-menu.locale,
+ul.m-menu.locale > li {
+	border: 0;
+	margin: 0;
+	float: left;
+}
+
+ul.m-menu.locale > li {
+	margin: 1px;
+	opacity: 0.5;
+}
+
+ul.m-menu.locale > li.selected {
+	opacity: 1;
+}
+
+ul.m-menu.locale > li > a,
+ul.m-menu.locale > li > span {
+	padding: 0;
 }
 
 ul.m-menu.toolbar {
@@ -116,3 +142,13 @@ ul.m-menu.toolbar > li > span {
 	text-decoration: none;
 	float: left;
 }
+
+/* Panel styles */
+div.m-panel {
+	background: #fee8ae;
+	border: 1px solid #c7a663;
+	border-radius: 20px;
+	margin: 10px;
+	padding: 20px;
+}
+
