@@ -18,9 +18,4 @@ public class Index extends AbstractPage {
 	public Asset getLogo() {
 		return logo;
 	}
-
-	@Override
-	public String getTitle() {
-		return getMessages().get("page.index.title");
-	}
 }

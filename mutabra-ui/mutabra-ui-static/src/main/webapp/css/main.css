@@ -2,9 +2,22 @@
  * Copyright 2000 - 2009 Ivan Khalopik. All Rights Reserved.
  */
 
+/* Common styles */
+html {
+	background: #e6d29d;
+	color: #6d440c;
+	font-family: arial, verdana, sans-serif;
+	font-size: 15px;
+}
+
+a,
+a:visited,
+a:hover {
+	color: #6d440c;
+}
+
 /* Layout */
 div.header {
-	border-bottom: 1px solid #DDDDFF;
 	padding: 10px 20px;
 }
 
@@ -27,36 +40,26 @@ a.logo {
 }
 
 div.footer {
+	border-top: 1px solid #C7A663;
+	padding: 10px 20px;
 	text-align: center;
 	clear: both;
-	background: #ddddff;
-	padding: 10px 20px;
 }
 
-div.left {
-	padding: 20px;
-}
-
-div.content {
-	background: url("../img/cell.gif") repeat;
-	min-height: 520px;
-	margin: 10px;
+div.left,
+div.right {
 	padding: 20px;
 }
 
 /* Menu styles */
 ul.m-menu {
-	background-color: #FFFFFF;
-	color: #000000;
-	border: 1px solid #BED6F8;
+	border: 1px solid #6d440c;
 	border-radius: 10px;
-	font-family: arial, verdana, sans-serif;
-	font-size: 11px;
 	list-style: none none inside;
 }
 
 ul.m-menu > li {
-	border: 1px solid #C0C0C0;
+	border: 1px solid #c7a663;
 	border-radius: 5px;
 	margin: 2px;
 	display: block;
@@ -66,13 +69,12 @@ ul.m-menu > li {
 }
 
 ul.m-menu > li:hover {
-	background: #ECF4FE;
+	border: 1px solid #6d440c;
 }
 
 ul.m-menu > li > a,
 ul.m-menu > li > span {
 	padding: 3px 20px 3px 30px;
-	color: #000000;
 	display: block;
 	position: relative;
 	text-decoration: none;
@@ -80,58 +82,35 @@ ul.m-menu > li > span {
 
 /* Panel styles */
 div.m-panel {
-	background-color: #FFFFFF;
-	color: #000000;
-	border: 1px solid #BED6F8;
-	border-radius: 10px;
+	background: #fee8ae;
+	border: 1px solid #c7a663;
+	border-radius: 20px;
 	margin: 10px;
-	font-family: arial, verdana, sans-serif;
-	font-size: 11px;
+	padding: 20px;
 }
 
-div.m-panel-header {
-	border: 1px solid #C0C0C0;
-	border-radius: 5px;
-	margin: 2px;
-	font-weight: bold;
-	line-height: 150%;
-}
-
-div.m-panel-header > span {
-	padding: 5px 10px;
-	float: left;
-}
-
-div.m-panel-body {
-	padding: 10px;
-}
-
-div.m-panel-footer {
-	border-top: 1px solid #C0C0C0;
-}
-
-div.m-panel-footer > ul,
-div.m-panel-footer > ul > li {
+ul.m-menu.toolbar {
 	border: 0;
+	border-top: 1px solid #c7a663;
+	border-radius: 0;
 	margin: 0;
-	float: left;
 	list-style: none none inside;
 }
 
-div.m-panel-footer > ul > li {
-	border: 1px solid #C0C0C0;
+ul.m-menu.toolbar > li {
+	border: 1px solid #c7a663;
 	border-radius: 5px;
 	margin: 10px 0 10px 10px;
+	float: left;
 }
 
-div.m-panel-footer > ul > li:hover {
-	background: #ECF4FE;
+ul.m-menu.toolbar > li:hover {
+	border: 1px solid #6d440c;
 }
 
-div.m-panel-footer > ul > li > a,
-div.m-panel-footer > ul > li > span {
+ul.m-menu.toolbar > li > a,
+ul.m-menu.toolbar > li > span {
 	padding: 5px 10px;
-	color: #000000;
 	display: block;
 	position: relative;
 	text-decoration: none;

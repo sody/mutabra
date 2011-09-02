@@ -21,12 +21,12 @@
 					<tr>
 						<td><span style="font-weight: bold;">${user}</span></td>
 						<td>
-							<a href="#">${message:signOut-label}</a>
+							<a href="#">${message:button.sign-out.title}</a>
 						</td>
 					</tr>
 				</table>
 				<p:else>
-					<a href="#">${message:signIn-label}</a>
+					<a href="#">${message:button.sign-in.title}</a>
 				</p:else>
 			</t:if>
 		</div>
@@ -40,7 +40,7 @@
 						<t:pagelink page="index">${message:page.index.title}</t:pagelink>
 					</li>
 					<li>
-						<t:pagelink page="admin/roles">${message:page.roles.title}</t:pagelink>
+						<t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink>
 					</li>
 				</ul>
 
@@ -49,23 +49,22 @@
 						<t:pagelink page="index">${message:page.index.title}</t:pagelink>
 					</p:indexMenuItem>
 					<p:rolesMenuItem>
-						<t:pagelink page="admin/roles">${message:page.roles.title}</t:pagelink>
+						<t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink>
 					</p:rolesMenuItem>
 				</t:menu>
-
-				<t:menu items="save,cancel"/>
 			</div>
 		</div>
 
 		<div class="column s-3">
-			<div class="container content">
-				<h1>${title}</h1>
+			<t:panel title="prop:title" class="center">
 				<t:body/>
-			</div>
+			</t:panel>
 		</div>
 
 		<div class="column">
-			Widgets Here
+			<div class="container right">
+				<t:delegate to="rightBody"/>
+			</div>
 		</div>
 
 	</div>

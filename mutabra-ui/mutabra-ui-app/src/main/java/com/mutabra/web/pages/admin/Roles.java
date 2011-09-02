@@ -20,9 +20,4 @@ public class Roles extends AbstractPage {
 	public GridDataSource getRoleSource() {
 		return new BaseEntityDataSource<Role>(roleService.query(), Role.class);
 	}
-
-	@Override
-	public String getTitle() {
-		return getMessages().get("page.roles.title");
-	}
 }

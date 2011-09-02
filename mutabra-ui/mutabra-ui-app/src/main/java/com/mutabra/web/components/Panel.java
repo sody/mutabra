@@ -25,6 +25,7 @@ import org.apache.tapestry5.annotations.SupportsInformalParameters;
 
 /**
  * @author Ivan Khalopik
+ * @since 1.0
  */
 @SupportsInformalParameters
 public class Panel extends AbstractComponent {
@@ -34,7 +35,7 @@ public class Panel extends AbstractComponent {
 	private String title;
 
 	@Property
-	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String[] buttons;
 
 	@Property

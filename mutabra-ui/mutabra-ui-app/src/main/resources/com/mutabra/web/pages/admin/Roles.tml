@@ -4,4 +4,12 @@
 
 <t:grid source="roleSource"/>
 
+
+<t:menu items="add" class="toolbar"/>
+
+<p:right>
+	<t:menu items="add"/>
+</p:right>
+
+
 </html>
