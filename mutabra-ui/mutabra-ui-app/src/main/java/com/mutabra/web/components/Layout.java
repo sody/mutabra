@@ -7,7 +7,7 @@ package com.mutabra.web.components;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.Block;
+import org.apache.tapestry5.PropertyOverrides;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
@@ -34,15 +34,19 @@ public class Layout extends AbstractComponent {
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String title;
 
+	@Property
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	private String[] buttons;
+
+	@Property
+	@Parameter(value = "this", allowNull = false)
+	private PropertyOverrides overrides;
+
 	@Inject
 	private BindingSource bindingSource;
 
 	Binding defaultTitle() {
 		return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
-	}
-
-	public Block getRightBody() {
-		return getResources().getBlockParameter("right");
 	}
 
 	public boolean isLoggedIn() {

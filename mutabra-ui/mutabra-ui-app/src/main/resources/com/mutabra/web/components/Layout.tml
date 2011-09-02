@@ -56,17 +56,18 @@
 		</div>
 
 		<div class="column s-3">
-			<t:panel title="prop:title" class="center">
+			<t:panel title="prop:title" buttons="prop:buttons" overrides="overrides">
 				<t:body/>
 			</t:panel>
 		</div>
 
 		<div class="column">
 			<div class="container right">
-				<t:delegate to="rightBody"/>
+				<t:if test="buttons">
+					<t:menu items="prop:buttons" overrides="overrides"/>
+				</t:if>
 			</div>
 		</div>
-
 	</div>
 
 	<div class="unit footer">

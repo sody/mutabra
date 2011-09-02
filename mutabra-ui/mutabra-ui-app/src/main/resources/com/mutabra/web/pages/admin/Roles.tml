@@ -1,15 +1,7 @@
-<html t:type="layout"
+<html t:type="layout" buttons="add,delete,cancel"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
 <t:grid source="roleSource"/>
-
-
-<t:menu items="add" class="toolbar"/>
-
-<p:right>
-	<t:menu items="add"/>
-</p:right>
-
 
 </html>
