@@ -148,3 +148,55 @@ ul.m-menu.user > li > a,
 ul.m-menu.user > li > span {
 	padding: 5px 20px;
 }
+
+table.t-data-grid {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 0;
+}
+
+table.t-data-grid > thead > tr {
+	background: #e6d29d;
+}
+
+table.t-data-grid > thead > tr > th {
+	border: 1px solid #c7a663;
+	color: #6d440c;
+	padding: 4px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+table.t-data-grid > thead > tr > th > a {
+	text-decoration: none;
+	color: #6d440c;
+}
+
+table.t-data-grid > tbody > tr:hover {
+	background-color: #F1F1F1;
+}
+
+table.t-data-grid > tbody > tr > td {
+	border: 1px solid #c7a663;
+	color: #6d440c;
+	padding: 4px;
+}
+
+img.t-sort-icon {
+	width: 0;
+	height: 0;
+	display: none;
+}
+
+div.t-data-grid-pager > a,
+div.t-data-grid-pager > span.current {
+	background-color: transparent;
+	border: 1px solid #c7a663;
+	color: #6d440c;
+	padding: 0 5px;
+}
+
+div.t-data-grid-pager > a:hover,
+div.t-data-grid-pager > span.current {
+	border: 1px solid #6d440c;
+}
