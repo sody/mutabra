@@ -55,6 +55,6 @@ public class Layout extends AbstractComponent {
 	}
 
 	public String getUser() {
-		return "user";
+		return "Account";
 	}
 }

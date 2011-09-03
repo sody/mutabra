@@ -56,10 +56,21 @@ div.right {
 	padding: 20px;
 }
 
-/* Menu styles */
+/* Panel styles */
+div.m-panel {
+	background: #fee8ae;
+	border: 1px solid #c7a663;
+	border-radius: 20px;
+	margin: 10px;
+	padding: 20px;
+}
+
+/* Default menu style */
 ul.m-menu {
 	border: 1px solid #6d440c;
 	border-radius: 10px;
+	margin: 0;
+	padding: 0;
 	list-style: none none inside;
 }
 
@@ -79,30 +90,38 @@ ul.m-menu > li:hover {
 
 ul.m-menu > li > a,
 ul.m-menu > li > span {
-	padding: 3px 20px 3px 30px;
+	padding: 5px 30px;
 	display: block;
 	position: relative;
 	text-decoration: none;
 }
 
-ul.m-menu.user {
-	margin: 0;
+/* Toolbar menu style */
+ul.m-menu.toolbar {
+	border: 0;
+	border-radius: 0;
+	border-top: 1px solid #c7a663;
+	margin-top: 10px;
+}
+
+ul.m-menu.toolbar > li {
+	margin: 10px 5px;
 	float: left;
 }
 
-ul.m-menu.user > li {
-	float: left;
+ul.m-menu.toolbar > li > a,
+ul.m-menu.toolbar > li > span {
+	padding: 5px 20px;
 }
 
-ul.m-menu.locale,
+/* Locale menu style */
+ul.m-menu.locale {
+	border: 0;
+}
+
 ul.m-menu.locale > li {
 	border: 0;
-	margin: 0;
 	float: left;
-}
-
-ul.m-menu.locale > li {
-	margin: 1px;
 	opacity: 0.5;
 }
 
@@ -115,40 +134,17 @@ ul.m-menu.locale > li > span {
 	padding: 0;
 }
 
-ul.m-menu.toolbar {
+/* User menu style */
+ul.m-menu.user {
 	border: 0;
-	border-top: 1px solid #c7a663;
-	border-radius: 0;
-	margin: 0;
-	list-style: none none inside;
+	margin: 5px 0;
 }
 
-ul.m-menu.toolbar > li {
-	border: 1px solid #c7a663;
-	border-radius: 5px;
-	margin: 10px 0 10px 10px;
+ul.m-menu.user > li {
 	float: left;
 }
 
-ul.m-menu.toolbar > li:hover {
-	border: 1px solid #6d440c;
+ul.m-menu.user > li > a,
+ul.m-menu.user > li > span {
+	padding: 5px 20px;
 }
-
-ul.m-menu.toolbar > li > a,
-ul.m-menu.toolbar > li > span {
-	padding: 5px 10px;
-	display: block;
-	position: relative;
-	text-decoration: none;
-	float: left;
-}
-
-/* Panel styles */
-div.m-panel {
-	background: #fee8ae;
-	border: 1px solid #c7a663;
-	border-radius: 20px;
-	margin: 10px;
-	padding: 20px;
-}
-

@@ -2,6 +2,6 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 	<t:loop source="locales" value="locale" formState="none">
-		<li class="${itemClass}"><t:eventlink event="changeLocale" context="locale" class="${linkClass}">${locale}</t:eventlink></li>
+		<li class="${itemClass}"><t:eventlink event="changeLocale" context="locale" class="${linkClass}"/></li>
 	</t:loop>
 </ul>

@@ -13,17 +13,14 @@
 	<div class="unit c-5 header">
 		<div class="column s-4">
 			<a href="/" class="logo">UTABRA</a>
+			<img alt="userpic" src="/img/races/elf64x64.png" style="float:right; margin: 10px;"/>
 		</div>
 		<div class="column">
-			<div class="container user">
-				<ul class="container m-menu user">
-					<li><a href="#">${user}</a></li>
-					<li><a href="#">${message:button.sign-out.title}</a></li>
-				</ul>
-			</div>
-			<div class="container user">
-				<t:localemenu/>
-			</div>
+			<ul class="container m-menu user">
+				<li><a href="#">${user}</a></li>
+				<li><a href="#">${message:button.sign-out.title}</a></li>
+			</ul>
+			<t:localemenu/>
 		</div>
 	</div>
 
@@ -50,7 +47,7 @@
 		<div class="column">
 			<div class="container right">
 				<t:if test="buttons">
-					<t:menu items="prop:buttons" overrides="overrides"/>
+					<t:menu items="prop:buttons" overrides="overrides" class="toolbar"/>
 				</t:if>
 			</div>
 		</div>

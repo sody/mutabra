@@ -1,4 +1,4 @@
-<ul class="container m-menu ${className}"
+<ul class="${menuClass}"
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 	<t:block id="defaultItemBody">

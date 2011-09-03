@@ -20,7 +20,6 @@ public class Menu extends AbstractComponent {
 	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
 	private String[] items;
 
-	@Property
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
 	private String className;
 
@@ -33,19 +32,27 @@ public class Menu extends AbstractComponent {
 	@Inject
 	private Block defaultItemBody;
 
-	public Block getItemBody() {
-		final Block block = overrides.getOverrideBlock(item + "MenuItem");
-		if (block != null) {
-			return block;
+	public String getMenuClass() {
+		final StringBuilder builder = new StringBuilder("container m-menu");
+		if (className != null) {
+			builder.append(" ").append(className);
 		}
-		return defaultItemBody;
+		return builder.toString();
+	}
+
+	public String getItemTitle() {
+		return getMessages().get("button." + item + ".title");
 	}
 
 	public String getItemClass() {
 		return item;
 	}
 
-	public String getItemTitle() {
-		return getMessages().get("button." + item + ".title");
+	public Block getItemBody() {
+		final Block block = overrides.getOverrideBlock(item + "MenuItem");
+		if (block != null) {
+			return block;
+		}
+		return defaultItemBody;
 	}
 }
