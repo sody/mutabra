@@ -19,14 +19,11 @@ import org.apache.tapestry5.services.BindingSource;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Import(stylesheet = {
-		"context:css/reset.css",
-		"context:css/base.css",
-		"context:css/fonts.css",
-		"context:css/layout.css",
-		"context:css/flag.css",
-		"context:css/main.css"
-})
+@Import(stack = "mutabra",
+		stylesheet = {
+				"context:css/flag.css",
+				"context:css/main.css"
+		})
 @SupportsInformalParameters
 public class Layout extends AbstractComponent {
 	private static final String PAGE_TITLE_PROPERTY = "title";

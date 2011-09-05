@@ -4,4 +4,20 @@
 
 <t:grid source="roleSource"/>
 
+<t:dialog id="addRoleDialog" title="Add Role" modal="true" resizable="true">
+	<t:form t:id="addRoleForm">
+		<t:beaneditor object="role"/>
+
+		<t:menu items="add" class="toolbar">
+			<p:addMenuItem>
+				<t:linksubmit>${message:button.add.title}</t:linksubmit>
+			</p:addMenuItem>
+		</t:menu>
+	</t:form>
+</t:dialog>
+
+<p:addMenuItem>
+	<t:dialoglink dialog="addRoleDialog">${message:button.add.title}</t:dialoglink>
+</p:addMenuItem>
+
 </html>
