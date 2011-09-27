@@ -1,17 +1,25 @@
-<html t:type="layout" buttons="add"
+<html t:type="layout" buttons="add,cancel"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="roleSource"/>
+<t:grid source="roleSource" include="code" add="actions">
+	<p:actionsCell>
+		<t:dialoglink dialog="addRoleDialog">${message:button.edit.title}</t:dialoglink>|
+		<t:eventlink event="delete">${message:button.delete.title}</t:eventlink>
+	</p:actionsCell>
+</t:grid>
 
 <t:dialog id="addRoleDialog" title="Add Role" modal="true" resizable="true">
 	<t:form t:id="addRoleForm">
 		<t:beaneditor object="role"/>
 
-		<t:menu items="add" class="toolbar">
+		<t:menu items="add,cancel" class="toolbar">
 			<p:addMenuItem>
 				<t:linksubmit>${message:button.add.title}</t:linksubmit>
 			</p:addMenuItem>
+			<p:cancelMenuItem>
+				<t:dialoglink dialog="addRoleDialog" action="close">${message:button.cancel.title}</t:dialoglink>
+			</p:cancelMenuItem>
 		</t:menu>
 	</t:form>
 </t:dialog>

@@ -16,38 +16,32 @@
 			<img alt="userpic" src="/img/races/orc64x64.png" style="float:right; margin: 10px;"/>
 		</div>
 		<div class="column">
-			<ul class="container m-menu user">
-				<li><a href="#">${user}</a></li>
-				<li><a href="#">${message:button.sign-out.title}</a></li>
-			</ul>
-			<t:localemenu/>
+			<t:menu.user/>
+			<t:menu.locale/>
 		</div>
 	</div>
 
 	<div class="unit c-5">
 		<div class="column">
-			<div class="container left">
-				<t:menu items="index,roles">
-					<p:indexMenuItem>
-						<t:pagelink page="index">${message:page.index.title}</t:pagelink>
-					</p:indexMenuItem>
-					<p:rolesMenuItem>
-						<t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink>
-					</p:rolesMenuItem>
-				</t:menu>
+			<div class="container left ui-widget">
+				<t:menu.sidebar/>
 			</div>
 		</div>
 
 		<div class="column s-3">
-			<t:panel title="prop:title" buttons="prop:buttons" overrides="overrides">
+			<div class="container center ui-widget ui-widget-content">
+				<h1>${title}</h1>
 				<t:body/>
-			</t:panel>
+				<t:if test="buttons">
+					<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
+				</t:if>
+			</div>
 		</div>
 
 		<div class="column">
-			<div class="container right">
+			<div class="container right ui-widget">
 				<t:if test="buttons">
-					<t:menu items="prop:buttons" overrides="overrides" class="toolbar"/>
+					<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
 				</t:if>
 			</div>
 		</div>

@@ -1,0 +1,13 @@
+<t:menu class="sidebar" items="index,roles,test" selected="test"
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter">
+	<p:indexMenuItem>
+		<t:pagelink page="index">${message:page.index.title}</t:pagelink>
+	</p:indexMenuItem>
+	<p:rolesMenuItem>
+		<t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink>
+	</p:rolesMenuItem>
+	<p:testMenuItem>
+		<t:pagelink page="test">${message:page.test.title}</t:pagelink>
+	</p:testMenuItem>
+</t:menu>

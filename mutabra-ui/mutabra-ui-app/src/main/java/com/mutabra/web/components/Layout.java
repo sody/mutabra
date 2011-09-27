@@ -22,7 +22,8 @@ import org.apache.tapestry5.services.BindingSource;
 @Import(stack = "mutabra",
 		stylesheet = {
 				"context:css/flag.css",
-				"context:css/main.css"
+				"context:css/main-theme.css"
+//				"context:css/main.css"
 		})
 @SupportsInformalParameters
 public class Layout extends AbstractComponent {
@@ -45,13 +46,5 @@ public class Layout extends AbstractComponent {
 
 	Binding defaultTitle() {
 		return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
-	}
-
-	public boolean isLoggedIn() {
-		return true;
-	}
-
-	public String getUser() {
-		return "Account";
 	}
 }

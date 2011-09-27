@@ -59,11 +59,10 @@ public class MutabraModule {
 		configuration.add("reset", new StackExtension(StackExtensionType.STYLESHEET, "context:css/reset.css"));
 		configuration.add("fonts", new StackExtension(StackExtensionType.STYLESHEET, "context:css/fonts.css"));
 		configuration.add("layout", new StackExtension(StackExtensionType.STYLESHEET, "context:css/layout.css"));
-		configuration.add("base", new StackExtension(StackExtensionType.STYLESHEET, "context:css/base.css"));
 
 		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-1.6.2.js"));
 		configuration.add("jquery-ui", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-ui-1.8.16.js"));
-		configuration.add("jquery-ui-sunny", new StackExtension(StackExtensionType.STYLESHEET, "context:css/jquery-ui-sunny-1.8.16.css"));
+		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));
 	}
 
 	@Contribute(JavaScriptStackSource.class)

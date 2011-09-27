@@ -1,24 +1,45 @@
 package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.Block;
-import org.apache.tapestry5.PropertyOverrides;
-import org.apache.tapestry5.annotations.Parameter;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SupportsInformalParameters;
+import com.mutabra.web.internal.CSSConstants;
+import org.apache.tapestry5.*;
+import org.apache.tapestry5.annotations.*;
+import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONObject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @SupportsInformalParameters
-public class Menu extends AbstractComponent {
+public class Menu extends AbstractComponent implements ClientElement {
+	private static final String MENU_CLASS = new StringBuilder()
+			.append(CSSConstants.MENU).append(" ")
+			.append(CSSConstants.WIDGET).append(" ")
+			.append(CSSConstants.WIDGET_CONTENT).append(" ")
+			.append(CSSConstants.CORNER_ALL).append(" ")
+			.append(CSSConstants.HELPER_CLEAR_FIX).toString();
+
+	private static final String MENU_ITEM_CLASS = new StringBuilder()
+			.append(CSSConstants.BUTTON).append(" ")
+			.append(CSSConstants.BUTTON_TEXT_ONLY).append(" ")
+			.append(CSSConstants.WIDGET).append(" ")
+			.append(CSSConstants.STATE_DEFAULT).append(" ")
+			.append(CSSConstants.CORNER_ALL).toString();
 
 	@Property
 	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
 	private String[] items;
+
+	@Property
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	private String selected;
+
+	@Property
+	@Parameter
+	private String item;
 
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
 	private String className;
@@ -26,33 +47,55 @@ public class Menu extends AbstractComponent {
 	@Parameter(value = "this", allowNull = false)
 	private PropertyOverrides overrides;
 
-	@Property
-	private String item;
+	@Inject
+	private JavaScriptSupport support;
 
 	@Inject
 	private Block defaultItemBody;
 
-	public String getMenuClass() {
-		final StringBuilder builder = new StringBuilder("container m-menu");
-		if (className != null) {
-			builder.append(" ").append(className);
-		}
-		return builder.toString();
+	private String clientId;
+
+	public String getClientId() {
+		return clientId;
 	}
 
-	public String getItemTitle() {
+	public boolean isSelected() {
+		return item.equals(selected);
+	}
+
+	public String getMenuItemTitle() {
 		return getMessages().get("button." + item + ".title");
 	}
 
-	public String getItemClass() {
-		return item;
-	}
-
-	public Block getItemBody() {
+	public Block getMenuItemBody() {
 		final Block block = overrides.getOverrideBlock(item + "MenuItem");
 		if (block != null) {
 			return block;
 		}
+		if (getResources().hasBody()) {
+			return getResources().getBody();
+		}
 		return defaultItemBody;
+	}
+
+	@BeginRender
+	void beginRender(final MarkupWriter writer) {
+		clientId = support.allocateClientId(getResources());
+		final Element menu = writer.element("ul", "id", clientId);
+		if (className != null) {
+			menu.addClassName(className);
+		}
+		menu.addClassName(
+				CSSConstants.MENU,
+				CSSConstants.WIDGET,
+				CSSConstants.WIDGET_CONTENT,
+				CSSConstants.CORNER_ALL,
+				CSSConstants.HELPER_CLEAR_FIX);
+	}
+
+	@AfterRender
+	void afterRender(final MarkupWriter writer) {
+		writer.end();
+		support.addInitializerCall("menu", new JSONObject("id", getClientId()));
 	}
 }

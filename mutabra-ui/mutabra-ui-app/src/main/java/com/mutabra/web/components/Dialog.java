@@ -6,7 +6,6 @@ import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
-import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.json.JSONObject;
@@ -16,7 +15,6 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Import(library = "dialog.js")
 public class Dialog extends AbstractComponent implements ClientElement {
 
 	@Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
@@ -38,7 +36,7 @@ public class Dialog extends AbstractComponent implements ClientElement {
 	private JavaScriptSupport support;
 
 	public String getClientId() {
-		return this.clientId;
+		return clientId;
 	}
 
 	@BeginRender

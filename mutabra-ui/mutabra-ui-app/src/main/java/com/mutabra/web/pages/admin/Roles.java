@@ -31,8 +31,6 @@ public class Roles extends AbstractPage {
 	}
 
 	void onSuccess() {
-//		final String randomCode = new BigInteger(130, new SecureRandom()).toString(32);
-//		role.setCode(randomCode);
 		roleService.save(role);
 	}
 }

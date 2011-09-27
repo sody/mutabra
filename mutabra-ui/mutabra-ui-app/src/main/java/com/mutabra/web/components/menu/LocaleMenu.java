@@ -1,12 +1,11 @@
-package com.mutabra.web.components;
+package com.mutabra.web.components.menu;
 
-import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.LocalizationSetter;
-import org.greatage.util.LocaleUtils;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -16,8 +15,9 @@ import java.util.Map;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class LocaleMenu extends AbstractComponent {
+public class LocaleMenu {
 	private static final Map<String, String> COUNTRY_CODES = new HashMap<String, String>();
+
 	static {
 		COUNTRY_CODES.put("ru", "RU");
 		COUNTRY_CODES.put("en", "US");
@@ -40,12 +40,8 @@ public class LocaleMenu extends AbstractComponent {
 		return locales;
 	}
 
-	public String getLinkClass() {
-		return "flag " + COUNTRY_CODES.get(locale);
-	}
-
-	public String getItemClass() {
-		return String.valueOf(currentLocale).equals(locale) ? "selected" : "";
+	public String getCurrentLocale() {
+		return currentLocale.toString();
 	}
 
 	void onChangeLocale(final String newLocale) {
