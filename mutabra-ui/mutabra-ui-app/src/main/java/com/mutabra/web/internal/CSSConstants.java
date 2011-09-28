@@ -22,9 +22,18 @@ public class CSSConstants {
 	public static final String STATE_HIGHLIGHT = "ui-state-highlight";
 	public static final String STATE_ERROR = "ui-state-error";
 
+	public static final String ICON = "ui-icon";
+
 	public static final String BUTTON = "ui-button";
-	public static final String BUTTON_TEXT = "ui-button-text";
+	public static final String BUTTON_ICONS_ONLY = "ui-button-icons-only";
+	public static final String BUTTON_ICON_ONLY = "ui-button-icon-only";
+	public static final String BUTTON_TEXT_ICONS = "ui-button-text-icons";
+	public static final String BUTTON_TEXT_ICON_PRIMARY = "ui-button-text-icon-primary";
+	public static final String BUTTON_TEXT_ICON_SECONDARY = "ui-button-text-icon-secondary";
 	public static final String BUTTON_TEXT_ONLY = "ui-button-text-only";
+	public static final String BUTTON_TEXT = "ui-button-text";
+	public static final String BUTTON_ICON_PRIMARY = "ui-button-icon-primary";
+	public static final String BUTTON_ICON_SECONDARY = "ui-button-icon-secondary";
 
 	public static final String MENU = "ui-menu";
 	public static final String MENU_ITEM = "ui-menu-item";

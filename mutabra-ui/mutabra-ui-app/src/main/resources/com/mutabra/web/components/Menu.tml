@@ -1,9 +1,9 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 	<t:block id="defaultItemBody">
-		<t:eventlink event="prop:item">${menuItemTitle}</t:eventlink>
+		<t:actionlink context="item">${menuItemTitle}</t:actionlink>
 	</t:block>
 
 	<t:loop source="items" value="item">
-		<li><t:delegate to="menuItemBody" t:mixins="menuitem" menuitem.class="prop:item" menuitem.selected="prop:selected"/></li>
+		<li><t:button class="prop:item" selected="prop:selected"><t:delegate to="menuItemBody"/></t:button></li>
 	</t:loop>
 </t:container>

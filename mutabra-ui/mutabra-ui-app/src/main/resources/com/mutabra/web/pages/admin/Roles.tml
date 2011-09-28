@@ -1,4 +1,4 @@
-<html t:type="layout" buttons="add,cancel"
+<html t:type="layout" buttons="add"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
@@ -13,7 +13,7 @@
 	<t:form t:id="addRoleForm">
 		<t:beaneditor object="role"/>
 
-		<t:menu items="add,cancel" class="toolbar">
+		<t:menu items="cancel,add" class="toolbar">
 			<p:addMenuItem>
 				<t:linksubmit>${message:button.add.title}</t:linksubmit>
 			</p:addMenuItem>
@@ -25,7 +25,9 @@
 </t:dialog>
 
 <p:addMenuItem>
-	<t:dialoglink dialog="addRoleDialog">${message:button.add.title}</t:dialoglink>
+	<t:button primary="literal:ui-icon-circle-plus">
+		<t:dialoglink dialog="addRoleDialog">${message:button.add.title}</t:dialoglink>
+	</t:button>
 </p:addMenuItem>
 
 </html>

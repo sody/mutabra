@@ -2,33 +2,20 @@ package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.CSSConstants;
-import org.apache.tapestry5.*;
+import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.Block;
+import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.PropertyOverrides;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @SupportsInformalParameters
-public class Menu extends AbstractComponent implements ClientElement {
-	private static final String MENU_CLASS = new StringBuilder()
-			.append(CSSConstants.MENU).append(" ")
-			.append(CSSConstants.WIDGET).append(" ")
-			.append(CSSConstants.WIDGET_CONTENT).append(" ")
-			.append(CSSConstants.CORNER_ALL).append(" ")
-			.append(CSSConstants.HELPER_CLEAR_FIX).toString();
-
-	private static final String MENU_ITEM_CLASS = new StringBuilder()
-			.append(CSSConstants.BUTTON).append(" ")
-			.append(CSSConstants.BUTTON_TEXT_ONLY).append(" ")
-			.append(CSSConstants.WIDGET).append(" ")
-			.append(CSSConstants.STATE_DEFAULT).append(" ")
-			.append(CSSConstants.CORNER_ALL).toString();
-
+public class Menu extends AbstractComponent {
 	@Property
 	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
 	private String[] items;
@@ -48,16 +35,7 @@ public class Menu extends AbstractComponent implements ClientElement {
 	private PropertyOverrides overrides;
 
 	@Inject
-	private JavaScriptSupport support;
-
-	@Inject
 	private Block defaultItemBody;
-
-	private String clientId;
-
-	public String getClientId() {
-		return clientId;
-	}
 
 	public boolean isSelected() {
 		return item.equals(selected);
@@ -80,8 +58,7 @@ public class Menu extends AbstractComponent implements ClientElement {
 
 	@BeginRender
 	void beginRender(final MarkupWriter writer) {
-		clientId = support.allocateClientId(getResources());
-		final Element menu = writer.element("ul", "id", clientId);
+		final Element menu = writer.element("ul");
 		if (className != null) {
 			menu.addClassName(className);
 		}
@@ -96,6 +73,5 @@ public class Menu extends AbstractComponent implements ClientElement {
 	@AfterRender
 	void afterRender(final MarkupWriter writer) {
 		writer.end();
-		support.addInitializerCall("menu", new JSONObject("id", getClientId()));
 	}
 }

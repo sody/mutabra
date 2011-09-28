@@ -8,12 +8,11 @@ import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.PropertyOverrides;
-import org.apache.tapestry5.annotations.Import;
-import org.apache.tapestry5.annotations.Parameter;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SupportsInformalParameters;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONLiteral;
 import org.apache.tapestry5.services.BindingSource;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
@@ -44,7 +43,15 @@ public class Layout extends AbstractComponent {
 	@Inject
 	private BindingSource bindingSource;
 
+	@Inject
+	private JavaScriptSupport support;
+
 	Binding defaultTitle() {
 		return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
+	}
+
+	@AfterRender
+	void afterRender() {
+		support.addInitializerCall("jquery.ui", "");
 	}
 }
