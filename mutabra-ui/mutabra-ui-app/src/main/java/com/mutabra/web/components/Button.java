@@ -1,4 +1,4 @@
-package com.mutabra.web.mixins;
+package com.mutabra.web.components;
 
 import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.BindingConstants;
@@ -12,7 +12,7 @@ import org.apache.tapestry5.func.Predicate;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class MenuItem {
+public class Button {
 
 	@Parameter(defaultPrefix = BindingConstants.LITERAL, name = "class")
 	private String className;
