@@ -1,15 +1,29 @@
 T5.extendInitializer({
 	"jquery.ui": function() {
 		(function($) {
+			// create buttons from every element of 'ui-button' class
 			$(".ui-button").each(function() {
-				var label = $(this).find(".ui-button-text").html();
-				var primary = $(this).find(".ui-button-icon-primary")
+				// get element
+				var element = $(this);
+				// find element representing primary icon ang parse it's class attribute
+				var primary = element.find(".ui-button-icon-primary")
 						.removeClass("ui-button-icon-primary ui-button-icon-secondary ui-icon")
 						.attr("class");
-				var secondary = $(this).find(".ui-button-icon-secondary")
+				// find element representing secondary icon ang parse it's class attribute
+				var secondary = element.find(".ui-button-icon-secondary")
 						.removeClass("ui-button-icon-primary ui-button-icon-secondary ui-icon")
 						.attr("class");
-				$(this).button({
+				// find element representing button text and get it's content
+				var label = element.find(".ui-button-text").html();
+				// '_EMPTY_' means that button doesn't have any text
+				var text = label && label != "_EMPTY_";
+				// if element is label we should create button from input it references for
+				if (element.is("label")) {
+					element = $("#" + element.attr("for"));
+				}
+				// create button
+				element.button({
+					text: text,
 					label: label,
 					icons: {
 						primary: primary,

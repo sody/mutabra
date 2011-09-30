@@ -1,6 +1,6 @@
 <t:menu class="locale" items="prop:locales" item="prop:locale"
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-	<t:button primary="flag-${locale}" selected="${currentLocale.equals(locale)}">
-		<t:eventlink event="changeLocale" context="locale"/>
+	<t:button primary="flag-${locale}">
+		<t:eventlink event="changeLocale" context="locale" class="${menuItemClass}"/>
 	</t:button>
 </t:menu>

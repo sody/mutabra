@@ -37,8 +37,8 @@ public class Menu extends AbstractComponent {
 	@Inject
 	private Block defaultItemBody;
 
-	public boolean isSelected() {
-		return item.equals(selected);
+	public String getMenuItemClass() {
+		return item + (item.equals(selected) ? " " + CSSConstants.STATE_HIGHLIGHT : "" );
 	}
 
 	public String getMenuItemTitle() {

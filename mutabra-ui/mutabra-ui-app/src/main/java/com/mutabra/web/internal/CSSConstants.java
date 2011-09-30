@@ -6,6 +6,7 @@ package com.mutabra.web.internal;
  */
 public class CSSConstants {
 	public static final String HELPER_CLEAR_FIX = "ui-helper-clearfix";
+	public static final String HELPER_HIDDEN_ACCESSIBLE = "ui-helper-hidden-accessible";
 
 	public static final String CORNER_ALL = "ui-corner-all";
 	public static final String CORNER_TOP = "ui-corner-top";

@@ -15,10 +15,10 @@
 
 		<t:menu items="cancel,add" class="toolbar">
 			<p:addMenuItem>
-				<t:linksubmit>${message:button.add.title}</t:linksubmit>
+				<t:button><t:linksubmit>${message:button.add.title}</t:linksubmit></t:button>
 			</p:addMenuItem>
 			<p:cancelMenuItem>
-				<t:dialoglink dialog="addRoleDialog" action="close">${message:button.cancel.title}</t:dialoglink>
+				<t:button><t:dialoglink dialog="addRoleDialog" action="close">${message:button.cancel.title}</t:dialoglink></t:button>
 			</p:cancelMenuItem>
 		</t:menu>
 	</t:form>

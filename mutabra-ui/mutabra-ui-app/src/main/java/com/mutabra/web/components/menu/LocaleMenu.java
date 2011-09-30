@@ -40,8 +40,8 @@ public class LocaleMenu {
 		return locales;
 	}
 
-	public String getCurrentLocale() {
-		return currentLocale.toString();
+	public String getMenuItemClass() {
+		return locale + (currentLocale.toString().equals(locale) ? " " + CSSConstants.STATE_HIGHLIGHT : "");
 	}
 
 	void onChangeLocale(final String newLocale) {

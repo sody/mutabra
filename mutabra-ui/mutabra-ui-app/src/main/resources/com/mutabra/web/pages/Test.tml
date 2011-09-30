@@ -171,14 +171,9 @@
 <br/>
 
 
-<script>
+<script type="text/javascript">
 	j$(function() {
 		j$("#accordion").accordion();
-
-		var availableTags = [
-			"ActionScript","AppleScript","Asp","BASIC","C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran",
-			"Groovy","Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme"
-		];
 		j$("#tags").autocomplete({
 			source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby", "python", "c", "scala", "groovy", "haskell", "perl"]
 		});

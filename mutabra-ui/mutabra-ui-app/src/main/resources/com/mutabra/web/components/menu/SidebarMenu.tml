@@ -2,12 +2,12 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:indexMenuItem>
-		<t:pagelink page="index">${message:page.index.title}</t:pagelink>
+		<t:button><t:pagelink page="index">${message:page.index.title}</t:pagelink></t:button>
 	</p:indexMenuItem>
 	<p:rolesMenuItem>
-		<t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink>
+		<t:button><t:pagelink page="admin/roles">${message:page.admin-roles.title}</t:pagelink></t:button>
 	</p:rolesMenuItem>
 	<p:testMenuItem>
-		<t:pagelink page="test">${message:page.test.title}</t:pagelink>
+		<t:button><t:pagelink page="test">${message:page.test.title}</t:pagelink></t:button>
 	</p:testMenuItem>
 </t:menu>

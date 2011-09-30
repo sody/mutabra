@@ -2,9 +2,9 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:accountMenuItem>
-		<a href="#">${message:button.account.title}</a>
+		<t:button><a href="#">${message:button.account.title}</a></t:button>
 	</p:accountMenuItem>
 	<p:signOutMenuItem>
-		<a href="#">${message:button.sign-out.title}</a>
+		<t:button><a href="#">${message:button.sign-out.title}</a></t:button>
 	</p:signOutMenuItem>
 </t:menu>
