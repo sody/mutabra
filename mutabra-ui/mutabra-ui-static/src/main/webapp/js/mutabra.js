@@ -35,7 +35,12 @@ T5.extendInitializer({
 	},
 
 	dialog: function(spec) {
-		j$("#" + spec.id).dialog(spec.options);
+		var d = j$("#" + spec.id).dialog(spec.options);
+		if (spec.options.autoDestroy) {
+			d.bind("dialogclose", function() {
+				d.remove().dialog("destroy");
+			});
+		}
 	},
 
 	dialoglink : function(spec) {

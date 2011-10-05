@@ -17,6 +17,8 @@
 package org.greatage.domain;
 
 
+import org.greatage.domain.annotations.Transactional;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -65,6 +67,7 @@ public interface EntityService<PK extends Serializable, E extends Entity<PK>, Q 
 	 *
 	 * @param entity detailed entity
 	 */
+	@Transactional
 	void save(E entity);
 
 	/**
@@ -72,6 +75,7 @@ public interface EntityService<PK extends Serializable, E extends Entity<PK>, Q 
 	 *
 	 * @param entity detailed entity
 	 */
+	@Transactional
 	void update(E entity);
 
 	/**
@@ -79,6 +83,7 @@ public interface EntityService<PK extends Serializable, E extends Entity<PK>, Q 
 	 *
 	 * @param entity detailed entity
 	 */
+	@Transactional
 	void saveOrUpdate(E entity);
 
 	/**
@@ -86,6 +91,7 @@ public interface EntityService<PK extends Serializable, E extends Entity<PK>, Q 
 	 *
 	 * @param entity detailed entity
 	 */
+	@Transactional
 	void delete(E entity);
 
 	Q query();

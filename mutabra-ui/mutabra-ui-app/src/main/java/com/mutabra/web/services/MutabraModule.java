@@ -1,6 +1,8 @@
 package com.mutabra.web.services;
 
+import com.mutabra.domain.BaseEntity;
 import com.mutabra.web.annotations.Custom;
+import com.mutabra.web.internal.EntityEncoderFactory;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
@@ -11,7 +13,10 @@ import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
+import org.apache.tapestry5.services.ValueEncoderFactory;
+import org.apache.tapestry5.services.ValueEncoderSource;
 import org.apache.tapestry5.services.javascript.*;
+import org.greatage.domain.EntityRepository;
 
 /**
  * @author Ivan Khalopik
@@ -30,12 +35,12 @@ public class MutabraModule {
 		configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT");
 	}
 
-//	@Contribute(ValueEncoderSource.class)
-//	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
-//											 final TypeCoercer typeCoercer,
-//											 final EntityRepository repository) {
-//		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
-//	}
+	@Contribute(ValueEncoderSource.class)
+	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
+											 final TypeCoercer typeCoercer,
+											 final EntityRepository repository) {
+		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
+	}
 
 //	@Decorate(serviceInterface = PropertyConduitSource.class)
 //	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,

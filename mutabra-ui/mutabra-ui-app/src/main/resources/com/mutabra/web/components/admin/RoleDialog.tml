@@ -1,0 +1,30 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter">
+
+	<t:zone id="${clientId}"/>
+
+	<t:block>
+		<t:dialog t:id="dialog" id="${dialogClientId}"
+				  width="500"
+				  title="${title}" modal="true"
+				  autoOpen="true" autoDestroy="true">
+			<t:form context="value">
+				<t:beaneditor object="value"/>
+
+				<t:menu items="cancel,save" class="toolbar">
+					<p:saveMenuItem>
+						<t:button>
+							<t:linksubmit>${message:button.save.title}</t:linksubmit>
+						</t:button>
+					</p:saveMenuItem>
+					<p:cancelMenuItem>
+						<t:button>
+							<t:dialoglink dialog="${dialogClientId}" action="close">${message:button.cancel.title}</t:dialoglink>
+						</t:button>
+					</p:cancelMenuItem>
+				</t:menu>
+			</t:form>
+		</t:dialog>
+	</t:block>
+</t:container>
+

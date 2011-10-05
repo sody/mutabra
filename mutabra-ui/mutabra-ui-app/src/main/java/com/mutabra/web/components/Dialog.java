@@ -27,10 +27,19 @@ public class Dialog extends AbstractComponent implements ClientElement {
 	private boolean autoOpen;
 
 	@Parameter
+	private boolean autoDestroy;
+
+	@Parameter
 	private boolean modal;
 
 	@Parameter
 	private boolean resizable;
+
+	@Parameter
+	private Integer width;
+
+	@Parameter
+	private Integer height;
 
 	@Inject
 	private JavaScriptSupport support;
@@ -48,14 +57,20 @@ public class Dialog extends AbstractComponent implements ClientElement {
 	void afterRender(final MarkupWriter writer) {
 		writer.end();
 
-		final JSONObject data = new JSONObject()
-				.put("id", getClientId())
-				.put("options", new JSONObject()
-						.put("title", title)
-						.put("autoOpen", autoOpen)
-						.put("modal", modal)
-						.put("resizable", resizable));
+		final JSONObject options = new JSONObject()
+				.put("title", title)
+				.put("autoOpen", autoOpen)
+				.put("autoDestroy", autoDestroy)
+				.put("modal", modal)
+				.put("resizable", resizable);
 
-		support.addInitializerCall("dialog", data);
+		if (width != null) {
+			options.put("width", width);
+		}
+		if (height != null) {
+			options.put("height", height);
+		}
+
+		support.addInitializerCall("dialog", new JSONObject("id", getClientId()).put("options", options));
 	}
 }

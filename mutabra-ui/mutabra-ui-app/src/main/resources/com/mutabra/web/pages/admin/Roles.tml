@@ -2,32 +2,19 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="roleSource" include="code" add="actions">
+<t:grid source="roleSource" row="row" include="code" add="actions">
 	<p:actionsCell>
-		<t:dialoglink dialog="addRoleDialog">${message:button.edit.title}</t:dialoglink>|
-		<t:eventlink event="delete">${message:button.delete.title}</t:eventlink>
+		<t:eventlink event="edit" zone="roleDialog" context="row">${message:button.edit.title}</t:eventlink> |
+		<t:eventlink event="delete" context="row">${message:button.delete.title}</t:eventlink>
 	</p:actionsCell>
 </t:grid>
 
-<t:dialog id="addRoleDialog" title="Add Role" modal="true" resizable="true">
-	<t:form t:id="addRoleForm">
-		<t:beaneditor object="role"/>
-
-		<t:menu items="cancel,add" class="toolbar">
-			<p:addMenuItem>
-				<t:button><t:linksubmit>${message:button.add.title}</t:linksubmit></t:button>
-			</p:addMenuItem>
-			<p:cancelMenuItem>
-				<t:button><t:dialoglink dialog="addRoleDialog" action="close">${message:button.cancel.title}</t:dialoglink></t:button>
-			</p:cancelMenuItem>
-		</t:menu>
-	</t:form>
-</t:dialog>
-
 <p:addMenuItem>
 	<t:button primary="literal:ui-icon-circle-plus">
-		<t:dialoglink dialog="addRoleDialog">${message:button.add.title}</t:dialoglink>
+		<t:eventlink event="add" zone="roleDialog">${message:button.add.title}</t:eventlink>
 	</t:button>
 </p:addMenuItem>
+
+<t:admin.roleDialog t:id="roleDialog" value="role"/>
 
 </html>

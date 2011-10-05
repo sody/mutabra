@@ -30,6 +30,8 @@ import java.io.Serializable;
  * @author Ivan Khalopik
  */
 public class EntityEncoderFactory<PK extends Serializable> implements ValueEncoderFactory<Entity<PK>> {
+	private static final String NEW_ENTITY_VALUE = "new";
+
 	private final TypeCoercer typeCoercer;
 	private final EntityRepository repository;
 	private final Class<PK> pkClass;
@@ -46,11 +48,14 @@ public class EntityEncoderFactory<PK extends Serializable> implements ValueEncod
 
 	public ValueEncoder<Entity<PK>> create(final Class<Entity<PK>> type) {
 		return new ValueEncoder<Entity<PK>>() {
-			public String toClient(Entity<PK> value) {
-				return value != null ? typeCoercer.coerce(value.getId(), String.class) : null;
+			public String toClient(final Entity<PK> value) {
+				return value == null ? null : value.isNew() ? NEW_ENTITY_VALUE : typeCoercer.coerce(value.getId(), String.class);
 			}
 
-			public Entity<PK> toValue(String clientValue) {
+			public Entity<PK> toValue(final String clientValue) {
+				if (NEW_ENTITY_VALUE.equals(clientValue)) {
+					return repository.create(type);
+				}
 				final PK pk = typeCoercer.coerce(clientValue, pkClass);
 				return pk != null ? repository.get(type, pk) : null;
 			}
