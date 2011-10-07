@@ -22,7 +22,7 @@
 	<div class="unit c-5">
 		<div class="column">
 			<div class="container left ui-widget">
-				<t:menu.sidebar/>
+				<t:menu.sidebarmenu/>
 			</div>
 		</div>
 
@@ -38,6 +38,7 @@
 
 		<div class="column">
 			<div class="container right ui-widget">
+				<t:menu.admin/>
 				<t:if test="buttons">
 					<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
 				</t:if>

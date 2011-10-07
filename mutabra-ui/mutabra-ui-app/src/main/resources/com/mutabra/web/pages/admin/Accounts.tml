@@ -2,19 +2,19 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="roleSource" row="row" include="code" add="actions">
+<t:grid source="accountSource" row="row" include="email" add="actions">
 	<p:actionsCell>
-		<t:eventlink event="edit" zone="roleDialog" context="row">${message:button.edit.title}</t:eventlink> |
+		<t:eventlink event="edit" zone="accountDialog" context="row">${message:button.edit.title}</t:eventlink> |
 		<t:eventlink event="delete" context="row">${message:button.delete.title}</t:eventlink>
 	</p:actionsCell>
 </t:grid>
 
 <p:addMenuItem>
 	<t:button primary="literal:ui-icon-circle-plus">
-		<t:eventlink event="add" zone="roleDialog">${message:button.add.title}</t:eventlink>
+		<t:eventlink event="add" zone="accountDialog">${message:button.add.title}</t:eventlink>
 	</t:button>
 </p:addMenuItem>
 
-<t:admin.roleDialog t:id="roleDialog"/>
+<t:admin.accountDialog t:id="accountDialog"/>
 
 </html>

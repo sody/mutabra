@@ -62,6 +62,7 @@ public class DomainModule {
 	@Contribute(EntityRepository.class)
 	public void contributeEntityRepository(final MappedConfiguration<Class, Class> configuration) {
 		configuration.add(Translation.class, TranslationImpl.class);
+
 		configuration.add(Account.class, AccountImpl.class);
 		configuration.add(Role.class, RoleImpl.class);
 		configuration.add(Permission.class, PermissionImpl.class);
