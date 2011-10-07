@@ -15,6 +15,6 @@
 	</t:button>
 </p:addMenuItem>
 
-<t:admin.roleDialog t:id="entityDialog"/>
+<t:admin.racedialog t:id="entityDialog"/>
 
 </html>

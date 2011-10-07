@@ -1,4 +1,4 @@
-<t:menu class="sidebar" items="roles,accounts,test" selected="test"
+<t:menu class="sidebar" items="roles,accounts,levels,races,faces,test" selected="test"
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:rolesMenuItem>
@@ -7,6 +7,15 @@
 	<p:accountsMenuItem>
 		<t:button><t:pagelink page="admin/accounts">${message:page.admin-accounts.title}</t:pagelink></t:button>
 	</p:accountsMenuItem>
+	<p:levelsMenuItem>
+		<t:button><t:pagelink page="admin/levels">${message:page.admin-levels.title}</t:pagelink></t:button>
+	</p:levelsMenuItem>
+	<p:facesMenuItem>
+		<t:button><t:pagelink page="admin/faces">${message:page.admin-faces.title}</t:pagelink></t:button>
+	</p:facesMenuItem>
+	<p:racesMenuItem>
+		<t:button><t:pagelink page="admin/races">${message:page.admin-races.title}</t:pagelink></t:button>
+	</p:racesMenuItem>
 	<p:testMenuItem>
 		<t:button><t:pagelink page="test">${message:page.test.title}</t:pagelink></t:button>
 	</p:testMenuItem>

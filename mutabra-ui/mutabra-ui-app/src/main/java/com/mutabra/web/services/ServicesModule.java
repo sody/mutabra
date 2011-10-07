@@ -1,11 +1,17 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.Translation;
+import com.mutabra.domain.common.Face;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.Race;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.TranslationQuery;
+import com.mutabra.services.common.FaceQuery;
+import com.mutabra.services.common.LevelQuery;
+import com.mutabra.services.common.RaceQuery;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.services.security.RoleQuery;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
@@ -42,6 +48,17 @@ public class ServicesModule {
 		return new BaseEntityServiceImpl<Account, AccountQuery>(repository, Account.class, AccountQuery.class);
 	}
 
+	public BaseEntityService<Level, LevelQuery> buildLevelService() {
+		return new BaseEntityServiceImpl<Level, LevelQuery>(repository, Level.class, LevelQuery.class);
+	}
+
+	public BaseEntityService<Face, FaceQuery> buildFaceService() {
+		return new BaseEntityServiceImpl<Face, FaceQuery>(repository, Face.class, FaceQuery.class);
+	}
+
+	public BaseEntityService<Race, RaceQuery> buildRaceService() {
+		return new BaseEntityServiceImpl<Race, RaceQuery>(repository, Race.class, RaceQuery.class);
+	}
 
 	@Advise(serviceInterface = BaseEntityService.class)
 	public void adviseTransactionalServices(final MethodAdviceReceiver receiver, final TransactionExecutor executor) {

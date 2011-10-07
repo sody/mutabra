@@ -21,21 +21,21 @@ public class Accounts extends AbstractPage {
 	private BaseEntityService<Account, AccountQuery> accountService;
 
 	@InjectComponent
-	private AccountDialog accountDialog;
+	private AccountDialog entityDialog;
 
 	@Property
 	private Account row;
 
-	public GridDataSource getAccountSource() {
+	public GridDataSource getSource() {
 		return new BaseEntityDataSource<Account>(accountService.query(), Account.class);
 	}
 
 	Object onAdd() {
-		return accountDialog.show(accountService.create());
+		return entityDialog.show(accountService.create());
 	}
 
 	Object onEdit(final Account account) {
-		return accountDialog.show(account);
+		return entityDialog.show(account);
 	}
 
 	void onDelete(final Account account) {
@@ -43,6 +43,6 @@ public class Accounts extends AbstractPage {
 	}
 
 	void onSuccess() {
-		accountService.saveOrUpdate(accountDialog.getValue());
+		accountService.saveOrUpdate(entityDialog.getValue());
 	}
 }

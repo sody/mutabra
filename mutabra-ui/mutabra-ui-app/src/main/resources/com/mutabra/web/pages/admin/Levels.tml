@@ -2,7 +2,7 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="source" row="row" include="code" add="actions">
+<t:grid source="source" row="row" include="code,rating" add="actions">
 	<p:actionsCell>
 		<t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit.title}</t:eventlink> |
 		<t:eventlink event="delete" context="row">${message:button.delete.title}</t:eventlink>
@@ -15,6 +15,6 @@
 	</t:button>
 </p:addMenuItem>
 
-<t:admin.roleDialog t:id="entityDialog"/>
+<t:admin.leveldialog t:id="entityDialog"/>
 
 </html>
