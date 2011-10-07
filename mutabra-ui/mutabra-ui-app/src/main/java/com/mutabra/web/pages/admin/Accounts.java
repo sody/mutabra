@@ -42,7 +42,8 @@ public class Accounts extends AbstractPage {
 		accountService.delete(account);
 	}
 
-	void onSuccess() {
+	Object onSuccess() {
 		accountService.saveOrUpdate(entityDialog.getValue());
+		return this;
 	}
 }

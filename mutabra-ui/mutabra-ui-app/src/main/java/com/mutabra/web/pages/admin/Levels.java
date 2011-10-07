@@ -42,7 +42,8 @@ public class Levels extends AbstractPage {
 		levelService.delete(level);
 	}
 
-	void onSuccess() {
+	Object onSuccess() {
 		levelService.saveOrUpdate(entityDialog.getValue());
+		return this;
 	}
 }

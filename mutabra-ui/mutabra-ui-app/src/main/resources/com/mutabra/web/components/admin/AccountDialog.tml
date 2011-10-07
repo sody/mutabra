@@ -1,0 +1,17 @@
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		  xmlns:p="tapestry:parameter">
+	<t:replace id="body">
+		<div class="t-beaneditor-row">
+			<t:label for="email"/>
+			<t:textfield t:id="email" value="value.email" validate="required"/>
+		</div>
+		<div class="t-beaneditor-row">
+			<t:label for="name"/>
+			<t:textfield t:id="name" value="value.name"/>
+		</div>
+		<div class="t-beaneditor-row">
+			<t:label for="place"/>
+			<t:textfield t:id="place" value="value.place"/>
+		</div>
+	</t:replace>
+</t:extend>

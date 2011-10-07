@@ -42,7 +42,8 @@ public class Races extends AbstractPage {
 		raceService.delete(race);
 	}
 
-	void onSuccess() {
+	Object onSuccess() {
 		raceService.saveOrUpdate(entityDialog.getValue());
+		return this;
 	}
 }

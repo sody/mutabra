@@ -1,0 +1,9 @@
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		  xmlns:p="tapestry:parameter">
+	<t:replace id="body">
+		<div class="t-beaneditor-row">
+			<t:label for="code"/>
+			<t:textfield t:id="code" value="value.code" validate="required"/>
+		</div>
+	</t:replace>
+</t:extend>

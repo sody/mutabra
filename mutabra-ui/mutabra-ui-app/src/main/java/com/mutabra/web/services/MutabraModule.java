@@ -3,7 +3,10 @@ package com.mutabra.web.services;
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.web.annotations.Custom;
 import com.mutabra.web.internal.EntityEncoderFactory;
+import com.mutabra.web.internal.CustomValidationDecorator;
+import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.ValidationDecorator;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
@@ -13,8 +16,8 @@ import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
-import org.apache.tapestry5.services.ValueEncoderFactory;
-import org.apache.tapestry5.services.ValueEncoderSource;
+import org.apache.tapestry5.json.JSONObject;
+import org.apache.tapestry5.services.*;
 import org.apache.tapestry5.services.javascript.*;
 import org.greatage.domain.EntityRepository;
 
@@ -74,5 +77,31 @@ public class MutabraModule {
 	public void contributeJavaScriptStackSource(final MappedConfiguration<String, JavaScriptStack> configuration,
 												@Custom final JavaScriptStack mutabraStack) {
 		configuration.add("mutabra", mutabraStack);
+	}
+
+	@Contribute(MarkupRenderer.class)
+	public void contributeMarkupRenderer(final OrderedConfiguration<MarkupRendererFilter> configuration,
+										 final Environment environment) {
+		final MarkupRendererFilter validationDecorator = new MarkupRendererFilter() {
+			public void renderMarkup(MarkupWriter writer, MarkupRenderer renderer) {
+				environment.push(ValidationDecorator.class, new CustomValidationDecorator(environment, writer));
+				renderer.renderMarkup(writer);
+				environment.pop(ValidationDecorator.class);
+			}
+		};
+		configuration.add("CustomValidationDecorator", validationDecorator, "after:DefaultValidationDecorator");
+	}
+
+	@Contribute(PartialMarkupRenderer.class)
+	public void contributePartialMarkupRenderer(final OrderedConfiguration<PartialMarkupRendererFilter> configuration,
+												final Environment environment) {
+		final PartialMarkupRendererFilter validationDecorator = new PartialMarkupRendererFilter() {
+			public void renderMarkup(MarkupWriter writer, JSONObject reply, PartialMarkupRenderer renderer) {
+				environment.push(ValidationDecorator.class, new CustomValidationDecorator(environment, writer));
+				renderer.renderMarkup(writer, reply);
+				environment.pop(ValidationDecorator.class);
+			}
+		};
+		configuration.add("CustomValidationDecorator", validationDecorator, "after:DefaultValidationDecorator");
 	}
 }

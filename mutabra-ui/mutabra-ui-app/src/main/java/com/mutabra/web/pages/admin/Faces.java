@@ -42,7 +42,8 @@ public class Faces extends AbstractPage {
 		faceService.delete(face);
 	}
 
-	void onSuccess() {
+	Object onSuccess() {
 		faceService.saveOrUpdate(entityDialog.getValue());
+		return this;
 	}
 }

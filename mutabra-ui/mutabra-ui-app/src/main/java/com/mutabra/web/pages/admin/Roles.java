@@ -42,7 +42,8 @@ public class Roles extends AbstractPage {
 		roleService.delete(role);
 	}
 
-	void onSuccess() {
+	Object onSuccess() {
 		roleService.saveOrUpdate(entityDialog.getValue());
+		return this;
 	}
 }
