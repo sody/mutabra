@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class LiquibaseChangeSet implements ChangeSet {
+public class LiquibaseDatabaseService implements DatabaseService {
 	private boolean skip;
 	private boolean dropFirst;
 	private String contexts;
@@ -24,11 +24,11 @@ public class LiquibaseChangeSet implements ChangeSet {
 	private final DataSource dataSource;
 	private final ResourceAccessor resourceAccessor;
 
-	protected LiquibaseChangeSet(final DataSource dataSource) {
+	protected LiquibaseDatabaseService(final DataSource dataSource) {
 		this(dataSource, new ClassLoaderResourceAccessor());
 	}
 
-	protected LiquibaseChangeSet(final DataSource dataSource, final ResourceAccessor resourceAccessor) {
+	protected LiquibaseDatabaseService(final DataSource dataSource, final ResourceAccessor resourceAccessor) {
 		this.dataSource = dataSource;
 		this.resourceAccessor = resourceAccessor;
 	}
@@ -65,7 +65,7 @@ public class LiquibaseChangeSet implements ChangeSet {
 		this.changeLog = changeLog;
 	}
 
-	public void execute() {
+	public void update() {
 		if (isSkip()) {
 //			log.info("LiquiBase skipped due to skip flag configuration");
 			return;
