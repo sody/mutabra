@@ -5,9 +5,9 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
 	<preConditions>
-		<dbms type="mysql"/>
+		<dbms type="hsqldb"/>
 	</preConditions>
 
-	<include file="1.0/release-changelog.xml" relativeToChangelogFile="true"/>
+	<include file="release-1.0.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

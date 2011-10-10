@@ -367,6 +367,7 @@
 				<jdbc.username>sa</jdbc.username>
 				<jdbc.password></jdbc.password>
 				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
+				<liquibase.url>changelog/hsqldb/project-changelog.xml</liquibase.url>
 			</properties>
 		</profile>
 

@@ -1,5 +1,6 @@
 package com.mutabra.web.services;
 
+import com.mutabra.db.RepositoryData;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.Translation;
 import com.mutabra.domain.TranslationImpl;
@@ -12,12 +13,13 @@ import com.mutabra.domain.security.*;
 import com.mutabra.services.CodedEntityFilterProcessor;
 import com.mutabra.services.TranslationFilterProcessor;
 import com.mutabra.services.security.AccountFilterProcessor;
-import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ScopeConstants;
-import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Startup;
 import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
+import org.greatage.db.ChangeSet;
+import org.greatage.db.DatabaseService;
+import org.greatage.db.DefaultDatabaseService;
 import org.greatage.domain.BaseFilterProcessor;
 import org.greatage.domain.CompositeFilterProcessor;
 import org.greatage.domain.EntityFilterProcessor;
@@ -41,6 +43,13 @@ public class DomainModule {
 		binder.bind(EntityRepository.class, JdoRepository.class);
 		binder.bind(JdoExecutor.class, JdoExecutorImpl.class).scope(ScopeConstants.PERTHREAD);
 		binder.bind(EntityFilterProcessor.class, CompositeFilterProcessor.class);
+
+		binder.bind(DatabaseService.class, DefaultDatabaseService.class);
+	}
+
+	@Contribute(DatabaseService.class)
+	public void contributeDatabaseService(final OrderedConfiguration<ChangeSet> configuration) {
+		configuration.addInstance("gae", RepositoryData.class);
 	}
 
 	public PersistenceManagerFactory buildPersistenceManagerFactory(final Map<String, String> jdoConfiguration) {
@@ -84,5 +93,10 @@ public class DomainModule {
 		configuration.addInstance(CodedEntityFilterProcessor.class);
 		configuration.addInstance(TranslationFilterProcessor.class);
 		configuration.addInstance(AccountFilterProcessor.class);
+	}
+
+	@Startup
+	public void updateDatabase(final DatabaseService databaseService) {
+		databaseService.update();
 	}
 }

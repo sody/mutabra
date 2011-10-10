@@ -63,6 +63,16 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mutabra</groupId>
+			<artifactId>mutabra-db-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mutabra</groupId>
+			<artifactId>mutabra-db-data</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mutabra</groupId>
 			<artifactId>mutabra-domain-services</artifactId>
 		</dependency>
 
