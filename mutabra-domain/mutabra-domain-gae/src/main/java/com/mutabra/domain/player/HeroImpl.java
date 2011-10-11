@@ -1,18 +1,13 @@
 package com.mutabra.domain.player;
 
 import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.common.Face;
-import com.mutabra.domain.common.FaceImpl;
-import com.mutabra.domain.common.Level;
-import com.mutabra.domain.common.LevelImpl;
-import com.mutabra.domain.common.Race;
-import com.mutabra.domain.common.RaceImpl;
+import com.mutabra.domain.Tables;
+import com.mutabra.domain.common.*;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.AccountImpl;
 
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,8 +15,7 @@ import java.util.Set;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity
-@Table(name = "HERO")
+@PersistenceCapable(table = Tables.HERO)
 public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	@Persistent

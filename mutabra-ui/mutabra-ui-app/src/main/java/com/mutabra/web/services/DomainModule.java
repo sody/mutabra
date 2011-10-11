@@ -1,6 +1,9 @@
 package com.mutabra.web.services;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.mutabra.db.GAEDatabaseService;
+import com.mutabra.db.MutabraChangeLog;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.Translation;
 import com.mutabra.domain.TranslationImpl;
@@ -21,6 +24,8 @@ import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Startup;
 import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
 import org.greatage.db.DatabaseService;
+import org.greatage.db.DefaultDatabaseService;
+import org.greatage.db.gae.GAEDatabase;
 import org.greatage.domain.BaseFilterProcessor;
 import org.greatage.domain.CompositeFilterProcessor;
 import org.greatage.domain.EntityFilterProcessor;
@@ -44,8 +49,10 @@ public class DomainModule {
 		binder.bind(EntityRepository.class, JdoRepository.class);
 		binder.bind(JdoExecutor.class, JdoExecutorImpl.class).scope(ScopeConstants.PERTHREAD);
 		binder.bind(EntityFilterProcessor.class, CompositeFilterProcessor.class);
+	}
 
-		binder.bind(DatabaseService.class, GAEDatabaseService.class);
+	public DatabaseService buildDatabaseService() {
+		return new DefaultDatabaseService(new GAEDatabase(), new MutabraChangeLog());
 	}
 
 	public PersistenceManagerFactory buildPersistenceManagerFactory(final Map<String, String> jdoConfiguration) {

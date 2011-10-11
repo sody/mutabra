@@ -1,6 +1,7 @@
 package com.mutabra.domain.player;
 
 import com.mutabra.domain.BaseEntityImpl;
+import com.mutabra.domain.Tables;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardImpl;
 
@@ -11,7 +12,7 @@ import javax.jdo.annotations.Persistent;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable
+@PersistenceCapable(table = Tables.HERO_CARD)
 public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
 	@Persistent

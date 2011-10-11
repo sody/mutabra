@@ -3,6 +3,7 @@ package com.mutabra.domain.security;
 import com.google.appengine.api.datastore.Key;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
+import com.mutabra.domain.Tables;
 import com.mutabra.domain.player.Hero;
 
 import javax.jdo.annotations.NotPersistent;
@@ -18,7 +19,7 @@ import java.util.TimeZone;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable
+@PersistenceCapable(table = Tables.ACCOUNT)
 public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Persistent

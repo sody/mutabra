@@ -3,6 +3,7 @@ package com.mutabra.domain.security;
 import com.google.appengine.api.datastore.Key;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.Keys;
+import com.mutabra.domain.Tables;
 import com.mutabra.domain.TranslationType;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable
+@PersistenceCapable(table = Tables.ROLE)
 public class RoleImpl extends CodedEntityImpl implements Role {
 	public RoleImpl() {
 		super("ROLE", TranslationType.STANDARD);

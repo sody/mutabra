@@ -8,7 +8,7 @@ import java.util.Locale;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable
+@PersistenceCapable(table = Tables.TRANSLATION)
 public class TranslationImpl extends BaseEntityImpl implements Translation {
 
 	@Persistent

@@ -1,0 +1,20 @@
+package org.greatage.db.gae;
+
+import org.greatage.db.ChangeSetBuilder;
+import org.greatage.db.StatementBuilder;
+
+/**
+ * @author Ivan Khalopik
+ * @since 1.0
+ */
+public abstract class GAEStatement implements StatementBuilder, DataStoreCallback<Object> {
+	private final GAEChangeSet changeSet;
+
+	GAEStatement(final GAEChangeSet changeSet) {
+		this.changeSet = changeSet;
+	}
+
+	public ChangeSetBuilder end() {
+		return changeSet.endStatement(this);
+	}
+}
