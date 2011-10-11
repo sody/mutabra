@@ -1,8 +1,5 @@
 package com.mutabra.web.services;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.mutabra.db.GAEDatabaseService;
 import com.mutabra.db.MutabraChangeLog;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.Translation;
@@ -16,12 +13,14 @@ import com.mutabra.domain.security.*;
 import com.mutabra.services.CodedEntityFilterProcessor;
 import com.mutabra.services.TranslationFilterProcessor;
 import com.mutabra.services.security.AccountFilterProcessor;
+import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Startup;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
 import org.greatage.db.DatabaseService;
 import org.greatage.db.DefaultDatabaseService;
@@ -78,6 +77,7 @@ public class DomainModule {
 		configuration.add(Account.class, AccountImpl.class);
 		configuration.add(Role.class, RoleImpl.class);
 		configuration.add(Permission.class, PermissionImpl.class);
+		configuration.add(ChangeSet.class, ChangeSetImpl.class);
 
 		configuration.add(Face.class, FaceImpl.class);
 		configuration.add(Race.class, RaceImpl.class);
@@ -99,7 +99,10 @@ public class DomainModule {
 	}
 
 	@Startup
-	public void updateDatabase(final DatabaseService databaseService) {
-		databaseService.update();
+	public void updateDatabase(final DatabaseService databaseService,
+							   final @Symbol(SymbolConstants.PRODUCTION_MODE) boolean productionMode) {
+		if (!productionMode) {
+			databaseService.update();
+		}
 	}
 }

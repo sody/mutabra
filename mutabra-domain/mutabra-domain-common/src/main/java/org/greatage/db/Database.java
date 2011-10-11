@@ -10,6 +10,6 @@ public interface Database {
 
 	void close();
 
-	ChangeSetBuilder changeSet(String id, String author);
+	ChangeSetBuilder changeSet(String id, String author, String location);
 
 }

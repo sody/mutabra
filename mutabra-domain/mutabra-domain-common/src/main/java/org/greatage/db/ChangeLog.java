@@ -9,16 +9,16 @@ public abstract class ChangeLog {
 
 	private Database database;
 
-	protected ChangeSetBuilder begin(final String id) {
-		return begin(id, DEFAULT_AUTHOR);
+	protected ChangeSetBuilder begin(final String title) {
+		return begin(title, DEFAULT_AUTHOR);
 	}
 
-	protected ChangeSetBuilder begin(final String id, final String author) {
+	protected ChangeSetBuilder begin(final String title, final String author) {
 		assert database != null;
-		assert id != null;
+		assert title != null;
 		assert author != null;
 
-		return database.changeSet(id, author);
+		return database.changeSet(title, author, getClass().getName());
 	}
 
 	protected void add(final ChangeLog changeLog) {

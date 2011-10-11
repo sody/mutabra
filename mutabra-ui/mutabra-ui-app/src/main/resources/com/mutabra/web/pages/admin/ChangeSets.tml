@@ -1,0 +1,13 @@
+<html t:type="layout" buttons="update"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+<t:grid source="source" row="row" include="title,author,location,executed,checkSum,comment"/>
+
+<p:updateMenuItem>
+	<t:button primary="literal:ui-icon-circle-triangle-e">
+		<t:eventlink event="update">${message:button.update.title}</t:eventlink>
+	</t:button>
+</p:updateMenuItem>
+
+</html>

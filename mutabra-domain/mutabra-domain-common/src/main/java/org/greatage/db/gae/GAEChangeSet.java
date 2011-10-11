@@ -12,8 +12,9 @@ import java.util.*;
  */
 public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object> {
 	private final GAEDatabase database;
-	private final String id;
+	private final String title;
 	private final String author;
+	private final String location;
 
 	private String comment;
 	private Set<String> context = new HashSet<String>();
@@ -21,10 +22,31 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 	private final List<GAEStatement> statements = new ArrayList<GAEStatement>();
 	private GAEStatement statement;
 
-	GAEChangeSet(final GAEDatabase database, final String id, final String author) {
+	GAEChangeSet(final GAEDatabase database, final String title, final String author, final String location) {
 		this.database = database;
-		this.id = id;
+		this.title = title;
 		this.author = author;
+		this.location = location;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public String getCheckSum() {
+		return "_FAKE_CHECK_SUM_";
 	}
 
 	public ChangeSetBuilder comment(final String comment) {
@@ -51,10 +73,6 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 			gaeStatement.doInDataStore(dataStore);
 		}
 		return null;
-	}
-
-	private String calculateCheckSum() {
-		return "_FAKE_CHECK_SUM_";
 	}
 
 	<T extends GAEStatement> T beginStatement(final T statement) {
