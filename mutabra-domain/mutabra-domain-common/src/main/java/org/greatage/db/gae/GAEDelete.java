@@ -5,12 +5,13 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
 import org.greatage.db.ConditionEntryBuilder;
 import org.greatage.db.DeleteBuilder;
+import org.greatage.util.DescriptionBuilder;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class GAEDelete extends GAEConditionalStatement implements DeleteBuilder {
+public class GAEDelete extends GAEConditionalChange implements DeleteBuilder {
 	private final String entityName;
 
 	GAEDelete(final GAEChangeSet changeSet, final String entityName) {
@@ -31,5 +32,17 @@ public class GAEDelete extends GAEConditionalStatement implements DeleteBuilder 
 			dataStore.delete(entity.getKey());
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		final DescriptionBuilder builder = new DescriptionBuilder(getClass());
+		builder.append(entityName);
+		final DescriptionBuilder conditionsBuilder = new DescriptionBuilder("Conditions");
+		for (Query.FilterPredicate filter : getConditions()) {
+			conditionsBuilder.append(filter);
+		}
+		builder.append("conditions", conditionsBuilder);
+		return builder.toString();
 	}
 }

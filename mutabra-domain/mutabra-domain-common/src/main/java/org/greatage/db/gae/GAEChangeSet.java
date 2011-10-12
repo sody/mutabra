@@ -1,10 +1,7 @@
 package org.greatage.db.gae;
 
 import com.google.appengine.api.datastore.DatastoreService;
-import org.greatage.db.ChangeSetBuilder;
-import org.greatage.db.DeleteBuilder;
-import org.greatage.db.InsertBuilder;
-import org.greatage.db.UpdateBuilder;
+import org.greatage.db.*;
 
 import java.util.*;
 
@@ -21,8 +18,8 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 	private String comment;
 	private Set<String> context = new HashSet<String>();
 
-	private final List<GAEStatement> statements = new ArrayList<GAEStatement>();
-	private GAEStatement statement;
+	private final List<GAEChange> changes = new ArrayList<GAEChange>();
+	private GAEChange lastChange;
 
 	GAEChangeSet(final GAEDatabase database, final String title, final String author, final String location) {
 		this.database = database;
@@ -48,7 +45,11 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 	}
 
 	public String getCheckSum() {
-		return "_FAKE_CHECK_SUM_";
+		final StringBuilder builder = new StringBuilder().append(comment);
+		for (GAEChange change : changes) {
+			builder.append(":").append(change);
+		}
+		return CheckSumUtils.compositeCheckSum(builder.toString());
 	}
 
 	public ChangeSetBuilder comment(final String comment) {
@@ -62,43 +63,45 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 	}
 
 	public InsertBuilder insert(final String entityName) {
-		return beginStatement(new GAEInsert(this, entityName));
+		return beginChange(new GAEInsert(this, entityName));
 	}
 
 	public UpdateBuilder update(final String entityName) {
-		return beginStatement(new GAEUpdate(this, entityName));
+		return beginChange(new GAEUpdate(this, entityName));
 	}
 
 	public DeleteBuilder delete(final String entityName) {
-		return beginStatement(new GAEDelete(this, entityName));
+		return beginChange(new GAEDelete(this, entityName));
 	}
 
 	public void end() {
+		ensureChangeClosed();
 		database.endChangeSet(this);
 	}
 
 	public Object doInDataStore(final DatastoreService dataStore) {
-		//todo: do all work here
-		if (this.statement != null) {
-			this.statement.end();
-		}
-		for (GAEStatement gaeStatement : statements) {
-			gaeStatement.doInDataStore(dataStore);
+		for (GAEChange change : changes) {
+			change.doInDataStore(dataStore);
 		}
 		return null;
 	}
 
-	<T extends GAEStatement> T beginStatement(final T statement) {
-		if (this.statement != null) {
-			this.statement.end();
-		}
-		this.statement = statement;
-		return statement;
+	<T extends GAEChange> T beginChange(final T change) {
+		ensureChangeClosed();
+		lastChange = change;
+		return change;
 	}
 
-	<T extends GAEStatement> GAEChangeSet endStatement(final T statement) {
-		statements.add(statement);
-		this.statement = null;
+	<T extends GAEChange> GAEChangeSet endChange(final T change) {
+		changes.add(change);
+		lastChange = null;
 		return this;
+	}
+
+	private void ensureChangeClosed() {
+		if (lastChange != null) {
+			lastChange.end();
+			lastChange = null;
+		}
 	}
 }

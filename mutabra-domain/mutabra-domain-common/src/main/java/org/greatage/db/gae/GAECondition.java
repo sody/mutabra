@@ -1,16 +1,13 @@
 package org.greatage.db.gae;
 
 import com.google.appengine.api.datastore.Query;
-import org.greatage.db.ChangeSetBuilder;
-import org.greatage.db.ChildBuilder;
-import org.greatage.db.ConditionBuilder;
-import org.greatage.db.ConditionEntryBuilder;
+import org.greatage.db.*;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class GAECondition<T extends ChildBuilder<ChangeSetBuilder>> implements ConditionBuilder<T> {
+public class GAECondition<T extends ChangeBuilder> implements ConditionBuilder<T> {
 	private final T statement;
 
 	GAECondition(final T statement) {
@@ -57,7 +54,7 @@ public class GAECondition<T extends ChildBuilder<ChangeSetBuilder>> implements C
 		}
 
 		GAECondition<T> addCondition(final Query.FilterOperator operator, final Object value) {
-			((GAEConditionalStatement) statement).addCondition(new Query.FilterPredicate(propertyName, operator, value));
+			((GAEConditionalChange) statement).addCondition(new Query.FilterPredicate(propertyName, operator, value));
 			return GAECondition.this;
 		}
 	}

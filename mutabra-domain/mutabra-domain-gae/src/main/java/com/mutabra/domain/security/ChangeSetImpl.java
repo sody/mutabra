@@ -26,7 +26,7 @@ public class ChangeSetImpl extends BaseEntityImpl implements ChangeSet {
 	private String comment;
 
 	@Persistent
-	private Date executed;
+	private Date executedAt;
 
 	@Persistent
 	private String checkSum;
@@ -47,8 +47,8 @@ public class ChangeSetImpl extends BaseEntityImpl implements ChangeSet {
 		return comment;
 	}
 
-	public Date getExecuted() {
-		return executed;
+	public Date getExecutedAt() {
+		return executedAt;
 	}
 
 	public String getCheckSum() {

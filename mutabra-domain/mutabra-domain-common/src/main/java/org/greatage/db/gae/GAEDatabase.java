@@ -1,10 +1,7 @@
 package org.greatage.db.gae;
 
 import com.google.appengine.api.datastore.*;
-import org.greatage.db.ChangeLog;
-import org.greatage.db.ChangeSetBuilder;
-import org.greatage.db.Database;
-import org.greatage.db.DatabaseException;
+import org.greatage.db.*;
 
 import java.util.Date;
 
@@ -28,13 +25,16 @@ public class GAEDatabase implements Database {
 	public synchronized void update(final ChangeLog changeLog) {
 		lock();
 
-		changeLog.execute(this);
+		try {
+			changeLog.execute(this);
 
-		if (changeSet != null) {
-			changeSet.end();
-			changeSet = null;
+			if (changeSet != null) {
+				changeSet.end();
+				changeSet = null;
+			}
+		} finally {
+			unlock();
 		}
-		unlock();
 	}
 
 	public ChangeSetBuilder changeSet(final String title, final String author, final String location) {
@@ -58,6 +58,16 @@ public class GAEDatabase implements Database {
 		if (logEntry == null) {
 			changeSet.doInDataStore(dataStore);
 			log(changeSet);
+		} else {
+			final String actual = changeSet.getCheckSum();
+			final String expected = (String) logEntry.getProperty(SystemTables.LOG.CHECKSUM);
+			if (!CheckSumUtils.isValid(expected)) {
+				logEntry.setProperty(SystemTables.LOG.CHECKSUM, actual);
+				dataStore.put(logEntry);
+			} else if (!expected.equals(actual)) {
+				throw new DatabaseException(String.format("CheckSum check failed for change set '%s : %s : %s'. Should be '%s' but was '%s'",
+						changeSet.getTitle(), changeSet.getAuthor(), changeSet.getLocation(), expected, actual));
+			}
 		}
 		this.changeSet = null;
 	}

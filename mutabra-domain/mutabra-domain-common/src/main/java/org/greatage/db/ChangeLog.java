@@ -9,6 +9,24 @@ public abstract class ChangeLog {
 
 	private Database database;
 
+	private String location;
+
+	protected ChangeLog() {
+		location = getClass().getName();
+	}
+
+	public final void execute(final Database database) {
+		this.database = database;
+		init();
+		this.database = null;
+	}
+
+	protected void location(final String location) {
+		assert location != null;
+
+		this.location = location;
+	}
+
 	protected ChangeSetBuilder begin(final String title) {
 		return begin(title, DEFAULT_AUTHOR);
 	}
@@ -18,7 +36,7 @@ public abstract class ChangeLog {
 		assert title != null;
 		assert author != null;
 
-		return database.changeSet(title, author, getClass().getName());
+		return database.changeSet(title, author, location);
 	}
 
 	protected void add(final ChangeLog changeLog) {
@@ -29,10 +47,4 @@ public abstract class ChangeLog {
 	}
 
 	protected abstract void init();
-
-	public final void execute(final Database database) {
-		this.database = database;
-		init();
-		this.database = null;
-	}
 }

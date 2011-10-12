@@ -18,7 +18,7 @@ public interface ChangeSet extends BaseEntity {
 
 	String getComment();
 
-	Date getExecuted();
+	Date getExecutedAt();
 
 	String getCheckSum();
 }

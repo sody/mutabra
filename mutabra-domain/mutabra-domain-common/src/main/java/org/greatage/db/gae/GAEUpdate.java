@@ -5,12 +5,15 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
 import org.greatage.db.ConditionEntryBuilder;
 import org.greatage.db.UpdateBuilder;
+import org.greatage.util.DescriptionBuilder;
+
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class GAEUpdate extends GAEConditionalStatement implements UpdateBuilder {
+public class GAEUpdate extends GAEConditionalChange implements UpdateBuilder {
 	private final Entity entity;
 
 	GAEUpdate(final GAEChangeSet changeSet, final String entityName) {
@@ -39,5 +42,20 @@ public class GAEUpdate extends GAEConditionalStatement implements UpdateBuilder 
 		}
 
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		final DescriptionBuilder builder = new DescriptionBuilder(getClass());
+		builder.append(entity.getKind());
+		for (Map.Entry<String, Object> entry : entity.getProperties().entrySet()) {
+			builder.append(entry.getKey(), entry.getValue());
+		}
+		final DescriptionBuilder conditionsBuilder = new DescriptionBuilder("Conditions");
+		for (Query.FilterPredicate filter : getConditions()) {
+			conditionsBuilder.append(filter);
+		}
+		builder.append("conditions", conditionsBuilder);
+		return builder.toString();
 	}
 }
