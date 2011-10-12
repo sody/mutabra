@@ -1,13 +1,15 @@
-package org.greatage.db;
+package org.greatage.db.liquibase;
 
 import liquibase.Liquibase;
-import liquibase.database.Database;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.resource.ResourceAccessor;
+import org.greatage.db.ChangeLog;
+import org.greatage.db.ChangeSetBuilder;
+import org.greatage.db.Database;
 
 import javax.sql.DataSource;
 
@@ -15,7 +17,7 @@ import javax.sql.DataSource;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class LiquibaseDatabaseService implements DatabaseService {
+public class LiquibaseDatabase implements Database {
 	private boolean skip;
 	private boolean dropFirst;
 	private String contexts;
@@ -24,11 +26,11 @@ public class LiquibaseDatabaseService implements DatabaseService {
 	private final DataSource dataSource;
 	private final ResourceAccessor resourceAccessor;
 
-	protected LiquibaseDatabaseService(final DataSource dataSource) {
+	public LiquibaseDatabase(final DataSource dataSource) {
 		this(dataSource, new ClassLoaderResourceAccessor());
 	}
 
-	protected LiquibaseDatabaseService(final DataSource dataSource, final ResourceAccessor resourceAccessor) {
+	public LiquibaseDatabase(final DataSource dataSource, final ResourceAccessor resourceAccessor) {
 		this.dataSource = dataSource;
 		this.resourceAccessor = resourceAccessor;
 	}
@@ -57,15 +59,7 @@ public class LiquibaseDatabaseService implements DatabaseService {
 		this.contexts = contexts;
 	}
 
-	public String getChangeLog() {
-		return changeLog;
-	}
-
-	public void setChangeLog(final String changeLog) {
-		this.changeLog = changeLog;
-	}
-
-	public void update() {
+	public void update(final ChangeLog changeLog) {
 		if (isSkip()) {
 //			log.info("LiquiBase skipped due to skip flag configuration");
 			return;
@@ -73,7 +67,7 @@ public class LiquibaseDatabaseService implements DatabaseService {
 
 		Liquibase liquibase = null;
 		try {
-			liquibase = createLiquibase();
+			liquibase = createLiquibase(((LiquibaseChangeLog)changeLog).getChangeLog());
 			if (isDropFirst()) {
 				liquibase.dropAll();
 			}
@@ -87,7 +81,7 @@ public class LiquibaseDatabaseService implements DatabaseService {
 				} catch (LiquibaseException e) {
 //					log.warning("Error releasing locks", e);
 				}
-				final Database database = liquibase.getDatabase();
+				final liquibase.database.Database database = liquibase.getDatabase();
 				try {
 					if (!database.isAutoCommit()) {
 						database.rollback();
@@ -100,11 +94,15 @@ public class LiquibaseDatabaseService implements DatabaseService {
 		}
 	}
 
-	protected Liquibase createLiquibase() throws Exception {
-		return new Liquibase(getChangeLog(), resourceAccessor, getDatabase());
+	public ChangeSetBuilder changeSet(final String id, final String author, final String location) {
+		throw new UnsupportedOperationException("Liquibase implementation has its own change set structure");
 	}
 
-	protected Database getDatabase() throws Exception {
+	protected Liquibase createLiquibase(final String changeLog) throws Exception {
+		return new Liquibase(changeLog, resourceAccessor, getDatabase());
+	}
+
+	protected liquibase.database.Database getDatabase() throws Exception {
 		return DatabaseFactory.getInstance().findCorrectDatabaseImplementation(getDatabaseConnection());
 	}
 

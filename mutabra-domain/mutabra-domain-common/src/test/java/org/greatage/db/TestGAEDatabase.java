@@ -49,7 +49,7 @@ public class TestGAEDatabase extends Assert {
 						.insert("department").set("name", "department1").set("company", 10l).end()
 						.end();
 
-				begin("2", "author").comment("test employee")
+				begin("3", "author").comment("test employee")
 						.insert("employee").set("name", "employee1").set("department", 10l).end()
 						.end();
 			}

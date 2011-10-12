@@ -5,11 +5,8 @@ import org.greatage.db.ChangeLog;
 import org.greatage.db.ChangeSetBuilder;
 import org.greatage.db.Database;
 import org.greatage.db.DatabaseException;
-import org.greatage.util.CompositeKey;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -18,7 +15,6 @@ import java.util.Map;
 public class GAEDatabase implements Database {
 	private final DatastoreService dataStore;
 
-	private Map<CompositeKey, Entity> logs = new HashMap<CompositeKey, Entity>();
 	private ChangeSetBuilder changeSet;
 
 	public GAEDatabase() {
@@ -31,14 +27,6 @@ public class GAEDatabase implements Database {
 
 	public synchronized void update(final ChangeLog changeLog) {
 		lock();
-		logs.clear();
-		for (Entity entity : dataStore.prepare(new Query(SystemTables.LOG.NAME)).asIterable()) {
-			final String id = (String) entity.getProperty(SystemTables.LOG.TITLE);
-			final String author = (String) entity.getProperty(SystemTables.LOG.AUTHOR);
-			final String location = (String) entity.getProperty(SystemTables.LOG.LOCATION);
-			final CompositeKey key = new CompositeKey(id, author, location);
-			logs.put(key, entity);
-		}
 
 		changeLog.execute(this);
 
@@ -46,12 +34,32 @@ public class GAEDatabase implements Database {
 			changeSet.end();
 			changeSet = null;
 		}
-		logs.clear();
 		unlock();
 	}
 
 	public ChangeSetBuilder changeSet(final String title, final String author, final String location) {
 		return beginChangeSet(new GAEChangeSet(this, title, author, location));
+	}
+
+	GAEChangeSet beginChangeSet(final GAEChangeSet changeSet) {
+		if (this.changeSet != null) {
+			this.changeSet.end();
+		}
+		this.changeSet = changeSet;
+		return changeSet;
+	}
+
+	void endChangeSet(final GAEChangeSet changeSet) {
+		final Query query = new Query(SystemTables.LOG.NAME)
+				.addFilter(SystemTables.LOG.TITLE, Query.FilterOperator.EQUAL, changeSet.getTitle())
+				.addFilter(SystemTables.LOG.AUTHOR, Query.FilterOperator.EQUAL, changeSet.getAuthor())
+				.addFilter(SystemTables.LOG.LOCATION, Query.FilterOperator.EQUAL, changeSet.getLocation());
+		final Entity logEntry = dataStore.prepare(query).asSingleEntity();
+		if (logEntry == null) {
+			changeSet.doInDataStore(dataStore);
+			log(changeSet);
+		}
+		this.changeSet = null;
 	}
 
 	private void lock() {
@@ -95,23 +103,6 @@ public class GAEDatabase implements Database {
 		logEntry.setProperty(SystemTables.LOG.CHECKSUM, changeSet.getCheckSum());
 		logEntry.setProperty(SystemTables.LOG.EXECUTED_AT, new Date());
 		dataStore.put(logEntry);
-	}
-
-	GAEChangeSet beginChangeSet(final GAEChangeSet changeSet) {
-		if (this.changeSet != null) {
-			this.changeSet.end();
-		}
-		this.changeSet = changeSet;
-		return changeSet;
-	}
-
-	void endChangeSet(final GAEChangeSet changeSet) {
-		final CompositeKey key = new CompositeKey(changeSet.getTitle(), changeSet.getAuthor(), changeSet.getLocation());
-		if (!logs.containsKey(key)) {
-			changeSet.doInDataStore(dataStore);
-			log(changeSet);
-		}
-		this.changeSet = null;
 	}
 
 	interface SystemTables {
