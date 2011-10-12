@@ -6,9 +6,7 @@ package org.greatage.db;
  */
 public interface Database {
 
-	void connect();
-
-	void close();
+	void update(ChangeLog changeLog);
 
 	ChangeSetBuilder changeSet(String id, String author, String location);
 

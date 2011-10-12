@@ -1,6 +1,7 @@
 package org.greatage.db.gae;
 
 import com.google.appengine.api.datastore.*;
+import org.greatage.db.ChangeLog;
 import org.greatage.db.ChangeSetBuilder;
 import org.greatage.db.Database;
 import org.greatage.db.DatabaseException;
@@ -15,9 +16,6 @@ import java.util.Map;
  * @since 1.0
  */
 public class GAEDatabase implements Database {
-	private static final String LOG_TABLE = "DATABASE_CHANGE_LOG";
-	private static final String LOCK_TABLE = "DATABASE_CHANGE_LOG_LOCK";
-
 	private final DatastoreService dataStore;
 
 	private Map<CompositeKey, Entity> logs = new HashMap<CompositeKey, Entity>();
@@ -31,21 +29,19 @@ public class GAEDatabase implements Database {
 		this.dataStore = dataStore;
 	}
 
-	public void connect() {
+	public synchronized void update(final ChangeLog changeLog) {
 		lock();
-
 		logs.clear();
-		for (Entity entity : dataStore.prepare(new Query(LOG_TABLE)).asIterable()) {
-			final String id = (String) entity.getProperty("title");
-			final String author = (String) entity.getProperty("author");
-			final String location = (String) entity.getProperty("location");
+		for (Entity entity : dataStore.prepare(new Query(SystemTables.LOG.NAME)).asIterable()) {
+			final String id = (String) entity.getProperty(SystemTables.LOG.TITLE);
+			final String author = (String) entity.getProperty(SystemTables.LOG.AUTHOR);
+			final String location = (String) entity.getProperty(SystemTables.LOG.LOCATION);
 			final CompositeKey key = new CompositeKey(id, author, location);
-
 			logs.put(key, entity);
 		}
-	}
 
-	public void close() {
+		changeLog.execute(this);
+
 		if (changeSet != null) {
 			changeSet.end();
 			changeSet = null;
@@ -61,42 +57,43 @@ public class GAEDatabase implements Database {
 	private void lock() {
 		Entity lock = null;
 		try {
-			lock = dataStore.get(KeyFactory.createKey(LOCK_TABLE, 1l));
+			lock = dataStore.get(KeyFactory.createKey(SystemTables.LOCK.NAME, SystemTables.LOCK.ID));
 		} catch (EntityNotFoundException e) {
 			// it doesn't exist, so we need to create one
 		}
 		if (lock == null) {
-			lock = new Entity(LOCK_TABLE, 1l);
+			lock = new Entity(SystemTables.LOCK.NAME, SystemTables.LOCK.ID);
 		}
-		if (lock.hasProperty("lockedBy")) {
-			throw new DatabaseException(String.format("Already locked by '%s'. Skipping update.", lock.getProperty("lockedBy")));
+		if (lock.hasProperty(SystemTables.LOCK.LOCKED_AT)) {
+			//noinspection MalformedFormatString
+			throw new DatabaseException(String.format("Already locked at '%1$tF %1$tT'. Skipping update.",
+					lock.getProperty(SystemTables.LOCK.LOCKED_AT)));
 		}
-		lock.setProperty("lockedBy", "me");
+		lock.setProperty(SystemTables.LOCK.LOCKED_AT, new Date());
 		dataStore.put(lock);
 	}
 
 	private void unlock() {
 		Entity lock = null;
 		try {
-			lock = dataStore.get(KeyFactory.createKey(LOCK_TABLE, 1l));
+			lock = dataStore.get(KeyFactory.createKey(SystemTables.LOCK.NAME, SystemTables.LOCK.ID));
 		} catch (EntityNotFoundException e) {
 			// it doesn't exist, so we need to create one
 		}
-		if (lock == null || !lock.hasProperty("lockedBy")) {
-			throw new DatabaseException(String.format("Not locked. Skipping."));
+		if (lock != null && lock.hasProperty(SystemTables.LOCK.LOCKED_AT)) {
+			lock.removeProperty(SystemTables.LOCK.LOCKED_AT);
+			dataStore.put(lock);
 		}
-		lock.removeProperty("lockedBy");
-		dataStore.put(lock);
 	}
 
 	private void log(final GAEChangeSet changeSet) {
-		final Entity logEntry = new Entity(LOG_TABLE);
-		logEntry.setProperty("title", changeSet.getTitle());
-		logEntry.setProperty("author", changeSet.getAuthor());
-		logEntry.setProperty("location", changeSet.getLocation());
-		logEntry.setProperty("comment", changeSet.getComment());
-		logEntry.setProperty("checkSum", changeSet.getCheckSum());
-		logEntry.setProperty("executed", new Date());
+		final Entity logEntry = new Entity(SystemTables.LOG.NAME);
+		logEntry.setProperty(SystemTables.LOG.TITLE, changeSet.getTitle());
+		logEntry.setProperty(SystemTables.LOG.AUTHOR, changeSet.getAuthor());
+		logEntry.setProperty(SystemTables.LOG.LOCATION, changeSet.getLocation());
+		logEntry.setProperty(SystemTables.LOG.COMMENT, changeSet.getComment());
+		logEntry.setProperty(SystemTables.LOG.CHECKSUM, changeSet.getCheckSum());
+		logEntry.setProperty(SystemTables.LOG.EXECUTED_AT, new Date());
 		dataStore.put(logEntry);
 	}
 
@@ -115,5 +112,24 @@ public class GAEDatabase implements Database {
 			log(changeSet);
 		}
 		this.changeSet = null;
+	}
+
+	interface SystemTables {
+		interface LOCK {
+			long ID = 1l;
+
+			String NAME = "DATABASE_CHANGE_LOG_LOCK";
+			String LOCKED_AT = "lockedAt";
+		}
+
+		interface LOG {
+			String NAME = "DATABASE_CHANGE_LOG";
+			String TITLE = "title";
+			String AUTHOR = "author";
+			String LOCATION = "location";
+			String COMMENT = "comment";
+			String CHECKSUM = "checkSum";
+			String EXECUTED_AT = "executedAt";
+		}
 	}
 }

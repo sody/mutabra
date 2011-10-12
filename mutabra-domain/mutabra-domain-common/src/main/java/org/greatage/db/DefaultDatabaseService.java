@@ -14,8 +14,6 @@ public class DefaultDatabaseService implements DatabaseService {
 	}
 
 	public void update() {
-		database.connect();
-		changeLog.execute(database);
-		database.close();
+		database.update(changeLog);
 	}
 }
