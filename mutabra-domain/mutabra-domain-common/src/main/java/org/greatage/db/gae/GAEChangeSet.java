@@ -2,7 +2,9 @@ package org.greatage.db.gae;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import org.greatage.db.ChangeSetBuilder;
+import org.greatage.db.DeleteBuilder;
 import org.greatage.db.InsertBuilder;
+import org.greatage.db.UpdateBuilder;
 
 import java.util.*;
 
@@ -63,12 +65,23 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 		return beginStatement(new GAEInsert(this, entityName));
 	}
 
+	public UpdateBuilder update(final String entityName) {
+		return beginStatement(new GAEUpdate(this, entityName));
+	}
+
+	public DeleteBuilder delete(final String entityName) {
+		return beginStatement(new GAEDelete(this, entityName));
+	}
+
 	public void end() {
 		database.endChangeSet(this);
 	}
 
 	public Object doInDataStore(final DatastoreService dataStore) {
 		//todo: do all work here
+		if (this.statement != null) {
+			this.statement.end();
+		}
 		for (GAEStatement gaeStatement : statements) {
 			gaeStatement.doInDataStore(dataStore);
 		}
@@ -83,7 +96,7 @@ public class GAEChangeSet implements ChangeSetBuilder, DataStoreCallback<Object>
 		return statement;
 	}
 
-	<T extends GAEStatement> ChangeSetBuilder endStatement(final T statement) {
+	<T extends GAEStatement> GAEChangeSet endStatement(final T statement) {
 		statements.add(statement);
 		this.statement = null;
 		return this;

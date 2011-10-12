@@ -46,6 +46,10 @@ public class GAEDatabase implements Database {
 	}
 
 	public void close() {
+		if (changeSet != null) {
+			changeSet.end();
+			changeSet = null;
+		}
 		logs.clear();
 		unlock();
 	}
@@ -85,6 +89,17 @@ public class GAEDatabase implements Database {
 		dataStore.put(lock);
 	}
 
+	private void log(final GAEChangeSet changeSet) {
+		final Entity logEntry = new Entity(LOG_TABLE);
+		logEntry.setProperty("title", changeSet.getTitle());
+		logEntry.setProperty("author", changeSet.getAuthor());
+		logEntry.setProperty("location", changeSet.getLocation());
+		logEntry.setProperty("comment", changeSet.getComment());
+		logEntry.setProperty("checkSum", changeSet.getCheckSum());
+		logEntry.setProperty("executed", new Date());
+		dataStore.put(logEntry);
+	}
+
 	GAEChangeSet beginChangeSet(final GAEChangeSet changeSet) {
 		if (this.changeSet != null) {
 			this.changeSet.end();
@@ -97,14 +112,7 @@ public class GAEDatabase implements Database {
 		final CompositeKey key = new CompositeKey(changeSet.getTitle(), changeSet.getAuthor(), changeSet.getLocation());
 		if (!logs.containsKey(key)) {
 			changeSet.doInDataStore(dataStore);
-			final Entity logEntry = new Entity(LOG_TABLE);
-			logEntry.setProperty("title", changeSet.getTitle());
-			logEntry.setProperty("author", changeSet.getAuthor());
-			logEntry.setProperty("location", changeSet.getLocation());
-			logEntry.setProperty("comment", changeSet.getComment());
-			logEntry.setProperty("checkSum", changeSet.getCheckSum());
-			logEntry.setProperty("executed", new Date());
-			dataStore.put(logEntry);
+			log(changeSet);
 		}
 		this.changeSet = null;
 	}
