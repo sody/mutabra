@@ -16,7 +16,13 @@ public class DefaultDatabaseService implements DatabaseService {
 		this.changeLog = changeLog;
 	}
 
-	public void update() {
-		database.update(changeLog);
+	public void update(final boolean dropFirst, final boolean clearCheckSums) {
+		final Database.UpdateOptions updateOptions = database.options();
+		if (dropFirst) {
+			updateOptions.dropFirst();
+		} else if (clearCheckSums) {
+			updateOptions.clearCheckSums();
+		}
+		updateOptions.update(changeLog);
 	}
 }

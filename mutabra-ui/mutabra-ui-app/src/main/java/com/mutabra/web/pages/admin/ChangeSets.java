@@ -26,11 +26,17 @@ public class ChangeSets extends AbstractPage {
 	@Property
 	private ChangeSet row;
 
+	@Property
+	private boolean dropFirst;
+
+	@Property
+	private boolean clearCheckSums;
+
 	public GridDataSource getSource() {
 		return new BaseEntityDataSource<ChangeSet>(changeSetService.query(), ChangeSet.class);
 	}
 
-	void onUpdate() {
-		databaseService.update();
+	void onSuccess() {
+		databaseService.update(dropFirst, clearCheckSums);
 	}
 }

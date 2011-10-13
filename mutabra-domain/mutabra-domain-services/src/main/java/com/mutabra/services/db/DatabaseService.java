@@ -6,5 +6,5 @@ package com.mutabra.services.db;
  */
 public interface DatabaseService {
 
-	void update();
+	void update(final boolean dropFirst, final boolean clearCheckSums);
 }

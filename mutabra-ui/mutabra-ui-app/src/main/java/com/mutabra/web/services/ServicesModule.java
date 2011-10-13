@@ -6,6 +6,7 @@ import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.ChangeSet;
+import com.mutabra.domain.security.Permission;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
@@ -15,6 +16,7 @@ import com.mutabra.services.common.LevelQuery;
 import com.mutabra.services.common.RaceQuery;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.services.security.ChangeSetQuery;
+import com.mutabra.services.security.PermissionQuery;
 import com.mutabra.services.security.RoleQuery;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.annotations.Advise;
@@ -44,6 +46,10 @@ public class ServicesModule {
 
 	public BaseEntityService<Role, RoleQuery> buildRoleService() {
 		return new BaseEntityServiceImpl<Role, RoleQuery>(repository, Role.class, RoleQuery.class);
+	}
+
+	public BaseEntityService<Permission, PermissionQuery> buildPermissionService() {
+		return new BaseEntityServiceImpl<Permission, PermissionQuery>(repository, Permission.class, PermissionQuery.class);
 	}
 
 	public BaseEntityService<Account, AccountQuery> buildAccountService() {

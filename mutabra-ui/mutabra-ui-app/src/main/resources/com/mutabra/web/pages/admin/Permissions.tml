@@ -1,0 +1,14 @@
+<html t:type="layout"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+<t:grid source="source" row="row" include="code" add="id,actions" reorder="id,code,actions">
+	<p:idCell>${row.id}</p:idCell>
+	<p:actionsCell>
+		<t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit.title}</t:eventlink>
+	</p:actionsCell>
+</t:grid>
+
+<t:admin.permissionDialog t:id="entityDialog"/>
+
+</html>

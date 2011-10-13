@@ -6,8 +6,35 @@
 
 <p:updateMenuItem>
 	<t:button primary="literal:ui-icon-circle-triangle-e">
-		<t:eventlink event="update">${message:button.update.title}</t:eventlink>
+		<t:dialoglink dialog="updateDialog">${message:button.update.title}</t:dialoglink>
 	</t:button>
 </p:updateMenuItem>
+
+<t:dialog t:id="updateDialog" title="${message:update.title}" modal="true">
+	<t:form>
+		<div class="t-beaneditor-row">
+			<t:label for="dropFirst"/>
+			<t:checkbox t:id="dropFirst" value="dropFirst" label="${message:drop-first.label}"/>
+		</div>
+
+		<div class="t-beaneditor-row">
+			<t:label for="clearCheckSums"/>
+			<t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:clear-check-sums.label}"/>
+		</div>
+
+		<t:menu items="cancel,update" class="toolbar">
+			<p:updateMenuItem>
+				<t:button>
+					<t:linksubmit>${message:button.update.title}</t:linksubmit>
+				</t:button>
+			</p:updateMenuItem>
+			<p:cancelMenuItem>
+				<t:button>
+					<t:dialoglink dialog="updateDialog" action="close">${message:button.cancel.title}</t:dialoglink>
+				</t:button>
+			</p:cancelMenuItem>
+		</t:menu>
+	</t:form>
+</t:dialog>
 
 </html>

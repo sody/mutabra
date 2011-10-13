@@ -102,7 +102,7 @@ public class DomainModule {
 	public void updateDatabase(final DatabaseService databaseService,
 							   final @Symbol(SymbolConstants.PRODUCTION_MODE) boolean productionMode) {
 		if (!productionMode) {
-			databaseService.update();
+			databaseService.update(false, false);
 		}
 	}
 }
