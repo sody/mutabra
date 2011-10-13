@@ -21,12 +21,6 @@
 			<!-- Module versions -->
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-domain-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.mutabra</groupId>
 				<artifactId>mutabra-domain-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -66,6 +60,18 @@
 			<dependency>
 				<groupId>org.greatage</groupId>
 				<artifactId>greatage-common</artifactId>
+				<version>${ga.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.greatage</groupId>
+				<artifactId>greatage-db</artifactId>
+				<version>${ga.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.greatage</groupId>
+				<artifactId>greatage-domain</artifactId>
 				<version>${ga.version}</version>
 			</dependency>
 

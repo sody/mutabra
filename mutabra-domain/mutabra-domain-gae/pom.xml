@@ -29,6 +29,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.greatage</groupId>
+			<artifactId>greatage-db</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 		</dependency>

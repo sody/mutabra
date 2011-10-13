@@ -23,8 +23,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-common</artifactId>
+			<groupId>org.greatage</groupId>
+			<artifactId>greatage-domain</artifactId>
 		</dependency>
 	</dependencies>
 </project>
