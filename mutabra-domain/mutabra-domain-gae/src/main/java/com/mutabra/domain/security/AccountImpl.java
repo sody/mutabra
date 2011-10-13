@@ -1,19 +1,15 @@
 package com.mutabra.domain.security;
 
 import com.google.appengine.api.datastore.Key;
+import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
-import com.mutabra.domain.Tables;
 import com.mutabra.domain.player.Hero;
 
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik

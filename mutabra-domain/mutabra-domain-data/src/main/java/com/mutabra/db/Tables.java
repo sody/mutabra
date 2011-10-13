@@ -1,4 +1,4 @@
-package com.mutabra.domain;
+package com.mutabra.db;
 
 /**
  * @author Ivan Khalopik

@@ -1,7 +1,7 @@
 package com.mutabra.domain.common;
 
 import com.mutabra.domain.CodedEntityImpl;
-import com.mutabra.domain.Tables;
+import com.mutabra.db.Tables;
 import com.mutabra.domain.TranslationType;
 
 import javax.jdo.annotations.PersistenceCapable;

@@ -2,6 +2,7 @@ package com.mutabra.web.pages.admin;
 
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.db.DatabaseService;
 import com.mutabra.services.security.ChangeSetQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.BaseEntityDataSource;
@@ -9,7 +10,6 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.greatage.db.DatabaseService;
 
 /**
  * @author Ivan Khalopik

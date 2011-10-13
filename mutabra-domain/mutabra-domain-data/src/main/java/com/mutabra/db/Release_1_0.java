@@ -1,6 +1,5 @@
 package com.mutabra.db;
 
-import com.mutabra.domain.Tables;
 import org.greatage.db.ChangeLog;
 
 /**

@@ -1,7 +1,7 @@
 package com.mutabra.domain.player;
 
 import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.Tables;
+import com.mutabra.db.Tables;
 import com.mutabra.domain.common.*;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.AccountImpl;
