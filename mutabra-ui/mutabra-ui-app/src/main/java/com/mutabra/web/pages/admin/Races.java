@@ -30,16 +30,8 @@ public class Races extends AbstractPage {
 		return new BaseEntityDataSource<Race>(raceService.query(), Race.class);
 	}
 
-	Object onAdd() {
-		return entityDialog.show(raceService.create());
-	}
-
 	Object onEdit(final Race race) {
 		return entityDialog.show(race);
-	}
-
-	void onDelete(final Race race) {
-		raceService.delete(race);
 	}
 
 	Object onSuccess() {

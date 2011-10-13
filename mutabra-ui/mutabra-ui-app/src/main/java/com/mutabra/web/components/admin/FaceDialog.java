@@ -12,6 +12,11 @@ import static org.apache.tapestry5.EventConstants.PREPARE_FOR_SUBMIT;
  */
 public class FaceDialog extends EntityDialog<Face> {
 
+	@Override
+	public String getTitle() {
+		return getMessages().get("edit.title");
+	}
+
 	@OnEvent(PREPARE_FOR_SUBMIT)
 	void prepare(final Face entity) {
 		init(entity);

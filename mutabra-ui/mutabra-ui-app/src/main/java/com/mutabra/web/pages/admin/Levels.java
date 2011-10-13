@@ -30,16 +30,8 @@ public class Levels extends AbstractPage {
 		return new BaseEntityDataSource<Level>(levelService.query(), Level.class);
 	}
 
-	Object onAdd() {
-		return entityDialog.show(levelService.create());
-	}
-
 	Object onEdit(final Level level) {
 		return entityDialog.show(level);
-	}
-
-	void onDelete(final Level level) {
-		levelService.delete(level);
 	}
 
 	Object onSuccess() {

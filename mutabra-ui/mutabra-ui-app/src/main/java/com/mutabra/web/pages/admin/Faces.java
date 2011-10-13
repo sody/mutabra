@@ -30,16 +30,8 @@ public class Faces extends AbstractPage {
 		return new BaseEntityDataSource<Face>(faceService.query(), Face.class);
 	}
 
-	Object onAdd() {
-		return entityDialog.show(faceService.create());
-	}
-
 	Object onEdit(final Face face) {
 		return entityDialog.show(face);
-	}
-
-	void onDelete(final Face face) {
-		faceService.delete(face);
 	}
 
 	Object onSuccess() {
