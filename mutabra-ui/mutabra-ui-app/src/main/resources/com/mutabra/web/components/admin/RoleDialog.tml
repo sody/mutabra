@@ -5,5 +5,6 @@
 			<t:label for="code"/>
 			<t:textfield t:id="code" value="value.code" validate="required"/>
 		</div>
+		<t:admin.translationEditor t:id="translationEditor" value="value"/>
 	</t:replace>
 </t:extend>

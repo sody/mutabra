@@ -1,7 +1,9 @@
 package com.mutabra.web.pages.admin;
 
+import com.mutabra.domain.Translation;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.TranslationService;
 import com.mutabra.services.security.RoleQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.RoleDialog;
@@ -9,6 +11,7 @@ import com.mutabra.web.internal.BaseEntityDataSource;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
 /**
@@ -19,6 +22,9 @@ public class Roles extends AbstractPage {
 
 	@InjectService("roleService")
 	private BaseEntityService<Role, RoleQuery> roleService;
+
+	@Inject
+	private TranslationService translationService;
 
 	@InjectComponent
 	private RoleDialog entityDialog;
@@ -44,6 +50,9 @@ public class Roles extends AbstractPage {
 
 	Object onSuccess() {
 		roleService.saveOrUpdate(entityDialog.getValue());
+		for (Translation translation : entityDialog.getTranslations()) {
+			translationService.saveOrUpdate(translation);
+		}
 		return this;
 	}
 }

@@ -1,7 +1,9 @@
 package com.mutabra.domain;
 
 import com.mutabra.db.Tables;
+import org.greatage.util.LocaleUtils;
 
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import java.util.Locale;
@@ -23,7 +25,10 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 	private String variant;
 
 	@Persistent
-	private Locale locale = Locale.ROOT;
+	private String locale = "";
+
+	@NotPersistent
+	private Locale localeValue;
 
 	@Persistent
 	private String value;
@@ -61,10 +66,14 @@ public class TranslationImpl extends BaseEntityImpl implements Translation {
 	}
 
 	public Locale getLocale() {
-		return locale;
+		if (localeValue == null) {
+			localeValue = LocaleUtils.parseLocale(locale);
+		}
+		return localeValue;
 	}
 
 	public void setLocale(final Locale locale) {
-		this.locale = locale;
+		localeValue = locale;
+		this.locale = locale != null ? locale.toString() : null;
 	}
 }

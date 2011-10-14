@@ -1,0 +1,8 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<t:loop source="variants" value="variant">
+		<div class="t-beaneditor-row">
+			<t:label for="translation"/>
+			<t:textfield t:id="translation" clientId="prop:variant" label="prop:label" value="translation.value" validate="required"/>
+		</div>
+	</t:loop>
+</t:container>
