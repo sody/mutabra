@@ -2,6 +2,7 @@ package com.mutabra.web.pages.admin;
 
 import com.mutabra.domain.common.Face;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.TranslationService;
 import com.mutabra.services.common.FaceQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.FaceDialog;
@@ -9,6 +10,7 @@ import com.mutabra.web.internal.BaseEntityDataSource;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
 /**
@@ -19,6 +21,9 @@ public class Faces extends AbstractPage {
 
 	@InjectService("faceService")
 	private BaseEntityService<Face, FaceQuery> faceService;
+
+	@Inject
+	private TranslationService translationService;
 
 	@InjectComponent
 	private FaceDialog entityDialog;
@@ -36,6 +41,7 @@ public class Faces extends AbstractPage {
 
 	Object onSuccess() {
 		faceService.saveOrUpdate(entityDialog.getValue());
+		translationService.saveTranslations(entityDialog.getTranslations());
 		return this;
 	}
 }
