@@ -3,6 +3,7 @@ package com.mutabra.services;
 import com.mutabra.domain.Translatable;
 import com.mutabra.domain.Translation;
 import org.greatage.domain.EntityRepository;
+import org.greatage.domain.annotations.Transactional;
 
 import java.util.*;
 
@@ -17,10 +18,17 @@ public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation, T
 	}
 
 	public Map<String, Translation> getTranslations(final Translatable translatable, final Locale locale) {
-		final List<Translation> translations = getEntities(translatable, locale);
 		final Map<String, Translation> mapped = new HashMap<String, Translation>();
-		for (Translation translation : translations) {
-			mapped.put(translation.getVariant(), translation);
+		if (translatable.getTranslationCode() != null) {
+			final List<Translation> translations = query()
+					.setType(translatable.getTranslationType())
+					.addLocale(locale)
+					.addCode(translatable.getTranslationCode())
+					.list();
+
+			for (Translation translation : translations) {
+				mapped.put(translation.getVariant(), translation);
+			}
 		}
 
 		final Map<String, Translation> result = new HashMap<String, Translation>();
@@ -37,14 +45,23 @@ public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation, T
 		return result;
 	}
 
-	private List<Translation> getEntities(final Translatable translatable, final Locale locale) {
-		if (translatable.getTranslationCode() == null) {
-			return Collections.emptyList();
+	@Transactional
+	public void saveTranslations(final Collection<Translation> translations) {
+		for (Translation translation : translations) {
+			saveOrUpdate(translation);
 		}
-		return query()
-				.setType(translatable.getTranslationType())
-				.addLocale(locale)
-				.addCode(translatable.getTranslationCode())
-				.list();
+	}
+
+	@Transactional
+	public void deleteTranslations(final Translatable translatable) {
+		if (translatable.getTranslationCode() != null) {
+			final List<Translation> translations = query()
+					.setType(translatable.getTranslationType())
+					.addCode(translatable.getTranslationCode())
+					.list();
+			for (Translation translation : translations) {
+				delete(translation);
+			}
+		}
 	}
 }

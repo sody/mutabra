@@ -1,6 +1,5 @@
 package com.mutabra.web.pages.admin;
 
-import com.mutabra.domain.Translation;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.TranslationService;
@@ -46,13 +45,12 @@ public class Roles extends AbstractPage {
 
 	void onDelete(final Role role) {
 		roleService.delete(role);
+		translationService.deleteTranslations(role);
 	}
 
 	Object onSuccess() {
 		roleService.saveOrUpdate(entityDialog.getValue());
-		for (Translation translation : entityDialog.getTranslations()) {
-			translationService.saveOrUpdate(translation);
-		}
+		translationService.saveTranslations(entityDialog.getTranslations());
 		return this;
 	}
 }
