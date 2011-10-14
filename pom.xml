@@ -386,6 +386,8 @@
 		<profile>
 			<id>debug</id>
 			<properties>
+				<project.production.mode>true</project.production.mode>
+
 				<maven.test.skip>true</maven.test.skip>
 				<maven.javadoc.skip>true</maven.javadoc.skip>
 			</properties>
@@ -393,6 +395,8 @@
 	</profiles>
 
 	<properties>
+		<project.production.mode>true</project.production.mode>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

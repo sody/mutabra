@@ -39,6 +39,7 @@
 				<configuration>
 					<!--<classifier>${jdbc.profile}</classifier>-->
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
 				</configuration>
 			</plugin>
 
