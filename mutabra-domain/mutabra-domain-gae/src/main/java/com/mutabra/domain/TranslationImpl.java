@@ -1,5 +1,7 @@
 package com.mutabra.domain;
 
+import com.mutabra.db.Tables;
+
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import java.util.Locale;
