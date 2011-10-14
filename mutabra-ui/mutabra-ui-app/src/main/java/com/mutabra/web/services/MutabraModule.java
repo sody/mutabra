@@ -2,16 +2,20 @@ package com.mutabra.web.services;
 
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.web.annotations.Custom;
-import com.mutabra.web.internal.EntityEncoderFactory;
 import com.mutabra.web.internal.CustomValidationDecorator;
+import com.mutabra.web.internal.EntityEncoderFactory;
+import com.mutabra.web.internal.I18nPropertyConduitSource;
+import com.mutabra.web.internal.TranslatorImpl;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ValidationDecorator;
+import org.apache.tapestry5.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
@@ -30,7 +34,7 @@ public class MutabraModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withMarker(Custom.class);
-//		binder.bind(Translator.class, TranslatorImpl.class);
+		binder.bind(Translator.class, TranslatorImpl.class);
 	}
 
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
@@ -45,12 +49,12 @@ public class MutabraModule {
 		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
 	}
 
-//	@Decorate(serviceInterface = PropertyConduitSource.class)
-//	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
-//															   final Translator translator,
-//															   final StringInterner interner) {
-//		return new I18nPropertyConduitSource(conduitSource, translator, interner);
-//	}
+	@Decorate(serviceInterface = PropertyConduitSource.class)
+	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
+															   final Translator translator,
+															   final StringInterner interner) {
+		return new I18nPropertyConduitSource(conduitSource, translator, interner);
+	}
 
 	@Contribute(TypeCoercer.class)
 	public void contributeTypeCoercer(final Configuration<CoercionTuple> configuration) {
