@@ -4,15 +4,11 @@ import com.mutabra.domain.Translatable;
 import com.mutabra.domain.Translation;
 import com.mutabra.services.TranslationService;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.Field;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik
@@ -41,7 +37,23 @@ public class TranslationEditor extends AbstractComponent {
 
 	public Translation getTranslation() {
 		if (translations == null) {
-			translations = translationService.getTranslations(value, getLocale());
+			final List<Translation> existingTranslations = translationService.getTranslations(value, getLocale());
+			final Map<String, Translation> mapped = new HashMap<String, Translation>();
+			for (Translation translation : existingTranslations) {
+				mapped.put(translation.getVariant(), translation);
+			}
+
+			translations = new HashMap<String, Translation>();
+			for (String translationVariant : value.getTranslationVariants()) {
+				if (mapped.containsKey(translationVariant)) {
+					translations.put(translationVariant, mapped.get(translationVariant));
+				} else {
+					final Translation translation = translationService.create();
+					translation.setLocale(getLocale());
+					translation.setVariant(translationVariant);
+					translations.put(translationVariant, translation);
+				}
+			}
 		}
 		return translations.get(variant);
 	}

@@ -5,7 +5,10 @@ import com.mutabra.domain.Translation;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Ivan Khalopik
@@ -17,32 +20,14 @@ public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation, T
 		super(repository, Translation.class, TranslationQuery.class);
 	}
 
-	public Map<String, Translation> getTranslations(final Translatable translatable, final Locale locale) {
-		final Map<String, Translation> mapped = new HashMap<String, Translation>();
-		if (translatable.getTranslationCode() != null) {
-			final List<Translation> translations = query()
-					.setType(translatable.getTranslationType())
-					.addLocale(locale)
-					.addCode(translatable.getTranslationCode())
-					.list();
-
-			for (Translation translation : translations) {
-				mapped.put(translation.getVariant(), translation);
-			}
-		}
-
-		final Map<String, Translation> result = new HashMap<String, Translation>();
-		for (String variant : translatable.getTranslationVariants()) {
-			if (mapped.containsKey(variant)) {
-				result.put(variant, mapped.get(variant));
-			} else {
-				final Translation translation = create();
-				translation.setLocale(locale);
-				translation.setVariant(variant);
-				result.put(variant, translation);
-			}
-		}
-		return result;
+	public List<Translation> getTranslations(final Translatable translatable, final Locale locale) {
+		return translatable.getTranslationCode() == null ?
+				Collections.<Translation>emptyList() :
+				query()
+						.setType(translatable.getTranslationType())
+						.addLocale(locale)
+						.addCode(translatable.getTranslationCode())
+						.list();
 	}
 
 	@Transactional

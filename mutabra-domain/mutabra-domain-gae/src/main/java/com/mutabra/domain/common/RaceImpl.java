@@ -14,6 +14,6 @@ import javax.jdo.annotations.PersistenceCapable;
 public class RaceImpl extends CodedEntityImpl implements Race {
 
 	public RaceImpl() {
-		super("RACE", TranslationType.STANDARD);
+		super(Tables.RACE, TranslationType.STANDARD);
 	}
 }

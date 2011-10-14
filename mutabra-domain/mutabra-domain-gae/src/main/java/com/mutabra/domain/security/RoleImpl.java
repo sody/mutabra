@@ -18,7 +18,7 @@ import java.util.Set;
 @PersistenceCapable(table = Tables.ROLE)
 public class RoleImpl extends CodedEntityImpl implements Role {
 	public RoleImpl() {
-		super("ROLE", TranslationType.STANDARD);
+		super(Tables.ROLE, TranslationType.STANDARD);
 	}
 
 	@Persistent(mappedBy = "roles")

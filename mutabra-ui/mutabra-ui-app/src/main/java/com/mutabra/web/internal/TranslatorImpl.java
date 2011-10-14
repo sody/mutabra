@@ -9,6 +9,7 @@ import org.greatage.util.CompositeKey;
 import org.greatage.util.LocaleUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -70,9 +71,9 @@ public class TranslatorImpl implements Translator {
 		final CompositeKey key = createKey(translatable, locale);
 		if (!cache.containsKey(key)) {
 			final Map<String, String> messages = new HashMap<String, String>();
-			final Map<String, Translation> translations = translationService.getTranslations(translatable, locale);
-			for (Map.Entry<String, Translation> entry : translations.entrySet()) {
-				messages.put(entry.getKey(), entry.getValue().getValue());
+			final List<Translation> translations = translationService.getTranslations(translatable, locale);
+			for (Translation entry : translations) {
+				messages.put(entry.getVariant(), entry.getValue());
 			}
 			cache.put(key, messages);
 		}

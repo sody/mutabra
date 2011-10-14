@@ -14,6 +14,6 @@ import javax.jdo.annotations.PersistenceCapable;
 public class FaceImpl extends CodedEntityImpl implements Face {
 
 	public FaceImpl() {
-		super("FACE", TranslationType.STANDARD);
+		super(Tables.FACE, TranslationType.STANDARD);
 	}
 }

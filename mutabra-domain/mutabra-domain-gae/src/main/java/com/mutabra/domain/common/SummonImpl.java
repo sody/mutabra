@@ -21,7 +21,7 @@ public class SummonImpl extends CodedEntityImpl implements Summon {
 	private int defence;
 
 	public SummonImpl() {
-		super("SUMMON", TranslationType.STANDARD);
+		super(Tables.SUMMON, TranslationType.STANDARD);
 	}
 
 	public int getAttack() {

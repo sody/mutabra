@@ -31,7 +31,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	protected CardImpl(final CardType type) {
-		super("CARD", TranslationType.STANDARD);
+		super(Tables.CARD, TranslationType.STANDARD);
 		this.type = type;
 	}
 

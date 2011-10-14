@@ -24,7 +24,7 @@ public class EffectImpl extends CodedEntityImpl implements Effect {
 	private int defence;
 
 	public EffectImpl() {
-		super("EFFECT", TranslationType.STANDARD);
+		super(Tables.EFFECT, TranslationType.STANDARD);
 	}
 
 	public TargetType getTargetType() {

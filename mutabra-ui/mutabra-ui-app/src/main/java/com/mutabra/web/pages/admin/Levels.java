@@ -7,6 +7,7 @@ import com.mutabra.services.common.LevelQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.LevelDialog;
 import com.mutabra.web.internal.BaseEntityDataSource;
+import com.mutabra.web.services.Translator;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
@@ -25,6 +26,9 @@ public class Levels extends AbstractPage {
 	@Inject
 	private TranslationService translationService;
 
+	@Inject
+	private Translator translator;
+
 	@InjectComponent
 	private LevelDialog entityDialog;
 
@@ -42,6 +46,8 @@ public class Levels extends AbstractPage {
 	Object onSuccess() {
 		levelService.saveOrUpdate(entityDialog.getValue());
 		translationService.saveTranslations(entityDialog.getTranslations());
+		//todo: should be automatic
+		translator.invalidateCache(entityDialog.getValue());
 		return this;
 	}
 }

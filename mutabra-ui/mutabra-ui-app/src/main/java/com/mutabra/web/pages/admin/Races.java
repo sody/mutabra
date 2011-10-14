@@ -7,6 +7,7 @@ import com.mutabra.services.common.RaceQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.RaceDialog;
 import com.mutabra.web.internal.BaseEntityDataSource;
+import com.mutabra.web.services.Translator;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
@@ -25,6 +26,9 @@ public class Races extends AbstractPage {
 	@Inject
 	private TranslationService translationService;
 
+	@Inject
+	private Translator translator;
+
 	@InjectComponent
 	private RaceDialog entityDialog;
 
@@ -42,6 +46,8 @@ public class Races extends AbstractPage {
 	Object onSuccess() {
 		raceService.saveOrUpdate(entityDialog.getValue());
 		translationService.saveTranslations(entityDialog.getTranslations());
+		//todo: should be automatic
+		translator.invalidateCache(entityDialog.getValue());
 		return this;
 	}
 }

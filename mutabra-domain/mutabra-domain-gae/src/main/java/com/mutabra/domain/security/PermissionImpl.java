@@ -22,7 +22,7 @@ public class PermissionImpl extends CodedEntityImpl implements Permission {
 	private Set<Key> roles = new HashSet<Key>();
 
 	public PermissionImpl() {
-		super("PERMISSION", TranslationType.STANDARD);
+		super(Tables.PERMISSION, TranslationType.STANDARD);
 	}
 
 	public Set<Role> getRoles() {
