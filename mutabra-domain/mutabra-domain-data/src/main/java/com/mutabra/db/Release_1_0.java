@@ -58,5 +58,9 @@ public class Release_1_0 extends ChangeLog {
 				.set("locale", "")
 				.set("value", "Elf").end()
 				.end();
+
+		begin("2011-10-17/admin_account", "sody").comment("admin account added")
+				.insert(Tables.ACCOUNT).set("email", "admin@mutabra.com").set("password", "21232f297a57a5a743894a0e4a801fc3").end();
+
 	}
 }

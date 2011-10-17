@@ -3,10 +3,7 @@ package com.mutabra.domain.security;
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.domain.player.Hero;
 
-import java.util.Date;
-import java.util.Locale;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik
@@ -61,4 +58,6 @@ public interface Account extends BaseEntity {
 	public void setRoles(final Set<Role> roles);
 
 	public Set<Hero> getHeroes();
+
+	List<String> getAuthorities();
 }
