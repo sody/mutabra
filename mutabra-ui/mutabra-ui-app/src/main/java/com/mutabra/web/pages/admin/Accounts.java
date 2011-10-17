@@ -6,15 +6,18 @@ import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.AccountDialog;
 import com.mutabra.web.internal.BaseEntityDataSource;
+import com.mutabra.web.services.AuthorityConstants;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.greatage.security.annotations.Allow;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
+@Allow(AuthorityConstants.STATUS_AUTHENTICATED)
 public class Accounts extends AbstractPage {
 
 	@InjectService("accountService")

@@ -7,17 +7,20 @@ import com.mutabra.services.common.FaceQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.FaceDialog;
 import com.mutabra.web.internal.BaseEntityDataSource;
+import com.mutabra.web.services.AuthorityConstants;
 import com.mutabra.web.services.Translator;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.greatage.security.annotations.Allow;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
+@Allow(AuthorityConstants.STATUS_AUTHENTICATED)
 public class Faces extends AbstractPage {
 
 	@InjectService("faceService")

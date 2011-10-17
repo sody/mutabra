@@ -6,15 +6,18 @@ import com.mutabra.services.db.DatabaseService;
 import com.mutabra.services.security.ChangeSetQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.BaseEntityDataSource;
+import com.mutabra.web.services.AuthorityConstants;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.greatage.security.annotations.Allow;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
+@Allow(AuthorityConstants.STATUS_AUTHENTICATED)
 public class ChangeSets extends AbstractPage {
 
 	@InjectService("changeSetService")

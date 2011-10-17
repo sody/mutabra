@@ -67,6 +67,13 @@ public class SecurityModule {
 				// not found
 				return null;
 			}
+
+			@Override
+			protected PasswordAuthentication doSignIn(final PasswordAuthenticationToken token) {
+				final PasswordAuthentication authentication = super.doSignIn(token);
+				authentication.getAuthorities().add(AuthorityConstants.STATUS_AUTHENTICATED);
+				return authentication;
+			}
 		});
 	}
 
