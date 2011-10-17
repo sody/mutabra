@@ -11,7 +11,7 @@
 		</ul>
 		<div id="sign-in-tab">
 			<h1>${message:page.security-sign-in.title}</h1>
-			<t:form>
+			<t:form t:id="signIn">
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
 						<t:delegate to="block:email"/>
@@ -31,7 +31,7 @@
 		</div>
 		<div id="sign-up-tab">
 			<h1>${message:page.security-sign-up.title}</h1>
-			<t:form>
+			<t:form t:id="signUp">
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
 						<t:delegate to="block:email"/>
@@ -50,7 +50,7 @@
 		</div>
 		<div id="restore-tab">
 			<h1>${message:page.security-restore.title}</h1>
-			<t:form>
+			<t:form t:id="restore">
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
 						<t:delegate to="block:email"/>

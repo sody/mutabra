@@ -29,7 +29,7 @@ import org.greatage.domain.EntityRepository;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@SubModule(value = {DomainModule.class, ServicesModule.class})
+@SubModule(value = {DomainModule.class, ServicesModule.class, SecurityModule.class})
 public class MutabraModule {
 
 	public static void bind(final ServiceBinder binder) {

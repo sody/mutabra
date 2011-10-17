@@ -2,7 +2,12 @@
 		  xmlns:p="tapestry:parameter">
 
 	<t:replace id="header-area">
-		<t:layout.header/>
+		<t:if test="account">
+			<t:layout.header/>
+			<p:else>
+				<t:layout.anonymousheader/>
+			</p:else>
+		</t:if>
 	</t:replace>
 
 	<t:replace id="content-area">
