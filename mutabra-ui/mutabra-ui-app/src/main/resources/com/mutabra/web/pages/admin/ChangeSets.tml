@@ -1,4 +1,4 @@
-<html t:type="layout" buttons="update"
+<html t:type="layout/default" buttons="update"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 

@@ -2,15 +2,13 @@
  * Copyright 2000 - 2009 Ivan Khalopik. All Rights Reserved.
  */
 
-package com.mutabra.web.components;
+package com.mutabra.web.components.layout;
 
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.PropertyOverrides;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONLiteral;
 import org.apache.tapestry5.services.BindingSource;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
@@ -22,23 +20,14 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 		stylesheet = {
 				"context:css/flag.css",
 				"context:css/main-theme.css"
-//				"context:css/main.css"
 		})
 @SupportsInformalParameters
-public class Layout extends AbstractComponent {
+public class EmptyLayout extends AbstractComponent {
 	private static final String PAGE_TITLE_PROPERTY = "title";
 
 	@Property
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String title;
-
-	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String[] buttons;
-
-	@Property
-	@Parameter(value = "this", allowNull = false)
-	private PropertyOverrides overrides;
 
 	@Inject
 	private BindingSource bindingSource;

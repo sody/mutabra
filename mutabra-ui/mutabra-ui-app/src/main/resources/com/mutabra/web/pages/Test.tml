@@ -1,4 +1,4 @@
-<html t:type="layout" buttons="add,cancel"
+<html t:type="layout/default" buttons="add,cancel"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 

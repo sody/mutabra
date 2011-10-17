@@ -1,0 +1,36 @@
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		  xmlns:p="tapestry:parameter">
+
+	<t:replace id="header-area">
+		<t:layout.header/>
+	</t:replace>
+
+	<t:replace id="content-area">
+		<div id="content" class="unit c-5">
+			<div class="column">
+				<div id="left" class="container ui-widget">
+					<t:menu.sidebarmenu/>
+				</div>
+			</div>
+
+			<div class="column s-3">
+				<div id="center" class="container ui-widget ui-widget-content">
+					<h1>${title}</h1>
+					<t:body/>
+					<t:if test="buttons">
+						<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
+					</t:if>
+				</div>
+			</div>
+
+			<div class="column">
+				<div id="right" class="container ui-widget">
+					<t:menu.admin/>
+					<t:if test="buttons">
+						<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
+					</t:if>
+				</div>
+			</div>
+		</div>
+	</t:replace>
+</t:extend>

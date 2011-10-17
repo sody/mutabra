@@ -1,0 +1,12 @@
+<div id="header" class="unit c-5" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<div class="column">
+		<t:layout.logo/>
+	</div>
+	<div class="column s-3">
+		<img alt="userpic" src="/img/races/orc64x64.png" style="float:right; margin: 10px;"/>
+	</div>
+	<div class="column">
+		<t:menu.user/>
+		<t:menu.locale/>
+	</div>
+</div>
