@@ -1,0 +1,84 @@
+<html t:type="layout/empty"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+<div id="content" class="unit">
+	<div id="center-panel" class="container">
+		<ul>
+			<li><a href="#sign-in-tab">${message:button.sign-in.title}</a></li>
+			<li><a href="#sign-up-tab">${message:button.sign-up.title}</a></li>
+			<li><a href="#restore-tab">${message:button.restore.title}</a></li>
+		</ul>
+		<div id="sign-in-tab">
+			<h1>${message:page.security-sign-in.title}</h1>
+			<t:form>
+				<div class="t-beaneditor-row">
+					<div class="t-beaneditor-row">
+						<t:delegate to="block:email"/>
+					</div>
+					<div class="t-beaneditor-row">
+						<t:label for="password"/>
+						<t:passwordfield t:id="password" value="password" validate="required"/>
+					</div>
+				</div>
+
+				<t:menu.oauthmenu>
+					<t:button>
+						<t:linksubmit>${message:button.sign-in.title}</t:linksubmit>
+					</t:button>
+				</t:menu.oauthmenu>
+			</t:form>
+		</div>
+		<div id="sign-up-tab">
+			<h1>${message:page.security-sign-up.title}</h1>
+			<t:form>
+				<div class="t-beaneditor-row">
+					<div class="t-beaneditor-row">
+						<t:delegate to="block:email"/>
+					</div>
+					<div class="t-beaneditor-row">
+						<a href="#">Additional Options</a>
+					</div>
+				</div>
+
+				<t:menu.oauthmenu>
+					<t:button>
+						<t:linksubmit>${message:button.sign-up.title}</t:linksubmit>
+					</t:button>
+				</t:menu.oauthmenu>
+			</t:form>
+		</div>
+		<div id="restore-tab">
+			<h1>${message:page.security-restore.title}</h1>
+			<t:form>
+				<div class="t-beaneditor-row">
+					<div class="t-beaneditor-row">
+						<t:delegate to="block:email"/>
+					</div>
+				</div>
+
+				<t:menu.oauthmenu>
+					<t:button>
+						<t:linksubmit>${message:button.restore.title}</t:linksubmit>
+					</t:button>
+				</t:menu.oauthmenu>
+			</t:form>
+		</div>
+		<t:block id="email">
+			<t:label for="email"/>
+			<t:textfield t:id="email" value="email" validate="required"/>
+		</t:block>
+	</div>
+</div>
+
+<script type="text/javascript">
+	j$(function() {
+		j$("#center-panel").tabs();
+		j$("#center-panel .ui-tabs-nav, #center-panel .ui-tabs-nav > *")
+				.removeClass("ui-corner-all ui-corner-top")
+				.addClass("ui-corner-bottom");
+	});
+</script>
+
+
+</html>

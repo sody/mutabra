@@ -1,0 +1,16 @@
+<t:menu id="oauth" class="toolbar" items="facebook,google,twitter,last"
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+		xmlns:p="tapestry:parameter">
+	<p:facebookMenuItem>
+		<t:button><a href="#">F</a></t:button>
+	</p:facebookMenuItem>
+	<p:googleMenuItem>
+		<t:button><a href="#">G</a></t:button>
+	</p:googleMenuItem>
+	<p:twitterMenuItem>
+		<t:button><a href="#">t</a></t:button>
+	</p:twitterMenuItem>
+	<p:lastMenuItem>
+		<t:body/>
+	</p:lastMenuItem>
+</t:menu>

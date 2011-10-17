@@ -38,7 +38,7 @@ public class Menu extends AbstractComponent {
 	private Block defaultItemBody;
 
 	public String getMenuItemClass() {
-		return item + (item.equals(selected) ? " " + CSSConstants.STATE_HIGHLIGHT : "" );
+		return item + (item.equals(selected) ? " " + CSSConstants.STATE_HIGHLIGHT : "");
 	}
 
 	public String getMenuItemTitle() {
@@ -68,6 +68,8 @@ public class Menu extends AbstractComponent {
 				CSSConstants.WIDGET_CONTENT,
 				CSSConstants.CORNER_ALL,
 				CSSConstants.HELPER_CLEAR_FIX);
+
+		getResources().renderInformalParameters(writer);
 	}
 
 	@AfterRender

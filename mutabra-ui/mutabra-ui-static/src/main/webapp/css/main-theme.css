@@ -81,6 +81,10 @@ h6 {
 	width: 500px;
 }
 
+#oauth li:last-child {
+	float: right;
+}
+
 /* Menu styles */
 /* Sidebar */
 ul.sidebar {
