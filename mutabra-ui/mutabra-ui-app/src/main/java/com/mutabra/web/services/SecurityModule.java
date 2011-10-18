@@ -71,6 +71,9 @@ public class SecurityModule {
 			protected PasswordAuthentication doSignIn(final PasswordAuthenticationToken token) {
 				final PasswordAuthentication authentication = super.doSignIn(token);
 				authentication.getAuthorities().add(AuthorityConstants.STATUS_AUTHENTICATED);
+				//todo: !!!remove this!!!
+				authentication.getAuthorities().add(AuthorityConstants.ROLE_ADMIN);
+				//todo: !!!remove this!!!
 				return authentication;
 			}
 		});
@@ -78,7 +81,7 @@ public class SecurityModule {
 
 	public void contributeComponentClassTransformWorker(
 			final OrderedConfiguration<ComponentClassTransformWorker2> configuration) {
-		configuration.addInstance("PageSecurity", SecurityAnnotationWorker.class, "before:OnEvent");
+//		configuration.addInstance("PageSecurity", SecurityAnnotationWorker.class, "before:OnEvent");
 	}
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)

@@ -20,7 +20,7 @@ import org.greatage.security.annotations.Allow;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Allow(AuthorityConstants.STATUS_AUTHENTICATED)
+@Allow(AuthorityConstants.ROLE_ADMIN)
 public class Permissions extends AbstractPage {
 
 	@InjectService("permissionService")

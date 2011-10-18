@@ -253,10 +253,10 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>apache-snapshots</id>
-			<url>https://repository.apache.org/content/repositories/snapshots</url>
+			<id>apache-staging</id>
+			<url>https://repository.apache.org/content/groups/staging</url>
 			<releases>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
@@ -422,7 +422,7 @@
 		<datanucleus.appengine.version>1.0.8</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 
-		<tapestry.version>5.3-SNAPSHOT</tapestry.version>
+		<tapestry.version>5.3-beta-22</tapestry.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.1</mail.api.version>
 

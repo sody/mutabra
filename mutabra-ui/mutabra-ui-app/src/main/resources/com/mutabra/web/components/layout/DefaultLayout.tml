@@ -2,12 +2,12 @@
 		  xmlns:p="tapestry:parameter">
 
 	<t:replace id="header-area">
-		<t:if test="account">
+		<t:role account="true" hero="true">
 			<t:layout.header/>
-			<p:else>
-				<t:layout.anonymousheader/>
-			</p:else>
-		</t:if>
+		</t:role>
+		<t:role anonymous="true">
+			<t:layout.anonymousheader/>
+		</t:role>
 	</t:replace>
 
 	<t:replace id="content-area">
@@ -30,7 +30,9 @@
 
 			<div class="column">
 				<div id="right" class="container ui-widget">
-					<t:menu.admin/>
+					<t:authority allow="ROLE_ADMIN">
+						<t:menu.admin/>
+					</t:authority>
 					<t:if test="buttons">
 						<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
 					</t:if>

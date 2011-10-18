@@ -1,10 +1,11 @@
 package com.mutabra.web.internal;
 
+import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.model.MutableComponentModel;
-import org.apache.tapestry5.plastic.MethodAdvice;
-import org.apache.tapestry5.plastic.MethodInvocation;
 import org.apache.tapestry5.plastic.PlasticClass;
-import org.apache.tapestry5.services.TransformConstants;
+import org.apache.tapestry5.runtime.Component;
+import org.apache.tapestry5.runtime.ComponentEvent;
+import org.apache.tapestry5.services.ComponentEventHandler;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.apache.tapestry5.services.transform.TransformationSupport;
 import org.greatage.security.AccessDeniedException;
@@ -23,6 +24,8 @@ import java.util.List;
  * @since 1.0
  */
 public class SecurityAnnotationWorker implements ComponentClassTransformWorker2 {
+	private static final List<String> ANONYMOUS_AUTHORITIES = CollectionUtils.newList(AuthorityConstants.STATUS_ANONYMOUS);
+
 	private final SecurityContext securityContext;
 
 	public SecurityAnnotationWorker(final SecurityContext securityContext) {
@@ -30,14 +33,13 @@ public class SecurityAnnotationWorker implements ComponentClassTransformWorker2 
 	}
 
 	public void transform(final PlasticClass plasticClass, final TransformationSupport support, final MutableComponentModel model) {
-		final Allow allow = plasticClass.getAnnotation(Allow.class);
-		final Deny deny = plasticClass.getAnnotation(Deny.class);
-		if (allow != null || deny != null) {
-			plasticClass.introduceMethod(TransformConstants.DISPATCH_COMPONENT_EVENT_DESCRIPTION).addAdvice(new MethodAdvice() {
-				public void advise(final MethodInvocation invocation) {
-					final Authentication user = securityContext.getCurrentUser();
-					final List<String> authorities = user != null ? user.getAuthorities() :
-							CollectionUtils.newList(AuthorityConstants.STATUS_ANONYMOUS);
+		if (model.isPage()) {
+			final Allow allow = plasticClass.getAnnotation(Allow.class);
+			final Deny deny = plasticClass.getAnnotation(Deny.class);
+			support.addEventHandler(EventConstants.ACTIVATE, 0, "Page Security", new ComponentEventHandler() {
+				public void handleEvent(final Component instance, final ComponentEvent event) {
+					final Authentication authentication = securityContext.getCurrentUser();
+					final List<String> authorities = authentication != null ? authentication.getAuthorities() : ANONYMOUS_AUTHORITIES;
 
 					if (allow != null) {
 						if (!authorities.containsAll(Arrays.asList(allow.value()))) {
@@ -51,7 +53,6 @@ public class SecurityAnnotationWorker implements ComponentClassTransformWorker2 
 							}
 						}
 					}
-					invocation.proceed();
 				}
 			});
 		}

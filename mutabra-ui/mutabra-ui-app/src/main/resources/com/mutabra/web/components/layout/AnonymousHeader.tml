@@ -12,7 +12,7 @@
 			</div>
 			<div class="t-beaneditor-row">
 				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.twitter.title}</a></t:button>
-				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.vkontakte.title}</a></t:button>
+				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.vk.title}</a></t:button>
 			</div>
 		</div>
 	</div>
