@@ -7,12 +7,12 @@
 	<div class="column s-3">
 		<div id="user-pic">
 			<div class="t-beaneditor-row">
-				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.facebook.title}</a></t:button>
-				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.google.title}</a></t:button>
+				<t:button primary="medium facebook" text="false"><a class="transparent" href="#">${message:button.facebook.title}</a></t:button>
+				<t:button primary="medium google" text="false"><a class="transparent" href="#">${message:button.google.title}</a></t:button>
 			</div>
 			<div class="t-beaneditor-row">
-				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.twitter.title}</a></t:button>
-				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.vk.title}</a></t:button>
+				<t:button primary="medium twitter" text="false"><a class="transparent" href="#">${message:button.twitter.title}</a></t:button>
+				<t:button primary="ui-icon-locked" text="false"><a class="transparent" href="#">${message:button.vk.title}</a></t:button>
 			</div>
 		</div>
 	</div>

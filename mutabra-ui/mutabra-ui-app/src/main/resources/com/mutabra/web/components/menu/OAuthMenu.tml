@@ -1,14 +1,14 @@
-<t:menu id="oauth" class="toolbar" items="facebook,google,twitter,last"
+<t:menu id="oauth" class="transparent toolbar" items="facebook,google,twitter,last"
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:facebookMenuItem>
-		<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.facebook.title}</a></t:button>
+		<t:button primary="medium facebook" text="false"><a class="transparent" href="#">${message:button.facebook.title}</a></t:button>
 	</p:facebookMenuItem>
 	<p:googleMenuItem>
-		<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.google.title}</a></t:button>
+		<t:button primary="medium google" text="false"><a class="transparent" href="#">${message:button.google.title}</a></t:button>
 	</p:googleMenuItem>
 	<p:twitterMenuItem>
-		<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.twitter.title}</a></t:button>
+		<t:button primary="medium twitter" text="false"><a class="transparent" href="#">${message:button.twitter.title}</a></t:button>
 	</p:twitterMenuItem>
 	<p:lastMenuItem>
 		<t:body/>

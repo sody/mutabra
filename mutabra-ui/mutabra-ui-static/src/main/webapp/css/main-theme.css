@@ -112,6 +112,34 @@ input {
 	float: right;
 }
 
+/* Button styles */
+.medium.facebook {
+	background: url("../img/social/facebook_24x24.png")
+}
+.medium.google {
+	background: url("../img/social/google_24x24.png")
+}
+.medium.twitter {
+	background: url("../img/social/twitter_24x24.png")
+}
+
+.ui-button.transparent,
+.ui-widget-content .ui-button.transparent {
+	border: 0;
+	background: transparent;
+	padding: 1px;
+}
+
+.ui-state-default.transparent  {
+	opacity: 0.5;
+}
+
+.ui-state-active.transparent ,
+.ui-state-highlight.transparent ,
+.ui-state-hover.transparent {
+	opacity: 1;
+}
+
 /* Menu styles */
 /* Sidebar */
 ul.sidebar {
@@ -575,6 +603,12 @@ div.t-beaneditor-row select {
 	width: 16px;
 	height: 16px;
 	background-image: url(../img/ui-icons256x240.png);
+}
+
+.ui-icon.medium {
+	width: 24px;
+	height: 24px;
+	/*background-image: url(../img/ui-icons256x240.png);*/
 }
 
 /*
@@ -1667,6 +1701,22 @@ input.ui-button {
 .ui-button-text-icons .ui-button-icon-secondary,
 .ui-button-icons-only .ui-button-icon-secondary {
 	right: .5em;
+}
+
+/*button icon element(s) */
+.ui-button-icon-only .ui-icon.medium,
+.ui-button-text-icon-primary .ui-icon.medium,
+.ui-button-text-icon-secondary .ui-icon.medium,
+.ui-button-text-icons .ui-icon.medium,
+.ui-button-icons-only .ui-icon.medium {
+	position: absolute;
+	top: 50%;
+	margin-top: -12px;
+}
+
+.ui-button-icon-only .ui-icon.medium {
+	left: 50%;
+	margin-left: -12px;
 }
 
 /*button sets*/
