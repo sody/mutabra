@@ -1,19 +1,28 @@
-<div id="header" class="unit c-5"
+<div id="header" class="unit c-5 ui-widget"
 	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	 xmlns:p="tapestry:parameter">
 	<div class="column">
 		<t:layout.logo/>
 	</div>
 	<div class="column s-3">
-		<t:if test="hero">
-			<t:layout.userpic user="hero.face.code" style="float:right; margin: 10px;"/>
-			<p:else>
-				<t:layout.userpic style="float:right; margin: 10px;"/>
-			</p:else>
-		</t:if>
+		<div id="user-pic">
+			<t:if test="hero">
+				<t:layout.userpic user="hero.face.code"/>
+				<p:else>
+					<t:layout.userpic/>
+				</p:else>
+			</t:if>
+		</div>
 	</div>
 	<div class="column">
-		<t:button><a href="#"><span>${account.email}</span></a></t:button>
-		<t:menu.locale/>
+		<div class="t-beaneditor-row">
+			<t:button secondary="ui-icon-triangle-1-s"><a href="#">${account.email}</a></t:button>
+			<t:button secondary="ui-icon-power" text="false">
+				<t:eventlink event="signOut">${message:button.sign-out.title}</t:eventlink>
+			</t:button>
+		</div>
+		<div class="t-beaneditor-row">
+			<t:menu.locale/>
+		</div>
 	</div>
 </div>

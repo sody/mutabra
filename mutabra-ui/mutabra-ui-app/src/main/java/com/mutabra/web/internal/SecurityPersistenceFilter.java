@@ -5,6 +5,7 @@ import org.greatage.security.Authentication;
 import org.greatage.security.SecurityContext;
 
 import java.io.IOException;
+import java.security.PrivilegedExceptionAction;
 
 /**
  * @author Ivan Khalopik
@@ -23,23 +24,32 @@ public class SecurityPersistenceFilter implements RequestFilter {
 	public boolean service(final Request request, final Response response, final RequestHandler handler) throws IOException {
 		try {
 			final Authentication authentication = loadAuthentication(request);
-			securityContext.setCurrentUser(authentication);
-			return handler.service(request, response);
-		} finally {
-			final Authentication authentication = securityContext.getCurrentUser();
-			saveAuthentication(request, authentication);
+			return securityContext.doAs(authentication, new PrivilegedExceptionAction<Boolean>() {
+				public Boolean run() throws IOException {
+					final boolean result = handler.service(request, response);
+					saveAuthentication(request, securityContext.getCurrentUser());
+					return result;
+				}
+			});
+		} catch (IOException e) {
+			throw e;
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			// it will never happen
+			throw new SecurityException(e);
 		}
 	}
 
 	private Authentication loadAuthentication(final Request request) {
 		final Session session = getSession(request, true);
-		final Object user = session != null ? session.getAttribute(SECURITY_CONTEXT_KEY) : null;
-		return user != null && user instanceof Authentication ? (Authentication) user : null;
+		final Object authentication = session != null ? session.getAttribute(SECURITY_CONTEXT_KEY) : null;
+		return authentication != null && authentication instanceof Authentication ? (Authentication) authentication : null;
 	}
 
-	private void saveAuthentication(final Request request, final Authentication user) {
+	private void saveAuthentication(final Request request, final Authentication authentication) {
 		final Session session = getSession(request, true);
-		session.setAttribute(SECURITY_CONTEXT_KEY, user);
+		session.setAttribute(SECURITY_CONTEXT_KEY, authentication);
 	}
 
 	private Session getSession(final Request request, final boolean allowCreate) {

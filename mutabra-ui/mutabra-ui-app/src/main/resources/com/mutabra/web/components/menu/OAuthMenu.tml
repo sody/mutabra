@@ -2,13 +2,13 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:facebookMenuItem>
-		<t:button><a href="#">F</a></t:button>
+		<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.facebook.title}</a></t:button>
 	</p:facebookMenuItem>
 	<p:googleMenuItem>
-		<t:button><a href="#">G</a></t:button>
+		<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.google.title}</a></t:button>
 	</p:googleMenuItem>
 	<p:twitterMenuItem>
-		<t:button><a href="#">t</a></t:button>
+		<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.twitter.title}</a></t:button>
 	</p:twitterMenuItem>
 	<p:lastMenuItem>
 		<t:body/>

@@ -26,7 +26,6 @@ import org.greatage.security.*;
 public class SecurityModule {
 
 	public static void bind(final ServiceBinder binder) {
-		binder.bind(AuthenticationManager.class, AuthenticationManagerImpl.class);
 		binder.bind(SecurityContext.class, SecurityContextImpl.class);
 	}
 
@@ -51,7 +50,7 @@ public class SecurityModule {
 		return new MessageDigestPasswordEncoder("MD5", false);
 	}
 
-	@Contribute(AuthenticationManager.class)
+	@Contribute(SecurityContext.class)
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration,
 												@InjectService("accountService") final BaseEntityService<Account, AccountQuery> accountService,
 												final PasswordEncoder passwordEncoder) {

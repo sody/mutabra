@@ -1,29 +1,38 @@
-<div id="header" class="unit c-5"
+<div id="header" class="unit c-5 ui-widget"
 	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	 xmlns:p="tapestry:parameter">
 	<div class="column">
 		<t:layout.logo/>
 	</div>
-	<div class="column s-2">_</div>
-	<div class="column s-2">
-		<div id="anonymous-menu" class="container ui-widget">
-			<div class="unit">
-				<t:form t:id="signIn">
-					<t:textfield t:id="email" value="email" class="first ui-corner-left"/>
-					<t:passwordfield t:id="password" value="password" class="second ui-corner-right"/>
-					<t:button>
-						<t:linksubmit>${message:button.sign-in.title}</t:linksubmit>
-					</t:button>
-				</t:form>
+	<div class="column s-3">
+		<div id="user-pic">
+			<div class="t-beaneditor-row">
+				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.facebook.title}</a></t:button>
+				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.google.title}</a></t:button>
 			</div>
-			<div class="unit">
-				<t:form t:id="signUp">
-					<t:textfield t:id="registrationEmail" value="email" class="double ui-corner-all"/>
-					<t:button>
-						<t:linksubmit>${message:button.sign-up.title}</t:linksubmit>
-					</t:button>
-				</t:form>
+			<div class="t-beaneditor-row">
+				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.twitter.title}</a></t:button>
+				<t:button primary="ui-icon-locked" text="false"><a href="#">${message:button.vkontakte.title}</a></t:button>
 			</div>
+		</div>
+	</div>
+	<div class="column">
+		<div class="t-beaneditor-row">
+			<t:form t:id="signIn">
+				<t:textfield t:id="email" value="email" class="first ui-corner-left"/>
+				<t:passwordfield t:id="password" value="password" class="second ui-corner-right"/>
+				<t:button primary="ui-icon-play" text="false">
+					<t:linksubmit>${message:button.sign-in.title}</t:linksubmit>
+				</t:button>
+			</t:form>
+		</div>
+		<div class="t-beaneditor-row">
+			<t:form t:id="signUp">
+				<t:textfield t:id="registrationEmail" value="email" class="double ui-corner-all"/>
+				<t:button primary="ui-icon-eject" text="false">
+					<t:linksubmit>${message:button.sign-up.title}</t:linksubmit>
+				</t:button>
+			</t:form>
 		</div>
 	</div>
 </div>

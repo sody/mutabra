@@ -41,6 +41,6 @@ public class EmptyLayout extends AbstractComponent {
 
 	@AfterRender
 	void afterRender() {
-		support.addInitializerCall("jquery.ui", "");
+		support.addInitializerCall("jquery_ui", "");
 	}
 }

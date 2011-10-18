@@ -3,7 +3,6 @@ package com.mutabra.web.internal;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.ResponseRenderer;
-import org.greatage.security.*;
 import org.greatage.util.ReflectionUtils;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class SecurityExceptionHandler implements RequestExceptionHandler {
 
 	@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 	public void handleRequestException(final Throwable exception) throws IOException {
-		final org.greatage.security.SecurityException securityException = ReflectionUtils.findException(exception, org.greatage.security.SecurityException.class);
+		final SecurityException securityException = ReflectionUtils.findException(exception, SecurityException.class);
 		if (securityException != null) {
 			final String pageName = resolver.resolvePageClassNameToPageName(loginPage.getName());
 			renderer.renderPageMarkupResponse(pageName);
