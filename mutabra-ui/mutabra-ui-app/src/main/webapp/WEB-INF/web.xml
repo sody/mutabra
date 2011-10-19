@@ -17,7 +17,38 @@
 
 	<context-param>
 		<param-name>tapestry.production-mode</param-name>
-		<param-value>false</param-value>
+		<param-value>${project.production.mode}</param-value>
+	</context-param>
+
+
+	<context-param>
+		<param-name>twitter.consumer-key</param-name>
+		<param-value>${twitter.consumer.key}</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>twitter.consumer-secret</param-name>
+		<param-value>${twitter.consumer.secret}</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>facebook.app-id</param-name>
+		<param-value>${facebook.app.id}</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>facebook.app-secret</param-name>
+		<param-value>${facebook.app-secret}</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>google.consumer-key</param-name>
+		<param-value>${google.consumer.key}</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>google.consumer-secret</param-name>
+		<param-value>${google.consumer.secret}</param-value>
 	</context-param>
 
 	<context-param>

@@ -2,19 +2,19 @@ package com.mutabra.web.services;
 
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
+import com.mutabra.security.*;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
-import com.mutabra.web.internal.SecurityAnnotationWorker;
 import com.mutabra.web.internal.SecurityExceptionHandler;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
 import com.mutabra.web.pages.Security;
+import org.apache.tapestry5.Link;
+import org.apache.tapestry5.internal.services.RequestPageCache;
+import org.apache.tapestry5.internal.structure.Page;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.annotations.Contribute;
-import org.apache.tapestry5.ioc.annotations.Decorate;
-import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.apache.tapestry5.ioc.annotations.Scope;
+import org.apache.tapestry5.ioc.annotations.*;
 import org.apache.tapestry5.services.*;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.greatage.security.*;
@@ -24,6 +24,14 @@ import org.greatage.security.*;
  * @since 1.0
  */
 public class SecurityModule {
+	private final RequestPageCache requestPageCache;
+	private final ComponentClassResolver componentClassResolver;
+
+	public SecurityModule(final RequestPageCache requestPageCache,
+						  final ComponentClassResolver componentClassResolver) {
+		this.requestPageCache = requestPageCache;
+		this.componentClassResolver = componentClassResolver;
+	}
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(SecurityContext.class, SecurityContextImpl.class);
@@ -94,5 +102,29 @@ public class SecurityModule {
 	@Contribute(RequestHandler.class)
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
 		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class);
+	}
+
+	public TwitterService buildTwitterService(@Symbol("twitter.consumer.key") final String consumerKey,
+											  @Symbol("twitter.consumer.secret") final String consumerSecret) {
+		final Link link = createEventLink(Security.class, "twitterConnect");
+		return new TwitterServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
+	}
+
+	public FacebookService buildFacebookService(@Symbol("facebook.app.id") final String appId,
+												@Symbol("facebook.app.secret") final String appSecret) {
+		final Link link = createEventLink(Security.class, "facebookConnect");
+		return new FacebookServiceImpl(appId, appSecret, link.toAbsoluteURI());
+	}
+
+	public GoogleService buildGoogleService(@Symbol("google.consumer.key") final String consumerKey,
+											@Symbol("google.consumer.secret") final String consumerSecret) {
+		final Link link = createEventLink(Security.class, "googleConnect");
+		return new GoogleServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI(), "https://mail.google.com/");
+	}
+
+	private Link createEventLink(final Class pageClass, final String eventType, final Object... context) {
+		final String pageName = componentClassResolver.resolvePageClassNameToPageName(pageClass.getName());
+		final Page page = requestPageCache.get(pageName);
+		return page.getRootElement().createEventLink(eventType, context);
 	}
 }

@@ -2,13 +2,13 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:facebookMenuItem>
-		<t:button primary="medium facebook" text="false"><a class="transparent" href="#">${message:button.facebook.title}</a></t:button>
+		<t:button primary="medium facebook" text="false"><t:eventlink class="transparent" event="connectToFacebook">${message:button.facebook.title}</t:eventlink></t:button>
 	</p:facebookMenuItem>
 	<p:googleMenuItem>
-		<t:button primary="medium google" text="false"><a class="transparent" href="#">${message:button.google.title}</a></t:button>
+		<t:button primary="medium google" text="false"><t:eventlink class="transparent" event="connectToGoogle">${message:button.google.title}</t:eventlink></t:button>
 	</p:googleMenuItem>
 	<p:twitterMenuItem>
-		<t:button primary="medium twitter" text="false"><a class="transparent" href="#">${message:button.twitter.title}</a></t:button>
+		<t:button primary="medium twitter" text="false"><t:eventlink class="transparent" event="connectToTwitter">${message:button.twitter.title}</t:eventlink></t:button>
 	</p:twitterMenuItem>
 	<p:lastMenuItem>
 		<t:body/>

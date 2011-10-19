@@ -1,5 +1,9 @@
 package com.mutabra.web.components.layout;
 
+import com.mutabra.security.BaseOAuthService;
+import com.mutabra.security.FacebookService;
+import com.mutabra.security.GoogleService;
+import com.mutabra.security.TwitterService;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -7,6 +11,9 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.PasswordAuthenticationToken;
 import org.greatage.security.SecurityContext;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * @author Ivan Khalopik
@@ -23,6 +30,15 @@ public class AnonymousHeader extends AbstractComponent {
 	@Inject
 	private SecurityContext securityContext;
 
+	@Inject
+	private TwitterService twitterService;
+
+	@Inject
+	private FacebookService facebookService;
+
+	@Inject
+	private GoogleService googleService;
+
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
 		securityContext.signIn(new PasswordAuthenticationToken(email, password));
@@ -33,5 +49,21 @@ public class AnonymousHeader extends AbstractComponent {
 	Object signUp() {
 		//todo: make it work
 		return getResources().getPageName();
+	}
+
+	URL onConnectToFacebook() throws MalformedURLException {
+		return createAuthenticationURL(facebookService);
+	}
+
+	URL onConnectToGoogle() throws MalformedURLException {
+		return createAuthenticationURL(googleService);
+	}
+
+	URL onConnectToTwitter() throws MalformedURLException {
+		return createAuthenticationURL(twitterService);
+	}
+
+	private URL createAuthenticationURL(final BaseOAuthService authService) throws MalformedURLException {
+		return new URL(authService.getAuthorizationURL());
 	}
 }
