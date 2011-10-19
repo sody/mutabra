@@ -1,9 +1,6 @@
 package com.mutabra.web.components.layout;
 
-import com.mutabra.security.BaseOAuthService;
-import com.mutabra.security.FacebookService;
-import com.mutabra.security.GoogleService;
-import com.mutabra.security.TwitterService;
+import com.mutabra.security.*;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -39,6 +36,9 @@ public class AnonymousHeader extends AbstractComponent {
 	@Inject
 	private GoogleService googleService;
 
+	@Inject
+	private VKontakteService vkontakteService;
+
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
 		securityContext.signIn(new PasswordAuthenticationToken(email, password));
@@ -61,6 +61,10 @@ public class AnonymousHeader extends AbstractComponent {
 
 	URL onConnectToTwitter() throws MalformedURLException {
 		return createAuthenticationURL(twitterService);
+	}
+
+	URL onConnectToVKontakte() throws MalformedURLException {
+		return createAuthenticationURL(vkontakteService);
 	}
 
 	private URL createAuthenticationURL(final BaseOAuthService authService) throws MalformedURLException {

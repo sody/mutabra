@@ -76,4 +76,18 @@ public class Security extends AbstractPage {
 		System.out.println(info);
 		return null;
 	}
+
+	Object onVKontakteConnect(
+			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
+			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier,
+			@RequestParameter(value = "denied", allowBlank = true) String denied) {
+
+		final String info = new DescriptionBuilder("VKONTAKTE TOKEN")
+				.append("token", token)
+				.append("verifier", verifier)
+				.append("denied", denied)
+				.toString();
+		System.out.println(info);
+		return null;
+	}
 }

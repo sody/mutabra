@@ -122,6 +122,12 @@ public class SecurityModule {
 		return new GoogleServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI(), "https://mail.google.com/");
 	}
 
+	public VKontakteService buildVKontakteService(@Symbol("vkontakte.consumer-key") final String consumerKey,
+												  @Symbol("vkontakte.consumer-secret") final String consumerSecret) {
+		final Link link = createEventLink(Security.class, "vKontakteConnect");
+		return new VKontakteServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
+	}
+
 	private Link createEventLink(final Class pageClass, final String eventType, final Object... context) {
 		final String pageName = componentClassResolver.resolvePageClassNameToPageName(pageClass.getName());
 		final Page page = requestPageCache.get(pageName);

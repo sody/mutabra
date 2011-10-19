@@ -39,6 +39,7 @@
 				<configuration>
 					<!--<classifier>${jdbc.profile}</classifier>-->
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<webXml>src/main/config/web.xml</webXml>
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
 				</configuration>
 			</plugin>
@@ -115,6 +116,21 @@
 	</dependencies>
 
 	<profiles>
+		<profile>
+			<id>debug</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>src/main/config/web-dev.xml</webXml>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 		<profile>
 			<id>gae</id>
 			<build>
