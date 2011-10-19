@@ -38,7 +38,7 @@
 
 	<context-param>
 		<param-name>facebook.app-secret</param-name>
-		<param-value>${facebook.app-secret}</param-value>
+		<param-value>${facebook.app.secret}</param-value>
 	</context-param>
 
 	<context-param>

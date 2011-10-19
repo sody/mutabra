@@ -104,20 +104,20 @@ public class SecurityModule {
 		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class);
 	}
 
-	public TwitterService buildTwitterService(@Symbol("twitter.consumer.key") final String consumerKey,
-											  @Symbol("twitter.consumer.secret") final String consumerSecret) {
+	public TwitterService buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,
+											  @Symbol("twitter.consumer-secret") final String consumerSecret) {
 		final Link link = createEventLink(Security.class, "twitterConnect");
 		return new TwitterServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
 	}
 
-	public FacebookService buildFacebookService(@Symbol("facebook.app.id") final String appId,
-												@Symbol("facebook.app.secret") final String appSecret) {
+	public FacebookService buildFacebookService(@Symbol("facebook.app-id") final String appId,
+												@Symbol("facebook.app-secret") final String appSecret) {
 		final Link link = createEventLink(Security.class, "facebookConnect");
 		return new FacebookServiceImpl(appId, appSecret, link.toAbsoluteURI());
 	}
 
-	public GoogleService buildGoogleService(@Symbol("google.consumer.key") final String consumerKey,
-											@Symbol("google.consumer.secret") final String consumerSecret) {
+	public GoogleService buildGoogleService(@Symbol("google.consumer-key") final String consumerKey,
+											@Symbol("google.consumer-secret") final String consumerSecret) {
 		final Link link = createEventLink(Security.class, "googleConnect");
 		return new GoogleServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI(), "https://mail.google.com/");
 	}
