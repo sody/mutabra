@@ -76,7 +76,7 @@ public class SecurityModule {
 				//todo: !!!remove this!!!
 				authorities.add(AuthorityConstants.ROLE_ADMIN);
 				//todo: !!!remove this!!!
-				return new PasswordAuthentication(account.getName(), account.getPassword(), authorities);
+				return new PasswordAuthentication(account.getEmail(), account.getPassword(), authorities);
 			}
 
 			@Override

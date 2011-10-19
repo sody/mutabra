@@ -89,7 +89,7 @@ public class Security extends AbstractPage {
 				"New account was created for you,\n" +
 				"(login: %s, password: %s, activation token: %s).\n" +
 				"To activate your account please follow the link:\n %s",
-				email, generatedPassword, generatedPassword, link.toAbsoluteURI());
+				email, generatedPassword, generatedToken, link.toAbsoluteURI());
 		mailService.send(email, "Mutabra Account", message);
 		accountService.save(account);
 
