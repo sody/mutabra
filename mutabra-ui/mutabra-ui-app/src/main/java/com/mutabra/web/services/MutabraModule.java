@@ -2,10 +2,7 @@ package com.mutabra.web.services;
 
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.web.annotations.Custom;
-import com.mutabra.web.internal.CustomValidationDecorator;
-import com.mutabra.web.internal.EntityEncoderFactory;
-import com.mutabra.web.internal.I18nPropertyConduitSource;
-import com.mutabra.web.internal.TranslatorImpl;
+import com.mutabra.web.internal.*;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ValidationDecorator;
@@ -33,6 +30,7 @@ import org.greatage.domain.EntityRepository;
 public class MutabraModule {
 
 	public static void bind(final ServiceBinder binder) {
+		binder.bind(LinkManager.class, LinkManagerImpl.class);
 		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withMarker(Custom.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
 	}

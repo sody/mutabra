@@ -9,8 +9,6 @@ import com.mutabra.web.internal.SecurityExceptionHandler;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
 import com.mutabra.web.pages.Security;
 import org.apache.tapestry5.Link;
-import org.apache.tapestry5.internal.services.RequestPageCache;
-import org.apache.tapestry5.internal.structure.Page;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -18,20 +16,16 @@ import org.apache.tapestry5.ioc.annotations.*;
 import org.apache.tapestry5.services.*;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.greatage.security.*;
+import org.greatage.util.StringUtils;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class SecurityModule {
-	private final RequestPageCache requestPageCache;
-	private final ComponentClassResolver componentClassResolver;
-
-	public SecurityModule(final RequestPageCache requestPageCache,
-						  final ComponentClassResolver componentClassResolver) {
-		this.requestPageCache = requestPageCache;
-		this.componentClassResolver = componentClassResolver;
-	}
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(SecurityContext.class, SecurityContextImpl.class);
@@ -62,7 +56,36 @@ public class SecurityModule {
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration,
 												@InjectService("accountService") final BaseEntityService<Account, AccountQuery> accountService,
 												final PasswordEncoder passwordEncoder) {
-		configuration.add("mutabra", new PasswordAuthenticationProvider(passwordEncoder) {
+		configuration.add("oneTime", new AbstractAuthenticationProvider<PasswordAuthentication, OneTimeToken>(PasswordAuthentication.class, OneTimeToken.class) {
+			@Override
+			protected PasswordAuthentication doSignIn(final OneTimeToken token) {
+				if (StringUtils.isEmpty(token.getName()) || StringUtils.isEmpty(token.getToken())) {
+					throw new AuthenticationException("Wrong token");
+				}
+				final Account account = accountService.query().withEmail(token.getName()).unique();
+				if (account == null || !token.getToken().equals(account.getToken())) {
+					throw new AuthenticationException("Wrong token");
+				}
+
+				account.setToken(null);
+				account.setLastLogin(new Date());
+				accountService.save(account);
+
+				final List<String> authorities = account.getAuthorities();
+				authorities.add(AuthorityConstants.STATUS_AUTHENTICATED);
+				//todo: !!!remove this!!!
+				authorities.add(AuthorityConstants.ROLE_ADMIN);
+				//todo: !!!remove this!!!
+				return new PasswordAuthentication(account.getName(), account.getPassword(), authorities);
+			}
+
+			@Override
+			protected void doSignOut(final PasswordAuthentication authentication) {
+				// do nothing
+			}
+		});
+
+		configuration.add("credentials", new PasswordAuthenticationProvider(passwordEncoder) {
 			@Override
 			protected PasswordAuthentication getAuthentication(final String name) {
 				if (name != null) {
@@ -104,33 +127,31 @@ public class SecurityModule {
 		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class);
 	}
 
-	public TwitterService buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,
+	public TwitterService buildTwitterService(final LinkManager linkManager,
+											  @Symbol("twitter.consumer-key") final String consumerKey,
 											  @Symbol("twitter.consumer-secret") final String consumerSecret) {
-		final Link link = createEventLink(Security.class, "twitterConnect");
+		final Link link = linkManager.createPageEventLink(Security.class, "twitterConnect");
 		return new TwitterServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
 	}
 
-	public FacebookService buildFacebookService(@Symbol("facebook.app-id") final String appId,
+	public FacebookService buildFacebookService(final LinkManager linkManager,
+												@Symbol("facebook.app-id") final String appId,
 												@Symbol("facebook.app-secret") final String appSecret) {
-		final Link link = createEventLink(Security.class, "facebookConnect");
+		final Link link = linkManager.createPageEventLink(Security.class, "facebookConnect");
 		return new FacebookServiceImpl(appId, appSecret, link.toAbsoluteURI());
 	}
 
-	public GoogleService buildGoogleService(@Symbol("google.consumer-key") final String consumerKey,
+	public GoogleService buildGoogleService(final LinkManager linkManager,
+											@Symbol("google.consumer-key") final String consumerKey,
 											@Symbol("google.consumer-secret") final String consumerSecret) {
-		final Link link = createEventLink(Security.class, "googleConnect");
+		final Link link = linkManager.createPageEventLink(Security.class, "googleConnect");
 		return new GoogleServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI(), "https://mail.google.com/");
 	}
 
-	public VKontakteService buildVKontakteService(@Symbol("vkontakte.consumer-key") final String consumerKey,
+	public VKontakteService buildVKontakteService(final LinkManager linkManager,
+												  @Symbol("vkontakte.consumer-key") final String consumerKey,
 												  @Symbol("vkontakte.consumer-secret") final String consumerSecret) {
-		final Link link = createEventLink(Security.class, "vKontakteConnect");
+		final Link link = linkManager.createPageEventLink(Security.class, "vKontakteConnect");
 		return new VKontakteServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
-	}
-
-	private Link createEventLink(final Class pageClass, final String eventType, final Object... context) {
-		final String pageName = componentClassResolver.resolvePageClassNameToPageName(pageClass.getName());
-		final Page page = requestPageCache.get(pageName);
-		return page.getRootElement().createEventLink(eventType, context);
 	}
 }

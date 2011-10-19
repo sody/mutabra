@@ -18,6 +18,7 @@ import com.mutabra.services.security.AccountQuery;
 import com.mutabra.services.security.ChangeSetQuery;
 import com.mutabra.services.security.PermissionQuery;
 import com.mutabra.services.security.RoleQuery;
+import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Advise;
@@ -39,6 +40,7 @@ public class ServicesModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
+		binder.bind(MailService.class, MailServiceImpl.class);
 	}
 
 	public ServicesModule(final EntityRepository repository) {

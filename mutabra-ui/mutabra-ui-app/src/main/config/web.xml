@@ -52,6 +52,17 @@
 	</context-param>
 
 	<context-param>
+		<param-name>vkontakte.consumer-key</param-name>
+		<param-value>_KEY_</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>vkontakte.consumer-secret</param-name>
+		<param-value>_SECRET_</param-value>
+	</context-param>
+
+
+	<context-param>
 		<param-name>tapestry.start-page-name</param-name>
 		<param-value>/</param-value>
 	</context-param>
