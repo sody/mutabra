@@ -20,5 +20,13 @@ public class AccountFilterProcessor extends BaseEntityFilterProcessor<Account, A
 		if (!StringUtils.isEmpty(filter.getEmail())) {
 			criteria.add(criteria.getProperty(Account.EMAIL_PROPERTY).eq(filter.getEmail()));
 		}
+
+		if (!StringUtils.isEmpty(filter.getPassword())) {
+			criteria.add(criteria.getProperty(Account.PASSWORD_PROPERTY).eq(filter.getPassword()));
+		}
+
+		if (!StringUtils.isEmpty(filter.getToken())) {
+			criteria.add(criteria.getProperty(Account.TOKEN_PROPERTY).eq(filter.getToken()));
+		}
 	}
 }

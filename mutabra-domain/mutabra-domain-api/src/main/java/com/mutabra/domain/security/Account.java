@@ -13,6 +13,10 @@ public interface Account extends BaseEntity {
 
 	String EMAIL_PROPERTY = "email";
 
+	String PASSWORD_PROPERTY = "password";
+
+	String TOKEN_PROPERTY = "token";
+
 	public String getEmail();
 
 	public void setEmail(final String email);

@@ -9,18 +9,38 @@ import org.greatage.domain.EntityRepository;
  * @since 1.0
  */
 public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> {
-	private String userName;
+	private String email;
+	private String password;
+	private String token;
 
 	public AccountQuery(final EntityRepository repository) {
 		super(repository, Account.class);
 	}
 
-	public AccountQuery withEmail(final String userName) {
-		this.userName = userName;
+	public AccountQuery withEmail(final String email) {
+		this.email = email;
+		return query();
+	}
+
+	public AccountQuery withPassword(final String password) {
+		this.password = password;
+		return query();
+	}
+
+	public AccountQuery withToken(final String token) {
+		this.token = token;
 		return query();
 	}
 
 	public String getEmail() {
-		return userName;
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getToken() {
+		return token;
 	}
 }

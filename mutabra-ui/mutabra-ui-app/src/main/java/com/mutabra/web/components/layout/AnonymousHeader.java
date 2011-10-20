@@ -16,8 +16,8 @@ import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.greatage.security.PasswordAuthenticationToken;
-import org.greatage.security.PasswordEncoder;
+import org.greatage.security.Credentials;
+import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
 
 import java.math.BigInteger;
@@ -48,7 +48,7 @@ public class AnonymousHeader extends AbstractComponent {
 	private MailService mailService;
 
 	@Inject
-	private PasswordEncoder passwordEncoder;
+	private SecretEncoder secretEncoder;
 
 	@Inject
 	private LinkManager linkManager;
@@ -67,7 +67,7 @@ public class AnonymousHeader extends AbstractComponent {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
-		securityContext.signIn(new PasswordAuthenticationToken(email, password));
+		securityContext.signIn(new Credentials(email, password));
 		return getResources().getPageName();
 	}
 
@@ -82,7 +82,7 @@ public class AnonymousHeader extends AbstractComponent {
 
 		final Account account = accountService.create();
 		account.setEmail(email);
-		account.setPassword(passwordEncoder.encode(generatedPassword));
+		account.setPassword(secretEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
 

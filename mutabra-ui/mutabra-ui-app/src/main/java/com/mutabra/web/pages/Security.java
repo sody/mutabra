@@ -1,7 +1,6 @@
 package com.mutabra.web.pages;
 
 import com.mutabra.domain.security.Account;
-import com.mutabra.security.OneTimeToken;
 import com.mutabra.security.TwitterService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
@@ -14,14 +13,12 @@ import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.RequestParameter;
-import org.apache.tapestry5.internal.services.LinkSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.greatage.security.PasswordAuthenticationToken;
-import org.greatage.security.PasswordEncoder;
+import org.greatage.security.Credentials;
+import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
 import org.greatage.util.DescriptionBuilder;
-import org.greatage.util.StringUtils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -49,7 +46,7 @@ public class Security extends AbstractPage {
 	private MailService mailService;
 
 	@Inject
-	private PasswordEncoder passwordEncoder;
+	private SecretEncoder passwordEncoder;
 
 	@Inject
 	private LinkManager linkManager;
@@ -59,13 +56,13 @@ public class Security extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
-		securityContext.signIn(new PasswordAuthenticationToken(email, password));
+		securityContext.signIn(new Credentials(email, password));
 		return Index.class;
 	}
 
 	@OnEvent("signIn")
 	Object signInOnce(final String email, final String token) {
-		securityContext.signIn(new OneTimeToken(email, token));
+		securityContext.signIn(new Credentials("token", email, token));
 		return Index.class;
 	}
 

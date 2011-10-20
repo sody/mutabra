@@ -17,7 +17,6 @@ import org.apache.tapestry5.ioc.annotations.*;
 import org.apache.tapestry5.services.*;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.greatage.security.*;
-import org.greatage.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -49,64 +48,60 @@ public class SecurityModule {
 		};
 	}
 
-	public PasswordEncoder buildPasswordEncoder() {
-		return new MessageDigestPasswordEncoder("MD5", false);
+	public SecretEncoder buildSecretEncoder() {
+		return new MessageDigestSecretEncoder("MD5", false);
 	}
 
 	@Contribute(SecurityContext.class)
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration,
 												@InjectService("accountService") final BaseEntityService<Account, AccountQuery> accountService,
-												final PasswordEncoder passwordEncoder) {
-		configuration.add("oneTime", new AbstractAuthenticationProvider<PasswordAuthentication, OneTimeToken>(PasswordAuthentication.class, OneTimeToken.class) {
+												final SecretEncoder secretEncoder) {
+		configuration.add("token", new UserCredentialsProvider("token") {
 			@Override
-			protected PasswordAuthentication doSignIn(final OneTimeToken token) {
-				if (StringUtils.isEmpty(token.getName()) || StringUtils.isEmpty(token.getToken())) {
-					throw new AuthenticationException("Wrong token");
+			protected User getAuthentication(final String key, final String secret) {
+				final Account account = accountService.query()
+						.withEmail(key)
+						.withToken(secret)
+						.unique();
+
+				if (account != null) {
+					account.setToken(null);
+					account.setLastLogin(new Date());
+					accountService.save(account);
+
+					final List<String> authorities = account.getAuthorities();
+					authorities.add(AuthorityConstants.STATUS_AUTHENTICATED);
+					//todo: !!!remove this!!!
+					authorities.add(AuthorityConstants.ROLE_ADMIN);
+					//todo: !!!remove this!!!
+					return new User(account.getEmail(), authorities);
 				}
-				final Account account = accountService.query().withEmail(token.getName()).unique();
-				if (account == null || !token.getToken().equals(account.getToken())) {
-					throw new AuthenticationException("Wrong token");
-				}
 
-				account.setToken(null);
-				account.setLastLogin(new Date());
-				accountService.save(account);
-
-				final List<String> authorities = account.getAuthorities();
-				authorities.add(AuthorityConstants.STATUS_AUTHENTICATED);
-				//todo: !!!remove this!!!
-				authorities.add(AuthorityConstants.ROLE_ADMIN);
-				//todo: !!!remove this!!!
-				return new PasswordAuthentication(account.getEmail(), account.getPassword(), authorities);
-			}
-
-			@Override
-			protected void doSignOut(final PasswordAuthentication authentication) {
-				// do nothing
+				return null;
 			}
 		});
 
-		configuration.add("credentials", new PasswordAuthenticationProvider(passwordEncoder) {
+		configuration.add("credentials", new UserCredentialsProvider(secretEncoder) {
 			@Override
-			protected PasswordAuthentication getAuthentication(final String name) {
-				if (name != null) {
-					final Account account = accountService.query().withEmail(name).unique();
-					if (account != null) {
-						return new PasswordAuthentication(account.getEmail(), account.getPassword(), account.getAuthorities());
-					}
-				}
-				// not found
-				return null;
-			}
+			protected User getAuthentication(final String key, final String secret) {
+				final Account account = accountService.query()
+						.withEmail(key)
+						.withPassword(secret)
+						.unique();
 
-			@Override
-			protected PasswordAuthentication doSignIn(final PasswordAuthenticationToken token) {
-				final PasswordAuthentication authentication = super.doSignIn(token);
-				authentication.getAuthorities().add(AuthorityConstants.STATUS_AUTHENTICATED);
-				//todo: !!!remove this!!!
-				authentication.getAuthorities().add(AuthorityConstants.ROLE_ADMIN);
-				//todo: !!!remove this!!!
-				return authentication;
+				if (account != null) {
+					account.setLastLogin(new Date());
+					accountService.save(account);
+
+					final List<String> authorities = account.getAuthorities();
+					authorities.add(AuthorityConstants.STATUS_AUTHENTICATED);
+					//todo: !!!remove this!!!
+					authorities.add(AuthorityConstants.ROLE_ADMIN);
+					//todo: !!!remove this!!!
+					return new User(account.getEmail(), authorities);
+				}
+
+				return null;
 			}
 		});
 	}
