@@ -5,6 +5,7 @@ import com.mutabra.domain.security.Account;
 import com.mutabra.security.*;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
+import com.mutabra.web.internal.SecurityAnnotationWorker;
 import com.mutabra.web.internal.SecurityExceptionHandler;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
 import com.mutabra.web.pages.Security;
@@ -112,7 +113,7 @@ public class SecurityModule {
 
 	public void contributeComponentClassTransformWorker(
 			final OrderedConfiguration<ComponentClassTransformWorker2> configuration) {
-//		configuration.addInstance("PageSecurity", SecurityAnnotationWorker.class, "before:OnEvent");
+		configuration.addInstance("PageSecurity", SecurityAnnotationWorker.class, "after:OnEvent");
 	}
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)

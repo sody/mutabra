@@ -22,6 +22,7 @@ import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Advise;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.plastic.MethodAdvice;
 import org.apache.tapestry5.plastic.MethodInvocation;
 import org.greatage.domain.EntityRepository;
@@ -45,6 +46,10 @@ public class ServicesModule {
 
 	public ServicesModule(final EntityRepository repository) {
 		this.repository = repository;
+	}
+
+	public MailService buildMailService(final @Symbol("mail.admin-address") String adminAddress) {
+		return new MailServiceImpl(adminAddress);
 	}
 
 	public BaseEntityService<Role, RoleQuery> buildRoleService() {

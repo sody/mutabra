@@ -22,6 +22,11 @@
 
 
 	<context-param>
+		<param-name>mail.admin-address</param-name>
+		<param-value>${mail.admin.address}</param-value>
+	</context-param>
+
+	<context-param>
 		<param-name>twitter.consumer-key</param-name>
 		<param-value>${twitter.consumer.key}</param-value>
 	</context-param>
