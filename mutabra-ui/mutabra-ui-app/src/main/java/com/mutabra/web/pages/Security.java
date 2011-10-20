@@ -1,6 +1,8 @@
 package com.mutabra.web.pages;
 
 import com.mutabra.domain.security.Account;
+import com.mutabra.security.FacebookService;
+import com.mutabra.security.FacebookToken;
 import com.mutabra.security.TwitterService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
@@ -50,6 +52,9 @@ public class Security extends AbstractPage {
 
 	@Inject
 	private LinkManager linkManager;
+
+	@Inject
+	private FacebookService facebookService;
 
 	@Inject
 	private TwitterService twitterService;
@@ -108,7 +113,11 @@ public class Security extends AbstractPage {
 				.append("error_description", errorDescription)
 				.toString();
 		System.out.println(info);
-		return null;
+
+		if (code != null) {
+			securityContext.signIn(new FacebookToken(code));
+		}
+		return Index.class;
 	}
 
 	@OnEvent("twitterConnect")

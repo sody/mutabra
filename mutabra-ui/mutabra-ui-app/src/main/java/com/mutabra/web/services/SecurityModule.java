@@ -104,6 +104,8 @@ public class SecurityModule {
 				return null;
 			}
 		});
+
+		configuration.addInstance("facebook", FacebookProvider.class);
 	}
 
 	public void contributeComponentClassTransformWorker(
@@ -134,7 +136,7 @@ public class SecurityModule {
 												@Symbol("facebook.app-id") final String appId,
 												@Symbol("facebook.app-secret") final String appSecret) {
 		final Link link = linkManager.createPageEventLink(Security.class, "facebookConnect");
-		return new FacebookServiceImpl(appId, appSecret, link.toAbsoluteURI());
+		return new FacebookServiceImpl(appId, appSecret, link.toAbsoluteURI(), "email");
 	}
 
 	public GoogleService buildGoogleService(final LinkManager linkManager,

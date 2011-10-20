@@ -28,5 +28,15 @@ public class AccountFilterProcessor extends BaseEntityFilterProcessor<Account, A
 		if (!StringUtils.isEmpty(filter.getToken())) {
 			criteria.add(criteria.getProperty(Account.TOKEN_PROPERTY).eq(filter.getToken()));
 		}
+
+		if (!StringUtils.isEmpty(filter.getFacebook())) {
+			criteria.add(criteria.getProperty(Account.FACEBOOK_USER_PROPERTY).eq(filter.getFacebook()));
+		}
+		if (!StringUtils.isEmpty(filter.getTwitter())) {
+			criteria.add(criteria.getProperty(Account.TWITTER_USER_PROPERTY).eq(filter.getTwitter()));
+		}
+		if (!StringUtils.isEmpty(filter.getGoogle())) {
+			criteria.add(criteria.getProperty(Account.GOOGLE_USER_PROPERTY).eq(filter.getGoogle()));
+		}
 	}
 }

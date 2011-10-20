@@ -5,6 +5,7 @@ import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.player.Hero;
+import org.greatage.util.LocaleUtils;
 
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
@@ -25,6 +26,15 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private String password;
 
 	@Persistent
+	private String facebookUser;
+
+	@Persistent
+	private String twitterUser;
+
+	@Persistent
+	private String googleUser;
+
+	@Persistent
 	private Date registered;
 
 	@Persistent
@@ -40,7 +50,10 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private String place;
 
 	@Persistent
-	private Locale locale;
+	private String locale = "";
+
+	@NotPersistent
+	private Locale localeValue;
 
 	@Persistent
 	private TimeZone timeZone;
@@ -68,6 +81,30 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public String getFacebookUser() {
+		return facebookUser;
+	}
+
+	public void setFacebookUser(final String user) {
+		facebookUser = user;
+	}
+
+	public String getTwitterUser() {
+		return twitterUser;
+	}
+
+	public void setTwitterUser(final String user) {
+		twitterUser = user;
+	}
+
+	public String getGoogleUser() {
+		return googleUser;
+	}
+
+	public void setGoogleUser(final String user) {
+		googleUser = user;
 	}
 
 	public Date getRegistered() {
@@ -111,11 +148,15 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	}
 
 	public Locale getLocale() {
-		return locale;
+		if (localeValue == null) {
+			localeValue = LocaleUtils.parseLocale(locale);
+		}
+		return localeValue;
 	}
 
 	public void setLocale(final Locale locale) {
-		this.locale = locale;
+		localeValue = locale;
+		this.locale = locale != null ? locale.toString() : null;
 	}
 
 	public TimeZone getTimeZone() {

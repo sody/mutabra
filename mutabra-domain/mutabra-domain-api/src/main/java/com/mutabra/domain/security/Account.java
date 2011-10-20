@@ -17,6 +17,12 @@ public interface Account extends BaseEntity {
 
 	String TOKEN_PROPERTY = "token";
 
+	String FACEBOOK_USER_PROPERTY = "facebookUser";
+
+	String TWITTER_USER_PROPERTY = "twitterUser";
+
+	String GOOGLE_USER_PROPERTY = "googleUser";
+
 	public String getEmail();
 
 	public void setEmail(final String email);
@@ -24,6 +30,18 @@ public interface Account extends BaseEntity {
 	public String getPassword();
 
 	public void setPassword(final String password);
+
+	public String getFacebookUser();
+
+	public void setFacebookUser(String user);
+
+	public String getTwitterUser();
+
+	public void setTwitterUser(String user);
+
+	public String getGoogleUser();
+
+	public void setGoogleUser(String user);
 
 	public Date getRegistered();
 
