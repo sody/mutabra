@@ -41,7 +41,6 @@ public class ServicesModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
-		binder.bind(MailService.class, MailServiceImpl.class);
 	}
 
 	public ServicesModule(final EntityRepository repository) {
