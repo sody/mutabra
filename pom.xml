@@ -422,7 +422,7 @@
 		<datanucleus.appengine.version>1.0.8</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 
-		<tapestry.version>5.3-beta-24</tapestry.version>
+		<tapestry.version>5.3-beta-25</tapestry.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.1</mail.api.version>
 
