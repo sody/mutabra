@@ -190,6 +190,17 @@
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-ioc</artifactId>
 				<version>${tapestry.version}</version>
+
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -407,24 +418,24 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<ga.version>1.0-SNAPSHOT</ga.version>
-		<slf4j.version>1.6.2</slf4j.version>
-		<logback.version>0.9.29</logback.version>
+		<slf4j.version>1.6.3</slf4j.version>
+		<logback.version>0.9.30</logback.version>
 		<javassist.version>3.12.1.GA</javassist.version>
-		<testng.version>6.2</testng.version>
+		<testng.version>6.3</testng.version>
 
-		<hibernate.version>4.0.0.CR1</hibernate.version>
-		<mysql.version>5.1.10</mysql.version>
+		<hibernate.version>4.0.0.CR4</hibernate.version>
+		<mysql.version>5.1.18</mysql.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 
 		<appengine.version>1.5.5</appengine.version>
 		<datanucleus.version>1.1.5</datanucleus.version>
 		<datanucleus.enhancer.version>1.1.4</datanucleus.enhancer.version>
-		<datanucleus.appengine.version>1.0.8</datanucleus.appengine.version>
+		<datanucleus.appengine.version>1.0.10</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 
 		<tapestry.version>5.3-beta-25</tapestry.version>
 		<servlet.api.version>2.5</servlet.api.version>
-		<mail.api.version>1.4.1</mail.api.version>
+		<mail.api.version>1.4.4</mail.api.version>
 
 		<release.url>file:///mutabra/release</release.url>
 		<log.dir>file:///mutabra/log</log.dir>

@@ -1,11 +1,12 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.BaseEntity;
-import com.mutabra.web.annotations.Custom;
-import com.mutabra.web.internal.*;
-import org.apache.tapestry5.MarkupWriter;
+import com.mutabra.web.internal.CustomValidationDecoratorFactory;
+import com.mutabra.web.internal.EntityEncoderFactory;
+import com.mutabra.web.internal.I18nPropertyConduitSource;
+import com.mutabra.web.internal.LinkManagerImpl;
+import com.mutabra.web.internal.TranslatorImpl;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ValidationDecorator;
 import org.apache.tapestry5.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
@@ -13,13 +14,21 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
+import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
-import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry5.services.*;
-import org.apache.tapestry5.services.javascript.*;
+import org.apache.tapestry5.services.PropertyConduitSource;
+import org.apache.tapestry5.services.ValidationDecoratorFactory;
+import org.apache.tapestry5.services.ValueEncoderFactory;
+import org.apache.tapestry5.services.ValueEncoderSource;
+import org.apache.tapestry5.services.javascript.ExtensibleJavaScriptStack;
+import org.apache.tapestry5.services.javascript.JavaScriptStack;
+import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
+import org.apache.tapestry5.services.javascript.StackExtension;
+import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.greatage.domain.EntityRepository;
 
 /**
@@ -30,14 +39,20 @@ import org.greatage.domain.EntityRepository;
 public class MutabraModule {
 
 	public static void bind(final ServiceBinder binder) {
+		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
+		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
 		binder.bind(LinkManager.class, LinkManagerImpl.class);
-		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withMarker(Custom.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
 	}
 
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
-		configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT");
+	}
+
+	@Contribute(ServiceOverride.class)
+	public static void contributeServiceOverrides(final MappedConfiguration<Class, Object> configuration,
+												  final @Local ValidationDecoratorFactory decoratorFactory) {
+		configuration.add(ValidationDecoratorFactory.class, decoratorFactory);
 	}
 
 	@Contribute(ValueEncoderSource.class)
@@ -63,9 +78,9 @@ public class MutabraModule {
 		}));
 	}
 
-	@Custom
+	@Local
 	@Contribute(JavaScriptStack.class)
-	public void contributeMutabraJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
+	public void contributeJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
 		configuration.add("reset", new StackExtension(StackExtensionType.STYLESHEET, "context:css/reset.css"));
 		configuration.add("fonts", new StackExtension(StackExtensionType.STYLESHEET, "context:css/fonts.css"));
 		configuration.add("layout", new StackExtension(StackExtensionType.STYLESHEET, "context:css/layout.css"));
@@ -77,33 +92,7 @@ public class MutabraModule {
 
 	@Contribute(JavaScriptStackSource.class)
 	public void contributeJavaScriptStackSource(final MappedConfiguration<String, JavaScriptStack> configuration,
-												@Custom final JavaScriptStack mutabraStack) {
-		configuration.add("mutabra", mutabraStack);
-	}
-
-	@Contribute(MarkupRenderer.class)
-	public void contributeMarkupRenderer(final OrderedConfiguration<MarkupRendererFilter> configuration,
-										 final Environment environment) {
-		final MarkupRendererFilter validationDecorator = new MarkupRendererFilter() {
-			public void renderMarkup(MarkupWriter writer, MarkupRenderer renderer) {
-				environment.push(ValidationDecorator.class, new CustomValidationDecorator(environment, writer));
-				renderer.renderMarkup(writer);
-				environment.pop(ValidationDecorator.class);
-			}
-		};
-		configuration.add("CustomValidationDecorator", validationDecorator, "after:DefaultValidationDecorator");
-	}
-
-	@Contribute(PartialMarkupRenderer.class)
-	public void contributePartialMarkupRenderer(final OrderedConfiguration<PartialMarkupRendererFilter> configuration,
-												final Environment environment) {
-		final PartialMarkupRendererFilter validationDecorator = new PartialMarkupRendererFilter() {
-			public void renderMarkup(MarkupWriter writer, JSONObject reply, PartialMarkupRenderer renderer) {
-				environment.push(ValidationDecorator.class, new CustomValidationDecorator(environment, writer));
-				renderer.renderMarkup(writer, reply);
-				environment.pop(ValidationDecorator.class);
-			}
-		};
-		configuration.add("CustomValidationDecorator", validationDecorator, "after:DefaultValidationDecorator");
+												final @Local JavaScriptStack stack) {
+		configuration.add("mutabra", stack);
 	}
 }
