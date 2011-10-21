@@ -14,6 +14,7 @@ import org.greatage.util.LocaleUtils;
 import org.greatage.util.StringUtils;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -39,13 +40,12 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		if (StringUtils.isEmpty(token.getCode())) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		//todo: change result value to map
-		final JSONObject profile = facebookService.getProfile(token.getCode());
-		final String username = (String) profile.get("id");
-		if (StringUtils.isEmpty(username)) {
+		final Map<String, Object> profile = facebookService.connect(token.getCode()).getProfile();
+		final String facebookId = (String) profile.get("id");
+		if (StringUtils.isEmpty(facebookId)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		Account account = accountService.query().withFacebook(username).unique();
+		Account account = accountService.query().withFacebook(facebookId).unique();
 		if (account != null) {
 			return authenticate(account);
 		}
@@ -56,13 +56,13 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		}
 		account = accountService.query().withEmail(email).unique();
 		if (account != null) {
-			account.setFacebookUser(username);
+			account.setFacebookUser(facebookId);
 			return authenticate(account);
 		}
 
 		account = accountService.create();
 		account.setEmail(email);
-		account.setFacebookUser(username);
+		account.setFacebookUser(facebookId);
 		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
 		account.setRegistered(new Date());
 		account.setName((String) profile.get("name"));

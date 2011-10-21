@@ -1,6 +1,6 @@
 package com.mutabra.security;
 
-import org.apache.tapestry5.json.JSONObject;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -8,5 +8,10 @@ import org.apache.tapestry5.json.JSONObject;
  */
 public interface FacebookService extends BaseOAuthService {
 
-	JSONObject getProfile(String secret);
+	Session connect(String secret);
+
+	interface Session {
+
+		Map<String, Object> getProfile();
+	}
 }
