@@ -1,4 +1,4 @@
-<t:menu class="sidebar" items="index,fake1,fake2,fake3,test" selected="test"
+<t:menu class="sidebar" items="index,fake1,fake2,fake3" selected="test"
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:indexMenuItem>
@@ -13,7 +13,4 @@
 	<p:fake3MenuItem>
 		<t:button><t:pagelink page="index">Fake 3</t:pagelink></t:button>
 	</p:fake3MenuItem>
-	<p:testMenuItem>
-		<t:button><t:pagelink page="test">${message:page.test.title}</t:pagelink></t:button>
-	</p:testMenuItem>
 </t:menu>

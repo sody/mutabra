@@ -1,4 +1,4 @@
-package com.mutabra.web.pages;
+package com.mutabra.web.pages.admin;
 
 import com.mutabra.web.base.pages.AbstractPage;
 
