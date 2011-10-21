@@ -3,7 +3,7 @@ package com.mutabra.security;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
-import com.mutabra.web.services.AuthorityConstants;
+import com.mutabra.web.internal.Authorities;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.json.JSONObject;
 import org.greatage.security.AbstractAuthenticationProvider;
@@ -13,10 +13,7 @@ import org.greatage.security.User;
 import org.greatage.util.LocaleUtils;
 import org.greatage.util.StringUtils;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -42,8 +39,9 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		if (StringUtils.isEmpty(token.getCode())) {
 			throw new AuthenticationException("Invalid credentials");
 		}
+		//todo: change result value to map
 		final JSONObject profile = facebookService.getProfile(token.getCode());
-		final String username = (String) profile.get("username");
+		final String username = (String) profile.get("id");
 		if (StringUtils.isEmpty(username)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
@@ -65,7 +63,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		account = accountService.create();
 		account.setEmail(email);
 		account.setFacebookUser(username);
-		account.setPassword(secretEncoder.encode(generateRandomString()));
+		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
 		account.setRegistered(new Date());
 		account.setName((String) profile.get("name"));
 		account.setLocale(LocaleUtils.parseLocale((String) profile.get("locale")));
@@ -82,15 +80,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 	private User authenticate(final Account account) {
 		account.setLastLogin(new Date());
 		accountService.save(account);
-		final List<String> authorities = account.getAuthorities();
-		authorities.add(AuthorityConstants.STATUS_AUTHENTICATED);
-		//todo: !!!remove this!!!
-		authorities.add(AuthorityConstants.ROLE_ADMIN);
-		//todo: !!!remove this!!!
-		return new User(account.getEmail(), authorities);
-	}
 
-	private String generateRandomString() {
-		return new BigInteger(130, new SecureRandom()).toString(32);
+		return Authorities.createUser(account);
 	}
 }

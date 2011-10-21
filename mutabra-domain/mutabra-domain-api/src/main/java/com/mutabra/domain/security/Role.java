@@ -10,13 +10,9 @@ import java.util.Set;
  */
 public interface Role extends CodedEntity {
 
-	String ROLE_PREFIX = "ROLE_";
-
 	Set<Account> getAccounts();
 
 	Set<Permission> getPermissions();
 
 	void setPermissions(Set<Permission> permissions);
-
-	String getAuthority();
 }

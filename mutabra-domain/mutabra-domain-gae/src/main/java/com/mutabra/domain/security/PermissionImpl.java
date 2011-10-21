@@ -32,8 +32,4 @@ public class PermissionImpl extends CodedEntityImpl implements Permission {
 	public void setRoles(final Set<Role> roles) {
 		this.roles = Keys.getKeys(roles);
 	}
-
-	public String getAuthority() {
-		return PERMISSION_PREFIX + getCode().toUpperCase();
-	}
 }

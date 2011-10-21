@@ -1,6 +1,6 @@
 package com.mutabra.web.components;
 
-import com.mutabra.web.services.AuthorityConstants;
+import com.mutabra.web.internal.Authorities;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 public class Authority {
-	private static final List<String> ANONYMOUS_AUTHORITIES = CollectionUtils.newList(AuthorityConstants.STATUS_ANONYMOUS);
+	private static final List<String> ANONYMOUS_AUTHORITIES = CollectionUtils.newList(Authorities.STATUS_ANONYMOUS);
 
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String allow;

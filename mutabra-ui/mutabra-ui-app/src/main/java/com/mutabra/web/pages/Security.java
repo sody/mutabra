@@ -7,6 +7,7 @@ import com.mutabra.security.TwitterService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.services.LinkManager;
 import com.mutabra.web.services.MailService;
 import org.apache.tapestry5.EventConstants;
@@ -22,8 +23,6 @@ import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
 import org.greatage.util.DescriptionBuilder;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.Date;
 
 /**
@@ -77,8 +76,8 @@ public class Security extends AbstractPage {
 			throw new ValidationException("Account already exists");
 		}
 
-		final String generatedToken = generateRandomString();
-		final String generatedPassword = generateRandomString();
+		final String generatedToken = Authorities.generateSecret();
+		final String generatedPassword = Authorities.generateSecret();
 
 		final Account account = accountService.create();
 		account.setEmail(email);
@@ -161,9 +160,5 @@ public class Security extends AbstractPage {
 				.toString();
 		System.out.println(info);
 		return null;
-	}
-
-	private String generateRandomString() {
-		return new BigInteger(130, new SecureRandom()).toString(32);
 	}
 }

@@ -1,10 +1,15 @@
 package com.mutabra.web.components.layout;
 
 import com.mutabra.domain.security.Account;
-import com.mutabra.security.*;
+import com.mutabra.security.BaseOAuthService;
+import com.mutabra.security.FacebookService;
+import com.mutabra.security.GoogleService;
+import com.mutabra.security.TwitterService;
+import com.mutabra.security.VKontakteService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.pages.Index;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.LinkManager;
@@ -20,10 +25,8 @@ import org.greatage.security.Credentials;
 import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
 
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.SecureRandom;
 import java.util.Date;
 
 /**
@@ -77,8 +80,8 @@ public class AnonymousHeader extends AbstractComponent {
 			throw new ValidationException("Account already exists");
 		}
 
-		final String generatedToken = generateRandomString();
-		final String generatedPassword = generateRandomString();
+		final String generatedToken = Authorities.generateSecret();
+		final String generatedPassword = Authorities.generateSecret();
 
 		final Account account = accountService.create();
 		account.setEmail(email);
@@ -117,9 +120,5 @@ public class AnonymousHeader extends AbstractComponent {
 
 	private URL createAuthenticationURL(final BaseOAuthService authService) throws MalformedURLException {
 		return new URL(authService.getAuthorizationURL());
-	}
-
-	private String generateRandomString() {
-		return new BigInteger(130, new SecureRandom()).toString(32);
 	}
 }

@@ -187,14 +187,7 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 		return heroes;
 	}
 
-	public List<String> getAuthorities() {
-		final List<String> authorities = new ArrayList<String>();
-		for (Role role : getRoles()) {
-			authorities.add(role.getAuthority());
-			for (Permission permission : role.getPermissions()) {
-				authorities.add(permission.getAuthority());
-			}
-		}
-		return authorities;
+	public String getDisplayName() {
+		return getEmail();
 	}
 }

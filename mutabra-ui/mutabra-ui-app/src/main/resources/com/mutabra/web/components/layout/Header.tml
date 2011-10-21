@@ -16,7 +16,7 @@
 	</div>
 	<div class="column">
 		<div class="t-beaneditor-row">
-			<t:button secondary="ui-icon-triangle-1-s"><a href="#">${account.email}</a></t:button>
+			<t:button secondary="ui-icon-triangle-1-s"><a href="#">${account.displayName}</a></t:button>
 			<t:button secondary="ui-icon-power" text="false">
 				<t:eventlink event="signOut">${message:button.sign-out.title}</t:eventlink>
 			</t:button>
