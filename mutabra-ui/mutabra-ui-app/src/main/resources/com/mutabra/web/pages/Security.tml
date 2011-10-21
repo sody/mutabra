@@ -11,7 +11,8 @@
 		</ul>
 		<div id="sign-in-tab">
 			<h1>${message:page.security-sign-in.title}</h1>
-			<t:form t:id="signIn">
+			<t:form t:id="signIn" clientValidation="false">
+				<t:customerrors/>
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
 						<t:delegate to="block:email"/>
@@ -31,7 +32,8 @@
 		</div>
 		<div id="sign-up-tab">
 			<h1>${message:page.security-sign-up.title}</h1>
-			<t:form t:id="signUp">
+			<t:form t:id="signUp" clientValidation="false">
+				<t:customerrors/>
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
 						<t:delegate to="block:email"/>
@@ -50,7 +52,8 @@
 		</div>
 		<div id="restore-tab">
 			<h1>${message:page.security-restore.title}</h1>
-			<t:form t:id="restore">
+			<t:form t:id="restore" clientValidation="false">
+				<t:customerrors/>
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
 						<t:delegate to="block:email"/>
@@ -66,7 +69,7 @@
 		</div>
 		<t:block id="email">
 			<t:label for="email"/>
-			<t:textfield t:id="email" value="email" validate="required"/>
+			<t:textfield t:id="email" value="email" validate="required,email"/>
 		</t:block>
 	</div>
 </div>

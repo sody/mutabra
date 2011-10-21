@@ -81,25 +81,18 @@ public class AnonymousHeader extends AbstractComponent {
 		}
 
 		final String generatedToken = Authorities.generateSecret();
-		final String generatedPassword = Authorities.generateSecret();
 
 		final Account account = accountService.create();
 		account.setEmail(email);
-		account.setPassword(secretEncoder.encode(generatedPassword));
+		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
 
 		final Link link = linkManager.createPageEventLink(Security.class, "signIn", email, generatedToken);
-		final String message = String.format("Hello Mr.,\n" +
-				"New account was created for you,\n" +
-				"(login: %s, password: %s, activation token: %s).\n" +
-				"To activate your account please follow the link:\n %s",
-				email, generatedPassword, generatedToken, link.toAbsoluteURI());
-		mailService.send(email, "Mutabra Account", message);
+		mailService.notifySignUp(email, generatedToken, link.toAbsoluteURI());
 		accountService.save(account);
 
-		System.out.println("MESSAGE: " + message);
-		return Index.class;
+		return getResources().getPageName();
 	}
 
 	URL onConnectToFacebook() throws MalformedURLException {

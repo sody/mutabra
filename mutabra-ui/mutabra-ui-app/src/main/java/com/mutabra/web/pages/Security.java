@@ -12,10 +12,11 @@ import com.mutabra.web.services.LinkManager;
 import com.mutabra.web.services.MailService;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
-import org.apache.tapestry5.ValidationException;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.RequestParameter;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
@@ -36,6 +37,15 @@ public class Security extends AbstractPage {
 
 	@Property
 	private String password;
+
+	@InjectComponent
+	private Form signIn;
+
+	@InjectComponent
+	private Form signUp;
+
+	@InjectComponent
+	private Form restore;
 
 	@Inject
 	private SecurityContext securityContext;
@@ -71,9 +81,11 @@ public class Security extends AbstractPage {
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signUp")
-	Object signUp() throws ValidationException {
+	Object signUp() {
+		//todo: move to validate method
 		if (accountService.query().withEmail(email).unique() != null) {
-			throw new ValidationException("Account already exists");
+			signUp.recordError("Account already exists");
+			return null;
 		}
 
 		final String generatedToken = Authorities.generateSecret();
@@ -86,15 +98,32 @@ public class Security extends AbstractPage {
 		account.setRegistered(new Date());
 
 		final Link link = linkManager.createPageEventLink(Security.class, "signIn", email, generatedToken);
-		final String message = String.format("Hello Mr.,\n" +
-				"New account was created for you,\n" +
-				"(login: %s, password: %s, activation token: %s).\n" +
-				"To activate your account please follow the link:\n %s",
-				email, generatedPassword, generatedToken, link.toAbsoluteURI());
-		mailService.send(email, "Mutabra Account", message);
+		mailService.notifySignUp(email, generatedToken, link.toAbsoluteURI());
 		accountService.save(account);
 
-		System.out.println("MESSAGE: " + message);
+		return Index.class;
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "restore")
+	Object restorePassword() {
+		//todo: move to validate method
+		final Account account = accountService.query().withEmail(email).unique();
+		if (account == null) {
+			restore.recordError("Account doesn't exist.");
+			return null;
+		}
+		if (account.getToken() != null) {
+			restore.recordError("Can restore password only once.");
+			return null;
+		}
+
+		final String generatedToken = Authorities.generateSecret();
+		account.setToken(generatedToken);
+
+		final Link link = linkManager.createPageEventLink(Security.class, "signIn", email, generatedToken);
+		mailService.notifyRestorePassword(email, generatedToken, link.toAbsoluteURI());
+		accountService.save(account);
+
 		return Index.class;
 	}
 
