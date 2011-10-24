@@ -3,7 +3,6 @@ package com.mutabra.web.components.layout;
 import com.mutabra.domain.security.Account;
 import com.mutabra.security.BaseOAuthService;
 import com.mutabra.security.FacebookToken;
-import com.mutabra.security.GoogleService;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.TwitterToken;
 import com.mutabra.security.VKontakteService;
@@ -24,7 +23,6 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
 import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
-import org.springframework.social.oauth1.OAuthToken;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -56,9 +54,6 @@ public class AnonymousHeader extends AbstractComponent {
 
 	@Inject
 	private LinkManager linkManager;
-
-	@Inject
-	private GoogleService googleService;
 
 	@Inject
 	private VKontakteService vkontakteService;
@@ -100,8 +95,9 @@ public class AnonymousHeader extends AbstractComponent {
 		securityContext.signIn(new TwitterToken(session));
 	}
 
-	URL onConnectToGoogle() throws MalformedURLException {
-		return createConnectURL(googleService);
+	@OnEvent(value = EventConstants.SUCCESS, component = "google")
+	void googleConnected(final OAuth.Session session) {
+		System.out.println();
 	}
 
 	URL onConnectToVKontakte() throws MalformedURLException {

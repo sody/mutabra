@@ -15,7 +15,9 @@
 				</t:button>
 			</div>
 			<div class="t-beaneditor-row">
-				<t:button primary="medium google" text="false"><t:eventlink class="transparent" event="connectToGoogle">${message:button.google.title}</t:eventlink></t:button>
+				<t:button primary="medium google" text="false">
+					<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google.title}</t:social.googleconnect>
+				</t:button>
 				<t:button primary="ui-icon-locked" text="false"><t:eventlink class="transparent" event="connectToVKontakte">${message:button.vk.title}</t:eventlink></t:button>
 			</div>
 		</div>

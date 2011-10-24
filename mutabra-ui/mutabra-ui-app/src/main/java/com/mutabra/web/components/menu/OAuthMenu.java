@@ -1,7 +1,6 @@
 package com.mutabra.web.components.menu;
 
 import com.mutabra.security.FacebookToken;
-import com.mutabra.security.GoogleService;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.TwitterToken;
 import com.mutabra.web.base.components.AbstractComponent;
@@ -10,17 +9,11 @@ import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.SecurityContext;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class OAuthMenu extends AbstractComponent {
-
-	@Inject
-	private GoogleService googleService;
 
 	@Inject
 	private SecurityContext securityContext;
@@ -35,8 +28,8 @@ public class OAuthMenu extends AbstractComponent {
 		securityContext.signIn(new TwitterToken(session));
 	}
 
-
-	URL onConnectToGoogle() throws MalformedURLException {
-		return new URL(googleService.getAuthorizationURL());
+	@OnEvent(value = EventConstants.SUCCESS, component = "google")
+	void googleConnected(final OAuth.Session session) {
+		System.out.println();
 	}
 }

@@ -4,8 +4,7 @@ import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.security.Facebook;
 import com.mutabra.security.FacebookProvider;
-import com.mutabra.security.GoogleService;
-import com.mutabra.security.GoogleServiceImpl;
+import com.mutabra.security.Google;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
@@ -152,11 +151,9 @@ public class SecurityModule {
 		return new Twitter(consumerKey, consumerSecret);
 	}
 
-	public GoogleService buildGoogleService(final LinkManager linkManager,
-											@Symbol("google.consumer-key") final String consumerKey,
-											@Symbol("google.consumer-secret") final String consumerSecret) {
-		final Link link = linkManager.createPageEventLink(Security.class, "googleConnect");
-		return new GoogleServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI(), "https://mail.google.com/");
+	public OAuth buildGoogleService(@Symbol("google.consumer-key") final String consumerKey,
+									@Symbol("google.consumer-secret") final String consumerSecret) {
+		return new Google(consumerKey, consumerSecret);
 	}
 
 	public VKontakteService buildVKontakteService(final LinkManager linkManager,

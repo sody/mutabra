@@ -12,7 +12,9 @@
 		</t:button>
 	</p:twitterMenuItem>
 	<p:googleMenuItem>
-		<t:button primary="medium google" text="false"><t:eventlink class="transparent" event="connectToGoogle">${message:button.google.title}</t:eventlink></t:button>
+		<t:button primary="medium google" text="false">
+			<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google.title}</t:social.googleconnect>
+		</t:button>
 	</p:googleMenuItem>
 	<p:lastMenuItem>
 		<t:body/>

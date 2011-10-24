@@ -118,19 +118,6 @@ public class Security extends AbstractPage {
 		return Index.class;
 	}
 
-	@OnEvent("googleConnect")
-	Object connectGoogle(
-			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
-			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier) {
-
-		final String info = new DescriptionBuilder("GOOGLE TOKEN")
-				.append("token", token)
-				.append("verifier", verifier)
-				.toString();
-		System.out.println(info);
-		return null;
-	}
-
 	@OnEvent("vKontakteConnect")
 	Object connectVKontakte(
 			@RequestParameter(value = "oauth_token", allowBlank = true) String token,

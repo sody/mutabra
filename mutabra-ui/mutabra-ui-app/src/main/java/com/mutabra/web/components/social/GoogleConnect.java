@@ -11,29 +11,27 @@ import org.greatage.util.DescriptionBuilder;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class TwitterConnect extends AbstractOAuthConnect {
+public class GoogleConnect extends AbstractOAuthConnect {
 
-	@InjectService("twitterService")
-	private OAuth twitterService;
+	@InjectService("googleService")
+	private OAuth googleService;
 
 	@Override
 	protected OAuth getOAuth() {
-		return twitterService;
+		return googleService;
 	}
 
 	@OnEvent(CONNECTED_EVENT)
 	Object connected(
 			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
-			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier,
-			@RequestParameter(value = "denied", allowBlank = true) final String denied) {
+			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier) {
 
-		final String info = new DescriptionBuilder("TWITTER TOKEN")
-				.append("oauth_token", token)
-				.append("oauth_verifier", verifier)
-				.append("denied", denied)
+		final String info = new DescriptionBuilder("GOOGLE TOKEN")
+				.append("token", token)
+				.append("verifier", verifier)
 				.toString();
 		System.out.println(info);
 
-		return doConnected(token, verifier, denied);
+		return doConnected(token, verifier, null);
 	}
 }
