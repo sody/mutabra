@@ -433,7 +433,7 @@
 		<datanucleus.appengine.version>1.0.10</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 
-		<tapestry.version>5.3-beta-25</tapestry.version>
+		<tapestry.version>5.3-beta-26</tapestry.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.4</mail.api.version>
 

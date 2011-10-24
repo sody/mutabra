@@ -56,7 +56,7 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 
 	protected Object doConnected(final String token, final String secret, final String error) {
 		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
-		if (token != null) {
+		if (secret != null) {
 			try {
 				final OAuth.Session session = startSession(token, secret);
 				final Object[] context = {session};
