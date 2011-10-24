@@ -8,7 +8,6 @@ import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.SecurityContext;
-import org.springframework.social.oauth1.OAuthToken;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,8 +30,8 @@ public class OAuthMenu extends AbstractComponent {
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
-	void twitterConnected(final OAuthToken accessToken) {
-		securityContext.signIn(new TwitterToken(accessToken.getValue(), accessToken.getSecret()));
+	void twitterConnected(final String token, final String secret, final String callbackUrl, final String scope) {
+		securityContext.signIn(new TwitterToken(token, secret, callbackUrl, scope));
 	}
 
 	URL onConnectToGoogle() throws MalformedURLException {

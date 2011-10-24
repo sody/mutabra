@@ -11,28 +11,22 @@ import org.greatage.security.SecretEncoder;
 import org.greatage.security.User;
 import org.greatage.util.LocaleUtils;
 import org.greatage.util.StringUtils;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
-import org.springframework.social.oauth1.OAuth1ServiceProvider;
-import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.TwitterProfile;
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class TwitterProvider extends AbstractAuthenticationProvider<User, TwitterToken> {
-	private final OAuth1ServiceProvider<Twitter> twitterService;
+	private final OAuth twitterService;
 	private final BaseEntityService<Account, AccountQuery> accountService;
 	private final SecretEncoder secretEncoder;
 
 
-	public TwitterProvider(final @InjectService("twitterService") OAuth1ServiceProvider<Twitter> twitterService,
-			final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
+	public TwitterProvider(final @InjectService("twitterService") OAuth twitterService,
+						   final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
 						   final SecretEncoder secretEncoder) {
 		super(User.class, TwitterToken.class);
 		this.twitterService = twitterService;
@@ -46,20 +40,22 @@ public class TwitterProvider extends AbstractAuthenticationProvider<User, Twitte
 			throw new AuthenticationException("Invalid credentials");
 		}
 
-		final Twitter twitter = twitterService.getApi(token.getToken(), token.getSecret());
-		final TwitterProfile profile = twitter.userOperations().getUserProfile();
+		final OAuth.Session session = twitterService.connect(
+				token.getToken(), token.getSecret(), token.getCallbackUrl(), token.getScope());
 
-		Account account = accountService.query().withTwitter(String.valueOf(profile.getId())).unique();
+		final Map<String, Object> profile = session.getProfile();
+
+		Account account = accountService.query().withTwitter(String.valueOf(profile.get("id"))).unique();
 		if (account != null) {
 			return authenticate(account);
 		}
 
 		account = accountService.create();
-		account.setTwitterUser(String.valueOf(profile.getId()));
+		account.setTwitterUser(String.valueOf(profile.get("id")));
 		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
 		account.setRegistered(new Date());
-		account.setName(profile.getName());
-		account.setLocale(LocaleUtils.parseLocale(profile.getLanguage()));
+		account.setName((String) profile.get("name"));
+		account.setLocale(LocaleUtils.parseLocale((String) profile.get("language")));
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
 		return authenticate(account);

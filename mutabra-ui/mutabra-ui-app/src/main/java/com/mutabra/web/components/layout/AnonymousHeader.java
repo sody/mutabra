@@ -95,8 +95,8 @@ public class AnonymousHeader extends AbstractComponent {
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
-	void twitterConnected(final OAuthToken accessToken) {
-		securityContext.signIn(new TwitterToken(accessToken.getValue(), accessToken.getSecret()));
+	void twitterConnected(final String token, final String secret, final String callbackUrl, final String scope) {
+		securityContext.signIn(new TwitterToken(token, secret, callbackUrl, scope));
 	}
 
 	URL onConnectToGoogle() throws MalformedURLException {

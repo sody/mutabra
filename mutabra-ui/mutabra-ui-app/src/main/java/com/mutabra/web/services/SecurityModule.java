@@ -5,6 +5,8 @@ import com.mutabra.domain.security.Account;
 import com.mutabra.security.FacebookProvider;
 import com.mutabra.security.GoogleService;
 import com.mutabra.security.GoogleServiceImpl;
+import com.mutabra.security.OAuth;
+import com.mutabra.security.Twitter;
 import com.mutabra.security.TwitterProvider;
 import com.mutabra.security.VKontakteService;
 import com.mutabra.security.VKontakteServiceImpl;
@@ -40,10 +42,7 @@ import org.greatage.security.User;
 import org.greatage.security.UserCredentialsProvider;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookServiceProvider;
-import org.springframework.social.oauth1.OAuth1ServiceProvider;
 import org.springframework.social.oauth2.OAuth2ServiceProvider;
-import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.connect.TwitterServiceProvider;
 
 import java.util.Date;
 
@@ -149,9 +148,9 @@ public class SecurityModule {
 		return new FacebookServiceProvider(clientId, clientSecret);
 	}
 
-	public OAuth1ServiceProvider<Twitter> buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,
-															  @Symbol("twitter.consumer-secret") final String consumerSecret) {
-		return new TwitterServiceProvider(consumerKey, consumerSecret);
+	public OAuth buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,
+									 @Symbol("twitter.consumer-secret") final String consumerSecret) {
+		return new Twitter(consumerKey, consumerSecret);
 	}
 
 	public GoogleService buildGoogleService(final LinkManager linkManager,

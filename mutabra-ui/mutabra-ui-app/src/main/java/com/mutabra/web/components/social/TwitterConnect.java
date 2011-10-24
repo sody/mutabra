@@ -1,5 +1,6 @@
 package com.mutabra.web.components.social;
 
+import com.mutabra.security.OAuth;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.EventConstants;
@@ -12,11 +13,6 @@ import org.apache.tapestry5.corelib.base.AbstractComponentEventLink;
 import org.apache.tapestry5.internal.util.CaptureResultCallback;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.springframework.social.oauth1.AuthorizedRequestToken;
-import org.springframework.social.oauth1.OAuth1Parameters;
-import org.springframework.social.oauth1.OAuth1ServiceProvider;
-import org.springframework.social.oauth1.OAuthToken;
-import org.springframework.social.twitter.api.Twitter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,7 +32,7 @@ public class TwitterConnect extends AbstractComponentEventLink {
 	private ComponentResources resources;
 
 	@InjectService("twitterService")
-	private OAuth1ServiceProvider<Twitter> twitterService;
+	private OAuth twitterService;
 
 	@Cached
 	protected String getCallbackUri() {
@@ -50,10 +46,7 @@ public class TwitterConnect extends AbstractComponentEventLink {
 
 	@OnEvent(CONNECT_EVENT)
 	URL connect() throws MalformedURLException {
-		final OAuth1Parameters parameters = new OAuth1Parameters();
-		parameters.setCallbackUrl(getCallbackUri());
-
-		return new URL(buildConnectURL(parameters));
+		return new URL(twitterService.getAuthorizationUrl(getCallbackUri(), scope));
 	}
 
 	@OnEvent(CONNECTED_EVENT)
@@ -64,32 +57,21 @@ public class TwitterConnect extends AbstractComponentEventLink {
 
 		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
 		if (verifier != null) {
-			try {
-				final OAuthToken accessToken = twitterService.getOAuthOperations().exchangeForAccessToken(
-						new AuthorizedRequestToken(new OAuthToken(token, verifier), verifier), null);
-				final Object[] context = {accessToken};
-				final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
+			final Object[] context = {token, verifier, getCallbackUri(), scope};
+			final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
 
-				if (handled) {
-					return callback.getResult();
-				}
-				return null;
-			} catch (Exception e) {
-				denied = e.getMessage();
+			if (handled) {
+				return callback.getResult();
 			}
+			return null;
+		} else {
+			final Object[] context = {denied};
+			final boolean handled = resources.triggerEvent(EventConstants.FAILURE, context, callback);
+
+			if (handled) {
+				return callback.getResult();
+			}
+			return null;
 		}
-
-		final Object[] context = {denied};
-		final boolean handled = resources.triggerEvent(EventConstants.FAILURE, context, callback);
-
-		if (handled) {
-			return callback.getResult();
-		}
-		return null;
-	}
-
-	private String buildConnectURL(final OAuth1Parameters parameters) {
-		final OAuthToken token = twitterService.getOAuthOperations().fetchRequestToken(getCallbackUri(), null);
-		return twitterService.getOAuthOperations().buildAuthorizeUrl(token.getValue(), parameters);
 	}
 }
