@@ -3,12 +3,9 @@ package com.mutabra.web.services;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.security.FacebookProvider;
-import com.mutabra.security.FacebookService;
-import com.mutabra.security.FacebookServiceImpl;
 import com.mutabra.security.GoogleService;
 import com.mutabra.security.GoogleServiceImpl;
-import com.mutabra.security.TwitterService;
-import com.mutabra.security.TwitterServiceImpl;
+import com.mutabra.security.TwitterProvider;
 import com.mutabra.security.VKontakteService;
 import com.mutabra.security.VKontakteServiceImpl;
 import com.mutabra.services.BaseEntityService;
@@ -41,6 +38,12 @@ import org.greatage.security.SecurityContext;
 import org.greatage.security.SecurityContextImpl;
 import org.greatage.security.User;
 import org.greatage.security.UserCredentialsProvider;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.connect.FacebookServiceProvider;
+import org.springframework.social.oauth1.OAuth1ServiceProvider;
+import org.springframework.social.oauth2.OAuth2ServiceProvider;
+import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.connect.TwitterServiceProvider;
 
 import java.util.Date;
 
@@ -121,6 +124,7 @@ public class SecurityModule {
 		});
 
 		configuration.addInstance("facebook", FacebookProvider.class);
+		configuration.addInstance("twitter", TwitterProvider.class);
 	}
 
 	public void contributeComponentClassTransformWorker(
@@ -140,18 +144,14 @@ public class SecurityModule {
 		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class);
 	}
 
-	public TwitterService buildTwitterService(final LinkManager linkManager,
-											  @Symbol("twitter.consumer-key") final String consumerKey,
-											  @Symbol("twitter.consumer-secret") final String consumerSecret) {
-		final Link link = linkManager.createPageEventLink(Security.class, "twitterConnect");
-		return new TwitterServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
+	public OAuth2ServiceProvider<Facebook> buildFacebookService(@Symbol("facebook.app-id") final String clientId,
+																@Symbol("facebook.app-secret") final String clientSecret) {
+		return new FacebookServiceProvider(clientId, clientSecret);
 	}
 
-	public FacebookService buildFacebookService(final LinkManager linkManager,
-												@Symbol("facebook.app-id") final String appId,
-												@Symbol("facebook.app-secret") final String appSecret) {
-		final Link link = linkManager.createPageEventLink(Security.class, "facebookConnect");
-		return new FacebookServiceImpl(appId, appSecret, link.toAbsoluteURI(), "email");
+	public OAuth1ServiceProvider<Twitter> buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,
+															  @Symbol("twitter.consumer-secret") final String consumerSecret) {
+		return new TwitterServiceProvider(consumerKey, consumerSecret);
 	}
 
 	public GoogleService buildGoogleService(final LinkManager linkManager,

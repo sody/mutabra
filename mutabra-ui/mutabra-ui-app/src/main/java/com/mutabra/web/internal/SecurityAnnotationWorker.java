@@ -33,9 +33,9 @@ public class SecurityAnnotationWorker implements ComponentClassTransformWorker2 
 	}
 
 	public void transform(final PlasticClass plasticClass, final TransformationSupport support, final MutableComponentModel model) {
-		if (model.isPage()) {
-			final Allow allow = plasticClass.getAnnotation(Allow.class);
-			final Deny deny = plasticClass.getAnnotation(Deny.class);
+		final Allow allow = plasticClass.getAnnotation(Allow.class);
+		final Deny deny = plasticClass.getAnnotation(Deny.class);
+		if (model.isPage() && (allow != null || deny != null)) {
 			support.addEventHandler(EventConstants.ACTIVATE, 0, "Page Security", new ComponentEventHandler() {
 				public void handleEvent(final Component instance, final ComponentEvent event) {
 					final Authentication authentication = securityContext.getCurrentUser();

@@ -1,9 +1,6 @@
 package com.mutabra.web.pages;
 
 import com.mutabra.domain.security.Account;
-import com.mutabra.security.FacebookService;
-import com.mutabra.security.FacebookToken;
-import com.mutabra.security.TwitterService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.pages.AbstractPage;
@@ -62,12 +59,6 @@ public class Security extends AbstractPage {
 	@Inject
 	private LinkManager linkManager;
 
-	@Inject
-	private FacebookService facebookService;
-
-	@Inject
-	private TwitterService twitterService;
-
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
 		securityContext.signIn(new Credentials(email, password));
@@ -125,42 +116,6 @@ public class Security extends AbstractPage {
 		accountService.save(account);
 
 		return Index.class;
-	}
-
-	@OnEvent("facebookConnect")
-	Object connectFacebook(
-			@RequestParameter(value = "code", allowBlank = true) final String code,
-			@RequestParameter(value = "error", allowBlank = true) final String error,
-			@RequestParameter(value = "error_reason", allowBlank = true) final String errorReason,
-			@RequestParameter(value = "error_description", allowBlank = true) final String errorDescription) {
-
-		final String info = new DescriptionBuilder("FACEBOOK TOKEN")
-				.append("code", code)
-				.append("error", error)
-				.append("error_reason", errorReason)
-				.append("error_description", errorDescription)
-				.toString();
-		System.out.println(info);
-
-		if (code != null) {
-			securityContext.signIn(new FacebookToken(code));
-		}
-		return Index.class;
-	}
-
-	@OnEvent("twitterConnect")
-	Object connectTwitter(
-			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
-			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier,
-			@RequestParameter(value = "denied", allowBlank = true) String denied) {
-
-		final String info = new DescriptionBuilder("TWITTER TOKEN")
-				.append("token", token)
-				.append("verifier", verifier)
-				.append("denied", denied)
-				.toString();
-		System.out.println(info);
-		return null;
 	}
 
 	@OnEvent("googleConnect")

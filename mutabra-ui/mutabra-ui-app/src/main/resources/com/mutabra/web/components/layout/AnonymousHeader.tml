@@ -7,11 +7,15 @@
 	<div class="column s-3">
 		<div id="user-pic">
 			<div class="t-beaneditor-row">
-				<t:button primary="medium facebook" text="false"><t:eventlink class="transparent" event="connectToFacebook">${message:button.facebook.title}</t:eventlink></t:button>
-				<t:button primary="medium google" text="false"><t:eventlink class="transparent" event="connectToGoogle">${message:button.google.title}</t:eventlink></t:button>
+				<t:button primary="medium facebook" text="false">
+					<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook.title}</t:social.facebookconnect>
+				</t:button>
+				<t:button primary="medium twitter" text="false">
+					<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter.title}</t:social.twitterconnect>
+				</t:button>
 			</div>
 			<div class="t-beaneditor-row">
-				<t:button primary="medium twitter" text="false"><t:eventlink class="transparent" event="connectToTwitter">${message:button.twitter.title}</t:eventlink></t:button>
+				<t:button primary="medium google" text="false"><t:eventlink class="transparent" event="connectToGoogle">${message:button.google.title}</t:eventlink></t:button>
 				<t:button primary="ui-icon-locked" text="false"><t:eventlink class="transparent" event="connectToVKontakte">${message:button.vk.title}</t:eventlink></t:button>
 			</div>
 		</div>

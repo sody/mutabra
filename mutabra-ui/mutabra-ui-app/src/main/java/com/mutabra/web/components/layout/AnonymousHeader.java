@@ -2,15 +2,14 @@ package com.mutabra.web.components.layout;
 
 import com.mutabra.domain.security.Account;
 import com.mutabra.security.BaseOAuthService;
-import com.mutabra.security.FacebookService;
+import com.mutabra.security.FacebookToken;
 import com.mutabra.security.GoogleService;
-import com.mutabra.security.TwitterService;
+import com.mutabra.security.TwitterToken;
 import com.mutabra.security.VKontakteService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.Authorities;
-import com.mutabra.web.pages.Index;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.LinkManager;
 import com.mutabra.web.services.MailService;
@@ -24,6 +23,7 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
 import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
+import org.springframework.social.oauth1.OAuthToken;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -55,12 +55,6 @@ public class AnonymousHeader extends AbstractComponent {
 
 	@Inject
 	private LinkManager linkManager;
-
-	@Inject
-	private TwitterService twitterService;
-
-	@Inject
-	private FacebookService facebookService;
 
 	@Inject
 	private GoogleService googleService;
@@ -95,23 +89,25 @@ public class AnonymousHeader extends AbstractComponent {
 		return getResources().getPageName();
 	}
 
-	URL onConnectToFacebook() throws MalformedURLException {
-		return createAuthenticationURL(facebookService);
+	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
+	void facebookConnected(final String accessToken) {
+		securityContext.signIn(new FacebookToken(accessToken));
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
+	void twitterConnected(final OAuthToken accessToken) {
+		securityContext.signIn(new TwitterToken(accessToken.getValue(), accessToken.getSecret()));
 	}
 
 	URL onConnectToGoogle() throws MalformedURLException {
-		return createAuthenticationURL(googleService);
-	}
-
-	URL onConnectToTwitter() throws MalformedURLException {
-		return createAuthenticationURL(twitterService);
+		return createConnectURL(googleService);
 	}
 
 	URL onConnectToVKontakte() throws MalformedURLException {
-		return createAuthenticationURL(vkontakteService);
+		return createConnectURL(vkontakteService);
 	}
 
-	private URL createAuthenticationURL(final BaseOAuthService authService) throws MalformedURLException {
+	private URL createConnectURL(final BaseOAuthService authService) throws MalformedURLException {
 		return new URL(authService.getAuthorizationURL());
 	}
 }

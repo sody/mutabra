@@ -50,7 +50,8 @@
 				<configuration>
 					<contextPath>/</contextPath>
 					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
-					<jettyEnvXml>${project.build.directory}/${project.build.finalName}/WEB-INF/jetty-env.xml</jettyEnvXml>
+					<jettyEnvXml>${project.build.directory}/${project.build.finalName}/WEB-INF/jetty-env.xml
+					</jettyEnvXml>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 							<port>8081</port>
@@ -113,11 +114,30 @@
 			<version>1.2.3</version>
 		</dependency>
 
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.social</groupId>-->
-			<!--<artifactId>spring-social-facebook</artifactId>-->
-			<!--<version>1.0.0.RELEASE</version>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-twitter</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>3.1.0.RC3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<profiles>

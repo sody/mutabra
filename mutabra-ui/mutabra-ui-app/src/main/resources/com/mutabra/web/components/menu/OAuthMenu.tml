@@ -1,15 +1,19 @@
-<t:menu id="oauth" class="transparent toolbar" items="facebook,google,twitter,last"
+<t:menu id="oauth" class="transparent toolbar" items="facebook,twitter,google,last"
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:facebookMenuItem>
-		<t:button primary="medium facebook" text="false"><t:eventlink class="transparent" event="connectToFacebook">${message:button.facebook.title}</t:eventlink></t:button>
+		<t:button primary="medium facebook" text="false">
+			<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook.title}</t:social.facebookconnect>
+		</t:button>
 	</p:facebookMenuItem>
+	<p:twitterMenuItem>
+		<t:button primary="medium twitter" text="false">
+			<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter.title}</t:social.twitterconnect>
+		</t:button>
+	</p:twitterMenuItem>
 	<p:googleMenuItem>
 		<t:button primary="medium google" text="false"><t:eventlink class="transparent" event="connectToGoogle">${message:button.google.title}</t:eventlink></t:button>
 	</p:googleMenuItem>
-	<p:twitterMenuItem>
-		<t:button primary="medium twitter" text="false"><t:eventlink class="transparent" event="connectToTwitter">${message:button.twitter.title}</t:eventlink></t:button>
-	</p:twitterMenuItem>
 	<p:lastMenuItem>
 		<t:body/>
 	</p:lastMenuItem>

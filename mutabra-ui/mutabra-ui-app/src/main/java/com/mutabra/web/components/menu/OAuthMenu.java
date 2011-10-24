@@ -1,11 +1,14 @@
 package com.mutabra.web.components.menu;
 
-import com.mutabra.security.BaseOAuthService;
-import com.mutabra.security.FacebookService;
+import com.mutabra.security.FacebookToken;
 import com.mutabra.security.GoogleService;
-import com.mutabra.security.TwitterService;
+import com.mutabra.security.TwitterToken;
 import com.mutabra.web.base.components.AbstractComponent;
+import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.greatage.security.SecurityContext;
+import org.springframework.social.oauth1.OAuthToken;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,27 +20,22 @@ import java.net.URL;
 public class OAuthMenu extends AbstractComponent {
 
 	@Inject
-	private TwitterService twitterService;
-
-	@Inject
-	private FacebookService facebookService;
-
-	@Inject
 	private GoogleService googleService;
 
-	URL onConnectToFacebook() throws MalformedURLException {
-		return createAuthenticationURL(facebookService);
+	@Inject
+	private SecurityContext securityContext;
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
+	void facebookConnected(final String accessToken) {
+		securityContext.signIn(new FacebookToken(accessToken));
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
+	void twitterConnected(final OAuthToken accessToken) {
+		securityContext.signIn(new TwitterToken(accessToken.getValue(), accessToken.getSecret()));
 	}
 
 	URL onConnectToGoogle() throws MalformedURLException {
-		return createAuthenticationURL(googleService);
-	}
-
-	URL onConnectToTwitter() throws MalformedURLException {
-		return createAuthenticationURL(twitterService);
-	}
-
-	private URL createAuthenticationURL(final BaseOAuthService authService) throws MalformedURLException {
-		return new URL(authService.getAuthorizationURL());
+		return new URL(googleService.getAuthorizationURL());
 	}
 }
