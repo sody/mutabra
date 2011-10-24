@@ -36,31 +36,4 @@ public class MailServiceImpl implements MailService {
 			throw new RuntimeException(String.format("Error occurs while sending email 'to:%s/%s'", to, subject), e);
 		}
 	}
-
-	public void notifySignUp(final String to, final String token, final String link) {
-		final String message = String.format(REGISTRATION_NOTIFICATION, to, token, link, DEFAULT_SIGNATURE);
-		send(to, "Mutabra Account", message);
-	}
-
-	public void notifyRestorePassword(final String to, final String token, final String link) {
-		final String message = String.format(RESTORE_PASSWORD_NOTIFICATION, to, token, link, DEFAULT_SIGNATURE);
-		send(to, "Mutabra Account", message);
-	}
-
-
-	private static final String REGISTRATION_NOTIFICATION = new StringBuilder()
-			.append("Hello Mr.,\n\n")
-			.append("New account was created for you.\n")
-			.append("\tlogin: %s\n\tactivation token: %s\n\n")
-			.append("To activate your account please follow the link:\n\n\t%s\n\n")
-			.append("---\n%s").toString();
-
-	private static final String RESTORE_PASSWORD_NOTIFICATION = new StringBuilder()
-			.append("Hello Mr.,\n\n")
-			.append("New access token was created for you.\n")
-			.append("\tlogin: %s\n\tactivation token: %s\n\n")
-			.append("To enter your account please follow the link:\n\n\t%s\n\n")
-			.append("---\n%s").toString();
-
-	private static final String DEFAULT_SIGNATURE = "BR, Mutabra team";
 }

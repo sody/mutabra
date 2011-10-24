@@ -7,22 +7,15 @@ import com.mutabra.security.TwitterToken;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.Authorities;
-import com.mutabra.web.pages.Security;
-import com.mutabra.web.services.LinkManager;
-import com.mutabra.web.services.MailService;
+import com.mutabra.web.services.AccountManager;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.Link;
 import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
-import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
-
-import java.util.Date;
 
 /**
  * @author Ivan Khalopik
@@ -43,13 +36,7 @@ public class AnonymousHeader extends AbstractComponent {
 	private BaseEntityService<Account, AccountQuery> accountService;
 
 	@Inject
-	private MailService mailService;
-
-	@Inject
-	private SecretEncoder secretEncoder;
-
-	@Inject
-	private LinkManager linkManager;
+	private AccountManager accountManager;
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
@@ -63,17 +50,7 @@ public class AnonymousHeader extends AbstractComponent {
 			throw new ValidationException("Account already exists");
 		}
 
-		final String generatedToken = Authorities.generateSecret();
-
-		final Account account = accountService.create();
-		account.setEmail(email);
-		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
-		account.setToken(generatedToken);
-		account.setRegistered(new Date());
-
-		final Link link = linkManager.createPageEventLink(Security.class, "signIn", email, generatedToken);
-		mailService.notifySignUp(email, generatedToken, link.toAbsoluteURI());
-		accountService.save(account);
+		accountManager.signUp(email);
 
 		return getResources().getPageName();
 	}

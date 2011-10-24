@@ -4,24 +4,16 @@ import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.internal.Authorities;
-import com.mutabra.web.services.LinkManager;
-import com.mutabra.web.services.MailService;
+import com.mutabra.web.services.AccountManager;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.Link;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.RequestParameter;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
-import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
-import org.greatage.util.DescriptionBuilder;
-
-import java.util.Date;
 
 /**
  * @author Ivan Khalopik
@@ -51,13 +43,7 @@ public class Security extends AbstractPage {
 	private BaseEntityService<Account, AccountQuery> accountService;
 
 	@Inject
-	private MailService mailService;
-
-	@Inject
-	private SecretEncoder passwordEncoder;
-
-	@Inject
-	private LinkManager linkManager;
+	private AccountManager accountManager;
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
@@ -79,18 +65,7 @@ public class Security extends AbstractPage {
 			return null;
 		}
 
-		final String generatedToken = Authorities.generateSecret();
-		final String generatedPassword = Authorities.generateSecret();
-
-		final Account account = accountService.create();
-		account.setEmail(email);
-		account.setPassword(passwordEncoder.encode(generatedPassword));
-		account.setToken(generatedToken);
-		account.setRegistered(new Date());
-
-		final Link link = linkManager.createPageEventLink(Security.class, "signIn", email, generatedToken);
-		mailService.notifySignUp(email, generatedToken, link.toAbsoluteURI());
-		accountService.save(account);
+		accountManager.signUp(email);
 
 		return Index.class;
 	}
@@ -108,28 +83,8 @@ public class Security extends AbstractPage {
 			return null;
 		}
 
-		final String generatedToken = Authorities.generateSecret();
-		account.setToken(generatedToken);
-
-		final Link link = linkManager.createPageEventLink(Security.class, "signIn", email, generatedToken);
-		mailService.notifyRestorePassword(email, generatedToken, link.toAbsoluteURI());
-		accountService.save(account);
+		accountManager.restorePassword(email);
 
 		return Index.class;
-	}
-
-	@OnEvent("vKontakteConnect")
-	Object connectVKontakte(
-			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
-			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier,
-			@RequestParameter(value = "denied", allowBlank = true) String denied) {
-
-		final String info = new DescriptionBuilder("VKONTAKTE TOKEN")
-				.append("token", token)
-				.append("verifier", verifier)
-				.append("denied", denied)
-				.toString();
-		System.out.println(info);
-		return null;
 	}
 }
