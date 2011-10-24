@@ -11,14 +11,14 @@ import org.greatage.util.DescriptionBuilder;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class FacebookConnect extends AbstractOAuth2Connect {
+public class VKontakteConnect extends AbstractOAuth2Connect {
 
-	@InjectService("facebookService")
-	private OAuth2 facebookService;
+	@InjectService("vkontakteService")
+	private OAuth2 vkontakteService;
 
 	@Override
 	protected OAuth2 getOAuth() {
-		return facebookService;
+		return vkontakteService;
 	}
 
 	@OnEvent(CONNECTED_EVENT)
@@ -28,7 +28,7 @@ public class FacebookConnect extends AbstractOAuth2Connect {
 			@RequestParameter(value = "error_reason", allowBlank = true) final String errorReason,
 			@RequestParameter(value = "error_description", allowBlank = true) final String errorDescription) {
 
-		final String info = new DescriptionBuilder("FACEBOOK TOKEN")
+		final String info = new DescriptionBuilder("VKONTAKTE TOKEN")
 				.append("code", code)
 				.append("error", error)
 				.append("error_reason", errorReason)

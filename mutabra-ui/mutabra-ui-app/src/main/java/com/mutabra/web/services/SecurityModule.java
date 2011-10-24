@@ -9,8 +9,7 @@ import com.mutabra.security.OAuth;
 import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
 import com.mutabra.security.TwitterProvider;
-import com.mutabra.security.VKontakteService;
-import com.mutabra.security.VKontakteServiceImpl;
+import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.internal.Authorities;
@@ -18,7 +17,6 @@ import com.mutabra.web.internal.SecurityAnnotationWorker;
 import com.mutabra.web.internal.SecurityExceptionHandler;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
 import com.mutabra.web.pages.Security;
-import org.apache.tapestry5.Link;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -156,10 +154,8 @@ public class SecurityModule {
 		return new Google(consumerKey, consumerSecret);
 	}
 
-	public VKontakteService buildVKontakteService(final LinkManager linkManager,
-												  @Symbol("vkontakte.consumer-key") final String consumerKey,
-												  @Symbol("vkontakte.consumer-secret") final String consumerSecret) {
-		final Link link = linkManager.createPageEventLink(Security.class, "vKontakteConnect");
-		return new VKontakteServiceImpl(consumerKey, consumerSecret, link.toAbsoluteURI());
+	public OAuth2 buildVkontakteService(@Symbol("vkontakte.consumer-key") final String consumerKey,
+										@Symbol("vkontakte.consumer-secret") final String consumerSecret) {
+		return new VKontakte(consumerKey, consumerSecret);
 	}
 }

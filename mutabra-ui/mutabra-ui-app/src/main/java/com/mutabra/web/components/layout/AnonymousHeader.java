@@ -1,11 +1,9 @@
 package com.mutabra.web.components.layout;
 
 import com.mutabra.domain.security.Account;
-import com.mutabra.security.BaseOAuthService;
 import com.mutabra.security.FacebookToken;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.TwitterToken;
-import com.mutabra.security.VKontakteService;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.components.AbstractComponent;
@@ -24,8 +22,6 @@ import org.greatage.security.Credentials;
 import org.greatage.security.SecretEncoder;
 import org.greatage.security.SecurityContext;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 
 /**
@@ -54,9 +50,6 @@ public class AnonymousHeader extends AbstractComponent {
 
 	@Inject
 	private LinkManager linkManager;
-
-	@Inject
-	private VKontakteService vkontakteService;
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
@@ -100,11 +93,8 @@ public class AnonymousHeader extends AbstractComponent {
 		System.out.println();
 	}
 
-	URL onConnectToVKontakte() throws MalformedURLException {
-		return createConnectURL(vkontakteService);
-	}
-
-	private URL createConnectURL(final BaseOAuthService authService) throws MalformedURLException {
-		return new URL(authService.getAuthorizationURL());
+	@OnEvent(value = EventConstants.SUCCESS, component = "vkontakte")
+	void vkontakteConnected(final OAuth.Session session) {
+		System.out.println();
 	}
 }

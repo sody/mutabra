@@ -18,7 +18,9 @@
 				<t:button primary="medium google" text="false">
 					<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google.title}</t:social.googleconnect>
 				</t:button>
-				<t:button primary="ui-icon-locked" text="false"><t:eventlink class="transparent" event="connectToVKontakte">${message:button.vk.title}</t:eventlink></t:button>
+				<t:button primary="ui-icon-locked" text="false">
+					<t:social.vkontakteconnect t:id="vkontakte" class="transparent">${message:button.vkontakte.title}</t:social.vkontakteconnect>
+				</t:button>
 			</div>
 		</div>
 	</div>
