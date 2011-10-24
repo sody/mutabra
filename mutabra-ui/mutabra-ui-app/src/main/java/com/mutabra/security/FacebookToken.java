@@ -7,13 +7,13 @@ import org.greatage.security.AuthenticationToken;
  * @since 1.0
  */
 public class FacebookToken implements AuthenticationToken {
-	private final String code;
+	private final OAuth.Session session;
 
-	public FacebookToken(final String code) {
-		this.code = code;
+	public FacebookToken(final OAuth.Session session) {
+		this.session = session;
 	}
 
-	public String getCode() {
-		return code;
+	public OAuth.Session getSession() {
+		return session;
 	}
 }

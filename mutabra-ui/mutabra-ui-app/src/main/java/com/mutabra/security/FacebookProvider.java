@@ -9,63 +9,60 @@ import org.greatage.security.AbstractAuthenticationProvider;
 import org.greatage.security.AuthenticationException;
 import org.greatage.security.SecretEncoder;
 import org.greatage.security.User;
+import org.greatage.util.LocaleUtils;
 import org.greatage.util.StringUtils;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.oauth2.OAuth2ServiceProvider;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class FacebookProvider extends AbstractAuthenticationProvider<User, FacebookToken> {
-	private final OAuth2ServiceProvider<Facebook> facebookService;
 	private final BaseEntityService<Account, AccountQuery> accountService;
 	private final SecretEncoder secretEncoder;
 
-	public FacebookProvider(final @InjectService("facebookService") OAuth2ServiceProvider<Facebook> facebookService,
-							final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
+	public FacebookProvider(final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
 							final SecretEncoder secretEncoder) {
 		super(User.class, FacebookToken.class);
-		this.facebookService = facebookService;
 		this.accountService = accountService;
 		this.secretEncoder = secretEncoder;
 	}
 
 	@Override
 	protected User doSignIn(final FacebookToken token) {
-		if (StringUtils.isEmpty(token.getCode())) {
+		if (token.getSession() == null) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		final Facebook facebook = facebookService.getApi(token.getCode());
-		final FacebookProfile profile = facebook.userOperations().getUserProfile();
+		final Map<String, Object> profile = token.getSession().getProfile();
 
-		if (StringUtils.isEmpty(profile.getId())) {
+		final String profileId = String.valueOf(profile.get("id"));
+		if (StringUtils.isEmpty(profileId)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		Account account = accountService.query().withFacebook(profile.getId()).unique();
+		Account account = accountService.query().withFacebook(profileId).unique();
 		if (account != null) {
 			return authenticate(account);
 		}
 
-		if (StringUtils.isEmpty(profile.getEmail())) {
+		final String email = String.valueOf(profile.get("email"));
+		if (StringUtils.isEmpty(email)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		account = accountService.query().withEmail(profile.getEmail()).unique();
+		account = accountService.query().withEmail(email).unique();
 		if (account != null) {
-			account.setFacebookUser(profile.getId());
+			account.setFacebookUser(profileId);
 			return authenticate(account);
 		}
 
 		account = accountService.create();
-		account.setFacebookUser(profile.getId());
-		account.setEmail(profile.getEmail());
+		account.setFacebookUser(profileId);
+		account.setEmail(email);
 		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
 		account.setRegistered(new Date());
-		account.setName(profile.getName());
-		account.setLocale(profile.getLocale());
+		account.setName(String.valueOf(profile.get("name")));
+		account.setLocale(LocaleUtils.parseLocale(String.valueOf(profile.get("locale"))));
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
 		return authenticate(account);

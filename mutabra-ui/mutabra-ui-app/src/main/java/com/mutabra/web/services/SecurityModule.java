@@ -2,10 +2,12 @@ package com.mutabra.web.services;
 
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
+import com.mutabra.security.Facebook;
 import com.mutabra.security.FacebookProvider;
 import com.mutabra.security.GoogleService;
 import com.mutabra.security.GoogleServiceImpl;
 import com.mutabra.security.OAuth;
+import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
 import com.mutabra.security.TwitterProvider;
 import com.mutabra.security.VKontakteService;
@@ -40,9 +42,6 @@ import org.greatage.security.SecurityContext;
 import org.greatage.security.SecurityContextImpl;
 import org.greatage.security.User;
 import org.greatage.security.UserCredentialsProvider;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.connect.FacebookServiceProvider;
-import org.springframework.social.oauth2.OAuth2ServiceProvider;
 
 import java.util.Date;
 
@@ -143,9 +142,9 @@ public class SecurityModule {
 		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class);
 	}
 
-	public OAuth2ServiceProvider<Facebook> buildFacebookService(@Symbol("facebook.app-id") final String clientId,
-																@Symbol("facebook.app-secret") final String clientSecret) {
-		return new FacebookServiceProvider(clientId, clientSecret);
+	public OAuth2 buildFacebookService(@Symbol("facebook.app-id") final String clientId,
+									   @Symbol("facebook.app-secret") final String clientSecret) {
+		return new Facebook(clientId, clientSecret);
 	}
 
 	public OAuth buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,

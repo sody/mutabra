@@ -26,8 +26,8 @@ public class OAuthMenu extends AbstractComponent {
 	private SecurityContext securityContext;
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
-	void facebookConnected(final String accessToken) {
-		securityContext.signIn(new FacebookToken(accessToken));
+	void facebookConnected(final OAuth.Session session) {
+		securityContext.signIn(new FacebookToken(session));
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")

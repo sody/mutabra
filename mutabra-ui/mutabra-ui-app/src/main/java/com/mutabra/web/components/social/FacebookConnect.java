@@ -1,5 +1,7 @@
 package com.mutabra.web.components.social;
 
+import com.mutabra.security.OAuth;
+import com.mutabra.security.OAuth2;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.EventConstants;
@@ -12,11 +14,6 @@ import org.apache.tapestry5.corelib.base.AbstractComponentEventLink;
 import org.apache.tapestry5.internal.util.CaptureResultCallback;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.oauth2.GrantType;
-import org.springframework.social.oauth2.OAuth2Parameters;
-import org.springframework.social.oauth2.OAuth2ServiceProvider;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,7 +33,7 @@ public class FacebookConnect extends AbstractComponentEventLink {
 	private ComponentResources resources;
 
 	@InjectService("facebookService")
-	private OAuth2ServiceProvider<Facebook> facebookService;
+	private OAuth2 facebookService;
 
 	@Cached
 	protected String getRedirectUri() {
@@ -50,13 +47,7 @@ public class FacebookConnect extends AbstractComponentEventLink {
 
 	@OnEvent(CONNECT_EVENT)
 	URL connect() throws MalformedURLException {
-		final OAuth2Parameters parameters = new OAuth2Parameters();
-		if (scope != null) {
-			parameters.setScope(scope);
-		}
-		parameters.setRedirectUri(getRedirectUri());
-
-		return new URL(buildConnectURL(parameters));
+		return new URL(facebookService.getAuthorizationUrl(getRedirectUri(), scope));
 	}
 
 	@OnEvent(CONNECTED_EVENT)
@@ -68,10 +59,9 @@ public class FacebookConnect extends AbstractComponentEventLink {
 
 		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
 		if (code != null) {
-			final AccessGrant accessGrant;
 			try {
-				accessGrant = facebookService.getOAuthOperations().exchangeForAccess(code, getRedirectUri(), null);
-				final Object[] context = {accessGrant.getAccessToken()};
+				final OAuth.Session session = facebookService.connect(code, getRedirectUri(), scope);
+				final Object[] context = {session};
 				final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
 
 				if (handled) {
@@ -79,7 +69,7 @@ public class FacebookConnect extends AbstractComponentEventLink {
 				}
 				return null;
 			} catch (Exception e) {
-				errorDescription = e.getMessage();
+				//todo: log error
 			}
 		}
 
@@ -90,9 +80,5 @@ public class FacebookConnect extends AbstractComponentEventLink {
 			return callback.getResult();
 		}
 		return null;
-	}
-
-	private String buildConnectURL(final OAuth2Parameters parameters) {
-		return facebookService.getOAuthOperations().buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, parameters);
 	}
 }
