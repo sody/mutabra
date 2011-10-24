@@ -10,7 +10,6 @@ import org.greatage.security.AuthenticationException;
 import org.greatage.security.SecretEncoder;
 import org.greatage.security.User;
 import org.greatage.util.LocaleUtils;
-import org.greatage.util.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -20,28 +19,24 @@ import java.util.Map;
  * @since 1.0
  */
 public class TwitterProvider extends AbstractAuthenticationProvider<User, TwitterToken> {
-	private final OAuth twitterService;
 	private final BaseEntityService<Account, AccountQuery> accountService;
 	private final SecretEncoder secretEncoder;
 
 
-	public TwitterProvider(final @InjectService("twitterService") OAuth twitterService,
-						   final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
+	public TwitterProvider(final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
 						   final SecretEncoder secretEncoder) {
 		super(User.class, TwitterToken.class);
-		this.twitterService = twitterService;
 		this.accountService = accountService;
 		this.secretEncoder = secretEncoder;
 	}
 
 	@Override
 	protected User doSignIn(final TwitterToken token) {
-		if (StringUtils.isEmpty(token.getToken()) || StringUtils.isEmpty(token.getSecret())) {
+		if (token.getSession() == null) {
 			throw new AuthenticationException("Invalid credentials");
 		}
 
-		final OAuth.Session session = twitterService.connect(
-				token.getToken(), token.getSecret(), token.getCallbackUrl(), token.getScope());
+		final OAuth.Session session = token.getSession();
 
 		final Map<String, Object> profile = session.getProfile();
 
@@ -54,8 +49,8 @@ public class TwitterProvider extends AbstractAuthenticationProvider<User, Twitte
 		account.setTwitterUser(String.valueOf(profile.get("id")));
 		account.setPassword(secretEncoder.encode(Authorities.generateSecret()));
 		account.setRegistered(new Date());
-		account.setName((String) profile.get("name"));
-		account.setLocale(LocaleUtils.parseLocale((String) profile.get("language")));
+		account.setName(String.valueOf(profile.get("name")));
+		account.setLocale(LocaleUtils.parseLocale(String.valueOf(profile.get("language"))));
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
 		return authenticate(account);

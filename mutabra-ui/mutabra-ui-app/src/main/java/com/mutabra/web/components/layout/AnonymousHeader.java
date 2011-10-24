@@ -4,6 +4,7 @@ import com.mutabra.domain.security.Account;
 import com.mutabra.security.BaseOAuthService;
 import com.mutabra.security.FacebookToken;
 import com.mutabra.security.GoogleService;
+import com.mutabra.security.OAuth;
 import com.mutabra.security.TwitterToken;
 import com.mutabra.security.VKontakteService;
 import com.mutabra.services.BaseEntityService;
@@ -95,8 +96,8 @@ public class AnonymousHeader extends AbstractComponent {
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
-	void twitterConnected(final String token, final String secret, final String callbackUrl, final String scope) {
-		securityContext.signIn(new TwitterToken(token, secret, callbackUrl, scope));
+	void twitterConnected(final OAuth.Session session) {
+		securityContext.signIn(new TwitterToken(session));
 	}
 
 	URL onConnectToGoogle() throws MalformedURLException {

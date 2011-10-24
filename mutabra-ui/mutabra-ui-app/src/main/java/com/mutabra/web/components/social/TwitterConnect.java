@@ -53,25 +53,30 @@ public class TwitterConnect extends AbstractComponentEventLink {
 	Object connected(
 			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
 			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier,
-			@RequestParameter(value = "denied", allowBlank = true) String denied) {
+			@RequestParameter(value = "denied", allowBlank = true) final String denied) {
 
 		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
 		if (verifier != null) {
-			final Object[] context = {token, verifier, getCallbackUri(), scope};
-			final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
+			try {
+				final OAuth.Session session = twitterService.connect(token, verifier, getCallbackUri(), scope);
+				final Object[] context = {session};
+				final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
 
-			if (handled) {
-				return callback.getResult();
+				if (handled) {
+					return callback.getResult();
+				}
+				return null;
+			} catch (Exception e) {
+				//todo: log error
 			}
-			return null;
-		} else {
-			final Object[] context = {denied};
-			final boolean handled = resources.triggerEvent(EventConstants.FAILURE, context, callback);
-
-			if (handled) {
-				return callback.getResult();
-			}
-			return null;
 		}
+
+		final Object[] context = {denied};
+		final boolean handled = resources.triggerEvent(EventConstants.FAILURE, context, callback);
+
+		if (handled) {
+			return callback.getResult();
+		}
+		return null;
 	}
 }
