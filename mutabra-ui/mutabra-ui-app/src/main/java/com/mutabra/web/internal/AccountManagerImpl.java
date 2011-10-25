@@ -46,7 +46,7 @@ public class AccountManagerImpl implements AccountManager {
 
 		final Account account = accountService.create();
 		account.setEmail(email);
-		account.setPassword(passwordEncoder.encode(generatedPassword));
+		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
 
@@ -64,6 +64,19 @@ public class AccountManagerImpl implements AccountManager {
 
 		final Link link = createTokenLink(email, generatedToken);
 		final String message = String.format(RESTORE_PASSWORD_NOTIFICATION, email, generatedToken, link, DEFAULT_SIGNATURE);
+		mailService.send(email, "Mutabra Account", message);
+		accountService.save(account);
+	}
+
+	public void changePassword(final String email, final String password) {
+		final Account account = accountService.query().withEmail(email).unique();
+
+		final String generatedToken = Authorities.generateSecret();
+		account.setToken(generatedToken);
+		account.setPendingPassword(passwordEncoder.encode(password));
+
+		final Link link = createTokenLink(email, generatedToken);
+		final String message = String.format(CHANGE_PASSWORD_NOTIFICATION, email, generatedToken, link.toAbsoluteURI(), DEFAULT_SIGNATURE);
 		mailService.send(email, "Mutabra Account", message);
 		accountService.save(account);
 	}
@@ -91,6 +104,13 @@ public class AccountManagerImpl implements AccountManager {
 			.append("New access token was created for you.\n")
 			.append("\tlogin: %s\n\tactivation token: %s\n\n")
 			.append("To enter your account please follow the link:\n\n\t%s\n\n")
+			.append("---\n%s").toString();
+
+	private static final String CHANGE_PASSWORD_NOTIFICATION = new StringBuilder()
+			.append("Hello Mr.,\n\n")
+			.append("New access token was created for you.\n")
+			.append("\tlogin: %s\n\tactivation token: %s\n\n")
+			.append("To confirm password change follow the link:\n\n\t%s\n\n")
 			.append("---\n%s").toString();
 
 	private static final String DEFAULT_SIGNATURE = "BR, Mutabra team";

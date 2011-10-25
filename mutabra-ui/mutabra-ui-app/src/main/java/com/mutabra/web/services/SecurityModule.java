@@ -90,6 +90,10 @@ public class SecurityModule {
 				if (account != null) {
 					account.setToken(null);
 					account.setLastLogin(new Date());
+					if (account.getPendingPassword() != null) {
+						account.setPassword(account.getPendingPassword());
+						account.setPendingPassword(null);
+					}
 					accountService.save(account);
 
 					return Authorities.createUser(account);

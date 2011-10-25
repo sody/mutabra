@@ -1,0 +1,56 @@
+<html t:type="layout/default"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+
+<t:form t:id="changeEmailForm">
+	<t:customerrors/>
+
+	<div class="t-beaneditor-row">
+		<t:label for="email"/>
+		<t:textfield t:id="email" value="email" validate="required"/>
+	</div>
+
+	<t:button>
+		<t:linksubmit>${message:button.change.title}</t:linksubmit>
+	</t:button>
+</t:form>
+
+<hr/>
+
+<t:form t:id="changePasswordForm">
+	<t:customerrors/>
+
+	<div class="t-beaneditor-row">
+		<t:label for="password"/>
+		<t:textfield t:id="password" value="password" validate="required"/>
+	</div>
+
+	<div class="t-beaneditor-row">
+		<t:label for="confirmPassword"/>
+		<t:textfield t:id="confirmPassword" value="confirmPassword" validate="required"/>
+	</div>
+
+	<t:button>
+		<t:linksubmit>${message:button.change.title}</t:linksubmit>
+	</t:button>
+</t:form>
+
+<hr/>
+
+<t:form t:id="accountForm">
+	<div class="t-beaneditor-row">
+		<t:label for="name"/>
+		<t:textfield t:id="name" value="value.name"/>
+	</div>
+	<div class="t-beaneditor-row">
+		<t:label for="place"/>
+		<t:textfield t:id="place" value="value.place"/>
+	</div>
+
+	<t:button>
+		<t:linksubmit>${message:button.save.title}</t:linksubmit>
+	</t:button>
+</t:form>
+
+</html>

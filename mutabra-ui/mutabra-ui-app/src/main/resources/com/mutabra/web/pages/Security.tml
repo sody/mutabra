@@ -11,7 +11,7 @@
 		</ul>
 		<div id="sign-in-tab">
 			<h1>${message:page.security-sign-in.title}</h1>
-			<t:form t:id="signIn" clientValidation="false">
+			<t:form t:id="signIn">
 				<t:customerrors/>
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
@@ -32,7 +32,7 @@
 		</div>
 		<div id="sign-up-tab">
 			<h1>${message:page.security-sign-up.title}</h1>
-			<t:form t:id="signUp" clientValidation="false">
+			<t:form t:id="signUp">
 				<t:customerrors/>
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">
@@ -52,7 +52,7 @@
 		</div>
 		<div id="restore-tab">
 			<h1>${message:page.security-restore.title}</h1>
-			<t:form t:id="restore" clientValidation="false">
+			<t:form t:id="restore">
 				<t:customerrors/>
 				<div class="t-beaneditor-row">
 					<div class="t-beaneditor-row">

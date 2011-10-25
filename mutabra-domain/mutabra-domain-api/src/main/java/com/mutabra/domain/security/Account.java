@@ -34,6 +34,10 @@ public interface Account extends BaseEntity {
 
 	public void setPassword(final String password);
 
+	public String getPendingPassword();
+
+	public void setPendingPassword(final String password);
+
 	public String getFacebookUser();
 
 	public void setFacebookUser(String user);

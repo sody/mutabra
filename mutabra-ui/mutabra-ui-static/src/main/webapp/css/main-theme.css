@@ -31,6 +31,13 @@ h6 {
 	color: #6d440c;
 }
 
+hr {
+	border: 0;
+	border-top: 1px solid #c7a663;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 input {
 	border: 1px solid #BDC7D8;
 	background: #ffffff;

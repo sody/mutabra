@@ -9,4 +9,6 @@ public interface AccountManager {
 	void signUp(String email);
 
 	void restorePassword(String email);
+
+	void changePassword(String email, String password);
 }

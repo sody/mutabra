@@ -10,7 +10,11 @@ import org.greatage.util.LocaleUtils;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * @author Ivan Khalopik
@@ -24,6 +28,9 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Persistent
 	private String password;
+
+	@Persistent
+	private String pendingPassword;
 
 	@Persistent
 	private String facebookUser;
@@ -81,6 +88,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public String getPendingPassword() {
+		return pendingPassword;
+	}
+
+	public void setPendingPassword(final String password) {
+		pendingPassword = password;
 	}
 
 	public String getFacebookUser() {
