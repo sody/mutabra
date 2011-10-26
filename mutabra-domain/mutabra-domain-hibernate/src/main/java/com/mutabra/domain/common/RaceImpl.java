@@ -1,5 +1,6 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
@@ -11,10 +12,10 @@ import javax.persistence.Table;
  * @since 1.0
  */
 @Entity
-@Table(name = "RACE")
+@Table(name = Tables.RACE)
 public class RaceImpl extends CodedEntityImpl implements Race {
 
 	public RaceImpl() {
-		super("RACE", TranslationType.STANDARD);
+		super(Tables.RACE, TranslationType.STANDARD);
 	}
 }

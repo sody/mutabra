@@ -1,5 +1,7 @@
 package com.mutabra.domain;
 
+import com.mutabra.db.Tables;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,7 +12,7 @@ import java.util.Locale;
  * @since 1.0
  */
 @Entity
-@Table(name = "TRANSLATION")
+@Table(name = Tables.TRANSLATION)
 public class TranslationImpl extends BaseEntityImpl implements Translation {
 
 	@Column(name = "BASENAME", nullable = false)

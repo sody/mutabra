@@ -1,5 +1,6 @@
 package com.mutabra.domain.security;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
@@ -14,14 +15,14 @@ import java.util.Set;
  * @since 1.0
  */
 @Entity
-@Table(name = "PERMISSION")
+@Table(name = Tables.PERMISSION)
 public class PermissionImpl extends CodedEntityImpl implements Permission {
 
 	@ManyToMany(mappedBy = "permissions", targetEntity = RoleImpl.class)
 	private Set<Role> roles = new HashSet<Role>();
 
 	public PermissionImpl() {
-		super("PERMISSION", TranslationType.STANDARD);
+		super(Tables.PERMISSION, TranslationType.STANDARD);
 	}
 
 	public Set<Role> getRoles() {
@@ -31,9 +32,4 @@ public class PermissionImpl extends CodedEntityImpl implements Permission {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
-	public String getAuthority() {
-		return PERMISSION_PREFIX + getCode().toUpperCase();
-	}
-
 }

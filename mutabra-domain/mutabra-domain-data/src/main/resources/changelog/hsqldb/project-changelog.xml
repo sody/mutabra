@@ -8,6 +8,6 @@
 		<dbms type="hsqldb"/>
 	</preConditions>
 
-	<include file="release-1.0.xml" relativeToChangelogFile="true"/>
+	<include file="release_1.0.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

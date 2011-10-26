@@ -1,9 +1,14 @@
 package com.mutabra.domain.security;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +17,10 @@ import java.util.Set;
  * @since 1.0
  */
 @Entity
-@Table(name = "ROLE")
+@Table(name = Tables.ROLE)
 public class RoleImpl extends CodedEntityImpl implements Role {
 	public RoleImpl() {
-		super("ROLE", TranslationType.STANDARD);
+		super(Tables.ROLE, TranslationType.STANDARD);
 	}
 
 	@ManyToMany(mappedBy = "roles", targetEntity = AccountImpl.class)
@@ -37,9 +42,5 @@ public class RoleImpl extends CodedEntityImpl implements Role {
 
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
-	}
-
-	public String getAuthority() {
-		return ROLE_PREFIX + getCode().toUpperCase();
 	}
 }

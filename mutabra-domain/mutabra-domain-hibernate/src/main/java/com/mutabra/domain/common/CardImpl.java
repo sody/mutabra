@@ -1,18 +1,23 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @Entity
-@Table(name = "CARD")
+@Table(name = Tables.CARD)
 public class CardImpl extends CodedEntityImpl implements Card {
 
 	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType",
@@ -37,7 +42,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	protected CardImpl(final CardType type) {
-		super("CARD", TranslationType.STANDARD);
+		super(Tables.CARD, TranslationType.STANDARD);
 		this.type = type;
 	}
 

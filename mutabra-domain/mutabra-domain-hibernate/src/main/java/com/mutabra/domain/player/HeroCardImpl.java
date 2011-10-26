@@ -1,5 +1,6 @@
 package com.mutabra.domain.player;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardImpl;
@@ -11,7 +12,7 @@ import javax.persistence.*;
  * @since 1.0
  */
 @Entity
-@Table(name = "HERO_CARD")
+@Table(name = Tables.HERO_CARD)
 public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
 	@ManyToOne(targetEntity = HeroImpl.class)

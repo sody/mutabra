@@ -1,18 +1,29 @@
 package com.mutabra.domain.security;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.player.HeroImpl;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = Tables.ACCOUNT)
 public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Column(name = "EMAIL", nullable = false)
@@ -20,6 +31,18 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
+
+	@Column(name = "PENDING_PASSWORD", nullable = true)
+	private String pendingPassword;
+
+	@Column(name = "FACEBOOK_USER", nullable = true)
+	private String facebookUser;
+
+	@Column(name = "TWITTER_USER", nullable = true)
+	private String twitterUser;
+
+	@Column(name = "GOOGLE_USER", nullable = true)
+	private String googleUser;
 
 	@Column(name = "REGISTRATION_DATE", nullable = true, updatable = false)
 	private Date registered;
@@ -68,6 +91,38 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public String getPendingPassword() {
+		return pendingPassword;
+	}
+
+	public void setPendingPassword(final String password) {
+		this.pendingPassword = password;
+	}
+
+	public String getFacebookUser() {
+		return facebookUser;
+	}
+
+	public void setFacebookUser(final String user) {
+		this.facebookUser = user;
+	}
+
+	public String getTwitterUser() {
+		return twitterUser;
+	}
+
+	public void setTwitterUser(final String user) {
+		this.twitterUser = user;
+	}
+
+	public String getGoogleUser() {
+		return googleUser;
+	}
+
+	public void setGoogleUser(final String user) {
+		this.googleUser = user;
 	}
 
 	public Date getRegistered() {
@@ -144,5 +199,9 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public Set<Hero> getHeroes() {
 		return heroes;
+	}
+
+	public String getDisplayName() {
+		return getEmail();
 	}
 }

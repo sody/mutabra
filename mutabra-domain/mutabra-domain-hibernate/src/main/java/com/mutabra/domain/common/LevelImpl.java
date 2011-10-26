@@ -1,5 +1,6 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
@@ -12,14 +13,14 @@ import javax.persistence.Table;
  * @since 1.0
  */
 @Entity
-@Table(name = "LEVEL")
+@Table(name = Tables.LEVEL)
 public class LevelImpl extends CodedEntityImpl implements Level {
 
 	@Column(name = "RATING", nullable = false)
 	private long rating;
 
 	public LevelImpl() {
-		super("LEVEL", TranslationType.STANDARD);
+		super(Tables.LEVEL, TranslationType.STANDARD);
 	}
 
 	public long getRating() {

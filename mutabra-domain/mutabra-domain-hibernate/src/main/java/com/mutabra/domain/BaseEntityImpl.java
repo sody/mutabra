@@ -1,6 +1,8 @@
 package com.mutabra.domain;
 
 import org.greatage.domain.AbstractEntity;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,7 +12,8 @@ import javax.persistence.*;
  * @since 1.0
  */
 @MappedSuperclass
-@org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
+@DynamicInsert
+@DynamicUpdate
 public class BaseEntityImpl extends AbstractEntity<Long> implements BaseEntity {
 
 	@Id

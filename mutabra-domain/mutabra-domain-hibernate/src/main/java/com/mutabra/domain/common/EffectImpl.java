@@ -1,5 +1,6 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 import org.hibernate.annotations.Parameter;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  * @since 1.0
  */
 @Entity
-@Table(name = "EFFECT")
+@Table(name = Tables.EFFECT)
 public class EffectImpl extends CodedEntityImpl implements Effect {
 
 	@Type(type = "org.greatage.hibernate.type.OrderedEnumUserType",
@@ -29,7 +30,7 @@ public class EffectImpl extends CodedEntityImpl implements Effect {
 	private int defence;
 
 	public EffectImpl() {
-		super("EFFECT", TranslationType.STANDARD);
+		super(Tables.EFFECT, TranslationType.STANDARD);
 	}
 
 	public TargetType getTargetType() {
