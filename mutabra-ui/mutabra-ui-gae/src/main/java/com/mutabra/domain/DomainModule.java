@@ -1,4 +1,4 @@
-package com.mutabra.web.services;
+package com.mutabra.domain;
 
 import com.mutabra.db.MutabraChangeLog;
 import com.mutabra.domain.Keys;

@@ -1,6 +1,7 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.BaseEntity;
+import com.mutabra.domain.DomainModule;
 import com.mutabra.web.internal.AccountManagerImpl;
 import com.mutabra.web.internal.CustomValidationDecoratorFactory;
 import com.mutabra.web.internal.EntityEncoderFactory;

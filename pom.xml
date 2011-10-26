@@ -58,7 +58,13 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-ui-app</artifactId>
+				<artifactId>mutabra-ui-hibernate</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mutabra</groupId>
+				<artifactId>mutabra-ui-gae</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -372,12 +378,13 @@
 		<profile>
 			<id>hibernate</id>
 			<properties>
+				<jdbc.source>jdbc/mutabra</jdbc.source>
 				<jdbc.driver>org.hsqldb.jdbcDriver</jdbc.driver>
-				<jdbc.url>jdbc:hsqldb:/mutabra/db/gamedb;shutdown=true</jdbc.url>
+				<jdbc.url>jdbc:hsqldb:/mutabra/db/mutabra;shutdown=true</jdbc.url>
 				<jdbc.username>sa</jdbc.username>
 				<jdbc.password></jdbc.password>
 				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
-				<liquibase.url>changelog/hsqldb/project-changelog.xml</liquibase.url>
+				<liquibase.changelog>changelog/hsqldb/project-changelog.xml</liquibase.changelog>
 			</properties>
 		</profile>
 

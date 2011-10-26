@@ -27,22 +27,6 @@
 	</context-param>
 
 	<context-param>
-		<param-name>project.data-source</param-name>
-		<param-value>${jdbc.source}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>project.change-log</param-name>
-		<param-value>${liquibase.changelog}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>project.hibernate-dialect</param-name>
-		<param-value>${hibernate.dialect}</param-value>
-	</context-param>
-
-
-	<context-param>
 		<param-name>mail.admin-address</param-name>
 		<param-value>${mail.admin.address}</param-value>
 	</context-param>
@@ -87,6 +71,7 @@
 		<param-value>_SECRET_</param-value>
 	</context-param>
 
+
 	<filter>
 		<filter-name>mutabra</filter-name>
 		<filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
@@ -104,10 +89,4 @@
 		<error-code>404</error-code>
 		<location>/error</location>
 	</error-page>
-
-	<resource-ref>
-		<res-ref-name>${jdbc.source}</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
 </web-app>

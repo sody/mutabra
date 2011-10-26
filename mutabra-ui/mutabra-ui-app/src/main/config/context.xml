@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="">
-	<Resource name="jdbc/nonamedb" auth="Container" type="javax.sql.DataSource"
+	<Resource name="${jdbc.source}" auth="Container" type="javax.sql.DataSource"
 			  driverClassName="${jdbc.driver}"
 			  url="${jdbc.url}"
 			  username="${jdbc.username}" password="${jdbc.password}"
