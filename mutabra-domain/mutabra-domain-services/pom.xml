@@ -24,12 +24,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-data</artifactId>
+			<artifactId>mutabra-domain-api</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-api</artifactId>
+			<groupId>org.greatage</groupId>
+			<artifactId>greatage-db</artifactId>
 		</dependency>
 	</dependencies>
 </project>

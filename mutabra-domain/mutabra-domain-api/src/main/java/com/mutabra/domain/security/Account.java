@@ -78,10 +78,6 @@ public interface Account extends BaseEntity {
 
 	public void setTimeZone(final TimeZone timeZone);
 
-	public Date getDeletedAt();
-
-	public void setDeletedAt(final Date deletedAt);
-
 	public Set<Role> getRoles();
 
 	public void setRoles(final Set<Role> roles);

@@ -4,6 +4,9 @@ import com.mutabra.db.Tables;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,6 +21,9 @@ import java.util.Set;
  */
 @Entity
 @Table(name = Tables.ROLE)
+@AttributeOverrides({
+		@AttributeOverride(name = "id", column = @Column(name = "ROLE_ID"))
+})
 public class RoleImpl extends CodedEntityImpl implements Role {
 	public RoleImpl() {
 		super(Tables.ROLE, TranslationType.STANDARD);
@@ -28,8 +34,8 @@ public class RoleImpl extends CodedEntityImpl implements Role {
 
 	@ManyToMany(targetEntity = PermissionImpl.class)
 	@JoinTable(name = "ROLE_PERMISSION",
-			joinColumns = @JoinColumn(name = "ID_ROLE", nullable = false),
-			inverseJoinColumns = @JoinColumn(name = "ID_PERMISSION", nullable = false))
+			joinColumns = @JoinColumn(name = "ROLE_ID", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", nullable = false))
 	private Set<Permission> permissions = new HashSet<Permission>();
 
 	public Set<Account> getAccounts() {

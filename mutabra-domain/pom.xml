@@ -18,7 +18,6 @@
 	<name>Mutabra Domain Aggregator</name>
 
 	<modules>
-		<module>mutabra-domain-data</module>
 		<module>mutabra-domain-api</module>
 		<module>mutabra-domain-services</module>
 	</modules>

@@ -21,12 +21,6 @@
 			<!-- Module versions -->
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-domain-data</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.mutabra</groupId>
 				<artifactId>mutabra-domain-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>

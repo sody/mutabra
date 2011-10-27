@@ -5,6 +5,8 @@ import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.player.HeroImpl;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,6 +26,9 @@ import java.util.TimeZone;
  */
 @Entity
 @Table(name = Tables.ACCOUNT)
+@AttributeOverrides({
+		@AttributeOverride(name = "id", column = @Column(name = "ACCOUNT_ID"))
+})
 public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Column(name = "EMAIL", nullable = false)
@@ -56,7 +61,7 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Column(name = "NAME", nullable = true, insertable = false)
 	private String name;
 
-	@Column(name = "PLACE", nullable = true, insertable = false)
+	@Column(name = "LOCATION", nullable = true, insertable = false)
 	private String place;
 
 	@Column(name = "LOCALE", nullable = true, insertable = false)
@@ -65,13 +70,10 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Column(name = "TIMEZONE", nullable = true, insertable = false)
 	private TimeZone timeZone;
 
-	@Column(name = "DELETED_AT", nullable = true, insertable = false)
-	private Date deletedAt;
-
 	@ManyToMany(targetEntity = RoleImpl.class)
 	@JoinTable(name = "ACCOUNT_ROLE",
-			joinColumns = @JoinColumn(name = "ID_ACCOUNT", nullable = false),
-			inverseJoinColumns = @JoinColumn(name = "ID_ROLE", nullable = false))
+			joinColumns = @JoinColumn(name = "ACCOUNT_ID", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false))
 	private Set<Role> roles = new HashSet<Role>();
 
 	@OneToMany(mappedBy = "account", targetEntity = HeroImpl.class)
@@ -179,14 +181,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setTimeZone(final TimeZone timeZone) {
 		this.timeZone = timeZone;
-	}
-
-	public Date getDeletedAt() {
-		return deletedAt;
-	}
-
-	public void setDeletedAt(final Date deletedAt) {
-		this.deletedAt = deletedAt;
 	}
 
 	public Set<Role> getRoles() {

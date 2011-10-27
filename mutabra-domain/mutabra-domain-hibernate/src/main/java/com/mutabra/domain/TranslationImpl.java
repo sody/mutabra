@@ -2,6 +2,8 @@ package com.mutabra.domain;
 
 import com.mutabra.db.Tables;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,9 +15,12 @@ import java.util.Locale;
  */
 @Entity
 @Table(name = Tables.TRANSLATION)
+@AttributeOverrides({
+		@AttributeOverride(name = "id", column = @Column(name = "TRANSLATION_ID"))
+})
 public class TranslationImpl extends BaseEntityImpl implements Translation {
 
-	@Column(name = "BASENAME", nullable = false)
+	@Column(name = "TRANSLATION_TYPE", nullable = false)
 	private String type;
 
 	@Column(name = "CODE", nullable = false)

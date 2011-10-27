@@ -19,17 +19,28 @@
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 	</build>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-data</artifactId>
+			<artifactId>mutabra-domain-api</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-api</artifactId>
+			<groupId>org.greatage</groupId>
+			<artifactId>greatage-db</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>2.0-rc5-ra1.4</version>
 		</dependency>
 
 		<dependency>

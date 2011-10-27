@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"
+				   logicalFilePath="release_1_0.xml">
+
+
+	<changeSet id="2011-10-27/ACCOUNT" author="sody">
+		<sql>
+			create table ACCOUNT (
+				ACCOUNT_ID integer primary key auto_increment,
+				EMAIL varchar(255),
+				PASSWORD varchar(255),
+				TOKEN varchar(255),
+
+				PENDING_EMAIL varchar(255),
+				PENDING_PASSWORD varchar(255),
+				PENDING_TOKEN varchar(255),
+
+				FACEBOOK_USER varchar(255),
+				TWITTER_USER varchar(255),
+				GOOGLE_USER varchar(255),
+				VK_USER varchar(255),
+
+				REGISTRATION_DATE datetime not null,
+				LAST_LOGIN_DATE datetime,
+
+				NAME varchar(255),
+				LOCALE varchar(255),
+				TIMEZONE varchar(255),
+				LOCATION varchar(255),
+
+				VERSION integer not null default 0
+			) engine=InnoDB;
+
+			alter table ACCOUNT
+				add unique index UX_ACCOUNT_EMAIL (EMAIL);
+		</sql>
+	</changeSet>
+
+	<changeSet id="2011-10-27/TRANSLATION" author="sody">
+		<sql>
+			create table TRANSLATION (
+				TRANSLATION_ID integer primary key auto_increment,
+				TRANSLATION_TYPE varchar(255) not null,
+				CODE varchar(255) not null,
+				VARIANT varchar(255) not null,
+				LOCALE varchar(255) not null,
+				VALUE varchar(255) not null,
+
+				VERSION integer not null default 0
+			) engine=InnoDB;
+
+			alter table TRANSLATION
+				add unique index UX_TRANSLATION_CODE (TRANSLATION_TYPE, CODE, VARIANT, LOCALE);
+		</sql>
+	</changeSet>
+
+	<changeSet id="2011-10-27/ROLE" author="sody">
+		<sql>
+			create table ROLE (
+				ROLE_ID integer primary key auto_increment,
+				CODE varchar(255) not null,
+
+				VERSION integer not null default 0
+			) engine=InnoDB;
+
+			alter table ROLE
+				add unique index UX_ROLE_CODE (CODE);
+		</sql>
+	</changeSet>
+
+	<changeSet id="2011-10-27/PERMISSION" author="sody">
+		<sql>
+			create table PERMISSION (
+				PERMISSION_ID integer primary key auto_increment,
+				CODE varchar(255) not null,
+
+				VERSION integer not null default 0
+			) engine=InnoDB;
+
+			alter table PERMISSION
+				add unique index UX_PERMISSION_CODE (CODE);
+		</sql>
+	</changeSet>
+
+	<changeSet id="2011-10-27/ACCOUNT_ROLE" author="sody">
+		<sql>
+			create table ACCOUNT_ROLE (
+				ACCOUNT_ID integer not null,
+				ROLE_ID integer not null,
+				primary key (ACCOUNT_ID, ROLE_ID)
+			) type=InnoDB;
+
+			alter table ACCOUNT_ROLE
+				add constraint FK_ACCOUNT_ROLE_TO_ACCOUNT foreign key (ACCOUNT_ID) references ACCOUNT(ACCOUNT_ID),
+				add constraint FK_ACCOUNT_ROLE_TO_ROLE foreign key (ROLE_ID) references ROLE(ROLE_ID);
+		</sql>
+	</changeSet>
+
+	<changeSet id="2011-10-27/ROLE_PERMISSION" author="sody">
+		<sql>
+			create table ROLE_PERMISSION (
+				ROLE_ID integer not null,
+				PERMISSION_ID integer not null,
+				primary key (ROLE_ID, PERMISSION_ID)
+			) type=InnoDB;
+
+			alter table ROLE_PERMISSION
+				add constraint FK_ROLE_PERMISSION_TO_ROLE foreign key (ROLE_ID) references ROLE(ROLE_ID),
+				add constraint FK_ROLE_PERMISSION_TO_PERMISSION foreign key (PERMISSION_ID) references PERMISSION(PERMISSION_ID);
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>
+
+        
