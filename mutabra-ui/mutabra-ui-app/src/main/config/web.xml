@@ -20,11 +20,11 @@
 		<param-value>${project.production.mode}</param-value>
 	</context-param>
 
-
 	<context-param>
 		<param-name>tapestry.start-page-name</param-name>
 		<param-value>/</param-value>
 	</context-param>
+
 
 	<context-param>
 		<param-name>project.data-source</param-name>

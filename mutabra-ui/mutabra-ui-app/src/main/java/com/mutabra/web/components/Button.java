@@ -11,6 +11,8 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.dom.Node;
 import org.apache.tapestry5.dom.Text;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * Corresponds to jquery.ui button widgets. It is responsible for correct button rendering with all needed content and
@@ -62,6 +64,9 @@ public class Button {
 	 */
 	@Parameter(defaultPrefix = BindingConstants.LITERAL, value = "true")
 	private boolean text;
+
+	@Inject
+	private JavaScriptSupport support;
 
 	private final MarkupWriterListener listener = new MarkupWriterAdapter() {
 		@Override
@@ -117,6 +122,10 @@ public class Button {
 			addButtonStyle(element);
 			addButtonContent(element);
 		}
+		if (element.getAttribute("id") == null) {
+			element.attribute("id", support.allocateClientId("button"));
+		}
+		support.addInitializerCall("button", element.getAttribute("id"));
 	}
 
 	/**

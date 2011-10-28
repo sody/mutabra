@@ -1,8 +1,8 @@
 T5.extendInitializers({
-	jquery_ui: function() {
+	button: function(id) {
 		(function($) {
 			// create buttons from every element of 'ui-button' class
-			$(".ui-button").each(function() {
+			$("#" + id).each(function() {
 				// get element
 				var element = $(this);
 				// find element representing primary icon ang parse it's class attribute
