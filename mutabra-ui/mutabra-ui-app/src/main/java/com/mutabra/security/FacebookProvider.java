@@ -75,7 +75,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 
 	private User authenticate(final Account account) {
 		account.setLastLogin(new Date());
-		accountService.save(account);
+		accountService.saveOrUpdate(account);
 
 		return Authorities.createUser(account);
 	}

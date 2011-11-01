@@ -27,10 +27,19 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private String email;
 
 	@Persistent
+	private String pendingEmail;
+
+	@Persistent
 	private String password;
 
 	@Persistent
 	private String pendingPassword;
+
+	@Persistent
+	private String token;
+
+	@Persistent
+	private String pendingToken;
 
 	@Persistent
 	private String facebookUser;
@@ -46,9 +55,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Persistent
 	private Date lastLogin;
-
-	@Persistent
-	private String token;
 
 	@Persistent
 	private String name;
@@ -82,6 +88,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 		this.email = email;
 	}
 
+	public String getPendingEmail() {
+		return pendingEmail;
+	}
+
+	public void setPendingEmail(final String email) {
+		this.pendingEmail = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -96,6 +110,22 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setPendingPassword(final String password) {
 		pendingPassword = password;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(final String token) {
+		this.token = token;
+	}
+
+	public String getPendingToken() {
+		return pendingToken;
+	}
+
+	public void setPendingToken(final String token) {
+		this.pendingToken = token;
 	}
 
 	public String getFacebookUser() {
@@ -136,14 +166,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setLastLogin(final Date lastLogin) {
 		this.lastLogin = lastLogin;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(final String token) {
-		this.token = token;
 	}
 
 	public String getName() {

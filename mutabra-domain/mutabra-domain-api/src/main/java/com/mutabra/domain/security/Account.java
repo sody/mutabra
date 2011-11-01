@@ -16,9 +16,13 @@ public interface Account extends BaseEntity {
 
 	String EMAIL_PROPERTY = "email";
 
+	String PENDING_EMAIL_PROPERTY = "pendingEmail";
+
 	String PASSWORD_PROPERTY = "password";
 
 	String TOKEN_PROPERTY = "token";
+
+	String PENDING_TOKEN_PROPERTY = "pendingToken";
 
 	String FACEBOOK_USER_PROPERTY = "facebookUser";
 
@@ -30,6 +34,10 @@ public interface Account extends BaseEntity {
 
 	public void setEmail(final String email);
 
+	public String getPendingEmail();
+
+	public void setPendingEmail(String email);
+
 	public String getPassword();
 
 	public void setPassword(final String password);
@@ -37,6 +45,14 @@ public interface Account extends BaseEntity {
 	public String getPendingPassword();
 
 	public void setPendingPassword(final String password);
+
+	public String getToken();
+
+	public void setToken(final String token);
+
+	public String getPendingToken();
+
+	public void setPendingToken(String token);
 
 	public String getFacebookUser();
 
@@ -57,10 +73,6 @@ public interface Account extends BaseEntity {
 	public Date getLastLogin();
 
 	public void setLastLogin(final Date lastLogin);
-
-	public String getToken();
-
-	public void setToken(final String token);
 
 	public String getName();
 

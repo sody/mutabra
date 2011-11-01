@@ -16,6 +16,8 @@ public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> {
 	private String facebook;
 	private String twitter;
 	private String google;
+	private String pendingEmail;
+	private String pendingToken;
 
 	public AccountQuery(final EntityRepository repository) {
 		super(repository, Account.class);
@@ -26,6 +28,11 @@ public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> {
 		return query();
 	}
 
+	public AccountQuery withPendingEmail(final String email) {
+		this.pendingEmail = email;
+		return query();
+	}
+
 	public AccountQuery withPassword(final String password) {
 		this.password = password;
 		return query();
@@ -33,6 +40,11 @@ public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> {
 
 	public AccountQuery withToken(final String token) {
 		this.token = token;
+		return query();
+	}
+
+	public AccountQuery withPendingToken(final String token) {
+		this.pendingToken = token;
 		return query();
 	}
 
@@ -55,12 +67,20 @@ public class AccountQuery extends BaseEntityQuery<Account, AccountQuery> {
 		return email;
 	}
 
+	public String getPendingEmail() {
+		return pendingEmail;
+	}
+
 	public String getPassword() {
 		return password;
 	}
 
 	public String getToken() {
 		return token;
+	}
+
+	public String getPendingToken() {
+		return pendingToken;
 	}
 
 	public String getFacebook() {

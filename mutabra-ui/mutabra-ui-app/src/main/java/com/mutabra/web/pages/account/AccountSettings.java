@@ -44,23 +44,23 @@ public class AccountSettings extends AbstractPage {
 		return accountContext.getAccount();
 	}
 
-	@SetupRender
-	void setup() {
-		email = getValue().getEmail();
-	}
-
 	@OnEvent(value = EventConstants.SUCCESS, component = "accountForm")
 	void save() {
-		accountService.save(getValue());
+		accountService.update(getValue());
+		//todo: add success notification
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "changeEmailForm")
 	void changeEmail() {
+		//todo: validate if if email exist, if new email differs from current and if new email are not exist
+		accountManager.changeEmail(getValue().getEmail(), email);
+		//todo: add success notification
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "changePasswordForm")
 	void changePassword() {
-		//todo: validate if passwords match each other
+		//todo: validate if email exist, if passwords match each other...
 		accountManager.changePassword(getValue().getEmail(), password);
+		//todo: add success notification
 	}
 }

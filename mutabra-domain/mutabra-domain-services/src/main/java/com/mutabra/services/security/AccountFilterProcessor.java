@@ -20,13 +20,18 @@ public class AccountFilterProcessor extends BaseEntityFilterProcessor<Account, A
 		if (!StringUtils.isEmpty(filter.getEmail())) {
 			criteria.add(criteria.getProperty(Account.EMAIL_PROPERTY).eq(filter.getEmail()));
 		}
-
 		if (!StringUtils.isEmpty(filter.getPassword())) {
 			criteria.add(criteria.getProperty(Account.PASSWORD_PROPERTY).eq(filter.getPassword()));
 		}
-
 		if (!StringUtils.isEmpty(filter.getToken())) {
 			criteria.add(criteria.getProperty(Account.TOKEN_PROPERTY).eq(filter.getToken()));
+		}
+
+		if (!StringUtils.isEmpty(filter.getPendingEmail())) {
+			criteria.add(criteria.getProperty(Account.PENDING_EMAIL_PROPERTY).eq(filter.getPendingEmail()));
+		}
+		if (!StringUtils.isEmpty(filter.getPendingToken())) {
+			criteria.add(criteria.getProperty(Account.PENDING_TOKEN_PROPERTY).eq(filter.getPendingToken()));
 		}
 
 		if (!StringUtils.isEmpty(filter.getFacebook())) {
