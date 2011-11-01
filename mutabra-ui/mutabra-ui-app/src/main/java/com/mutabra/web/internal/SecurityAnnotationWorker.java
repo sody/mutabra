@@ -10,6 +10,7 @@ import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.apache.tapestry5.services.transform.TransformationSupport;
 import org.greatage.security.AccessDeniedException;
 import org.greatage.security.Authentication;
+import org.greatage.security.AuthenticationException;
 import org.greatage.security.AuthorityConstants;
 import org.greatage.security.SecurityContext;
 import org.greatage.security.annotations.Allow;
@@ -43,12 +44,18 @@ public class SecurityAnnotationWorker implements ComponentClassTransformWorker2 
 
 					if (allow != null) {
 						if (!authorities.containsAll(Arrays.asList(allow.value()))) {
+							if (authentication == null) {
+								throw new AuthenticationException("Not authenticated");
+							}
 							throw new AccessDeniedException(String.format("Access denied for authorities: '%s'", authorities));
 						}
 					}
 					if (deny != null) {
 						for (String authority : deny.value()) {
 							if (authorities.contains(authority)) {
+								if (authentication == null) {
+									throw new AuthenticationException("Not authenticated");
+								}
 								throw new AccessDeniedException(String.format("Access denied for authorities: '%s'", authorities));
 							}
 						}

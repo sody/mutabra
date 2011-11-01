@@ -3,16 +3,16 @@
 		xmlns:p="tapestry:parameter">
 
 	<t:if test="productionMode">
-		<t:layout.defaultlayout title="message:page.error.title">
-			<p>${message:page.error.message}</p>
+		<t:layout.defaultlayout>
+			<p>${message}</p>
 		</t:layout.defaultlayout>
 		<p:else>
 			<html>
 			<head>
-				<title>${message:page.error.title}</title>
+				<title>${title}</title>
 			</head>
 			<body>
-			<h1 class="t-exception-report">${message:page.error.title}</h1>
+			<h1 class="t-exception-report">${message}</h1>
 
 			<t:if test="rootException">
 				<t:exceptiondisplay exception="rootException"/>

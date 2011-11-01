@@ -2,6 +2,7 @@ package com.mutabra.web.internal;
 
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.ResponseRenderer;
+import org.greatage.security.AuthenticationException;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class SecurityExceptionHandler implements RequestExceptionHandler {
 	@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 	public void handleRequestException(final Throwable exception) throws IOException {
 		final Throwable rootException = getRootCause(exception);
-		if (rootException instanceof SecurityException) {
+		if (rootException instanceof AuthenticationException) {
 			//todo: log it
 			renderer.renderPageMarkupResponse(loginPage);
 		} else {
