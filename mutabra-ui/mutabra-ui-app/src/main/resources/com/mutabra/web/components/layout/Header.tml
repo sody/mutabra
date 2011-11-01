@@ -9,17 +9,16 @@
 			<t:if test="hero">
 				<t:layout.userpic user="hero.face.code"/>
 				<p:else>
-					<t:layout.userpic/>
+					<t:pagelink page="account/settings">
+						<t:layout.userpic/>
+					</t:pagelink>
 				</p:else>
 			</t:if>
 		</div>
 	</div>
 	<div class="column">
 		<div class="t-beaneditor-row">
-			<t:button secondary="ui-icon-triangle-1-s"><a href="#">${account.displayName}</a></t:button>
-			<t:button secondary="ui-icon-power" text="false">
-				<t:eventlink event="signOut">${message:button.sign-out.title}</t:eventlink>
-			</t:button>
+			<t:menu.user/>
 		</div>
 		<div class="t-beaneditor-row">
 			<t:menu.locale/>

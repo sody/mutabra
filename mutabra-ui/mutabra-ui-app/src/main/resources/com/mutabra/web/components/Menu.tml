@@ -1,9 +1,14 @@
-<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<ul class="${menuClass}" t:id="list"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 	<t:block id="defaultItemBody">
-		<t:button><t:actionlink context="item" class="${menuItemClass}">${menuItemTitle}</t:actionlink></t:button>
+		<t:button>
+			<t:actionlink context="item" class="${menuItemClass}">${menuItemTitle}</t:actionlink>
+		</t:button>
 	</t:block>
 
 	<t:loop source="items" value="item">
-		<li><t:delegate to="menuItemBody"/></li>
+		<li>
+			<t:delegate to="menuItemBody"/>
+		</li>
 	</t:loop>
-</t:container>
+</ul>

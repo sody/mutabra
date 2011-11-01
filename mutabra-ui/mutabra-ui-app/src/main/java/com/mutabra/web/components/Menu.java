@@ -4,10 +4,14 @@ import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
-import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.PropertyOverrides;
-import org.apache.tapestry5.annotations.*;
-import org.apache.tapestry5.dom.Element;
+import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.MixinClasses;
+import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
+import org.apache.tapestry5.corelib.components.Any;
+import org.apache.tapestry5.corelib.mixins.RenderInformals;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
@@ -16,6 +20,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 @SupportsInformalParameters
 public class Menu extends AbstractComponent {
+
 	@Property
 	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
 	private String[] items;
@@ -34,8 +39,25 @@ public class Menu extends AbstractComponent {
 	@Parameter(value = "this", allowNull = false)
 	private PropertyOverrides overrides;
 
+	@Component(inheritInformalParameters = true)
+	@MixinClasses(RenderInformals.class)
+	private Any list;
+
 	@Inject
 	private Block defaultItemBody;
+
+	public String getMenuClass() {
+		final StringBuilder builder = new StringBuilder();
+		if (className != null) {
+			builder.append(className).append(' ');
+		}
+		builder.append(CSSConstants.MENU).append(' ')
+				.append(CSSConstants.WIDGET).append(' ')
+				.append(CSSConstants.WIDGET_CONTENT).append(' ')
+				.append(CSSConstants.CORNER_ALL).append(' ')
+				.append(CSSConstants.HELPER_CLEAR_FIX);
+		return builder.toString();
+	}
 
 	public String getMenuItemClass() {
 		return item + (item.equals(selected) ? " " + CSSConstants.STATE_HIGHLIGHT : "");
@@ -54,26 +76,5 @@ public class Menu extends AbstractComponent {
 			return getResources().getBody();
 		}
 		return defaultItemBody;
-	}
-
-	@BeginRender
-	void beginRender(final MarkupWriter writer) {
-		final Element menu = writer.element("ul");
-		if (className != null) {
-			menu.addClassName(className);
-		}
-		menu.addClassName(
-				CSSConstants.MENU,
-				CSSConstants.WIDGET,
-				CSSConstants.WIDGET_CONTENT,
-				CSSConstants.CORNER_ALL,
-				CSSConstants.HELPER_CLEAR_FIX);
-
-		getResources().renderInformalParameters(writer);
-	}
-
-	@AfterRender
-	void afterRender(final MarkupWriter writer) {
-		writer.end();
 	}
 }

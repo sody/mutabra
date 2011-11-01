@@ -95,6 +95,4 @@ public interface Account extends BaseEntity {
 	public void setRoles(final Set<Role> roles);
 
 	public Set<Hero> getHeroes();
-
-	public String getDisplayName();
 }

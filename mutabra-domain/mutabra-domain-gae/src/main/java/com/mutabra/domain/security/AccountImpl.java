@@ -72,9 +72,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private TimeZone timeZone;
 
 	@Persistent
-	private Date deletedAt;
-
-	@Persistent
 	private Set<Key> roles = new HashSet<Key>();
 
 	@NotPersistent
@@ -204,14 +201,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 		this.timeZone = timeZone;
 	}
 
-	public Date getDeletedAt() {
-		return deletedAt;
-	}
-
-	public void setDeletedAt(final Date deletedAt) {
-		this.deletedAt = deletedAt;
-	}
-
 	public Set<Role> getRoles() {
 		return Keys.getInstances(roles, Role.class);
 	}
@@ -222,9 +211,5 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public Set<Hero> getHeroes() {
 		return heroes;
-	}
-
-	public String getDisplayName() {
-		return getEmail();
 	}
 }

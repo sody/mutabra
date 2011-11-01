@@ -70,6 +70,13 @@ input {
 	float: right;
 }
 
+#user-menu {
+	display: none;
+	min-width: 200px;
+	position: absolute;
+	z-index: 1;
+}
+
 #logo {
 	background: url("../img/logo80x60.png") no-repeat;
 	margin-left: 30px;

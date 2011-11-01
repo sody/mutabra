@@ -1,6 +1,5 @@
 package com.mutabra.web.internal;
 
-import com.google.appengine.repackaged.com.google.common.base.StringUtil;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
@@ -14,7 +13,6 @@ import org.apache.tapestry5.internal.structure.Page;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.greatage.security.SecretEncoder;
-import org.greatage.util.StringUtils;
 
 import java.util.Date;
 
