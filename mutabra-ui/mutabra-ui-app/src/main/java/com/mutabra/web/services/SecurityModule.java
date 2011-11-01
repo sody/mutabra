@@ -16,7 +16,6 @@ import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.internal.SecurityAnnotationWorker;
 import com.mutabra.web.internal.SecurityExceptionHandler;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
-import com.mutabra.web.pages.Security;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -25,10 +24,10 @@ import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
+import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.ResponseRenderer;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.greatage.security.Authentication;
@@ -137,9 +136,8 @@ public class SecurityModule {
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)
 	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
-																   final ResponseRenderer renderer,
-																   final ComponentClassResolver resolver) {
-		return new SecurityExceptionHandler(handler, renderer, resolver, Security.class);
+																   final ResponseRenderer renderer) {
+		return new SecurityExceptionHandler(handler, renderer, "security");
 	}
 
 	@Contribute(RequestHandler.class)

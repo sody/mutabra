@@ -49,6 +49,8 @@ public class MutabraModule {
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
 		configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
+		configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
+		configuration.add(SymbolConstants.START_PAGE_NAME, "/");
 	}
 
 	@Contribute(ServiceOverride.class)

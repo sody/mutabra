@@ -22,11 +22,6 @@
 
 
 	<context-param>
-		<param-name>tapestry.start-page-name</param-name>
-		<param-value>/</param-value>
-	</context-param>
-
-	<context-param>
 		<param-name>mail.admin-address</param-name>
 		<param-value>${mail.admin.address}</param-value>
 	</context-param>
@@ -84,9 +79,4 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error</location>
-	</error-page>
 </web-app>

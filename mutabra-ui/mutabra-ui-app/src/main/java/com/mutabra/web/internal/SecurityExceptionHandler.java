@@ -1,9 +1,7 @@
 package com.mutabra.web.internal;
 
-import org.apache.tapestry5.services.ComponentClassResolver;
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.ResponseRenderer;
-import org.greatage.util.ReflectionUtils;
 
 import java.io.IOException;
 
@@ -14,28 +12,33 @@ import java.io.IOException;
 public class SecurityExceptionHandler implements RequestExceptionHandler {
 	private final RequestExceptionHandler delegate;
 	private final ResponseRenderer renderer;
-	private final ComponentClassResolver resolver;
-	private final Class loginPage;
+	private final String loginPage;
 
 	public SecurityExceptionHandler(final RequestExceptionHandler delegate,
 									final ResponseRenderer renderer,
-									final ComponentClassResolver resolver,
-									final Class loginPage) {
+									final String loginPage) {
 
 		this.delegate = delegate;
 		this.renderer = renderer;
-		this.resolver = resolver;
 		this.loginPage = loginPage;
 	}
 
 	@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 	public void handleRequestException(final Throwable exception) throws IOException {
-		final SecurityException securityException = ReflectionUtils.findException(exception, SecurityException.class);
-		if (securityException != null) {
-			final String pageName = resolver.resolvePageClassNameToPageName(loginPage.getName());
-			renderer.renderPageMarkupResponse(pageName);
+		final Throwable rootException = getRootCause(exception);
+		if (rootException instanceof SecurityException) {
+			//todo: log it
+			renderer.renderPageMarkupResponse(loginPage);
 		} else {
 			delegate.handleRequestException(exception);
 		}
+	}
+
+	private static Throwable getRootCause(Throwable throwable) {
+		Throwable cause;
+		while ((cause = throwable.getCause()) != null) {
+			throwable = cause;
+		}
+		return throwable;
 	}
 }

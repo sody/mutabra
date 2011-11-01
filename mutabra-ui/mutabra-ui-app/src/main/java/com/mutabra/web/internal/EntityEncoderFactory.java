@@ -57,7 +57,11 @@ public class EntityEncoderFactory<PK extends Serializable> implements ValueEncod
 					return repository.create(type);
 				}
 				final PK pk = typeCoercer.coerce(clientValue, pkClass);
-				return pk != null ? repository.get(type, pk) : null;
+				final Entity<PK> entity = pk != null ? repository.get(type, pk) : null;
+				if (entity == null) {
+					throw new NotFoundException();
+				}
+				return entity;
 			}
 
 			@Override

@@ -20,11 +20,6 @@
 		<param-value>${project.production.mode}</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>tapestry.start-page-name</param-name>
-		<param-value>/</param-value>
-	</context-param>
-
 
 	<context-param>
 		<param-name>project.data-source</param-name>
@@ -99,11 +94,6 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error</location>
-	</error-page>
 
 	<resource-ref>
 		<res-ref-name>${jdbc.source}</res-ref-name>
