@@ -22,6 +22,7 @@ public abstract class Authorities implements org.greatage.security.AuthorityCons
 	private static final String ANONYMOUS_USER = "anonymous";
 
 	public static final String ROLE_ADMIN = ROLE_PREFIX + "ADMIN";
+	public static final String ROLE_USER = ROLE_PREFIX + "USER";
 
 	public static User createUser(final Account account) {
 		return new User(account(account), authorities(account));

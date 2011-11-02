@@ -1,8 +1,10 @@
 package com.mutabra.web.internal;
 
 import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
+import com.mutabra.services.security.RoleQuery;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.AccountManager;
 import com.mutabra.web.services.MailService;
@@ -15,6 +17,8 @@ import org.apache.tapestry5.services.ComponentClassResolver;
 import org.greatage.security.SecretEncoder;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Ivan Khalopik
@@ -22,6 +26,7 @@ import java.util.Date;
  */
 public class AccountManagerImpl implements AccountManager {
 	private final BaseEntityService<Account, AccountQuery> accountService;
+	private final BaseEntityService<Role, RoleQuery> roleService;
 	private final MailService mailService;
 	private final SecretEncoder passwordEncoder;
 	private final RequestPageCache requestPageCache;
@@ -29,12 +34,14 @@ public class AccountManagerImpl implements AccountManager {
 
 	public AccountManagerImpl(
 			final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
+			final @InjectService("roleService") BaseEntityService<Role, RoleQuery> roleService,
 			final SecretEncoder passwordEncoder,
 			final MailService mailService,
 			final RequestPageCache requestPageCache,
 			final ComponentClassResolver componentClassResolver) {
 
 		this.accountService = accountService;
+		this.roleService = roleService;
 		this.mailService = mailService;
 		this.passwordEncoder = passwordEncoder;
 		this.requestPageCache = requestPageCache;
@@ -55,6 +62,8 @@ public class AccountManagerImpl implements AccountManager {
 		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
+		final Set<Role> roles = new HashSet<Role>(roleService.query().withCode("user").list());
+		account.setRoles(roles);
 
 		account.setPendingEmail(null);
 		account.setPendingToken(null);

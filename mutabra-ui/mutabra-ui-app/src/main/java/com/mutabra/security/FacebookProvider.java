@@ -1,8 +1,10 @@
 package com.mutabra.security;
 
 import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
+import com.mutabra.services.security.RoleQuery;
 import com.mutabra.web.internal.Authorities;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.AbstractAuthenticationProvider;
@@ -13,7 +15,9 @@ import org.greatage.util.LocaleUtils;
 import org.greatage.util.StringUtils;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Ivan Khalopik
@@ -21,12 +25,15 @@ import java.util.Map;
  */
 public class FacebookProvider extends AbstractAuthenticationProvider<User, FacebookToken> {
 	private final BaseEntityService<Account, AccountQuery> accountService;
+	private final BaseEntityService<Role, RoleQuery> roleService;
 	private final SecretEncoder secretEncoder;
 
 	public FacebookProvider(final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
+							final @InjectService("roleService") BaseEntityService<Role, RoleQuery> roleService,
 							final SecretEncoder secretEncoder) {
 		super(User.class, FacebookToken.class);
 		this.accountService = accountService;
+		this.roleService = roleService;
 		this.secretEncoder = secretEncoder;
 	}
 
@@ -65,6 +72,10 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		account.setLocale(LocaleUtils.parseLocale(String.valueOf(profile.get("locale"))));
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
+
+		final Set<Role> roles = new HashSet<Role>(roleService.query().withCode("user").list());
+		account.setRoles(roles);
+
 		return authenticate(account);
 	}
 
