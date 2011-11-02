@@ -58,11 +58,6 @@ public abstract class Authorities implements org.greatage.security.AuthorityCons
 			}
 		}
 		authorities.add(STATUS_AUTHENTICATED);
-
-		//todo: !!!remove this asap!!!
-		authorities.add(ROLE_ADMIN);
-		//todo: !!!remove this asap!!!
-
 		return authorities;
 	}
 }

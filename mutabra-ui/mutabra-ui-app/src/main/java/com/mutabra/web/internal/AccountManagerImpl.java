@@ -62,7 +62,7 @@ public class AccountManagerImpl implements AccountManager {
 		final Link link = createTokenLink(email, generatedToken);
 		final String message = String.format(SIGN_UP_NOTIFICATION, email, generatedToken, link.toAbsoluteURI(), DEFAULT_SIGNATURE);
 		mailService.send(email, "mutabra: new account", message);
-		accountService.save(account);
+		accountService.saveOrUpdate(account);
 	}
 
 	public void restorePassword(final String email) throws ValidationException {
@@ -86,7 +86,7 @@ public class AccountManagerImpl implements AccountManager {
 		final Link link = createTokenLink(email, generatedToken);
 		final String message = String.format(RESTORE_PASSWORD_NOTIFICATION, email, generatedToken, link.toAbsoluteURI(), DEFAULT_SIGNATURE);
 		mailService.send(email, "mutabra: password retrieval", message);
-		accountService.update(account);
+		accountService.saveOrUpdate(account);
 	}
 
 	public void changePassword(final String email, final String password) {
@@ -102,7 +102,7 @@ public class AccountManagerImpl implements AccountManager {
 		final Link link = createTokenLink(email, generatedToken);
 		final String message = String.format(CHANGE_PASSWORD_NOTIFICATION, email, generatedToken, link.toAbsoluteURI(), DEFAULT_SIGNATURE);
 		mailService.send(email, "mutabra: password change", message);
-		accountService.update(account);
+		accountService.saveOrUpdate(account);
 	}
 
 	public void changeEmail(final String oldEmail, final String newEmail) {
@@ -126,8 +126,8 @@ public class AccountManagerImpl implements AccountManager {
 
 		mailService.send(oldEmail, "mutabra: email change", message);
 		mailService.send(newEmail, "mutabra: email change", message2);
-		accountService.update(account);
-		accountService.save(tempAccount);
+		accountService.saveOrUpdate(account);
+		accountService.saveOrUpdate(tempAccount);
 	}
 
 	public void confirmEmail(final String email, final String token) throws ValidationException {
@@ -143,7 +143,7 @@ public class AccountManagerImpl implements AccountManager {
 			account.setPendingEmail(null);
 		}
 		account.setPendingToken(null);
-		accountService.update(account);
+		accountService.saveOrUpdate(account);
 	}
 
 	private Link createConfirmLink(final String oldEmail, final String generatedPendingToken) {

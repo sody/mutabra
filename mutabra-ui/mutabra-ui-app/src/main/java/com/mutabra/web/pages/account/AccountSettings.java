@@ -46,7 +46,7 @@ public class AccountSettings extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "accountForm")
 	void save() {
-		accountService.update(getValue());
+		accountService.saveOrUpdate(getValue());
 		//todo: add success notification
 	}
 

@@ -62,5 +62,10 @@ public class Release_1_0 extends ChangeLog {
 		begin("2011-10-17/admin_account", "sody").comment("admin account added")
 				.insert(Tables.ACCOUNT).set("email", "admin@mutabra.com").set("password", "21232f297a57a5a743894a0e4a801fc3").end();
 
+		begin("2011-11-02/admin_account_role", "sody").comment("admin account role added")
+				.update(Tables.ACCOUNT)
+				.where("email").equal("admin@mutabra.com").end()
+				.setFrom("roles", Tables.ROLE).where("code").equal("admin").end().end()
+				.end();
 	}
 }

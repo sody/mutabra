@@ -23,11 +23,11 @@ public class Keys {
 		return manager.getObjectById(entityClass, key);
 	}
 
-	public static <T> Set<T> getInstances(final Set<Key> keys, final Class<T> entityClass) {
+	public static <T, V extends T> Set<T> getInstances(final Set<Key> keys, final Class<T> entityClass, final Class<V> valueClass) {
 		final PersistenceManager manager = instance.getPersistenceManager();
 		final Set<T> result = CollectionUtils.newSet();
 		for (Key key : keys) {
-			result.add(manager.getObjectById(entityClass, key));
+			result.add(manager.getObjectById(valueClass, key));
 		}
 		return result;
 	}

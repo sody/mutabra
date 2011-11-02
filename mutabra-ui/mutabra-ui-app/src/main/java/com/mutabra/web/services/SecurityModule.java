@@ -97,7 +97,7 @@ public class SecurityModule {
 						account.setEmail(account.getPendingEmail());
 						account.setPendingEmail(null);
 					}
-					accountService.update(account);
+					accountService.saveOrUpdate(account);
 
 					return Authorities.createUser(account);
 				}
@@ -116,7 +116,7 @@ public class SecurityModule {
 
 				if (account != null) {
 					account.setLastLogin(new Date());
-					accountService.update(account);
+					accountService.saveOrUpdate(account);
 
 					return Authorities.createUser(account);
 				}

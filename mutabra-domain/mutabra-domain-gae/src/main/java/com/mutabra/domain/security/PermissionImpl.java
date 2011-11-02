@@ -26,7 +26,7 @@ public class PermissionImpl extends CodedEntityImpl implements Permission {
 	}
 
 	public Set<Role> getRoles() {
-		return Keys.getInstances(roles, Role.class);
+		return Keys.getInstances(roles, Role.class, RoleImpl.class);
 	}
 
 	public void setRoles(final Set<Role> roles) {

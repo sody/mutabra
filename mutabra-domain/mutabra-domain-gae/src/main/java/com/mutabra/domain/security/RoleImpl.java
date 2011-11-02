@@ -28,11 +28,11 @@ public class RoleImpl extends CodedEntityImpl implements Role {
 	private Set<Key> permissions = new HashSet<Key>();
 
 	public Set<Account> getAccounts() {
-		return Keys.getInstances(accounts, Account.class);
+		return Keys.getInstances(accounts, Account.class, AccountImpl.class);
 	}
 
 	public Set<Permission> getPermissions() {
-		return Keys.getInstances(permissions, Permission.class);
+		return Keys.getInstances(permissions, Permission.class, PermissionImpl.class);
 	}
 
 	public void setPermissions(final Set<Permission> permissions) {
