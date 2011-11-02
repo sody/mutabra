@@ -3,6 +3,10 @@ html {
 	background: #e6d29d;
 }
 
+body {
+	min-width: 960px;
+}
+
 h1 {
 	font-size: 138.5%;
 }
