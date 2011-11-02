@@ -74,12 +74,12 @@
 
 	<context-param>
 		<param-name>vkontakte.consumer-key</param-name>
-		<param-value>_KEY_</param-value>
+		<param-value>${vkontakte.consumer.key}</param-value>
 	</context-param>
 
 	<context-param>
 		<param-name>vkontakte.consumer-secret</param-name>
-		<param-value>_SECRET_</param-value>
+		<param-value>${vkontakte.consumer.secret}</param-value>
 	</context-param>
 
 	<filter>
