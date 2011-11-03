@@ -2,7 +2,14 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="source" row="row" include="code" add="description,actions">
+<t:grid source="source" row="row"
+		include="code"
+		add="picture,description,actions"
+		reorder="picture,code,description,actions">
+
+	<p:pictureCell>
+		<t:game.racedisplay value="row"/>
+	</p:pictureCell>
 	<p:descriptionCell>${row:description}</p:descriptionCell>
 	<p:actionsCell>
 		<t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit.title}</t:eventlink>
