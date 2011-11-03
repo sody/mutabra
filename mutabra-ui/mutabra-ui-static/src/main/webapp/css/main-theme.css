@@ -116,7 +116,6 @@ input {
 	border-radius: 20px;
 	margin: 10px;
 	padding: 20px;
-	min-height: 500px;
 }
 
 #center-panel {
@@ -2232,4 +2231,85 @@ button.ui-button::-moz-focus-inner {
 .ui-progressbar .ui-progressbar-value {
 	margin: -1px;
 	height: 100%;
+}
+
+.jcarousel-container-horizontal {
+	width: 64px;
+	padding: 20px 40px;
+}
+
+.jcarousel-clip {
+	overflow: hidden;
+}
+
+.jcarousel-clip-horizontal {
+	width: 64px;
+	height: 64px;
+}
+
+.jcarousel-item {
+	width: 64px;
+	height: 64px;
+}
+
+.jcarousel-item-horizontal {
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-next-horizontal {
+	position: absolute;
+	top: 36px;
+	right: 5px;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	background: transparent url(../img/next-horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-next-horizontal:hover,
+.jcarousel-next-horizontal:focus {
+	background-position: -32px 0;
+}
+
+.jcarousel-next-horizontal:active {
+	background-position: -64px 0;
+}
+
+.jcarousel-next-disabled-horizontal,
+.jcarousel-next-disabled-horizontal:hover,
+.jcarousel-next-disabled-horizontal:focus,
+.jcarousel-next-disabled-horizontal:active {
+	cursor: default;
+	background-position: -96px 0;
+}
+
+.jcarousel-prev-horizontal {
+	position: absolute;
+	top: 36px;
+	left: 5px;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	background: transparent url(../img/prev-horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-prev-horizontal:hover,
+.jcarousel-prev-horizontal:focus {
+	background-position: -32px 0;
+}
+
+.jcarousel-prev-horizontal:active {
+	background-position: -64px 0;
+}
+
+.jcarousel-prev-disabled-horizontal,
+.jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-prev-disabled-horizontal:active {
+	cursor: default;
+	background-position: -96px 0;
 }

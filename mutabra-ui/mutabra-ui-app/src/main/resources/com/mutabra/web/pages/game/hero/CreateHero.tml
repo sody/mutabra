@@ -1,0 +1,9 @@
+<html t:type="layout/default" buttons="create,cancel"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+	<div class="t-beaneditor-row">
+		<t:game.raceselect/>
+	</div>
+
+</html>

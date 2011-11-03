@@ -3,6 +3,7 @@ package com.mutabra.web.services;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
+import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.domain.security.Permission;
@@ -14,6 +15,7 @@ import com.mutabra.services.TranslationServiceImpl;
 import com.mutabra.services.common.FaceQuery;
 import com.mutabra.services.common.LevelQuery;
 import com.mutabra.services.common.RaceQuery;
+import com.mutabra.services.player.HeroQuery;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.services.security.ChangeSetQuery;
 import com.mutabra.services.security.PermissionQuery;
@@ -77,6 +79,10 @@ public class ServicesModule {
 
 	public BaseEntityService<Race, RaceQuery> buildRaceService() {
 		return new BaseEntityServiceImpl<Race, RaceQuery>(repository, Race.class, RaceQuery.class);
+	}
+
+	public BaseEntityService<Hero, HeroQuery> buildHeroService() {
+		return new BaseEntityServiceImpl<Hero, HeroQuery>(repository, Hero.class, HeroQuery.class);
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)

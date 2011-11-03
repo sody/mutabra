@@ -48,5 +48,9 @@ T5.extendInitializers({
 			j$('#' + spec.dialogId).dialog(spec.action);
 			return false;
 		});
+	},
+
+	carousel: function(id) {
+		j$('#' + id).jcarousel();
 	}
 });

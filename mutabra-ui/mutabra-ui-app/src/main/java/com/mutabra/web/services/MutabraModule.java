@@ -91,6 +91,7 @@ public class MutabraModule {
 
 		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-1.6.2.js"));
 		configuration.add("jquery-ui", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-ui-1.8.16.js"));
+		configuration.add("jquery-jcarousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery.jcarousel.js"));
 		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));
 	}
 
