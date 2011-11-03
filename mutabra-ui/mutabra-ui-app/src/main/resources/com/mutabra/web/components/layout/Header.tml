@@ -6,14 +6,9 @@
 	</div>
 	<div class="column s-3">
 		<div id="user-pic">
-			<t:if test="hero">
-				<t:layout.userpic user="hero.face.code"/>
-				<p:else>
-					<t:pagelink page="account/settings">
-						<t:layout.userpic/>
-					</t:pagelink>
-				</p:else>
-			</t:if>
+			<t:pagelink page="account/settings">
+				<t:image.heroimage hero="hero"/>
+			</t:pagelink>
 		</div>
 	</div>
 	<div class="column">

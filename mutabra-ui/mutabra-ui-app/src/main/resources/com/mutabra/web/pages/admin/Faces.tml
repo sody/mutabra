@@ -7,7 +7,7 @@
 		add="picture,description,actions"
 		reorder="picture,code,description,actions">
 	<p:pictureCell>
-		<t:game.facedisplay value="row"/>
+		<t:image.faceimage face="row"/>
 	</p:pictureCell>
 	<p:descriptionCell>${row:description}</p:descriptionCell>
 	<p:actionsCell>

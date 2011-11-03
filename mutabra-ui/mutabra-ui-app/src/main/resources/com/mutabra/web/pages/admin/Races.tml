@@ -8,7 +8,7 @@
 		reorder="picture,code,description,actions">
 
 	<p:pictureCell>
-		<t:game.racedisplay value="row"/>
+		<t:image.raceimage race="row"/>
 	</p:pictureCell>
 	<p:descriptionCell>${row:description}</p:descriptionCell>
 	<p:actionsCell>
