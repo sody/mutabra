@@ -1,0 +1,118 @@
+<mockup version="1.0" skin="sketch" measuredW="982" measuredH="1356" mockupW="966" mockupH="1350">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="16" y="6" w="966" h="770" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Mutabra%0Ahttp%3A//mutabra.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::RoundButton" x="251" y="190" w="489" h="538" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Button" x="311" y="273" w="132" h="32" measuredW="105" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Change%20Email</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::IconLabel" x="763" y="94" w="-1" h="-1" measuredW="112" measuredH="49" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>TableIcon%7Csmall</icon>
+        <text>Account%20Settings</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::IconLabel" x="896" y="94" w="-1" h="-1" measuredW="45" measuredH="49" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>home1%26bm%3Bhome1.bmml%26bm%3Bhome1.bmml%26bm%3Bhome1.bmml</href>
+        <icon>PowerIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22880%2C88%2C925%2C137%22%20href%3D%22home1.bmml%22%20alt%3D%22home1%22%20id%3D%2239%22/%3E</map>
+        <text>Logout</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::Label" x="311" y="233" w="-1" h="-1" measuredW="43" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>email*</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::TextInput" x="431" y="230" w="154" h="-1" measuredW="84" measuredH="29" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20email</text>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::Label" x="311" y="347" w="99" h="25" measuredW="96" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>new%20password*</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::TextInput" x="431" y="344" w="154" h="-1" measuredW="108" measuredH="29" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enter%20password</text>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::HRule" x="311" y="326" w="374" h="-1" measuredW="100" measuredH="5" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Label" x="311" y="498" w="-1" h="-1" measuredW="39" measuredH="25" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::TextInput" x="431" y="496" w="154" h="-1" measuredW="55" measuredH="29" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Murzik</text>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::Label" x="311" y="540" w="-1" h="-1" measuredW="56" measuredH="25" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Location</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::TextInput" x="431" y="538" w="154" h="-1" measuredW="62" measuredH="29" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ukraine</text>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::Label" x="311" y="582" w="-1" h="-1" measuredW="68" measuredH="25" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Time%20Zone</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Label" x="311" y="624" w="-1" h="-1" measuredW="43" measuredH="25" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Locale</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::ComboBox" x="431" y="623" w="154" h="-1" measuredW="76" measuredH="25" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Russian</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Image" x="44" y="92" w="143" h="79" measuredW="80" measuredH="60" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./logo80x60.png</src>
+        <text>logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::HRule" x="311" y="476" w="374" h="-1" measuredW="100" measuredH="5" zOrder="18" locked="false" isInGroup="-1"/>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Button" x="311" y="675" w="132" h="32" measuredW="107" measuredH="28" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22491%2C515%2C583%2C547%22%20href%3D%22switchhero1.bmml%22%20alt%3D%22switchhero1%22%20id%3D%2233%22/%3E</map>
+        <text>Save%20Options</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Button" x="311" y="428" w="132" h="32" measuredW="98" measuredH="28" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Change%20Pass</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::ComboBox" x="431" y="581" w="154" h="-1" measuredW="83" measuredH="25" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>GMT%20+2</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::StickyNote" x="16" y="801" w="961" h="555" measuredW="109" measuredH="123" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>5.1.%20Change%20email%0A5.1.1.%20%u0415%u0441%u043B%u0438%20%u0432%u0432%u0435%u0434%u0435%u043D%u043D%u043E%u0433%u043E%20%u0435%u043C%u0430%u0439%u043B%u0430%20%u043D%u0435%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0443%u0435%u0442%20%u0432%20%u0441%u0438%u0441%u0442%u0435%u043C%u0435.%20%u0442%u043E%3A%0A-%20%u0441%u043E%u0437%u0434%u0430%u043D%u0438%u0435%20%u0434%u0432%u0443%u0445%20%u0442%u043E%u043A%u0435%u043D%u043E%u0432%20%u0434%u043B%u044F%20%u043F%u043E%u0434%u0442%u0432%u0435%u0440%u0436%u0434%u0435%u043D%u0438%u044F%20%u0435%u043C%u0430%u0439%u043B%u043E%u0432%0A-%20%u043E%u0442%u0441%u044B%u043B%u043A%u0430%202%u0445%20%u043F%u0438%u0441%u0435%u043C%20%u043D%u0430%20%u043E%u0431%u0430%20%u0435%u043C%u0430%u0439%u043B%u0430%20%28%u0441%u0442%u0430%u0440%u043E%u0433%u043E%20%u0438%20%u0432%u0432%u0435%u0434%u0435%u043D%u043D%u043E%u0433%u043E%29%0A-%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0434%u043E%u043B%u0436%u0435%u043D%20%u043F%u043E%u0434%u0442%u0432%u0435%u0440%u0434%u0438%u0442%u044C%20%u043E%u0431%u0430%20%u0435%u043C%u0430%u0439%u043B%u0430%2C%20%u043D%u0435%u0432%u0430%u0436%u043D%u043E%20%u0432%20%u043A%u0430%u043A%u043E%u043C%20%u043F%u043E%u0440%u044F%u0434%u043A%u0435.%0A-%20%u043F%u043E%u0441%u043B%u0435%20%u043F%u043E%u0434%u0442%u0432%u0435%u0440%u0436%u0434%u0435%u043D%u0438%u044F%20%u043E%u0431%u043E%u0438%u0445%20%u0435%u043C%u0430%u0439%u043B%u043E%u0432%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u043C%u043E%u0436%u0435%u0442%20%u0437%u0430%u0439%u0442%u0438%20%u043D%u043E%u0432%u044B%u043C%20%u0435%u043C%u0430%u0439%u043B%u043E%u043C.%0A5.1.2.%20%u0415%u0441%u043B%u0438%20%u0432%u0432%u0435%u0434%u0435%u043D%u043D%u044B%u0439%20%u0435%u043C%u0430%u0439%u043B%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0443%u0435%u0442%2C%20%u0442%u043E%20%u0443%u0432%u0435%u0434%u043E%u043C%u043B%u0435%u043D%u0438%u0435%20%u043E%20%u0442%u043E%u043C%2C%20%u0447%u0442%u043E%20%u0435%u043C%u0430%u0439%u043B%20%u0437%u0430%u043D%u044F%u0442.%0A5.1.3.%20%u0415%u0441%u043B%u0438%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u043F%u0440%u043E%u0438%u0433%u043D%u043E%u0440%u0438%u0442%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u044F%20%u0432%205.1.1.%2C%20%u0442%u043E%20%u043E%u043D%20%u043C%u043E%u0436%u0435%u0442%20%u0437%u0430%u0445%u043E%u0434%u0438%u0442%u044C%20%u0441%20%u043F%u0440%u0435%u0434%u044B%u0434%u0443%u0449%u0438%u043C%20%u0435%u043C%u0430%u0439%u043B%u043E%u043C%0A%20%0A5.2.%20Change%20password%0A-%20%u0441%u043E%u0437%u0434%u0430%u043D%u0438%u0435%20%u0442%u043E%u043A%u0435%u043D%u0430%20%u0434%u043B%u044F%20%u043F%u043E%u0434%u0442%u0432%u0435%u0440%u0436%u0434%u0435%u043D%u0438%u044F%20%u0441%u043C%u0435%u043D%u044B%20%u043F%u0430%u0440%u043E%u043B%u044F%0A-%20%u043E%u0442%u0441%u044B%u043B%u043A%u0430%20%u0435%u043C%u0430%u0439%u043B%u0430%20%u0441%20%u0442%u043E%u043A%u0435%u043D%u043E%u043C%0A-%20%u043F%u043E%u0441%u043B%u0435%20%u043F%u043E%u0434%u0442%u0432%u0435%u0440%u0436%u0434%u0435%u043D%u0438%u044F%20%u0441%u043C%u0435%u043D%u044B%20%u043F%u0430%u0440%u043E%u043B%u044F%20%u043F%u0430%u0440%u043E%u043B%u044C%20%u043C%u0435%u043D%u044F%u0435%u0442%u0441%u044F%0A5.2.1.%20%u0415%u0441%u043B%u0438%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u043F%u0440%u043E%u0438%u0433%u043D%u043E%u0440%u0438%u0442%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u044F%20%u0432%205.2.%2C%20%u0442%u043E%20%u043E%u043D%20%u043C%u043E%u0436%u0435%u0442%20%u0437%u0430%u0445%u043E%u0434%u0438%u0442%u044C%20%u0441%20%u043F%u0440%u0435%u0434%u044B%u0434%u0443%u0449%u0438%u043C%20%u043F%u0430%u0440%u043E%u043B%u0435%u043C.%0A%20%0A5.3.%20Change%20options%0A5.3.1.%20%u0421%u043C%u0435%u043D%u0430%20%u0438%u043C%u0435%u043D%u0438%20%u0432%u043B%u0438%u044F%u0435%u0442%20%u043D%u0430%20%u043E%u0442%u043E%u0431%u0440%u0430%u0436%u0435%u043D%u0438%u0435%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044F%20%u0434%u043B%u044F%20%u0434%u0440%u0443%u0433%u0438%u0445%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u0435%u0439.%0A5.3.2.%20Locale%20%u0432%u043B%u0438%u044F%u0435%u0442%20%u043D%u0430%20%u044F%u0437%u044B%u043A%20%u043F%u0440%u0438%u043B%u043E%u0436%u0435%u043D%u0438%u044F%2C%20%u043A%u043E%u0442%u043E%u0440%u043E%u0435%20%u0443%u0441%u0442%u0430%u043D%u0430%u0432%u043B%u0438%u0432%u0430%u0435%u0442%u0441%u044F%20%u043F%u043E%u0441%u043B%u0435%20%u0432%u0445%u043E%u0434%u0430%20%u0432%20%u0438%u0433%u0440%u0443.%0A5.3.2.1.%20%u0415%u0441%u043B%u0438%20locale%20%u043D%u0435%20%u0437%u0430%u0434%u0430%u043D%u0430%2C%20%u0442%u043E%20%u043E%u043D%u0430%20%u0431%u0435%u0440%u0435%u0442%u0441%u044F%20%u0438%u0437%20%u0431%u0440%u0430%u0443%u0437%u0435%u0440%u0430.%0A5.3.3.%20Location%20%26%20time%20zone%20%u043D%u0438%20%u043D%u0430%20%u0447%u0442%u043E%20%u043D%u0435%20%u0432%u043B%u0438%u044F%u044E%u0442.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

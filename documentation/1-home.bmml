@@ -1,0 +1,92 @@
+<mockup version="1.0" skin="sketch" measuredW="981" measuredH="1657" mockupW="965" mockupH="1651">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="16" y="6" w="965" h="643" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Mutabra%0Ahttp%3A//mutabra.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="865" y="97" w="61" h="28" measuredW="55" measuredH="28" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>switchhero1%26bm%3Bswitchhero1.bmml%26bm%3Bswitchhero1.bmml%26bm%3Bswitchhero1.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22849%2C91%2C910%2C119%22%20href%3D%22switchhero1.bmml%22%20alt%3D%22switchhero1%22%20id%3D%2216%22/%3E</map>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="863" y="137" w="63" h="28" measuredW="77" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>registrationpage1%26bm%3Bregistrationpage1.bmml%26bm%3Bregistrationpage1.bmml%26bm%3Bregistrationpage1.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C131%2C910%2C159%22%20href%3D%22registrationpage1.bmml%22%20alt%3D%22registrationpage1%22%20id%3D%2217%22/%3E</map>
+        <text>Register</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::TextInput" x="637" y="93" w="113" h="-1" measuredW="44" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>email</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::TextInput" x="757" y="95" w="98" h="-1" measuredW="68" measuredH="29" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>password</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::TextInput" x="637" y="136" w="218" h="-1" measuredW="44" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>email</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::Icon" x="598" y="95" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>TwitterIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Icon" x="598" y="139" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>AIMIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Icon" x="559" y="95" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>FacebookIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Icon" x="559" y="139" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ThumbsUpIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::RoundButton" x="256" y="198" w="486" h="382" measuredW="32" measuredH="32" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::RoundButton" x="64" y="198" w="151" h="382" measuredW="32" measuredH="32" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::RoundButton" x="781" y="198" w="151" h="382" measuredW="32" measuredH="32" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Image" x="44" y="92" w="143" h="79" measuredW="80" measuredH="60" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./logo80x60.png</src>
+        <text>logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::MultilineButton" x="426" y="263" w="143" h="79" measuredW="124" measuredH="78" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Start%20Game%0AMutabra</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::StickyNote" x="22" y="697" w="959" h="960" measuredW="109" measuredH="123" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1.1.%20Login%0A1.1.1.%20%u0415%u0441%u043B%u0438%20%u043A%u0440%u0435%u0434%u044B%20%u0432%u0430%u043B%u0438%u0434%u043D%u044B%u0435%20%u0442%u043E%20%u0432%u0445%u043E%u0434%20%u0432%20%u0438%u0433%u0440%u0443%3A%0A1.1.1.1.%20%u0415%u0441%u043B%u0438%20%u0433%u0435%u0440%u043E%u0435%u0432%20%u043D%u0435%u0442%u0443%20%u0442%u043E%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0430%20%3Ccreate%20hero%3E%0A1.1.1.2.%20%u0415%u0441%u043B%u0438%20%u0433%u0435%u0440%u043E%u0438%20%u0435%u0441%u0442%u044C%2C%20%u0442%u043E%20%u0432%u0445%u043E%u0434%20%u043F%u043E%u0441%u043B%u0435%u0434%u043D%u0438%u043C%20%u0433%u0435%u0440%u043E%u0435%u043C%2C%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0430%20%3Cgame%3E%0A1.1.2.%20%u0415%u0441%u043B%u0438%20%u043B%u043E%u0433%u0438%u043D%20%u0438%u043B%u0438%20%u043F%u0430%u0440%u043E%u043B%u044C%20%u043D%u0435%u043F%u0440%u0430%u0432%u0438%u043B%u044C%u043D%u044B%u0435%2C%20%u0442%u043E%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0430%20%3Csecurity/login%3E%20%u0441%20%u0443%u0432%u0435%u0434%u043E%u043C%u043B%u0435%u043D%u0438%u0435%u043C%20%u043E%u0431%20%u043D%u0435%u043F%u0440%u0430%u0432%u0438%u043B%u044C%u043D%u044B%u0445%20%u043A%u0440%u0435%u0434%u0430%u0445.%20%0A%20%0A1.2.%20Registration%0A1.2.1.%20%u0415%u0441%u043B%u0438%20%u0435%u043C%u0430%u0439%u043B%20%u043D%u0435%20%u0437%u0430%u043D%u044F%u0442%2C%20%u0438%20%u0435%u043C%u0430%u0439%u043B%20%u0432%u0430%u043B%u0438%u0434%u0435%u043D%2C%20%u0442%u043E%3A%0A-%20%u0430%u0432%u0442%u043E%u043C%u0430%u0442%u0438%u0447%u0435%u0441%u043A%u0430%u044F%20%u0433%u0435%u043D%u0435%u0440%u0430%u0446%u0438%u044F%20%u043F%u0430%u0440%u043E%u043B%u044F%0A-%20%u0437%u0430%u043F%u043E%u043C%u0438%u043D%u0430%u043D%u0438%u0435%20%u0432%u0440%u0435%u043C%u0435%u043D%u0438%20%u0440%u0435%u0433%u0438%u0441%u0442%u0440%u0430%u0446%u0438%u0438%0A-%20%u0441%u043E%u0437%u0434%u0430%u043D%u0438%u0435%20%u0432%u0440%u0435%u043C%u0435%u043D%u043D%u043E%u0433%u043E%20%u0442%u043E%u043A%u0435%u043D%u0430%20%u0434%u043B%u044F%20%u0432%u0445%u043E%u0434%u0430%20%u0432%20%u0438%u0433%u0440%u0443%20%28%u0441%u0441%u044B%u043B%u043A%u0430%20%u0432%20%u043F%u0438%u0441%u044C%u043C%u0435%2C%20%u043F%u043E%20%u043A%u043E%u0442%u043E%u0440%u043E%u0439%20%u043C%u043E%u0436%u043D%u043E%20%u0437%u0430%u0439%u0442%u0438%20%u0442%u043E%u043B%u044C%u043A%u043E%20%u043E%u0434%u0438%u043D%20%u0440%u0430%u0437%29%0A-%20%u0432%u044B%u0441%u043B%u0430%u0442%u044C%20%u0435%u043C%u0430%u0439%u043B%20%u0441%20%u043F%u0430%u0440%u043E%u043B%u0435%u043C%20%u0438%20%u0442%u043E%u043A%u0435%u043D%u043E%u043C%0A-%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044E%20%u043F%u0440%u0438%u0441%u0432%u0430%u0438%u0432%u0430%u0435%u0442%u0441%u044F%20%u0440%u043E%u043B%u044C%20user%0A-%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u043E%u0441%u0442%u0430%u0435%u0442%u0441%u044F%20%u043D%u0430%20%u0442%u043E%u0439%20%u0436%u0435%20%28%3F%29%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0435%20%u0438%20%u0435%u043C%u0443%20%u043F%u043E%u043A%u0430%u0437%u044B%u0432%u0430%u0435%u0442%u0441%u044F%20%u0443%u0432%u0435%u0434%u043E%u043C%u043B%u0435%u043D%u0438%u0435%20%u043E%u0431%20%u043E%u0442%u043F%u0440%u0430%u0432%u043A%u0435%20%u043F%u0438%u0441%u044C%u043C%u0430%20%u043D%u0430%20%u0435%u0433%u043E%20%u0435%u043C%u0430%u0439%u043B%2C%20%u0433%u0434%u0435%20%u043E%u043D%20%u0434%u043E%u043B%u0436%u0435%u043D%20%u0441%u043B%u0435%u0434%u043E%u0432%u0430%u0442%u044C%20%u0438%u043D%u0441%u0442%u0440%u0443%u043A%u0446%u0438%u044F%u043C.%0A1.2.2.%20%u0415%u0441%u043B%u0438%20%u0435%u043C%u0430%u0439%u043B%20%u0437%u0430%u043D%u044F%u0442%20%u0438%u043B%u0438%20%u043D%u0435%20%u0432%u0430%u043B%u0438%u0434%u0435%u043D%2C%20%u0442%u043E%20%u043F%u0435%u0440%u0435%u0445%u043E%u0434%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0443%20%3Csecurity/registration%3E%0A1.2.3.%20%u041F%u043E%u0441%u043B%u0435%20%u0440%u0435%u0433%u0438%u0441%u0442%u0440%u0430%u0446%u0438%u0438%20%u0430%u043A%u043A%u0430%u0443%u043D%u0442%u0430%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0434%u043E%u043B%u0436%u0435%u043D%20%u043F%u043E%u0434%u0442%u0432%u0435%u0440%u0434%u0438%u0442%u044C%20%u0441%u0432%u043E%u0439%20%u0435%u043C%u0430%u0439%u043B%2C%20%u043F%u0435%u0440%u0435%u0439%u0434%u044F%20%u043F%u043E%20%u0441%u0441%u044B%u043B%u043A%u0435%20%u0432%20%u0435%u043C%u0430%u0439%u043B%u0435.%20%u041E%u043D%20%u043F%u043E%u043F%u0430%u0434%u0430%u0435%u0442%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0443%20%3Ccreate%20hero%3E%20%u0441%20%u0443%u0432%u0435%u0434%u043E%u043C%u043B%u0435%u043D%u0438%u0435%u043C%20%u043E%u0431%20%u0443%u0441%u043F%u0435%u0448%u043D%u043E%u0439%20%u0440%u0435%u0433%u0438%u0441%u0442%u0440%u0430%u0446%u0438%u0438.%0A%20%0A1.3.%20%u0412%u0445%u043E%u0434%20%u0447%u0435%u0440%u0435%u0437%20%u0438%u043A%u043E%u043D%u043A%u0438%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u044B%u0445%20%u0441%u0435%u0442%u0435%u0439%0A1.3.1.%20%u0415%u0441%u043B%u0438%20%u0442%u0430%u043A%u043E%u0439%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20%u0443%u0436%u0435%20%u0437%u0430%u0440%u0435%u0433%u0435%u043D%20%u0432%20%u043F%u0440%u0438%u043B%u043E%u0436%u0435%u043D%u0438%u0438%2C%20%u0442%u043E%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0430%20%3Cgame%3E%0A1.3.2.%20%u0415%u0441%u043B%u0438%20%u0442%u0430%u043A%u043E%u0439%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20%u043D%u0435%20%u0437%u0430%u0440%u0435%u0433%u0435%u043D%20%u0432%20%u043F%u0440%u0438%u043B%u043E%u0436%u0435%u043D%u0438%u0438%2C%20%u043D%u043E%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0441%20%u0442%u0430%u043A%u0438%u043C%20%u0435%u043C%u0430%u0439%u043B%u043E%u043C%20%u0437%u0430%u0440%u0435%u0433%u0435%u043D%2C%20%u0442%u043E%3A%0A-%20%u0437%u0430%u043F%u043E%u043C%u0438%u043D%u0430%u043D%u0438%u0435%20id%20%u043F%u0440%u043E%u0444%u0438%u043B%u044F%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20%u0434%u043B%u044F%20%u044D%u0442%u043E%u0433%u043E%20%u0430%u043A%u043A%u0430%u0443%u043D%u0442%u0430%0A-%20%u043F%u0435%u0440%u0435%u0445%u043E%u0434%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446y%20%3Cgame%3E%0A1.3.2.1.%20%u0414%u043B%u044F%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20Twitter%20%u0435%u043C%u0430%u0439%u043B%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044F%20%u043F%u043E%u043B%u0443%u0447%u0438%u0442%u044C%20%u043D%u0435%u043B%u044C%u0437%u044F%2C%20%u043F%u043E%u044D%u0442%u043E%u043C%u0443%20%u0434%u043B%u044F%20%u0442%u0430%u043A%u0438%u0445%20%u0441%u0435%u0442%u0435%u0439%20%20%u043F%u0443%u043D%u043A%u0442%201.3.2%20%u043D%u0435%20%u0440%u0430%u0441%u043F%u043E%u0441%u0442%u0440%u0430%u043D%u044F%u0435%u0442%u0441%u044F.%0A1.3.3.%20%u0415%u0441%u043B%u0438%20%u043D%u0438%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20%u043D%u0435%20%u0437%u0430%u0440%u0435%u0433%u0435%u043D%20%u0432%20%u043F%u0440%u0438%u043B%u043E%u0436%u0435%u043D%u0438%u0438%2C%20%u043D%u0438%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0441%20%u0442%u0430%u043A%u0438%u043C%20%u0435%u043C%u0430%u0439%u043B%u043E%u043C%20%u043D%u0435%20%u0437%u0430%u0440%u0435%u0433%u0435%u043D%2C%20%u0442%u043E%3A%0A-%20%u0441%u043E%u0437%u0434%u0430%u043D%u0438%u0435%20%u0430%u043A%u043A%u0430%u0443%u043D%u0442%u0430%20%u0441%20%u0432%u0440%u0435%u043C%u0435%u043D%u0435%u043C%20%u0440%u0435%u0433%u0438%u0441%u0442%u0440%u0430%u0446%u0438%u0438%20%u0435%u043C%u0430%u0439%u043B%u043E%u043C%20%28%u0435%u0441%u043B%u0438%20%u0435%u0441%u0442%u044C%29%2C%20id%20%u043F%u0440%u043E%u0444%u0438%u043B%u044F%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20%u0438%20%u0434%u043E%u043F%u043E%u043B%u043D%u0438%u0442%u0435%u043B%u044C%u043D%u043E%u0439%20%u0438%u043D%u0444%u043E%u0440%u043C%u0430%u0446%u0438%u0438%20%u0438%u0437%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438%20%28%u043B%u043E%u043A%u0430%u043B%u044C%2C%20timezone%2C%20%u0438%u043C%u044F%20%u0438%20%u0442%u0434.%29%0A-%20%u043F%u0435%u0440%u0435%u0445%u043E%u0434%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0443%20%3Ccreate%20hero%3E%20%u0441%20%u0443%u0432%u0435%u0434%u043E%u043C%u043B%u0435%u043D%u0438%u0435%u043C%20%u043E%u0431%20%u0443%u0441%u043F%u0435%u0448%u043D%u043E%u0439%20%u0440%u0435%u0433%u0438%u0441%u0442%u0440%u0430%u0446%u0438%u0438%20%u0430%u043A%u043A%u0430%u0443%u043D%u0442%u0430%0A1.3.3.1.%20%u0415%u0441%u043B%u0438%20%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u0435%u043B%u044C%20%u0440%u0430%u043D%u0435%u0435%20%u0431%u044B%u043B%20%u0437%u0430%u0440%u0435%u0433%u0435%u043D%20%u0441%20%u0442%u0430%u043A%u0438%u043C%20%u0435%u043C%u0430%u0439%u043B%u043E%u043C%2C%20%u0442%u043E%20%u043E%u043D%20%u0441%u043C%u043E%u0436%u0435%u0442%20%u0437%u0430%u0445%u043E%u0434%u0438%u0442%u044C%20%u043A%u0430%u043A%20%u0438%20%u0440%u0430%u043D%u0435%u0435%20%u0437%u0430%u0445%u043E%u0434%u0438%u043B%20%u043F%u0440%u043E%u0441%u0442%u043E%20%u0447%u0435%u0440%u0435%u0437%20%u043B%u043E%u0433%u0438%u043D%20%u043F%u0430%u0440%u043E%u043B%u044C.%0A1.3.4.%20%u0414%u043E%u043B%u0436%u043D%u044B%20%u0431%u044B%u0442%u044C%20%u0440%u0435%u0430%u043B%u0438%u0437%u043E%u0432%u0430%u043D%u044B%20%u0441%u043B%u0435%u0434%u0443%u044E%u0449%u0438%u0435%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u044B%u0435%20%u0441%u0435%u0442%u0438%3A%0A-%20twitter%0A-%20facebook%0A-%20google%0A-%20vkontakte%0A1.4.%20Start%20game%0A-%20%u0421%u043E%u0437%u0434%u0430%u043D%u0438%u0435%20%u0432%u0440%u0435%u043C%u0435%u043D%u043D%u043E%u0433%u043E%20%u0430%u043A%u043A%u0430%u0443%u043D%u0442%u0430%20%u0431%u0435%u0437%20%u0435%u043C%u0430%u0439%u043B%u0430%20%u0438%u043B%u0438%20%u0441%u043E%u0446%u0438%u0430%u043B%u044C%u043D%u043E%u0439%20%u0441%u0435%u0442%u0438.%0A-%20%u041F%u0435%u0440%u0435%u0445%u043E%u0434%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0443%20%u0432%u044B%u0431%u043E%u0440%u0430%20%u0441%u043B%u0443%u0447%u0430%u0439%u043D%u043E%u0433%u043E%20%u0433%u0435%u0440%u043E%u044F%20%3Cchoose%20random%20hero%3E</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
