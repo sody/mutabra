@@ -58,6 +58,7 @@ public class SecurityModule {
 		final Account account = user == null ? null : Authorities.isTwitterUser(user.getName()) ?
 				accountService.query().withTwitter(Authorities.getTwitterUser(user.getName())).unique() :
 				accountService.query().withEmail(user.getName()).unique();
+		final Hero hero = account != null ? account.getHero() : null;
 
 		return new AccountContext() {
 			public Account getAccount() {
@@ -65,7 +66,7 @@ public class SecurityModule {
 			}
 
 			public Hero getHero() {
-				return null;
+				return hero;
 			}
 		};
 	}

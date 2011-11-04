@@ -30,69 +30,73 @@ public interface Account extends BaseEntity {
 
 	String GOOGLE_USER_PROPERTY = "googleUser";
 
-	public String getEmail();
+	String getEmail();
 
-	public void setEmail(final String email);
+	void setEmail(String email);
 
-	public String getPendingEmail();
+	String getPendingEmail();
 
-	public void setPendingEmail(String email);
+	void setPendingEmail(String email);
 
-	public String getPassword();
+	String getPassword();
 
-	public void setPassword(final String password);
+	void setPassword(String password);
 
-	public String getPendingPassword();
+	String getPendingPassword();
 
-	public void setPendingPassword(final String password);
+	void setPendingPassword(String password);
 
-	public String getToken();
+	String getToken();
 
-	public void setToken(final String token);
+	void setToken(String token);
 
-	public String getPendingToken();
+	String getPendingToken();
 
-	public void setPendingToken(String token);
+	void setPendingToken(String token);
 
-	public String getFacebookUser();
+	String getFacebookUser();
 
-	public void setFacebookUser(String user);
+	void setFacebookUser(String user);
 
-	public String getTwitterUser();
+	String getTwitterUser();
 
-	public void setTwitterUser(String user);
+	void setTwitterUser(String user);
 
-	public String getGoogleUser();
+	String getGoogleUser();
 
-	public void setGoogleUser(String user);
+	void setGoogleUser(String user);
 
-	public Date getRegistered();
+	Date getRegistered();
 
-	public void setRegistered(final Date registered);
+	void setRegistered(Date registered);
 
-	public Date getLastLogin();
+	Date getLastLogin();
 
-	public void setLastLogin(final Date lastLogin);
+	void setLastLogin(Date lastLogin);
 
-	public String getName();
+	String getName();
 
-	public void setName(final String name);
+	void setName(String name);
 
-	public String getPlace();
+	String getPlace();
 
-	public void setPlace(final String place);
+	void setPlace(String place);
 
-	public Locale getLocale();
+	Locale getLocale();
 
-	public void setLocale(final Locale locale);
+	void setLocale(Locale locale);
 
-	public TimeZone getTimeZone();
+	TimeZone getTimeZone();
 
-	public void setTimeZone(final TimeZone timeZone);
+	void setTimeZone(TimeZone timeZone);
 
-	public Set<Role> getRoles();
+	Hero getHero();
 
-	public void setRoles(final Set<Role> roles);
+	void setHero(Hero hero);
 
-	public Set<Hero> getHeroes();
+	Set<Role> getRoles();
+
+	void setRoles(Set<Role> roles);
+
+	Set<Hero> getHeroes();
 }

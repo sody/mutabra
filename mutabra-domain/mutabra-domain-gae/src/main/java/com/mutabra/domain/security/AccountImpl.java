@@ -5,6 +5,7 @@ import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.player.HeroImpl;
 import org.greatage.util.LocaleUtils;
 
 import javax.jdo.annotations.NotPersistent;
@@ -70,6 +71,9 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Persistent
 	private TimeZone timeZone;
+
+	@NotPersistent
+	private HeroImpl hero;
 
 	@Persistent
 	private Set<Key> roles = new HashSet<Key>();
@@ -199,6 +203,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setTimeZone(final TimeZone timeZone) {
 		this.timeZone = timeZone;
+	}
+
+	public Hero getHero() {
+		return hero;
+	}
+
+	public void setHero(final Hero hero) {
+		this.hero = (HeroImpl) hero;
 	}
 
 	public Set<Role> getRoles() {

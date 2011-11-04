@@ -7,6 +7,7 @@ import com.mutabra.security.TwitterToken;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountManager;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.ValidationException;
@@ -41,7 +42,7 @@ public class AnonymousHeader extends AbstractComponent {
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
 		securityContext.signIn(new Credentials(email, password));
-		return getResources().getPageName();
+		return GameHome.class;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signUp")
@@ -56,22 +57,26 @@ public class AnonymousHeader extends AbstractComponent {
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
-	void facebookConnected(final OAuth.Session session) {
+	Object facebookConnected(final OAuth.Session session) {
 		securityContext.signIn(new FacebookToken(session));
+		return GameHome.class;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
-	void twitterConnected(final OAuth.Session session) {
+	Object twitterConnected(final OAuth.Session session) {
 		securityContext.signIn(new TwitterToken(session));
+		return GameHome.class;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "google")
-	void googleConnected(final OAuth.Session session) {
+	Object googleConnected(final OAuth.Session session) {
 		System.out.println();
+		return GameHome.class;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "vkontakte")
-	void vkontakteConnected(final OAuth.Session session) {
+	Object vkontakteConnected(final OAuth.Session session) {
 		System.out.println();
+		return GameHome.class;
 	}
 }

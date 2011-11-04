@@ -5,7 +5,7 @@
 		<t:button><t:pagelink page="index">${message:page.index.title}</t:pagelink></t:button>
 	</p:indexMenuItem>
 	<p:securityMenuItem>
-		<t:button><t:pagelink page="security">${message:button.sign-in.title}</t:pagelink></t:button>
+		<t:button><t:pagelink page="game/home">${message:page.game-home.title}</t:pagelink></t:button>
 	</p:securityMenuItem>
 	<p:fake1MenuItem>
 		<t:button><t:pagelink page="index">Fake 1</t:pagelink></t:button>

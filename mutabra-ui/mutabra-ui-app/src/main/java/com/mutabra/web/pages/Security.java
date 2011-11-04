@@ -4,6 +4,7 @@ import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountManager;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.ValidationException;
@@ -50,13 +51,13 @@ public class Security extends AbstractPage {
 	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
 	Object signIn() {
 		securityContext.signIn(new Credentials(email, password));
-		return Index.class;
+		return GameHome.class;
 	}
 
 	@OnEvent("signIn")
 	Object signInOnce(final String email, final String token) {
 		securityContext.signIn(new Credentials("token", email, token));
-		return Index.class;
+		return GameHome.class;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signUp")
