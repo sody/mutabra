@@ -17,7 +17,7 @@ public class DefaultDatabaseService implements DatabaseService {
 	}
 
 	public void update(final boolean dropFirst, final boolean clearCheckSums) {
-		final Database.UpdateOptions updateOptions = database.options();
+		final Database.Options updateOptions = database.options();
 		if (dropFirst) {
 			updateOptions.dropFirst();
 		} else if (clearCheckSums) {
