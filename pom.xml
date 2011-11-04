@@ -5,7 +5,7 @@
 
 	<groupId>com.mutabra</groupId>
 	<artifactId>mutabra-parent</artifactId>
-	<version>1.0-pre-alpha-2-SNAPSHOT</version>
+	<version>1.0-pre-alpha-3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Mutabra Project</name>
@@ -415,7 +415,7 @@
 		<datanucleus.appengine.version>1.0.10</datanucleus.appengine.version>
 		<jdo.api.version>2.3-eb</jdo.api.version>
 
-		<tapestry.version>5.3-rc-2</tapestry.version>
+		<tapestry.version>5.3-rc-3</tapestry.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.4</mail.api.version>
 
