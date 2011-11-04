@@ -65,7 +65,7 @@ public class Release_1_0 extends ChangeLog {
 		update(Tables.ACCOUNT)
 				.where(condition("email").equal("admin@mutabra.com"))
 				.set("roles",
-						select(Tables.ROLE).where(condition("code").equal("admin"))
+						select(Tables.ROLE).where(condition("code").in("admin", "user"))
 				);
 	}
 }

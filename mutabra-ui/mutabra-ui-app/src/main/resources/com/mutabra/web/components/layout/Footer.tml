@@ -1,5 +1,7 @@
 <div id="footer" class="unit ui-widget" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-	Copyright © 2010 Ivan Khalopik. All rights reserved.
+	${message:text.copyright}
+	<br/>
+	App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion}
 	<br/>
 	<a href="mailto:ikhalopik@gmail.com">Contact Us</a>
 </div>
