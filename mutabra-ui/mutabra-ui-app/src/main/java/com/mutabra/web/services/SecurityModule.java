@@ -11,7 +11,6 @@ import com.mutabra.security.Twitter;
 import com.mutabra.security.TwitterProvider;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.internal.SecurityAnnotationWorker;
 import com.mutabra.web.internal.SecurityExceptionHandler;
@@ -27,7 +26,6 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
-import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.ResponseRenderer;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 import org.greatage.security.Authentication;
@@ -41,6 +39,8 @@ import org.greatage.security.UserCredentialsProvider;
 
 import java.util.Date;
 
+import static com.mutabra.services.Mappers.account$;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -52,12 +52,12 @@ public class SecurityModule {
 	}
 
 	@Scope(ScopeConstants.PERTHREAD)
-	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account, AccountQuery> accountService,
+	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
 											  final SecurityContext securityContext) {
 		final Authentication user = securityContext.getCurrentUser();
 		final Account account = user == null ? null : Authorities.isTwitterUser(user.getName()) ?
-				accountService.query().withTwitter(Authorities.getTwitterUser(user.getName())).unique() :
-				accountService.query().withEmail(user.getName()).unique();
+				accountService.query(account$.twitterUser.eq(Authorities.getTwitterUser(user.getName()))).unique() :
+				accountService.query(account$.email.eq(user.getName())).unique();
 		final Hero hero = account != null ? account.getHero() : null;
 
 		return new AccountContext() {
@@ -77,15 +77,15 @@ public class SecurityModule {
 
 	@Contribute(SecurityContext.class)
 	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration,
-												@InjectService("accountService") final BaseEntityService<Account, AccountQuery> accountService,
+												@InjectService("accountService") final BaseEntityService<Account> accountService,
 												final SecretEncoder secretEncoder) {
 		configuration.add("token", new UserCredentialsProvider("token") {
 			@Override
 			protected User getAuthentication(final String key, final String secret) {
-				final Account account = accountService.query()
-						.withEmail(key)
-						.withToken(secret)
-						.unique();
+				final Account account = accountService.query(
+						account$.email.eq(key),
+						account$.token.eq(secret)
+				).unique();
 
 				if (account != null) {
 					account.setToken(null);
@@ -110,10 +110,10 @@ public class SecurityModule {
 		configuration.add("credentials", new UserCredentialsProvider(secretEncoder) {
 			@Override
 			protected User getAuthentication(final String key, final String secret) {
-				final Account account = accountService.query()
-						.withEmail(key)
-						.withPassword(secret)
-						.unique();
+				final Account account = accountService.query(
+						account$.email.eq(key),
+						account$.password.eq(secret)
+				).unique();
 
 				if (account != null) {
 					account.setLastLogin(new Date());

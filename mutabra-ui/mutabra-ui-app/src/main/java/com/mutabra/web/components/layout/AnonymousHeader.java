@@ -5,7 +5,6 @@ import com.mutabra.security.FacebookToken;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.TwitterToken;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountManager;
@@ -17,6 +16,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
 import org.greatage.security.SecurityContext;
+
+import static com.mutabra.services.Mappers.account$;
 
 /**
  * @author Ivan Khalopik
@@ -34,7 +35,7 @@ public class AnonymousHeader extends AbstractComponent {
 	private SecurityContext securityContext;
 
 	@InjectService("accountService")
-	private BaseEntityService<Account, AccountQuery> accountService;
+	private BaseEntityService<Account> accountService;
 
 	@Inject
 	private AccountManager accountManager;
@@ -47,7 +48,7 @@ public class AnonymousHeader extends AbstractComponent {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signUp")
 	Object signUp() throws ValidationException {
-		if (accountService.query().withEmail(email).unique() != null) {
+		if (accountService.query(account$.email.eq(email)).unique() != null) {
 			throw new ValidationException("Account already exists");
 		}
 

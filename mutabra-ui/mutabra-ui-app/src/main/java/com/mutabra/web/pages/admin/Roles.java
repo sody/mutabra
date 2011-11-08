@@ -3,7 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.TranslationService;
-import com.mutabra.services.security.RoleQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.RoleDialog;
 import com.mutabra.web.internal.Authorities;
@@ -24,7 +23,7 @@ import org.greatage.security.annotations.Allow;
 public class Roles extends AbstractPage {
 
 	@InjectService("roleService")
-	private BaseEntityService<Role, RoleQuery> roleService;
+	private BaseEntityService<Role> roleService;
 
 	@Inject
 	private TranslationService translationService;

@@ -12,14 +12,6 @@ import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.TranslationService;
 import com.mutabra.services.TranslationServiceImpl;
-import com.mutabra.services.common.FaceQuery;
-import com.mutabra.services.common.LevelQuery;
-import com.mutabra.services.common.RaceQuery;
-import com.mutabra.services.player.HeroQuery;
-import com.mutabra.services.security.AccountQuery;
-import com.mutabra.services.security.ChangeSetQuery;
-import com.mutabra.services.security.PermissionQuery;
-import com.mutabra.services.security.RoleQuery;
 import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -53,36 +45,36 @@ public class ServicesModule {
 		return new MailServiceImpl(adminAddress);
 	}
 
-	public BaseEntityService<Role, RoleQuery> buildRoleService() {
-		return new BaseEntityServiceImpl<Role, RoleQuery>(repository, Role.class, RoleQuery.class);
+	public BaseEntityService<Role> buildRoleService() {
+		return new BaseEntityServiceImpl<Role>(repository, Role.class);
 	}
 
-	public BaseEntityService<Permission, PermissionQuery> buildPermissionService() {
-		return new BaseEntityServiceImpl<Permission, PermissionQuery>(repository, Permission.class, PermissionQuery.class);
+	public BaseEntityService<Permission> buildPermissionService() {
+		return new BaseEntityServiceImpl<Permission>(repository, Permission.class);
 	}
 
-	public BaseEntityService<Account, AccountQuery> buildAccountService() {
-		return new BaseEntityServiceImpl<Account, AccountQuery>(repository, Account.class, AccountQuery.class);
+	public BaseEntityService<Account> buildAccountService() {
+		return new BaseEntityServiceImpl<Account>(repository, Account.class);
 	}
 
-	public BaseEntityService<ChangeSet, ChangeSetQuery> buildChangeSetService() {
-		return new BaseEntityServiceImpl<ChangeSet, ChangeSetQuery>(repository, ChangeSet.class, ChangeSetQuery.class);
+	public BaseEntityService<ChangeSet> buildChangeSetService() {
+		return new BaseEntityServiceImpl<ChangeSet>(repository, ChangeSet.class);
 	}
 
-	public BaseEntityService<Level, LevelQuery> buildLevelService() {
-		return new BaseEntityServiceImpl<Level, LevelQuery>(repository, Level.class, LevelQuery.class);
+	public BaseEntityService<Level> buildLevelService() {
+		return new BaseEntityServiceImpl<Level>(repository, Level.class);
 	}
 
-	public BaseEntityService<Face, FaceQuery> buildFaceService() {
-		return new BaseEntityServiceImpl<Face, FaceQuery>(repository, Face.class, FaceQuery.class);
+	public BaseEntityService<Face> buildFaceService() {
+		return new BaseEntityServiceImpl<Face>(repository, Face.class);
 	}
 
-	public BaseEntityService<Race, RaceQuery> buildRaceService() {
-		return new BaseEntityServiceImpl<Race, RaceQuery>(repository, Race.class, RaceQuery.class);
+	public BaseEntityService<Race> buildRaceService() {
+		return new BaseEntityServiceImpl<Race>(repository, Race.class);
 	}
 
-	public BaseEntityService<Hero, HeroQuery> buildHeroService() {
-		return new BaseEntityServiceImpl<Hero, HeroQuery>(repository, Hero.class, HeroQuery.class);
+	public BaseEntityService<Hero> buildHeroService() {
+		return new BaseEntityServiceImpl<Hero>(repository, Hero.class);
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)

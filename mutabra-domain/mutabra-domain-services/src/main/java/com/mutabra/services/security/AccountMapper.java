@@ -1,0 +1,26 @@
+package com.mutabra.services.security;
+
+import com.mutabra.domain.BaseEntity;
+import com.mutabra.services.BaseEntityMapper;
+import org.greatage.domain.PropertyMapper;
+
+/**
+ * @author Ivan Khalopik
+ * @since 1.0
+ */
+public class AccountMapper<E extends BaseEntity> extends BaseEntityMapper<E> {
+	public final PropertyMapper<Long, E, String> email = property("email");
+	public final PropertyMapper<Long, E, String> password = property("password");
+	public final PropertyMapper<Long, E, String> token = property("token");
+
+	public final PropertyMapper<Long, E, String> pendingEmail = property("pendingEmail");
+	public final PropertyMapper<Long, E, String> pendingToken = property("pendingToken");
+
+	public final PropertyMapper<Long, E, String> facebookUser = property("facebookUser");
+	public final PropertyMapper<Long, E, String> twitterUser = property("twitterUser");
+	public final PropertyMapper<Long, E, String> googleUser = property("googleUser");
+
+	public AccountMapper(final String path) {
+		super(path);
+	}
+}

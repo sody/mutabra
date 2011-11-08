@@ -3,8 +3,6 @@ package com.mutabra.web.pages.game.hero;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.common.RaceQuery;
-import com.mutabra.services.player.HeroQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.services.AccountContext;
@@ -23,10 +21,10 @@ import org.greatage.security.annotations.Allow;
 public class CreateHero extends AbstractPage {
 
 	@InjectService("heroService")
-	private BaseEntityService<Hero, HeroQuery> heroService;
+	private BaseEntityService<Hero> heroService;
 
 	@InjectService("raceService")
-	private BaseEntityService<Race, RaceQuery> raceService;
+	private BaseEntityService<Race> raceService;
 
 	@Property
 	private Hero value;

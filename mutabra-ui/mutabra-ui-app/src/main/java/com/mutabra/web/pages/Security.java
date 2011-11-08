@@ -1,8 +1,5 @@
 package com.mutabra.web.pages;
 
-import com.mutabra.domain.security.Account;
-import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.security.AccountQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountManager;
@@ -13,7 +10,6 @@ import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.Credentials;
 import org.greatage.security.SecurityContext;
 import org.greatage.util.StringUtils;
@@ -41,9 +37,6 @@ public class Security extends AbstractPage {
 
 	@Inject
 	private SecurityContext securityContext;
-
-	@InjectService("accountService")
-	private BaseEntityService<Account, AccountQuery> accountService;
 
 	@Inject
 	private AccountManager accountManager;

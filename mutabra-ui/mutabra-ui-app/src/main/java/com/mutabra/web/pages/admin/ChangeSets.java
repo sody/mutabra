@@ -3,7 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.db.DatabaseService;
-import com.mutabra.services.security.ChangeSetQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.internal.BaseEntityDataSource;
@@ -21,7 +20,7 @@ import org.greatage.security.annotations.Allow;
 public class ChangeSets extends AbstractPage {
 
 	@InjectService("changeSetService")
-	private BaseEntityService<ChangeSet, ChangeSetQuery> changeSetService;
+	private BaseEntityService<ChangeSet> changeSetService;
 
 	@Inject
 	private DatabaseService databaseService;

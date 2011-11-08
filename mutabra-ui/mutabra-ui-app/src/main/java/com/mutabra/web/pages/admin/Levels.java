@@ -3,7 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.common.Level;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.TranslationService;
-import com.mutabra.services.common.LevelQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.LevelDialog;
 import com.mutabra.web.internal.Authorities;
@@ -24,7 +23,7 @@ import org.greatage.security.annotations.Allow;
 public class Levels extends AbstractPage {
 
 	@InjectService("levelService")
-	private BaseEntityService<Level, LevelQuery> levelService;
+	private BaseEntityService<Level> levelService;
 
 	@Inject
 	private TranslationService translationService;

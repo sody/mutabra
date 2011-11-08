@@ -3,8 +3,6 @@ package com.mutabra.security;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.security.AccountQuery;
-import com.mutabra.services.security.RoleQuery;
 import com.mutabra.web.internal.Authorities;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.AbstractAuthenticationProvider;
@@ -19,17 +17,20 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static com.mutabra.services.Mappers.account$;
+import static com.mutabra.services.Mappers.role$;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class FacebookProvider extends AbstractAuthenticationProvider<User, FacebookToken> {
-	private final BaseEntityService<Account, AccountQuery> accountService;
-	private final BaseEntityService<Role, RoleQuery> roleService;
+	private final BaseEntityService<Account> accountService;
+	private final BaseEntityService<Role> roleService;
 	private final SecretEncoder secretEncoder;
 
-	public FacebookProvider(final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
-							final @InjectService("roleService") BaseEntityService<Role, RoleQuery> roleService,
+	public FacebookProvider(final @InjectService("accountService") BaseEntityService<Account> accountService,
+							final @InjectService("roleService") BaseEntityService<Role> roleService,
 							final SecretEncoder secretEncoder) {
 		super(User.class, FacebookToken.class);
 		this.accountService = accountService;
@@ -48,7 +49,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		if (StringUtils.isEmpty(profileId)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		Account account = accountService.query().withFacebook(profileId).unique();
+		Account account = accountService.query(account$.facebookUser.eq(profileId)).unique();
 		if (account != null) {
 			return authenticate(account);
 		}
@@ -57,7 +58,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		if (StringUtils.isEmpty(email)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		account = accountService.query().withEmail(email).unique();
+		account = accountService.query(account$.email.eq(email)).unique();
 		if (account != null) {
 			account.setFacebookUser(profileId);
 			return authenticate(account);
@@ -73,7 +74,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
 
-		final Set<Role> roles = new HashSet<Role>(roleService.query().withCode("user").list());
+		final Set<Role> roles = new HashSet<Role>(roleService.query(role$.code.eq("user")).list());
 		account.setRoles(roles);
 
 		return authenticate(account);

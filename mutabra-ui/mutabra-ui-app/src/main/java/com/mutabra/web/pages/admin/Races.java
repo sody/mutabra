@@ -3,7 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.common.Race;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.TranslationService;
-import com.mutabra.services.common.RaceQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.RaceDialog;
 import com.mutabra.web.internal.Authorities;
@@ -24,7 +23,7 @@ import org.greatage.security.annotations.Allow;
 public class Races extends AbstractPage {
 
 	@InjectService("raceService")
-	private BaseEntityService<Race, RaceQuery> raceService;
+	private BaseEntityService<Race> raceService;
 
 	@Inject
 	private TranslationService translationService;

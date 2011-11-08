@@ -3,8 +3,7 @@ package com.mutabra.web.internal;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.security.AccountQuery;
-import com.mutabra.services.security.RoleQuery;
+import com.mutabra.services.Mappers;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.AccountManager;
 import com.mutabra.web.services.MailService;
@@ -20,21 +19,24 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.mutabra.services.Mappers.account$;
+import static com.mutabra.services.Mappers.role$;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class AccountManagerImpl implements AccountManager {
-	private final BaseEntityService<Account, AccountQuery> accountService;
-	private final BaseEntityService<Role, RoleQuery> roleService;
+	private final BaseEntityService<Account> accountService;
+	private final BaseEntityService<Role> roleService;
 	private final MailService mailService;
 	private final SecretEncoder passwordEncoder;
 	private final RequestPageCache requestPageCache;
 	private final ComponentClassResolver componentClassResolver;
 
 	public AccountManagerImpl(
-			final @InjectService("accountService") BaseEntityService<Account, AccountQuery> accountService,
-			final @InjectService("roleService") BaseEntityService<Role, RoleQuery> roleService,
+			final @InjectService("accountService") BaseEntityService<Account> accountService,
+			final @InjectService("roleService") BaseEntityService<Role> roleService,
 			final SecretEncoder passwordEncoder,
 			final MailService mailService,
 			final RequestPageCache requestPageCache,
@@ -49,7 +51,7 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	public void signUp(final String email) throws ValidationException {
-		if (accountService.query().withEmail(email).unique() != null) {
+		if (accountService.query(account$.email.eq(email)).unique() != null) {
 			//todo: add localization
 			throw new ValidationException("Account already exists.");
 		}
@@ -62,7 +64,7 @@ public class AccountManagerImpl implements AccountManager {
 		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
-		final Set<Role> roles = new HashSet<Role>(roleService.query().withCode("user").list());
+		final Set<Role> roles = new HashSet<Role>(roleService.query(role$.code.eq("user")).list());
 		account.setRoles(roles);
 
 		account.setPendingEmail(null);
@@ -75,7 +77,7 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	public void restorePassword(final String email) throws ValidationException {
-		final Account account = accountService.query().withEmail(email).unique();
+		final Account account = accountService.query(account$.email.eq(email)).unique();
 		if (account == null) {
 			//todo: add localization
 			throw new ValidationException("Account doesn't exist.");
@@ -99,7 +101,7 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	public void changePassword(final String email, final String password) {
-		final Account account = accountService.query().withEmail(email).unique();
+		final Account account = accountService.query(account$.email.eq(email)).unique();
 
 		final String generatedToken = Authorities.generateSecret();
 		account.setToken(generatedToken);
@@ -118,7 +120,7 @@ public class AccountManagerImpl implements AccountManager {
 		final Account tempAccount = accountService.create();
 		tempAccount.setEmail(newEmail);
 
-		final Account account = accountService.query().withEmail(oldEmail).unique();
+		final Account account = accountService.query(account$.email.eq(oldEmail)).unique();
 		final String generatedToken = Authorities.generateSecret();
 		account.setToken(generatedToken);
 		final String generatedPendingToken = Authorities.generateSecret();
@@ -140,13 +142,13 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	public void confirmEmail(final String email, final String token) throws ValidationException {
-		final Account account = accountService.query().withEmail(email).withPendingToken(token).unique();
+		final Account account = accountService.query(account$.email.eq(email), account$.pendingToken.eq(token)).unique();
 		if (account == null) {
 			//todo: add localization
 			throw new ValidationException("Wrong credentials.");
 		}
 		if (account.getToken() == null && account.getPendingEmail() != null) {
-			final Account tempAccount = accountService.query().withPendingEmail(account.getPendingEmail()).unique();
+			final Account tempAccount = accountService.query(account$.pendingEmail.eq(account.getPendingEmail())).unique();
 			accountService.delete(tempAccount);
 			account.setEmail(account.getPendingEmail());
 			account.setPendingEmail(null);

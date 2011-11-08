@@ -10,24 +10,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static com.mutabra.services.Mappers.translation$;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation, TranslationQuery> implements TranslationService {
+public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation> implements TranslationService {
 
 	public TranslationServiceImpl(final EntityRepository repository) {
-		super(repository, Translation.class, TranslationQuery.class);
+		super(repository, Translation.class);
 	}
 
 	public List<Translation> getTranslations(final Translatable translatable, final Locale locale) {
 		return translatable.getTranslationCode() == null ?
 				Collections.<Translation>emptyList() :
-				query()
-						.setType(translatable.getTranslationType())
-						.addLocale(locale)
-						.addCode(translatable.getTranslationCode())
-						.list();
+				query(
+						translation$.type.eq(translatable.getTranslationType()),
+						translation$.locale.eq(locale.toString()),
+						translation$.code.eq(translatable.getTranslationCode())
+				).list();
 	}
 
 	@Transactional
@@ -40,10 +42,11 @@ public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation, T
 	@Transactional
 	public void deleteTranslations(final Translatable translatable) {
 		if (translatable.getTranslationCode() != null) {
-			final List<Translation> translations = query()
-					.setType(translatable.getTranslationType())
-					.addCode(translatable.getTranslationCode())
-					.list();
+			final List<Translation> translations = query(
+					translation$.type.eq(translatable.getTranslationType()),
+					translation$.code.eq(translatable.getTranslationCode())
+			).list();
+
 			for (Translation translation : translations) {
 				delete(translation);
 			}

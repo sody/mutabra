@@ -3,7 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.common.Face;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.TranslationService;
-import com.mutabra.services.common.FaceQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.FaceDialog;
 import com.mutabra.web.internal.Authorities;
@@ -24,7 +23,7 @@ import org.greatage.security.annotations.Allow;
 public class Faces extends AbstractPage {
 
 	@InjectService("faceService")
-	private BaseEntityService<Face, FaceQuery> faceService;
+	private BaseEntityService<Face> faceService;
 
 	@Inject
 	private TranslationService translationService;

@@ -1,22 +1,33 @@
 package com.mutabra.domain;
 
 import com.mutabra.db.MutabraChangeLog;
-import com.mutabra.domain.Keys;
-import com.mutabra.domain.Translation;
-import com.mutabra.domain.TranslationImpl;
-import com.mutabra.domain.common.*;
+import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.CardImpl;
+import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.EffectImpl;
+import com.mutabra.domain.common.Face;
+import com.mutabra.domain.common.FaceImpl;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.LevelImpl;
+import com.mutabra.domain.common.Race;
+import com.mutabra.domain.common.RaceImpl;
+import com.mutabra.domain.common.Summon;
+import com.mutabra.domain.common.SummonImpl;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.player.HeroCard;
 import com.mutabra.domain.player.HeroCardImpl;
 import com.mutabra.domain.player.HeroImpl;
-import com.mutabra.domain.security.*;
-import com.mutabra.services.CodedEntityFilterProcessor;
-import com.mutabra.services.TranslationFilterProcessor;
+import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.AccountImpl;
+import com.mutabra.domain.security.ChangeSet;
+import com.mutabra.domain.security.ChangeSetImpl;
+import com.mutabra.domain.security.Permission;
+import com.mutabra.domain.security.PermissionImpl;
+import com.mutabra.domain.security.Role;
+import com.mutabra.domain.security.RoleImpl;
 import com.mutabra.services.db.DatabaseService;
 import com.mutabra.services.db.DefaultDatabaseService;
-import com.mutabra.services.security.AccountFilterProcessor;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -25,13 +36,10 @@ import org.apache.tapestry5.ioc.annotations.Startup;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
 import org.greatage.db.gae.GAEDatabase;
-import org.greatage.domain.BaseFilterProcessor;
-import org.greatage.domain.CompositeFilterProcessor;
-import org.greatage.domain.EntityFilterProcessor;
 import org.greatage.domain.EntityRepository;
-import org.greatage.domain.jdo.JdoExecutor;
-import org.greatage.domain.jdo.JdoExecutorImpl;
-import org.greatage.domain.jdo.JdoRepository;
+import org.greatage.domain.jdo.JDOExecutor;
+import org.greatage.domain.jdo.JDOExecutorImpl;
+import org.greatage.domain.jdo.JDORepository;
 
 import javax.jdo.Constants;
 import javax.jdo.JDOHelper;
@@ -45,9 +53,8 @@ import java.util.Map;
 public class DomainModule {
 
 	public static void bind(final ServiceBinder binder) {
-		binder.bind(EntityRepository.class, JdoRepository.class);
-		binder.bind(JdoExecutor.class, JdoExecutorImpl.class).scope(ScopeConstants.PERTHREAD);
-		binder.bind(EntityFilterProcessor.class, CompositeFilterProcessor.class);
+		binder.bind(EntityRepository.class, JDORepository.class);
+		binder.bind(JDOExecutor.class, JDOExecutorImpl.class).scope(ScopeConstants.PERTHREAD);
 	}
 
 	public DatabaseService buildDatabaseService() {
@@ -88,14 +95,6 @@ public class DomainModule {
 
 		configuration.add(Hero.class, HeroImpl.class);
 		configuration.add(HeroCard.class, HeroCardImpl.class);
-	}
-
-	@Contribute(EntityFilterProcessor.class)
-	public void contributeEntityFilterProcessor(final Configuration<EntityFilterProcessor> configuration) {
-		configuration.addInstance(BaseFilterProcessor.class);
-		configuration.addInstance(CodedEntityFilterProcessor.class);
-		configuration.addInstance(TranslationFilterProcessor.class);
-		configuration.addInstance(AccountFilterProcessor.class);
 	}
 
 	@Startup

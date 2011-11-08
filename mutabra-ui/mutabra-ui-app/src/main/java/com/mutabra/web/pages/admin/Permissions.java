@@ -3,7 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.security.Permission;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.TranslationService;
-import com.mutabra.services.security.PermissionQuery;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.PermissionDialog;
 import com.mutabra.web.internal.Authorities;
@@ -24,7 +23,7 @@ import org.greatage.security.annotations.Allow;
 public class Permissions extends AbstractPage {
 
 	@InjectService("permissionService")
-	private BaseEntityService<Permission, PermissionQuery> permissionService;
+	private BaseEntityService<Permission> permissionService;
 
 	@Inject
 	private TranslationService translationService;
