@@ -29,7 +29,6 @@ import com.mutabra.services.db.DatabaseService;
 import com.mutabra.services.db.DefaultDatabaseService;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Startup;
@@ -37,8 +36,8 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
 import org.greatage.db.gae.GAEDatabase;
 import org.greatage.domain.EntityRepository;
+import org.greatage.domain.TransactionExecutor;
 import org.greatage.domain.jdo.JDOExecutor;
-import org.greatage.domain.jdo.JDOExecutorImpl;
 import org.greatage.domain.jdo.JDORepository;
 
 import javax.jdo.Constants;
@@ -54,7 +53,7 @@ public class DomainModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(EntityRepository.class, JDORepository.class);
-		binder.bind(JDOExecutor.class, JDOExecutorImpl.class).scope(ScopeConstants.PERTHREAD);
+		binder.bind(TransactionExecutor.class, JDOExecutor.class);
 	}
 
 	public DatabaseService buildDatabaseService() {

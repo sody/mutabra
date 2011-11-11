@@ -22,6 +22,10 @@ import org.apache.tapestry5.ioc.services.CoercionTuple;
 import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.PropertyConduitSource;
+import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.RequestFilter;
+import org.apache.tapestry5.services.RequestHandler;
+import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.ValidationDecoratorFactory;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.services.ValueEncoderSource;
@@ -31,6 +35,10 @@ import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.greatage.domain.EntityRepository;
+import org.greatage.domain.SessionCallback;
+import org.greatage.domain.TransactionExecutor;
+
+import java.io.IOException;
 
 /**
  * @author Ivan Khalopik
@@ -100,4 +108,19 @@ public class MutabraModule {
 												final @Local JavaScriptStack stack) {
 		configuration.add("mutabra", stack);
 	}
+
+	@Contribute(RequestHandler.class)
+	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration,
+										 final TransactionExecutor<Object, Object> executor) {
+		configuration.add("RepositorySessionFilter", new RequestFilter() {
+			public boolean service(final Request request, final Response response, final RequestHandler requestHandler) throws IOException {
+				return executor.execute(new SessionCallback<Boolean, Object>() {
+					public Boolean doInSession(final Object session) throws Exception {
+						return requestHandler.service(request, response);
+					}
+				});
+			}
+		});
+	}
+
 }

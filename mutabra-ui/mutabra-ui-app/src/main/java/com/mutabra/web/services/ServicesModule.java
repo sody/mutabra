@@ -20,7 +20,7 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.plastic.MethodAdvice;
 import org.apache.tapestry5.plastic.MethodInvocation;
 import org.greatage.domain.EntityRepository;
-import org.greatage.domain.Transaction;
+import org.greatage.domain.TransactionCallback;
 import org.greatage.domain.TransactionExecutor;
 import org.greatage.domain.annotations.Transactional;
 
@@ -78,17 +78,15 @@ public class ServicesModule {
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)
-	public void adviseTransactionalServices(final MethodAdviceReceiver receiver, final TransactionExecutor executor) {
+	public void adviseTransactionalServices(final MethodAdviceReceiver receiver, final TransactionExecutor<Object, Object> executor) {
 		final MethodAdvice advice = new MethodAdvice() {
-			public void advise(MethodInvocation invocation) {
-				final Transaction transaction = executor.begin();
-				try {
-					invocation.proceed();
-					transaction.commit();
-				} catch (Throwable throwable) {
-					transaction.rollback();
-					throw new RuntimeException("Could not finish transaction.", throwable);
-				}
+			public void advise(final MethodInvocation invocation) {
+				executor.execute(new TransactionCallback<Object, Object>() {
+					public Object doInTransaction(final Object transaction) throws Exception {
+						invocation.proceed();
+						return invocation.getReturnValue();
+					}
+				});
 			}
 		};
 
