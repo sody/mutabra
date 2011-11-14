@@ -41,7 +41,6 @@
 		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
-			<version>3.0</version>
 		</dependency>
 
 		<dependency>

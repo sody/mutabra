@@ -127,7 +127,7 @@
 			<dependency>
 				<groupId>javax.persistence</groupId>
 				<artifactId>persistence-api</artifactId>
-				<version>1.0</version>
+				<version>${jpa.version}</version>
 			</dependency>
 
 			<!-- GAE module dependencies -->
@@ -156,33 +156,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.google.appengine.orm</groupId>
-				<artifactId>datanucleus-appengine</artifactId>
-				<version>${datanucleus.appengine.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.datanucleus</groupId>
-				<artifactId>datanucleus-core</artifactId>
-				<version>${datanucleus.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.datanucleus</groupId>
-				<artifactId>datanucleus-jpa</artifactId>
-				<version>${datanucleus.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.datanucleus</groupId>
-				<artifactId>datanucleus-enhancer</artifactId>
-				<version>${datanucleus.enhancer.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>javax.jdo</groupId>
-				<artifactId>jdo2-api</artifactId>
-				<version>${jdo.api.version}</version>
+				<groupId>com.googlecode.objectify</groupId>
+				<artifactId>objectify</artifactId>
+				<version>${objectify.version}</version>
 			</dependency>
 
 			<!-- UI module dependencies -->
@@ -222,9 +198,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.got5</groupId>
-				<artifactId>tapestry5-jquery</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
+				<groupId>org.scribe</groupId>
+				<artifactId>scribe</artifactId>
+				<version>${scribe.version}</version>
 			</dependency>
 
 			<dependency>
@@ -406,20 +382,18 @@
 		<testng.version>6.3</testng.version>
 
 		<hibernate.version>4.0.0.CR4</hibernate.version>
+		<jpa.version>1.0</jpa.version>
 		<mysql.version>5.1.18</mysql.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 
 		<appengine.version>1.5.5</appengine.version>
-		<datanucleus.version>1.1.5</datanucleus.version>
-		<datanucleus.enhancer.version>1.1.4</datanucleus.enhancer.version>
-		<datanucleus.appengine.version>1.0.10</datanucleus.appengine.version>
-		<jdo.api.version>2.3-eb</jdo.api.version>
+		<objectify.version>3.0</objectify.version>
 
 		<tapestry.version>5.3-rc-3</tapestry.version>
+		<scribe.version>1.2.3</scribe.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.4</mail.api.version>
 
 		<release.url>file:///mutabra/release</release.url>
-		<log.dir>file:///mutabra/log</log.dir>
 	</properties>
 </project>
