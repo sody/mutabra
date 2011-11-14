@@ -1,23 +1,20 @@
 package com.mutabra.domain.common;
 
-import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.db.Tables;
+import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
+import javax.persistence.Entity;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable(table = Tables.SUMMON)
+@Entity(name = Tables.SUMMON)
 public class SummonImpl extends CodedEntityImpl implements Summon {
 
-	@Persistent
 	private int attack;
 
-	@Persistent
 	private int defence;
 
 	public SummonImpl() {

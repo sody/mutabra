@@ -1,26 +1,22 @@
 package com.mutabra.domain.common;
 
-import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.db.Tables;
+import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
+import javax.persistence.Entity;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable(table = Tables.EFFECT)
+@Entity(name = Tables.EFFECT)
 public class EffectImpl extends CodedEntityImpl implements Effect {
 
-	@Persistent
 	private TargetType targetType;
 
-	@Persistent
 	private int attack;
 
-	@Persistent
 	private int defence;
 
 	public EffectImpl() {

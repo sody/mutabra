@@ -1,10 +1,11 @@
 package com.mutabra.web.pages.game.hero;
 
-import com.mutabra.domain.common.Race;
 import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
+import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -20,11 +21,11 @@ import org.greatage.security.annotations.Allow;
 @Allow(Authorities.ROLE_USER)
 public class CreateHero extends AbstractPage {
 
+	@InjectService("accountService")
+	private BaseEntityService<Account> accountService;
+
 	@InjectService("heroService")
 	private BaseEntityService<Hero> heroService;
-
-	@InjectService("raceService")
-	private BaseEntityService<Race> raceService;
 
 	@Property
 	private Hero value;
@@ -46,6 +47,6 @@ public class CreateHero extends AbstractPage {
 	}
 
 	private Object back() {
-		return null;
+		return GameHome.class;
 	}
 }

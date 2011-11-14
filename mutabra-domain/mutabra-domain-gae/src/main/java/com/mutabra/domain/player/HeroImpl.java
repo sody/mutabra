@@ -1,56 +1,52 @@
 package com.mutabra.domain.player;
 
-import com.mutabra.domain.BaseEntityImpl;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Parent;
 import com.mutabra.db.Tables;
-import com.mutabra.domain.common.*;
+import com.mutabra.domain.BaseEntityImpl;
+import com.mutabra.domain.Keys;
+import com.mutabra.domain.common.Face;
+import com.mutabra.domain.common.FaceImpl;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.LevelImpl;
+import com.mutabra.domain.common.Race;
+import com.mutabra.domain.common.RaceImpl;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.AccountImpl;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import java.util.HashSet;
+import javax.persistence.Entity;
 import java.util.Set;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable(table = Tables.HERO)
+@Entity(name = Tables.HERO)
 public class HeroImpl extends BaseEntityImpl implements Hero {
 
-	@Persistent
-	private AccountImpl account;
+	@Parent
+	private Key<AccountImpl> account;
 
-	@Persistent
 	private String name;
 
-	@Persistent
-	private FaceImpl face;
+	private Key<RaceImpl> race;
 
-	@Persistent
-	private RaceImpl race;
+	private Key<FaceImpl> face;
 
-	@Persistent
-	private LevelImpl level;
+	private Key<LevelImpl> level;
 
-	@Persistent
 	private long rating;
 
-	@Persistent
 	private int attack;
 
-	@Persistent
 	private int defence;
 
-	@Persistent
-	private Set<HeroCard> cards = new HashSet<HeroCard>();
-
 	public Account getAccount() {
-		return account;
+		return Keys.getInstance(account);
 	}
 
 	public void setAccount(final Account account) {
-		this.account = (AccountImpl) account;
+		this.account = new Key<AccountImpl>(AccountImpl.class, account.getId());
 	}
 
 	public String getName() {
@@ -70,27 +66,27 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public Face getFace() {
-		return face;
+		return Keys.getInstance(face);
 	}
 
 	public void setFace(final Face face) {
-		this.face = (FaceImpl) face;
+		this.face = new Key<FaceImpl>(FaceImpl.class, face.getId());
 	}
 
 	public Race getRace() {
-		return race;
+		return Keys.getInstance(race);
 	}
 
 	public void setRace(final Race race) {
-		this.race = (RaceImpl) race;
+		this.race = new Key<RaceImpl>(RaceImpl.class, race.getId());
 	}
 
 	public Level getLevel() {
-		return level;
+		return Keys.getInstance(level);
 	}
 
 	public void setLevel(final Level level) {
-		this.level = (LevelImpl) level;
+		this.level = new Key<LevelImpl>(LevelImpl.class, level.getId());
 	}
 
 	public int getAttack() {
@@ -110,6 +106,6 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public Set<HeroCard> getCards() {
-		return cards;
+		return Keys.getChildren(HeroCard.class, HeroCardImpl.class, this);
 	}
 }

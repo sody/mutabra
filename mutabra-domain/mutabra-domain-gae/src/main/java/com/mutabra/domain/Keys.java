@@ -1,10 +1,12 @@
 package com.mutabra.domain;
 
-import com.google.appengine.api.datastore.Key;
-import org.greatage.util.CollectionUtils;
+import com.google.appengine.api.datastore.Transaction;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Objectify;
+import org.greatage.domain.SessionCallback;
+import org.greatage.domain.TransactionExecutor;
 
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,35 +14,33 @@ import java.util.Set;
  * @since 1.0
  */
 public class Keys {
-	private static volatile PersistenceManagerFactory instance;
+	private static volatile TransactionExecutor<Transaction, Objectify> executor;
 
-	public static void init(final PersistenceManagerFactory instance) {
-		Keys.instance = instance;
+	public static void init(final TransactionExecutor<Transaction, Objectify> executor) {
+		Keys.executor = executor;
 	}
 
-	public static <T> T getInstance(final Key key, final Class<T> entityClass) {
-		final PersistenceManager manager = instance.getPersistenceManager();
-		return manager.getObjectById(entityClass, key);
+	public static <T> T getInstance(final Key<T> key) {
+		return key == null ? null : executor.execute(new SessionCallback<T, Objectify>() {
+			public T doInSession(final Objectify session) throws Exception {
+				return session.get(key);
+			}
+		});
 	}
 
-	public static <T, V extends T> Set<T> getInstances(final Set<Key> keys, final Class<T> entityClass, final Class<V> valueClass) {
-		final PersistenceManager manager = instance.getPersistenceManager();
-		final Set<T> result = CollectionUtils.newSet();
-		for (Key key : keys) {
-			result.add(manager.getObjectById(valueClass, key));
-		}
-		return result;
+	public static <T, V extends T> Set<T> getInstances(final Class<T> entityClass, final Set<Key<V>> keys) {
+		return keys == null ? null : executor.execute(new SessionCallback<Set<T>, Objectify>() {
+			public Set<T> doInSession(final Objectify session) throws Exception {
+				return new HashSet<T>(session.get(keys).values());
+			}
+		});
 	}
 
-	public static <T extends BaseEntity> Key getKey(final T entity) {
-		return ((BaseEntityImpl) entity).getKey();
-	}
-
-	public static <T extends BaseEntity> Set<Key> getKeys(final Set<T> entities) {
-		final Set<Key> result = CollectionUtils.newSet();
-		for (T entity : entities) {
-			result.add(((BaseEntityImpl) entity).getKey());
-		}
-		return result;
+	public static <T, V extends T, P> Set<T> getChildren(final Class<T> entityClass, final Class<V> realClass, final P parent) {
+		return executor.execute(new SessionCallback<Set<T>, Objectify>() {
+			public Set<T> doInSession(final Objectify session) throws Exception {
+				return new HashSet<T>(session.query(entityClass).ancestor(parent).list());
+			}
+		});
 	}
 }

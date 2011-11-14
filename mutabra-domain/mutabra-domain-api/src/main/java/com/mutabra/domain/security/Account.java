@@ -14,22 +14,6 @@ import java.util.TimeZone;
  */
 public interface Account extends BaseEntity {
 
-	String EMAIL_PROPERTY = "email";
-
-	String PENDING_EMAIL_PROPERTY = "pendingEmail";
-
-	String PASSWORD_PROPERTY = "password";
-
-	String TOKEN_PROPERTY = "token";
-
-	String PENDING_TOKEN_PROPERTY = "pendingToken";
-
-	String FACEBOOK_USER_PROPERTY = "facebookUser";
-
-	String TWITTER_USER_PROPERTY = "twitterUser";
-
-	String GOOGLE_USER_PROPERTY = "googleUser";
-
 	String getEmail();
 
 	void setEmail(String email);

@@ -1,6 +1,7 @@
 package com.mutabra.domain.security;
 
-import com.google.appengine.api.datastore.Key;
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Indexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
@@ -8,9 +9,8 @@ import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.player.HeroImpl;
 import org.greatage.util.LocaleUtils;
 
-import javax.jdo.annotations.NotPersistent;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
@@ -21,65 +21,49 @@ import java.util.TimeZone;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable(table = Tables.ACCOUNT)
+@Entity(name = Tables.ACCOUNT)
 public class AccountImpl extends BaseEntityImpl implements Account {
 
-	@Persistent
 	private String email;
 
-	@Persistent
 	private String pendingEmail;
 
-	@Persistent
 	private String password;
 
-	@Persistent
 	private String pendingPassword;
 
-	@Persistent
 	private String token;
 
-	@Persistent
 	private String pendingToken;
 
-	@Persistent
+	@Indexed
 	private String facebookUser;
 
-	@Persistent
+	@Indexed
 	private String twitterUser;
 
-	@Persistent
+	@Indexed
 	private String googleUser;
 
-	@Persistent
 	private Date registered;
 
-	@Persistent
 	private Date lastLogin;
 
-	@Persistent
 	private String name;
 
-	@Persistent
 	private String place;
 
-	@Persistent
 	private String locale = "";
 
-	@NotPersistent
+	@Transient
 	private Locale localeValue;
 
-	@Persistent
+	@Transient
 	private TimeZone timeZone;
 
-	@NotPersistent
-	private HeroImpl hero;
+	private Key<HeroImpl> hero;
 
-	@Persistent
-	private Set<Key> roles = new HashSet<Key>();
-
-	@NotPersistent
-	private Set<Hero> heroes = new HashSet<Hero>();
+	private Set<Key<RoleImpl>> roles = new HashSet<Key<RoleImpl>>();
 
 	public String getEmail() {
 		return email;
@@ -206,22 +190,26 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	}
 
 	public Hero getHero() {
-		return hero;
+		return Keys.getInstance(hero);
 	}
 
 	public void setHero(final Hero hero) {
-		this.hero = (HeroImpl) hero;
+		final Key<AccountImpl> parent = new Key<AccountImpl>(AccountImpl.class, getId());
+		this.hero = new Key<HeroImpl>(parent, HeroImpl.class, hero.getId());
 	}
 
 	public Set<Role> getRoles() {
-		return Keys.getInstances(roles, Role.class, RoleImpl.class);
+		return Keys.getInstances(Role.class, roles);
 	}
 
 	public void setRoles(final Set<Role> roles) {
-		this.roles = Keys.getKeys(roles);
+		this.roles = new HashSet<Key<RoleImpl>>();
+		for (Role role : roles) {
+			this.roles.add(new Key<RoleImpl>(RoleImpl.class, role.getId()));
+		}
 	}
 
 	public Set<Hero> getHeroes() {
-		return heroes;
+		return Keys.getChildren(Hero.class, HeroImpl.class, this);
 	}
 }

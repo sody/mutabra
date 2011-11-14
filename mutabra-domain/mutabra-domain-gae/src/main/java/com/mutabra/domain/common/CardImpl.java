@@ -1,29 +1,29 @@
 package com.mutabra.domain.common;
 
-import com.mutabra.domain.CodedEntityImpl;
+import com.googlecode.objectify.Key;
 import com.mutabra.db.Tables;
+import com.mutabra.domain.CodedEntityImpl;
+import com.mutabra.domain.Keys;
 import com.mutabra.domain.TranslationType;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@PersistenceCapable(table = Tables.CARD)
+@Entity(name = Tables.CARD)
 public class CardImpl extends CodedEntityImpl implements Card {
 
-	@Persistent
 	private CardType type;
 
-	@Persistent
-	private LevelImpl level;
+	private Key<LevelImpl> level;
 
-	@Persistent
+	@Embedded
 	private EffectImpl effect;
 
-	@Persistent
+	@Embedded
 	private SummonImpl summon;
 
 	public CardImpl() {
@@ -44,11 +44,11 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	public Level getLevel() {
-		return level;
+		return Keys.getInstance(level);
 	}
 
 	public void setLevel(final Level level) {
-		this.level = (LevelImpl) level;
+		this.level = new Key<LevelImpl>(LevelImpl.class, level.getId());
 	}
 
 	public Effect getEffect() {

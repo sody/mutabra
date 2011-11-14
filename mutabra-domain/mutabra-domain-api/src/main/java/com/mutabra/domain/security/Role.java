@@ -10,9 +10,5 @@ import java.util.Set;
  */
 public interface Role extends CodedEntity {
 
-	Set<Account> getAccounts();
-
 	Set<Permission> getPermissions();
-
-	void setPermissions(Set<Permission> permissions);
 }

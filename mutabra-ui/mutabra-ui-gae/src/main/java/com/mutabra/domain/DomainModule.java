@@ -1,5 +1,8 @@
 package com.mutabra.domain;
 
+import com.google.appengine.api.datastore.Transaction;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
 import com.mutabra.db.MutabraChangeLog;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardImpl;
@@ -33,17 +36,11 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Startup;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.datanucleus.store.appengine.jdo.DatastoreJDOPersistenceManagerFactory;
 import org.greatage.db.gae.GAEDatabase;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.TransactionExecutor;
-import org.greatage.domain.jdo.JDOExecutor;
-import org.greatage.domain.jdo.JDORepository;
-
-import javax.jdo.Constants;
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManagerFactory;
-import java.util.Map;
+import org.greatage.domain.objectify.ObjectifyExecutor;
+import org.greatage.domain.objectify.ObjectifyRepository;
 
 /**
  * @author Ivan Khalopik
@@ -52,28 +49,31 @@ import java.util.Map;
 public class DomainModule {
 
 	public static void bind(final ServiceBinder binder) {
-		binder.bind(EntityRepository.class, JDORepository.class);
-		binder.bind(TransactionExecutor.class, JDOExecutor.class);
+		binder.bind(EntityRepository.class, ObjectifyRepository.class);
+		binder.bind(TransactionExecutor.class, ObjectifyExecutor.class);
 	}
 
 	public DatabaseService buildDatabaseService() {
 		return new DefaultDatabaseService(new GAEDatabase(), new MutabraChangeLog());
 	}
 
-	public PersistenceManagerFactory buildPersistenceManagerFactory(final Map<String, String> jdoConfiguration) {
-		final PersistenceManagerFactory factory = JDOHelper.getPersistenceManagerFactory(jdoConfiguration);
-		Keys.init(factory);
-		return factory;
-	}
+	public ObjectifyFactory buildObjectifyFactory() {
+		final ObjectifyFactory objectifyFactory = new ObjectifyFactory();
 
-	@Contribute(PersistenceManagerFactory.class)
-	public void contributePersistenceManagerFactory(final MappedConfiguration<String, String> configuration) {
-		configuration.add(Constants.PROPERTY_PERSISTENCE_MANAGER_FACTORY_CLASS, DatastoreJDOPersistenceManagerFactory.class.getName());
-		configuration.add(Constants.PROPERTY_CONNECTION_URL, "appengine");
-		configuration.add(Constants.OPTION_NONTRANSACTIONAL_READ, "true");
-		configuration.add(Constants.OPTION_NONTRANSACTIONAL_WRITE, "true");
-		configuration.add(Constants.OPTION_RETAIN_VALUES, "true");
-		configuration.add("datanucleus.appengine.autoCreateDatastoreTxns", "true");
+		objectifyFactory.register(TranslationImpl.class);
+
+		objectifyFactory.register(AccountImpl.class);
+		objectifyFactory.register(RoleImpl.class);
+		objectifyFactory.register(PermissionImpl.class);
+		objectifyFactory.register(ChangeSetImpl.class);
+
+		objectifyFactory.register(FaceImpl.class);
+		objectifyFactory.register(RaceImpl.class);
+		objectifyFactory.register(LevelImpl.class);
+
+		objectifyFactory.register(HeroImpl.class);
+
+		return objectifyFactory;
 	}
 
 	@Contribute(EntityRepository.class)
@@ -102,5 +102,10 @@ public class DomainModule {
 		if (!productionMode) {
 			databaseService.update(false, false);
 		}
+	}
+
+	@Startup
+	public void linkExecutor(final TransactionExecutor<Transaction, Objectify> executor) {
+		Keys.init(executor);
 	}
 }
