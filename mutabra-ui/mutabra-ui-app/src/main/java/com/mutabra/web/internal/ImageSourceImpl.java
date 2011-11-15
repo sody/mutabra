@@ -45,7 +45,8 @@ public class ImageSourceImpl implements ImageSource {
 
 	public Asset getHeroImage(final Hero hero, final int size) {
 		return hero != null ?
-				getContextAsset(HERO_REPOSITORY, hero.getRace().getCode() + "_" + hero.getFace().getCode(), size, notFound) :
+				getRaceImage(hero.getRace(), size) :
+//				getContextAsset(HERO_REPOSITORY, hero.getRace().getCode() + "_" + hero.getFace().getCode(), size, notFound) :
 				notFound;
 	}
 
