@@ -36,8 +36,13 @@ public class CreateHero extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS)
 	Object createHero() {
-		value = heroService.create(accountContext.getAccount());
+		final Account account = accountContext.getAccount();
+		value = heroService.create(account);
 		heroService.saveOrUpdate(value);
+
+		account.setHero(value);
+		accountService.save(account);
+
 		return back();
 	}
 

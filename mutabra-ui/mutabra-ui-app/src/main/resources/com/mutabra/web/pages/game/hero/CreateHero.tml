@@ -1,9 +1,19 @@
-<html t:type="layout/default" buttons="create,cancel"
+<html t:type="layout/default"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
+<t:form>
 	<div class="t-beaneditor-row">
 		<t:game.raceselect/>
 	</div>
+
+	<t:menu class="toolbar" items="create,cancel">
+		<p:createMenuItem>
+			<t:button>
+				<t:submit value="message:button.create.title"/>
+			</t:button>
+		</p:createMenuItem>
+	</t:menu>
+</t:form>
 
 </html>

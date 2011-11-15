@@ -8,15 +8,14 @@ import org.greatage.util.ReflectionUtils;
 
 /**
  * @author Ivan Khalopik
- * @version $Revision$ $Date$
- * @since 1.11
+ * @since 1.0
  */
 public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements HeroService {
 	private final Class<? extends Hero> realEntityClass;
 
-	public HeroServiceImpl(final EntityRepository repository, final Class<Hero> entityClass) {
-		super(repository, entityClass);
-		realEntityClass = repository.create(entityClass).getClass();
+	public HeroServiceImpl(final EntityRepository repository) {
+		super(repository, Hero.class);
+		realEntityClass = repository.create(Hero.class).getClass();
 	}
 
 	public Hero create(final Account account) {

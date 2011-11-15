@@ -39,7 +39,7 @@ public class Keys {
 	public static <T, V extends T, P> Set<T> getChildren(final Class<T> entityClass, final Class<V> realClass, final P parent) {
 		return executor.execute(new SessionCallback<Set<T>, Objectify>() {
 			public Set<T> doInSession(final Objectify session) throws Exception {
-				return new HashSet<T>(session.query(entityClass).ancestor(parent).list());
+				return new HashSet<T>(session.query(realClass).ancestor(parent).list());
 			}
 		});
 	}
