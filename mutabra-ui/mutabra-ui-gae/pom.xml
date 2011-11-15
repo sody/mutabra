@@ -29,12 +29,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-gae</artifactId>
+			<artifactId>mutabra-domain-api</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-services</artifactId>
+			<artifactId>mutabra-domain-gae</artifactId>
 		</dependency>
 
 		<dependency>

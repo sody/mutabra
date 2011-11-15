@@ -3,7 +3,6 @@ package com.mutabra.web.internal;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.Mappers;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.AccountManager;
 import com.mutabra.web.services.MailService;

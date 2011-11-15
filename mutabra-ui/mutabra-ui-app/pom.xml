@@ -23,13 +23,6 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-			<resource>
-				<directory>src/main/config</directory>
-				<includes>
-					<include>logback.xml</include>
-				</includes>
-				<filtering>true</filtering>
-			</resource>
 		</resources>
 
 		<plugins>
@@ -49,7 +42,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-services</artifactId>
+			<artifactId>mutabra-domain-api</artifactId>
 		</dependency>
 
 		<dependency>
@@ -71,11 +64,6 @@
 		<dependency>
 			<groupId>org.scribe</groupId>
 			<artifactId>scribe</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
 		</dependency>
 
 		<dependency>
@@ -117,7 +105,7 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
 						<configuration>
-							<webXml>src/main/config/web-gae.xml</webXml>
+							<webXml>src/main/config/web-dev.xml</webXml>
 							<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
 						</configuration>
 					</plugin>
@@ -134,6 +122,11 @@
 					<groupId>com.mutabra</groupId>
 					<artifactId>mutabra-ui-gae</artifactId>
 				</dependency>
+
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</dependency>
 			</dependencies>
 		</profile>
 
@@ -141,6 +134,13 @@
 			<id>hibernate</id>
 			<build>
 				<resources>
+					<resource>
+						<directory>src/main/config</directory>
+						<includes>
+							<include>logback.xml</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
 					<resource>
 						<directory>src/main/config</directory>
 						<includes>
@@ -187,6 +187,11 @@
 				<dependency>
 					<groupId>com.mutabra</groupId>
 					<artifactId>mutabra-ui-hibernate</artifactId>
+				</dependency>
+
+				<dependency>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>

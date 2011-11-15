@@ -24,12 +24,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-hibernate</artifactId>
+			<artifactId>mutabra-domain-api</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-domain-services</artifactId>
+			<artifactId>mutabra-domain-hibernate</artifactId>
 		</dependency>
 
 		<dependency>

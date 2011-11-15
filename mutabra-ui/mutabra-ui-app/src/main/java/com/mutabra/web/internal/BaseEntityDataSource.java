@@ -1,8 +1,6 @@
 package com.mutabra.web.internal;
 
 import com.mutabra.domain.BaseEntity;
-import com.mutabra.services.BaseEntityMapper;
-import org.apache.tapestry5.grid.ColumnSort;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.grid.SortConstraint;
 import org.greatage.domain.EntityQuery;

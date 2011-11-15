@@ -3,8 +3,6 @@ package com.mutabra.web.pages.admin;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.security.AccountMapper;
-import com.mutabra.services.security.RoleMapper;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.AccountDialog;
 import com.mutabra.web.internal.Authorities;
