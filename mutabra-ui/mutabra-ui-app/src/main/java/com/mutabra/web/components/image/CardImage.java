@@ -1,38 +1,42 @@
 package com.mutabra.web.components.image;
 
-import com.mutabra.domain.common.Race;
+import com.mutabra.domain.common.Card;
 import com.mutabra.web.base.components.AbstractImage;
 import com.mutabra.web.services.ImageSource;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.annotations.Value;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class RaceImage extends AbstractImage {
+public class CardImage extends AbstractImage {
 
 	@Property
 	@Parameter(required = true, allowNull = false)
-	private Race race;
+	private Card card;
+
+	@Value("card:description")
+	private String title;
 
 	@Inject
 	private ImageSource imageSource;
 
 	@Override
 	protected String getTitle() {
-		return race.getCode();
+		return title;
 	}
 
 	@Override
 	protected String getAlt() {
-		return race.getCode();
+		return card.getCode();
 	}
 
 	@Override
 	protected Asset getAsset() {
-		return imageSource.getRaceImage(race, getSize());
+		return imageSource.getCardImage(card, getSize());
 	}
 }

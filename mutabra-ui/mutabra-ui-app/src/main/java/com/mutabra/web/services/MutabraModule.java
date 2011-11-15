@@ -6,6 +6,7 @@ import com.mutabra.web.internal.AccountManagerImpl;
 import com.mutabra.web.internal.CustomValidationDecoratorFactory;
 import com.mutabra.web.internal.EntityEncoderFactory;
 import com.mutabra.web.internal.I18nPropertyConduitSource;
+import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.TranslatorImpl;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
@@ -52,6 +53,7 @@ public class MutabraModule {
 		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
 		binder.bind(AccountManager.class, AccountManagerImpl.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
+		binder.bind(ImageSource.class, ImageSourceImpl.class);
 	}
 
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {

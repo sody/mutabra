@@ -1,5 +1,7 @@
 package com.mutabra.db;
 
+import com.mutabra.domain.common.CardType;
+import com.mutabra.domain.common.TargetType;
 import org.greatage.db.ChangeLog;
 
 /**
@@ -67,5 +69,28 @@ public class Release_1_0 extends ChangeLog {
 				.set("roles",
 						select(Tables.ROLE).where(condition("code").in("admin", "user"))
 				);
+
+		begin("2011-11-15/test_cards_and_faces").comment("some test cards added");
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "ec1")
+				.set("effect.targetType", TargetType.PLAYER_ENEMY.name())
+				.set("effect.attack", 10)
+				.set("effect.defence", 0)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.SUMMON.name())
+				.set("code", "sc1")
+				.set("summon.attack", 3)
+				.set("summon.defence", 10)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.FACE)
+				.set("code", "f1");
+		insert(Tables.FACE)
+				.set("code", "f2");
 	}
 }

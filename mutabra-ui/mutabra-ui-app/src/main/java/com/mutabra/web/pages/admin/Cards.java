@@ -43,7 +43,7 @@ public class Cards extends AbstractPage {
 	}
 
 	Object onEdit(final Card card) {
-		return entityDialog.show(row);
+		return entityDialog.show(card);
 	}
 
 	Object onSuccess() {

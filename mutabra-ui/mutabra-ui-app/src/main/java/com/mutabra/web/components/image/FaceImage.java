@@ -2,8 +2,11 @@ package com.mutabra.web.components.image;
 
 import com.mutabra.domain.common.Face;
 import com.mutabra.web.base.components.AbstractImage;
+import com.mutabra.web.services.ImageSource;
+import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
  * @author Ivan Khalopik
@@ -15,23 +18,21 @@ public class FaceImage extends AbstractImage {
 	@Parameter(required = true, allowNull = false)
 	private Face face;
 
+	@Inject
+	private ImageSource imageSource;
+
 	@Override
 	protected String getTitle() {
 		return face.getCode();
 	}
 
 	@Override
+	protected Asset getAsset() {
+		return imageSource.getFaceImage(face, getSize());
+	}
+
+	@Override
 	protected String getAlt() {
 		return face.getCode();
-	}
-
-	@Override
-	protected String getPath() {
-		return "img/faces/";
-	}
-
-	@Override
-	protected String getName() {
-		return face.getCode().toLowerCase();
 	}
 }
