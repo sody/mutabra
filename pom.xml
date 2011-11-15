@@ -359,7 +359,7 @@
 		</profile>
 
 		<profile>
-			<id>debug</id>
+			<id>dev</id>
 			<properties>
 				<project.production.mode>false</project.production.mode>
 
