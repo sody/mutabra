@@ -13,6 +13,8 @@ import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.CodedEntityServiceImpl;
 import com.mutabra.services.TranslationService;
 import com.mutabra.services.TranslationServiceImpl;
+import com.mutabra.services.common.CardService;
+import com.mutabra.services.common.CardServiceImpl;
 import com.mutabra.services.player.HeroService;
 import com.mutabra.services.player.HeroServiceImpl;
 import com.mutabra.web.internal.MailServiceImpl;
@@ -39,6 +41,7 @@ public class ServicesModule {
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
 		binder.bind(HeroService.class, HeroServiceImpl.class);
+		binder.bind(CardService.class, CardServiceImpl.class);
 	}
 
 	public ServicesModule(final EntityRepository repository) {

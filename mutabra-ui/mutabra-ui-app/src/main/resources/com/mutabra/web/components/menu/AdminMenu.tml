@@ -1,4 +1,4 @@
-<t:menu class="sidebar" items="changeSets,accounts,roles,permissions,levels,races,faces,test" selected="test"
+<t:menu class="sidebar" items="changeSets,accounts,roles,permissions,levels,races,faces,cards,test" selected="test"
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:changeSetsMenuItem>
@@ -22,6 +22,9 @@
 	<p:racesMenuItem>
 		<t:button><t:pagelink page="admin/races">${message:page.admin-races.title}</t:pagelink></t:button>
 	</p:racesMenuItem>
+	<p:cardsMenuItem>
+		<t:button><t:pagelink page="admin/cards">${message:page.admin-cards.title}</t:pagelink></t:button>
+	</p:cardsMenuItem>
 	<p:testMenuItem>
 		<t:button><t:pagelink page="admin/test">${message:page.admin-test.title}</t:pagelink></t:button>
 	</p:testMenuItem>
