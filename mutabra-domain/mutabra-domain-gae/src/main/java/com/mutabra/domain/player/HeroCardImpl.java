@@ -25,13 +25,16 @@ public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
 	private long rating;
 
-	public Hero getHero() {
-		return Keys.getInstance(hero);
+	public HeroCardImpl() {
 	}
 
-	public void setHero(final Hero hero) {
+	public HeroCardImpl(final Hero hero) {
 		final Key<AccountImpl> parent = new Key<AccountImpl>(AccountImpl.class, hero.getAccount().getId());
 		this.hero = new Key<HeroImpl>(parent, HeroImpl.class, hero.getId());
+	}
+
+	public Hero getHero() {
+		return Keys.getInstance(hero);
 	}
 
 	public Card getCard() {

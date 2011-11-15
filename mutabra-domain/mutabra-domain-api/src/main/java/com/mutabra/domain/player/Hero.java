@@ -16,8 +16,6 @@ public interface Hero extends BaseEntity {
 
 	Account getAccount();
 
-	void setAccount(Account account);
-
 	String getName();
 
 	void setName(String name);

@@ -41,12 +41,15 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	private int defence;
 
-	public Account getAccount() {
-		return Keys.getInstance(account);
+	public HeroImpl() {
 	}
 
-	public void setAccount(final Account account) {
+	public HeroImpl(final Account account) {
 		this.account = new Key<AccountImpl>(AccountImpl.class, account.getId());
+	}
+
+	public Account getAccount() {
+		return Keys.getInstance(account);
 	}
 
 	public String getName() {

@@ -2,6 +2,7 @@ package com.mutabra.web.components.game;
 
 import com.mutabra.domain.common.Race;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.CodedEntityService;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.AfterRender;
@@ -28,7 +29,7 @@ public class RaceSelect implements ClientElement {
 	private Race value;
 
 	@InjectService("raceService")
-	private BaseEntityService<Race> raceService;
+	private CodedEntityService<Race> raceService;
 
 	@Property
 	private Race row;

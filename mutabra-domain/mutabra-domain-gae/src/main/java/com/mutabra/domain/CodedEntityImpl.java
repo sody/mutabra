@@ -20,21 +20,22 @@ public class CodedEntityImpl extends BaseEntityImpl implements CodedEntity {
 	@Transient
 	private final Collection<String> variants;
 
-	protected CodedEntityImpl(final String type, final Collection<String> variants) {
+	protected CodedEntityImpl(final String type, final TranslationType translationType) {
+		this(type, null, translationType);
+	}
+
+	protected CodedEntityImpl(final String type, final String code, final TranslationType translationType) {
+		this(type, code, translationType.getVariants());
+	}
+
+	protected CodedEntityImpl(final String type, final String code, final Collection<String> variants) {
+		this.code = code;
 		this.type = type.toUpperCase();
 		this.variants = variants;
 	}
 
-	protected CodedEntityImpl(final String type, final TranslationType translationType) {
-		this(type, translationType.getVariants());
-	}
-
 	public String getCode() {
 		return code;
-	}
-
-	public void setCode(final String code) {
-		this.code = code;
 	}
 
 	public String getTranslationType() {

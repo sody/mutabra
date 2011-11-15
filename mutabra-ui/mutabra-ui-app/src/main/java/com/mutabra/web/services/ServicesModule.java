@@ -3,15 +3,18 @@ package com.mutabra.web.services;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
-import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.domain.security.Permission;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
+import com.mutabra.services.CodedEntityService;
+import com.mutabra.services.CodedEntityServiceImpl;
 import com.mutabra.services.TranslationService;
 import com.mutabra.services.TranslationServiceImpl;
+import com.mutabra.services.player.HeroService;
+import com.mutabra.services.player.HeroServiceImpl;
 import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -35,6 +38,7 @@ public class ServicesModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
+		binder.bind(HeroService.class, HeroServiceImpl.class);
 	}
 
 	public ServicesModule(final EntityRepository repository) {
@@ -45,12 +49,12 @@ public class ServicesModule {
 		return new MailServiceImpl(adminAddress);
 	}
 
-	public BaseEntityService<Role> buildRoleService() {
-		return new BaseEntityServiceImpl<Role>(repository, Role.class);
+	public CodedEntityService<Role> buildRoleService() {
+		return new CodedEntityServiceImpl<Role>(repository, Role.class);
 	}
 
-	public BaseEntityService<Permission> buildPermissionService() {
-		return new BaseEntityServiceImpl<Permission>(repository, Permission.class);
+	public CodedEntityService<Permission> buildPermissionService() {
+		return new CodedEntityServiceImpl<Permission>(repository, Permission.class);
 	}
 
 	public BaseEntityService<Account> buildAccountService() {
@@ -61,20 +65,16 @@ public class ServicesModule {
 		return new BaseEntityServiceImpl<ChangeSet>(repository, ChangeSet.class);
 	}
 
-	public BaseEntityService<Level> buildLevelService() {
-		return new BaseEntityServiceImpl<Level>(repository, Level.class);
+	public CodedEntityService<Level> buildLevelService() {
+		return new CodedEntityServiceImpl<Level>(repository, Level.class);
 	}
 
-	public BaseEntityService<Face> buildFaceService() {
-		return new BaseEntityServiceImpl<Face>(repository, Face.class);
+	public CodedEntityService<Face> buildFaceService() {
+		return new CodedEntityServiceImpl<Face>(repository, Face.class);
 	}
 
-	public BaseEntityService<Race> buildRaceService() {
-		return new BaseEntityServiceImpl<Race>(repository, Race.class);
-	}
-
-	public BaseEntityService<Hero> buildHeroService() {
-		return new BaseEntityServiceImpl<Hero>(repository, Hero.class);
+	public CodedEntityService<Race> buildRaceService() {
+		return new CodedEntityServiceImpl<Race>(repository, Race.class);
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)

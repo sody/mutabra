@@ -11,13 +11,11 @@ public interface HeroCard extends BaseEntity {
 
 	Hero getHero();
 
-	void setHero(final Hero hero);
-
 	Card getCard();
 
-	void setCard(final Card card);
+	void setCard(Card card);
 
 	long getRating();
 
-	void setRating(final long rating);
+	void setRating(long rating);
 }

@@ -21,26 +21,22 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	private Key<LevelImpl> level;
 
 	@Embedded
-	private EffectImpl effect;
+	private EffectImpl effect = new EffectImpl();
 
 	@Embedded
-	private SummonImpl summon;
+	private SummonImpl summon = new SummonImpl();
 
 	public CardImpl() {
-		this(CardType.UNKNOWN);
+		this(null, CardType.UNKNOWN);
 	}
 
-	protected CardImpl(final CardType type) {
-		super(Tables.CARD, TranslationType.STANDARD);
+	public CardImpl(final String code, final CardType type) {
+		super(Tables.CARD, code, TranslationType.STANDARD);
 		this.type = type;
 	}
 
 	public CardType getType() {
 		return type;
-	}
-
-	public void setType(final CardType type) {
-		this.type = type;
 	}
 
 	public Level getLevel() {
@@ -55,15 +51,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 		return effect;
 	}
 
-	public void setEffect(final Effect effect) {
-		this.effect = (EffectImpl) effect;
-	}
-
 	public Summon getSummon() {
 		return summon;
-	}
-
-	public void setSummon(final Summon summon) {
-		this.summon = (SummonImpl) summon;
 	}
 }

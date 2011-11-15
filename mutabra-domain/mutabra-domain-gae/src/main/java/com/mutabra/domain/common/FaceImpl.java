@@ -14,6 +14,10 @@ import javax.persistence.Entity;
 public class FaceImpl extends CodedEntityImpl implements Face {
 
 	public FaceImpl() {
-		super(Tables.FACE, TranslationType.STANDARD);
+		this(null);
+	}
+
+	public FaceImpl(final String code) {
+		super(Tables.FACE, code, TranslationType.STANDARD);
 	}
 }

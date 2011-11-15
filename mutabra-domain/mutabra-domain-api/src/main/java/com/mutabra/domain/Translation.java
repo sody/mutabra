@@ -8,12 +8,6 @@ import java.util.Locale;
  */
 public interface Translation extends BaseEntity {
 
-	String TYPE_PROPERTY = "type";
-	String CODE_PROPERTY = "code";
-	String VARIANT_PROPERTY = "variant";
-	String LOCALE_PROPERTY = "locale";
-	String VALUE_PROPERTY = "value";
-
 	String getValue();
 
 	void setValue(String value);

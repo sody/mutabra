@@ -16,11 +16,15 @@ import java.util.Set;
  */
 @Entity(name = Tables.ROLE)
 public class RoleImpl extends CodedEntityImpl implements Role {
+	private Set<Key<PermissionImpl>> permissions = new HashSet<Key<PermissionImpl>>();
+
 	public RoleImpl() {
-		super(Tables.ROLE, TranslationType.STANDARD);
+		this(null);
 	}
 
-	private Set<Key<PermissionImpl>> permissions = new HashSet<Key<PermissionImpl>>();
+	public RoleImpl(final String code) {
+		super(Tables.ROLE, code, TranslationType.STANDARD);
+	}
 
 	public Set<Permission> getPermissions() {
 		return Keys.getInstances(Permission.class, permissions);

@@ -8,8 +8,6 @@ import com.mutabra.domain.CodedEntity;
  */
 public interface Level extends CodedEntity {
 
-	String RATING_PROPERTY = "rating";
-
 	long getRating();
 
 	void setRating(long rating);

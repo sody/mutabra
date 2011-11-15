@@ -1,8 +1,6 @@
 package com.mutabra.domain.common;
 
 import com.mutabra.db.Tables;
-import com.mutabra.domain.CodedEntityImpl;
-import com.mutabra.domain.TranslationType;
 
 import javax.persistence.Entity;
 
@@ -11,15 +9,11 @@ import javax.persistence.Entity;
  * @since 1.0
  */
 @Entity(name = Tables.SUMMON)
-public class SummonImpl extends CodedEntityImpl implements Summon {
+public class SummonImpl implements Summon {
 
 	private int attack;
 
 	private int defence;
-
-	public SummonImpl() {
-		super(Tables.SUMMON, TranslationType.STANDARD);
-	}
 
 	public int getAttack() {
 		return attack;

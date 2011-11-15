@@ -14,6 +14,10 @@ import javax.persistence.Entity;
 public class PermissionImpl extends CodedEntityImpl implements Permission {
 
 	public PermissionImpl() {
-		super(Tables.PERMISSION, TranslationType.STANDARD);
+		this(null);
+	}
+
+	public PermissionImpl(final String code) {
+		super(Tables.PERMISSION, code, TranslationType.STANDARD);
 	}
 }

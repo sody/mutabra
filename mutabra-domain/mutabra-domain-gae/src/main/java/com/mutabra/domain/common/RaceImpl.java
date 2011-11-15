@@ -14,6 +14,10 @@ import javax.persistence.Entity;
 public class RaceImpl extends CodedEntityImpl implements Race {
 
 	public RaceImpl() {
-		super(Tables.RACE, TranslationType.STANDARD);
+		this(null);
+	}
+
+	public RaceImpl(final String code) {
+		super(Tables.RACE, code, TranslationType.STANDARD);
 	}
 }

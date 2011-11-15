@@ -1,8 +1,6 @@
 package com.mutabra.domain.common;
 
 import com.mutabra.db.Tables;
-import com.mutabra.domain.CodedEntityImpl;
-import com.mutabra.domain.TranslationType;
 
 import javax.persistence.Entity;
 
@@ -11,17 +9,13 @@ import javax.persistence.Entity;
  * @since 1.0
  */
 @Entity(name = Tables.EFFECT)
-public class EffectImpl extends CodedEntityImpl implements Effect {
+public class EffectImpl implements Effect {
 
 	private TargetType targetType;
 
 	private int attack;
 
 	private int defence;
-
-	public EffectImpl() {
-		super(Tables.EFFECT, TranslationType.STANDARD);
-	}
 
 	public TargetType getTargetType() {
 		return targetType;

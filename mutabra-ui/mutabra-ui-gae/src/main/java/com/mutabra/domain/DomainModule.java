@@ -70,8 +70,10 @@ public class DomainModule {
 		objectifyFactory.register(FaceImpl.class);
 		objectifyFactory.register(RaceImpl.class);
 		objectifyFactory.register(LevelImpl.class);
+		objectifyFactory.register(CardImpl.class);
 
 		objectifyFactory.register(HeroImpl.class);
+		objectifyFactory.register(HeroCardImpl.class);
 
 		return objectifyFactory;
 	}

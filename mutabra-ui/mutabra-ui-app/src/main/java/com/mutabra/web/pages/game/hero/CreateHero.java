@@ -3,6 +3,7 @@ package com.mutabra.web.pages.game.hero;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.player.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.pages.game.GameHome;
@@ -24,8 +25,8 @@ public class CreateHero extends AbstractPage {
 	@InjectService("accountService")
 	private BaseEntityService<Account> accountService;
 
-	@InjectService("heroService")
-	private BaseEntityService<Hero> heroService;
+	@Inject
+	private HeroService heroService;
 
 	@Property
 	private Hero value;
@@ -35,8 +36,7 @@ public class CreateHero extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS)
 	Object createHero() {
-		value = heroService.create();
-		value.setAccount(accountContext.getAccount());
+		value = heroService.create(accountContext.getAccount());
 		heroService.saveOrUpdate(value);
 		return back();
 	}

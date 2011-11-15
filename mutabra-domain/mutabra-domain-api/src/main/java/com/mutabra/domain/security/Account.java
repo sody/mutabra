@@ -74,13 +74,13 @@ public interface Account extends BaseEntity {
 
 	void setTimeZone(TimeZone timeZone);
 
-	Hero getHero();
-
-	void setHero(Hero hero);
-
 	Set<Role> getRoles();
 
 	void setRoles(Set<Role> roles);
+
+	Hero getHero();
+
+	void setHero(Hero hero);
 
 	Set<Hero> getHeroes();
 }

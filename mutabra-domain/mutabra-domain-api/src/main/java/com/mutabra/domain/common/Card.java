@@ -10,17 +10,11 @@ public interface Card extends CodedEntity {
 
 	CardType getType();
 
-	void setType(CardType type);
+	Effect getEffect();
+
+	Summon getSummon();
 
 	Level getLevel();
 
 	void setLevel(Level level);
-
-	Effect getEffect();
-
-	void setEffect(Effect effect);
-
-	Summon getSummon();
-
-	void setSummon(Summon summon);
 }

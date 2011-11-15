@@ -16,7 +16,11 @@ public class LevelImpl extends CodedEntityImpl implements Level {
 	private long rating;
 
 	public LevelImpl() {
-		super(Tables.LEVEL, TranslationType.STANDARD);
+		this(null);
+	}
+
+	public LevelImpl(final String code) {
+		super(Tables.LEVEL, code, TranslationType.STANDARD);
 	}
 
 	public long getRating() {

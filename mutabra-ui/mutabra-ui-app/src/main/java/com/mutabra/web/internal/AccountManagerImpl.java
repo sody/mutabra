@@ -3,6 +3,7 @@ package com.mutabra.web.internal;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.CodedEntityService;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.AccountManager;
 import com.mutabra.web.services.MailService;
@@ -27,7 +28,7 @@ import static com.mutabra.services.Mappers.role$;
  */
 public class AccountManagerImpl implements AccountManager {
 	private final BaseEntityService<Account> accountService;
-	private final BaseEntityService<Role> roleService;
+	private final CodedEntityService<Role> roleService;
 	private final MailService mailService;
 	private final SecretEncoder passwordEncoder;
 	private final RequestPageCache requestPageCache;
@@ -35,7 +36,7 @@ public class AccountManagerImpl implements AccountManager {
 
 	public AccountManagerImpl(
 			final @InjectService("accountService") BaseEntityService<Account> accountService,
-			final @InjectService("roleService") BaseEntityService<Role> roleService,
+			final @InjectService("roleService") CodedEntityService<Role> roleService,
 			final SecretEncoder passwordEncoder,
 			final MailService mailService,
 			final RequestPageCache requestPageCache,
@@ -63,7 +64,8 @@ public class AccountManagerImpl implements AccountManager {
 		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
-		final Set<Role> roles = new HashSet<Role>(roleService.query(role$.code.eq("user")).list());
+		final Set<Role> roles = new HashSet<Role>();
+		roles.add(roleService.get("user"));
 		account.setRoles(roles);
 
 		account.setPendingEmail(null);
