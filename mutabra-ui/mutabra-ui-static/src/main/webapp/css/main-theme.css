@@ -2258,58 +2258,30 @@ button.ui-button::-moz-focus-inner {
 }
 
 /**
- *  Horizontal Buttons
+ *  JCarousel styles
  */
-.jcarousel-next-horizontal {
+.jcarousel-next,
+.jcarousel-prev {
 	position: absolute;
 	top: 36px;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	background-image: url(../img/icons_64x32x32.png);
+}
+
+.jcarousel-next-disabled,
+.jcarousel-prev-disabled {
+	cursor: default;
+	opacity: 0.5;
+}
+
+.jcarousel-next {
 	right: 5px;
-	width: 32px;
-	height: 32px;
-	cursor: pointer;
-	background: transparent url(../img/next-horizontal.png) no-repeat 0 0;
-}
-
-.jcarousel-next-horizontal:hover,
-.jcarousel-next-horizontal:focus {
 	background-position: -32px 0;
 }
 
-.jcarousel-next-horizontal:active {
-	background-position: -64px 0;
-}
-
-.jcarousel-next-disabled-horizontal,
-.jcarousel-next-disabled-horizontal:hover,
-.jcarousel-next-disabled-horizontal:focus,
-.jcarousel-next-disabled-horizontal:active {
-	cursor: default;
-	background-position: -96px 0;
-}
-
-.jcarousel-prev-horizontal {
-	position: absolute;
-	top: 36px;
+.jcarousel-prev {
 	left: 5px;
-	width: 32px;
-	height: 32px;
-	cursor: pointer;
-	background: transparent url(../img/prev-horizontal.png) no-repeat 0 0;
-}
-
-.jcarousel-prev-horizontal:hover,
-.jcarousel-prev-horizontal:focus {
-	background-position: -32px 0;
-}
-
-.jcarousel-prev-horizontal:active {
-	background-position: -64px 0;
-}
-
-.jcarousel-prev-disabled-horizontal,
-.jcarousel-prev-disabled-horizontal:hover,
-.jcarousel-prev-disabled-horizontal:focus,
-.jcarousel-prev-disabled-horizontal:active {
-	cursor: default;
-	background-position: -96px 0;
+	background-position: 0 0;
 }
