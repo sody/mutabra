@@ -47,12 +47,14 @@ public class CreateHero extends AbstractPage {
 	@Inject
 	private AccountContext accountContext;
 
+	@OnEvent(EventConstants.ACTIVATE)
+	void activate() {
+		value = heroService.create(accountContext.getAccount());
+	}
+
 	@OnEvent(value = EventConstants.SUCCESS)
 	Object createHero() {
-		final Account account = accountContext.getAccount();
-
 		//todo: remove this with form implementation
-		value = heroService.create(account);
 		final Level level = levelService.get("newbie");
 		final Race race = raceService.get("orc");
 		final Face face = faceService.get("f2");
@@ -62,6 +64,7 @@ public class CreateHero extends AbstractPage {
 
 		heroService.saveOrUpdate(value);
 		// enter the game with just created character
+		final Account account = accountContext.getAccount();
 		account.setHero(value);
 		accountService.save(account);
 

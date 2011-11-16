@@ -7,6 +7,24 @@
 		<t:game.raceselect/>
 	</div>
 
+	<div class="unit">
+		<div class="column">
+			<div class="t-beaneditor-row">
+				<t:game.faceselect/>
+			</div>
+		</div>
+		<div class="column">
+			<div class="t-beaneditor-row">
+				<t:label for="name"/>
+				<t:textfield t:id="name" value="value.name" validate="required"/>
+			</div>
+			<div class="t-beaneditor-row">
+				<t:label for="level"/>
+				<t:textfield t:id="level" value="literal:newbie" disabled="true"/>
+			</div>
+		</div>
+	</div>
+
 	<t:menu class="toolbar" items="create,cancel">
 		<p:createMenuItem>
 			<t:button>

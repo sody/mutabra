@@ -19,7 +19,7 @@ public class CardImage extends AbstractImage {
 	@Parameter(required = true, allowNull = false)
 	private Card card;
 
-	@Value("card:description")
+	@Parameter(value = "prop:card:description")
 	private String title;
 
 	@Inject

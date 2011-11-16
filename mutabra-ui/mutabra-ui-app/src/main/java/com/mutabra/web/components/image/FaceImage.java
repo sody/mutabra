@@ -18,12 +18,15 @@ public class FaceImage extends AbstractImage {
 	@Parameter(required = true, allowNull = false)
 	private Face face;
 
+	@Parameter(value = "prop:face:description")
+	private String title;
+
 	@Inject
 	private ImageSource imageSource;
 
 	@Override
 	protected String getTitle() {
-		return face.getCode();
+		return title;
 	}
 
 	@Override
