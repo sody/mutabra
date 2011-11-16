@@ -4,7 +4,7 @@
 	<div class="column">
 		<t:layout.logo/>
 	</div>
-	<div class="column s-3">
+	<div class="column s-2">
 		<div id="user-pic">
 			<div class="t-beaneditor-row">
 				<t:button primary="medium facebook" text="false">
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="column">
+	<div class="column s-2">
 		<div class="t-beaneditor-row">
 			<t:form t:id="signIn">
 				<t:textfield t:id="email" value="email"  validate="required,email" class="first ui-corner-left"/>

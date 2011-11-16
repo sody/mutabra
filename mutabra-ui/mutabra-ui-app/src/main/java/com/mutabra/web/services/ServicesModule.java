@@ -21,6 +21,7 @@ import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Advise;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.plastic.MethodAdvice;
 import org.apache.tapestry5.plastic.MethodInvocation;
@@ -40,7 +41,6 @@ public class ServicesModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
-		binder.bind(HeroService.class, HeroServiceImpl.class);
 		binder.bind(CardService.class, CardServiceImpl.class);
 	}
 
@@ -78,6 +78,10 @@ public class ServicesModule {
 
 	public CodedEntityService<Race> buildRaceService() {
 		return new CodedEntityServiceImpl<Race>(repository, Race.class);
+	}
+
+	public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService) {
+		return new HeroServiceImpl(repository, levelService);
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)

@@ -6,8 +6,8 @@
 	</div>
 	<div class="column s-3">
 		<div id="user-pic">
-			<t:pagelink page="game/home">
-				<t:image.heroimage hero="hero"/>
+			<t:pagelink page="account/settings">
+				<t:image.accountimage account="account"/>
 			</t:pagelink>
 		</div>
 	</div>

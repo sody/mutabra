@@ -12,6 +12,8 @@ import org.apache.tapestry5.Asset;
  */
 public interface ImageSource {
 
+	Asset getNotFoundImage(int size);
+
 	Asset getRaceImage(Race race, int size);
 
 	Asset getFaceImage(Face face, int size);

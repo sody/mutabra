@@ -1,10 +1,8 @@
 package com.mutabra.web.pages.game.hero;
 
-import com.mutabra.domain.common.Level;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.player.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
@@ -30,9 +28,6 @@ public class CreateHero extends AbstractPage {
 	@Inject
 	private HeroService heroService;
 
-	@InjectService("levelService")
-	private CodedEntityService<Level> levelService;
-
 	@Property
 	private Hero value;
 
@@ -46,11 +41,8 @@ public class CreateHero extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS)
 	Object createHero() {
-		//todo: move this to service layer
-		final Level level = levelService.get("newbie");
-		value.setLevel(level);
-
 		heroService.saveOrUpdate(value);
+
 		// enter the game with just created character
 		final Account account = accountContext.getAccount();
 		account.setHero(value);

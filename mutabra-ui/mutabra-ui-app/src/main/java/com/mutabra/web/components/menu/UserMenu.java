@@ -28,6 +28,11 @@ public class UserMenu {
 	}
 
 	public String getUserName() {
+		final Hero hero = getHero();
+		if (hero != null) {
+			return hero.getName();
+		}
+
 		final Account account = getAccount();
 		if (account.getName() != null) {
 			return account.getName();

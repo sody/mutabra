@@ -31,33 +31,43 @@ public class ImageSourceImpl implements ImageSource {
 		notFound = assetSource.getContextAsset(HERO_REPOSITORY + "anonymous_64x64.png", locale.getLocale());
 	}
 
+	public Asset getNotFoundImage(final int size) {
+		return notFound;
+	}
+
 	public Asset getRaceImage(final Race race, final int size) {
-		return race != null ? getContextAsset(RACE_REPOSITORY, race.getCode(), size, notFound) : notFound;
+		return race != null ?
+				getContextAsset(RACE_REPOSITORY, race.getCode(), size) :
+				getNotFoundImage(size);
 	}
 
 	public Asset getFaceImage(final Face face, final int size) {
-		return face != null ? getContextAsset(FACE_REPOSITORY, face.getCode(), size, notFound) : notFound;
+		return face != null ?
+				getContextAsset(FACE_REPOSITORY, face.getCode(), size) :
+				getNotFoundImage(size);
 	}
 
 	public Asset getCardImage(final Card card, final int size) {
-		return card != null ? getContextAsset(CARD_REPOSITORY, card.getCode(), size, notFound) : notFound;
+		return card != null ?
+				getContextAsset(CARD_REPOSITORY, card.getCode(), size) :
+				getNotFoundImage(size);
 	}
 
 	public Asset getHeroImage(final Hero hero, final int size) {
 		return hero != null ?
 				getRaceImage(hero.getRace(), size) :
 //				getContextAsset(HERO_REPOSITORY, hero.getRace().getCode() + "_" + hero.getFace().getCode(), size, notFound) :
-				notFound;
+				getNotFoundImage(size);
 	}
 
-	private Asset getContextAsset(final String repository, final String code, final int size, final Asset defaultAsset) {
+	private Asset getContextAsset(final String repository, final String code, final int size) {
 		final StringBuilder builder = new StringBuilder(repository);
 		builder.append(code).append('_').append(size).append('x').append(size).append(".png");
 		try {
 			return assetSource.getContextAsset(builder.toString(), locale.getLocale());
 		} catch (Exception e) {
 			// return default if not found
-			return defaultAsset;
+			return getNotFoundImage(size);
 		}
 	}
 }

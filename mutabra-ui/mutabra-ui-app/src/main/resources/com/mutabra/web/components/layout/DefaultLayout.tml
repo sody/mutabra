@@ -2,8 +2,11 @@
 		  xmlns:p="tapestry:parameter">
 
 	<t:replace id="header-area">
-		<t:role account="true" hero="true">
+		<t:role hero="true">
 			<t:layout.header/>
+		</t:role>
+		<t:role account="true">
+			<t:layout.accountheader/>
 		</t:role>
 		<t:role anonymous="true">
 			<t:layout.anonymousheader/>
