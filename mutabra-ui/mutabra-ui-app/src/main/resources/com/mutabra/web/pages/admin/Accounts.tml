@@ -1,4 +1,4 @@
-<html t:type="layout/default" buttons="add"
+<html t:type="layout/default"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
@@ -9,11 +9,14 @@
 	</p:actionsCell>
 </t:grid>
 
-<p:addMenuItem>
-	<t:button primary="literal:ui-icon-circle-plus">
-		<t:eventlink event="add" zone="entityDialog">${message:button.add.title}</t:eventlink>
-	</t:button>
-</p:addMenuItem>
+<t:menu class="toolbar" items="add">
+	<p:addMenuItem>
+		<t:button primary="literal:ui-icon-circle-plus">
+			<t:eventlink event="add" zone="entityDialog">${message:button.add.title}</t:eventlink>
+		</t:button>
+	</p:addMenuItem>
+</t:menu>
+
 
 <t:admin.accountDialog t:id="entityDialog"/>
 

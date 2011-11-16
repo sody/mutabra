@@ -22,9 +22,6 @@
 				<div id="center" class="container ui-widget ui-widget-content">
 					<h1>${title}</h1>
 					<t:body/>
-					<t:if test="buttons">
-						<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
-					</t:if>
 				</div>
 			</div>
 
@@ -33,9 +30,6 @@
 					<t:authority allow="ROLE_ADMIN">
 						<t:menu.admin/>
 					</t:authority>
-					<t:if test="buttons">
-						<t:menu class="toolbar" items="prop:buttons" overrides="overrides"/>
-					</t:if>
 				</div>
 			</div>
 		</div>

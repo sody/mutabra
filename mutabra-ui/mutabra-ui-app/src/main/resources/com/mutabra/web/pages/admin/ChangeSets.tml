@@ -1,14 +1,8 @@
-<html t:type="layout/default" buttons="update"
+<html t:type="layout/default"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
 <t:grid source="source" row="row" include="title,author,location,executedAt,checkSum,comment"/>
-
-<p:updateMenuItem>
-	<t:button primary="literal:ui-icon-circle-triangle-e">
-		<t:dialoglink dialog="updateDialog">${message:button.update.title}</t:dialoglink>
-	</t:button>
-</p:updateMenuItem>
 
 <t:dialog t:id="updateDialog" title="${message:update.title}" modal="true">
 	<t:form>
@@ -36,5 +30,13 @@
 		</t:menu>
 	</t:form>
 </t:dialog>
+
+<t:menu class="toolbar" items="update">
+	<p:updateMenuItem>
+		<t:button primary="literal:ui-icon-circle-triangle-e">
+			<t:dialoglink dialog="updateDialog">${message:button.update.title}</t:dialoglink>
+		</t:button>
+	</p:updateMenuItem>
+</t:menu>
 
 </html>
