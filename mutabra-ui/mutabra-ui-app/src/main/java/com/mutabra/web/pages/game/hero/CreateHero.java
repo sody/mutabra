@@ -54,13 +54,9 @@ public class CreateHero extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS)
 	Object createHero() {
-		//todo: remove this with form implementation
+		//todo: move this to service layer
 		final Level level = levelService.get("newbie");
-		final Race race = raceService.get("orc");
-		final Face face = faceService.get("f2");
 		value.setLevel(level);
-		value.setRace(race);
-		value.setFace(face);
 
 		heroService.saveOrUpdate(value);
 		// enter the game with just created character

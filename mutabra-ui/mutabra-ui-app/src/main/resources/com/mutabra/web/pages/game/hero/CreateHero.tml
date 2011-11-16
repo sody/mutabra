@@ -4,13 +4,13 @@
 
 <t:form>
 	<div class="t-beaneditor-row">
-		<t:game.raceselect/>
+		<t:game.raceselect value="value.race"/>
 	</div>
 
 	<div class="unit">
 		<div class="column">
 			<div class="t-beaneditor-row">
-				<t:game.faceselect/>
+				<t:game.faceselect value="value.face"/>
 			</div>
 		</div>
 		<div class="column">

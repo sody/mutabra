@@ -1,10 +1,8 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<ul id="${clientId}">
-		<t:loop source="source" value="row">
-			<li><t:image.raceimage race="row"/></li>
-		</t:loop>
-	</ul>
+	<t:carousel source="source" row="row" value="value">
+		<t:image.raceimage race="row"/>
+	</t:carousel>
 
 </t:container>

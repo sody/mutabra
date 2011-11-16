@@ -50,7 +50,18 @@ T5.extendInitializers({
 		});
 	},
 
-	carousel: function(id) {
-		j$('#' + id).jcarousel();
+	carousel: function(spec) {
+		if (spec.hiddenId) {
+			j$('#' + spec.id).jcarousel({
+				start: spec.selected,
+				itemVisibleInCallback: function(carousel, item, index) {
+					j$('#' + spec.hiddenId).val(spec.values[index-1]);
+				}
+			});
+		} else {
+			j$('#' + spec.id).jcarousel({
+				start: spec.selected
+			});
+		}
 	}
 });

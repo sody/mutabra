@@ -1,0 +1,14 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<t:if test="insideForm">
+		<t:hidden t:id="hiddenValue" value="value" encoder="encoder"/>
+	</t:if>
+
+	<ul id="${clientId}">
+		<t:loop source="source" value="row" encoder="encoder">
+			<li><t:body/></li>
+		</t:loop>
+	</ul>
+
+</t:container>
