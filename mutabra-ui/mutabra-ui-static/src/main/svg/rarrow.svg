@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" version="1.1">
-	<path fill="#000" d="m19,5c6.2741,17.882,6.573,35.876,0,54l25-27z"/>
+	<title>Right Arrow Icon</title>
+	<desc>Right Arrow Icon</desc>
+
+	<path stroke="none"
+		  fill="#333"
+		  d="
+		  m 19,5
+		  c 8,18 8,36 0,54
+		  l 25 -27
+		  z"/>
 </svg>
 
