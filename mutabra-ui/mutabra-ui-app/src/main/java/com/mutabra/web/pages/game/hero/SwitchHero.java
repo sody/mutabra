@@ -1,10 +1,8 @@
 package com.mutabra.web.pages.game.hero;
 
-import com.mutabra.domain.common.Level;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.player.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
@@ -17,12 +15,14 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.annotations.Allow;
 
+import java.util.Set;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @Allow(Authorities.ROLE_USER)
-public class CreateHero extends AbstractPage {
+public class SwitchHero extends AbstractPage {
 
 	@InjectService("accountService")
 	private BaseEntityService<Account> accountService;
@@ -30,33 +30,26 @@ public class CreateHero extends AbstractPage {
 	@Inject
 	private HeroService heroService;
 
-	@InjectService("levelService")
-	private CodedEntityService<Level> levelService;
+	@Inject
+	private AccountContext accountContext;
+
+	@Property
+	private Set<Hero> source;
 
 	@Property
 	private Hero value;
 
-	@Inject
-	private AccountContext accountContext;
+	@Property
+	private Hero row;
 
 	@OnEvent(EventConstants.ACTIVATE)
-	void activate() {
-		value = heroService.create(accountContext.getAccount());
-	}
-
-	@OnEvent(value = EventConstants.SUCCESS)
-	Object createHero() {
-		//todo: move this to service layer
-		final Level level = levelService.get("newbie");
-		value.setLevel(level);
-
-		heroService.saveOrUpdate(value);
-		// enter the game with just created character
-		final Account account = accountContext.getAccount();
-		account.setHero(value);
-		accountService.save(account);
-
-		return back();
+	Object activate() {
+		value = accountContext.getHero();
+		source = accountContext.getAccount().getHeroes();
+		if (source.isEmpty()) {
+			return CreateHero.class;
+		}
+		return null;
 	}
 
 	@OnEvent
