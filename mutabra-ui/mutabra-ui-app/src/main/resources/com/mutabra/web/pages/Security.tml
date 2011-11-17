@@ -5,9 +5,9 @@
 <div id="content" class="unit">
 	<div id="center-panel" class="container">
 		<ul>
-			<li><a href="#sign-in-tab">${message:button.sign-in.title}</a></li>
-			<li><a href="#sign-up-tab">${message:button.sign-up.title}</a></li>
-			<li><a href="#restore-tab">${message:button.restore.title}</a></li>
+			<li><a href="#sign-in-tab">${message:button.sign-in}</a></li>
+			<li><a href="#sign-up-tab">${message:button.sign-up}</a></li>
+			<li><a href="#restore-tab">${message:button.restore}</a></li>
 		</ul>
 		<div id="sign-in-tab">
 			<h1>${message:page.security-sign-in.title}</h1>
@@ -25,7 +25,7 @@
 
 				<t:menu.oauthmenu>
 					<t:button>
-						<t:linksubmit>${message:button.sign-in.title}</t:linksubmit>
+						<t:linksubmit>${message:button.sign-in}</t:linksubmit>
 					</t:button>
 				</t:menu.oauthmenu>
 			</t:form>
@@ -45,7 +45,7 @@
 
 				<t:menu.oauthmenu>
 					<t:button>
-						<t:linksubmit>${message:button.sign-up.title}</t:linksubmit>
+						<t:linksubmit>${message:button.sign-up}</t:linksubmit>
 					</t:button>
 				</t:menu.oauthmenu>
 			</t:form>
@@ -62,7 +62,7 @@
 
 				<t:menu.oauthmenu>
 					<t:button>
-						<t:linksubmit>${message:button.restore.title}</t:linksubmit>
+						<t:linksubmit>${message:button.restore}</t:linksubmit>
 					</t:button>
 				</t:menu.oauthmenu>
 			</t:form>

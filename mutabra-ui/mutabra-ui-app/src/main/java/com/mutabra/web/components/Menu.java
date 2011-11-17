@@ -64,7 +64,7 @@ public class Menu extends AbstractComponent {
 	}
 
 	public String getMenuItemTitle() {
-		return getMessages().get("button." + item + ".title");
+		return getMessages().get("button." + item);
 	}
 
 	public Block getMenuItemBody() {

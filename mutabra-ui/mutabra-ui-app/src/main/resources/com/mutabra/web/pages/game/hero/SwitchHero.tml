@@ -10,7 +10,7 @@
 <t:menu class="toolbar" items="enter,create,cancel">
 	<p:createMenuItem>
 		<t:button>
-			<t:pagelink page="game/hero/create">${message:button.create.title}</t:pagelink>
+			<t:pagelink page="game/hero/create">${message:button.create}</t:pagelink>
 		</t:button>
 	</p:createMenuItem>
 </t:menu>

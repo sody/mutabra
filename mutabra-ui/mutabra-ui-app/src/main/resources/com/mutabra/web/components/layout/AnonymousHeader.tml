@@ -8,18 +8,18 @@
 		<div id="user-pic">
 			<div class="t-beaneditor-row">
 				<t:button primary="medium facebook" text="false">
-					<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook.title}</t:social.facebookconnect>
+					<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook}</t:social.facebookconnect>
 				</t:button>
 				<t:button primary="medium twitter" text="false">
-					<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter.title}</t:social.twitterconnect>
+					<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter}</t:social.twitterconnect>
 				</t:button>
 			</div>
 			<div class="t-beaneditor-row">
 				<t:button primary="medium google" text="false">
-					<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google.title}</t:social.googleconnect>
+					<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google}</t:social.googleconnect>
 				</t:button>
 				<t:button primary="ui-icon-locked" text="false">
-					<t:social.vkontakteconnect t:id="vkontakte" class="transparent">${message:button.vkontakte.title}</t:social.vkontakteconnect>
+					<t:social.vkontakteconnect t:id="vkontakte" class="transparent">${message:button.vkontakte}</t:social.vkontakteconnect>
 				</t:button>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 				<t:textfield t:id="email" value="email"  validate="required,email" class="first ui-corner-left"/>
 				<t:passwordfield t:id="password" value="password" validate="required" class="second ui-corner-right"/>
 				<t:button primary="ui-icon-play" text="false">
-					<t:linksubmit>${message:button.sign-in.title}</t:linksubmit>
+					<t:linksubmit>${message:button.sign-in}</t:linksubmit>
 				</t:button>
 			</t:form>
 		</div>
@@ -38,7 +38,7 @@
 			<t:form t:id="signUp">
 				<t:textfield t:id="registrationEmail" value="email" validate="required,email" class="double ui-corner-all"/>
 				<t:button primary="ui-icon-eject" text="false">
-					<t:linksubmit>${message:button.sign-up.title}</t:linksubmit>
+					<t:linksubmit>${message:button.sign-up}</t:linksubmit>
 				</t:button>
 			</t:form>
 		</div>

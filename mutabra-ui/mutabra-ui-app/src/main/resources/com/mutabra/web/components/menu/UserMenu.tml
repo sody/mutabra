@@ -7,22 +7,22 @@
 	<t:menu id="user-menu" class="sidebar" items="settings,switch,signOut">
 		<p:settingsMenuItem>
 			<t:button>
-				<t:pagelink page="account/settings">${message:button.account-settings.title}</t:pagelink>
+				<t:pagelink page="account/settings">${message:button.account-settings}</t:pagelink>
 			</t:button>
 		</p:settingsMenuItem>
 		<p:switchMenuItem>
 			<t:button>
-				<t:pagelink page="game/hero/switch">${message:button.switch-hero.title}</t:pagelink>
+				<t:pagelink page="game/hero/switch">${message:button.switch-hero}</t:pagelink>
 			</t:button>
 		</p:switchMenuItem>
 		<p:signOutMenuItem>
 			<t:button>
-				<t:eventlink event="signOut">${message:button.sign-out.title}</t:eventlink>
+				<t:eventlink event="signOut">${message:button.sign-out}</t:eventlink>
 			</t:button>
 		</p:signOutMenuItem>
 	</t:menu>
 	<t:button secondary="ui-icon-power" text="false">
-		<t:eventlink event="signOut">${message:button.sign-out.title}</t:eventlink>
+		<t:eventlink event="signOut">${message:button.sign-out}</t:eventlink>
 	</t:button>
 
 <script type="text/javascript">

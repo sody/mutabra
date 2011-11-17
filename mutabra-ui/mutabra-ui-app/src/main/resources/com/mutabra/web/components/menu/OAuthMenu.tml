@@ -3,17 +3,17 @@
 		xmlns:p="tapestry:parameter">
 	<p:facebookMenuItem>
 		<t:button primary="medium facebook" text="false">
-			<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook.title}</t:social.facebookconnect>
+			<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook}</t:social.facebookconnect>
 		</t:button>
 	</p:facebookMenuItem>
 	<p:twitterMenuItem>
 		<t:button primary="medium twitter" text="false">
-			<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter.title}</t:social.twitterconnect>
+			<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter}</t:social.twitterconnect>
 		</t:button>
 	</p:twitterMenuItem>
 	<p:googleMenuItem>
 		<t:button primary="medium google" text="false">
-			<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google.title}</t:social.googleconnect>
+			<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google}</t:social.googleconnect>
 		</t:button>
 	</p:googleMenuItem>
 	<p:lastMenuItem>

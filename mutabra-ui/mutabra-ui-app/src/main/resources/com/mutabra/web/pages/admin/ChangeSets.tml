@@ -19,12 +19,12 @@
 		<t:menu items="cancel,update" class="toolbar">
 			<p:updateMenuItem>
 				<t:button>
-					<t:linksubmit>${message:button.update.title}</t:linksubmit>
+					<t:linksubmit>${message:button.update}</t:linksubmit>
 				</t:button>
 			</p:updateMenuItem>
 			<p:cancelMenuItem>
 				<t:button>
-					<t:dialoglink dialog="updateDialog" action="close">${message:button.cancel.title}</t:dialoglink>
+					<t:dialoglink dialog="updateDialog" action="close">${message:button.cancel}</t:dialoglink>
 				</t:button>
 			</p:cancelMenuItem>
 		</t:menu>
@@ -34,7 +34,7 @@
 <t:menu class="toolbar" items="update">
 	<p:updateMenuItem>
 		<t:button primary="literal:ui-icon-circle-triangle-e">
-			<t:dialoglink dialog="updateDialog">${message:button.update.title}</t:dialoglink>
+			<t:dialoglink dialog="updateDialog">${message:button.update}</t:dialoglink>
 		</t:button>
 	</p:updateMenuItem>
 </t:menu>

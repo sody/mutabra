@@ -1,5 +1,5 @@
 <div id="footer" class="unit ui-widget" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-	${message:text.copyright}
+	${message:message.copyright}
 	<br/>
 	App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion}
 	<br/>

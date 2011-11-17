@@ -18,12 +18,12 @@
 						<t:menu items="cancel,save" class="toolbar">
 							<p:saveMenuItem>
 								<t:button>
-									<t:linksubmit>${message:button.save.title}</t:linksubmit>
+									<t:linksubmit>${message:button.save}</t:linksubmit>
 								</t:button>
 							</p:saveMenuItem>
 							<p:cancelMenuItem>
 								<t:button>
-									<t:dialoglink dialog="${dialogId}" action="close">${message:button.cancel.title}</t:dialoglink>
+									<t:dialoglink dialog="${dialogId}" action="close">${message:button.cancel}</t:dialoglink>
 								</t:button>
 							</p:cancelMenuItem>
 						</t:menu>
