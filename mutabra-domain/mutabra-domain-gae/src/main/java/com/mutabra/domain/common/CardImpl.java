@@ -31,7 +31,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	public CardImpl(final String code, final CardType type) {
-		super(Tables.CARD, code, TranslationType.STANDARD);
+		super(Tables.CARD, code, TranslationType.DESCRIPTION);
 		this.type = type;
 		if (type == CardType.EFFECT) {
 			effect = new EffectImpl();

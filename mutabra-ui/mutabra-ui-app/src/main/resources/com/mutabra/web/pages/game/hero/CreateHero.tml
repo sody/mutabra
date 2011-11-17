@@ -16,11 +16,11 @@
 		<div class="column">
 			<div class="t-beaneditor-row">
 				<t:label for="name"/>
-				<t:textfield t:id="name" value="value.name" validate="required"/>
+				<t:textfield t:id="name" value="value.name" validate="required" label="message:label.name"/>
 			</div>
 			<div class="t-beaneditor-row">
 				<t:label for="level"/>
-				<t:textfield t:id="level" value="literal:newbie" disabled="true"/>
+				<t:textfield t:id="level" value="literal:newbie" disabled="true" label="message:label.level"/>
 			</div>
 		</div>
 	</div>

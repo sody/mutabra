@@ -23,7 +23,7 @@ public class RoleImpl extends CodedEntityImpl implements Role {
 	}
 
 	public RoleImpl(final String code) {
-		super(Tables.ROLE, code, TranslationType.STANDARD);
+		super(Tables.ROLE, code, TranslationType.NAME);
 	}
 
 	public Set<Permission> getPermissions() {

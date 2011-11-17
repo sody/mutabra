@@ -18,7 +18,7 @@ public class FaceImage extends AbstractImage {
 	@Parameter(required = true, allowNull = false)
 	private Face face;
 
-	@Parameter(value = "prop:face:description")
+	@Parameter(value = "prop:face:name")
 	private String title;
 
 	@Inject

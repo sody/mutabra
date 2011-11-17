@@ -18,6 +18,6 @@ public class PermissionImpl extends CodedEntityImpl implements Permission {
 	}
 
 	public PermissionImpl(final String code) {
-		super(Tables.PERMISSION, code, TranslationType.STANDARD);
+		super(Tables.PERMISSION, code, TranslationType.NAME);
 	}
 }

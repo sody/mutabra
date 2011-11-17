@@ -32,7 +32,7 @@ public class TranslationEditor extends AbstractComponent {
 	}
 
 	public String getLabel() {
-		return getMessages().get(variant + ".label");
+		return getMessages().get("label." + variant);
 	}
 
 	public Translation getTranslation() {

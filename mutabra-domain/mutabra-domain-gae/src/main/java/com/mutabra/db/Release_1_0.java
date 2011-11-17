@@ -92,5 +92,11 @@ public class Release_1_0 extends ChangeLog {
 				.set("code", "f1");
 		insert(Tables.FACE)
 				.set("code", "f2");
+
+		begin("2011-11-17/translations").comment("description translations renamed to name");
+		update(Tables.TRANSLATION)
+				.set("variant", "name")
+				.where(condition("variant").equal("description"));
+
 	}
 }

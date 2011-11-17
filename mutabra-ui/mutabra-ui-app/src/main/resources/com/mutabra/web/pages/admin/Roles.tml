@@ -2,9 +2,8 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="source" row="row" include="code" add="id,description,actions" reorder="id,code,description,actions">
-	<p:idCell>${row.id}</p:idCell>
-	<p:descriptionCell>${row:description}</p:descriptionCell>
+<t:grid source="source" row="row" include="code" add="name,actions">
+	<p:nameCell>${row:name}</p:nameCell>
 	<p:actionsCell>
 		<t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink>
 	</p:actionsCell>

@@ -18,6 +18,6 @@ public class RaceImpl extends CodedEntityImpl implements Race {
 	}
 
 	public RaceImpl(final String code) {
-		super(Tables.RACE, code, TranslationType.STANDARD);
+		super(Tables.RACE, code, TranslationType.DESCRIPTION);
 	}
 }

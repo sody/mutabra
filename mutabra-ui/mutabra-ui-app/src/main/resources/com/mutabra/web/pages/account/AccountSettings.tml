@@ -8,7 +8,7 @@
 
 	<div class="t-beaneditor-row">
 		<t:label for="email"/>
-		<t:textfield t:id="email" value="email" validate="required"/>
+		<t:textfield t:id="email" value="email" validate="required" label="message:label.email"/>
 	</div>
 
 	<t:button>
@@ -23,12 +23,7 @@
 
 	<div class="t-beaneditor-row">
 		<t:label for="password"/>
-		<t:textfield t:id="password" value="password" validate="required"/>
-	</div>
-
-	<div class="t-beaneditor-row">
-		<t:label for="confirmPassword"/>
-		<t:textfield t:id="confirmPassword" value="confirmPassword" validate="required"/>
+		<t:textfield t:id="password" value="password" validate="required" label="message:label.password"/>
 	</div>
 
 	<t:button>
@@ -41,11 +36,11 @@
 <t:form t:id="accountForm">
 	<div class="t-beaneditor-row">
 		<t:label for="name"/>
-		<t:textfield t:id="name" value="value.name"/>
+		<t:textfield t:id="name" value="value.name" label="message:label.name"/>
 	</div>
 	<div class="t-beaneditor-row">
 		<t:label for="place"/>
-		<t:textfield t:id="place" value="value.place"/>
+		<t:textfield t:id="place" value="value.place" label="message:label.place"/>
 	</div>
 
 	<t:button>

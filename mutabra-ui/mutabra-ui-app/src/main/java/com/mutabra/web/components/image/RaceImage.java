@@ -19,7 +19,7 @@ public class RaceImage extends AbstractImage {
 	@Parameter(required = true, allowNull = false)
 	private Race race;
 
-	@Parameter(value = "prop:race:description")
+	@Parameter(value = "prop:race:name")
 	private String title;
 
 	@Inject

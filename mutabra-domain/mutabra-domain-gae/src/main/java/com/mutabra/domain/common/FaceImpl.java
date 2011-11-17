@@ -18,6 +18,6 @@ public class FaceImpl extends CodedEntityImpl implements Face {
 	}
 
 	public FaceImpl(final String code) {
-		super(Tables.FACE, code, TranslationType.STANDARD);
+		super(Tables.FACE, code, TranslationType.NAME);
 	}
 }

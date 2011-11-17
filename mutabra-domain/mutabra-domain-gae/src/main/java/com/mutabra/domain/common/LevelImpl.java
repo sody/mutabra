@@ -20,7 +20,7 @@ public class LevelImpl extends CodedEntityImpl implements Level {
 	}
 
 	public LevelImpl(final String code) {
-		super(Tables.LEVEL, code, TranslationType.STANDARD);
+		super(Tables.LEVEL, code, TranslationType.NAME);
 	}
 
 	public long getRating() {

@@ -8,12 +8,12 @@
 	<t:form>
 		<div class="t-beaneditor-row">
 			<t:label for="dropFirst"/>
-			<t:checkbox t:id="dropFirst" value="dropFirst" label="${message:drop-first.label}"/>
+			<t:checkbox t:id="dropFirst" value="dropFirst" label="${message:label.drop-first}"/>
 		</div>
 
 		<div class="t-beaneditor-row">
 			<t:label for="clearCheckSums"/>
-			<t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:clear-check-sums.label}"/>
+			<t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:label.clear-check-sums}"/>
 		</div>
 
 		<t:menu items="cancel,update" class="toolbar">

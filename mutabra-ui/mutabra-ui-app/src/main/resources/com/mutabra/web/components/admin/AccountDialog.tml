@@ -3,15 +3,15 @@
 	<t:replace id="body">
 		<div class="t-beaneditor-row">
 			<t:label for="email"/>
-			<t:textfield t:id="email" value="value.email" validate="required"/>
+			<t:textfield t:id="email" value="value.email" validate="required" label="message:label.email"/>
 		</div>
 		<div class="t-beaneditor-row">
 			<t:label for="name"/>
-			<t:textfield t:id="name" value="value.name"/>
+			<t:textfield t:id="name" value="value.name" label="message:label.name"/>
 		</div>
 		<div class="t-beaneditor-row">
 			<t:label for="place"/>
-			<t:textfield t:id="place" value="value.place"/>
+			<t:textfield t:id="place" value="value.place" label="message:label.place"/>
 		</div>
 	</t:replace>
 </t:extend>
