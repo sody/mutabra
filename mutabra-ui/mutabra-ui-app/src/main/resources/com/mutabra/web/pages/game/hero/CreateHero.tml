@@ -3,8 +3,19 @@
 	  xmlns:p="tapestry:parameter">
 
 <t:form>
-	<div class="t-beaneditor-row">
-		<t:game.raceselect value="value.race"/>
+	<div class="unit">
+		<div class="column">
+			<div class="t-beaneditor-row">
+				<t:game.raceselect value="value.race" callback="raceChangeCallback"/>
+			</div>
+		</div>
+		<div class="column">
+			<t:loop source="races" value="row" index="index">
+				<div id="race-${index}" class="t-beaneditor-row" style="display:none;">
+					${row:description}
+				</div>
+			</t:loop>
+		</div>
 	</div>
 
 	<div class="unit">
@@ -20,7 +31,7 @@
 			</div>
 			<div class="t-beaneditor-row">
 				<t:label for="level"/>
-				<t:textfield t:id="level" value="literal:newbie" disabled="true" label="message:label.level"/>
+				<t:textfield t:id="level" value="value.level:name" disabled="true" label="message:label.level"/>
 			</div>
 		</div>
 	</div>
@@ -33,5 +44,16 @@
 		</p:createMenuItem>
 	</t:menu>
 </t:form>
+
+<script type="text/javascript">
+	var selectedRace;
+	var raceChangeCallback = function(carousel, item, index) {
+		if (selectedRace) {
+			selectedRace.hide();
+		}
+		selectedRace = j$("#race-" + (index-1));
+		selectedRace.show();
+	};
+</script>
 
 </html>

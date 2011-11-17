@@ -1,7 +1,7 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<t:carousel source="source" row="row" value="value">
+	<t:carousel source="source" row="row" value="value" callback="prop:callback">
 		<t:image.raceimage race="row"/>
 	</t:carousel>
 

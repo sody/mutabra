@@ -1,19 +1,24 @@
 package com.mutabra.web.pages.game.hero;
 
+import com.mutabra.domain.common.Race;
 import com.mutabra.domain.player.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.player.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.annotations.Allow;
+
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -25,14 +30,28 @@ public class CreateHero extends AbstractPage {
 	@InjectService("accountService")
 	private BaseEntityService<Account> accountService;
 
+	@InjectService("raceService")
+	private CodedEntityService<Race> raceService;
+
 	@Inject
 	private HeroService heroService;
 
 	@Property
 	private Hero value;
 
+	@Property
+	private Race row;
+
+	@Property
+	private int index;
+
 	@Inject
 	private AccountContext accountContext;
+
+	@Cached
+	public List<Race> getRaces() {
+		return raceService.query().list();
+	}
 
 	@OnEvent(EventConstants.ACTIVATE)
 	void activate() {

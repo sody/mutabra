@@ -2,6 +2,7 @@ package com.mutabra.web.components.game;
 
 import com.mutabra.domain.common.Race;
 import com.mutabra.services.CodedEntityService;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
@@ -18,6 +19,10 @@ public class RaceSelect {
 	@Property
 	@Parameter
 	private Race value;
+
+	@Property
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	private String callback;
 
 	@InjectService("raceService")
 	private CodedEntityService<Race> raceService;

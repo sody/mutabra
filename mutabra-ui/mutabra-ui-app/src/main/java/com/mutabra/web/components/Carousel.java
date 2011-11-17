@@ -13,6 +13,7 @@ import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.corelib.components.Hidden;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.json.JSONArray;
+import org.apache.tapestry5.json.JSONLiteral;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.ComponentDefaultProvider;
 import org.apache.tapestry5.services.FormSupport;
@@ -42,6 +43,9 @@ public class Carousel<T> extends AbstractComponent implements ClientElement {
 	@Property
 	@Parameter
 	private T row;
+
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	private String callback;
 
 	@Inject
 	private JavaScriptSupport support;
@@ -84,6 +88,9 @@ public class Carousel<T> extends AbstractComponent implements ClientElement {
 				values.put(encoder.toClient(element));
 			}
 			spec.put("values", values);
+		}
+		if (callback != null) {
+			spec.put("callback", new JSONLiteral(callback));
 		}
 		support.addInitializerCall("carousel", spec);
 	}
