@@ -2,4 +2,12 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
+<t:loop source="players" value="row">
+	<div>
+		${message:label.name}: ${row.name}
+		<br/>
+		<t:image.heroimage hero="row"/>
+	</div>
+</t:loop>
+
 </html>

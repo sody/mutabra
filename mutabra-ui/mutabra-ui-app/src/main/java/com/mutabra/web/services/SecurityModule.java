@@ -12,6 +12,7 @@ import com.mutabra.security.TwitterProvider;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.internal.Authorities;
+import com.mutabra.web.internal.PlayerServiceImpl;
 import com.mutabra.web.internal.SecurityAnnotationWorker;
 import com.mutabra.web.internal.SecurityExceptionHandler;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
@@ -49,16 +50,22 @@ public class SecurityModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(SecurityContext.class, SecurityContextImpl.class);
+		binder.bind(PlayerService.class, PlayerServiceImpl.class);
 	}
 
 	@Scope(ScopeConstants.PERTHREAD)
 	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
-											  final SecurityContext securityContext) {
+											  final SecurityContext securityContext,
+											  final PlayerService playerService) {
 		final Authentication user = securityContext.getCurrentUser();
 		final Account account = user == null ? null : Authorities.isTwitterUser(user.getName()) ?
 				accountService.query(account$.twitterUser.eq(Authorities.getTwitterUser(user.getName()))).unique() :
 				accountService.query(account$.email.eq(user.getName())).unique();
 		final Hero hero = account != null ? account.getHero() : null;
+
+		if (hero != null) {
+			playerService.update(hero);
+		}
 
 		return new AccountContext() {
 			public Account getAccount() {
