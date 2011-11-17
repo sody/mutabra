@@ -3,11 +3,20 @@
 	  xmlns:p="tapestry:parameter">
 
 <t:form>
-<t:carousel source="source" row="row" value="value">
+<t:carousel source="source" row="row" value="value" callback="heroChangeCallback">
 	<t:image.heroimage hero="row"/>
 </t:carousel>
 
 <t:menu class="toolbar" items="enter,create,cancel">
+	<p:enterMenuItem>
+		<t:loop source="source" value="row" index="index">
+			<div id="hero-${index}" style="display:none;">
+				<t:button>
+					<t:eventlink event="enter" context="row">${message:button.enter}</t:eventlink>
+				</t:button>
+			</div>
+		</t:loop>
+	</p:enterMenuItem>
 	<p:createMenuItem>
 		<t:button>
 			<t:pagelink page="game/hero/create">${message:button.create}</t:pagelink>
@@ -16,4 +25,15 @@
 </t:menu>
 
 </t:form>
+
+<script type="text/javascript">
+	var selectedHero;
+	var heroChangeCallback = function(carousel, item, index) {
+		if (selectedHero) {
+			selectedHero.hide();
+		}
+		selectedHero = j$("#hero-" + (index-1));
+		selectedHero.show();
+	};
+</script>
 </html>

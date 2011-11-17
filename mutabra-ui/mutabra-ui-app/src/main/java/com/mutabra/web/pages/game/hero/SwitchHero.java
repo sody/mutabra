@@ -1,7 +1,11 @@
 package com.mutabra.web.pages.game.hero;
 
+import com.googlecode.objectify.Key;
+import com.mutabra.domain.Keys;
 import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.player.HeroImpl;
 import com.mutabra.domain.security.Account;
+import com.mutabra.domain.security.AccountImpl;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.player.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
@@ -42,6 +46,9 @@ public class SwitchHero extends AbstractPage {
 	@Property
 	private Hero row;
 
+	@Property
+	private int index;
+
 	@OnEvent(EventConstants.ACTIVATE)
 	Object activate() {
 		value = accountContext.getHero();
@@ -52,10 +59,15 @@ public class SwitchHero extends AbstractPage {
 		return null;
 	}
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	Object enter() {
+	@OnEvent("enter")
+	Object enter(final long number) {
 		// enter the game with just created character
 		final Account account = accountContext.getAccount();
+
+		//todo: appengine dependent part, remove it
+		final Key<Hero> heroKey = new Key<Hero>(new Key<Account>(AccountImpl.class, account.getId()), HeroImpl.class, number);
+		value = Keys.getInstance(heroKey);
+
 		account.setHero(value);
 		accountService.save(account);
 

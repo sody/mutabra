@@ -80,13 +80,19 @@ public class Carousel<T> extends AbstractComponent implements ClientElement {
 
 	@AfterRender
 	void renderScript() {
-		final JSONObject spec = new JSONObject("id", getClientId(), "selected", encoder.toClient(value));
+		final JSONObject spec = new JSONObject("id", getClientId());
+		final String selectedItemValue = encoder.toClient(value);
+		final JSONArray values = new JSONArray();
+		for (T element : source) {
+			final String itemValue = encoder.toClient(element);
+			values.put(itemValue);
+			if (itemValue.equals(selectedItemValue)) {
+				spec.put("selected", values.length());
+			}
+		}
+
 		if (isInsideForm()) {
 			spec.put("hiddenId", hiddenValue.getClientId());
-			final JSONArray values = new JSONArray();
-			for (T element : source) {
-				values.put(encoder.toClient(element));
-			}
 			spec.put("values", values);
 		}
 		if (callback != null) {
