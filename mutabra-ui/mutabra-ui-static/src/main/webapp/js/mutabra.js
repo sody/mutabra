@@ -51,17 +51,17 @@ T5.extendInitializers({
 	},
 
 	carousel: function(spec) {
-		if (spec.hiddenId) {
-			j$('#' + spec.id).jcarousel({
-				start: spec.selected,
-				itemVisibleInCallback: function(carousel, item, index) {
-					j$('#' + spec.hiddenId).val(spec.values[index-1]);
+		j$('#' + spec.id).jcarousel({
+			scroll: 1,
+			start: spec.selected,
+			itemVisibleInCallback: function(carousel, item, index) {
+				if (spec.hiddenId) {
+					j$('#' + spec.hiddenId).val(spec.values[index - 1]);
 				}
-			});
-		} else {
-			j$('#' + spec.id).jcarousel({
-				start: spec.selected
-			});
-		}
+				if (spec.callback) {
+					spec.callback(carousel, item, index);
+				}
+			}
+		});
 	}
 });

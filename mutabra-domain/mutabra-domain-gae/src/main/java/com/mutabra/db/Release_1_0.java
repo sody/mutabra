@@ -98,5 +98,34 @@ public class Release_1_0 extends ChangeLog {
 				.set("variant", "name")
 				.where(condition("variant").equal("description"));
 
+		begin("2011-11-17/flyer_race").comment("formed flyer race");
+		insert(Tables.RACE).set("code", "flyer");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.RACE)
+				.set("code", "flyer")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Flyer");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.RACE)
+				.set("code", "flyer")
+				.set("variant", "description")
+				.set("locale", "")
+				.set("value", "Flyers is a race that comes from the world of one mountain...");
+
+		begin("2011-11-17/plunger_race").comment("formed plunger race");
+		insert(Tables.RACE).set("code", "plunger");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.RACE)
+				.set("code", "plunger")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Plunger");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.RACE)
+				.set("code", "plunger")
+				.set("variant", "description")
+				.set("locale", "")
+				.set("value", "Plunger is a race that comes from the sunny world where there is nothing except water...");
 	}
 }
