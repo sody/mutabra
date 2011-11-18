@@ -7,15 +7,15 @@
     </control>
     <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="865" y="97" w="61" h="28" measuredW="53" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>switchhero1%26bm%3Bswitchhero1.bmml%26bm%3Bswitchhero1.bmml%26bm%3Bswitchhero1.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22849%2C91%2C910%2C119%22%20href%3D%22switchhero1.bmml%22%20alt%3D%22switchhero1%22%20id%3D%2216%22/%3E</map>
+        <href>6-creationhero%26bm%3B6-creationhero.bmml%26bm%3B6-creationhero.bmml%26bm%3B6-creationhero.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22849%2C91%2C910%2C119%22%20href%3D%226-creationhero.bmml%22%20alt%3D%226-creationhero%22%20id%3D%2216%22/%3E</map>
         <text>Login</text>
       </controlProperties>
     </control>
     <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="863" y="137" w="63" h="28" measuredW="74" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>registrationpage1%26bm%3Bregistrationpage1.bmml%26bm%3Bregistrationpage1.bmml%26bm%3Bregistrationpage1.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C131%2C910%2C159%22%20href%3D%22registrationpage1.bmml%22%20alt%3D%22registrationpage1%22%20id%3D%2217%22/%3E</map>
+        <href>3-registrationpage%26bm%3B3-registrationpage.bmml%26bm%3B3-registrationpage.bmml%26bm%3B3-registrationpage.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C131%2C910%2C159%22%20href%3D%223-registrationpage.bmml%22%20alt%3D%223-registrationpage%22%20id%3D%2217%22/%3E</map>
         <text>Register</text>
       </controlProperties>
     </control>
