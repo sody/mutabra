@@ -18,8 +18,8 @@
     </control>
     <control controlID="33" controlTypeID="com.balsamiq.mockups::Button" x="404" y="659" w="92" h="32" measuredW="64" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>switchhero1%26bm%3Bswitchhero1.bmml%26bm%3Bswitchhero1.bmml%26bm%3Bswitchhero1.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22388%2C653%2C480%2C685%22%20href%3D%22switchhero1.bmml%22%20alt%3D%22switchhero1%22%20id%3D%2233%22/%3E</map>
+        <href>7-switchhero%26bm%3B7-switchhero.bmml%26bm%3B7-switchhero.bmml%26bm%3B7-switchhero.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22388%2C653%2C480%2C685%22%20href%3D%227-switchhero.bmml%22%20alt%3D%227-switchhero%22%20id%3D%2233%22/%3E</map>
         <text>Cancel</text>
       </controlProperties>
     </control>
