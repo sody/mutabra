@@ -1,4 +1,4 @@
-package com.mutabra.domain.player;
+package com.mutabra.domain.game;
 
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.domain.common.Card;

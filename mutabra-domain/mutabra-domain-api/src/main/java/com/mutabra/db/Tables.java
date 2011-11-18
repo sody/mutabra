@@ -20,4 +20,9 @@ public interface Tables {
 
 	String HERO = "HERO";
 	String HERO_CARD = "HERO_CARD";
+
+	String BATTLE = "BATTLE";
+	String BATTLE_MEMBER = "BATTLE_MEMBER";
+	String BATTLE_CARD = "BATTLE_CARD";
+	String BATTLE_SUMMON = "BATTLE_SUMMON";
 }

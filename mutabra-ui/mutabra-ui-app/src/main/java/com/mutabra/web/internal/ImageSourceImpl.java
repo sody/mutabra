@@ -3,7 +3,7 @@ package com.mutabra.web.internal;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.web.services.ImageSource;
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.ioc.services.ThreadLocale;

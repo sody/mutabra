@@ -5,8 +5,8 @@ import com.googlecode.objectify.annotation.Indexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
-import com.mutabra.domain.player.Hero;
-import com.mutabra.domain.player.HeroImpl;
+import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.HeroImpl;
 import org.greatage.util.LocaleUtils;
 
 import javax.persistence.Entity;
@@ -194,8 +194,7 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	}
 
 	public void setHero(final Hero hero) {
-		final Key<AccountImpl> parent = new Key<AccountImpl>(AccountImpl.class, getId());
-		this.hero = new Key<HeroImpl>(parent, HeroImpl.class, hero.getId());
+		this.hero = Keys.getKey(hero);
 	}
 
 	public Set<Role> getRoles() {
@@ -205,7 +204,8 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	public void setRoles(final Set<Role> roles) {
 		this.roles = new HashSet<Key<RoleImpl>>();
 		for (Role role : roles) {
-			this.roles.add(new Key<RoleImpl>(RoleImpl.class, role.getId()));
+			final Key<RoleImpl> key = Keys.getKey(role);
+			this.roles.add(key);
 		}
 	}
 

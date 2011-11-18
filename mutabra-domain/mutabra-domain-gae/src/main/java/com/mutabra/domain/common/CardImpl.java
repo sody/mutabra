@@ -50,7 +50,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	}
 
 	public void setLevel(final Level level) {
-		this.level = new Key<LevelImpl>(LevelImpl.class, level.getId());
+		this.level = Keys.getKey(level);
 	}
 
 	public Effect getEffect() {

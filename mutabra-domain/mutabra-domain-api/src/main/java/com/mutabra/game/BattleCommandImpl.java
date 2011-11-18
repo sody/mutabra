@@ -1,6 +1,6 @@
 package com.mutabra.game;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 import org.greatage.util.CollectionUtils;
 
 import java.util.Collection;

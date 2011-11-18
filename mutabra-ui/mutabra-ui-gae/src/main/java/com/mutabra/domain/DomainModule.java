@@ -16,10 +16,18 @@ import com.mutabra.domain.common.Race;
 import com.mutabra.domain.common.RaceImpl;
 import com.mutabra.domain.common.Summon;
 import com.mutabra.domain.common.SummonImpl;
-import com.mutabra.domain.player.Hero;
-import com.mutabra.domain.player.HeroCard;
-import com.mutabra.domain.player.HeroCardImpl;
-import com.mutabra.domain.player.HeroImpl;
+import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.game.BattleCard;
+import com.mutabra.domain.game.BattleCardImpl;
+import com.mutabra.domain.game.BattleImpl;
+import com.mutabra.domain.game.BattleMember;
+import com.mutabra.domain.game.BattleMemberImpl;
+import com.mutabra.domain.game.BattleSummon;
+import com.mutabra.domain.game.BattleSummonImpl;
+import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.HeroCard;
+import com.mutabra.domain.game.HeroCardImpl;
+import com.mutabra.domain.game.HeroImpl;
 import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.AccountImpl;
 import com.mutabra.domain.security.ChangeSet;
@@ -36,6 +44,8 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Startup;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.services.ValueEncoderFactory;
+import org.apache.tapestry5.services.ValueEncoderSource;
 import org.greatage.db.gae.GAEDatabase;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.TransactionExecutor;
@@ -75,6 +85,11 @@ public class DomainModule {
 		objectifyFactory.register(HeroImpl.class);
 		objectifyFactory.register(HeroCardImpl.class);
 
+		objectifyFactory.register(BattleImpl.class);
+		objectifyFactory.register(BattleMemberImpl.class);
+		objectifyFactory.register(BattleCardImpl.class);
+		objectifyFactory.register(BattleSummonImpl.class);
+
 		return objectifyFactory;
 	}
 
@@ -96,7 +111,19 @@ public class DomainModule {
 
 		configuration.add(Hero.class, HeroImpl.class);
 		configuration.add(HeroCard.class, HeroCardImpl.class);
+
+		configuration.add(Battle.class, BattleImpl.class);
+		configuration.add(BattleMember.class, BattleMemberImpl.class);
+		configuration.add(BattleCard.class, BattleCardImpl.class);
+		configuration.add(BattleSummon.class, BattleSummonImpl.class);
 	}
+
+	@Contribute(ValueEncoderSource.class)
+	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
+											 final EntityRepository repository) {
+		configuration.add(BaseEntity.class, new GAEEntityEncoderFactory(repository));
+	}
+
 
 	@Startup
 	public void updateDatabase(final DatabaseService databaseService,

@@ -1,4 +1,4 @@
-package com.mutabra.domain.player;
+package com.mutabra.domain.game;
 
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.domain.common.Face;
@@ -45,4 +45,8 @@ public interface Hero extends BaseEntity {
 	void setDefence(int defence);
 
 	Set<HeroCard> getCards();
+
+	Battle getBattle();
+
+	void setBattle(Battle battle);
 }

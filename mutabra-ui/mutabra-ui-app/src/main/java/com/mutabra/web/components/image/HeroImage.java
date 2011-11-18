@@ -1,6 +1,6 @@
 package com.mutabra.web.components.image;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.web.base.components.AbstractImage;
 import com.mutabra.web.services.ImageSource;
 import org.apache.tapestry5.Asset;

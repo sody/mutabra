@@ -1,4 +1,4 @@
-package com.mutabra.domain.player;
+package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
@@ -7,7 +7,6 @@ import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardImpl;
-import com.mutabra.domain.security.AccountImpl;
 
 import javax.persistence.Entity;
 
@@ -29,8 +28,7 @@ public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 	}
 
 	public HeroCardImpl(final Hero hero) {
-		final Key<AccountImpl> parent = new Key<AccountImpl>(AccountImpl.class, hero.getAccount().getId());
-		this.hero = new Key<HeroImpl>(parent, HeroImpl.class, hero.getId());
+		this.hero = Keys.getKey(hero);
 	}
 
 	public Hero getHero() {
@@ -42,7 +40,7 @@ public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 	}
 
 	public void setCard(final Card card) {
-		this.card = new Key<CardImpl>(CardImpl.class, card.getId());
+		this.card = Keys.getKey(card);
 	}
 
 	public long getRating() {
@@ -51,5 +49,10 @@ public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
 	public void setRating(final long rating) {
 		this.rating = rating;
+	}
+
+	@Override
+	public Key<?> getParentKey() {
+		return hero;
 	}
 }

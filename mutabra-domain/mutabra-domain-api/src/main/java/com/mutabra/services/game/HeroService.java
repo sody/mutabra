@@ -1,6 +1,6 @@
-package com.mutabra.services.player;
+package com.mutabra.services.game;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 

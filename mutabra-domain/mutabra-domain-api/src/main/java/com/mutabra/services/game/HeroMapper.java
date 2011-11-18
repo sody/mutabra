@@ -1,4 +1,4 @@
-package com.mutabra.services.player;
+package com.mutabra.services.game;
 
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.services.BaseEntityMapper;

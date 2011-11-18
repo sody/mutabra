@@ -1,6 +1,7 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.security.Facebook;
 import com.mutabra.security.FacebookProvider;
@@ -62,6 +63,7 @@ public class SecurityModule {
 				accountService.query(account$.twitterUser.eq(Authorities.getTwitterUser(user.getName()))).unique() :
 				accountService.query(account$.email.eq(user.getName())).unique();
 		final Hero hero = account != null ? account.getHero() : null;
+		final Battle battle = hero != null ? hero.getBattle() : null;
 
 		if (hero != null) {
 			playerService.update(hero);
@@ -74,6 +76,10 @@ public class SecurityModule {
 
 			public Hero getHero() {
 				return hero;
+			}
+
+			public Battle getBattle() {
+				return battle;
 			}
 		};
 	}

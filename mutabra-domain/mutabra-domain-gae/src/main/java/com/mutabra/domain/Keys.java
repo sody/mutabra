@@ -20,6 +20,13 @@ public class Keys {
 		Keys.executor = executor;
 	}
 
+	public static <T, V extends T> Key<V> getKey(final T entity) {
+		if (entity != null) {
+			return ((BaseEntityImpl) entity).getKey();
+		}
+		return null;
+	}
+
 	public static <T> T getInstance(final Key<T> key) {
 		return key == null ? null : executor.execute(new SessionCallback<T, Objectify>() {
 			public T doInSession(final Objectify session) throws Exception {

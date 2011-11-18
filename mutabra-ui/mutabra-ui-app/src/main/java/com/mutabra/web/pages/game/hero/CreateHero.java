@@ -1,11 +1,11 @@
 package com.mutabra.web.pages.game.hero;
 
 import com.mutabra.domain.common.Race;
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.CodedEntityService;
-import com.mutabra.services.player.HeroService;
+import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.pages.game.GameHome;

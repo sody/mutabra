@@ -1,6 +1,6 @@
 package com.mutabra.web.components.menu;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Account;
 import com.mutabra.web.pages.Index;
 import com.mutabra.web.services.AccountContext;

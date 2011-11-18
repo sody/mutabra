@@ -1,7 +1,7 @@
 package com.mutabra.web.pages.game;
 
-import com.mutabra.domain.player.Hero;
-import com.mutabra.services.player.HeroService;
+import com.mutabra.domain.game.Hero;
+import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.pages.game.hero.CreateHero;

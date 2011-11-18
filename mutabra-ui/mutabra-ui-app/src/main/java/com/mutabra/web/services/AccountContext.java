@@ -1,6 +1,7 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Account;
 
 /**
@@ -12,4 +13,6 @@ public interface AccountContext {
 	Account getAccount();
 
 	Hero getHero();
+
+	Battle getBattle();
 }

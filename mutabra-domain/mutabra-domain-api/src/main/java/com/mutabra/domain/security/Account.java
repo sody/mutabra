@@ -1,7 +1,7 @@
 package com.mutabra.domain.security;
 
 import com.mutabra.domain.BaseEntity;
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 
 import java.util.Date;
 import java.util.Locale;

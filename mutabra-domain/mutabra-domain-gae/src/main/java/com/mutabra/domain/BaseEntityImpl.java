@@ -1,5 +1,6 @@
 package com.mutabra.domain;
 
+import com.googlecode.objectify.Key;
 import org.greatage.domain.AbstractEntity;
 
 import javax.persistence.Id;
@@ -15,5 +16,14 @@ public class BaseEntityImpl extends AbstractEntity<Long> implements BaseEntity {
 
 	public Long getId() {
 		return id;
+	}
+
+	public <T> Key<T> getKey() {
+		//noinspection unchecked
+		return getParentKey() != null ? new Key(getParentKey(), getClass(), getId()) : new Key(getClass(), getId());
+	}
+
+	public Key<?> getParentKey() {
+		return null;
 	}
 }

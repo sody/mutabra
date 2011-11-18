@@ -1,4 +1,4 @@
-package com.mutabra.domain.player;
+package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
@@ -41,11 +41,13 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	private int defence;
 
+	private Key<BattleImpl> battle;
+
 	public HeroImpl() {
 	}
 
 	public HeroImpl(final Account account) {
-		this.account = new Key<AccountImpl>(AccountImpl.class, account.getId());
+		this.account = Keys.getKey(account);
 	}
 
 	public Account getAccount() {
@@ -73,7 +75,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setFace(final Face face) {
-		this.face = new Key<FaceImpl>(FaceImpl.class, face.getId());
+		this.face = Keys.getKey(face);
 	}
 
 	public Race getRace() {
@@ -81,7 +83,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setRace(final Race race) {
-		this.race = new Key<RaceImpl>(RaceImpl.class, race.getId());
+		this.race = Keys.getKey(race);
 	}
 
 	public Level getLevel() {
@@ -89,7 +91,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	}
 
 	public void setLevel(final Level level) {
-		this.level = new Key<LevelImpl>(LevelImpl.class, level.getId());
+		this.level = Keys.getKey(level);
 	}
 
 	public int getAttack() {
@@ -110,5 +112,18 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	public Set<HeroCard> getCards() {
 		return Keys.getChildren(HeroCard.class, HeroCardImpl.class, this);
+	}
+
+	public Battle getBattle() {
+		return Keys.getInstance(battle);
+	}
+
+	public void setBattle(final Battle battle) {
+		this.battle = Keys.getKey(battle);
+	}
+
+	@Override
+	public Key<?> getParentKey() {
+		return account;
 	}
 }

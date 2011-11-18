@@ -1,6 +1,6 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.player.Hero;
+import com.mutabra.domain.game.Hero;
 
 import java.util.List;
 

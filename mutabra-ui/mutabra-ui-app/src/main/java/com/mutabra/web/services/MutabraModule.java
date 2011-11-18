@@ -69,12 +69,14 @@ public class MutabraModule {
 		configuration.add(ValidationDecoratorFactory.class, decoratorFactory);
 	}
 
+	/*
 	@Contribute(ValueEncoderSource.class)
 	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
 											 final TypeCoercer typeCoercer,
 											 final EntityRepository repository) {
 		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
 	}
+	*/
 
 	@Decorate(serviceInterface = PropertyConduitSource.class)
 	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
