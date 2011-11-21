@@ -1,6 +1,7 @@
 package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Parent;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
@@ -15,6 +16,7 @@ import com.mutabra.domain.security.Account;
 import com.mutabra.domain.security.AccountImpl;
 
 import javax.persistence.Entity;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -42,6 +44,9 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 	private int defence;
 
 	private Key<BattleImpl> battle;
+
+	@Indexed
+	private Date lastActive;
 
 	public HeroImpl() {
 	}
@@ -120,6 +125,14 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	public void setBattle(final Battle battle) {
 		this.battle = Keys.getKey(battle);
+	}
+
+	public Date getLastActive() {
+		return lastActive;
+	}
+
+	public void setLastActive(final Date lastActive) {
+		this.lastActive = lastActive;
 	}
 
 	@Override

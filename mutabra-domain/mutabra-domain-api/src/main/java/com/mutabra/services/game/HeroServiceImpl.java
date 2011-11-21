@@ -14,6 +14,7 @@ import org.greatage.util.ReflectionUtils;
  */
 public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements HeroService {
 	private final Class<? extends Hero> realEntityClass;
+
 	private final CodedEntityService<Level> levelService;
 
 	public HeroServiceImpl(final EntityRepository repository, final CodedEntityService<Level> levelService) {

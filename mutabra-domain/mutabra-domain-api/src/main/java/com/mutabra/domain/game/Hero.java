@@ -6,6 +6,7 @@ import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.security.Account;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -49,4 +50,8 @@ public interface Hero extends BaseEntity {
 	Battle getBattle();
 
 	void setBattle(Battle battle);
+
+	Date getLastActive();
+
+	void setLastActive(Date lastActive);
 }
