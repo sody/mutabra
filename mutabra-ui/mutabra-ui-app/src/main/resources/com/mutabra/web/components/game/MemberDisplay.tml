@@ -6,7 +6,7 @@
 		<br/>
 		<t:image.heroimage hero="value.hero"/>
 		<br/>
-		Life: ${value.health}
+		<span class="ui-icon ui-icon-heart"/>(${value.health})
 	</div>
 
 </t:container>
