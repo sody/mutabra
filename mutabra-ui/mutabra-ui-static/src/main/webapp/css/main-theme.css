@@ -350,6 +350,12 @@ div.t-beaneditor-row select {
 	margin: 8px;
 }
 
+.hero {
+	padding: 10px;
+	width: 150px;
+	height: 225px;
+}
+
 /*
  * jQuery UI CSS Framework 1.8.16
  *

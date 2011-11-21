@@ -3,11 +3,13 @@
 	  xmlns:p="tapestry:parameter">
 
 <t:loop source="players" value="row">
-	<div>
-		${message:label.name}: ${row.name}
-		<br/>
-		<t:image.heroimage hero="row"/>
-	</div>
+	<t:eventlink event="createBattle" context="row">
+		<div>
+			${message:label.name}: ${row.name}
+			<br/>
+			<t:image.heroimage hero="row"/>
+		</div>
+	</t:eventlink>
 </t:loop>
 
 </html>

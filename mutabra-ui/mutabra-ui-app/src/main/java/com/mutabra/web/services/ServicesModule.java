@@ -15,6 +15,8 @@ import com.mutabra.services.TranslationService;
 import com.mutabra.services.TranslationServiceImpl;
 import com.mutabra.services.common.CardService;
 import com.mutabra.services.common.CardServiceImpl;
+import com.mutabra.services.game.BattleService;
+import com.mutabra.services.game.BattleServiceImpl;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
 import com.mutabra.web.internal.MailServiceImpl;
@@ -42,6 +44,7 @@ public class ServicesModule {
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
 		binder.bind(CardService.class, CardServiceImpl.class);
+		binder.bind(BattleService.class, BattleServiceImpl.class);
 	}
 
 	public ServicesModule(final EntityRepository repository) {

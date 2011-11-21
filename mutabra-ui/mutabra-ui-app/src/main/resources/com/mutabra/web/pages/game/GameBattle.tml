@@ -1,0 +1,16 @@
+<html t:type="layout/default"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	  xmlns:p="tapestry:parameter">
+
+<h2>Round: ${battle.round}</h2>
+
+<div class="unit c-5">
+	<div class="column">
+		<t:game.memberdisplay value="opponent"/>
+		<br/>
+		<t:game.memberdisplay value="you"/>
+		<br/>
+	</div>
+</div>
+
+</html>

@@ -1,0 +1,12 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<div class="hero ui-widget ui-widget-content ui-corner-all">
+		<h4>${value.hero.name} - player</h4>
+		<br/>
+		<t:image.heroimage hero="value.hero"/>
+		<br/>
+		Life: ${value.health}
+	</div>
+
+</t:container>

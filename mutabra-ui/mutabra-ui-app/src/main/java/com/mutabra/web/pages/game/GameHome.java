@@ -2,6 +2,7 @@ package com.mutabra.web.pages.game;
 
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.Mappers;
+import com.mutabra.services.game.BattleService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
@@ -28,6 +29,9 @@ public class GameHome extends AbstractPage {
 	private HeroService heroService;
 
 	@Inject
+	private BattleService battleService;
+
+	@Inject
 	private AccountContext accountContext;
 
 	@Property
@@ -44,6 +48,19 @@ public class GameHome extends AbstractPage {
 		if (accountContext.getHero() == null) {
 			//todo: add more complex rules
 			return CreateHero.class;
+		}
+		if (accountContext.getBattle() != null) {
+			return GameBattle.class;
+		}
+		return null;
+	}
+
+	@OnEvent("createBattle")
+	Object createBattle(final Hero hero) {
+		if (hero.getBattle() == null) {
+			final Hero currentHero = accountContext.getHero();
+			battleService.createBattle(currentHero, hero);
+			return GameBattle.class;
 		}
 		return null;
 	}
