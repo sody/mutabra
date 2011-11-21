@@ -7,15 +7,15 @@
     </control>
     <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="865" y="97" w="61" h="28" measuredW="53" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>6-creationhero%26bm%3B6-creationhero.bmml%26bm%3B6-creationhero.bmml%26bm%3B6-creationhero.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22849%2C91%2C910%2C119%22%20href%3D%226-creationhero.bmml%22%20alt%3D%226-creationhero%22%20id%3D%2216%22/%3E</map>
+        <href>1-6-creationhero%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22849%2C91%2C910%2C119%22%20href%3D%221-6-creationhero.bmml%22%20alt%3D%221-6-creationhero%22%20id%3D%2216%22/%3E</map>
         <text>Login</text>
       </controlProperties>
     </control>
     <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="863" y="137" w="63" h="28" measuredW="74" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>3-registrationpage%26bm%3B3-registrationpage.bmml%26bm%3B3-registrationpage.bmml%26bm%3B3-registrationpage.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C131%2C910%2C159%22%20href%3D%223-registrationpage.bmml%22%20alt%3D%223-registrationpage%22%20id%3D%2217%22/%3E</map>
+        <href>1-3-registrationpage%26bm%3B1-3-registrationpage.bmml%26bm%3B1-3-registrationpage.bmml%26bm%3B1-3-registrationpage.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C131%2C910%2C159%22%20href%3D%221-3-registrationpage.bmml%22%20alt%3D%221-3-registrationpage%22%20id%3D%2217%22/%3E</map>
         <text>Register</text>
       </controlProperties>
     </control>
@@ -74,8 +74,8 @@
     </control>
     <control controlID="33" controlTypeID="com.balsamiq.mockups::Image" x="79" y="97" w="120" h="68" measuredW="77" measuredH="79" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>1-home%26bm%3B1-home.bmml%26bm%3B1-home.bmml%26bm%3B1-home.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C91%2C183%2C159%22%20href%3D%221-home.bmml%22%20alt%3D%221-home%22%20id%3D%2233%22/%3E</map>
+        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C91%2C183%2C159%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2233%22/%3E</map>
         <src>./logo80x60.png</src>
         <text>logo</text>
       </controlProperties>
@@ -103,8 +103,8 @@
     </control>
     <control controlID="40" controlTypeID="com.balsamiq.mockups::Accordion" x="79" y="205" w="120" h="105" measuredW="150" measuredH="234" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
-        <hrefs>1-home%26bm%3B1-home.bmml%26bm%3B1-home.bmml%26bm%3B1-home.bmml%2C2-loginpage%26bm%3B2-loginpage.bmml%26bm%3B2-loginpage.bmml%26bm%3B2-loginpage.bmml%2C%2C%2C%2C</hrefs>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C199%2C183%2C229%22%20href%3D%221-home.bmml%22%20alt%3D%221-home%22%20id%3D%2240_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C225%2C183%2C255%22%20href%3D%222-loginpage.bmml%22%20alt%3D%222-loginpage%22%20id%3D%2240_1%22/%3E%0A</map>
+        <hrefs>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%2C1-2-loginpage%26bm%3B1-2-loginpage.bmml%26bm%3B1-2-loginpage.bmml%26bm%3B1-2-loginpage.bmml%2C%2C%2C%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C199%2C183%2C229%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2240_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C225%2C183%2C255%22%20href%3D%221-2-loginpage.bmml%22%20alt%3D%221-2-loginpage%22%20id%3D%2240_1%22/%3E%0A</map>
         <selectedIndex>0</selectedIndex>
         <text>Home%0AGame%0A-%20Hero%0A-%20Cards%0AFake%201%0AFake%202</text>
         <verticalScrollbar>false</verticalScrollbar>

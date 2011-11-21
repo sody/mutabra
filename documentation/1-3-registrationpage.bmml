@@ -7,8 +7,8 @@
     </control>
     <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="532" y="370" w="91" h="28" measuredW="93" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>1-home%26bm%3B1-home.bmml%26bm%3B1-home.bmml%26bm%3B1-home.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22507%2C366%2C598%2C394%22%20href%3D%221-home.bmml%22%20alt%3D%221-home%22%20id%3D%2216%22/%3E</map>
+        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22507%2C366%2C598%2C394%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2216%22/%3E</map>
         <text>Registration</text>
       </controlProperties>
     </control>
@@ -39,9 +39,9 @@
     </control>
     <control controlID="33" controlTypeID="com.balsamiq.mockups::TabBar" x="350" y="254" w="309" h="200" measuredW="256" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
-        <hrefs>2-loginpage%26bm%3B2-loginpage.bmml%26bm%3B2-loginpage.bmml%26bm%3B2-loginpage.bmml%2C3-registrationpage%26bm%3B3-registrationpage.bmml%26bm%3B3-registrationpage.bmml%26bm%3B3-registrationpage.bmml%2C4-restorepasswordpage%26bm%3B4-restorepasswordpage.bmml%26bm%3B4-restorepasswordpage.bmml%26bm%3B4-restorepasswordpage.bmml</hrefs>
+        <hrefs>1-2-loginpage%26bm%3B1-2-loginpage.bmml%26bm%3B1-2-loginpage.bmml%26bm%3B1-2-loginpage.bmml%2C1-3-registrationpage%26bm%3B1-3-registrationpage.bmml%26bm%3B1-3-registrationpage.bmml%26bm%3B1-3-registrationpage.bmml%2C1-4-restorepasswordpage%26bm%3B1-4-restorepasswordpage.bmml%26bm%3B1-4-restorepasswordpage.bmml%26bm%3B1-4-restorepasswordpage.bmml</hrefs>
         <italic>false</italic>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22345%2C425%2C386%2C450%22%20href%3D%222-loginpage.bmml%22%20alt%3D%222-loginpage%22%20id%3D%2233_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22386%2C425%2C448%2C450%22%20href%3D%223-registrationpage.bmml%22%20alt%3D%223-registrationpage%22%20id%3D%2233_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22448%2C425%2C507%2C450%22%20href%3D%224-restorepasswordpage.bmml%22%20alt%3D%224-restorepasswordpage%22%20id%3D%2233_2%22/%3E%0A</map>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22345%2C425%2C386%2C450%22%20href%3D%221-2-loginpage.bmml%22%20alt%3D%221-2-loginpage%22%20id%3D%2233_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22386%2C425%2C448%2C450%22%20href%3D%221-3-registrationpage.bmml%22%20alt%3D%221-3-registrationpage%22%20id%3D%2233_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22448%2C425%2C507%2C450%22%20href%3D%221-4-restorepasswordpage.bmml%22%20alt%3D%221-4-restorepasswordpage%22%20id%3D%2233_2%22/%3E%0A</map>
         <selectedIndex>1</selectedIndex>
         <tabHPosition>left</tabHPosition>
         <tabVPosition>bottom</tabVPosition>
@@ -60,8 +60,8 @@
     </control>
     <control controlID="37" controlTypeID="com.balsamiq.mockups::Image" x="79" y="97" w="120" h="68" measuredW="77" measuredH="79" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>1-home%26bm%3B1-home.bmml%26bm%3B1-home.bmml%26bm%3B1-home.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2254%2C93%2C174%2C161%22%20href%3D%221-home.bmml%22%20alt%3D%221-home%22%20id%3D%2237%22/%3E</map>
+        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2254%2C93%2C174%2C161%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2237%22/%3E</map>
         <src>./logo80x60.png</src>
         <text>logo</text>
       </controlProperties>

@@ -1,0 +1,225 @@
+<mockup version="1.0" skin="sketch" measuredW="980" measuredH="1436" mockupW="960" mockupH="1416">
+  <controls>
+    <control controlID="7" controlTypeID="__group__" x="20" y="20" w="960" h="1416" measuredW="960" measuredH="1416" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>page</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="960" h="700" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="7">
+          <controlProperties>
+            <text>Mutabra%0Ahttp%3A//www.mutabra.com</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="59" y="88" w="120" h="68" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="7">
+          <controlProperties>
+            <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2259%2C88%2C179%2C156%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%221%22/%3E</map>
+            <src>./logo80x60.png</src>
+            <text>logo</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="230" y="169" w="500" h="400" measuredW="500" measuredH="400" zOrder="2" locked="false" isInGroup="7">
+          <controlProperties>
+            <controlName>content</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="500" h="400" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="2">
+              <controlProperties>
+                <borderStyle>roundedSolid</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="15" y="15" w="-1" h="-1" measuredW="69" measuredH="33" zOrder="1" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>Battle</text>
+              </controlProperties>
+            </control>
+            <control controlID="11" controlTypeID="__group__" x="195" y="155" w="109" h="90" measuredW="109" measuredH="90" zOrder="2" locked="false" isInGroup="2">
+              <controlProperties>
+                <controlName>field</controlName>
+              </controlProperties>
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="30" y="0" w="50" h="30" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <shape>diamond</shape>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::RoundButton" x="30" y="30" w="50" h="30" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <color>0</color>
+                    <icon>PlusBigIcon%7Csmall</icon>
+                    <shape>diamond</shape>
+                    <text/>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::RoundButton" x="30" y="60" w="50" h="30" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <borderColor>13576743</borderColor>
+                    <color>10066329</color>
+                    <icon>ContactIcon%7Csmall</icon>
+                    <shape>diamond</shape>
+                    <text/>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="45" w="50" h="30" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <borderColor>0</borderColor>
+                    <color>10066329</color>
+                    <icon>SadFaceIcon%7Csmall</icon>
+                    <shape>diamond</shape>
+                  </controlProperties>
+                </control>
+                <control controlID="4" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="15" w="50" h="30" measuredW="32" measuredH="32" zOrder="4" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <color>10066329</color>
+                    <icon>SlideShareIcon%7Csmall</icon>
+                    <shape>diamond</shape>
+                  </controlProperties>
+                </control>
+                <control controlID="5" controlTypeID="com.balsamiq.mockups::RoundButton" x="59" y="45" w="50" h="30" measuredW="32" measuredH="32" zOrder="5" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <shape>diamond</shape>
+                  </controlProperties>
+                </control>
+                <control controlID="6" controlTypeID="com.balsamiq.mockups::RoundButton" x="59" y="15" w="50" h="30" measuredW="32" measuredH="32" zOrder="6" locked="false" isInGroup="11">
+                  <controlProperties>
+                    <color>10066329</color>
+                    <icon>ContactIcon%7Csmall</icon>
+                    <shape>diamond</shape>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="23" controlTypeID="__group__" x="150" y="260" w="200" h="100" measuredW="200" measuredH="100" zOrder="3" locked="false" isInGroup="2">
+              <controlProperties>
+                <controlName>abilities</controlName>
+              </controlProperties>
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="200" h="100" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="23">
+                  <controlProperties>
+                    <borderStyle>roundedSolid</borderStyle>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="__group__" x="70" y="10" w="60" h="80" measuredW="60" measuredH="80" zOrder="1" locked="false" isInGroup="23">
+                  <controlProperties>
+                    <controlName>ability</controlName>
+                    <href>3-2-cards%26bm%3B3-2-cards.bmml%26bm%3B3-2-cards.bmml%26bm%3B3-2-cards.bmml</href>
+                    <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22450%2C439%2C510%2C519%22%20href%3D%223-2-cards.bmml%22%20alt%3D%223-2-cards%22%20id%3D%221%22/%3E</map>
+                  </controlProperties>
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="60" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1">
+                      <controlProperties>
+                        <borderStyle>roundedSolid</borderStyle>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="5" y="5" w="50" h="50" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="1"/>
+                  </groupChildrenDescriptors>
+                </control>
+                <control controlID="2" controlTypeID="__group__" x="10" y="10" w="60" h="80" measuredW="60" measuredH="80" zOrder="2" locked="false" isInGroup="23">
+                  <controlProperties>
+                    <controlName>ability</controlName>
+                    <href>3-2-cards%26bm%3B3-2-cards.bmml%26bm%3B3-2-cards.bmml%26bm%3B3-2-cards.bmml</href>
+                    <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22390%2C439%2C450%2C519%22%20href%3D%223-2-cards.bmml%22%20alt%3D%223-2-cards%22%20id%3D%222%22/%3E</map>
+                  </controlProperties>
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="60" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="2">
+                      <controlProperties>
+                        <borderStyle>roundedSolid</borderStyle>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="5" y="5" w="50" h="50" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="2"/>
+                  </groupChildrenDescriptors>
+                </control>
+                <control controlID="3" controlTypeID="__group__" x="130" y="10" w="60" h="80" measuredW="60" measuredH="80" zOrder="3" locked="false" isInGroup="23">
+                  <controlProperties>
+                    <controlName>ability</controlName>
+                    <href>3-2-cards%26bm%3B3-2-cards.bmml%26bm%3B3-2-cards.bmml%26bm%3B3-2-cards.bmml</href>
+                    <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22510%2C439%2C570%2C519%22%20href%3D%223-2-cards.bmml%22%20alt%3D%223-2-cards%22%20id%3D%223%22/%3E</map>
+                  </controlProperties>
+                  <groupChildrenDescriptors>
+                    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="60" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="3">
+                      <controlProperties>
+                        <borderStyle>roundedSolid</borderStyle>
+                      </controlProperties>
+                    </control>
+                    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="5" y="5" w="50" h="50" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="3"/>
+                  </groupChildrenDescriptors>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="24" controlTypeID="__group__" x="39" y="270" w="60" h="80" measuredW="60" measuredH="80" zOrder="4" locked="false" isInGroup="2">
+              <controlProperties>
+                <controlName>selected</controlName>
+                <href>3-3-summons%26bm%3B3-3-summons.bmml%26bm%3B3-3-summons.bmml%26bm%3B3-3-summons.bmml</href>
+                <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22269%2C439%2C329%2C519%22%20href%3D%223-3-summons.bmml%22%20alt%3D%223-3-summons%22%20id%3D%2224%22/%3E</map>
+              </controlProperties>
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="60" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="24">
+                  <controlProperties>
+                    <borderStyle>roundedSolid</borderStyle>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="5" y="5" w="50" h="50" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="24"/>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="25" controlTypeID="__group__" x="39" y="63" w="60" h="80" measuredW="60" measuredH="80" zOrder="5" locked="false" isInGroup="2">
+              <controlProperties>
+                <controlName>player</controlName>
+                <href>3-3-summons%26bm%3B3-3-summons.bmml%26bm%3B3-3-summons.bmml%26bm%3B3-3-summons.bmml</href>
+                <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22269%2C232%2C329%2C312%22%20href%3D%223-3-summons.bmml%22%20alt%3D%223-3-summons%22%20id%3D%2225%22/%3E</map>
+              </controlProperties>
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="60" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="25">
+                  <controlProperties>
+                    <borderStyle>roundedSolid</borderStyle>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="5" y="5" w="50" h="50" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="25"/>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="26" controlTypeID="__group__" x="39" y="160" w="60" h="80" measuredW="60" measuredH="80" zOrder="6" locked="false" isInGroup="2">
+              <controlProperties>
+                <controlName>player</controlName>
+                <href>3-3-summons%26bm%3B3-3-summons.bmml%26bm%3B3-3-summons.bmml%26bm%3B3-3-summons.bmml</href>
+                <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22269%2C329%2C329%2C409%22%20href%3D%223-3-summons.bmml%22%20alt%3D%223-3-summons%22%20id%3D%2226%22/%3E</map>
+              </controlProperties>
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="60" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="26">
+                  <controlProperties>
+                    <borderStyle>roundedSolid</borderStyle>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="5" y="5" w="50" h="50" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="26"/>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="27" controlTypeID="com.balsamiq.mockups::Paragraph" x="350" y="48" w="135" h="207" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>Round%2012%3A%0A%5Bsody%5D%20summoned%20a%20%5Bhuge%20hydra%5D...%0A%5Bhermes%5D%20attacked%20%5Bsody%5D%20with%20a%20%5Bwood%20sword%5D...%0A%20%0ARound%2011%3A%0A%5Bhermes%5D%20skips...%0A%5Bsody%5D%20attacks%20%5Bhermes%5D%20with%20a%20%5Bchain%20lighting%5D...%0A%20%0A%5B...%5D</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="752" y="99" w="-1" h="-1" measuredW="101" measuredH="45" zOrder="3" locked="false" isInGroup="7">
+          <controlProperties>
+            <href>1-5-accountsettings%26bm%3B1-5-accountsettings.bmml%26bm%3B1-5-accountsettings.bmml%26bm%3B1-5-accountsettings.bmml</href>
+            <icon>TableIcon%7Csmall</icon>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22752%2C99%2C853%2C144%22%20href%3D%221-5-accountsettings.bmml%22%20alt%3D%221-5-accountsettings%22%20id%3D%223%22/%3E</map>
+            <text>Account%20Settings</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::IconLabel" x="885" y="99" w="-1" h="-1" measuredW="44" measuredH="45" zOrder="4" locked="false" isInGroup="7">
+          <controlProperties>
+            <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+            <icon>PowerIcon%7Csmall</icon>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22885%2C99%2C929%2C144%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%224%22/%3E</map>
+            <text>Logout</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::StickyNote" x="0" y="716" w="960" h="700" measuredW="109" measuredH="123" zOrder="5" locked="false" isInGroup="7">
+          <controlProperties>
+            <text>1.%20%u0411%u043E%u0439%0A1.1.%20%u0411%u043E%u0439%20%u043D%u0430%u0447%u0438%u043D%u0430%u0435%u0442%u0441%u044F%20%u0441%20%u0441%u043E%u0433%u043B%u0430%u0441%u0438%u044F%20%u0432%u0441%u0435%u0445%20%u0438%u0433%u0440%u043E%u043A%u043E%u0432%20%u0437%u0430%u044F%u0432%u043B%u0435%u043D%u043D%u044B%u0445%20%u043D%u0430%20%u0431%u043E%u0439.%0A1.2.%20%u0411%u043E%u0439%20%u0434%u043B%u0438%u0442%u0441%u044F%20%u043D%u0435%u043A%u043E%u0442%u043E%u0440%u043E%u0435%20%u043A%u043E%u043B%u0438%u0447%u0435%u0441%u0442%u0432%u043E%20%u0440%u0430%u0443%u043D%u0434%u043E%u0432.%0A1.3.%20%u0420%u0430%u0443%u043D%u0434%20%u043E%u0433%u0440%u0430%u043D%u0438%u0447%u0435%u043D%20%u043D%u0435%u043A%u043E%u0442%u043E%u0440%u044B%u043C%20%u043F%u0440%u043E%u043C%u0435%u0436%u0443%u0442%u043A%u043E%u043C%20%u0432%u0440%u0435%u043C%u0435%u043D%u0438%20%28%u043D%u0430%u043F%u0440%u0438%u043C%u0435%u0440%2C%202%20%u043C%u0438%u043D.%29%0A1.4.%20%u0412%20%u043A%u0430%u0436%u0434%u043E%u043C%20%u0440%u0430%u0443%u043D%u0434%u0435%20%u0432%u0441%u0435%20%u0438%u0433%u0440%u043E%u043A%u0438%20%u043E%u0434%u043D%u043E%u0432%u0440%u0435%u043C%u0435%u043D%u043D%u043E%20%u0434%u0435%u043B%u0430%u044E%u0442%20%u0437%u0430%u043A%u0430%u0437%u044B%20%u043D%u0430%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u044F%20%u043B%u0438%u0431%u043E%20%u043F%u0440%u043E%u043F%u0443%u0441%u043A%u0430%u044E%u0442%20%u0445%u043E%u0434.%0A1.5.%20%u0417%u0430%20%u0440%u0430%u0443%u043D%u0434%20%u0440%u0430%u0437%u0440%u0435%u0448%u0430%u0435%u0442%u0441%u044F%20%u0438%u0441%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u0442%u044C%201%20%u043A%u0430%u0440%u0442%u0443%20%u0438%20%u043F%u043E%201-%u043C%u0443%20%u0443%u043C%u0435%u043D%u0438%u044E%20%u0434%u043B%u044F%20%u043A%u0430%u0436%u0434%u043E%u0433%u043E%20%u0432%u044B%u0437%u0432%u0430%u043D%u043D%u043E%u0433%u043E%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0430.%0A1.6.%20%u0418%u0441%u043F%u043E%u043B%u044C%u0437%u043E%u0432%u0430%u043D%u043D%u044B%u0435%20%u043A%u0430%u0440%u0442%u044B%20%u0443%u0445%u043E%u0434%u044F%u0442%20%u0438%u0437%20%u0438%u0433%u0440%u044B.%20%28%u043D%u0435%u043A%u043E%u0442%u043E%u0440%u044B%u0435%20%u0443%u043C%u0435%u043D%u0438%u044F%20%u043C%u043E%u0433%u0443%u0442%20%u0442%u043E%u0436%u0435%20%u0432%u044B%u0445%u043E%u0434%u0438%u0442%u044C%20%u0438%u0437%20%u0438%u0433%u0440%u044B%29%0A1.7.%20%u041F%u043E%u0441%u043B%u0435%20%u0442%u043E%u0433%u043E%20%u043A%u0430%u043A%20%u0437%u0430%u043A%u0430%u0437%u044B%20%u043F%u0440%u0438%u043D%u044F%u0442%u044B%2C%20%u043E%u043D%u0438%20%u043E%u0431%u0440%u0430%u0431%u0430%u0442%u044B%u0432%u0430%u044E%u0442%u0441%u044F%20%u043D%u0430%20%u0441%u0435%u0440%u0432%u0435%u0440%u0435%20%u0438%20%u043F%u043E%u043A%u0430%u0437%u044B%u0432%u0430%u044E%u0442%u0441%u044F%20%u0440%u0435%u0437%u0443%u043B%u044C%u0442%u0430%u0442%u044B%20%u0440%u0430%u0443%u043D%u0434%u0430%20%u0432%20%u043B%u043E%u0433%u0435.%0A1.8.%20%u0415%u0441%u043B%u0438%20%u0432%20%u0440%u0435%u0437%u0443%u043B%u044C%u0442%u0430%u0442%u0435%20%u0440%u0430%u0443%u043D%u0434%u0430%20%u043A%u0442%u043E%20%u043B%u0438%u0431%u043E%20%u043F%u043E%u0442%u0435%u0440%u044F%u043B%20%u0432%u0441%u0435%u0445%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%20%u0438%20%u0433%u0435%u0440%u043E%u044F%20%u0431%u043E%u0439%20%u0441%u0447%u0438%u0442%u0430%u0435%u0442%u0441%u044F%20%u0437%u0430%u043A%u043E%u043D%u0447%u0435%u043D%u043D%u044B%u043C.%0A1.9.%20%u0415%u0441%u043B%u0438%20%u043E%u0431%u0430%20%u0438%u0433%u0440%u043E%u043A%u0430%20%u0438%u043C%u0435%u044E%u0442%20%u0436%u0438%u0432%u044B%u0445%20%u043D%u0430%20%u043F%u043E%u043B%u0435%20%u0431%u043E%u0439%20%u043F%u0440%u043E%u0434%u043E%u043B%u0436%u0430%u0435%u0442%u0441%u044F%2C%20%u043D%u0430%u0447%u0438%u043D%u0430%u0435%u0442%u0441%u044F%20%u0441%u043B%u0435%u0434%u0443%u044E%u0449%u0438%u0439%20%u0440%u0430%u0443%u043D%u0434.%0A%20%0A2.%20%u0421%u0440%u0430%u043D%u0438%u0446%u0430%20%u0431%u043E%u044F%20%u043E%u0442%u043E%u0431%u0440%u0430%u0436%u0430%u0435%u0442%20%u0441%u043B%u0435%u0434%u0443%u044E%u0449%u0443%u044E%20%u0438%u043D%u0444%u043E%u0440%u043C%u0430%u0446%u0438%u044E%20%u0441%u0432%u044F%u0437%u0430%u043D%u043D%u0443%u044E%20%u0441%20%u0431%u043E%u0435%u043C%3A%0A2.1.%20%u0421%u043B%u0435%u0432%u0430%20%u043D%u0430%u0445%u043E%u0434%u044F%u0442%u0441%u044F%203%20%u0438%u043D%u043E%u0440%u043C%u0430%u0446%u0438%u043E%u043D%u043D%u044B%u0445%20%u043F%u0430%u043D%u0435%u043B%u0438%20-%20%u043E%u043F%u043E%u043D%u0435%u043D%u0442%2C%20%u0438%u0433%u0440%u043E%u043A%2C%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u043E%u0435%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E/%u0433%u0435%u0440%u043E%u0439.%0A2.1.1.%20%u041F%u0430%u043D%u0435%u043B%u044C%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u043E%u0435%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u043F%u043E%u043A%u0430%u0437%u044B%u0432%u0430%u0435%u0442%20%u0438%u043D%u0444%u043E%u0440%u043C%u0430%u0446%u0438%u044E%20%u043E%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0435%20%u043B%u0438%u0431%u043E%20%u0433%u0435%u0440%u043E%u0435%2C%20%u043D%u0430%u0445%u043E%u0434%u044F%u0449%u0435%u043C%u0441%u044F%20%u043D%u0430%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u043E%u0439%20%u043F%u043E%u0437%u0438%u0446%u0438%u0438%20%u043F%u043E%u043B%u044F%20%u0431%u043E%u044F%0A2.2.%20%u041F%u043E%20%u0446%u0435%u043D%u0442%u0440%u0443%20%u043F%u043E%u043A%u0430%u0437%u0430%u043D%u043E%20%u043F%u043E%u043B%u0435%20%u0431%u043E%u044F%20%u0441%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0430%u043C%u0438%20%u043D%u0430%u0445%u043E%u0434%u044F%u0449%u0438%u043C%u0438%u0441%u044F%20%u043D%u0430%20%u043D%u0435%u043C.%0A2.2.1.%20%u0412%u044B%u0431%u0440%u0430%u043D%u043D%u0430%u044F%20%u043F%u043E%u0437%u0438%u0446%u0438%u044F%20%u043F%u043E%u0434%u0441%u0432%u0435%u0447%u0438%u0432%u0430%u0435%u0442%u0441%u044F%0A2.2.2.%20%u041F%u0440%u0438%20%u0432%u044B%u0431%u043E%u0440%u0435%20%u0434%u0440%u0443%u0433%u043E%u0439%20%u043F%u043E%u0437%u0438%u0446%u0438%u0438%20%u043F%u043E%u043B%u044F%20%u0431%u043E%u044F%2C%20%u043F%u0430%u043D%u0435%u043B%u044C%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u043E%u0433%u043E%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0430%20%u0438%20%u043F%u0430%u043D%u0435%u043B%u044C%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0439%20%u043F%u043E%u043A%u0430%u0437%u044B%u0432%u0430%u044E%u0442%20%u043E%u0431%u043D%u043E%u0432%u043B%u0435%u043D%u043D%u0443%u044E%20%u0438%u043D%u0444%u043E%u0440%u043C%u0430%u0446%u0438%u044E.%0A2.2.4.%20%u041F%u043E%20%u0443%u043C%u043E%u043B%u0447%u0430%u043D%u0438%u044E%20%u0432%u044B%u0431%u0440%u0430%u043D%20%u0441%u0432%u043E%u0439%20%u0433%u0435%u0440%u043E%u0439%20%u043B%u0438%u0431%u043E%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u0435%u0441%u043B%u0438%20%u0433%u0435%u0440%u043E%u0439%20%u043C%u0435%u0440%u0442%u0432.%0A2.3.%20%u0412%u043D%u0438%u0437%u0443%20%u043E%u0442%u043E%u0431%u0440%u0430%u0436%u0430%u0435%u0442%u0441%u044F%20%u0441%u043F%u0438%u0441%u043E%u043A%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0439%20%u0434%u043B%u044F%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u043E%u0433%u043E%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u0430%20%u043B%u0438%u0431%u043E%20%u0433%u0435%u0440%u043E%u044F.%0A2.3.1.%20%u0412%20%u0441%u043B%u0443%u0447%u0430%u0435%20%u0435%u0441%u043B%u0438%20%u0432%u044B%u0431%u0440%u0430%u043D%u043E%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u0431%u0435%u0437%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0439%2C%20%u043F%u0430%u043D%u0435%u043B%u044C%20%u043D%u0435%20%u043F%u043E%u043A%u0430%u0437%u044B%u0432%u0430%u0435%u0442%u0441%u044F%0A2.3.2.%20%u0412%20%u0441%u043B%u0443%u0447%u0430%u0435%20%u0435%u0441%u043B%u0438%20%u0432%u044B%u0431%u0440%u0430%u043D%u043E%20%u0447%u0443%u0436%u043E%u0435%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u043B%u0438%u0431%u043E%20%u0433%u0435%u0440%u043E%u0439%2C%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u044F%20%u0437%u0430%u0434%u0438%u0437%u044D%u0439%u0431%u043B%u0435%u043D%u044B%0A2.3.3.%20%u0415%u0441%u043B%u0438%20%u0432%u044B%u0431%u0440%u0430%u043D%u043E%20%u0441%u0432%u043E%u0435%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u043B%u0438%u0431%u043E%20%u0433%u0435%u0440%u043E%u0439%2C%u043D%u043E%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0435%20%u043F%u043E%20%u043A%u0430%u043A%u0438%u043C%20%u0442%u043E%20%u043F%u0440%u0438%u0447%u0438%u043D%u0430%u043C%20%u043D%u0435%u0434%u043E%u0441%u0442%u0443%u043F%u043D%u043E%28%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u0443%u0436%u0435%20%u043F%u043E%u0445%u043E%u0434%u0438%u043B%u043E%2C%20%u043D%u0435%20%u0445%u0432%u0430%u0442%u0430%u0435%u0442%20%u043A%u0440%u043E%u0432%u0438%2C%20%u0435%u0444%u0444%u0435%u043A%u0442%20%u0432%u0440%u0430%u0436%u0435%u0441%u043A%u043E%u0433%u043E%20%u0437%u0430%u043A%u043B%u0438%u043D%u0430%u043D%u0438%u044F%20%u0438%20%u0442.%u0434.%29%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0435%20%u043E%u0442%u0440%u0438%u0441%u043E%u0432%u044B%u0432%u0430%u0435%u0442%u0441%u044F%20%u043A%u0430%u043A%20%u0437%u0430%u0434%u0438%u0437%u044D%u0439%u0431%u043B%u0435%u043D%u043E%u0435.%0A2.3.4.%20%u041F%u0440%u0438%20%u0432%u044B%u0431%u043E%u0440%u0435%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u044F%3A%0A-%20%u0432%u0441%u0435%20%u044D%u043B%u0435%u043C%u0435%u043D%u0442%u044B%20%u043D%u0430%20%u043A%u043E%u0442%u043E%u0440%u044B%u0435%20%u043F%u0440%u0438%u043C%u0435%u043D%u0438%u043C%u043E%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0435%20%u043F%u043E%u0434%u0441%u0432%u0435%u0447%u0438%u0432%u0430%u044E%u0442%u0441%u044F%0A-%20%u043F%u043E%u0441%u043B%u0435%20%u044D%u0442%u043E%u0433%u043E%20%u043D%u0443%u0436%u043D%u043E%20%u0432%u044B%u0431%u0440%u0430%u0442%u044C%20%u0446%u0435%u043B%u044C%0A-%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u043E%u0435%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0435%20%u043F%u043E%u043C%u0435%u0449%u0430%u0435%u0442%u0441%u044F%20%u0432%20%u043E%u0447%u0435%u0440%u0435%u0434%u044C%20%u0434%u0435%u0439%u0441%u0442%u0432%u0438%u0439%0A-%20%u0432%u044B%u0431%u0438%u0440%u0430%u0435%u0442%u0441%u044F%20%u0441%u043B%u0435%u0434%u0443%u044E%u0449%u0435%u0435%20%u0432%u0430%u0448%u0435%20%u043D%u0435%u043F%u043E%u0445%u043E%u0434%u0438%u0432%u0448%u0435%u0435%20%u0441%u0443%u0449%u0435%u0441%u0442%u0432%u043E%20%u043B%u0438%u0431%u043E%20%u0433%u0435%u0440%u043E%u0439%0A2.4.%20%u0421%u043F%u0440%u0430%u0432%u0430%20%u043E%u0442%u043E%u0431%u0440%u0430%u0436%u0430%u0435%u0442%u0441%u044F%20%u043B%u043E%u0433%20%u0431%u043E%u044F%20%u0432%20%u043A%u0440%u0430%u0442%u043A%u043E%u0439%20%u0444%u043E%u0440%u043C%u0435.%0A2.4.1.%20%u0412%20%u043A%u043E%u043D%u0446%u0435%20%u043B%u043E%u0433%u0430%20%u0434%u043E%u043B%u0436%u043D%u0430%20%u043F%u0440%u0438%u0441%u0443%u0442%u0441%u0442%u0432%u043E%u0432%u0430%u0442%u044C%20%u0441%u0441%u044B%u043B%u043A%u0430%20%u043D%u0430%20%u043F%u0440%u043E%u0441%u043C%u043E%u0442%u0440%20%u043F%u043E%u043B%u043D%u043E%u0433%u043E%20%u043B%u043E%u0433%u0430.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

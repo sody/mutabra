@@ -18,8 +18,8 @@
     </control>
     <control controlID="33" controlTypeID="com.balsamiq.mockups::Button" x="411" y="517" w="92" h="32" measuredW="96" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>6-creationhero%26bm%3B6-creationhero.bmml%26bm%3B6-creationhero.bmml%26bm%3B6-creationhero.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22395%2C511%2C487%2C543%22%20href%3D%226-creationhero.bmml%22%20alt%3D%226-creationhero%22%20id%3D%2233%22/%3E</map>
+        <href>1-6-creationhero%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22395%2C511%2C487%2C543%22%20href%3D%221-6-creationhero.bmml%22%20alt%3D%221-6-creationhero%22%20id%3D%2233%22/%3E</map>
         <text>Create%20New</text>
       </controlProperties>
     </control>
@@ -40,25 +40,25 @@
     </control>
     <control controlID="37" controlTypeID="com.balsamiq.mockups::Image" x="79" y="97" w="120" h="68" measuredW="77" measuredH="79" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>1-home%26bm%3B1-home.bmml%26bm%3B1-home.bmml%26bm%3B1-home.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C91%2C183%2C159%22%20href%3D%221-home.bmml%22%20alt%3D%221-home%22%20id%3D%2237%22/%3E</map>
+        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C91%2C183%2C159%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2237%22/%3E</map>
         <src>./logo80x60.png</src>
         <text>logo</text>
       </controlProperties>
     </control>
     <control controlID="38" controlTypeID="com.balsamiq.mockups::IconLabel" x="763" y="94" w="-1" h="-1" measuredW="101" measuredH="45" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>accountsettings1%26bm%3Baccountsettings1.bmml%26bm%3Baccountsettings1.bmml%26bm%3Baccountsettings1.bmml</href>
+        <href>1-5-accountsettings%26bm%3B1-5-accountsettings.bmml%26bm%3B1-5-accountsettings.bmml%26bm%3B1-5-accountsettings.bmml</href>
         <icon>TableIcon%7Csmall</icon>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22747%2C88%2C848%2C133%22%20href%3D%22accountsettings1.bmml%22%20alt%3D%22accountsettings1%22%20id%3D%2238%22/%3E</map>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22747%2C88%2C848%2C133%22%20href%3D%221-5-accountsettings.bmml%22%20alt%3D%221-5-accountsettings%22%20id%3D%2238%22/%3E</map>
         <text>Account%20Settings</text>
       </controlProperties>
     </control>
     <control controlID="39" controlTypeID="com.balsamiq.mockups::IconLabel" x="896" y="94" w="-1" h="-1" measuredW="44" measuredH="45" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
-        <href>home1%26bm%3Bhome1.bmml%26bm%3Bhome1.bmml%26bm%3Bhome1.bmml</href>
+        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
         <icon>PowerIcon%7Csmall</icon>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22880%2C88%2C924%2C133%22%20href%3D%22home1.bmml%22%20alt%3D%22home1%22%20id%3D%2239%22/%3E</map>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22880%2C88%2C924%2C133%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2239%22/%3E</map>
         <text>Logout</text>
       </controlProperties>
     </control>
