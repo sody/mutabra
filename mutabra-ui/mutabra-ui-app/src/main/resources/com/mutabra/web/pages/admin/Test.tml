@@ -187,25 +187,25 @@
 		j$("#format").buttonset();
 		j$("#button1").button({
 			icons: {
-				primary: "ui-icon-locked"
+				primary: "ui-icon-blood"
 			},
 			text: false
 		});
 		j$("#button2").button({
 			icons: {
-				primary: "ui-icon-locked"
+				primary: "ui-icon-skull"
 			}
 		});
 		j$("#button3").button({
 			icons: {
-				primary: "ui-icon-gear",
-				secondary: "ui-icon-triangle-1-s"
+				primary: "ui-icon-heart",
+				secondary: "ui-icon-skull"
 			}
 		});
 		j$("#button4").button({
 			icons: {
-				primary: "ui-icon-gear",
-				secondary: "ui-icon-triangle-1-s"
+				primary: "ui-icon-blood",
+				secondary: "ui-icon-skull"
 			},
 			text: false
 		});

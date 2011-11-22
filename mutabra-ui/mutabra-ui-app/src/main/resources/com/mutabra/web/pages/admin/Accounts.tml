@@ -11,7 +11,7 @@
 
 <t:menu class="toolbar" items="add">
 	<p:addMenuItem>
-		<t:button primary="literal:ui-icon-circle-plus">
+		<t:button>
 			<t:eventlink event="add" zone="entityDialog">${message:button.add}</t:eventlink>
 		</t:button>
 	</p:addMenuItem>

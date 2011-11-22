@@ -33,7 +33,7 @@
 
 <t:menu class="toolbar" items="update">
 	<p:updateMenuItem>
-		<t:button primary="literal:ui-icon-circle-triangle-e">
+		<t:button>
 			<t:dialoglink dialog="updateDialog">${message:button.update}</t:dialoglink>
 		</t:button>
 	</p:updateMenuItem>
