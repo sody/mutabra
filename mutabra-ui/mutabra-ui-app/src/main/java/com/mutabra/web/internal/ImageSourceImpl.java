@@ -28,46 +28,46 @@ public class ImageSourceImpl implements ImageSource {
 		this.locale = locale;
 
 		//todo: implement all different not found assets
-		notFound = assetSource.getContextAsset(HERO_REPOSITORY + "anonymous_64x64.png", locale.getLocale());
+		notFound = assetSource.getContextAsset(HERO_REPOSITORY + "anonymous.svg", locale.getLocale());
 	}
 
-	public Asset getNotFoundImage(final int size) {
+	public Asset getNotFoundImage() {
 		return notFound;
 	}
 
-	public Asset getRaceImage(final Race race, final int size) {
+	public Asset getRaceImage(final Race race) {
 		return race != null ?
-				getContextAsset(RACE_REPOSITORY, race.getCode(), size) :
-				getNotFoundImage(size);
+				getContextAsset(RACE_REPOSITORY, race.getCode()) :
+				getNotFoundImage();
 	}
 
-	public Asset getFaceImage(final Face face, final int size) {
+	public Asset getFaceImage(final Face face) {
 		return face != null ?
-				getContextAsset(FACE_REPOSITORY, face.getCode(), size) :
-				getNotFoundImage(size);
+				getContextAsset(FACE_REPOSITORY, face.getCode()) :
+				getNotFoundImage();
 	}
 
-	public Asset getCardImage(final Card card, final int size) {
+	public Asset getCardImage(final Card card) {
 		return card != null ?
-				getContextAsset(CARD_REPOSITORY, card.getCode(), size) :
-				getNotFoundImage(size);
+				getContextAsset(CARD_REPOSITORY, card.getCode()) :
+				getNotFoundImage();
 	}
 
-	public Asset getHeroImage(final Hero hero, final int size) {
+	public Asset getHeroImage(final Hero hero) {
 		return hero != null ?
-				getRaceImage(hero.getRace(), size) :
+				getRaceImage(hero.getRace()) :
 //				getContextAsset(HERO_REPOSITORY, hero.getRace().getCode() + "_" + hero.getFace().getCode(), size, notFound) :
-				getNotFoundImage(size);
+				getNotFoundImage();
 	}
 
-	private Asset getContextAsset(final String repository, final String code, final int size) {
+	private Asset getContextAsset(final String repository, final String code) {
 		final StringBuilder builder = new StringBuilder(repository);
-		builder.append(code).append('_').append(size).append('x').append(size).append(".png");
+		builder.append(code).append(".svg");
 		try {
 			return assetSource.getContextAsset(builder.toString(), locale.getLocale());
 		} catch (Exception e) {
 			// return default if not found
-			return getNotFoundImage(size);
+			return getNotFoundImage();
 		}
 	}
 }

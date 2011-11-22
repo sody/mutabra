@@ -33,6 +33,6 @@ public class AccountImage extends AbstractImage {
 
 	@Override
 	protected Asset getAsset() {
-		return imageSource.getNotFoundImage(getSize());
+		return imageSource.getNotFoundImage();
 	}
 }

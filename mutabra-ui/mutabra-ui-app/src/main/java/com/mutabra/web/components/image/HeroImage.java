@@ -33,6 +33,6 @@ public class HeroImage extends AbstractImage {
 
 	@Override
 	protected Asset getAsset() {
-		return imageSource.getHeroImage(hero, getSize());
+		return imageSource.getHeroImage(hero);
 	}
 }

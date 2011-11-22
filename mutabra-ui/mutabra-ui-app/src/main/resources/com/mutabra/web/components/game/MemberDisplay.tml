@@ -4,7 +4,7 @@
 	<div class="hero ui-widget ui-widget-content ui-corner-all">
 		<h4>${value.hero.name} - player</h4>
 		<br/>
-		<t:image.heroimage hero="value.hero"/>
+		<t:image.heroimage hero="value.hero" size="100"/>
 		<br/>
 		<span class="ui-icon ui-icon-heart"/>(${value.health})
 	</div>

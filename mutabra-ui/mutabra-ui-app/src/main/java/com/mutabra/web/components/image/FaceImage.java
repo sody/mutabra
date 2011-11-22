@@ -31,7 +31,7 @@ public class FaceImage extends AbstractImage {
 
 	@Override
 	protected Asset getAsset() {
-		return imageSource.getFaceImage(face, getSize());
+		return imageSource.getFaceImage(face);
 	}
 
 	@Override

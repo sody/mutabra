@@ -17,12 +17,14 @@ public abstract class AbstractImage extends AbstractComponent {
 
 	@BeginRender
 	protected void beginRender(final MarkupWriter writer) {
-		final Element img = writer.element("img", "alt", getAlt(), "title", getTitle());
+		final Element img = writer.element("img",
+				"alt", getAlt(),
+				"title", getTitle(),
+				"width", getSize(),
+				"height", getSize());
 		getResources().renderInformalParameters(writer);
 
-		final Asset asset = getAsset();
-
-		img.attribute("src", asset.toClientURL());
+		img.attribute("src", getAsset().toClientURL());
 		writer.end();
 	}
 

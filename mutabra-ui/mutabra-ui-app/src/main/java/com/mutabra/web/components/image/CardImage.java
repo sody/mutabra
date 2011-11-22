@@ -37,6 +37,6 @@ public class CardImage extends AbstractImage {
 
 	@Override
 	protected Asset getAsset() {
-		return imageSource.getCardImage(card, getSize());
+		return imageSource.getCardImage(card);
 	}
 }

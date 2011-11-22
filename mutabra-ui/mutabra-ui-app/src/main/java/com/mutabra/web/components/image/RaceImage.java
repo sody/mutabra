@@ -37,6 +37,6 @@ public class RaceImage extends AbstractImage {
 
 	@Override
 	protected Asset getAsset() {
-		return imageSource.getRaceImage(race, getSize());
+		return imageSource.getRaceImage(race);
 	}
 }
