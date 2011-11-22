@@ -21,9 +21,6 @@
 			</t:button>
 		</p:signOutMenuItem>
 	</t:menu>
-	<t:button secondary="ui-icon-power" text="false">
-		<t:eventlink event="signOut">${message:button.sign-out}</t:eventlink>
-	</t:button>
 
 <script type="text/javascript">
 	j$(function() {
