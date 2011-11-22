@@ -626,19 +626,19 @@ div.t-beaneditor-row select {
 .ui-icon {
 	width: 16px;
 	height: 16px;
-	background-image: url(../img/icons_64x32x16.png);
+	background-image: url(../img/icons_64x48x16.png);
 }
 
 .ui-icon.medium {
 	width: 24px;
 	height: 24px;
-	background-image: url(../img/icons_96x48x24.png);
+	background-image: url(../img/icons_96x72x24.png);
 }
 
 .ui-icon.big {
 	width: 32px;
 	height: 32px;
-	background-image: url(../img/icons_128x64x32.png);
+	background-image: url(../img/icons_128x96x32.png);
 }
 
 /*
@@ -652,32 +652,52 @@ div.t-beaneditor-row select {
 */
 
 /* positioning */
-.ui-icon-arrow-l {
+.ui-icon-circle-triangle-w,
+.ui-icon-triangle-1-w {
 	background-position: 0 0;
 }
 
-.ui-icon-arrow-r {
+.ui-icon-circle-triangle-e,
+.ui-icon-triangle-1-e {
 	background-position: -16px 0;
 }
 
-.ui-icon-arrow-t {
+.ui-icon-circle-triangle-n,
+.ui-icon-triangle-1-n {
 	background-position: -32px 0;
 }
 
-.ui-icon-arrow-b {
+.ui-icon-circle-triangle-s,
+.ui-icon-triangle-1-s {
 	background-position: -48px 0;
 }
 
-.ui-icon-blood {
+.ui-icon-arrow-l {
 	background-position: 0 -16px;
 }
 
-.ui-icon-heart {
+.ui-icon-arrow-r {
 	background-position: -16px -16px;
 }
 
-.ui-icon-skull {
+.ui-icon-arrow-t {
 	background-position: -32px -16px;
+}
+
+.ui-icon-arrow-b {
+	background-position: -48px -16px;
+}
+
+.ui-icon-blood {
+	background-position: 0 -32px;
+}
+
+.ui-icon-heart {
+	background-position: -16px -32px;
+}
+
+.ui-icon-skull {
+	background-position: -32px -32px;
 }
 
 /* Misc visuals
@@ -1607,7 +1627,7 @@ button.ui-button::-moz-focus-inner {
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
-	background-image: url(../img/icons_128x64x32.png);
+	background-image: url(../img/icons_128x96x32.png);
 }
 
 .jcarousel-next-disabled,
@@ -1618,10 +1638,10 @@ button.ui-button::-moz-focus-inner {
 
 .jcarousel-next {
 	right: 5px;
-	background-position: -32px 0;
+	background-position: -32px -16px;
 }
 
 .jcarousel-prev {
 	left: 5px;
-	background-position: 0 0;
+	background-position: 0 -16px;
 }

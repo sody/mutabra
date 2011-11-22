@@ -29,7 +29,7 @@
 			<t:form t:id="signIn">
 				<t:textfield t:id="email" value="email"  validate="required,email" label="message:label.email" class="first ui-corner-left"/>
 				<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password" class="second ui-corner-right"/>
-				<t:button primary="ui-icon-arrow-r" text="false">
+				<t:button primary="ui-icon-triangle-1-e" text="false">
 					<t:linksubmit>${message:button.sign-in}</t:linksubmit>
 				</t:button>
 			</t:form>
@@ -37,7 +37,7 @@
 		<div class="t-beaneditor-row">
 			<t:form t:id="signUp">
 				<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="double ui-corner-all"/>
-				<t:button primary="ui-icon-arrow-r" text="false">
+				<t:button primary="ui-icon-triangle-1-e" text="false">
 					<t:linksubmit>${message:button.sign-up}</t:linksubmit>
 				</t:button>
 			</t:form>
