@@ -7,9 +7,12 @@
 <div class="unit c-5">
 	<div class="column">
 		<t:game.memberdisplay value="opponent"/>
-		<br/>
+	</div>
+	<div class="column s-3" align="center" >
+		<t:game.fielddisplay/>
+	</div>
+	<div class="column">
 		<t:game.memberdisplay value="you"/>
-		<br/>
 	</div>
 </div>
 
