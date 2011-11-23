@@ -350,21 +350,19 @@ div.t-beaneditor-row select {
 	margin: 8px;
 }
 
+.card,
 .hero {
 	margin: 10px;
 	padding: 10px;
 	width: 150px;
 	height: 225px;
 	float: left;
-}
-
-.card {
-	margin: 10px;
-	padding: 10px;
-	width: 150px;
-	height: 225px;
-	float: left;
-}
+	}
+	.card .ui-icon,
+	.hero .ui-icon {
+		float: left;
+		margin-right: 5px;
+	}
 
 /*
  * jQuery UI CSS Framework 1.8.16

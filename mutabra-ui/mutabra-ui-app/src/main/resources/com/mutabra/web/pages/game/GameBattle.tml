@@ -27,11 +27,13 @@
 			<t:game.memberdisplay value="member"/>
 		</div>
 		<div class="column">
-			<div class="hand">
-				<t:loop source="member.hand" value="card">
-					<t:game.carddisplay value="card.card.card"/>
-				</t:loop>
-			</div>
+			<t:if test="friend">
+				<div class="hand">
+					<t:loop source="member.hand" value="card">
+						<t:game.carddisplay value="card.card.card"/>
+					</t:loop>
+				</div>
+			</t:if>
 		</div>
 	</div>
 </t:loop>

@@ -6,12 +6,13 @@
 		<br/>
 		<t:image.cardimage card="value" size="100"/>
 		<br/>
-		<t:if test="value.effect">
-			${value.effect.strength}<span class="ui-icon ui-icon-skull"/>
+		<span class="ui-icon ui-icon-blood"/>${value.bloodCost}<br/>
+		<t:if test="effectCard">
+			<span class="ui-icon ui-icon-skull"/>${value.effect.strength}<br/>
 		</t:if>
-		<t:if test="value.summon">
-			${value.summon.strength}<span class="ui-icon ui-icon-skull"/>
-			${value.summon.health}<span class="ui-icon ui-icon-heart"/>
+		<t:if test="summonCard">
+			<span class="ui-icon ui-icon-skull"/>${value.summon.strength}<br/>
+			<span class="ui-icon ui-icon-heart"/>${value.summon.health}<br/>
 		</t:if>
 	</div>
 

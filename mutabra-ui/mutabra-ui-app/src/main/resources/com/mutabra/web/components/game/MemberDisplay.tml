@@ -6,7 +6,7 @@
 		<br/>
 		<t:image.heroimage hero="value.hero" size="100"/>
 		<br/>
-		<span class="ui-icon ui-icon-heart"/>(${value.health})
+		<span class="ui-icon ui-icon-heart"/>${value.health}
 	</div>
 
 </t:container>

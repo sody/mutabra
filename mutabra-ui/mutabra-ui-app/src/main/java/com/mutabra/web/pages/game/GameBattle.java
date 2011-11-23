@@ -72,6 +72,10 @@ public class GameBattle extends AbstractPage {
 		return members.values();
 	}
 
+	public boolean isFriend() {
+		return member.equals(you);
+	}
+
 	@OnEvent(EventConstants.ACTIVATE)
 	Object activate() {
 		final Hero hero = accountContext.getHero();
