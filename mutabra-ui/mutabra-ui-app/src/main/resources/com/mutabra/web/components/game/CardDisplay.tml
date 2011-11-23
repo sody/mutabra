@@ -1,0 +1,13 @@
+<t:container
+		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<div class="card ui-widget ui-widget-content ui-corner-all">
+		<h4>${value:name} - card</h4>
+		<br/>
+		<t:image.cardimage card="value" size="100"/>
+		<br/>
+		${value.effect.attack} <span class="ui-icon ui-icon-skull"/>
+		${value.effect.defence} <span class="ui-icon ui-icon-heart"/>
+	</div>
+
+</t:container>

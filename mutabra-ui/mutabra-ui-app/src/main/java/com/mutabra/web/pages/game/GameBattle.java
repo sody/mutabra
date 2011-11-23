@@ -1,6 +1,7 @@
 package com.mutabra.web.pages.game;
 
 import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.game.BattleCard;
 import com.mutabra.domain.game.BattleMember;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.web.base.pages.AbstractPage;
@@ -38,6 +39,9 @@ public class GameBattle extends AbstractPage {
 
 	@Property
 	private BattleMember member;
+
+	@Property
+	private BattleCard card;
 
 	@Property
 	private int position;

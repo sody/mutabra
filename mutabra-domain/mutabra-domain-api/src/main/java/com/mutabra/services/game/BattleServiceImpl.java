@@ -1,11 +1,16 @@
 package com.mutabra.services.game;
 
 import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.game.BattleCard;
 import com.mutabra.domain.game.BattleMember;
 import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.HeroCard;
 import com.mutabra.services.BaseEntityServiceImpl;
 import org.greatage.domain.EntityRepository;
+import org.greatage.domain.annotations.Transactional;
 import org.greatage.util.ReflectionUtils;
+
+import java.util.Date;
 
 /**
  * @author Ivan Khalopik
@@ -14,22 +19,23 @@ import org.greatage.util.ReflectionUtils;
 public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements BattleService {
 
 	private Class<? extends BattleMember> realMemberClass;
+	private Class<? extends BattleCard> realCardClass;
 
 	public BattleServiceImpl(final EntityRepository repository) {
 		super(repository, Battle.class);
 
 		realMemberClass = repository.create(BattleMember.class).getClass();
+		realCardClass = repository.create(BattleCard.class).getClass();
 	}
 
+	@Transactional
 	public Battle createBattle(final Hero hero1, final Hero hero2) {
 		final Battle battle = create();
+		battle.setStartedAt(new Date());
 		save(battle);
-		final BattleMember member1 = creteBattleMember(battle, hero1);
-		member1.setPosition(102);
-		final BattleMember member2 = creteBattleMember(battle, hero2);
-		member2.setPosition(100);
-		repository().save(member1);
-		repository().save(member2);
+
+		addMember(battle, hero1, 102);
+		addMember(battle, hero2, 100);
 
 		hero1.setBattle(battle);
 		hero2.setBattle(battle);
@@ -39,7 +45,17 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		return battle;
 	}
 
-	private BattleMember creteBattleMember(final Battle battle, final Hero hero) {
-		return ReflectionUtils.newInstance(realMemberClass, battle, hero);
+	private void addMember(final Battle battle, final Hero hero, final int position) {
+		final BattleMember member = ReflectionUtils.newInstance(realMemberClass, battle, hero);
+		member.setPosition(position);
+		repository().save(member);
+		for (HeroCard heroCard : hero.getCards()) {
+			addCard(member, heroCard);
+		}
+	}
+
+	private void addCard(final BattleMember member, final HeroCard heroCard) {
+		final BattleCard card = ReflectionUtils.newInstance(realCardClass, member, heroCard);
+		repository().save(card);
 	}
 }

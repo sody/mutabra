@@ -351,9 +351,19 @@ div.t-beaneditor-row select {
 }
 
 .hero {
+	margin: 10px;
 	padding: 10px;
 	width: 150px;
 	height: 225px;
+	float: left;
+}
+
+.card {
+	margin: 10px;
+	padding: 10px;
+	width: 150px;
+	height: 225px;
+	float: left;
 }
 
 /*

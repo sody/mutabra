@@ -1,5 +1,6 @@
 package com.mutabra.web.services;
 
+import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
@@ -83,8 +84,9 @@ public class ServicesModule {
 		return new CodedEntityServiceImpl<Race>(repository, Race.class);
 	}
 
-	public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService) {
-		return new HeroServiceImpl(repository, levelService);
+	public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService,
+										final @InjectService("cardService") CodedEntityService<Card> cardService) {
+		return new HeroServiceImpl(repository, levelService, cardService);
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)

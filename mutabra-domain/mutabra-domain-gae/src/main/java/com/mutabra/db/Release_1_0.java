@@ -127,5 +127,9 @@ public class Release_1_0 extends ChangeLog {
 				.set("variant", "description")
 				.set("locale", "")
 				.set("value", "Plunger is a race that comes from the sunny world where there is nothing except water...");
+
+		begin("2011-11-23/races").comment("orc and elf races removed");
+		delete(Tables.TRANSLATION).where(condition("type").equal(Tables.RACE).and(condition("code").in("orc", "elf")));
+		delete(Tables.RACE).where(condition("code").in("orc", "elf"));
 	}
 }

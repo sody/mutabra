@@ -27,7 +27,9 @@
 			<t:game.memberdisplay value="member"/>
 		</div>
 		<div class="column">
-
+			<t:loop source="member.cards" value="card">
+				<t:game.carddisplay value="card.card.card"/>
+			</t:loop>
 		</div>
 	</div>
 </t:loop>
