@@ -4,16 +4,19 @@
 	<div class="card ui-widget ui-widget-content ui-corner-all">
 		<h4>${value:name}</h4>
 		<br/>
-		<t:image.cardimage card="value" size="100"/>
+		<t:image.cardimage card="value"/>
 		<br/>
-		<span class="ui-icon ui-icon-blood"/>${value.bloodCost}<br/>
 		<t:if test="effectCard">
-			<span class="ui-icon ui-icon-skull"/>${value.effect.strength}<br/>
+			<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.effect.strength}</span>
+			<br/>
 		</t:if>
 		<t:if test="summonCard">
-			<span class="ui-icon ui-icon-skull"/>${value.summon.strength}<br/>
-			<span class="ui-icon ui-icon-heart"/>${value.summon.health}<br/>
+			<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.summon.strength}</span>
+			<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.summon.health}</span>
+			<br/>
 		</t:if>
+		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
+		<br/>
 	</div>
 
 </t:container>
