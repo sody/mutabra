@@ -1645,3 +1645,11 @@ button.ui-button::-moz-focus-inner {
 	left: 5px;
 	background-position: 0 -32px;
 }
+
+path.selected {
+	stroke-width: 3px;
+}
+
+path.busy {
+	fill: #e6d29d;
+}

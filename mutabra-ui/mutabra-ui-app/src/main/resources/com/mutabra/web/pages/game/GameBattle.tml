@@ -15,16 +15,6 @@
 
 <div class="unit" align="center">
 	<svg xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
-		<style>
-			path.selected {
-				stroke-width: 3px;
-			}
-
-			path.busy {
-				fill: #e6d29d;
-			}
-		</style>
-
 		<t:loop source="positions" value="position">
 			<t:game.fieldcell x="x" y="y" empty="empty" selected="selected"/>
 		</t:loop>
