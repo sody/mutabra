@@ -2,12 +2,17 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 	<div class="card ui-widget ui-widget-content ui-corner-all">
-		<h4>${value:name} - card</h4>
+		<h4>${value:name}</h4>
 		<br/>
 		<t:image.cardimage card="value" size="100"/>
 		<br/>
-		${value.effect.attack} <span class="ui-icon ui-icon-skull"/>
-		${value.effect.defence} <span class="ui-icon ui-icon-heart"/>
+		<t:if test="value.effect">
+			${value.effect.strength}<span class="ui-icon ui-icon-skull"/>
+		</t:if>
+		<t:if test="value.summon">
+			${value.summon.strength}<span class="ui-icon ui-icon-skull"/>
+			${value.summon.health}<span class="ui-icon ui-icon-heart"/>
+		</t:if>
 	</div>
 
 </t:container>

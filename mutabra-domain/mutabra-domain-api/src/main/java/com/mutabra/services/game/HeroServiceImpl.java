@@ -37,7 +37,7 @@ public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements Hero
 		final Hero hero = ReflectionUtils.newInstance(realEntityClass, account);
 		hero.setName(account.getName());
 		hero.setLevel(levelService.get("newbie"));
-		hero.setDefence(10);
+		hero.setHealth(15);
 		return hero;
 	}
 
@@ -47,8 +47,21 @@ public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements Hero
 		super.save(entity);
 
 		if ("plunger".equals(entity.getRace().getCode())) {
-			addCard(entity, "ec1");
-			addCard(entity, "sc1");
+			addCard(entity, "electric-ray");
+			addCard(entity, "seahorse");
+			addCard(entity, "calm");
+			addCard(entity, "wave");
+			addCard(entity, "whirlpool");
+			addCard(entity, "trident-blow");
+		}
+
+		if ("flyer".equals(entity.getRace().getCode())) {
+			addCard(entity, "chamois");
+			addCard(entity, "carrion-vulture");
+			addCard(entity, "scramble");
+			addCard(entity, "scratch");
+			addCard(entity, "snowball");
+			addCard(entity, "throw");
 		}
 	}
 

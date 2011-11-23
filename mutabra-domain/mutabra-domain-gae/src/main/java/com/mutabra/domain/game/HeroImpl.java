@@ -39,9 +39,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	private long rating;
 
-	private int attack;
-
-	private int defence;
+	private int health;
 
 	private Key<BattleImpl> battle;
 
@@ -99,20 +97,12 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 		this.level = Keys.getKey(level);
 	}
 
-	public int getAttack() {
-		return attack;
+	public int getHealth() {
+		return health;
 	}
 
-	public void setAttack(final int attack) {
-		this.attack = attack;
-	}
-
-	public int getDefence() {
-		return defence;
-	}
-
-	public void setDefence(final int defence) {
-		this.defence = defence;
+	public void setHealth(final int health) {
+		this.health = health;
 	}
 
 	public Set<HeroCard> getCards() {

@@ -29,7 +29,7 @@ public class BattleSummonImpl extends BaseEntityImpl implements BattleSummon {
 	public BattleSummonImpl(final BattleMember owner, final HeroCard card) {
 		this.owner = Keys.getKey(owner);
 		this.card = Keys.getKey(card);
-		health = card.getCard().getSummon().getDefence();
+		health = card.getCard().getSummon().getHealth();
 	}
 
 	public BattleMember getOwner() {

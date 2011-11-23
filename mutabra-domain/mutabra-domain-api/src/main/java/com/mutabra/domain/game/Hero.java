@@ -37,13 +37,9 @@ public interface Hero extends BaseEntity {
 
 	void setLevel(Level level);
 
-	int getAttack();
+	int getHealth();
 
-	void setAttack(int attack);
-
-	int getDefence();
-
-	void setDefence(int defence);
+	void setHealth(int health);
 
 	Set<HeroCard> getCards();
 

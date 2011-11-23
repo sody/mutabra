@@ -10,11 +10,11 @@ public interface Effect {
 
 	void setTargetType(TargetType targetType);
 
-	int getAttack();
+	int getStrength();
 
-	void setAttack(int attack);
+	void setStrength(int strength);
 
-	int getDefence();
+	int getDuration();
 
-	void setDefence(int defence);
+	void setDuration(int duration);
 }

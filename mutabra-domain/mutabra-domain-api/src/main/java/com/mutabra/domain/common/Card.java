@@ -17,4 +17,8 @@ public interface Card extends CodedEntity {
 	Level getLevel();
 
 	void setLevel(Level level);
+
+	int getBloodCost();
+
+	void setBloodCost(int bloodCost);
 }

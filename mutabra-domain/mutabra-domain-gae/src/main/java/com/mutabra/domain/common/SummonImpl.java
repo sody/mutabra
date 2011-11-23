@@ -11,23 +11,23 @@ import javax.persistence.Entity;
 @Entity(name = Tables.SUMMON)
 public class SummonImpl implements Summon {
 
-	private int attack;
+	private int strength;
 
-	private int defence;
+	private int health;
 
-	public int getAttack() {
-		return attack;
+	public int getStrength() {
+		return strength;
 	}
 
-	public void setAttack(final int attack) {
-		this.attack = attack;
+	public void setStrength(final int strength) {
+		this.strength = strength;
 	}
 
-	public int getDefence() {
-		return defence;
+	public int getHealth() {
+		return health;
 	}
 
-	public void setDefence(final int defence) {
-		this.defence = defence;
+	public void setHealth(final int health) {
+		this.health = health;
 	}
 }

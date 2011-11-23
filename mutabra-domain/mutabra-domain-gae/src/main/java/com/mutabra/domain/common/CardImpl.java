@@ -26,6 +26,8 @@ public class CardImpl extends CodedEntityImpl implements Card {
 	@Embedded
 	private SummonImpl summon = new SummonImpl();
 
+	private int bloodCost;
+
 	public CardImpl() {
 		this(null, CardType.UNKNOWN);
 	}
@@ -59,5 +61,13 @@ public class CardImpl extends CodedEntityImpl implements Card {
 
 	public Summon getSummon() {
 		return summon;
+	}
+
+	public int getBloodCost() {
+		return bloodCost;
+	}
+
+	public void setBloodCost(final int bloodCost) {
+		this.bloodCost = bloodCost;
 	}
 }

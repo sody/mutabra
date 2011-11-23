@@ -6,11 +6,11 @@ package com.mutabra.domain.common;
  */
 public interface Summon {
 
-	int getAttack();
+	int getStrength();
 
-	void setAttack(int attack);
+	void setStrength(int strength);
 
-	int getDefence();
+	int getHealth();
 
-	void setDefence(int defence);
+	void setHealth(int defence);
 }

@@ -30,7 +30,7 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 	public BattleMemberImpl(final Battle battle, final Hero hero) {
 		this.battle = Keys.getKey(battle);
 		this.hero = Keys.getKey(hero);
-		health = hero.getDefence();
+		health = hero.getHealth();
 	}
 
 	public Battle getBattle() {

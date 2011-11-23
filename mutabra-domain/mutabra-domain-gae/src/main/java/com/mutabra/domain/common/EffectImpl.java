@@ -13,9 +13,8 @@ public class EffectImpl implements Effect {
 
 	private TargetType targetType;
 
-	private int attack;
-
-	private int defence;
+	private int strength;
+	private int duration;
 
 	public TargetType getTargetType() {
 		return targetType;
@@ -25,19 +24,19 @@ public class EffectImpl implements Effect {
 		this.targetType = targetType;
 	}
 
-	public int getAttack() {
-		return attack;
+	public int getStrength() {
+		return strength;
 	}
 
-	public void setAttack(final int attack) {
-		this.attack = attack;
+	public void setStrength(final int strength) {
+		this.strength = strength;
 	}
 
-	public int getDefence() {
-		return defence;
+	public int getDuration() {
+		return duration;
 	}
 
-	public void setDefence(final int defence) {
-		this.defence = defence;
+	public void setDuration(final int duration) {
+		this.duration = duration;
 	}
 }

@@ -70,24 +70,6 @@ public class Release_1_0 extends ChangeLog {
 						select(Tables.ROLE).where(condition("code").in("admin", "user"))
 				);
 
-		begin("2011-11-15/test_cards_and_faces").comment("some test cards added");
-		insert(Tables.CARD)
-				.set("type", CardType.EFFECT.name())
-				.set("code", "ec1")
-				.set("effect.targetType", TargetType.PLAYER_ENEMY.name())
-				.set("effect.attack", 10)
-				.set("effect.defence", 0)
-				.set("level",
-						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
-				);
-		insert(Tables.CARD)
-				.set("type", CardType.SUMMON.name())
-				.set("code", "sc1")
-				.set("summon.attack", 3)
-				.set("summon.defence", 10)
-				.set("level",
-						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
-				);
 		insert(Tables.FACE)
 				.set("code", "f1");
 		insert(Tables.FACE)
@@ -131,5 +113,268 @@ public class Release_1_0 extends ChangeLog {
 		begin("2011-11-23/races").comment("orc and elf races removed");
 		delete(Tables.TRANSLATION).where(condition("type").equal(Tables.RACE).and(condition("code").in("orc", "elf")));
 		delete(Tables.RACE).where(condition("code").in("orc", "elf"));
+
+		begin("2011-11-23/cleanup").comment("removed all old data");
+		delete(Tables.HERO_CARD);
+		delete(Tables.HERO);
+		delete(Tables.CARD);
+
+		begin("2011-11-23/plunger_cards").comment("plunger cards added");
+		insert(Tables.CARD)
+				.set("type", CardType.SUMMON.name())
+				.set("code", "electric-ray")
+				.set("bloodCost", 2)
+				.set("summon.strength", 3)
+				.set("summon.health", 5)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.SUMMON.name())
+				.set("code", "seahorse")
+				.set("bloodCost", 1)
+				.set("summon.strength", 1)
+				.set("summon.health", 3)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "calm")
+				.set("bloodCost", 1)
+				.set("effect.targetType", TargetType.ALL_FRIEND.name())
+				.set("effect.strength", 1)
+				.set("effect.duration", 3)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "wave")
+				.set("bloodCost", 2)
+				.set("effect.targetType", TargetType.SINGLE_ENEMY.name())
+				.set("effect.strength", 4)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "whirlpool")
+				.set("bloodCost", 1)
+				.set("effect.targetType", TargetType.SINGLE_ENEMY.name())
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "trident-blow")
+				.set("bloodCost", 2)
+				.set("effect.targetType", TargetType.SINGLE_ENEMY.name())
+				.set("effect.strength", 6)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		begin("2011-11-23/plunger_cards_translation").comment("plunger cards translations added");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "electric-ray")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Electric Ray");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "seahorse")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Seahorse");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "calm")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Calm");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "wave")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Wave");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "whirlpool")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Whirlpool");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "trident-blow")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Trident Blow");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "electric-ray")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Электрический Скат");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "seahorse")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Морской Конек");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "calm")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Штиль");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "wave")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Волна");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "whirlpool")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Водоворот");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "trident-blow")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Удар трезубцем");
+
+		begin("2011-11-23/flyer_cards").comment("flyer cards added");
+		insert(Tables.CARD)
+				.set("type", CardType.SUMMON.name())
+				.set("code", "chamois")
+				.set("bloodCost", 2)
+				.set("summon.strength", 2)
+				.set("summon.health", 6)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.SUMMON.name())
+				.set("code", "carrion-vulture")
+				.set("bloodCost", 2)
+				.set("summon.strength", 2)
+				.set("summon.health", 5)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "scramble")
+				.set("bloodCost", 1)
+				.set("effect.targetType", TargetType.PLAYER.name())
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "scratch")
+				.set("bloodCost", 1)
+				.set("effect.targetType", TargetType.PLAYER_ENEMY.name())
+				.set("effect.strength", 5)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "snowball")
+				.set("bloodCost", 1)
+				.set("effect.targetType", TargetType.ALL_ENEMY.name())
+				.set("effect.strength", 2)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		insert(Tables.CARD)
+				.set("type", CardType.EFFECT.name())
+				.set("code", "throw")
+				.set("bloodCost", 1)
+				.set("effect.targetType", TargetType.SINGLE_ENEMY.name())
+				.set("effect.strength", 3)
+				.set("level",
+						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
+				);
+		begin("2011-11-23/flyer_cards_translation").comment("flyer cards translations added");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "chamois")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Chamois");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "carrion-vulture")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Carrion Vulture");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "scramble")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Scramble");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "scratch")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Scratch");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "snowball")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Snowball");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "throw")
+				.set("variant", "name")
+				.set("locale", "")
+				.set("value", "Throw");
+
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "chamois")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Серна");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "carrion-vulture")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Гриф Падальщик");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "scramble")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Вскарабкаться");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "scratch")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Поцарапать");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "snowball")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Снежный Ком");
+		insert(Tables.TRANSLATION)
+				.set("type", Tables.CARD)
+				.set("code", "throw")
+				.set("variant", "name")
+				.set("locale", "ru")
+				.set("value", "Сбросить");
 	}
 }
