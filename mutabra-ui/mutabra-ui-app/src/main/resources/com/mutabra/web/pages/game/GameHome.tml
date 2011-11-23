@@ -3,7 +3,7 @@
 	  xmlns:p="tapestry:parameter">
 
 <t:loop source="players" value="row">
-	<t:eventlink event="createBattle" context="row">
+	<t:eventlink event="createBattle" context="row" disabled="canCreateBattle">
 		<div>
 			${message:label.name}: ${row.name}
 			<br/>

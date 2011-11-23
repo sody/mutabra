@@ -2,6 +2,7 @@ package com.mutabra.domain.game;
 
 import com.mutabra.domain.BaseEntity;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -15,4 +16,8 @@ public interface Battle extends BaseEntity {
 	int getRound();
 
 	void setRound(int round);
+
+	Date getStartedAt();
+
+	void setStartedAt(Date startedAt);
 }

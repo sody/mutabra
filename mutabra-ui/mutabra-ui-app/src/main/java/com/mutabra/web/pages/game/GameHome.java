@@ -37,10 +37,16 @@ public class GameHome extends AbstractPage {
 	@Property
 	private Hero row;
 
+	private Hero hero;
+
 	public List<Hero> getPlayers() {
 		final Date timeout = new Date(System.currentTimeMillis() - 50000);
 		final PaginationBuilder pagination = PaginationBuilder.create().count(20);
 		return heroService.query(Mappers.hero$.lastActive.gt(timeout)).list(pagination);
+	}
+
+	public boolean isCanCreateBattle() {
+		return row.equals(hero);
 	}
 
 	@OnEvent(EventConstants.ACTIVATE)
@@ -52,14 +58,14 @@ public class GameHome extends AbstractPage {
 		if (accountContext.getBattle() != null) {
 			return GameBattle.class;
 		}
+		hero = accountContext.getHero();
 		return null;
 	}
 
 	@OnEvent("createBattle")
-	Object createBattle(final Hero hero) {
-		if (hero.getBattle() == null) {
-			final Hero currentHero = accountContext.getHero();
-			battleService.createBattle(currentHero, hero);
+	Object createBattle(final Hero target) {
+		if (target.getBattle() == null && hero.getBattle() == null && !target.equals(hero)) {
+			battleService.createBattle(hero, target);
 			return GameBattle.class;
 		}
 		return null;

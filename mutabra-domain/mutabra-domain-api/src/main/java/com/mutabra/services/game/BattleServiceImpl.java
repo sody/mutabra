@@ -25,7 +25,9 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		final Battle battle = create();
 		save(battle);
 		final BattleMember member1 = creteBattleMember(battle, hero1);
+		member1.setPosition(102);
 		final BattleMember member2 = creteBattleMember(battle, hero2);
+		member2.setPosition(100);
 		repository().save(member1);
 		repository().save(member2);
 
