@@ -17,6 +17,10 @@ public interface BattleMember extends BaseEntity {
 
 	Set<BattleCard> getCards();
 
+	Set<BattleCard> getDeck();
+
+	Set<BattleCard> getHand();
+
 	Set<BattleSummon> getSummons();
 
 	int getPosition();

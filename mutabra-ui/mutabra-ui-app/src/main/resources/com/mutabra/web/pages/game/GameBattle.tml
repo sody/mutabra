@@ -2,7 +2,7 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<h2>Round: ${battle.round}</h2>
+<h2>${message:label.round}: ${battle.round}</h2>
 
 <div class="unit">
 	<div class="column">
@@ -27,9 +27,11 @@
 			<t:game.memberdisplay value="member"/>
 		</div>
 		<div class="column">
-			<t:loop source="member.cards" value="card">
-				<t:game.carddisplay value="card.card.card"/>
-			</t:loop>
+			<div class="hand">
+				<t:loop source="member.hand" value="card">
+					<t:game.carddisplay value="card.card.card"/>
+				</t:loop>
+			</div>
 		</div>
 	</div>
 </t:loop>

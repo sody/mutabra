@@ -19,6 +19,7 @@ public class BattleCardImpl extends BaseEntityImpl implements BattleCard {
 	private Key<BattleMemberImpl> owner;
 
 	private Key<HeroCardImpl> card;
+	private boolean inHand;
 
 	public BattleCardImpl() {
 	}
@@ -34,6 +35,14 @@ public class BattleCardImpl extends BaseEntityImpl implements BattleCard {
 
 	public HeroCard getCard() {
 		return Keys.getInstance(card);
+	}
+
+	public boolean isInHand() {
+		return inHand;
+	}
+
+	public void setInHand(final boolean onHand) {
+		this.inHand = onHand;
 	}
 
 	@Override

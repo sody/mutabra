@@ -10,7 +10,9 @@ import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
 import org.greatage.util.ReflectionUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * @author Ivan Khalopik
@@ -43,6 +45,28 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		repository().save(hero2);
 
 		return battle;
+	}
+
+	@Transactional
+	public Battle startRound(final Battle battle) {
+		if (battle.getRound() == 0) {
+			for (BattleMember member : battle.getMembers()) {
+				final ArrayList<BattleCard> deck = new ArrayList<BattleCard>(member.getDeck());
+				for (int i = 0; i < deck.size() && i < 3; i++) {
+					final BattleCard card = deck.remove(random(deck.size()));
+					card.setInHand(true);
+					repository().save(card);
+				}
+			}
+			battle.setRound(1);
+			save(battle);
+		}
+		//todo: for implementation
+		return null;
+	}
+
+	private int random(final int size) {
+		return new Random().nextInt(size);
 	}
 
 	private void addMember(final Battle battle, final Hero hero, final int position) {

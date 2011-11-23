@@ -15,4 +15,7 @@ public interface BattleService extends BaseEntityService<Battle> {
 
 	@Transactional
 	Battle createBattle(Hero hero1, Hero hero2);
+
+	@Transactional
+	Battle startRound(Battle battle);
 }

@@ -45,6 +45,14 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this);
 	}
 
+	public Set<BattleCard> getDeck() {
+		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this, "inHand =", false);
+	}
+
+	public Set<BattleCard> getHand() {
+		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this, "inHand =", true);
+	}
+
 	public Set<BattleSummon> getSummons() {
 		return Keys.getChildren(BattleSummon.class, BattleSummonImpl.class, this);
 	}
