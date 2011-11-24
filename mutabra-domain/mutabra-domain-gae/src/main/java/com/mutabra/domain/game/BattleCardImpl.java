@@ -1,6 +1,7 @@
 package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Parent;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
@@ -19,6 +20,8 @@ public class BattleCardImpl extends BaseEntityImpl implements BattleCard {
 	private Key<BattleMemberImpl> owner;
 
 	private Key<HeroCardImpl> card;
+
+	@Indexed
 	private boolean inHand;
 
 	public BattleCardImpl() {

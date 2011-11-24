@@ -2,10 +2,12 @@ package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 /**
@@ -20,8 +22,12 @@ public class BattleSummonImpl extends BaseEntityImpl implements BattleSummon {
 
 	private Key<HeroCardImpl> card;
 
+	@Unindexed
+	@Embedded
+	private Position position = new Position();
+
+	@Unindexed
 	private int health;
-	private int position;
 
 	public BattleSummonImpl() {
 	}
@@ -40,12 +46,8 @@ public class BattleSummonImpl extends BaseEntityImpl implements BattleSummon {
 		return Keys.getInstance(card);
 	}
 
-	public int getPosition() {
+	public Position getPosition() {
 		return position;
-	}
-
-	public void setPosition(final int position) {
-		this.position = position;
 	}
 
 	public int getHealth() {

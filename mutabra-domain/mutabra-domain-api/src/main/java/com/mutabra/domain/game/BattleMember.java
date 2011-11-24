@@ -23,9 +23,7 @@ public interface BattleMember extends BaseEntity {
 
 	Set<BattleSummon> getSummons();
 
-	int getPosition();
-
-	void setPosition(int position);
+	Position getPosition();
 
 	int getHealth();
 

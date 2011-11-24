@@ -1,14 +1,9 @@
 package com.mutabra.domain.common;
 
-import com.mutabra.db.Tables;
-
-import javax.persistence.Entity;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity(name = Tables.EFFECT)
 public class EffectImpl implements Effect {
 
 	private TargetType targetType;

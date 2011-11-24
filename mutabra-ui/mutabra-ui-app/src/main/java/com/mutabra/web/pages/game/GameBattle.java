@@ -4,6 +4,7 @@ import com.mutabra.domain.game.Battle;
 import com.mutabra.domain.game.BattleCard;
 import com.mutabra.domain.game.BattleMember;
 import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.Position;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.services.AccountContext;
@@ -23,7 +24,15 @@ import java.util.Map;
  */
 @Allow(Authorities.ROLE_USER)
 public class GameBattle extends AbstractPage {
-	private static final int[] DUEL_POSITIONS = new int[]{0, 1, 100, 101, 102, 200, 201};
+	private static final Position[] DUEL_POSITIONS = {
+			new Position(0, 0),
+			new Position(0, 1),
+			new Position(1, 0),
+			new Position(1, 1),
+			new Position(1, 2),
+			new Position(2, 0),
+			new Position(2, 1),
+	};
 
 	@Inject
 	private AccountContext accountContext;
@@ -44,20 +53,12 @@ public class GameBattle extends AbstractPage {
 	private BattleCard card;
 
 	@Property
-	private int position;
+	private Position position;
 
-	private Map<Integer, BattleMember> members;
+	private Map<Position, BattleMember> members;
 
-	public int[] getPositions() {
+	public Position[] getPositions() {
 		return DUEL_POSITIONS;
-	}
-
-	public int getX() {
-		return position / 100;
-	}
-
-	public int getY() {
-		return position % 100;
 	}
 
 	public boolean isEmpty() {
@@ -69,7 +70,7 @@ public class GameBattle extends AbstractPage {
 	}
 
 	public boolean isSelected() {
-		return position == you.getPosition();
+		return position.equals(you.getPosition());
 	}
 
 	public Collection<BattleMember> getMembers() {
@@ -85,7 +86,7 @@ public class GameBattle extends AbstractPage {
 		final Hero hero = accountContext.getHero();
 		battle = accountContext.getBattle();
 
-		members = new HashMap<Integer, BattleMember>();
+		members = new HashMap<Position, BattleMember>();
 		for (BattleMember member : battle.getMembers()) {
 			members.put(member.getPosition(), member);
 			if (member.getHero().equals(hero)) {

@@ -44,7 +44,7 @@ public class FieldCell extends AbstractComponent {
 		final int startY = CELL_SIZE * (2 * y + 2 + (x + 1) % 2);
 
 		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
-		path.attribute("id", "f_" + (x * 100 + y));
+		path.attribute("id", "f_" + x + "_" + y);
 		if (selected) {
 			path.addClassName("selected");
 		}

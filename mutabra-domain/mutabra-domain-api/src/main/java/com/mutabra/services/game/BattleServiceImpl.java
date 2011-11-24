@@ -36,8 +36,8 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		battle.setStartedAt(new Date());
 		save(battle);
 
-		addMember(battle, hero1, 102);
-		addMember(battle, hero2, 100);
+		addMember(battle, hero1, 1, 2);
+		addMember(battle, hero2, 1, 0);
 
 		hero1.setBattle(battle);
 		hero2.setBattle(battle);
@@ -69,9 +69,10 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		return new Random().nextInt(size);
 	}
 
-	private void addMember(final Battle battle, final Hero hero, final int position) {
+	private void addMember(final Battle battle, final Hero hero, final int x, final int y) {
 		final BattleMember member = ReflectionUtils.newInstance(realMemberClass, battle, hero);
-		member.setPosition(position);
+		member.getPosition().setX(x);
+		member.getPosition().setY(y);
 		repository().save(member);
 		for (HeroCard heroCard : hero.getCards()) {
 			addCard(member, heroCard);

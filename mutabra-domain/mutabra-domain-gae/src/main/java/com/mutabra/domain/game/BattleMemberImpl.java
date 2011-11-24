@@ -2,10 +2,12 @@ package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.util.Set;
 
@@ -21,7 +23,11 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 
 	private Key<HeroImpl> hero;
 
-	private int position;
+	@Unindexed
+	@Embedded
+	private Position position = new Position();
+
+	@Unindexed
 	private int health;
 
 	public BattleMemberImpl() {
@@ -57,12 +63,8 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 		return Keys.getChildren(BattleSummon.class, BattleSummonImpl.class, this);
 	}
 
-	public int getPosition() {
+	public Position getPosition() {
 		return position;
-	}
-
-	public void setPosition(final int position) {
-		this.position = position;
 	}
 
 	public int getHealth() {

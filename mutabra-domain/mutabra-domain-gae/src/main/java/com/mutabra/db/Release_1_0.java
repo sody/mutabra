@@ -271,7 +271,7 @@ public class Release_1_0 extends ChangeLog {
 				.set("type", CardType.EFFECT.name())
 				.set("code", "scramble")
 				.set("bloodCost", 1)
-				.set("effect.targetType", TargetType.PLAYER.name())
+				.set("effect.targetType", TargetType.PLAYER_FRIEND.name())
 				.set("level",
 						select(Tables.LEVEL).unique().where(condition("code").equal("newbie"))
 				);
