@@ -49,19 +49,27 @@ public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements Hero
 		if ("plunger".equals(entity.getRace().getCode())) {
 			addCard(entity, "electric-ray");
 			addCard(entity, "seahorse");
+			addCard(entity, "mermaid");
 			addCard(entity, "calm");
 			addCard(entity, "wave");
 			addCard(entity, "whirlpool");
 			addCard(entity, "trident-blow");
+			addCard(entity, "swim-away");
+			addCard(entity, "storm");
+			addCard(entity, "drop-of-the-ocean");
 		}
 
 		if ("flyer".equals(entity.getRace().getCode())) {
 			addCard(entity, "chamois");
 			addCard(entity, "carrion-vulture");
+			addCard(entity, "chives");
 			addCard(entity, "scramble");
 			addCard(entity, "scratch");
 			addCard(entity, "snowball");
 			addCard(entity, "throw");
+			addCard(entity, "falling-boulder");
+			addCard(entity, "echo-mountain");
+			addCard(entity, "decompression");
 		}
 	}
 
