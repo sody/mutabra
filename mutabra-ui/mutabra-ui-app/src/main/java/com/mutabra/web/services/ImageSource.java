@@ -20,5 +20,7 @@ public interface ImageSource {
 
 	Asset getCardImage(Card card);
 
+	Asset getCardBack();
+
 	Asset getHeroImage(Hero hero);
 }

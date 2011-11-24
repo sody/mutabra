@@ -13,15 +13,18 @@ import org.apache.tapestry5.dom.Element;
 public abstract class AbstractImage extends AbstractComponent {
 
 	@Parameter(value = "64")
-	private int size;
+	private int width;
+
+	@Parameter(value = "64")
+	private int height;
 
 	@BeginRender
 	protected void beginRender(final MarkupWriter writer) {
 		final Element img = writer.element("img",
 				"alt", getAlt(),
 				"title", getTitle(),
-				"width", getSize(),
-				"height", getSize());
+				"width", getWidth(),
+				"height", getHeight());
 		getResources().renderInformalParameters(writer);
 
 		img.attribute("src", getAsset().toClientURL());
@@ -36,8 +39,12 @@ public abstract class AbstractImage extends AbstractComponent {
 		return "Image";
 	}
 
-	protected int getSize() {
-		return size;
+	protected int getWidth() {
+		return width;
+	}
+
+	protected int getHeight() {
+		return height;
 	}
 
 	protected abstract Asset getAsset();

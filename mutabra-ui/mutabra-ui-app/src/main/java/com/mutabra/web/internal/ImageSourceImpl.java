@@ -21,7 +21,9 @@ public class ImageSourceImpl implements ImageSource {
 
 	private final AssetSource assetSource;
 	private final ThreadLocale locale;
+
 	private final Asset notFound;
+	private final Asset cardBack;
 
 	public ImageSourceImpl(final AssetSource assetSource, final ThreadLocale locale) {
 		this.assetSource = assetSource;
@@ -29,6 +31,8 @@ public class ImageSourceImpl implements ImageSource {
 
 		//todo: implement all different not found assets
 		notFound = assetSource.getContextAsset(HERO_REPOSITORY + "anonymous.svg", locale.getLocale());
+
+		cardBack = getContextAsset(CARD_REPOSITORY, "back");
 	}
 
 	public Asset getNotFoundImage() {
@@ -51,6 +55,10 @@ public class ImageSourceImpl implements ImageSource {
 		return card != null ?
 				getContextAsset(CARD_REPOSITORY, card.getCode()) :
 				getNotFoundImage();
+	}
+
+	public Asset getCardBack() {
+		return cardBack;
 	}
 
 	public Asset getHeroImage(final Hero hero) {

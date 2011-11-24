@@ -15,6 +15,10 @@ public class CardDisplay {
 	@Parameter
 	private Card value;
 
+	@Property
+	@Parameter
+	private boolean visible;
+
 	public boolean isEffectCard() {
 		return value.getType() == CardType.EFFECT;
 	}

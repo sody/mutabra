@@ -27,13 +27,11 @@
 			<t:game.memberdisplay value="member"/>
 		</div>
 		<div class="column">
-			<t:if test="friend">
-				<div class="hand">
-					<t:loop source="member.hand" value="card">
-						<t:game.carddisplay value="card.card.card"/>
-					</t:loop>
-				</div>
-			</t:if>
+			<div class="hand ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+				<t:loop source="member.hand" value="card">
+					<t:game.carddisplay value="card.card.card" visible="friend"/>
+				</t:loop>
+			</div>
 		</div>
 	</div>
 </t:loop>
@@ -43,7 +41,7 @@
 		var selected = j$('path.selected');
 		j$('#' + selected.attr('id') + '_info').show();
 
-		j$('path').click(function(e) {
+		j$('path.busy').click(function(e) {
 			if (selected) {
 				j$('#' + selected.attr('id') + '_info').hide();
 				selected.attr('class', selected.attr('class').replace('selected', ''));
