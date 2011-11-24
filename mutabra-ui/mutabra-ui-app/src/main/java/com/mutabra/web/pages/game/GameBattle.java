@@ -64,6 +64,10 @@ public class GameBattle extends AbstractPage {
 		return !members.containsKey(position);
 	}
 
+	public boolean isHero() {
+		return members.containsKey(position);
+	}
+
 	public boolean isSelected() {
 		return position == you.getPosition();
 	}

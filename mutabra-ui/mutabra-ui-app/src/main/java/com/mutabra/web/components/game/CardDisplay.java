@@ -2,14 +2,26 @@ package com.mutabra.web.components.game;
 
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardType;
+import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.ClientElement;
+import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SetupRender;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONArray;
+import org.apache.tapestry5.json.JSONLiteral;
+import org.apache.tapestry5.json.JSONObject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class CardDisplay {
+public class CardDisplay implements ClientElement {
+
+	@Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
+	private String clientId;
 
 	@Property
 	@Parameter
@@ -19,11 +31,38 @@ public class CardDisplay {
 	@Parameter
 	private boolean visible;
 
+	@Inject
+	private JavaScriptSupport support;
+
+	private String assignedClientId;
+
+	public String getClientId() {
+		return assignedClientId;
+	}
+
 	public boolean isEffectCard() {
 		return value.getType() == CardType.EFFECT;
 	}
 
 	public boolean isSummonCard() {
 		return value.getType() == CardType.SUMMON;
+	}
+
+	@SetupRender
+	void setupClientId() {
+		assignedClientId = support.allocateClientId(clientId);
+	}
+
+	@AfterRender
+	void renderScript() {
+		if (visible) {
+			final JSONObject spec = new JSONObject("id", getClientId());
+			if (isEffectCard()) {
+				spec.put("target_type", value.getEffect().getTargetType().getOrder());
+			} else {
+				spec.put("target_type", 0);
+			}
+			support.addInitializerCall("card", spec);
+		}
 	}
 }

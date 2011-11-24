@@ -1663,3 +1663,8 @@ path.selected {
 path.busy {
 	fill: #e6d29d;
 }
+
+path.highlighted {
+	stroke: #f00;
+	stroke-width: 3px;
+}

@@ -16,7 +16,7 @@
 <div class="unit" align="center">
 	<svg xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
 		<t:loop source="positions" value="position">
-			<t:game.fieldcell x="x" y="y" empty="empty" selected="selected"/>
+			<t:game.fieldcell x="x" y="y" empty="empty" selected="selected" hero="hero"/>
 		</t:loop>
 	</svg>
 </div>

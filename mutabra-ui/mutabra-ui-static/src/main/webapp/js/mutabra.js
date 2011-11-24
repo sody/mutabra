@@ -63,5 +63,116 @@ T5.extendInitializers({
 				}
 			}
 		});
+	},
+
+	card: function(spec) {
+		j$('#' + spec.id).click(function() {
+			var card = j$(this);
+			card.addClass('ui-state-highlight');
+			var possible;
+			if (spec.target_type < 1) {
+				possible = j$('path.empty');
+				if (possible) {
+					possible.mouseover(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class') + ' highlighted');
+					});
+
+					possible.mouseout(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+					});
+
+					possible.click(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+						possible.unbind('mouseover');
+						possible.unbind('mouseout');
+						card.removeClass('ui-state-highlight');
+					});
+				}
+			}
+			else if (spec.target_type <= 3) {
+				if (spec.target_type == 1) {
+					possible = j$('path.busy');
+				} else if (spec.target_type == 2) {
+					possible = j$('path.enemy');
+				} else if (spec.target_type == 3) {
+					possible = j$('path.friend');
+				}
+				if (possible) {
+					possible.mouseover(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class') + ' highlighted');
+					});
+
+					possible.mouseout(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+					});
+
+					possible.click(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+						possible.unbind('mouseover');
+						possible.unbind('mouseout');
+						card.removeClass('ui-state-highlight');
+					});
+				}
+			}
+			else if (spec.target_type <= 6) {
+				if (spec.target_type == 4) {
+					possible = j$('path.busy');
+				} else if (spec.target_type == 5) {
+					possible = j$('path.enemy');
+				} else if (spec.target_type == 6) {
+					possible = j$('path.friend');
+				}
+				if (possible) {
+					possible.mouseover(function() {
+						possible.attr('class', possible.attr('class') + ' highlighted');
+					});
+
+					possible.mouseout(function() {
+						possible.attr('class', possible.attr('class').replace('highlighted', ''));
+					});
+
+					possible.click(function() {
+						possible.attr('class', possible.attr('class').replace('highlighted', ''));
+						possible.unbind('mouseover');
+						possible.unbind('mouseout');
+						card.removeClass('ui-state-highlight');
+					});
+				}
+			}
+			else if (spec.target_type <= 9) {
+				if (spec.target_type == 7) {
+					possible = j$('path.hero');
+				} else if (spec.target_type == 8) {
+					possible = j$('path.hero.enemy');
+				} else if (spec.target_type == 9) {
+					possible = j$('path.hero.friend');
+				}
+				if (possible) {
+					possible.mouseover(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class') + ' highlighted');
+					});
+
+					possible.mouseout(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+					});
+
+					possible.click(function() {
+						var selected = j$(this);
+						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+						possible.unbind('mouseover');
+						possible.unbind('mouseout');
+						card.removeClass('ui-state-highlight');
+					});
+				}
+			}
+		});
 	}
 });

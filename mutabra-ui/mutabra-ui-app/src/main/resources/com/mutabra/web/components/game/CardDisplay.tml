@@ -1,7 +1,7 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
 
-	<div class="card ui-widget ui-widget-content ui-corner-all">
+	<div id="${clientId}" class="card ui-widget ui-widget-content ui-corner-all">
 		<t:if test="visible">
 			<h4>${value:name}</h4>
 			<br/>

@@ -35,6 +35,9 @@ public class FieldCell extends AbstractComponent {
 	@Parameter(value = "true")
 	private boolean empty;
 
+	@Parameter
+	private boolean hero;
+
 	@BeginRender
 	void render(final MarkupWriter writer) {
 		final int startX = CELL_SIZE * (3 * x + 1);
@@ -42,11 +45,21 @@ public class FieldCell extends AbstractComponent {
 
 		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
 		path.attribute("id", "f_" + (x * 100 + y));
-		if (!empty) {
-			path.addClassName("busy");
-		}
 		if (selected) {
 			path.addClassName("selected");
+		}
+		if (empty) {
+			path.addClassName("empty");
+		} else {
+			path.addClassName("busy");
+			if (hero) {
+				path.addClassName("hero");
+			}
+			if (!selected) {
+				path.addClassName("enemy");
+			} else {
+				path.addClassName("friend");
+			}
 		}
 
 		final StringBuilder pathBuilder = new StringBuilder("m");
