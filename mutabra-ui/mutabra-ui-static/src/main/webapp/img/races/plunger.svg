@@ -1,7 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" version="1.1">
-	<title>Plunger Race Icon</title>
-	<desc>Plunger Race Icon</desc>
+
+	<title>Plunger Race</title>
+	<desc>Plunger Race</desc>
+
 	<path fill="#333"
-		  d="m32.5,0c-1.25,10.24-5,19.2-12.5,32-23.75,42.24,48.75,42.24,25,0-7.5-12.8-11.25-21.76-12.5-32z"/>
+		  d="m34,1,0,34c0,3,9,5,9,2v-10c0-2-1.96,0.0242-3,1l6-13v24c0,3-11.9,2-12,5v19h-4v-9c0-3-12-2-12-5v-25l6,14c-1-1-3-3-3-1v10c0,3,9,1,9-2v-30c0-2-2.12,0.234-3,1z"/>
+
 </svg>
 

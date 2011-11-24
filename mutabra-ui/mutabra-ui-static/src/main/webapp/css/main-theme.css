@@ -1665,6 +1665,6 @@ path.busy {
 }
 
 path.highlighted {
-	stroke: #f00;
+	fill: #fedcba;
 	stroke-width: 3px;
 }
