@@ -65,59 +65,74 @@ T5.extendInitializers({
 		});
 	},
 
-	card: function(spec) {
-		j$('#' + spec.id).click(function() {
-			var card = j$(this);
-			card.addClass('ui-state-highlight');
+	field: function(spec) {
+		var battleField = j$('#' + spec.id);
+		var selected = battleField.find('path.selected');
+		j$('#' + selected.attr('id') + '_info').show();
 
-			var target_type = spec.target_type;
-			var fullSelector;
-			var selector = 'path';
-			if (!target_type.supports_enemy_side) {
-				selector += '.friend';
+		battleField.find('path.hero,path.summon').click(function() {
+			if (selected) {
+				j$('#' + selected.attr('id') + '_info').hide();
+				selected.attr('class', selected.attr('class').replace(' selected', ''));
 			}
-			if (!target_type.supports_friend_side) {
-				selector += '.enemy';
-			}
-			if (target_type.supports_empty_point) {
-				fullSelector = selector + '.empty';
-			}
-			if (target_type.supports_hero_point) {
-				fullSelector = fullSelector ? fullSelector + ',' + selector + '.hero' : selector + '.hero';
-			}
-			if (target_type.supports_summon_point) {
-				fullSelector = fullSelector ? fullSelector + ',' + selector + '.summon' : selector + '.summon';
-			}
-			if (!fullSelector) {
-				fullSelector = selector;
-			}
+			selected = j$(this);
+			j$('#' + selected.attr('id') + '_info').show();
+			selected.attr('class', selected.attr('class') + ' selected');
+		});
 
-			var possible = j$(fullSelector);
-			if (possible) {
-				possible.mouseover(function() {
-					var selected = target_type.massive ? possible : j$(this);
-					selected.attr('class', function(index, attr) {
-						return attr + ' highlighted';
+		j$.each(spec.cards, function(index, value) {
+			j$('#' + value.id).click(function() {
+				var card = j$(this);
+				card.addClass('ui-state-highlight');
+
+				var fullSelector;
+				var selector = 'path';
+				if (!value.supports_enemy_side) {
+					selector += '.friend';
+				}
+				if (!value.supports_friend_side) {
+					selector += '.enemy';
+				}
+				if (value.supports_empty_point) {
+					fullSelector = selector + '.empty';
+				}
+				if (value.supports_hero_point) {
+					fullSelector = fullSelector ? fullSelector + ',' + selector + '.hero' : selector + '.hero';
+				}
+				if (value.supports_summon_point) {
+					fullSelector = fullSelector ? fullSelector + ',' + selector + '.summon' : selector + '.summon';
+				}
+				if (!fullSelector) {
+					fullSelector = selector;
+				}
+
+				var possible = battleField.find(fullSelector);
+				if (possible) {
+					possible.mouseover(function() {
+						var selected = value.massive ? possible : j$(this);
+						selected.attr('class', function(index, attr) {
+							return attr + ' highlighted';
+						});
 					});
-				});
 
-				possible.mouseout(function() {
-					var selected = target_type.massive ? possible : j$(this);
-					selected.attr('class', function(index, attr) {
-						return attr.replace(' highlighted', '');
+					possible.mouseout(function() {
+						var selected = value.massive ? possible : j$(this);
+						selected.attr('class', function(index, attr) {
+							return attr.replace(' highlighted', '');
+						});
 					});
-				});
 
-				possible.click(function() {
-					var selected = target_type.massive ? possible : j$(this);
-					selected.attr('class', function(index, attr) {
-						return attr.replace(' highlighted', '');
+					possible.click(function() {
+						var selected = value.massive ? possible : j$(this);
+						selected.attr('class', function(index, attr) {
+							return attr.replace(' highlighted', '');
+						});
+						possible.unbind('mouseover');
+						possible.unbind('mouseout');
+						card.removeClass('ui-state-highlight');
 					});
-					possible.unbind('mouseover');
-					possible.unbind('mouseout');
-					card.removeClass('ui-state-highlight');
-				});
-			}
+				}
+			});
 		});
 	}
 });

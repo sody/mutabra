@@ -1,36 +1,36 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<svg xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
-		<style>
-			path.selected {
-				fill: #e6d29d;
-				stroke-width: 3px;
-			}
-		</style>
+	<div class="unit">
+		<div class="column">
+			<t:game.memberdisplay value="opponent"/>
+		</div>
+		<div class="column">
+			<t:game.memberdisplay value="you"/>
+		</div>
+	</div>
 
-		<t:game.fieldcell x="0" y="0"/>
-		<t:game.fieldcell x="0" y="1"/>
+	<div class="unit" align="center">
+		<svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
+			<t:loop source="battleField" value="place">
+				<t:game.fieldcell place="place"/>
+			</t:loop>
+		</svg>
+	</div>
 
-		<t:game.fieldcell x="1" y="0"/>
-		<t:game.fieldcell x="1" y="1"/>
-		<t:game.fieldcell x="1" y="2"/>
-
-		<t:game.fieldcell x="2" y="0"/>
-		<t:game.fieldcell x="2" y="1"/>
-	</svg>
-
-	<script type="text/javascript">
-		j$(function() {
-			var selected;
-			j$('path').click(function(e) {
-				if (selected) {
-					selected.attr('class', '');
-				}
-				selected = j$(this);
-				selected.attr('class', 'selected');
-			});
-		});
-	</script>
+	<t:loop source="battle.members" value="member">
+		<div class="unit" id="f_${member.position.id}_info" style="display:none;">
+			<div class="column">
+				<t:game.memberdisplay value="member"/>
+			</div>
+			<div class="column">
+				<div class="hand ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+					<t:loop source="member.hand" value="card">
+						<t:game.carddisplay id="prop:cardClientId" value="card.card.card" visible="friend"/>
+					</t:loop>
+				</div>
+			</div>
+		</div>
+	</t:loop>
 
 </t:container>
