@@ -199,4 +199,28 @@ public enum TargetType implements OrderedEnum {
 	public int getOrder() {
 		return order;
 	}
+
+	public boolean isMassive() {
+		return massive;
+	}
+
+	public boolean supportsEnemySide() {
+		return supportsEnemySide;
+	}
+
+	public boolean supportsFriendSide() {
+		return supportsFriendSide;
+	}
+
+	public boolean supportsEmptyPoint() {
+		return supportsEmptyPoint;
+	}
+
+	public boolean supportsHeroPoint() {
+		return supportsHeroPoint;
+	}
+
+	public boolean supportsSummonPoint() {
+		return supportsSummonPoint;
+	}
 }

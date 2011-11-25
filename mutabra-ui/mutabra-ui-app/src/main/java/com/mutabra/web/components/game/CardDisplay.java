@@ -2,6 +2,7 @@ package com.mutabra.web.components.game;
 
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardType;
+import com.mutabra.domain.common.TargetType;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.AfterRender;
@@ -55,7 +56,16 @@ public class CardDisplay implements ClientElement {
 	void renderScript() {
 		if (visible) {
 			final JSONObject spec = new JSONObject("id", getClientId());
-			spec.put("target_type", value.getTargetType().getOrder());
+			final TargetType targetType = value.getTargetType();
+			spec.put("target_type",
+					new JSONObject()
+							.put("massive", targetType.isMassive())
+							.put("supports_enemy_side", targetType.supportsEnemySide())
+							.put("supports_friend_side", targetType.supportsFriendSide())
+							.put("supports_empty_point", targetType.supportsEmptyPoint())
+							.put("supports_hero_point", targetType.supportsHeroPoint())
+							.put("supports_summon_point", targetType.supportsSummonPoint())
+			);
 			support.addInitializerCall("card", spec);
 		}
 	}

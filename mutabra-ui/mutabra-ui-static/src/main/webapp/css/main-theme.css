@@ -1660,7 +1660,8 @@ path.selected {
 	stroke-width: 3px;
 }
 
-path.busy {
+path.hero,
+path.summon {
 	fill: #e6d29d;
 }
 

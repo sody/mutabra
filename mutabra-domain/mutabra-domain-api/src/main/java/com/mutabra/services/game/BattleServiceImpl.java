@@ -3,8 +3,11 @@ package com.mutabra.services.game;
 import com.mutabra.domain.game.Battle;
 import com.mutabra.domain.game.BattleCard;
 import com.mutabra.domain.game.BattleMember;
+import com.mutabra.domain.game.BattlePlace;
+import com.mutabra.domain.game.BattleSummon;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
+import com.mutabra.domain.game.Position;
 import com.mutabra.services.BaseEntityServiceImpl;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
@@ -12,6 +15,9 @@ import org.greatage.util.ReflectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -19,6 +25,14 @@ import java.util.Random;
  * @since 1.0
  */
 public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements BattleService {
+	private static final Position[] DUEL_POSITIONS = {
+			new Position(0, 0),
+			new Position(0, 1),
+			new Position(1, 0),
+			new Position(1, 2),
+			new Position(2, 0),
+			new Position(2, 1),
+	};
 
 	private Class<? extends BattleMember> realMemberClass;
 	private Class<? extends BattleCard> realCardClass;
@@ -63,6 +77,30 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		}
 		//todo: for implementation
 		return null;
+	}
+
+	public List<BattlePlace> getBattleField(final Hero hero, final Battle battle) {
+		final Map<Position, BattlePlace> battleField = new HashMap<Position, BattlePlace>();
+		boolean upSide = false;
+		for (BattleMember member : battle.getMembers()) {
+			final boolean enemy = !member.getHero().equals(hero);
+			if (!enemy && member.getPosition().getY() == 0) {
+				upSide = true;
+			}
+			battleField.put(member.getPosition(), new BattlePlace(member, enemy));
+			for (BattleSummon summon : member.getSummons()) {
+				battleField.put(summon.getPosition(), new BattlePlace(summon, enemy));
+			}
+		}
+
+		for (Position position : DUEL_POSITIONS) {
+			if (!battleField.containsKey(position)) {
+				final boolean enemy = (position.getY() == 0 && !upSide) || (position.getY() > 0 && upSide);
+				battleField.put(position, new BattlePlace(position, enemy));
+			}
+		}
+
+		return new ArrayList<BattlePlace>(battleField.values());
 	}
 
 	private int random(final int size) {

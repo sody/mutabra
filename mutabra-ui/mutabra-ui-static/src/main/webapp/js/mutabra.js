@@ -69,109 +69,54 @@ T5.extendInitializers({
 		j$('#' + spec.id).click(function() {
 			var card = j$(this);
 			card.addClass('ui-state-highlight');
-			var possible;
-			if (spec.target_type < 1) {
-				possible = j$('path.empty');
-				if (possible) {
-					possible.mouseover(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class') + ' highlighted');
-					});
 
-					possible.mouseout(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class').replace('highlighted', ''));
-					});
-
-					possible.click(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class').replace('highlighted', ''));
-						possible.unbind('mouseover');
-						possible.unbind('mouseout');
-						card.removeClass('ui-state-highlight');
-					});
-				}
+			var target_type = spec.target_type;
+			var fullSelector;
+			var selector = 'path';
+			if (!target_type.supports_enemy_side) {
+				selector += '.friend';
 			}
-			else if (spec.target_type <= 3) {
-				if (spec.target_type == 1) {
-					possible = j$('path.busy');
-				} else if (spec.target_type == 2) {
-					possible = j$('path.enemy');
-				} else if (spec.target_type == 3) {
-					possible = j$('path.friend');
-				}
-				if (possible) {
-					possible.mouseover(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class') + ' highlighted');
-					});
-
-					possible.mouseout(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class').replace('highlighted', ''));
-					});
-
-					possible.click(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class').replace('highlighted', ''));
-						possible.unbind('mouseover');
-						possible.unbind('mouseout');
-						card.removeClass('ui-state-highlight');
-					});
-				}
+			if (!target_type.supports_friend_side) {
+				selector += '.enemy';
 			}
-			else if (spec.target_type <= 6) {
-				if (spec.target_type == 4) {
-					possible = j$('path.busy');
-				} else if (spec.target_type == 5) {
-					possible = j$('path.enemy');
-				} else if (spec.target_type == 6) {
-					possible = j$('path.friend');
-				}
-				if (possible) {
-					possible.mouseover(function() {
-						possible.attr('class', possible.attr('class') + ' highlighted');
-					});
-
-					possible.mouseout(function() {
-						possible.attr('class', possible.attr('class').replace('highlighted', ''));
-					});
-
-					possible.click(function() {
-						possible.attr('class', possible.attr('class').replace('highlighted', ''));
-						possible.unbind('mouseover');
-						possible.unbind('mouseout');
-						card.removeClass('ui-state-highlight');
-					});
-				}
+			if (target_type.supports_empty_point) {
+				fullSelector = selector + '.empty';
 			}
-			else if (spec.target_type <= 9) {
-				if (spec.target_type == 7) {
-					possible = j$('path.hero');
-				} else if (spec.target_type == 8) {
-					possible = j$('path.hero.enemy');
-				} else if (spec.target_type == 9) {
-					possible = j$('path.hero.friend');
-				}
-				if (possible) {
-					possible.mouseover(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class') + ' highlighted');
-					});
+			if (target_type.supports_hero_point) {
+				fullSelector = fullSelector ? fullSelector + ',' + selector + '.hero' : selector + '.hero';
+			}
+			if (target_type.supports_summon_point) {
+				fullSelector = fullSelector ? fullSelector + ',' + selector + '.summon' : selector + '.summon';
+			}
+			if (!fullSelector) {
+				fullSelector = selector;
+			}
 
-					possible.mouseout(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class').replace('highlighted', ''));
+			var possible = j$(fullSelector);
+			if (possible) {
+				possible.mouseover(function() {
+					var selected = target_type.massive ? possible : j$(this);
+					selected.attr('class', function(index, attr) {
+						return attr + ' highlighted';
 					});
+				});
 
-					possible.click(function() {
-						var selected = j$(this);
-						selected.attr('class', selected.attr('class').replace('highlighted', ''));
-						possible.unbind('mouseover');
-						possible.unbind('mouseout');
-						card.removeClass('ui-state-highlight');
+				possible.mouseout(function() {
+					var selected = target_type.massive ? possible : j$(this);
+					selected.attr('class', function(index, attr) {
+						return attr.replace(' highlighted', '');
 					});
-				}
+				});
+
+				possible.click(function() {
+					var selected = target_type.massive ? possible : j$(this);
+					selected.attr('class', function(index, attr) {
+						return attr.replace(' highlighted', '');
+					});
+					possible.unbind('mouseover');
+					possible.unbind('mouseout');
+					card.removeClass('ui-state-highlight');
+				});
 			}
 		});
 	}

@@ -1,5 +1,6 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.game.BattlePlace;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -23,43 +24,21 @@ public class FieldCell extends AbstractComponent {
 			{1, -1},
 	};
 
-	@Parameter(required = true)
-	private int x;
-
-	@Parameter(required = true)
-	private int y;
-
-	@Parameter
-	private boolean selected;
-
-	@Parameter(value = "true")
-	private boolean empty;
-
-	@Parameter
-	private boolean hero;
+	@Parameter(required = true, allowNull = false)
+	private BattlePlace place;
 
 	@BeginRender
 	void render(final MarkupWriter writer) {
-		final int startX = CELL_SIZE * (3 * x + 1);
-		final int startY = CELL_SIZE * (2 * y + 2 + (x + 1) % 2);
+		final int startX = CELL_SIZE * (3 * place.getPosition().getX() + 1);
+		final int startY = CELL_SIZE * (2 * place.getPosition().getY() + 2 + (place.getPosition().getX() + 1) % 2);
 
 		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
-		path.attribute("id", "f_" + x + "_" + y);
-		if (selected) {
+		path.attribute("id", "f_" + place.getPosition().getId());
+
+		path.addClassName(place.hasHero() ? "hero" : place.hasSummon() ? "summon" : "empty");
+		path.addClassName(place.isEnemySide() ? "enemy" : "friend");
+		if (place.hasHero() && !place.isEnemySide()) {
 			path.addClassName("selected");
-		}
-		if (empty) {
-			path.addClassName("empty");
-		} else {
-			path.addClassName("busy");
-			if (hero) {
-				path.addClassName("hero");
-			}
-			if (!selected) {
-				path.addClassName("enemy");
-			} else {
-				path.addClassName("friend");
-			}
 		}
 
 		final StringBuilder pathBuilder = new StringBuilder("m");

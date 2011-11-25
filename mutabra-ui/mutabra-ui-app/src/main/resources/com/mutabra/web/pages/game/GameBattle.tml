@@ -15,13 +15,13 @@
 
 <div class="unit" align="center">
 	<svg xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
-		<t:loop source="positions" value="position">
-			<t:game.fieldcell x="position.x" y="position.y" empty="empty" selected="selected" hero="hero"/>
+		<t:loop source="battleField" value="place">
+			<t:game.fieldcell place="place"/>
 		</t:loop>
 	</svg>
 </div>
 
-<t:loop source="members" value="member">
+<t:loop source="battle.members" value="member">
 	<div class="unit" id="f_${member.position.id}_info" style="display:none;">
 		<div class="column">
 			<t:game.memberdisplay value="member"/>
@@ -41,7 +41,7 @@
 		var selected = j$('path.selected');
 		j$('#' + selected.attr('id') + '_info').show();
 
-		j$('path.busy').click(function(e) {
+		j$('path.hero,path.summon').click(function(e) {
 			if (selected) {
 				j$('#' + selected.attr('id') + '_info').hide();
 				selected.attr('class', selected.attr('class').replace('selected', ''));
