@@ -67,24 +67,31 @@ T5.extendInitializers({
 
 	field: function(spec) {
 		var battleField = j$('#' + spec.id);
-		var selected = battleField.find('path.selected');
-		j$('#' + selected.attr('id') + '_info').show();
+		var selectedField,selectedCard;
 
-		battleField.find('path.hero,path.summon').click(function() {
-			if (selected) {
-				j$('#' + selected.attr('id') + '_info').hide();
-				selected.attr('class', selected.attr('class').replace(' selected', ''));
+		j$.each(spec.fields, function(index, value) {
+			battleField.find('#' + value.id).click(function() {
+				if (selectedField) {
+					j$('#' + selectedField.infoId).hide();
+					j$('#' + selectedField.id).attr('class', function(index, attr) {
+						return attr.replace(' selected', '');
+					});
+				}
+				selectedField = value;
+				j$('#' + selectedField.infoId).show();
+				j$('#' + selectedField.id).attr('class', function(index, attr) {
+					return attr + ' selected';
+				});
+			});
+
+			if (value.selected) {
+				selectedField = value;
+				j$('#' + selectedField.infoId).show();
 			}
-			selected = j$(this);
-			j$('#' + selected.attr('id') + '_info').show();
-			selected.attr('class', selected.attr('class') + ' selected');
 		});
 
 		j$.each(spec.cards, function(index, value) {
-			j$('#' + value.id).click(function() {
-				var card = j$(this);
-				card.addClass('ui-state-highlight');
-
+			value.getPossible = function() {
 				var fullSelector;
 				var selector = 'path';
 				if (!value.supports_enemy_side) {
@@ -105,8 +112,28 @@ T5.extendInitializers({
 				if (!fullSelector) {
 					fullSelector = selector;
 				}
+				return battleField.find(fullSelector);
+			};
 
-				var possible = battleField.find(fullSelector);
+			j$('#' + value.id).click(function() {
+				var possible,card;
+				if (selectedCard) {
+					card = j$('#' + selectedCard.id);
+					card.removeClass('ui-state-highlight');
+
+					possible = selectedCard.getPossible();
+					possible.attr('class', function(index, attr) {
+						return attr.replace(' highlighted', '');
+					});
+					possible.unbind('mouseover');
+					possible.unbind('mouseout');
+				}
+
+				selectedCard = value;
+				card = j$('#' + selectedCard.id);
+				card.addClass('ui-state-highlight');
+
+				possible = value.getPossible();
 				if (possible) {
 					possible.mouseover(function() {
 						var selected = value.massive ? possible : j$(this);

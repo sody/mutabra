@@ -19,7 +19,7 @@
 	</div>
 
 	<t:loop source="battle.members" value="member">
-		<div class="unit" id="f_${member.position.id}_info" style="display:none;">
+		<div class="unit" id="${prop:memberClientId}" style="display:none;">
 			<div class="column">
 				<t:game.memberdisplay value="member"/>
 			</div>

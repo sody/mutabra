@@ -44,8 +44,10 @@ public class FieldDisplay {
 	@Property
 	private BattleMember opponent;
 
-	@Property
 	private BattleMember member;
+
+	@Property
+	private String memberClientId;
 
 	private BattleCard card;
 
@@ -59,9 +61,20 @@ public class FieldDisplay {
 	private List<BattlePlace> battleField;
 
 	private Map<String, BattleCard> cards = new HashMap<String, BattleCard>();
+	private Map<String, BattleMember> members = new HashMap<String, BattleMember>();
 
 	public boolean isFriend() {
 		return member.equals(you);
+	}
+
+	public BattleMember getMember() {
+		return member;
+	}
+
+	public void setMember(final BattleMember member) {
+		this.member = member;
+		memberClientId = support.allocateClientId("member");
+		members.put(memberClientId, member);
 	}
 
 	public BattleCard getCard() {
@@ -94,10 +107,21 @@ public class FieldDisplay {
 	@AfterRender
 	void renderScript() {
 		final JSONObject spec = new JSONObject("id", "battle-field");
-		final JSONArray list = new JSONArray();
+
+		final JSONArray fieldsSpec = new JSONArray();
+		for (Map.Entry<String, BattleMember> entry : members.entrySet()) {
+			fieldsSpec.put(new JSONObject()
+					.put("id", "f_" + entry.getValue().getPosition().getId())
+					.put("infoId", entry.getKey())
+					.put("selected", entry.getValue().equals(you))
+			);
+		}
+		spec.put("fields", fieldsSpec);
+
+		final JSONArray cardsSpec = new JSONArray();
 		for (Map.Entry<String, BattleCard> entry : cards.entrySet()) {
 			final TargetType targetType = entry.getValue().getCard().getCard().getTargetType();
-			list.put(new JSONObject()
+			cardsSpec.put(new JSONObject()
 					.put("id", entry.getKey())
 					.put("massive", targetType.isMassive())
 					.put("supports_enemy_side", targetType.supportsEnemySide())
@@ -107,7 +131,8 @@ public class FieldDisplay {
 					.put("supports_summon_point", targetType.supportsSummonPoint())
 			);
 		}
-		spec.put("cards", list);
+		spec.put("cards", cardsSpec);
+
 		support.addInitializerCall("field", spec);
 	}
 }
