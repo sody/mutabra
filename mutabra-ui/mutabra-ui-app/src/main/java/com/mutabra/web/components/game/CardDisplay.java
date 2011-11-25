@@ -9,8 +9,6 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONArray;
-import org.apache.tapestry5.json.JSONLiteral;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
@@ -57,11 +55,7 @@ public class CardDisplay implements ClientElement {
 	void renderScript() {
 		if (visible) {
 			final JSONObject spec = new JSONObject("id", getClientId());
-			if (isEffectCard()) {
-				spec.put("target_type", value.getEffect().getTargetType().getOrder());
-			} else {
-				spec.put("target_type", 0);
-			}
+			spec.put("target_type", value.getTargetType().getOrder());
 			support.addInitializerCall("card", spec);
 		}
 	}

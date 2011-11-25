@@ -20,13 +20,15 @@ public class CardImpl extends CodedEntityImpl implements Card {
 
 	private Key<LevelImpl> level;
 
+	private int bloodCost;
+
+	private TargetType targetType;
+
 	@Embedded
 	private EffectImpl effect = new EffectImpl();
 
 	@Embedded
 	private SummonImpl summon = new SummonImpl();
-
-	private int bloodCost;
 
 	public CardImpl() {
 		this(null, CardType.UNKNOWN);
@@ -55,19 +57,27 @@ public class CardImpl extends CodedEntityImpl implements Card {
 		this.level = Keys.getKey(level);
 	}
 
-	public Effect getEffect() {
-		return effect;
-	}
-
-	public Summon getSummon() {
-		return summon;
-	}
-
 	public int getBloodCost() {
 		return bloodCost;
 	}
 
 	public void setBloodCost(final int bloodCost) {
 		this.bloodCost = bloodCost;
+	}
+
+	public TargetType getTargetType() {
+		return targetType;
+	}
+
+	public void setTargetType(final TargetType targetType) {
+		this.targetType = targetType;
+	}
+
+	public Effect getEffect() {
+		return effect;
+	}
+
+	public Summon getSummon() {
+		return summon;
 	}
 }

@@ -389,7 +389,7 @@
 		<appengine.version>1.5.5</appengine.version>
 		<objectify.version>3.0</objectify.version>
 
-		<tapestry.version>5.3-rc-3</tapestry.version>
+		<tapestry.version>5.3</tapestry.version>
 		<scribe.version>1.2.3</scribe.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail.api.version>1.4.4</mail.api.version>

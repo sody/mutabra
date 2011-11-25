@@ -8,8 +8,8 @@ import java.util.List;
  * @since 1.0
  */
 public enum TranslationType {
-	NAME("name"),
-	DESCRIPTION("name", "description");
+	NAME(Translations.NAME),
+	DESCRIPTION(Translations.NAME, Translations.DESCRIPTION);
 
 	private final List<String> variants;
 

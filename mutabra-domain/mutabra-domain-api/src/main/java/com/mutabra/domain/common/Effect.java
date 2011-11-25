@@ -6,10 +6,6 @@ package com.mutabra.domain.common;
  */
 public interface Effect {
 
-	TargetType getTargetType();
-
-	void setTargetType(TargetType targetType);
-
 	int getStrength();
 
 	void setStrength(int strength);

@@ -11,12 +11,12 @@ import org.greatage.util.ReflectionUtils;
  * @since 1.0
  */
 public class CardServiceImpl extends CodedEntityServiceImpl<Card> implements CardService {
-	private final Class<? extends Card> cardClass;
+	private final Class<? extends Card> realCardClass;
 
 	public CardServiceImpl(final EntityRepository repository) {
 		super(repository, Card.class);
 		//noinspection unchecked
-		cardClass = repository.create(Card.class).getClass();
+		realCardClass = repository.create(Card.class).getClass();
 	}
 
 	@Override
@@ -25,6 +25,6 @@ public class CardServiceImpl extends CodedEntityServiceImpl<Card> implements Car
 	}
 
 	public Card create(final String code, final CardType type) {
-		return ReflectionUtils.newInstance(cardClass, code, type);
+		return ReflectionUtils.newInstance(realCardClass, code, type);
 	}
 }

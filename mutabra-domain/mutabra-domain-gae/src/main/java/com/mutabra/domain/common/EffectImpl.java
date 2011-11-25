@@ -6,18 +6,8 @@ package com.mutabra.domain.common;
  */
 public class EffectImpl implements Effect {
 
-	private TargetType targetType;
-
 	private int strength;
 	private int duration;
-
-	public TargetType getTargetType() {
-		return targetType;
-	}
-
-	public void setTargetType(final TargetType targetType) {
-		this.targetType = targetType;
-	}
 
 	public int getStrength() {
 		return strength;
