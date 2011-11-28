@@ -65,9 +65,11 @@ T5.extendInitializers({
 		});
 	},
 
-	field: function(spec) {
-		j$('#' + spec.id).field({
-			info: spec.infoId,
+	description: function(spec) {
+		j$('#' + spec.id).description({
+			card: spec.cardId,
+			field: spec.fieldId,
+			actions: spec.actionsId,
 			selected: spec.selected
 		});
 	},

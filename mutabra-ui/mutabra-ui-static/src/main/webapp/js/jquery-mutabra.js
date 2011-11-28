@@ -1,42 +1,71 @@
 (function($) {
 
-	var selectedField,selectedCard;
+	var selectedDescription,selectedCard;
 
-	$.widget("mutabra.field", {
+	$.widget("mutabra.description", {
 		options: {
 			selected: false
 		},
 
 		_create: function() {
 			var self = this;
-			this.infoElement = $('#' + this.options.info);
+			this.cardElement = $('#' + this.options.card);
+			this.fieldElement = $('#' + this.options.field);
+			this.actionsElement = $('#' + this.options.actions);
 
-			this.element.click(function() {
-				if (selectedField) {
-					selectedField.option('selected', false);
+			if (this.cardElement) {
+				this.cardElement.click(function() {
+					if (selectedDescription) {
+						selectedDescription.option('selected', false);
+					}
+
+					selectedDescription = self;
+					selectedDescription.option('selected', true);
+				});
+
+				if (this.options.selected) {
+					this.cardElement.click();
 				}
+			}
 
-				selectedField = self;
-				selectedField.option('selected', true);
-			});
+			if (this.fieldElement) {
+				this.fieldElement.click(function() {
+					if (selectedDescription) {
+						selectedDescription.option('selected', false);
+					}
 
-			if (this.options.selected) {
-				this.element.click();
+					selectedDescription = self;
+					selectedDescription.option('selected', true);
+				});
+
+				if (this.options.selected) {
+					this.fieldElement.click();
+				}
 			}
 		},
 
 		_setOption: function(key, value) {
 			if (key === "selected") {
 				if (value) {
-					this.infoElement.show();
-					this.element.attr('class', function(index, attr) {
-						return attr + ' ui-state-active';
-					});
+					this.element.show();
+					if (this.fieldElement) {
+						this.fieldElement.attr('class', function(index, attr) {
+							return attr + ' ui-state-active';
+						});
+					}
+					if (this.actionsElement) {
+						this.actionsElement.show();
+					}
 				} else {
-					this.infoElement.hide();
-					this.element.attr('class', function(index, attr) {
-						return attr.replace(' ui-state-active', '');
-					});
+					this.element.hide();
+					if (this.fieldElement) {
+						this.fieldElement.attr('class', function(index, attr) {
+							return attr.replace(' ui-state-active', '');
+						});
+					}
+					if (this.actionsElement) {
+						this.actionsElement.hide();
+					}
 				}
 			}
 

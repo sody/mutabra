@@ -350,18 +350,28 @@ div.t-beaneditor-row select {
 	margin: 8px;
 }
 
-.card,
-.hero {
+.description {
+	width: 280px;
+	height: 280px;
+	float: left;
+	margin-right: 10px;
+}
+.actions {
+	width: 420px;
+	height: 280px;
+	float: left;
+}
+.card {
 	margin: 10px;
-	padding: 10px;
+	padding: 9px;
 	width: 100px;
-	height: 150px;
+	height: 100px;
 	float: left;
 	}
-	.card .icon-text,
-	.hero .icon-text,
-	.card .ui-icon,
-	.hero .ui-icon {
+	.card .ui-icon {
+		float: left;
+	}
+	.card .icon-text {
 		float: left;
 		margin-right: 5px;
 	}
@@ -1665,7 +1675,6 @@ path.ui-state-highlight.summon,
 path.ui-state-highlight.empty,
 path.ui-state-highlight {
 	fill: #fedcba;
-	stroke-width: 3px;
 }
 
 path.hero,

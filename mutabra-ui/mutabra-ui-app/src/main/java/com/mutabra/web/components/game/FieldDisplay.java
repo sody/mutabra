@@ -4,14 +4,10 @@ import com.mutabra.domain.game.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.MarkupWriter;
-import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.dom.Element;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
@@ -31,12 +27,6 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 
 	@Parameter(required = true, allowNull = false)
 	private BattleField field;
-
-	@Parameter
-	private boolean selected;
-
-	@Inject
-	private JavaScriptSupport support;
 
 	private String clientId;
 
@@ -65,15 +55,5 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 		path.attribute("d", pathBuilder.toString());
 
 		writer.end();
-	}
-
-	@AfterRender
-	void renderScript() {
-		if (field.hasHero() || field.hasSummon()) {
-			support.addInitializerCall("field", new JSONObject()
-					.put("id", getClientId())
-					.put("infoId", getClientId() + "_info")
-					.put("selected", selected));
-		}
 	}
 }

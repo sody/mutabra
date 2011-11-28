@@ -1,36 +1,32 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div class="unit">
-		<div class="column">
-			<t:game.memberdisplay value="opponent"/>
-		</div>
-		<div class="column">
-			<t:game.memberdisplay value="you"/>
-		</div>
-	</div>
-
 	<div class="unit" align="center">
 		<svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
 			<t:loop source="fields" value="field">
-				<t:game.fielddisplay field="field" selected="selected"/>
+				<t:game.fielddisplay field="field"/>
 			</t:loop>
 		</svg>
 	</div>
 
-	<t:loop source="battle.members" value="member">
-		<div class="unit" id="${prop:memberClientId}" style="display:none;">
-			<div class="column">
-				<t:game.memberdisplay value="member"/>
+	<div class="description ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+		<t:loop source="battle.members" value="member">
+			<t:game.memberdescription value="member" selected="selected"/>
+			<t:loop source="member.hand" value="card">
+				<t:if test="selected">
+					<t:game.carddescription value="card.card.card"/>
+				</t:if>
+			</t:loop>
+		</t:loop>
+	</div>
+	<div class="actions ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+		<t:loop source="battle.members" value="member">
+			<div id="a_${member.position.id}" style="display:none;">
+				<t:loop source="member.hand" value="card">
+					<t:game.carddisplay value="card.card.card" visible="selected"/>
+				</t:loop>
 			</div>
-			<div class="column">
-				<div class="hand ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
-					<t:loop source="member.hand" value="card">
-						<t:game.carddisplay value="card.card.card" visible="visible"/>
-					</t:loop>
-				</div>
-			</div>
-		</div>
-	</t:loop>
+		</t:loop>
+	</div>
 
 </t:container>
