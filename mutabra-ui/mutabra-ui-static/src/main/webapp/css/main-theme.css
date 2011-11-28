@@ -1656,16 +1656,19 @@ button.ui-button::-moz-focus-inner {
 	background-position: 0 -32px;
 }
 
-path.selected {
+path.ui-state-active {
+	stroke-width: 3px;
+}
+
+path.ui-state-highlight.hero,
+path.ui-state-highlight.summon,
+path.ui-state-highlight.empty,
+path.ui-state-highlight {
+	fill: #fedcba;
 	stroke-width: 3px;
 }
 
 path.hero,
 path.summon {
 	fill: #e6d29d;
-}
-
-path.highlighted {
-	fill: #fedcba;
-	stroke-width: 3px;
 }

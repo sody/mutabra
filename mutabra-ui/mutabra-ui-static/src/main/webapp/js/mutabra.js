@@ -66,100 +66,21 @@ T5.extendInitializers({
 	},
 
 	field: function(spec) {
-		var battleField = j$('#' + spec.id);
-		var selectedField,selectedCard;
-
-		j$.each(spec.fields, function(index, value) {
-			battleField.find('#' + value.id).click(function() {
-				if (selectedField) {
-					j$('#' + selectedField.infoId).hide();
-					j$('#' + selectedField.id).attr('class', function(index, attr) {
-						return attr.replace(' selected', '');
-					});
-				}
-				selectedField = value;
-				j$('#' + selectedField.infoId).show();
-				j$('#' + selectedField.id).attr('class', function(index, attr) {
-					return attr + ' selected';
-				});
-			});
-
-			if (value.selected) {
-				selectedField = value;
-				j$('#' + selectedField.infoId).show();
-			}
+		j$('#' + spec.id).field({
+			info: spec.infoId,
+			selected: spec.selected
 		});
+	},
 
-		j$.each(spec.cards, function(index, value) {
-			value.getPossible = function() {
-				var fullSelector;
-				var selector = 'path';
-				if (!value.supports_enemy_side) {
-					selector += '.friend';
-				}
-				if (!value.supports_friend_side) {
-					selector += '.enemy';
-				}
-				if (value.supports_empty_point) {
-					fullSelector = selector + '.empty';
-				}
-				if (value.supports_hero_point) {
-					fullSelector = fullSelector ? fullSelector + ',' + selector + '.hero' : selector + '.hero';
-				}
-				if (value.supports_summon_point) {
-					fullSelector = fullSelector ? fullSelector + ',' + selector + '.summon' : selector + '.summon';
-				}
-				if (!fullSelector) {
-					fullSelector = selector;
-				}
-				return battleField.find(fullSelector);
-			};
-
-			j$('#' + value.id).click(function() {
-				var possible,card;
-				if (selectedCard) {
-					card = j$('#' + selectedCard.id);
-					card.removeClass('ui-state-highlight');
-
-					possible = selectedCard.getPossible();
-					possible.attr('class', function(index, attr) {
-						return attr.replace(' highlighted', '');
-					});
-					possible.unbind('mouseover');
-					possible.unbind('mouseout');
-				}
-
-				selectedCard = value;
-				card = j$('#' + selectedCard.id);
-				card.addClass('ui-state-highlight');
-
-				possible = value.getPossible();
-				if (possible) {
-					possible.mouseover(function() {
-						var selected = value.massive ? possible : j$(this);
-						selected.attr('class', function(index, attr) {
-							return attr + ' highlighted';
-						});
-					});
-
-					possible.mouseout(function() {
-						var selected = value.massive ? possible : j$(this);
-						selected.attr('class', function(index, attr) {
-							return attr.replace(' highlighted', '');
-						});
-					});
-
-					possible.click(function() {
-						var selected = value.massive ? possible : j$(this);
-						selected.attr('class', function(index, attr) {
-							return attr.replace(' highlighted', '');
-						});
-						possible.unbind('mouseover');
-						possible.unbind('mouseout');
-						card.removeClass('ui-state-highlight');
-					});
-				}
-			});
+	card: function(spec) {
+		j$('#' + spec.id).card({
+			selected: false,
+			massive: spec.massive,
+			supports_enemy_side: spec.supports_enemy_side,
+			supports_friend_side: spec.supports_friend_side,
+			supports_empty_point: spec.supports_empty_point,
+			supports_hero_point: spec.supports_hero_point,
+			supports_summon_point: spec.supports_summon_point
 		});
 	}
 });
