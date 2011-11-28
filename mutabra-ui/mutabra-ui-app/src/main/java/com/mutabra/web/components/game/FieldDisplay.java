@@ -1,81 +1,79 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.game.Battle;
-import com.mutabra.domain.game.BattleCard;
-import com.mutabra.domain.game.BattleMember;
-import com.mutabra.domain.game.BattlePlace;
-import com.mutabra.domain.game.Hero;
-import com.mutabra.services.game.BattleService;
-import com.mutabra.web.services.AccountContext;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SetupRender;
+import com.mutabra.domain.game.BattleField;
+import com.mutabra.web.base.components.AbstractComponent;
+import org.apache.tapestry5.ClientElement;
+import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.annotations.AfterRender;
+import org.apache.tapestry5.annotations.BeginRender;
+import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
+import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
-
-import java.util.List;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class FieldDisplay {
+@SupportsInformalParameters
+public class FieldDisplay extends AbstractComponent implements ClientElement {
+	private static final int CELL_SIZE = 40;
+	private static final int[][] CELL_PATH = {
+			{2, 0},
+			{1, 1},
+			{-1, 1},
+			{-2, 0},
+			{-1, -1},
+			{1, -1},
+	};
 
-	@Inject
-	private AccountContext accountContext;
+	@Parameter(required = true, allowNull = false)
+	private BattleField field;
 
-	@Inject
-	private BattleService battleService;
+	@Parameter
+	private boolean selected;
 
 	@Inject
 	private JavaScriptSupport support;
 
-	@Property
-	private Battle battle;
+	private String clientId;
 
-	@Property
-	private BattleMember you;
-
-	@Property
-	private BattleMember opponent;
-
-	@Property
-	private BattlePlace field;
-
-	@Property
-	private List<BattlePlace> fields;
-
-	@Property
-	private BattleMember member;
-
-	@Property
-	private BattleCard card;
-
-	public boolean isSelected() {
-		return field.getPosition().equals(you.getPosition());
+	public String getClientId() {
+		return clientId;
 	}
 
-	public boolean isVisible() {
-		return member.equals(you);
+	@BeginRender
+	void render(final MarkupWriter writer) {
+		clientId = "f_" + field.getPosition().getId();
+		final int startX = CELL_SIZE * (3 * field.getPosition().getX() + 1);
+		final int startY = CELL_SIZE * (2 * field.getPosition().getY() + 2 + (field.getPosition().getX() + 1) % 2);
+
+		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
+		path.attribute("id", clientId);
+
+		path.addClassName(field.hasHero() ? "hero" : field.hasSummon() ? "summon" : "empty");
+		path.addClassName(field.isEnemySide() ? "enemy" : "friend");
+
+		final StringBuilder pathBuilder = new StringBuilder("m");
+		pathBuilder.append(startX).append(',').append(startY);
+		for (int[] point : CELL_PATH) {
+			pathBuilder.append(',').append(point[0] * CELL_SIZE).append(',').append(point[1] * CELL_SIZE);
+		}
+		pathBuilder.append("z");
+		path.attribute("d", pathBuilder.toString());
+
+		writer.end();
 	}
 
-	public String getMemberClientId() {
-		return "f_" + member.getPosition().getId() + "_info";
-	}
-
-	@SetupRender
-	void setupBattleField() {
-		final Hero hero = accountContext.getHero();
-		battle = accountContext.getBattle();
-
-		fields = battleService.getBattleField(hero, battle);
-		for (BattlePlace battlePlace : fields) {
-			if (battlePlace.hasHero()) {
-				if (battlePlace.isEnemySide()) {
-					opponent = battlePlace.getMember();
-				} else {
-					you = battlePlace.getMember();
-				}
-			}
+	@AfterRender
+	void renderScript() {
+		if (field.hasHero() || field.hasSummon()) {
+			support.addInitializerCall("field", new JSONObject()
+					.put("id", getClientId())
+					.put("infoId", getClientId() + "_info")
+					.put("selected", selected));
 		}
 	}
 }

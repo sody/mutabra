@@ -3,7 +3,7 @@ package com.mutabra.services.game;
 import com.mutabra.domain.game.Battle;
 import com.mutabra.domain.game.BattleCard;
 import com.mutabra.domain.game.BattleMember;
-import com.mutabra.domain.game.BattlePlace;
+import com.mutabra.domain.game.BattleField;
 import com.mutabra.domain.game.BattleSummon;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
@@ -79,28 +79,28 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		return null;
 	}
 
-	public List<BattlePlace> getBattleField(final Hero hero, final Battle battle) {
-		final Map<Position, BattlePlace> battleField = new HashMap<Position, BattlePlace>();
+	public List<BattleField> getBattleField(final Hero hero, final Battle battle) {
+		final Map<Position, BattleField> battleField = new HashMap<Position, BattleField>();
 		boolean upSide = false;
 		for (BattleMember member : battle.getMembers()) {
 			final boolean enemy = !member.getHero().equals(hero);
 			if (!enemy && member.getPosition().getY() == 0) {
 				upSide = true;
 			}
-			battleField.put(member.getPosition(), new BattlePlace(member, enemy));
+			battleField.put(member.getPosition(), new BattleField(member, enemy));
 			for (BattleSummon summon : member.getSummons()) {
-				battleField.put(summon.getPosition(), new BattlePlace(summon, enemy));
+				battleField.put(summon.getPosition(), new BattleField(summon, enemy));
 			}
 		}
 
 		for (Position position : DUEL_POSITIONS) {
 			if (!battleField.containsKey(position)) {
 				final boolean enemy = (position.getY() == 0 && !upSide) || (position.getY() > 0 && upSide);
-				battleField.put(position, new BattlePlace(position, enemy));
+				battleField.put(position, new BattleField(position, enemy));
 			}
 		}
 
-		return new ArrayList<BattlePlace>(battleField.values());
+		return new ArrayList<BattleField>(battleField.values());
 	}
 
 	private int random(final int size) {

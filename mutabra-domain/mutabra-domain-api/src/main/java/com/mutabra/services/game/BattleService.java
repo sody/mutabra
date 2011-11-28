@@ -1,7 +1,7 @@
 package com.mutabra.services.game;
 
 import com.mutabra.domain.game.Battle;
-import com.mutabra.domain.game.BattlePlace;
+import com.mutabra.domain.game.BattleField;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityService;
 import org.greatage.domain.annotations.Transactional;
@@ -20,6 +20,6 @@ public interface BattleService extends BaseEntityService<Battle> {
 	@Transactional
 	Battle startRound(Battle battle);
 
-	List<BattlePlace> getBattleField(Hero hero, Battle battle);
+	List<BattleField> getBattleField(Hero hero, Battle battle);
 
 }

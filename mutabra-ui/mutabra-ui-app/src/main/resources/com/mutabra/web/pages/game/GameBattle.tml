@@ -4,6 +4,6 @@
 
 <h2>${message:label.round}: ${battle.round}</h2>
 
-<t:game.fielddisplay/>
+<t:game.battledisplay/>
 
 </html>

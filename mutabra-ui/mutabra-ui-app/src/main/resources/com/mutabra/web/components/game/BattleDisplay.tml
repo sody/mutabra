@@ -13,7 +13,7 @@
 	<div class="unit" align="center">
 		<svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
 			<t:loop source="fields" value="field">
-				<t:game.fieldcell field="field" selected="selected"/>
+				<t:game.fielddisplay field="field" selected="selected"/>
 			</t:loop>
 		</svg>
 	</div>
