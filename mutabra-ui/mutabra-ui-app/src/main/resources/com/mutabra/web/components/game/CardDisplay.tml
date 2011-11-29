@@ -2,22 +2,17 @@
 			 xmlns:p="tapestry:parameter">
 
 	<div id="${clientId}" class="card ui-widget ui-widget-content ui-corner-all">
-		<t:if test="visible">
-			<t:image.cardimage card="value"/>
-			<br/>
-			<t:if test="effectCard">
-				<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.effect.strength}</span>
-			</t:if>
-			<t:if test="summonCard">
-				<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.summon.strength}</span>
-				<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.summon.health}</span>
-			</t:if>
-			<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
-			<br/>
-			<p:else>
-				<t:image.cardbackimage width="100" height="100"/>
-			</p:else>
+		<t:image.cardimage card="value"/>
+		<br/>
+		<t:if test="effectCard">
+			<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.effect.strength}</span>
 		</t:if>
+		<t:if test="summonCard">
+			<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.summon.strength}</span>
+			<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.summon.health}</span>
+		</t:if>
+		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
+		<br/>
 	</div>
 
 </t:container>

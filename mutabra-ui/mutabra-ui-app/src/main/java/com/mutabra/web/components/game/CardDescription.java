@@ -4,13 +4,9 @@ import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardType;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
-import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
@@ -21,9 +17,6 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 	@Property
 	@Parameter
 	private Card value;
-
-	@Inject
-	private JavaScriptSupport support;
 
 	private String clientId;
 
@@ -41,13 +34,6 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 
 	@SetupRender
 	void setupClientId() {
-		clientId = "d_" + value.getCode();
-	}
-
-	@AfterRender
-	void renderScript() {
-		support.addInitializerCall("description", new JSONObject()
-				.put("id", getClientId())
-				.put("cardId", "c_" + value.getCode()));
+		clientId = "c_" + value.getCode() + "_description";
 	}
 }

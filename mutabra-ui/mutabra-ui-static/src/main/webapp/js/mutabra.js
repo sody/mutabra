@@ -65,18 +65,18 @@ T5.extendInitializers({
 		});
 	},
 
-	description: function(spec) {
-		j$('#' + spec.id).description({
-			card: spec.cardId,
-			field: spec.fieldId,
-			actions: spec.actionsId,
-			selected: spec.selected
+	field: function(spec) {
+		j$('#' + spec.id).field({
+			selected: spec.selected,
+			descriptionId: spec.id + '_description',
+			actionsId: spec.id + '_actions'
 		});
 	},
 
 	card: function(spec) {
 		j$('#' + spec.id).card({
 			selected: false,
+			descriptionId: spec.id + '_description',
 			massive: spec.massive,
 			supports_enemy_side: spec.supports_enemy_side,
 			supports_friend_side: spec.supports_friend_side,

@@ -52,4 +52,8 @@ public class BattleField {
 	public boolean isEnemySide() {
 		return enemySide;
 	}
+
+	public boolean isSelected() {
+		return !enemySide && member != null;
+	}
 }

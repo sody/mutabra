@@ -41,14 +41,7 @@ public class BattleDisplay {
 	private List<BattleField> fields;
 
 	@Property
-	private BattleMember member;
-
-	@Property
 	private BattleCard card;
-
-	public boolean isSelected() {
-		return member.equals(you);
-	}
 
 	@SetupRender
 	void setupBattleField() {
