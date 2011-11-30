@@ -14,7 +14,7 @@
 	};
 	var escapeHandler = function(event) {
 		if (event.keyCode == $.ui.keyCode.ESCAPE && selectedCard) {
-			selectedCard.escape();
+			selectedCard.cancel();
 		}
 	};
 
@@ -42,7 +42,7 @@
 		},
 
 		select: function() {
-			if (!this.option.empty && !selectedCard) {
+			if (!this.options.empty && !selectedCard) {
 				selected = this.description;
 				if (selectedField) {
 					selectedField.option('selected', false);
@@ -53,7 +53,7 @@
 		},
 
 		showDescription: function() {
-			if (!this.option.empty) {
+			if (!this.options.empty) {
 				if (selected) {
 					selected.hide();
 				}
@@ -62,7 +62,7 @@
 		},
 
 		hideDescription: function() {
-			if (!this.option.empty) {
+			if (!this.options.empty) {
 				this.description.hide();
 				if (selected) {
 					selected.show();
@@ -148,7 +148,7 @@
 			}
 		},
 
-		escape: function() {
+		cancel: function() {
 			// unselect card
 			this.option('selected', false);
 			selectedCard = null;
@@ -162,7 +162,7 @@
 
 		apply: function(field) {
 			alert('Card:' + this.element.attr('id') + ' Field:' + field.element.attr('id'));
-			this.escape();
+			this.cancel();
 		},
 
 		showDescription: function() {

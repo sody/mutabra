@@ -351,11 +351,19 @@ div.t-beaneditor-row select {
 }
 
 .description {
-	width: 280px;
-	height: 280px;
-	float: left;
 	margin-right: 10px;
-}
+	padding: 10px;
+	width: 260px;
+	height: 260px;
+	float: left;
+	}
+	.description .ui-icon {
+		float: left;
+	}
+	.description .icon-text {
+		float: left;
+		margin-right: 5px;
+	}
 .actions {
 	width: 420px;
 	height: 280px;
