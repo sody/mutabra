@@ -9,6 +9,7 @@
 		var field = $(event.target).data('field');
 		if (selectedCard && field) {
 			selectedCard.apply(field);
+			selectedField.disable();
 		}
 	};
 	var escapeHandler = function(event) {
@@ -20,29 +21,28 @@
 	$.widget('mutabra.field', {
 		options: {
 			selected: false,
-			disabled: true
+			disabled: false,
+			empty: true
 		},
 
 		_create: function() {
-			if (!this.options.disabled) {
-				var self = this;
-				this.description = $('#' + this.options.descriptionId);
-				this.actions = $('#' + this.options.actionsId);
+			var self = this;
+			this.description = $('#' + this.options.descriptionId);
+			this.actions = $('#' + this.options.actionsId);
 
-				this.element
-						.mouseover(function() { self.showDescription(); })
-						.mouseout(function() { self.hideDescription(); })
-						.click(function() { self.select(); });
+			this.element
+					.mouseover(function() { self.showDescription(); })
+					.mouseout(function() { self.hideDescription(); })
+					.click(function() { self.select(); });
 
-				if (this.options.selected) {
-					self.select();
-					selected.show();
-				}
+			if (this.options.selected) {
+				self.select();
+				selected.show();
 			}
 		},
 
 		select: function() {
-			if (!selectedCard) {
+			if (!this.option.empty && !selectedCard) {
 				selected = this.description;
 				if (selectedField) {
 					selectedField.option('selected', false);
@@ -53,36 +53,59 @@
 		},
 
 		showDescription: function() {
-			if (selected) {
-				selected.hide();
+			if (!this.option.empty) {
+				if (selected) {
+					selected.hide();
+				}
+				this.description.show();
 			}
-			this.description.show();
 		},
 
 		hideDescription: function() {
-			this.description.hide();
-			if (selected) {
-				selected.show();
+			if (!this.option.empty) {
+				this.description.hide();
+				if (selected) {
+					selected.show();
+				}
 			}
 		},
 
 		_setOption: function(key, value) {
-			if (key === 'selected') {
-				if (value) {
-					this.element.attr('class', function(index, attr) {
-						return attr + ' ui-state-active';
-					});
-					if (this.actions) {
-						this.actions.show();
+			switch (key) {
+				case 'selected':
+					if (value) {
+						this.element.attr('class', function(index, attr) {
+							return attr + ' ui-state-active';
+						});
+						if (this.actions) {
+							this.actions.show();
+						}
+					} else {
+						this.element.attr('class', function(index, attr) {
+							return attr.replace(' ui-state-active', '');
+						});
+						if (this.actions) {
+							this.actions.hide();
+						}
 					}
-				} else {
-					this.element.attr('class', function(index, attr) {
-						return attr.replace(' ui-state-active', '');
-					});
-					if (this.actions) {
-						this.actions.hide();
+					break;
+				case 'disabled':
+					if (value) {
+						this.element.attr('class', function(index, attr) {
+							return attr + ' ui-state-disabled';
+						});
+						this.description.addClass('ui-state-disabled');
+						this.actions.find(':mutabra-card').each(function() {
+							$(this).data('card').disable();
+						});
+					} else {
+						this.element.attr('class', function(index, attr) {
+							return attr.replace(' ui-state-disabled', '');
+						});
+						this.description.removeClass('ui-state-disabled');
+						this.actions.find(':mutabra-card').data('card').enable();
 					}
-				}
+					break;
 			}
 
 			$.Widget.prototype._setOption.apply(this, arguments);
@@ -114,13 +137,15 @@
 		},
 
 		select: function() {
-			selected = this.description;
-			if (selectedCard) {
-				selectedCard.option('selected', false);
+			if (!this.options.disabled) {
+				selected = this.description;
+				if (selectedCard) {
+					selectedCard.option('selected', false);
+				}
+				selectedCard = this;
+				selectedCard.option('selected', true);
+				$(document).keydown(escapeHandler);
 			}
-			selectedCard = this;
-			selectedCard.option('selected', true);
-			$(document).keydown(escapeHandler);
 		},
 
 		escape: function() {
@@ -155,25 +180,36 @@
 		},
 
 		_setOption: function(key, value) {
-			if (key === 'selected') {
-				var possible = this._getPossible();
-				if (value) {
-					this.element.addClass('ui-state-highlight');
-					if (possible) {
-						possible.attr('class', function(index, attr) {
-							return attr + ' ui-state-highlight';
-						});
-						possible.click(applyHandler);
+			switch (key) {
+				case 'selected':
+					var possible = this._getPossible();
+					if (value) {
+						this.element.addClass('ui-state-highlight');
+						if (possible) {
+							possible.attr('class', function(index, attr) {
+								return attr + ' ui-state-highlight';
+							});
+							possible.click(applyHandler);
+						}
+					} else {
+						this.element.removeClass('ui-state-highlight');
+						if (possible) {
+							possible.attr('class', function(index, attr) {
+								return attr.replace(' ui-state-highlight', '');
+							});
+							possible.unbind('click', applyHandler);
+						}
 					}
-				} else {
-					this.element.removeClass('ui-state-highlight');
-					if (possible) {
-						possible.attr('class', function(index, attr) {
-							return attr.replace(' ui-state-highlight', '');
-						});
-						possible.unbind('click', applyHandler);
+					break;
+				case 'disabled':
+					if (value) {
+						this.element.addClass('ui-state-disabled');
+						this.description.addClass('ui-state-disabled');
+					} else {
+						this.element.removeClass('ui-state-disabled');
+						this.description.removeClass('ui-state-disabled');
 					}
-				}
+					break;
 			}
 
 			$.Widget.prototype._setOption.apply(this, arguments);
