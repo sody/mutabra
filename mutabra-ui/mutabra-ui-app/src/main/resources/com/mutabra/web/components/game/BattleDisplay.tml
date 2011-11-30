@@ -9,7 +9,7 @@
 		</svg>
 	</div>
 
-	<div class="description ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+	<div id="battle-description" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
 			<t:if test="field.member">
 				<t:game.memberdescription value="field.member"/>
@@ -21,7 +21,7 @@
 			</t:if>
 		</t:loop>
 	</div>
-	<div class="actions ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+	<div id="battle-actions" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
 			<t:if test="field.member">
 				<t:if test="!field.enemySide">

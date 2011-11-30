@@ -350,21 +350,21 @@ div.t-beaneditor-row select {
 	margin: 8px;
 }
 
-.description {
+#battle-description {
 	margin-right: 10px;
 	padding: 10px;
 	width: 260px;
 	height: 260px;
 	float: left;
 	}
-	.description .ui-icon {
+	#battle-description .ui-icon {
 		float: left;
 	}
-	.description .icon-text {
+	#battle-description .icon-text {
 		float: left;
 		margin-right: 5px;
 	}
-.actions {
+#battle-actions {
 	width: 420px;
 	height: 280px;
 	float: left;
