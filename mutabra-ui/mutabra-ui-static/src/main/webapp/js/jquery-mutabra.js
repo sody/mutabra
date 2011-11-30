@@ -1,32 +1,10 @@
 (function($) {
+	$.mutabra = $.mutabra || {};
+}(jQuery));
+
+(function($) {
 
 	var selected, selectedField, selectedCard;
-
-	$.widget('mutabra.description', {
-		options: {
-			selected: false
-		},
-
-		_create: function() {
-			this.option('selected', this.options.selected);
-		},
-
-		_setOption: function(key, value) {
-			if (key === 'selected') {
-				if (value) {
-					this.element.show();
-				} else {
-					this.element.hide();
-				}
-			}
-
-			$.Widget.prototype._setOption.apply(this, arguments);
-		},
-
-		destroy: function() {
-			$.Widget.prototype.destroy.call(this);
-		}
-	});
 
 	$.widget('mutabra.field', {
 		options: {
@@ -35,37 +13,40 @@
 
 		_create: function() {
 			var self = this;
-			this.description = $('#' + this.options.descriptionId).description();
-			this.actionsElement = $('#' + this.options.actionsId);
+			this.description = $('#' + this.options.descriptionId);
+			this.actions = $('#' + this.options.actionsId);
 
-			this.element.mouseover(function() {
-				if (selected) {
-					selected.description('option', 'selected', false);
-				}
-				self.description.description('option', 'selected', true);
-			});
-
-			this.element.mouseout(function() {
-				self.description.description('option', 'selected', false);
-				if (selected) {
-					selected.description('option', 'selected', true);
-				}
-			});
-
-			this.element.click(function() {
-				selected = self.description;
-				if (selectedField) {
-					selectedField.option('selected', false);
-				}
-				selectedField = self;
-				selectedField.option('selected', true);
-			});
+			this.element
+					.mouseover(function() { self.showDescription(); })
+					.mouseout(function() { self.hideDescription(); })
+					.click(function() { self.select(); });
 
 			if (this.options.selected) {
-				selected = self.description;
-				selected.description('option', 'selected', true);
-				selectedField = self;
-				selectedField.option('selected', true);
+				self.select();
+				selected.show();
+			}
+		},
+
+		select: function() {
+			selected = this.description;
+			if (selectedField) {
+				selectedField.option('selected', false);
+			}
+			selectedField = this;
+			selectedField.option('selected', true);
+		},
+
+		showDescription: function() {
+			if (selected) {
+				selected.hide();
+			}
+			this.description.show();
+		},
+
+		hideDescription: function() {
+			this.description.hide();
+			if (selected) {
+				selected.show();
 			}
 		},
 
@@ -75,15 +56,15 @@
 					this.element.attr('class', function(index, attr) {
 						return attr + ' ui-state-active';
 					});
-					if (this.actionsElement) {
-						this.actionsElement.show();
+					if (this.actions) {
+						this.actions.show();
 					}
 				} else {
 					this.element.attr('class', function(index, attr) {
 						return attr.replace(' ui-state-active', '');
 					});
-					if (this.actionsElement) {
-						this.actionsElement.hide();
+					if (this.actions) {
+						this.actions.hide();
 					}
 				}
 			}
@@ -108,30 +89,35 @@
 
 		_create: function() {
 			var self = this;
-			this.description = $('#' + this.options.descriptionId).description();
+			this.description = $('#' + this.options.descriptionId);
 
-			this.element.mouseover(function() {
-				if (selected) {
-					selected.description('option', 'selected', false);
-				}
-				self.description.description('option', 'selected', true);
-			});
+			this.element
+					.mouseover(function() { self.showDescription(); })
+					.mouseout(function() { self.hideDescription(); })
+					.click(function() { self.select(); });
+		},
 
-			this.element.mouseout(function() {
-				self.description.description('option', 'selected', false);
-				if (selected) {
-					selected.description('option', 'selected', true);
-				}
-			});
+		select: function() {
+			selected = this.description;
+			if (selectedCard) {
+				selectedCard.option('selected', false);
+			}
+			selectedCard = this;
+			selectedCard.option('selected', true);
+		},
 
-			this.element.click(function() {
-				selected = self.description;
-				if (selectedCard) {
-					selectedCard.option('selected', false);
-				}
-				selectedCard = self;
-				selectedCard.option('selected', true);
-			});
+		showDescription: function() {
+			if (selected) {
+				selected.hide();
+			}
+			this.description.show();
+		},
+
+		hideDescription: function() {
+			this.description.hide();
+			if (selected) {
+				selected.show();
+			}
 		},
 
 		_setOption: function(key, value) {
