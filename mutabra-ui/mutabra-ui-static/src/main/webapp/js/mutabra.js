@@ -68,6 +68,7 @@ T5.extendInitializers({
 	field: function(spec) {
 		j$('#' + spec.id).field({
 			selected: spec.selected,
+			disabled: spec.disabled,
 			descriptionId: spec.id + '_description',
 			actionsId: spec.id + '_actions'
 		});

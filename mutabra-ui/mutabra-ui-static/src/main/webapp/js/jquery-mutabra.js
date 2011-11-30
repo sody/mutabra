@@ -5,35 +5,51 @@
 (function($) {
 
 	var selected, selectedField, selectedCard;
+	var applyHandler = function(event) {
+		var field = $(event.target).data('field');
+		if (selectedCard && field) {
+			selectedCard.apply(field);
+		}
+	};
+	var escapeHandler = function(event) {
+		if (event.keyCode == $.ui.keyCode.ESCAPE && selectedCard) {
+			selectedCard.escape();
+		}
+	};
 
 	$.widget('mutabra.field', {
 		options: {
-			selected: false
+			selected: false,
+			disabled: true
 		},
 
 		_create: function() {
-			var self = this;
-			this.description = $('#' + this.options.descriptionId);
-			this.actions = $('#' + this.options.actionsId);
+			if (!this.options.disabled) {
+				var self = this;
+				this.description = $('#' + this.options.descriptionId);
+				this.actions = $('#' + this.options.actionsId);
 
-			this.element
-					.mouseover(function() { self.showDescription(); })
-					.mouseout(function() { self.hideDescription(); })
-					.click(function() { self.select(); });
+				this.element
+						.mouseover(function() { self.showDescription(); })
+						.mouseout(function() { self.hideDescription(); })
+						.click(function() { self.select(); });
 
-			if (this.options.selected) {
-				self.select();
-				selected.show();
+				if (this.options.selected) {
+					self.select();
+					selected.show();
+				}
 			}
 		},
 
 		select: function() {
-			selected = this.description;
-			if (selectedField) {
-				selectedField.option('selected', false);
+			if (!selectedCard) {
+				selected = this.description;
+				if (selectedField) {
+					selectedField.option('selected', false);
+				}
+				selectedField = this;
+				selectedField.option('selected', true);
 			}
-			selectedField = this;
-			selectedField.option('selected', true);
 		},
 
 		showDescription: function() {
@@ -104,6 +120,24 @@
 			}
 			selectedCard = this;
 			selectedCard.option('selected', true);
+			$(document).keydown(escapeHandler);
+		},
+
+		escape: function() {
+			// unselect card
+			this.option('selected', false);
+			selectedCard = null;
+			selected.hide();
+
+			//select and show selectedfield
+			selectedField.select();
+			selected.show();
+			$(document).unbind('keydown', escapeHandler);
+		},
+
+		apply: function(field) {
+			alert('Card:' + this.element.attr('id') + ' Field:' + field.element.attr('id'));
+			this.escape();
 		},
 
 		showDescription: function() {
@@ -125,10 +159,11 @@
 				var possible = this._getPossible();
 				if (value) {
 					this.element.addClass('ui-state-highlight');
-					if (possible.filter()) {
+					if (possible) {
 						possible.attr('class', function(index, attr) {
 							return attr + ' ui-state-highlight';
 						});
+						possible.click(applyHandler);
 					}
 				} else {
 					this.element.removeClass('ui-state-highlight');
@@ -136,6 +171,7 @@
 						possible.attr('class', function(index, attr) {
 							return attr.replace(' ui-state-highlight', '');
 						});
+						possible.unbind('click', applyHandler);
 					}
 				}
 			}
