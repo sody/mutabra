@@ -7,18 +7,18 @@
 	<div class="column s-2">
 		<div id="user-pic">
 			<div class="t-beaneditor-row">
-				<t:button primary="medium facebook" text="false">
+				<t:button primary="big ui-icon-facebook" text="false">
 					<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook}</t:social.facebookconnect>
 				</t:button>
-				<t:button primary="medium twitter" text="false">
+				<t:button primary="big ui-icon-twitter" text="false">
 					<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter}</t:social.twitterconnect>
 				</t:button>
 			</div>
 			<div class="t-beaneditor-row">
-				<t:button primary="medium google" text="false">
+				<t:button primary="big ui-icon-google" text="false">
 					<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google}</t:social.googleconnect>
 				</t:button>
-				<t:button primary="ui-icon-locked" text="false">
+				<t:button primary="big ui-icon-vkontakte" text="false">
 					<t:social.vkontakteconnect t:id="vkontakte" class="transparent">${message:button.vkontakte}</t:social.vkontakteconnect>
 				</t:button>
 			</div>

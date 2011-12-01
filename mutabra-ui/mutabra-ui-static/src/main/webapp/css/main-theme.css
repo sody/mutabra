@@ -131,16 +131,6 @@ input {
 }
 
 /* Button styles */
-.ui-icon.medium.facebook {
-	background: url("../img/social/facebook_24x24.png")
-}
-.ui-icon.medium.google {
-	background: url("../img/social/google_24x24.png")
-}
-.ui-icon.medium.twitter {
-	background: url("../img/social/twitter_24x24.png")
-}
-
 .ui-button.transparent,
 .ui-widget-content .ui-button.transparent {
 	border: 0;
@@ -654,19 +644,19 @@ div.t-beaneditor-row select {
 .ui-icon {
 	width: 16px;
 	height: 16px;
-	background-image: url(../img/icons_64x48x16.png);
+	background-image: url(../img/icons_64x64x16.png);
 }
 
 .ui-icon.medium {
 	width: 24px;
 	height: 24px;
-	background-image: url(../img/icons_96x72x24.png);
+	background-image: url(../img/icons_96x96x24.png);
 }
 
 .ui-icon.big {
 	width: 32px;
 	height: 32px;
-	background-image: url(../img/icons_128x96x32.png);
+	background-image: url(../img/icons_128x128x32.png);
 }
 
 /*
@@ -716,16 +706,57 @@ div.t-beaneditor-row select {
 	background-position: -48px -16px;
 }
 
-.ui-icon-blood {
+.ui-icon-facebook {
 	background-position: 0 -32px;
+	}
+	.ui-icon-facebook.medium {
+		background-position: 0 -48px;
+	}
+	.ui-icon-facebook.big {
+		background-position: 0 -64px;
+	}
+
+.ui-icon-twitter {
+	background-position: -16px -32px;
+	}
+	.ui-icon-twitter.medium {
+		background-position: -24px -48px;
+	}
+	.ui-icon-twitter.big {
+		background-position: -32px -64px;
+	}
+
+.ui-icon-google {
+	background-position: -32px -32px;
+	}
+	.ui-icon-google.medium {
+		background-position: -48px -48px;
+	}
+	.ui-icon-google.big {
+		background-position: -64px -64px;
+	}
+
+.ui-icon-vkontakte {
+	background-position: -48px -32px;
+	}
+	.ui-icon-vkontakte.medium {
+		background-position: -72px -48px;
+	}
+	.ui-icon-vkontakte.big {
+		background-position: -96px -64px;
+	}
+
+
+.ui-icon-blood {
+	background-position: 0 -48px;
 }
 
 .ui-icon-heart {
-	background-position: -16px -32px;
+	background-position: -16px -48px;
 }
 
 .ui-icon-skull {
-	background-position: -32px -32px;
+	background-position: -32px -48px;
 }
 
 /* Misc visuals
@@ -1112,7 +1143,7 @@ input.ui-button {
 	right: .5em;
 }
 
-/*button icon element(s) */
+/* for medium icons */
 .ui-button-icon-only .ui-icon.medium,
 .ui-button-text-icon-primary .ui-icon.medium,
 .ui-button-text-icon-secondary .ui-icon.medium,
@@ -1126,6 +1157,22 @@ input.ui-button {
 .ui-button-icon-only .ui-icon.medium {
 	left: 50%;
 	margin-left: -12px;
+}
+
+/* for big icons */
+.ui-button-icon-only .ui-icon.big,
+.ui-button-text-icon-primary .ui-icon.big,
+.ui-button-text-icon-secondary .ui-icon.big,
+.ui-button-text-icons .ui-icon.big,
+.ui-button-icons-only .ui-icon.big {
+	position: absolute;
+	top: 50%;
+	margin-top: -16px;
+}
+
+.ui-button-icon-only .ui-icon.big {
+	left: 50%;
+	margin-left: -16px;
 }
 
 /*button sets*/
@@ -1655,7 +1702,7 @@ button.ui-button::-moz-focus-inner {
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
-	background-image: url(../img/icons_128x96x32.png);
+	background-image: url(../img/icons_128x128x32.png);
 }
 
 .jcarousel-next-disabled,
