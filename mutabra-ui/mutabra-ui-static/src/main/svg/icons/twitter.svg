@@ -4,10 +4,10 @@
 	<title>Twitter Icon</title>
 	<desc>Twitter Icon</desc>
 
-	<path stroke="#333" fill="none"
+	<path stroke="#000" fill="none"
 		  d="m11,6,42,0c3,0,5,2,5,5v42c0,3-2,5-5,5h-42c-3,0-5-2-5-5v-42c0-3,2-5,5-5z"/>
 
-	<path stroke="none" fill="#333"
+	<path stroke="#000" fill="none"
 		  d="m17,18c0-6,10-6,10,0v5h15c6,0,6,8,0,8h-15v3c0,4,2,7,6,7h9c6,0,6,9,0,9h-12c-7,0-13-6-13-13z"/>
 
 </svg>
