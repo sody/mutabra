@@ -1,11 +1,11 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.game.Battle;
-import com.mutabra.domain.game.BattleCard;
-import com.mutabra.domain.game.BattleField;
-import com.mutabra.domain.game.BattleMember;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleField;
+import com.mutabra.domain.battle.BattleMember;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.services.game.BattleService;
+import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.services.AccountContext;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;

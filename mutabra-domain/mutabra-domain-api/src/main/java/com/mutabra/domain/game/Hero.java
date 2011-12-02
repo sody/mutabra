@@ -1,6 +1,7 @@
 package com.mutabra.domain.game;
 
 import com.mutabra.domain.BaseEntity;
+import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;

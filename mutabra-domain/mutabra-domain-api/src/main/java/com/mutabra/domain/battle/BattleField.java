@@ -1,4 +1,4 @@
-package com.mutabra.domain.game;
+package com.mutabra.domain.battle;
 
 /**
  * @author Ivan Khalopik

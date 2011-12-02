@@ -1,6 +1,6 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Account;
 

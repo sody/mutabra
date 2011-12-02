@@ -1,4 +1,4 @@
-package com.mutabra.domain.game;
+package com.mutabra.domain.battle;
 
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;

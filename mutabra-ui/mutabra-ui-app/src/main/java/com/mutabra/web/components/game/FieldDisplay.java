@@ -1,6 +1,6 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.game.BattleField;
+import com.mutabra.domain.battle.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.MarkupWriter;

@@ -6,6 +6,8 @@ import com.googlecode.objectify.annotation.Parent;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleImpl;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.FaceImpl;
 import com.mutabra.domain.common.Level;

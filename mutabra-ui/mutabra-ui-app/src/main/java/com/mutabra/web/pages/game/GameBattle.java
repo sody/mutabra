@@ -1,7 +1,7 @@
 package com.mutabra.web.pages.game;
 
-import com.mutabra.domain.game.Battle;
-import com.mutabra.services.game.BattleService;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.services.AccountContext;

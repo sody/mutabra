@@ -1,7 +1,7 @@
-package com.mutabra.services.game;
+package com.mutabra.services.battle;
 
-import com.mutabra.domain.game.Battle;
-import com.mutabra.domain.game.BattleField;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleField;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityService;
 import org.greatage.domain.annotations.Transactional;

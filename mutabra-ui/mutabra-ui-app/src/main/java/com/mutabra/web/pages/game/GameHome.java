@@ -1,9 +1,9 @@
 package com.mutabra.web.pages.game;
 
-import com.mutabra.domain.game.Battle;
+import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.Mappers;
-import com.mutabra.services.game.BattleService;
+import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;

@@ -1,6 +1,7 @@
-package com.mutabra.domain.game;
+package com.mutabra.domain.battle;
 
 import com.mutabra.domain.BaseEntity;
+import com.mutabra.domain.game.Hero;
 
 import java.util.Set;
 

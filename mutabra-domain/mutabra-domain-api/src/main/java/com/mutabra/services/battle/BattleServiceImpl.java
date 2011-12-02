@@ -1,13 +1,13 @@
-package com.mutabra.services.game;
+package com.mutabra.services.battle;
 
-import com.mutabra.domain.game.Battle;
-import com.mutabra.domain.game.BattleCard;
-import com.mutabra.domain.game.BattleMember;
-import com.mutabra.domain.game.BattleField;
-import com.mutabra.domain.game.BattleSummon;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleField;
+import com.mutabra.domain.battle.BattleMember;
+import com.mutabra.domain.battle.BattleSummon;
+import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
-import com.mutabra.domain.game.Position;
 import com.mutabra.services.BaseEntityServiceImpl;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;

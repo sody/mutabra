@@ -1,4 +1,4 @@
-package com.mutabra.domain.game;
+package com.mutabra.domain.battle;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
@@ -6,6 +6,8 @@ import com.googlecode.objectify.annotation.Parent;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
+import com.mutabra.domain.game.HeroCard;
+import com.mutabra.domain.game.HeroCardImpl;
 
 import javax.persistence.Entity;
 
