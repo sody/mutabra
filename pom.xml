@@ -376,17 +376,17 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<ga.version>1.0-SNAPSHOT</ga.version>
-		<slf4j.version>1.6.3</slf4j.version>
-		<logback.version>0.9.30</logback.version>
+		<slf4j.version>1.6.4</slf4j.version>
+		<logback.version>1.0.0</logback.version>
 		<javassist.version>3.12.1.GA</javassist.version>
-		<testng.version>6.3</testng.version>
+		<testng.version>6.3.1</testng.version>
 
-		<hibernate.version>4.0.0.CR4</hibernate.version>
+		<hibernate.version>4.0.0.CR7</hibernate.version>
 		<jpa.version>1.0</jpa.version>
 		<mysql.version>5.1.18</mysql.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 
-		<appengine.version>1.5.5</appengine.version>
+		<appengine.version>1.6.0</appengine.version>
 		<objectify.version>3.0</objectify.version>
 
 		<tapestry.version>5.3</tapestry.version>
