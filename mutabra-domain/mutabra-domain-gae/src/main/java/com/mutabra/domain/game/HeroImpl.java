@@ -14,8 +14,6 @@ import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.LevelImpl;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.common.RaceImpl;
-import com.mutabra.domain.security.Account;
-import com.mutabra.domain.security.AccountImpl;
 
 import javax.persistence.Entity;
 import java.util.Date;

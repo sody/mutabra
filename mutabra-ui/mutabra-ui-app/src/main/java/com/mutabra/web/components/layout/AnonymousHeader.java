@@ -1,6 +1,6 @@
 package com.mutabra.web.components.layout;
 
-import com.mutabra.domain.security.Account;
+import com.mutabra.domain.game.Account;
 import com.mutabra.security.FacebookToken;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.TwitterToken;

@@ -1,6 +1,5 @@
 package com.mutabra.web.pages.game;
 
-import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.Mappers;
 import com.mutabra.services.battle.BattleService;
@@ -66,8 +65,7 @@ public class GameHome extends AbstractPage {
 	@OnEvent("createBattle")
 	Object createBattle(final Hero target) {
 		if (target.getBattle() == null && hero.getBattle() == null && !target.equals(hero)) {
-			final Battle battle = battleService.createBattle(hero, target);
-			battleService.startRound(battle);
+			battleService.startBattle(hero, target);
 			return GameBattle.class;
 		}
 		return null;

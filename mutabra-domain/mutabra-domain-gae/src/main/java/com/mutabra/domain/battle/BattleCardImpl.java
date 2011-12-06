@@ -3,6 +3,7 @@ package com.mutabra.domain.battle;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
@@ -21,10 +22,11 @@ public class BattleCardImpl extends BaseEntityImpl implements BattleCard {
 	@Parent
 	private Key<BattleMemberImpl> owner;
 
+	@Unindexed
 	private Key<HeroCardImpl> card;
 
 	@Indexed
-	private boolean inHand;
+	private BattleCardState state;
 
 	public BattleCardImpl() {
 	}
@@ -42,12 +44,12 @@ public class BattleCardImpl extends BaseEntityImpl implements BattleCard {
 		return Keys.getInstance(card);
 	}
 
-	public boolean isInHand() {
-		return inHand;
+	public BattleCardState getState() {
+		return state;
 	}
 
-	public void setInHand(final boolean onHand) {
-		this.inHand = onHand;
+	public void setState(final BattleCardState state) {
+		this.state = state;
 	}
 
 	@Override

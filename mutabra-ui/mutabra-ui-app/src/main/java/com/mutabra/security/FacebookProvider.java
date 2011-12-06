@@ -1,6 +1,6 @@
 package com.mutabra.security;
 
-import com.mutabra.domain.security.Account;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.CodedEntityService;
@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.mutabra.services.Mappers.account$;
-import static com.mutabra.services.Mappers.role$;
 
 /**
  * @author Ivan Khalopik

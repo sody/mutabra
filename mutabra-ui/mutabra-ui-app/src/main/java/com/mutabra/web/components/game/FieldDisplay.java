@@ -68,6 +68,8 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 	void renderScript() {
 		support.addInitializerCall("field", new JSONObject()
 				.put("id", getClientId())
+				.put("x", field.getPosition().getX())
+				.put("y", field.getPosition().getY())
 				.put("selected", field.isSelected())
 				.put("empty", !field.hasHero() && !field.hasSummon())
 		);

@@ -6,14 +6,14 @@ import org.greatage.hibernate.type.OrderedEnum;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public enum CardType implements OrderedEnum {
+public enum EffectType implements OrderedEnum {
 	UNKNOWN(0),
-	EFFECT(1),
-	SUMMON(2);
+	SUMMON(1),
+	EFFECT(2);
 
 	private final int order;
 
-	CardType(final int order) {
+	EffectType(final int order) {
 		this.order = order;
 	}
 

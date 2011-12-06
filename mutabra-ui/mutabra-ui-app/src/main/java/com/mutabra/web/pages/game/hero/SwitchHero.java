@@ -1,11 +1,7 @@
 package com.mutabra.web.pages.game.hero;
 
-import com.googlecode.objectify.Key;
-import com.mutabra.domain.Keys;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.game.HeroImpl;
-import com.mutabra.domain.security.Account;
-import com.mutabra.domain.security.AccountImpl;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;

@@ -20,6 +20,8 @@
 
 	$.widget('mutabra.field', {
 		options: {
+			x: 0,
+			y: 0,
 			selected: false,
 			disabled: false,
 			empty: true
@@ -118,6 +120,7 @@
 
 	$.widget('mutabra.card', {
 		options: {
+			url: '',
 			massive: false,
 			supports_enemy_side: false,
 			supports_friend_side : false,
@@ -161,6 +164,14 @@
 		},
 
 		apply: function(field) {
+			var url = this.options.url;
+			$.ajax({
+				url: url,
+				data: {
+					x: field.option('x'),
+					y: field.option('y')
+				}
+			});
 			alert('Card:' + this.element.attr('id') + ' Field:' + field.element.attr('id'));
 			this.cancel();
 		},

@@ -5,6 +5,8 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.mutabra.db.MutabraChangeLog;
 import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleAction;
+import com.mutabra.domain.battle.BattleActionImpl;
 import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.battle.BattleCardImpl;
 import com.mutabra.domain.battle.BattleImpl;
@@ -12,24 +14,22 @@ import com.mutabra.domain.battle.BattleMember;
 import com.mutabra.domain.battle.BattleMemberImpl;
 import com.mutabra.domain.battle.BattleSummon;
 import com.mutabra.domain.battle.BattleSummonImpl;
+import com.mutabra.domain.common.Ability;
+import com.mutabra.domain.common.AbilityImpl;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.CardImpl;
-import com.mutabra.domain.common.Effect;
-import com.mutabra.domain.common.EffectImpl;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.FaceImpl;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.LevelImpl;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.common.RaceImpl;
-import com.mutabra.domain.common.Summon;
-import com.mutabra.domain.common.SummonImpl;
+import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountImpl;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
 import com.mutabra.domain.game.HeroCardImpl;
 import com.mutabra.domain.game.HeroImpl;
-import com.mutabra.domain.security.Account;
-import com.mutabra.domain.security.AccountImpl;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.domain.security.ChangeSetImpl;
 import com.mutabra.domain.security.Permission;
@@ -72,7 +72,6 @@ public class DomainModule {
 
 		objectifyFactory.register(TranslationImpl.class);
 
-		objectifyFactory.register(AccountImpl.class);
 		objectifyFactory.register(RoleImpl.class);
 		objectifyFactory.register(PermissionImpl.class);
 		objectifyFactory.register(ChangeSetImpl.class);
@@ -81,7 +80,9 @@ public class DomainModule {
 		objectifyFactory.register(RaceImpl.class);
 		objectifyFactory.register(LevelImpl.class);
 		objectifyFactory.register(CardImpl.class);
+		objectifyFactory.register(AbilityImpl.class);
 
+		objectifyFactory.register(AccountImpl.class);
 		objectifyFactory.register(HeroImpl.class);
 		objectifyFactory.register(HeroCardImpl.class);
 
@@ -89,6 +90,7 @@ public class DomainModule {
 		objectifyFactory.register(BattleMemberImpl.class);
 		objectifyFactory.register(BattleCardImpl.class);
 		objectifyFactory.register(BattleSummonImpl.class);
+		objectifyFactory.register(BattleActionImpl.class);
 
 		return objectifyFactory;
 	}
@@ -97,7 +99,6 @@ public class DomainModule {
 	public void contributeEntityRepository(final MappedConfiguration<Class, Class> configuration) {
 		configuration.add(Translation.class, TranslationImpl.class);
 
-		configuration.add(Account.class, AccountImpl.class);
 		configuration.add(Role.class, RoleImpl.class);
 		configuration.add(Permission.class, PermissionImpl.class);
 		configuration.add(ChangeSet.class, ChangeSetImpl.class);
@@ -106,9 +107,9 @@ public class DomainModule {
 		configuration.add(Race.class, RaceImpl.class);
 		configuration.add(Level.class, LevelImpl.class);
 		configuration.add(Card.class, CardImpl.class);
-		configuration.add(Effect.class, EffectImpl.class);
-		configuration.add(Summon.class, SummonImpl.class);
+		configuration.add(Ability.class, AbilityImpl.class);
 
+		configuration.add(Account.class, AccountImpl.class);
 		configuration.add(Hero.class, HeroImpl.class);
 		configuration.add(HeroCard.class, HeroCardImpl.class);
 
@@ -116,6 +117,7 @@ public class DomainModule {
 		configuration.add(BattleMember.class, BattleMemberImpl.class);
 		configuration.add(BattleCard.class, BattleCardImpl.class);
 		configuration.add(BattleSummon.class, BattleSummonImpl.class);
+		configuration.add(BattleAction.class, BattleActionImpl.class);
 	}
 
 	@Contribute(ValueEncoderSource.class)

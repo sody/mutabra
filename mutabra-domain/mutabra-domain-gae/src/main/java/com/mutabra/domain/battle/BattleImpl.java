@@ -16,9 +16,22 @@ import java.util.Set;
 public class BattleImpl extends BaseEntityImpl implements Battle {
 	private int round;
 	private Date startedAt;
+	private BattleState state;
 
 	public Set<BattleMember> getMembers() {
 		return Keys.getChildren(BattleMember.class, BattleMemberImpl.class, this);
+	}
+
+	public Set<BattleAction> getActions() {
+		return Keys.getChildren(BattleAction.class, BattleActionImpl.class, this, "round =", round);
+	}
+
+	public BattleState getState() {
+		return state;
+	}
+
+	public void setState(final BattleState state) {
+		this.state = state;
 	}
 
 	public int getRound() {

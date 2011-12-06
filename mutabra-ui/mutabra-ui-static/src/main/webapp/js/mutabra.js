@@ -67,6 +67,8 @@ T5.extendInitializers({
 
 	field: function(spec) {
 		j$('#' + spec.id).field({
+			x: spec.x,
+			y: spec.y,
 			selected: spec.selected,
 			empty: spec.empty,
 			disabled: spec.disabled,
@@ -77,6 +79,7 @@ T5.extendInitializers({
 
 	card: function(spec) {
 		j$('#' + spec.id).card({
+			url: spec.url,
 			selected: false,
 			descriptionId: spec.id + '_description',
 			massive: spec.massive,

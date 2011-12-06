@@ -1,6 +1,6 @@
 package com.mutabra.web.pages.account;
 
-import com.mutabra.domain.security.Account;
+import com.mutabra.domain.game.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;

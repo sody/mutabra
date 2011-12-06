@@ -1,8 +1,8 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.security.Account;
 import com.mutabra.security.Facebook;
 import com.mutabra.security.FacebookProvider;
 import com.mutabra.security.Google;

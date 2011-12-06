@@ -1,8 +1,8 @@
 package com.mutabra.web.pages.game.hero;
 
 import com.mutabra.domain.common.Race;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.security.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.game.HeroService;

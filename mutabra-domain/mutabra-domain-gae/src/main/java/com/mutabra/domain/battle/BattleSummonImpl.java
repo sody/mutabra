@@ -22,6 +22,7 @@ public class BattleSummonImpl extends BaseEntityImpl implements BattleSummon {
 	@Parent
 	private Key<BattleMemberImpl> owner;
 
+	@Unindexed
 	private Key<HeroCardImpl> card;
 
 	@Unindexed
@@ -31,13 +32,16 @@ public class BattleSummonImpl extends BaseEntityImpl implements BattleSummon {
 	@Unindexed
 	private int health;
 
+	@Unindexed
+	private boolean exhausted;
+
 	public BattleSummonImpl() {
 	}
 
 	public BattleSummonImpl(final BattleMember owner, final HeroCard card) {
 		this.owner = Keys.getKey(owner);
 		this.card = Keys.getKey(card);
-		health = card.getCard().getSummon().getHealth();
+		health = card.getCard().getHealth();
 	}
 
 	public BattleMember getOwner() {
@@ -52,12 +56,24 @@ public class BattleSummonImpl extends BaseEntityImpl implements BattleSummon {
 		return position;
 	}
 
+	public void setPosition(final Position position) {
+		this.position = position;
+	}
+
 	public int getHealth() {
 		return health;
 	}
 
 	public void setHealth(final int health) {
 		this.health = health;
+	}
+
+	public boolean isExhausted() {
+		return exhausted;
+	}
+
+	public void setExhausted(final boolean exhausted) {
+		this.exhausted = exhausted;
 	}
 
 	@Override

@@ -13,7 +13,6 @@ public interface BattleMember extends BaseEntity {
 
 	Battle getBattle();
 
-
 	Hero getHero();
 
 	Set<BattleCard> getCards();
@@ -26,8 +25,17 @@ public interface BattleMember extends BaseEntity {
 
 	Position getPosition();
 
+	void setPosition(Position position);
+
 	int getHealth();
 
 	void setHealth(int health);
 
+	int getMentalPower();
+
+	void setMentalPower(int mentalPower);
+
+	boolean isExhausted();
+
+	void setExhausted(boolean exhausted);
 }

@@ -1,6 +1,6 @@
 package com.mutabra.web.internal;
 
-import com.mutabra.domain.security.Account;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.security.Permission;
 import com.mutabra.domain.security.Role;
 import org.greatage.security.User;

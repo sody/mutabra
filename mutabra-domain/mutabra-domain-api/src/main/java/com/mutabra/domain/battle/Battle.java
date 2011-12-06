@@ -11,7 +11,9 @@ import java.util.Set;
  */
 public interface Battle extends BaseEntity {
 
-	Set<BattleMember> getMembers();
+	BattleState getState();
+
+	void setState(BattleState state);
 
 	int getRound();
 
@@ -20,4 +22,8 @@ public interface Battle extends BaseEntity {
 	Date getStartedAt();
 
 	void setStartedAt(Date startedAt);
+
+	Set<BattleMember> getMembers();
+
+	Set<BattleAction> getActions();
 }

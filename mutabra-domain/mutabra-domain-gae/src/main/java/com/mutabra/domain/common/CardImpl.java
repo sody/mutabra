@@ -8,45 +8,23 @@ import com.mutabra.domain.TranslationType;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import java.util.Set;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @Entity(name = Tables.CARD)
-public class CardImpl extends CodedEntityImpl implements Card {
-
-	private CardType type;
+public class CardImpl extends CastableImpl implements Card {
 
 	private Key<LevelImpl> level;
 
-	private int bloodCost;
-
-	private TargetType targetType;
-
-	@Embedded
-	private EffectImpl effect = new EffectImpl();
-
-	@Embedded
-	private SummonImpl summon = new SummonImpl();
-
 	public CardImpl() {
-		this(null, CardType.UNKNOWN);
+		this(null);
 	}
 
-	public CardImpl(final String code, final CardType type) {
+	public CardImpl(final String code) {
 		super(Tables.CARD, code, TranslationType.DESCRIPTION);
-		this.type = type;
-		if (type == CardType.EFFECT) {
-			effect = new EffectImpl();
-		}
-		if (type == CardType.SUMMON) {
-			summon = new SummonImpl();
-		}
-	}
-
-	public CardType getType() {
-		return type;
 	}
 
 	public Level getLevel() {
@@ -57,27 +35,7 @@ public class CardImpl extends CodedEntityImpl implements Card {
 		this.level = Keys.getKey(level);
 	}
 
-	public int getBloodCost() {
-		return bloodCost;
-	}
-
-	public void setBloodCost(final int bloodCost) {
-		this.bloodCost = bloodCost;
-	}
-
-	public TargetType getTargetType() {
-		return targetType;
-	}
-
-	public void setTargetType(final TargetType targetType) {
-		this.targetType = targetType;
-	}
-
-	public Effect getEffect() {
-		return effect;
-	}
-
-	public Summon getSummon() {
-		return summon;
+	public Set<Ability> getAbilities() {
+		return Keys.getChildren(Ability.class, AbilityImpl.class, this);
 	}
 }

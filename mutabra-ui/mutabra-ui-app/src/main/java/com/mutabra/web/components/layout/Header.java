@@ -1,7 +1,7 @@
 package com.mutabra.web.components.layout;
 
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.security.Account;
 import com.mutabra.web.services.AccountContext;
 import org.apache.tapestry5.ioc.annotations.Inject;
 

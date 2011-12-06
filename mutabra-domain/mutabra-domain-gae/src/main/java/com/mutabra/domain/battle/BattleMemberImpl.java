@@ -23,6 +23,7 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 	@Parent
 	private Key<BattleImpl> battle;
 
+	@Unindexed
 	private Key<HeroImpl> hero;
 
 	@Unindexed
@@ -31,6 +32,12 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 
 	@Unindexed
 	private int health;
+
+	@Unindexed
+	private int mentalPower;
+
+	@Unindexed
+	private boolean exhausted;
 
 	public BattleMemberImpl() {
 	}
@@ -54,11 +61,11 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 	}
 
 	public Set<BattleCard> getDeck() {
-		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this, "inHand =", false);
+		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this, "state =", BattleCardState.DECK);
 	}
 
 	public Set<BattleCard> getHand() {
-		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this, "inHand =", true);
+		return Keys.getChildren(BattleCard.class, BattleCardImpl.class, this, "state =", BattleCardState.HAND);
 	}
 
 	public Set<BattleSummon> getSummons() {
@@ -69,12 +76,32 @@ public class BattleMemberImpl extends BaseEntityImpl implements BattleMember {
 		return position;
 	}
 
+	public void setPosition(final Position position) {
+		this.position = position;
+	}
+
 	public int getHealth() {
 		return health;
 	}
 
 	public void setHealth(final int health) {
 		this.health = health;
+	}
+
+	public int getMentalPower() {
+		return mentalPower;
+	}
+
+	public void setMentalPower(final int mentalPower) {
+		this.mentalPower = mentalPower;
+	}
+
+	public boolean isExhausted() {
+		return exhausted;
+	}
+
+	public void setExhausted(final boolean exhausted) {
+		this.exhausted = exhausted;
 	}
 
 	@Override

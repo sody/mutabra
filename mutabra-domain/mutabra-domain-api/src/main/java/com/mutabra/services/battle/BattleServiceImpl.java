@@ -1,9 +1,12 @@
 package com.mutabra.services.battle;
 
 import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleAction;
 import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCardState;
 import com.mutabra.domain.battle.BattleField;
 import com.mutabra.domain.battle.BattleMember;
+import com.mutabra.domain.battle.BattleState;
 import com.mutabra.domain.battle.BattleSummon;
 import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.game.Hero;
@@ -19,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * @author Ivan Khalopik
@@ -36,47 +40,80 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 
 	private Class<? extends BattleMember> realMemberClass;
 	private Class<? extends BattleCard> realCardClass;
+	private Class<? extends BattleAction> realActionClass;
 
 	public BattleServiceImpl(final EntityRepository repository) {
 		super(repository, Battle.class);
 
 		realMemberClass = repository.create(BattleMember.class).getClass();
 		realCardClass = repository.create(BattleCard.class).getClass();
+		realActionClass = repository.create(BattleAction.class).getClass();
 	}
 
 	@Transactional
-	public Battle createBattle(final Hero hero1, final Hero hero2) {
+	public void startBattle(final Hero hero1, final Hero hero2) {
 		final Battle battle = create();
 		battle.setStartedAt(new Date());
+		battle.setRound(1);
+		battle.setState(BattleState.STARTED);
 		save(battle);
 
-		addMember(battle, hero1, 1, 2);
-		addMember(battle, hero2, 1, 0);
+		addMember(battle, hero1, new Position(1, 2));
+		addMember(battle, hero2, new Position(1, 0));
 
 		hero1.setBattle(battle);
 		hero2.setBattle(battle);
 		repository().save(hero1);
 		repository().save(hero2);
-
-		return battle;
 	}
 
 	@Transactional
-	public Battle startRound(final Battle battle) {
-		if (battle.getRound() == 0) {
-			for (BattleMember member : battle.getMembers()) {
-				final ArrayList<BattleCard> deck = new ArrayList<BattleCard>(member.getDeck());
-				for (int i = 0; i < deck.size() && i < 3; i++) {
-					final BattleCard card = deck.remove(random(deck.size()));
-					card.setInHand(true);
-					repository().save(card);
-				}
+	public void endRound(final Battle battle) {
+		final Set<BattleAction> actions = battle.getActions();
+		for (BattleAction action : actions) {
+			final BattleCard card = action.getCard();
+			if (card != null) {
+				card.setState(BattleCardState.GRAVEYARD);
+				repository().save(card);
 			}
-			battle.setRound(1);
-			save(battle);
+			//todo: process it
 		}
-		//todo: for implementation
-		return null;
+		battle.setRound(battle.getRound() + 1);
+		save(battle);
+		for (BattleMember member : battle.getMembers()) {
+			member.setExhausted(false);
+			repository().save(member);
+			for (BattleSummon summon : member.getSummons()) {
+				summon.setExhausted(false);
+				repository().save(summon);
+			}
+			final ArrayList<BattleCard> deck = new ArrayList<BattleCard>(member.getDeck());
+			if (deck.size() > 0) {
+				final BattleCard card = deck.remove(random(deck.size()));
+				card.setState(BattleCardState.HAND);
+				repository().save(card);
+			}
+		}
+	}
+
+	@Transactional
+	public void registerAction(final BattleCard card, final Position target) {
+		final BattleMember member = card.getOwner();
+		final Battle battle = member.getBattle();
+		final BattleAction action = ReflectionUtils.newInstance(realActionClass, battle);
+		action.setCard(card);
+		action.setTarget(target);
+		repository().save(action);
+
+		member.setExhausted(true);
+		repository().save(member);
+
+		for (BattleMember battleMember : battle.getMembers()) {
+			if (!battleMember.isExhausted()) {
+				return;
+			}
+		}
+		endRound(battle);
 	}
 
 	public List<BattleField> getBattleField(final Hero hero, final Battle battle) {
@@ -103,22 +140,29 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		return new ArrayList<BattleField>(battleField.values());
 	}
 
-	private int random(final int size) {
-		return new Random().nextInt(size);
-	}
-
-	private void addMember(final Battle battle, final Hero hero, final int x, final int y) {
+	private void addMember(final Battle battle, final Hero hero, final Position position) {
 		final BattleMember member = ReflectionUtils.newInstance(realMemberClass, battle, hero);
-		member.getPosition().setX(x);
-		member.getPosition().setY(y);
+		member.setPosition(position);
+		member.setExhausted(false);
 		repository().save(member);
+
+		final List<BattleCard> deck = new ArrayList<BattleCard>();
 		for (HeroCard heroCard : hero.getCards()) {
-			addCard(member, heroCard);
+			final BattleCard card = ReflectionUtils.newInstance(realCardClass, member, heroCard);
+			card.setState(BattleCardState.DECK);
+			deck.add(card);
+		}
+		for (int i = 0; i < deck.size() && i < 3; i++) {
+			final BattleCard card = deck.remove(random(deck.size()));
+			card.setState(BattleCardState.HAND);
+			repository().save(card);
+		}
+		for (BattleCard card : deck) {
+			repository().save(card);
 		}
 	}
 
-	private void addCard(final BattleMember member, final HeroCard heroCard) {
-		final BattleCard card = ReflectionUtils.newInstance(realCardClass, member, heroCard);
-		repository().save(card);
+	private int random(final int size) {
+		return new Random().nextInt(size);
 	}
 }

@@ -5,7 +5,6 @@ import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
-import com.mutabra.domain.security.Account;
 
 import java.util.Date;
 import java.util.Set;

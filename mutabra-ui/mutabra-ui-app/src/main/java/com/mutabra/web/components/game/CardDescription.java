@@ -1,7 +1,7 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.common.Card;
-import com.mutabra.domain.common.CardType;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
@@ -16,7 +16,10 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 
 	@Property
 	@Parameter
-	private Card value;
+	private BattleCard value;
+
+	@Property
+	private Card card;
 
 	private String clientId;
 
@@ -24,16 +27,9 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 		return clientId;
 	}
 
-	public boolean isEffectCard() {
-		return value.getType() == CardType.EFFECT;
-	}
-
-	public boolean isSummonCard() {
-		return value.getType() == CardType.SUMMON;
-	}
-
 	@SetupRender
-	void setupClientId() {
-		clientId = "c_" + value.getCode() + "_description";
+	void setupCard() {
+		card = value.getCard().getCard();
+		clientId = "c_" + card.getCode() + "_description";
 	}
 }

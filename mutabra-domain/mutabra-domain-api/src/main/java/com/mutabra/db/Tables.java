@@ -15,8 +15,7 @@ public interface Tables {
 	String RACE = "RACE";
 	String FACE = "FACE";
 	String CARD = "CARD";
-	String EFFECT = "EFFECT";
-	String SUMMON = "SUMMON";
+	String ABILITY = "ABILITY";
 
 	String HERO = "HERO";
 	String HERO_CARD = "HERO_CARD";
@@ -25,4 +24,5 @@ public interface Tables {
 	String BATTLE_MEMBER = "BATTLE_MEMBER";
 	String BATTLE_CARD = "BATTLE_CARD";
 	String BATTLE_SUMMON = "BATTLE_SUMMON";
+	String BATTLE_ACTION = "BATTLE_ACTION";
 }

@@ -4,7 +4,7 @@ import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
-import com.mutabra.domain.security.Account;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.domain.security.Permission;
 import com.mutabra.domain.security.Role;
@@ -16,8 +16,6 @@ import com.mutabra.services.TranslationService;
 import com.mutabra.services.TranslationServiceImpl;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.battle.BattleServiceImpl;
-import com.mutabra.services.common.CardService;
-import com.mutabra.services.common.CardServiceImpl;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
 import com.mutabra.web.internal.MailServiceImpl;
@@ -44,7 +42,6 @@ public class ServicesModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
-		binder.bind(CardService.class, CardServiceImpl.class);
 		binder.bind(BattleService.class, BattleServiceImpl.class);
 	}
 
@@ -64,10 +61,6 @@ public class ServicesModule {
 		return new CodedEntityServiceImpl<Permission>(repository, Permission.class);
 	}
 
-	public BaseEntityService<Account> buildAccountService() {
-		return new BaseEntityServiceImpl<Account>(repository, Account.class);
-	}
-
 	public BaseEntityService<ChangeSet> buildChangeSetService() {
 		return new BaseEntityServiceImpl<ChangeSet>(repository, ChangeSet.class);
 	}
@@ -82,6 +75,14 @@ public class ServicesModule {
 
 	public CodedEntityService<Race> buildRaceService() {
 		return new CodedEntityServiceImpl<Race>(repository, Race.class);
+	}
+
+	public CodedEntityService<Card> buildCardService() {
+		return new CodedEntityServiceImpl<Card>(repository, Card.class);
+	}
+
+	public BaseEntityService<Account> buildAccountService() {
+		return new BaseEntityServiceImpl<Account>(repository, Account.class);
 	}
 
 	public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService,

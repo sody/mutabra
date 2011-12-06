@@ -15,7 +15,7 @@
 				<t:game.memberdescription value="field.member"/>
 				<t:if test="!field.enemySide">
 					<t:loop source="field.member.hand" value="card">
-						<t:game.carddescription value="card.card.card"/>
+						<t:game.carddescription value="card"/>
 					</t:loop>
 				</t:if>
 			</t:if>
@@ -27,7 +27,7 @@
 				<t:if test="!field.enemySide">
 					<div id="f_${field.position.id}_actions" style="display:none;">
 						<t:loop source="field.member.hand" value="card">
-							<t:game.carddisplay value="card.card.card"/>
+							<t:game.carddisplay value="card"/>
 						</t:loop>
 					</div>
 				</t:if>

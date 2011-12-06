@@ -1,12 +1,12 @@
-package com.mutabra.domain.security;
+package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
-import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.game.HeroImpl;
+import com.mutabra.domain.security.Role;
+import com.mutabra.domain.security.RoleImpl;
 import org.greatage.util.LocaleUtils;
 
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
 package com.mutabra.db;
 
 import com.mutabra.domain.Translations;
-import com.mutabra.domain.common.CardType;
+import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.Cards;
 import com.mutabra.domain.common.Levels;
 import com.mutabra.domain.common.Races;
@@ -75,8 +75,8 @@ public class Release_1_0 extends ChangeLog {
 				.into("code", "locale", "variant", "value")
 				.values(Races.PLUNGER, Translations.DEFAULT, Translations.NAME, "Plunger")
 				.values(Races.PLUNGER, Translations.RUSSIAN, Translations.NAME, "Ныряльщик")
-				.values(Races.PLUNGER, Translations.DEFAULT, Translations.DESCRIPTION, "Plunger is a race that comes from the sunny world where there is nothing except water...")
-				.values(Races.PLUNGER, Translations.RUSSIAN, Translations.DESCRIPTION, "Ныряльщик это гордая раса, происходящая из солнечного мира, где нет ничего, кроме Великого Океана...")
+				.values(Races.PLUNGER, Translations.DEFAULT, Translations.DESCRIPTION, "Plungers is a race that comes from the sunny world where there is nothing except water...")
+				.values(Races.PLUNGER, Translations.RUSSIAN, Translations.DESCRIPTION, "Ныряльщики это гордая раса, происходящая из солнечного мира, где нет ничего, кроме Великого Океана...")
 				.values(Races.FLYER, Translations.DEFAULT, Translations.NAME, "Flyer")
 				.values(Races.FLYER, Translations.RUSSIAN, Translations.NAME, "Летун")
 				.values(Races.FLYER, Translations.DEFAULT, Translations.DESCRIPTION, "Flyers is a race that comes from the world of one mountain...")
@@ -84,9 +84,9 @@ public class Release_1_0 extends ChangeLog {
 
 		begin("2011-11-23/plunger_and_flyer_cards").comment("plunger and flyer cards added");
 		insert(Tables.CARD)
-				.set("type", CardType.SUMMON.name())
+				.set("effectType", EffectType.SUMMON.name())
 				.set("level", select(Tables.LEVEL).unique().where(condition("code").equal(Levels.NEWBIE)))
-				.into("code", "targetType", "bloodCost", "summon.strength", "summon.health")
+				.into("code", "targetType", "bloodCost", "strength", "health")
 				.values(Cards.ELECTRIC_RAY, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 3, 5)
 				.values(Cards.SEAHORSE, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 1, 3)
 				.values(Cards.MERMAID, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 0, 4)
@@ -94,9 +94,9 @@ public class Release_1_0 extends ChangeLog {
 				.values(Cards.CARRION_VULTURE, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 2, 5)
 				.values(Cards.CHIVES, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 0, 1);
 		insert(Tables.CARD)
-				.set("type", CardType.EFFECT.name())
+				.set("effectType", EffectType.EFFECT.name())
 				.set("level", select(Tables.LEVEL).unique().where(condition("code").equal(Levels.NEWBIE)))
-				.into("code", "targetType", "bloodCost", "effect.strength", "effect.duration")
+				.into("code", "targetType", "bloodCost", "strength", "health")
 				.values(Cards.CALM, TargetType.ALL_FRIEND_BUSY.name(), 1, 1, 3)
 				.values(Cards.WAVE, TargetType.SINGLE_ENEMY_BUSY.name(), 2, 4, 1)
 				.values(Cards.WHIRLPOOL,TargetType.SINGLE_ENEMY_EMPTY.name(), 1, 0, 1)
@@ -134,7 +134,6 @@ public class Release_1_0 extends ChangeLog {
 				.values(Cards.STORM, Translations.RUSSIAN, Translations.NAME, "Шторм")
 				.values(Cards.DROP_OF_THE_OCEAN, Translations.DEFAULT, Translations.NAME, "Drop of the Ocean")
 				.values(Cards.DROP_OF_THE_OCEAN, Translations.RUSSIAN, Translations.NAME, "Капля океана")
-
 				.values(Cards.CHAMOIS, Translations.DEFAULT, Translations.NAME, "Chamois")
 				.values(Cards.CHAMOIS, Translations.RUSSIAN, Translations.NAME, "Серна")
 				.values(Cards.CARRION_VULTURE, Translations.DEFAULT, Translations.NAME, "Carrion Vulture")

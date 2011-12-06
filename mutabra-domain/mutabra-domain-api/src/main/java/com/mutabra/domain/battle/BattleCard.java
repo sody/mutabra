@@ -11,10 +11,9 @@ public interface BattleCard extends BaseEntity {
 
 	BattleMember getOwner();
 
-
 	HeroCard getCard();
 
-	boolean isInHand();
+	BattleCardState getState();
 
-	void setInHand(boolean onHand);
+	void setState(BattleCardState state);
 }

@@ -11,12 +11,17 @@ public interface BattleSummon extends BaseEntity {
 
 	BattleMember getOwner();
 
-
 	HeroCard getCard();
 
 	Position getPosition();
 
+	void setPosition(Position position);
+
 	int getHealth();
 
 	void setHealth(int health);
+
+	boolean isExhausted();
+
+	void setExhausted(boolean exhausted);
 }

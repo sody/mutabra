@@ -2,21 +2,15 @@
 			 xmlns:p="tapestry:parameter">
 
 	<div id="${clientId}" style="display:none;">
-		<h4>${value:name}</h4>
+		<h4>${card:name}</h4>
 		<br/>
-		<t:image.cardimage card="value"  width="150" height="150"/>
+		<t:image.cardimage card="card"  width="150" height="150"/>
 		<br/>
-		<t:if test="effectCard">
-			<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.effect.strength}</span>
-		</t:if>
-		<t:if test="summonCard">
-			<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.summon.strength}</span>
-			<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.summon.health}</span>
-		</t:if>
-		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
+		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${card.strength}</span>
+		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${card.health}</span>
+		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${card.bloodCost}</span>
 		<br/>
-
-		<p>${value:description}</p>
+		<p>${card:description}</p>
 	</div>
 
 </t:container>
