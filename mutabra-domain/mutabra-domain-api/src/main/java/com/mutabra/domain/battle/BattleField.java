@@ -1,5 +1,7 @@
 package com.mutabra.domain.battle;
 
+import com.mutabra.domain.common.TargetType;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -55,5 +57,25 @@ public class BattleField {
 
 	public boolean isSelected() {
 		return !enemySide && member != null;
+	}
+
+	@SuppressWarnings({"RedundantIfStatement"})
+	public boolean supports(final TargetType targetType) {
+		if (enemySide && !targetType.supportsEnemySide()) {
+			return false;
+		}
+		if (!enemySide && !targetType.supportsFriendSide()) {
+			return false;
+		}
+		if (member != null && !targetType.supportsHeroPoint()) {
+			return false;
+		}
+		if (summon != null && !targetType.supportsSummonPoint()) {
+			return false;
+		}
+		if (member != null && summon != null && !targetType.supportsEmptyPoint()) {
+			return false;
+		}
+		return true;
 	}
 }

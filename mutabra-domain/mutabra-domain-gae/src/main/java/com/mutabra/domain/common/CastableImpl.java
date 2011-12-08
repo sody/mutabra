@@ -1,5 +1,6 @@
 package com.mutabra.domain.common;
 
+import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.TranslationType;
 
@@ -9,14 +10,23 @@ import com.mutabra.domain.TranslationType;
  */
 public class CastableImpl extends CodedEntityImpl implements Castable {
 
+	@Unindexed
+	private String scriptClass;
+
 	private EffectType effectType;
 	private TargetType targetType;
 	private int bloodCost;
 	private int strength;
 	private int health;
 
-	protected CastableImpl(final String type, final String code, final TranslationType translationType) {
+	protected CastableImpl(final String type, final String code, final TranslationType translationType,
+						   final String scriptClass) {
 		super(type, code, translationType);
+		this.scriptClass = scriptClass;
+	}
+
+	public String getScriptClass() {
+		return scriptClass;
 	}
 
 	public EffectType getEffectType() {

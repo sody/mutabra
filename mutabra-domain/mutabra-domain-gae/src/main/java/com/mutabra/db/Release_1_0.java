@@ -1,12 +1,14 @@
 package com.mutabra.db;
 
 import com.mutabra.domain.Translations;
-import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.Cards;
+import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.Levels;
 import com.mutabra.domain.common.Races;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.security.Roles;
+import com.mutabra.scripts.AttackScript;
+import com.mutabra.scripts.FakeScript;
 import org.greatage.db.ChangeLog;
 
 /**
@@ -84,6 +86,7 @@ public class Release_1_0 extends ChangeLog {
 
 		begin("2011-11-23/plunger_and_flyer_cards").comment("plunger and flyer cards added");
 		insert(Tables.CARD)
+				.set("scriptClass", FakeScript.class.getName())
 				.set("effectType", EffectType.SUMMON.name())
 				.set("level", select(Tables.LEVEL).unique().where(condition("code").equal(Levels.NEWBIE)))
 				.into("code", "targetType", "bloodCost", "strength", "health")
@@ -94,23 +97,22 @@ public class Release_1_0 extends ChangeLog {
 				.values(Cards.CARRION_VULTURE, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 2, 5)
 				.values(Cards.CHIVES, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 0, 1);
 		insert(Tables.CARD)
-				.set("effectType", EffectType.EFFECT.name())
 				.set("level", select(Tables.LEVEL).unique().where(condition("code").equal(Levels.NEWBIE)))
-				.into("code", "targetType", "bloodCost", "strength", "health")
-				.values(Cards.CALM, TargetType.ALL_FRIEND_BUSY.name(), 1, 1, 3)
-				.values(Cards.WAVE, TargetType.SINGLE_ENEMY_BUSY.name(), 2, 4, 1)
-				.values(Cards.WHIRLPOOL,TargetType.SINGLE_ENEMY_EMPTY.name(), 1, 0, 1)
-				.values(Cards.TRIDENT_BLOW, TargetType.SINGLE_ENEMY_BUSY.name(), 2, 6, 1)
-				.values(Cards.SWIM_AWAY, TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 1)
-				.values(Cards.STORM, TargetType.ALL_FRIEND_BUSY.name(), 2, 0, 1)
-				.values(Cards.DROP_OF_THE_OCEAN, TargetType.SINGLE_ENEMY_BUSY.name(), 2, 0, 2)
-				.values(Cards.SCRAMBLE, TargetType.SINGLE_FRIEND_HERO.name(), 1, 0, 1)
-				.values(Cards.SCRATCH, TargetType.SINGLE_ENEMY_HERO.name(), 1, 5, 1)
-				.values(Cards.SNOWBALL, TargetType.ALL_ENEMY_BUSY.name(), 1, 2, 1)
-				.values(Cards.THROW, TargetType.SINGLE_ENEMY_BUSY.name(), 1, 3, 1)
-				.values(Cards.FALLING_BOULDER, TargetType.SINGLE_ENEMY_BUSY.name(), 1, 7, 1)
-				.values(Cards.ECHO_MOUNTAIN, TargetType.ALL_BUSY.name(), 2, 4, 1)
-				.values(Cards.DECOMPRESSION, TargetType.ALL_BUSY.name(), 1, 1, 2);
+				.into("code", "scriptClass", "targetType", "effectType", "bloodCost", "strength", "health")
+				.values(Cards.CALM, FakeScript.class.getName(), TargetType.ALL_FRIEND_BUSY.name(), EffectType.RANGED_ATTACK_ENHANCEMENT.name(), 1, 1, 3)
+				.values(Cards.WAVE, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.MAGIC_ATTACK.name(), 2, 4, 1) //todo: EffectType.MAGIC_ATTACK_CANCELLATION
+				.values(Cards.WHIRLPOOL, FakeScript.class.getName(), TargetType.SINGLE_ENEMY_EMPTY.name(), EffectType.SUMMON_CANCELLATION.name(), 1, 0, 1)
+				.values(Cards.TRIDENT_BLOW, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.MELEE_ATTACK.name(), 2, 6, 1)
+				.values(Cards.SWIM_AWAY, FakeScript.class.getName(), TargetType.SINGLE_FRIEND_EMPTY.name(), EffectType.MOVE.name(), 0, 0, 1)
+				.values(Cards.STORM, FakeScript.class.getName(), TargetType.ALL_FRIEND_BUSY.name(), EffectType.DAMAGE_ABSORPTION.name(), 2, 0, 1) //todo: analyze effect type
+				.values(Cards.DROP_OF_THE_OCEAN, FakeScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.ABILITY_CANCELLATION.name(), 2, 0, 2)
+				.values(Cards.SCRAMBLE, FakeScript.class.getName(), TargetType.SINGLE_FRIEND_HERO.name(), EffectType.UNKNOWN.name(), 1, 0, 1) //todo: add effect
+				.values(Cards.SCRATCH, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_HERO.name(), EffectType.MELEE_ATTACK.name(), 1, 5, 1) //todo: add effect
+				.values(Cards.SNOWBALL, AttackScript.class.getName(), TargetType.ALL_ENEMY_BUSY.name(), EffectType.MAGIC_ATTACK.name(), 1, 2, 1)
+				.values(Cards.THROW, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.RANGED_ATTACK.name(), 1, 3, 1)
+				.values(Cards.FALLING_BOULDER, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.MAGIC_ATTACK.name(), 1, 7, 1)
+				.values(Cards.ECHO_MOUNTAIN, FakeScript.class.getName(), TargetType.ALL_BUSY.name(), EffectType.MOVE_PUNISHMENT.name(), 2, 4, 1)
+				.values(Cards.DECOMPRESSION, FakeScript.class.getName(), TargetType.ALL_BUSY.name(), EffectType.DAMAGE_ABSORPTION.name(), 1, -1, 2);
 		insert(Tables.TRANSLATION)
 				.set("type", Tables.CARD)
 				.into("code", "locale", "variant", "value")

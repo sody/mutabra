@@ -8,6 +8,11 @@ import com.mutabra.domain.game.Account;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.domain.security.Permission;
 import com.mutabra.domain.security.Role;
+import com.mutabra.scripts.AttackScript;
+import com.mutabra.scripts.EffectScript;
+import com.mutabra.scripts.FakeScript;
+import com.mutabra.scripts.ScriptExecutor;
+import com.mutabra.scripts.ScriptExecutorImpl;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.CodedEntityService;
@@ -19,9 +24,11 @@ import com.mutabra.services.battle.BattleServiceImpl;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
 import com.mutabra.web.internal.MailServiceImpl;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Advise;
+import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.plastic.MethodAdvice;
@@ -43,6 +50,7 @@ public class ServicesModule {
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
 		binder.bind(BattleService.class, BattleServiceImpl.class);
+		binder.bind(ScriptExecutor.class, ScriptExecutorImpl.class);
 	}
 
 	public ServicesModule(final EntityRepository repository) {
@@ -108,5 +116,11 @@ public class ServicesModule {
 				receiver.adviseMethod(method, advice);
 			}
 		}
+	}
+
+	@Contribute(ScriptExecutor.class)
+	public void contributeScriptExecutor(final Configuration<Class<? extends EffectScript>> configuration) {
+		configuration.add(FakeScript.class);
+		configuration.add(AttackScript.class);
 	}
 }

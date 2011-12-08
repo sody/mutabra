@@ -8,6 +8,8 @@ import com.mutabra.domain.CodedEntity;
  */
 public interface Castable extends CodedEntity {
 
+	String getScriptClass();
+
 	EffectType getEffectType();
 
 	void setEffectType(EffectType effectType);

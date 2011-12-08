@@ -9,8 +9,11 @@ import com.mutabra.domain.battle.BattleMember;
 import com.mutabra.domain.battle.BattleState;
 import com.mutabra.domain.battle.BattleSummon;
 import com.mutabra.domain.battle.Position;
+import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
+import com.mutabra.scripts.ScriptExecutor;
 import com.mutabra.services.BaseEntityServiceImpl;
 import org.greatage.domain.EntityRepository;
 import org.greatage.domain.annotations.Transactional;
@@ -38,12 +41,14 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			new Position(2, 1),
 	};
 
-	private Class<? extends BattleMember> realMemberClass;
-	private Class<? extends BattleCard> realCardClass;
-	private Class<? extends BattleAction> realActionClass;
+	private final ScriptExecutor scriptExecutor;
+	private final Class<? extends BattleMember> realMemberClass;
+	private final Class<? extends BattleCard> realCardClass;
+	private final Class<? extends BattleAction> realActionClass;
 
-	public BattleServiceImpl(final EntityRepository repository) {
+	public BattleServiceImpl(final EntityRepository repository, final ScriptExecutor scriptExecutor) {
 		super(repository, Battle.class);
+		this.scriptExecutor = scriptExecutor;
 
 		realMemberClass = repository.create(BattleMember.class).getClass();
 		realCardClass = repository.create(BattleCard.class).getClass();
@@ -73,8 +78,17 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		for (BattleAction action : actions) {
 			final BattleCard card = action.getCard();
 			if (card != null) {
+				final Card realCard = card.getCard().getCard();
+				final List<BattleField> battleField = getBattleField(card.getOwner().getHero(), battle);
+				final List<?> targets = getTargets(realCard.getTargetType(), battleField, action.getTarget());
+				scriptExecutor.executeScript(realCard, targets);
 				card.setState(BattleCardState.GRAVEYARD);
 				repository().save(card);
+				for (Object target : targets) {
+					if (target instanceof BattleMember) {
+						repository().save((BattleMember) target);
+					}
+				}
 			}
 			//todo: process it
 		}
@@ -142,6 +156,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 
 	private void addMember(final Battle battle, final Hero hero, final Position position) {
 		final BattleMember member = ReflectionUtils.newInstance(realMemberClass, battle, hero);
+		member.setMentalPower(10);
 		member.setPosition(position);
 		member.setExhausted(false);
 		repository().save(member);
@@ -164,5 +179,36 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 
 	private int random(final int size) {
 		return new Random().nextInt(size);
+	}
+
+	private List<?> getTargets(final TargetType targetType, final List<BattleField> battleFields, final Position position) {
+		final ArrayList<Object> targets = new ArrayList<Object>();
+		if (targetType.isMassive()) {
+			for (BattleField field : battleFields) {
+				if (field.supports(targetType)) {
+					if (field.hasHero()) {
+						targets.add(field.getMember());
+					} else if (field.hasSummon()) {
+						targets.add(field.getSummon());
+					} else {
+						targets.add(field.getPosition());
+					}
+				}
+			}
+		} else {
+			for (BattleField field : battleFields) {
+				if (field.supports(targetType) && field.getPosition().equals(position)) {
+					if (field.hasHero()) {
+						targets.add(field.getMember());
+					} else if (field.hasSummon()) {
+						targets.add(field.getSummon());
+					} else {
+						targets.add(field.getPosition());
+					}
+					break;
+				}
+			}
+		}
+		return targets;
 	}
 }

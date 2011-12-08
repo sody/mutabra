@@ -2,11 +2,10 @@ package com.mutabra.domain.common;
 
 import com.googlecode.objectify.Key;
 import com.mutabra.db.Tables;
-import com.mutabra.domain.CodedEntityImpl;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.TranslationType;
+import com.mutabra.scripts.FakeScript;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.util.Set;
 
@@ -24,7 +23,7 @@ public class CardImpl extends CastableImpl implements Card {
 	}
 
 	public CardImpl(final String code) {
-		super(Tables.CARD, code, TranslationType.DESCRIPTION);
+		super(Tables.CARD, code, TranslationType.DESCRIPTION, FakeScript.class.getName());
 	}
 
 	public Level getLevel() {
