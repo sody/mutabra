@@ -3,6 +3,7 @@ package com.mutabra.domain.battle;
 import com.mutabra.domain.BaseEntity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ public interface Battle extends BaseEntity {
 
 	void setStartedAt(Date startedAt);
 
-	Set<BattleMember> getMembers();
+	List<BattleHero> getHeroes();
 
-	Set<BattleAction> getActions();
+	List<BattleEffect> getEffects();
 }

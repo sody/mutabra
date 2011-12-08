@@ -15,6 +15,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.annotations.Allow;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,7 +35,7 @@ public class SwitchHero extends AbstractPage {
 	private AccountContext accountContext;
 
 	@Property
-	private Set<Hero> source;
+	private List<Hero> source;
 
 	@Property
 	private Hero value;

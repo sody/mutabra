@@ -1,10 +1,8 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.BaseEntity;
 import com.mutabra.domain.DomainModule;
 import com.mutabra.web.internal.AccountManagerImpl;
 import com.mutabra.web.internal.CustomValidationDecoratorFactory;
-import com.mutabra.web.internal.EntityEncoderFactory;
 import com.mutabra.web.internal.I18nPropertyConduitSource;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.TranslatorImpl;
@@ -28,14 +26,11 @@ import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.ValidationDecoratorFactory;
-import org.apache.tapestry5.services.ValueEncoderFactory;
-import org.apache.tapestry5.services.ValueEncoderSource;
 import org.apache.tapestry5.services.javascript.ExtensibleJavaScriptStack;
 import org.apache.tapestry5.services.javascript.JavaScriptStack;
 import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
-import org.greatage.domain.EntityRepository;
 import org.greatage.domain.SessionCallback;
 import org.greatage.domain.TransactionExecutor;
 

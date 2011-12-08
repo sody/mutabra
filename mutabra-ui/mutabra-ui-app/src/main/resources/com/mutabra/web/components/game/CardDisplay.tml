@@ -2,11 +2,11 @@
 			 xmlns:p="tapestry:parameter">
 
 	<div id="${clientId}" class="card ui-widget ui-widget-content ui-corner-all">
-		<t:image.cardimage card="card"/>
+		<t:image.cardimage card="value"/>
 		<br/>
-		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${card.strength}</span>
-		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${card.health}</span>
-		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${card.bloodCost}</span>
+		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.power}</span>
+		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.health}</span>
+		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
 		<br/>
 	</div>
 

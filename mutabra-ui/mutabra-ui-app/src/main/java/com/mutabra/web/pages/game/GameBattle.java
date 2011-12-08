@@ -1,8 +1,9 @@
 package com.mutabra.web.pages.game;
 
 import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.Position;
+import com.mutabra.domain.common.Card;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.Authorities;
@@ -40,10 +41,11 @@ public class GameBattle extends AbstractPage {
 	}
 
 	@OnEvent("registerActions")
-	Object registerActions(final BattleCard card,
+	Object registerActions(final BattleHero hero,
+						   final Card card,
 						   final @RequestParameter(value = "x") int x,
 						   final @RequestParameter(value = "y") int y) {
-		battleService.registerAction(card, new Position(x, y));
+		battleService.registerAction(battle, hero, card, new Position(x, y));
 		return null;
 	}
 }

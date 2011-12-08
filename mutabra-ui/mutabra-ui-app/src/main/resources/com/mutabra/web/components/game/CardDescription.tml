@@ -2,15 +2,15 @@
 			 xmlns:p="tapestry:parameter">
 
 	<div id="${clientId}" style="display:none;">
-		<h4>${card:name}</h4>
+		<h4>${value:name}</h4>
 		<br/>
-		<t:image.cardimage card="card"  width="150" height="150"/>
+		<t:image.cardimage card="value"  width="150" height="150"/>
 		<br/>
-		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${card.strength}</span>
-		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${card.health}</span>
-		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${card.bloodCost}</span>
+		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.power}</span>
+		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.health}</span>
+		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
 		<br/>
-		<p>${card:description}</p>
+		<p>${value:description}</p>
 	</div>
 
 </t:container>

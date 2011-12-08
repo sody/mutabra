@@ -1,6 +1,6 @@
 package com.mutabra.domain.common;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -8,9 +8,5 @@ import java.util.Set;
  */
 public interface Card extends Castable {
 
-	Level getLevel();
-
-	void setLevel(Level level);
-
-	Set<Ability> getAbilities();
+	List<Ability> getAbilities();
 }

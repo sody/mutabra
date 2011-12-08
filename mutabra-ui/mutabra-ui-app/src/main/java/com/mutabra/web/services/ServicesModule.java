@@ -6,8 +6,6 @@ import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.security.ChangeSet;
-import com.mutabra.domain.security.Permission;
-import com.mutabra.domain.security.Role;
 import com.mutabra.scripts.AttackScript;
 import com.mutabra.scripts.EffectScript;
 import com.mutabra.scripts.FakeScript;
@@ -59,14 +57,6 @@ public class ServicesModule {
 
 	public MailService buildMailService(final @Symbol("mail.admin-address") String adminAddress) {
 		return new MailServiceImpl(adminAddress);
-	}
-
-	public CodedEntityService<Role> buildRoleService() {
-		return new CodedEntityServiceImpl<Role>(repository, Role.class);
-	}
-
-	public CodedEntityService<Permission> buildPermissionService() {
-		return new CodedEntityServiceImpl<Permission>(repository, Permission.class);
 	}
 
 	public BaseEntityService<ChangeSet> buildChangeSetService() {

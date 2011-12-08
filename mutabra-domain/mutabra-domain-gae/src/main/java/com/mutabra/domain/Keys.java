@@ -6,8 +6,8 @@ import com.googlecode.objectify.Objectify;
 import org.greatage.domain.SessionCallback;
 import org.greatage.domain.TransactionExecutor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -35,27 +35,18 @@ public class Keys {
 		});
 	}
 
-	public static <T, V extends T> Set<T> getInstances(final Class<T> entityClass, final Set<Key<V>> keys) {
-		return keys == null ? null : executor.execute(new SessionCallback<Set<T>, Objectify>() {
-			public Set<T> doInSession(final Objectify session) throws Exception {
-				return new HashSet<T>(session.get(keys).values());
+	public static <T, V extends T> List<T> getInstances(final Class<T> entityClass, final List<Key<V>> keys) {
+		return keys == null ? null : executor.execute(new SessionCallback<List<T>, Objectify>() {
+			public List<T> doInSession(final Objectify session) throws Exception {
+				return new ArrayList<T>(session.get(keys).values());
 			}
 		});
 	}
 
-	public static <T, V extends T, P> Set<T> getChildren(final Class<T> entityClass, final Class<V> realClass, final P parent) {
-		return executor.execute(new SessionCallback<Set<T>, Objectify>() {
-			public Set<T> doInSession(final Objectify session) throws Exception {
-				return new HashSet<T>(session.query(realClass).ancestor(parent).list());
-			}
-		});
-	}
-
-	public static <T, V extends T, P> Set<T> getChildren(final Class<T> entityClass, final Class<V> realClass, final P parent,
-														 final String condition, final Object value) {
-		return executor.execute(new SessionCallback<Set<T>, Objectify>() {
-			public Set<T> doInSession(final Objectify session) throws Exception {
-				return new HashSet<T>(session.query(realClass).ancestor(parent).filter(condition, value).list());
+	public static <T, V extends T, P> List<T> getChildren(final Class<T> entityClass, final Class<V> realClass, final P parent) {
+		return executor.execute(new SessionCallback<List<T>, Objectify>() {
+			public List<T> doInSession(final Objectify session) throws Exception {
+				return new ArrayList<T>(session.query(realClass).ancestor(parent).list());
 			}
 		});
 	}

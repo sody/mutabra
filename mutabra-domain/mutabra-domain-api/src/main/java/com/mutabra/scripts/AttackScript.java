@@ -1,7 +1,7 @@
 package com.mutabra.scripts;
 
-import com.mutabra.domain.battle.BattleMember;
-import com.mutabra.domain.common.Castable;
+import com.mutabra.domain.battle.BattleUnit;
+import com.mutabra.domain.common.Effect;
 
 /**
  * @author Ivan Khalopik
@@ -9,12 +9,13 @@ import com.mutabra.domain.common.Castable;
  */
 public class AttackScript implements EffectScript {
 
-	public void execute(final Castable castable, final Object target) {
-		if (target != null && target instanceof BattleMember) {
-			final int strength = castable.getStrength();
-			final BattleMember member = (BattleMember) target;
-			member.setHealth(member.getHealth() - strength);
+	public void execute(final BattleUnit caster, final Effect effect, final Object target) {
+		if (target != null) {
+			final int power = effect.getPower();
+			if (target instanceof BattleUnit) {
+				final BattleUnit unit = (BattleUnit) target;
+				unit.setHealth(unit.getHealth() - power);
+			}
 		}
 	}
-
 }

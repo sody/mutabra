@@ -3,7 +3,6 @@ package com.mutabra.security;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.CodedEntityService;
 import com.mutabra.web.internal.Authorities;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.security.AbstractAuthenticationProvider;
@@ -26,15 +25,12 @@ import static com.mutabra.services.Mappers.account$;
  */
 public class FacebookProvider extends AbstractAuthenticationProvider<User, FacebookToken> {
 	private final BaseEntityService<Account> accountService;
-	private final CodedEntityService<Role> roleService;
 	private final SecretEncoder secretEncoder;
 
 	public FacebookProvider(final @InjectService("accountService") BaseEntityService<Account> accountService,
-							final @InjectService("roleService") CodedEntityService<Role> roleService,
 							final SecretEncoder secretEncoder) {
 		super(User.class, FacebookToken.class);
 		this.accountService = accountService;
-		this.roleService = roleService;
 		this.secretEncoder = secretEncoder;
 	}
 
@@ -75,7 +71,7 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		//todo: account.setGender(...);
 
 		final Set<Role> roles = new HashSet<Role>();
-		roles.add(roleService.get("user"));
+		roles.add(Role.USER);
 		account.setRoles(roles);
 
 		return authenticate(account);

@@ -8,26 +8,26 @@ import com.mutabra.domain.common.TargetType;
  */
 public class BattleField {
 	private final Position position;
-	private final BattleSummon summon;
-	private final BattleMember member;
+	private final BattleCreature creature;
+	private final BattleHero hero;
 	private final boolean enemySide;
 
 	public BattleField(final Position position, final boolean enemySide) {
 		this(position, null, null, enemySide);
 	}
 
-	public BattleField(final BattleMember member, final boolean enemySide) {
-		this(member.getPosition(), null, member, enemySide);
+	public BattleField(final BattleHero hero, final boolean enemySide) {
+		this(hero.getPosition(), null, hero, enemySide);
 	}
 
-	public BattleField(final BattleSummon summon, final boolean enemySide) {
-		this(summon.getPosition(), summon, null, enemySide);
+	public BattleField(final BattleCreature creature, final boolean enemySide) {
+		this(creature.getPosition(), creature, null, enemySide);
 	}
 
-	private BattleField(final Position position, final BattleSummon summon, final BattleMember member, final boolean enemySide) {
+	private BattleField(final Position position, final BattleCreature creature, final BattleHero hero, final boolean enemySide) {
 		this.position = position;
-		this.summon = summon;
-		this.member = member;
+		this.creature = creature;
+		this.hero = hero;
 		this.enemySide = enemySide;
 	}
 
@@ -35,20 +35,20 @@ public class BattleField {
 		return position;
 	}
 
-	public BattleSummon getSummon() {
-		return summon;
+	public BattleCreature getCreature() {
+		return creature;
 	}
 
-	public BattleMember getMember() {
-		return member;
+	public BattleHero getHero() {
+		return hero;
 	}
 
 	public boolean hasHero() {
-		return member != null;
+		return hero != null;
 	}
 
 	public boolean hasSummon() {
-		return summon != null;
+		return creature != null;
 	}
 
 	public boolean isEnemySide() {
@@ -56,24 +56,24 @@ public class BattleField {
 	}
 
 	public boolean isSelected() {
-		return !enemySide && member != null;
+		return !enemySide && hero != null;
 	}
 
 	@SuppressWarnings({"RedundantIfStatement"})
 	public boolean supports(final TargetType targetType) {
-		if (enemySide && !targetType.supportsEnemySide()) {
+		if (enemySide && !targetType.supportsEnemy()) {
 			return false;
 		}
-		if (!enemySide && !targetType.supportsFriendSide()) {
+		if (!enemySide && !targetType.supportsFriend()) {
 			return false;
 		}
-		if (member != null && !targetType.supportsHeroPoint()) {
+		if (hero != null && !targetType.supportsHero()) {
 			return false;
 		}
-		if (summon != null && !targetType.supportsSummonPoint()) {
+		if (creature != null && !targetType.supportsSummon()) {
 			return false;
 		}
-		if (member != null && summon != null && !targetType.supportsEmptyPoint()) {
+		if (hero != null && creature != null && !targetType.supportsEmpty()) {
 			return false;
 		}
 		return true;

@@ -6,13 +6,13 @@ import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.security.Role;
-import com.mutabra.domain.security.RoleImpl;
 import org.greatage.util.LocaleUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
@@ -63,7 +63,7 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	private Key<HeroImpl> hero;
 
-	private Set<Key<RoleImpl>> roles = new HashSet<Key<RoleImpl>>();
+	private Set<Role> roles = new HashSet<Role>();
 
 	public String getEmail() {
 		return email;
@@ -198,18 +198,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	}
 
 	public Set<Role> getRoles() {
-		return Keys.getInstances(Role.class, roles);
+		return roles;
 	}
 
 	public void setRoles(final Set<Role> roles) {
-		this.roles = new HashSet<Key<RoleImpl>>();
-		for (Role role : roles) {
-			final Key<RoleImpl> key = Keys.getKey(role);
-			this.roles.add(key);
-		}
+		this.roles = roles;
 	}
 
-	public Set<Hero> getHeroes() {
+	public List<Hero> getHeroes() {
 		return Keys.getChildren(Hero.class, HeroImpl.class, this);
 	}
 }

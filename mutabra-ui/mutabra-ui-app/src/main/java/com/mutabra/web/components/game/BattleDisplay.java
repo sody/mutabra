@@ -1,9 +1,9 @@
 package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.battle.BattleField;
-import com.mutabra.domain.battle.BattleMember;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.common.Card;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.services.AccountContext;
@@ -29,10 +29,10 @@ public class BattleDisplay {
 	private Battle battle;
 
 	@Property
-	private BattleMember you;
+	private BattleHero you;
 
 	@Property
-	private BattleMember opponent;
+	private BattleHero opponent;
 
 	@Property
 	private BattleField field;
@@ -41,7 +41,7 @@ public class BattleDisplay {
 	private List<BattleField> fields;
 
 	@Property
-	private BattleCard card;
+	private Card card;
 
 	@SetupRender
 	void setupBattleField() {
@@ -52,9 +52,9 @@ public class BattleDisplay {
 		for (BattleField battleField : fields) {
 			if (battleField.hasHero()) {
 				if (battleField.isEnemySide()) {
-					opponent = battleField.getMember();
+					opponent = battleField.getHero();
 				} else {
-					you = battleField.getMember();
+					you = battleField.getHero();
 				}
 			}
 		}

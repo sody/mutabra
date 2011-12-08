@@ -24,9 +24,9 @@ public enum TargetType implements OrderedEnum {
 	SINGLE_EMPTY(false, true, true, true, false, false),
 
 	/**
-	 * Any busy(with hero or summoned creature) single point on the battle field.
+	 * Any single point with unit(hero or summoned creature) on the battle field.
 	 */
-	SINGLE_BUSY(false, true, true, false, true, true),
+	SINGLE_UNIT(false, true, true, false, true, true),
 
 	/**
 	 * Any single point with hero on the battle field.
@@ -36,7 +36,7 @@ public enum TargetType implements OrderedEnum {
 	/**
 	 * Any single point with summoned creature on the battle field.
 	 */
-	SINGLE_SUMMON(false, true, true, false, false, true),
+	SINGLE_CREATURE(false, true, true, false, false, true),
 
 	/**
 	 * Any single point on the enemy-side of the battle field.
@@ -49,9 +49,9 @@ public enum TargetType implements OrderedEnum {
 	SINGLE_ENEMY_EMPTY(false, true, false, true, false, false),
 
 	/**
-	 * Any busy(with hero or summoned creature) single point on the enemy-side of the battle field.
+	 * Any single point with unit(hero or summoned creature) on the enemy-side of the battle field.
 	 */
-	SINGLE_ENEMY_BUSY(false, true, false, false, true, true),
+	SINGLE_ENEMY_UNIT(false, true, false, false, true, true),
 
 	/**
 	 * Any single point with hero on the enemy-side of the battle field.
@@ -61,32 +61,32 @@ public enum TargetType implements OrderedEnum {
 	/**
 	 * Any single point with summoned creature on the enemy-side of the battle field.
 	 */
-	SINGLE_ENEMY_SUMMON(false, true, false, false, false, true),
+	SINGLE_ENEMY_CREATURE(false, true, false, false, false, true),
 
 	/**
-	 * Any single point on the your-side of the battle field.
+	 * Any single point on the friend-side of the battle field.
 	 */
 	SINGLE_FRIEND(false, false, true, true, true, true),
 
 	/**
-	 * Any empty single point on the your-side of the battle field.
+	 * Any empty single point on the friend-side of the battle field.
 	 */
 	SINGLE_FRIEND_EMPTY(false, false, true, true, false, false),
 
 	/**
-	 * Any busy(with hero or summoned creature) single point on the your-side of the battle field.
+	 * Any single point with unit(hero or summoned creature) on the friend-side of the battle field.
 	 */
-	SINGLE_FRIEND_BUSY(false, false, true, false, true, true),
+	SINGLE_FRIEND_UNIT(false, false, true, false, true, true),
 
 	/**
-	 * Any single point with hero on the your-side of the battle field.
+	 * Any single point with hero on the friend-side of the battle field.
 	 */
 	SINGLE_FRIEND_HERO(false, false, true, false, true, false),
 
 	/**
-	 * Any single point with summoned creature on the your-side of the battle field.
+	 * Any single point with summoned creature on the friend-side of the battle field.
 	 */
-	SINGLE_FRIEND_SUMMON(false, false, true, false, false, true),
+	SINGLE_FRIEND_CREATURE(false, false, true, false, false, true),
 
 
 	/**
@@ -100,9 +100,9 @@ public enum TargetType implements OrderedEnum {
 	ALL_EMPTY(true, true, true, true, false, false),
 
 	/**
-	 * All busy(with hero or summoned creature) points on the battle field.
+	 * All points with unit(hero or summoned creature) on the battle field.
 	 */
-	ALL_BUSY(true, true, true, false, true, true),
+	ALL_UNIT(true, true, true, false, true, true),
 
 	/**
 	 * All points with hero on the battle field.
@@ -112,7 +112,7 @@ public enum TargetType implements OrderedEnum {
 	/**
 	 * All points with summoned creature on the battle field.
 	 */
-	ALL_SUMMON(true, true, true, false, false, true),
+	ALL_CREATURE(true, true, true, false, false, true),
 
 	/**
 	 * All points on the enemy-side of the battle field.
@@ -125,9 +125,9 @@ public enum TargetType implements OrderedEnum {
 	ALL_ENEMY_EMPTY(true, true, false, true, false, false),
 
 	/**
-	 * All busy(with hero or summoned creature) points on the enemy-side of the battle field.
+	 * All points with unit(hero or summoned creature) on the enemy-side of the battle field.
 	 */
-	ALL_ENEMY_BUSY(true, true, false, false, true, true),
+	ALL_ENEMY_UNIT(true, true, false, false, true, true),
 
 	/**
 	 * All points with hero on the enemy-side of the battle field.
@@ -137,63 +137,63 @@ public enum TargetType implements OrderedEnum {
 	/**
 	 * ALL points with summoned creature on the enemy-side of the battle field.
 	 */
-	ALL_ENEMY_SUMMON(true, true, false, false, false, true),
+	ALL_ENEMY_CREATURE(true, true, false, false, false, true),
 
 	/**
-	 * All points on the your-side of the battle field.
+	 * All points on the friend-side of the battle field.
 	 */
 	ALL_FRIEND(true, false, true, true, true, true),
 
 	/**
-	 * All empty points on the your-side of the battle field.
+	 * All empty points on the friend-side of the battle field.
 	 */
 	ALL_FRIEND_EMPTY(true, false, true, true, false, false),
 
 	/**
-	 * All busy(with hero or summoned creature) points on the your-side of the battle field.
+	 * All points with unit(hero or summoned creature) on the friend-side of the battle field.
 	 */
-	ALL_FRIEND_BUSY(true, false, true, false, true, true),
+	ALL_FRIEND_UNIT(true, false, true, false, true, true),
 
 	/**
-	 * All points with hero on the your-side of the battle field.
+	 * All points with hero on the friend-side of the battle field.
 	 */
 	ALL_FRIEND_HERO(true, false, true, false, true, false),
 
 	/**
-	 * All points with summoned creature on the your-side of the battle field.
+	 * All points with summoned creature on the friend-side of the battle field.
 	 */
-	ALL_FRIEND_SUMMON(true, false, true, false, false, true);
+	ALL_FRIEND_CREATURE(true, false, true, false, false, true);
 
 	private final int order;
 
 	private final boolean massive;
 
-	private final boolean supportsEnemySide;
-	private final boolean supportsFriendSide;
+	private final boolean supportsEnemy;
+	private final boolean supportsFriend;
 
-	private final boolean supportsEmptyPoint;
-	private final boolean supportsHeroPoint;
-	private final boolean supportsSummonPoint;
+	private final boolean supportsEmpty;
+	private final boolean supportsHero;
+	private final boolean supportsCreature;
 
 	TargetType(final boolean massive,
-			   final boolean supportsEnemySide,
-			   final boolean supportsFriendSide,
-			   final boolean supportsEmptyPoint,
-			   final boolean supportsHeroPoint,
-			   final boolean supportsSummonPoint) {
+			   final boolean supportsEnemy,
+			   final boolean supportsFriend,
+			   final boolean supportsEmpty,
+			   final boolean supportsHero,
+			   final boolean supportsCreature) {
 		this.massive = massive;
-		this.supportsEnemySide = supportsEnemySide;
-		this.supportsFriendSide = supportsFriendSide;
-		this.supportsEmptyPoint = supportsEmptyPoint;
-		this.supportsHeroPoint = supportsHeroPoint;
-		this.supportsSummonPoint = supportsSummonPoint;
+		this.supportsEnemy = supportsEnemy;
+		this.supportsFriend = supportsFriend;
+		this.supportsEmpty = supportsEmpty;
+		this.supportsHero = supportsHero;
+		this.supportsCreature = supportsCreature;
 
 		order = (massive ? 32 : 0) +
-				(supportsEnemySide ? 16 : 0) +
-				(supportsFriendSide ? 8 : 0) +
-				(supportsEmptyPoint ? 4 : 0) +
-				(supportsHeroPoint ? 2 : 0) +
-				(supportsSummonPoint ? 1 : 0);
+				(supportsEnemy ? 16 : 0) +
+				(supportsFriend ? 8 : 0) +
+				(supportsEmpty ? 4 : 0) +
+				(supportsHero ? 2 : 0) +
+				(supportsCreature ? 1 : 0);
 	}
 
 	public int getOrder() {
@@ -204,23 +204,23 @@ public enum TargetType implements OrderedEnum {
 		return massive;
 	}
 
-	public boolean supportsEnemySide() {
-		return supportsEnemySide;
+	public boolean supportsEnemy() {
+		return supportsEnemy;
 	}
 
-	public boolean supportsFriendSide() {
-		return supportsFriendSide;
+	public boolean supportsFriend() {
+		return supportsFriend;
 	}
 
-	public boolean supportsEmptyPoint() {
-		return supportsEmptyPoint;
+	public boolean supportsEmpty() {
+		return supportsEmpty;
 	}
 
-	public boolean supportsHeroPoint() {
-		return supportsHeroPoint;
+	public boolean supportsHero() {
+		return supportsHero;
 	}
 
-	public boolean supportsSummonPoint() {
-		return supportsSummonPoint;
+	public boolean supportsSummon() {
+		return supportsCreature;
 	}
 }

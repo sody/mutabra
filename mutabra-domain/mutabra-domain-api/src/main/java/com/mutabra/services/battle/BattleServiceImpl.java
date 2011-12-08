@@ -1,15 +1,16 @@
 package com.mutabra.services.battle;
 
 import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleAction;
-import com.mutabra.domain.battle.BattleCard;
-import com.mutabra.domain.battle.BattleCardState;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleEffect;
 import com.mutabra.domain.battle.BattleField;
-import com.mutabra.domain.battle.BattleMember;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.BattleState;
-import com.mutabra.domain.battle.BattleSummon;
+import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.Castable;
+import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
@@ -20,12 +21,11 @@ import org.greatage.domain.annotations.Transactional;
 import org.greatage.util.ReflectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
 /**
  * @author Ivan Khalopik
@@ -42,17 +42,15 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 	};
 
 	private final ScriptExecutor scriptExecutor;
-	private final Class<? extends BattleMember> realMemberClass;
-	private final Class<? extends BattleCard> realCardClass;
-	private final Class<? extends BattleAction> realActionClass;
+	private final Class<? extends BattleHero> realHeroClass;
+	private final Class<? extends BattleEffect> realEffectClass;
 
 	public BattleServiceImpl(final EntityRepository repository, final ScriptExecutor scriptExecutor) {
 		super(repository, Battle.class);
 		this.scriptExecutor = scriptExecutor;
 
-		realMemberClass = repository.create(BattleMember.class).getClass();
-		realCardClass = repository.create(BattleCard.class).getClass();
-		realActionClass = repository.create(BattleAction.class).getClass();
+		realHeroClass = repository.create(BattleHero.class).getClass();
+		realEffectClass = repository.create(BattleEffect.class).getClass();
 	}
 
 	@Transactional
@@ -72,75 +70,101 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		repository().save(hero2);
 	}
 
-	@Transactional
-	public void endRound(final Battle battle) {
-		final Set<BattleAction> actions = battle.getActions();
-		for (BattleAction action : actions) {
-			final BattleCard card = action.getCard();
-			if (card != null) {
-				final Card realCard = card.getCard().getCard();
-				final List<BattleField> battleField = getBattleField(card.getOwner().getHero(), battle);
-				final List<?> targets = getTargets(realCard.getTargetType(), battleField, action.getTarget());
-				scriptExecutor.executeScript(realCard, targets);
-				card.setState(BattleCardState.GRAVEYARD);
-				repository().save(card);
-				for (Object target : targets) {
-					if (target instanceof BattleMember) {
-						repository().save((BattleMember) target);
-					}
-				}
-			}
-			//todo: process it
+	public void registerAction(final Battle battle,
+							   final BattleUnit caster,
+							   final Castable castable,
+							   final Position target) {
+
+		for (Effect effect : castable.getEffects()) {
+			final BattleEffect battleEffect = ReflectionUtils.newInstance(realEffectClass, battle, effect);
+			battleEffect.setCaster(caster);
+			battleEffect.setTarget(target);
+			battleEffect.setDuration(effect.getDuration());
+			repository().save(battleEffect);
 		}
-		battle.setRound(battle.getRound() + 1);
-		save(battle);
-		for (BattleMember member : battle.getMembers()) {
-			member.setExhausted(false);
-			repository().save(member);
-			for (BattleSummon summon : member.getSummons()) {
-				summon.setExhausted(false);
-				repository().save(summon);
-			}
-			final ArrayList<BattleCard> deck = new ArrayList<BattleCard>(member.getDeck());
-			if (deck.size() > 0) {
-				final BattleCard card = deck.remove(random(deck.size()));
-				card.setState(BattleCardState.HAND);
-				repository().save(card);
-			}
+		caster.setHealth(caster.getHealth() - castable.getBloodCost());
+		caster.setExhausted(true);
+		if (caster instanceof BattleHero) {
+			final BattleHero hero = (BattleHero) caster;
+			final List<Card> hand = hero.getHand();
+			final List<Card> graveyard = hero.getGraveyard();
+			hand.remove((Card) castable);
+			graveyard.add((Card) castable);
+			hero.setHand(hand);
+			hero.setGraveyard(graveyard);
 		}
-	}
+		repository().save(caster);
 
-	@Transactional
-	public void registerAction(final BattleCard card, final Position target) {
-		final BattleMember member = card.getOwner();
-		final Battle battle = member.getBattle();
-		final BattleAction action = ReflectionUtils.newInstance(realActionClass, battle);
-		action.setCard(card);
-		action.setTarget(target);
-		repository().save(action);
-
-		member.setExhausted(true);
-		repository().save(member);
-
-		for (BattleMember battleMember : battle.getMembers()) {
+		for (BattleHero battleMember : battle.getHeroes()) {
 			if (!battleMember.isExhausted()) {
 				return;
+			}
+			for (BattleCreature battleCreature : battleMember.getCreatures()) {
+				if (!battleCreature.isExhausted()) {
+					return;
+				}
 			}
 		}
 		endRound(battle);
 	}
 
+	@Transactional
+	public void endRound(final Battle battle) {
+		final List<BattleEffect> effects = battle.getEffects();
+		for (BattleEffect battleEffect : effects) {
+			final BattleUnit caster = battleEffect.getCaster();
+			final Effect effect = battleEffect.getEffect();
+			final BattleHero hero = caster instanceof BattleCreature
+					? ((BattleCreature) caster).getOwner()
+					: (BattleHero) caster;
+
+			final List<BattleField> battleField = getBattleField(hero.getHero(), battle);
+			final List<?> targets = getTargets(effect.getTargetType(), battleField, battleEffect.getTarget());
+			scriptExecutor.executeScript(caster, effect, targets);
+			battleEffect.setDuration(battleEffect.getDuration() - 1);
+			if (battleEffect.getDuration() <= 0) {
+				repository().delete(battleEffect);
+			} else {
+				repository().save(battleEffect);
+			}
+			for (Object target : targets) {
+				if (target instanceof BattleUnit) {
+					repository().save((BattleUnit) target);
+				}
+			}
+		}
+
+		battle.setRound(battle.getRound() + 1);
+		save(battle);
+		for (BattleHero hero : battle.getHeroes()) {
+			hero.setExhausted(false);
+			hero.setMentalPower(hero.getMentalPower() + 1);
+			final List<Card> deck = hero.getDeck();
+			final List<Card> hand = hero.getHand();
+			if (deck.size() > 0) {
+				hand.add(deck.remove(0));
+			}
+			hero.setDeck(deck);
+			hero.setHand(hand);
+			repository().save(hero);
+			for (BattleCreature creature : hero.getCreatures()) {
+				creature.setExhausted(false);
+				repository().save(creature);
+			}
+		}
+	}
+
 	public List<BattleField> getBattleField(final Hero hero, final Battle battle) {
 		final Map<Position, BattleField> battleField = new HashMap<Position, BattleField>();
 		boolean upSide = false;
-		for (BattleMember member : battle.getMembers()) {
+		for (BattleHero member : battle.getHeroes()) {
 			final boolean enemy = !member.getHero().equals(hero);
 			if (!enemy && member.getPosition().getY() == 0) {
 				upSide = true;
 			}
 			battleField.put(member.getPosition(), new BattleField(member, enemy));
-			for (BattleSummon summon : member.getSummons()) {
-				battleField.put(summon.getPosition(), new BattleField(summon, enemy));
+			for (BattleCreature creature : member.getCreatures()) {
+				battleField.put(creature.getPosition(), new BattleField(creature, enemy));
 			}
 		}
 
@@ -155,30 +179,26 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 	}
 
 	private void addMember(final Battle battle, final Hero hero, final Position position) {
-		final BattleMember member = ReflectionUtils.newInstance(realMemberClass, battle, hero);
-		member.setMentalPower(10);
-		member.setPosition(position);
-		member.setExhausted(false);
-		repository().save(member);
+		final BattleHero battleHero = ReflectionUtils.newInstance(realHeroClass, battle, hero);
+		battleHero.setHealth(hero.getHealth());
+		battleHero.setMentalPower(10);
+		battleHero.setPosition(position);
+		battleHero.setExhausted(false);
 
-		final List<BattleCard> deck = new ArrayList<BattleCard>();
-		for (HeroCard heroCard : hero.getCards()) {
-			final BattleCard card = ReflectionUtils.newInstance(realCardClass, member, heroCard);
-			card.setState(BattleCardState.DECK);
-			deck.add(card);
+		final List<Card> deck = new ArrayList<Card>();
+		for (HeroCard card : hero.getCards()) {
+			deck.add(card.getCard());
 		}
+		Collections.shuffle(deck);
+
+		final List<Card> hand = new ArrayList<Card>();
 		for (int i = 0; i < deck.size() && i < 3; i++) {
-			final BattleCard card = deck.remove(random(deck.size()));
-			card.setState(BattleCardState.HAND);
-			repository().save(card);
+			hand.add(deck.remove(0));
 		}
-		for (BattleCard card : deck) {
-			repository().save(card);
-		}
-	}
 
-	private int random(final int size) {
-		return new Random().nextInt(size);
+		battleHero.setDeck(deck);
+		battleHero.setHand(hand);
+		repository().save(battleHero);
 	}
 
 	private List<?> getTargets(final TargetType targetType, final List<BattleField> battleFields, final Position position) {
@@ -187,9 +207,9 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			for (BattleField field : battleFields) {
 				if (field.supports(targetType)) {
 					if (field.hasHero()) {
-						targets.add(field.getMember());
+						targets.add(field.getHero());
 					} else if (field.hasSummon()) {
-						targets.add(field.getSummon());
+						targets.add(field.getCreature());
 					} else {
 						targets.add(field.getPosition());
 					}
@@ -199,9 +219,9 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			for (BattleField field : battleFields) {
 				if (field.supports(targetType) && field.getPosition().equals(position)) {
 					if (field.hasHero()) {
-						targets.add(field.getMember());
+						targets.add(field.getHero());
 					} else if (field.hasSummon()) {
-						targets.add(field.getSummon());
+						targets.add(field.getCreature());
 					} else {
 						targets.add(field.getPosition());
 					}

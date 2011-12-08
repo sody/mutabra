@@ -11,10 +11,10 @@
 
 	<div id="battle-description" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
-			<t:if test="field.member">
-				<t:game.memberdescription value="field.member"/>
+			<t:if test="field.hero">
+				<t:game.herodescription value="field.hero"/>
 				<t:if test="!field.enemySide">
-					<t:loop source="field.member.hand" value="card">
+					<t:loop source="field.hero.hand" value="card">
 						<t:game.carddescription value="card"/>
 					</t:loop>
 				</t:if>
@@ -23,11 +23,11 @@
 	</div>
 	<div id="battle-actions" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
-			<t:if test="field.member">
+			<t:if test="field.hero">
 				<t:if test="!field.enemySide">
 					<div id="f_${field.position.id}_actions" style="display:none;">
-						<t:loop source="field.member.hand" value="card">
-							<t:game.carddisplay value="card"/>
+						<t:loop source="field.hero.hand" value="card">
+							<t:game.carddisplay value="card" hero="field.hero"/>
 						</t:loop>
 					</div>
 				</t:if>

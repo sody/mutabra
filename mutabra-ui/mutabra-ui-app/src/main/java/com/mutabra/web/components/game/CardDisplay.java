@@ -1,6 +1,6 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
@@ -21,10 +21,11 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 
 	@Property
 	@Parameter
-	private BattleCard value;
+	private BattleHero hero;
 
 	@Property
-	private Card card;
+	@Parameter
+	private Card value;
 
 	@Inject
 	private JavaScriptSupport support;
@@ -37,21 +38,20 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 
 	@SetupRender
 	void setupCard() {
-		card = value.getCard().getCard();
-		clientId = "c_" + card.getCode();
+		clientId = "c_" + value.getCode();
 	}
 
 	@AfterRender
 	void renderScript() {
-		final TargetType targetType = card.getTargetType();
+		final TargetType targetType = value.getTargetType();
 		support.addInitializerCall("card", new JSONObject()
 				.put("id", getClientId())
-				.put("url", getResources().createEventLink("registerActions", value).toAbsoluteURI())
+				.put("url", getResources().createEventLink("registerActions", hero, value).toAbsoluteURI())
 				.put("massive", targetType.isMassive())
-				.put("supports_enemy_side", targetType.supportsEnemySide())
-				.put("supports_friend_side", targetType.supportsFriendSide())
-				.put("supports_empty_point", targetType.supportsEmptyPoint())
-				.put("supports_hero_point", targetType.supportsHeroPoint())
-				.put("supports_summon_point", targetType.supportsSummonPoint()));
+				.put("supports_enemy_side", targetType.supportsEnemy())
+				.put("supports_friend_side", targetType.supportsFriend())
+				.put("supports_empty_point", targetType.supportsEmpty())
+				.put("supports_hero_point", targetType.supportsHero())
+				.put("supports_summon_point", targetType.supportsSummon()));
 	}
 }

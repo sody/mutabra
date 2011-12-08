@@ -1,17 +1,12 @@
 package com.mutabra.domain.battle;
 
 import com.mutabra.domain.BaseEntity;
-import com.mutabra.domain.game.HeroCard;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public interface BattleSummon extends BaseEntity {
-
-	BattleMember getOwner();
-
-	HeroCard getCard();
+public interface BattleUnit extends BaseEntity {
 
 	Position getPosition();
 

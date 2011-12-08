@@ -1,9 +1,7 @@
 package com.mutabra.web.pages.admin;
 
 import com.mutabra.domain.game.Account;
-import com.mutabra.domain.security.Role;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.CodedEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.AccountDialog;
 import com.mutabra.web.internal.Authorities;
@@ -23,9 +21,6 @@ public class Accounts extends AbstractPage {
 
 	@InjectService("accountService")
 	private BaseEntityService<Account> accountService;
-
-	@InjectService("roleService")
-	private CodedEntityService<Role> roleService;
 
 	@InjectComponent
 	private AccountDialog entityDialog;

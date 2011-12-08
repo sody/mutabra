@@ -1,6 +1,7 @@
 package com.mutabra.scripts;
 
-import com.mutabra.domain.common.Castable;
+import com.mutabra.domain.battle.BattleUnit;
+import com.mutabra.domain.common.Effect;
 
 /**
  * @author Ivan Khalopik
@@ -8,5 +9,5 @@ import com.mutabra.domain.common.Castable;
  */
 public interface EffectScript {
 
-	void execute(Castable castable, Object target);
+	void execute(BattleUnit caster, Effect effect, Object target);
 }

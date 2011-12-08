@@ -5,6 +5,7 @@ import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.security.Role;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
@@ -83,5 +84,5 @@ public interface Account extends BaseEntity {
 
 	void setHero(Hero hero);
 
-	Set<Hero> getHeroes();
+	List<Hero> getHeroes();
 }

@@ -1,6 +1,7 @@
 package com.mutabra.scripts;
 
-import com.mutabra.domain.common.Castable;
+import com.mutabra.domain.battle.BattleUnit;
+import com.mutabra.domain.common.Effect;
 
 import java.util.List;
 
@@ -10,6 +11,6 @@ import java.util.List;
  */
 public interface ScriptExecutor {
 
-	void executeScript(Castable castable, List<?> targets);
+	void executeScript(BattleUnit caster, Effect effect, List<?> targets);
 
 }

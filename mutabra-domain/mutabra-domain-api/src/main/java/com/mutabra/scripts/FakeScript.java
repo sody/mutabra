@@ -1,6 +1,7 @@
 package com.mutabra.scripts;
 
-import com.mutabra.domain.common.Castable;
+import com.mutabra.domain.battle.BattleUnit;
+import com.mutabra.domain.common.Effect;
 
 /**
  * @author Ivan Khalopik
@@ -8,8 +9,7 @@ import com.mutabra.domain.common.Castable;
  */
 public class FakeScript implements EffectScript {
 
-	public void execute(final Castable castable, final Object target) {
+	public void execute(final BattleUnit caster, final Effect effect, final Object target) {
 		//do nothing
 	}
-
 }

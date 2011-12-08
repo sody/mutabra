@@ -1,6 +1,6 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.battle.BattleMember;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
@@ -11,11 +11,11 @@ import org.apache.tapestry5.annotations.SetupRender;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class MemberDescription extends AbstractComponent implements ClientElement {
+public class HeroDescription extends AbstractComponent implements ClientElement {
 
 	@Property
 	@Parameter(required = true, allowNull = false)
-	private BattleMember value;
+	private BattleHero value;
 
 	private String clientId;
 

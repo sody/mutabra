@@ -17,7 +17,7 @@ import com.mutabra.domain.common.RaceImpl;
 
 import javax.persistence.Entity;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -105,7 +105,7 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 		this.health = health;
 	}
 
-	public Set<HeroCard> getCards() {
+	public List<HeroCard> getCards() {
 		return Keys.getChildren(HeroCard.class, HeroCardImpl.class, this);
 	}
 

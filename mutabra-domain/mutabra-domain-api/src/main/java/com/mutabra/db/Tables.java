@@ -16,6 +16,7 @@ public interface Tables {
 	String FACE = "FACE";
 	String CARD = "CARD";
 	String ABILITY = "ABILITY";
+	String EFFECT = "EFFECT";
 
 	String HERO = "HERO";
 	String HERO_CARD = "HERO_CARD";

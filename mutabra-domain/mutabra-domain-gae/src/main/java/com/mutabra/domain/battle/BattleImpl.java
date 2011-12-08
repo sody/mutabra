@@ -6,7 +6,7 @@ import com.mutabra.domain.Keys;
 
 import javax.persistence.Entity;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -17,14 +17,6 @@ public class BattleImpl extends BaseEntityImpl implements Battle {
 	private int round;
 	private Date startedAt;
 	private BattleState state;
-
-	public Set<BattleMember> getMembers() {
-		return Keys.getChildren(BattleMember.class, BattleMemberImpl.class, this);
-	}
-
-	public Set<BattleAction> getActions() {
-		return Keys.getChildren(BattleAction.class, BattleActionImpl.class, this, "round =", round);
-	}
 
 	public BattleState getState() {
 		return state;
@@ -48,5 +40,13 @@ public class BattleImpl extends BaseEntityImpl implements Battle {
 
 	public void setStartedAt(final Date startedAt) {
 		this.startedAt = startedAt;
+	}
+
+	public List<BattleHero> getHeroes() {
+		return Keys.getChildren(BattleHero.class, BattleHeroImpl.class, this);
+	}
+
+	public List<BattleEffect> getEffects() {
+		return Keys.getChildren(BattleEffect.class, BattleEffectImpl.class, this);
 	}
 }

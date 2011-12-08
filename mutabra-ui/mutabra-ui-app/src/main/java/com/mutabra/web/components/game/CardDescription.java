@@ -1,6 +1,5 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.common.Card;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
@@ -16,10 +15,7 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 
 	@Property
 	@Parameter
-	private BattleCard value;
-
-	@Property
-	private Card card;
+	private Card value;
 
 	private String clientId;
 
@@ -29,7 +25,6 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 
 	@SetupRender
 	void setupCard() {
-		card = value.getCard().getCard();
-		clientId = "c_" + card.getCode() + "_description";
+		clientId = "c_" + value.getCode() + "_description";
 	}
 }

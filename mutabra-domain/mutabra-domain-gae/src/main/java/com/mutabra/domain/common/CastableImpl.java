@@ -1,8 +1,10 @@
 package com.mutabra.domain.common;
 
-import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.domain.CodedEntityImpl;
+import com.mutabra.domain.Keys;
 import com.mutabra.domain.TranslationType;
+
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -10,31 +12,14 @@ import com.mutabra.domain.TranslationType;
  */
 public class CastableImpl extends CodedEntityImpl implements Castable {
 
-	@Unindexed
-	private String scriptClass;
-
-	private EffectType effectType;
 	private TargetType targetType;
 	private int bloodCost;
-	private int strength;
+	private int power;
+	private int duration;
 	private int health;
 
-	protected CastableImpl(final String type, final String code, final TranslationType translationType,
-						   final String scriptClass) {
+	protected CastableImpl(final String type, final String code, final TranslationType translationType) {
 		super(type, code, translationType);
-		this.scriptClass = scriptClass;
-	}
-
-	public String getScriptClass() {
-		return scriptClass;
-	}
-
-	public EffectType getEffectType() {
-		return effectType;
-	}
-
-	public void setEffectType(final EffectType effectType) {
-		this.effectType = effectType;
 	}
 
 	public TargetType getTargetType() {
@@ -53,12 +38,20 @@ public class CastableImpl extends CodedEntityImpl implements Castable {
 		this.bloodCost = bloodCost;
 	}
 
-	public int getStrength() {
-		return strength;
+	public int getPower() {
+		return power;
 	}
 
-	public void setStrength(final int strength) {
-		this.strength = strength;
+	public void setPower(final int power) {
+		this.power = power;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(final int duration) {
+		this.duration = duration;
 	}
 
 	public int getHealth() {
@@ -67,5 +60,9 @@ public class CastableImpl extends CodedEntityImpl implements Castable {
 
 	public void setHealth(final int health) {
 		this.health = health;
+	}
+
+	public List<Effect> getEffects() {
+		return Keys.getChildren(Effect.class, EffectImpl.class, this);
 	}
 }

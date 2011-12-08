@@ -1,7 +1,6 @@
 package com.mutabra.web.internal;
 
 import com.mutabra.domain.game.Account;
-import com.mutabra.domain.security.Permission;
 import com.mutabra.domain.security.Role;
 import org.greatage.security.User;
 import org.greatage.util.StringUtils;
@@ -53,10 +52,7 @@ public abstract class Authorities implements org.greatage.security.AuthorityCons
 	private static List<String> authorities(final Account account) {
 		final List<String> authorities = new ArrayList<String>();
 		for (Role role : account.getRoles()) {
-			authorities.add(ROLE_PREFIX + role.getCode().toUpperCase());
-			for (Permission permission : role.getPermissions()) {
-				authorities.add(PERMISSION_PREFIX + permission.getCode().toUpperCase());
-			}
+			authorities.add(ROLE_PREFIX + role.getTranslationCode().toUpperCase());
 		}
 		authorities.add(STATUS_AUTHENTICATED);
 		return authorities;

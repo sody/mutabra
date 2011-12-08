@@ -5,7 +5,6 @@ import com.googlecode.objectify.annotation.Parent;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.Keys;
 import com.mutabra.domain.TranslationType;
-import com.mutabra.scripts.FakeScript;
 
 import javax.persistence.Entity;
 
@@ -24,7 +23,7 @@ public class AbilityImpl extends CastableImpl implements Ability {
 	}
 
 	public AbilityImpl(final Card card, final String code) {
-		super(Tables.ABILITY, code, TranslationType.DESCRIPTION, FakeScript.class.getName());
+		super(Tables.ABILITY, code, TranslationType.DESCRIPTION);
 		this.card = Keys.getKey(card);
 	}
 

@@ -7,6 +7,7 @@ import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -41,7 +42,7 @@ public interface Hero extends BaseEntity {
 
 	void setHealth(int health);
 
-	Set<HeroCard> getCards();
+	List<HeroCard> getCards();
 
 	Battle getBattle();
 

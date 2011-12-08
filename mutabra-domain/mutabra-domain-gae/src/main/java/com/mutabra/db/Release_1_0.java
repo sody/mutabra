@@ -2,14 +2,14 @@ package com.mutabra.db;
 
 import com.mutabra.domain.Translations;
 import com.mutabra.domain.common.Cards;
-import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.Levels;
 import com.mutabra.domain.common.Races;
 import com.mutabra.domain.common.TargetType;
-import com.mutabra.domain.security.Roles;
-import com.mutabra.scripts.AttackScript;
-import com.mutabra.scripts.FakeScript;
+import com.mutabra.domain.security.Role;
 import org.greatage.db.ChangeLog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Ivan Khalopik
@@ -24,27 +24,23 @@ public class Release_1_0 extends ChangeLog {
 		author("sody");
 
 		begin("2011-10-11/roles").comment("roles data");
-		insert(Tables.ROLE)
-				.into("code")
-				.values(Roles.ADMIN)
-				.values(Roles.USER);
 		insert(Tables.TRANSLATION)
 				.set("type", Tables.ROLE)
 				.into("code", "locale", "variant", "value")
-				.values(Roles.ADMIN, Translations.DEFAULT, Translations.NAME, "Administrator")
-				.values(Roles.ADMIN, Translations.RUSSIAN, Translations.NAME, "Администратор")
-				.values(Roles.USER, Translations.DEFAULT, Translations.NAME, "User")
-				.values(Roles.USER, Translations.RUSSIAN, Translations.NAME, "Пользователь");
+				.values(Role.ADMIN.getTranslationCode(), Translations.DEFAULT, Translations.NAME, "Administrator")
+				.values(Role.ADMIN.getTranslationCode(), Translations.RUSSIAN, Translations.NAME, "Администратор")
+				.values(Role.USER.getTranslationCode(), Translations.DEFAULT, Translations.NAME, "User")
+				.values(Role.USER.getTranslationCode(), Translations.RUSSIAN, Translations.NAME, "Пользователь");
 
 		begin("2011-10-11/admin_account").comment("admin account added");
 		insert(Tables.ACCOUNT)
-				.set("roles", select(Tables.ROLE).where(condition("code").in(Roles.ADMIN, Roles.USER)))
+				.set("roles", new ArrayList<String>(Arrays.asList(Role.ADMIN.name(), Role.USER.name())))
 				.into("email", "password", "name")
 				.values("admin@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "admin");
 
 		begin("2011-10-11/test_accounts").comment("test accounts added");
 		insert(Tables.ACCOUNT)
-				.set("roles", select(Tables.ROLE).where(condition("code").equal(Roles.USER)))
+				.set("roles", new ArrayList<String>(Arrays.asList(Role.USER.name())))
 				.into("email", "password", "name")
 				.values("user1@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "sody")
 				.values("user2@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "hermes")
@@ -86,33 +82,33 @@ public class Release_1_0 extends ChangeLog {
 
 		begin("2011-11-23/plunger_and_flyer_cards").comment("plunger and flyer cards added");
 		insert(Tables.CARD)
-				.set("scriptClass", FakeScript.class.getName())
-				.set("effectType", EffectType.SUMMON.name())
-				.set("level", select(Tables.LEVEL).unique().where(condition("code").equal(Levels.NEWBIE)))
-				.into("code", "targetType", "bloodCost", "strength", "health")
-				.values(Cards.ELECTRIC_RAY, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 3, 5)
-				.values(Cards.SEAHORSE, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 1, 3)
-				.values(Cards.MERMAID, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 0, 4)
-				.values(Cards.CHAMOIS, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 2, 6)
-				.values(Cards.CARRION_VULTURE, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 2, 5)
-				.values(Cards.CHIVES, TargetType.SINGLE_FRIEND_EMPTY.name(), 2, 0, 1);
+				.set("duration", 1)
+				.set("targetType", TargetType.SINGLE_FRIEND_EMPTY.name())
+				.into("code", "bloodCost", "power", "health")
+				.values(Cards.ELECTRIC_RAY, 2, 3, 5)
+				.values(Cards.SEAHORSE, 2, 1, 3)
+				.values(Cards.MERMAID, 2, 0, 4)
+				.values(Cards.CHAMOIS, 2, 2, 6)
+				.values(Cards.CARRION_VULTURE, 2, 2, 5)
+				.values(Cards.CHIVES, 2, 0, 1);
+		//todo: add effects
 		insert(Tables.CARD)
-				.set("level", select(Tables.LEVEL).unique().where(condition("code").equal(Levels.NEWBIE)))
-				.into("code", "scriptClass", "targetType", "effectType", "bloodCost", "strength", "health")
-				.values(Cards.CALM, FakeScript.class.getName(), TargetType.ALL_FRIEND_BUSY.name(), EffectType.RANGED_ATTACK_ENHANCEMENT.name(), 1, 1, 3)
-				.values(Cards.WAVE, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.MAGIC_ATTACK.name(), 2, 4, 1) //todo: EffectType.MAGIC_ATTACK_CANCELLATION
-				.values(Cards.WHIRLPOOL, FakeScript.class.getName(), TargetType.SINGLE_ENEMY_EMPTY.name(), EffectType.SUMMON_CANCELLATION.name(), 1, 0, 1)
-				.values(Cards.TRIDENT_BLOW, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.MELEE_ATTACK.name(), 2, 6, 1)
-				.values(Cards.SWIM_AWAY, FakeScript.class.getName(), TargetType.SINGLE_FRIEND_EMPTY.name(), EffectType.MOVE.name(), 0, 0, 1)
-				.values(Cards.STORM, FakeScript.class.getName(), TargetType.ALL_FRIEND_BUSY.name(), EffectType.DAMAGE_ABSORPTION.name(), 2, 0, 1) //todo: analyze effect type
-				.values(Cards.DROP_OF_THE_OCEAN, FakeScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.ABILITY_CANCELLATION.name(), 2, 0, 2)
-				.values(Cards.SCRAMBLE, FakeScript.class.getName(), TargetType.SINGLE_FRIEND_HERO.name(), EffectType.UNKNOWN.name(), 1, 0, 1) //todo: add effect
-				.values(Cards.SCRATCH, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_HERO.name(), EffectType.MELEE_ATTACK.name(), 1, 5, 1) //todo: add effect
-				.values(Cards.SNOWBALL, AttackScript.class.getName(), TargetType.ALL_ENEMY_BUSY.name(), EffectType.MAGIC_ATTACK.name(), 1, 2, 1)
-				.values(Cards.THROW, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.RANGED_ATTACK.name(), 1, 3, 1)
-				.values(Cards.FALLING_BOULDER, AttackScript.class.getName(), TargetType.SINGLE_ENEMY_BUSY.name(), EffectType.MAGIC_ATTACK.name(), 1, 7, 1)
-				.values(Cards.ECHO_MOUNTAIN, FakeScript.class.getName(), TargetType.ALL_BUSY.name(), EffectType.MOVE_PUNISHMENT.name(), 2, 4, 1)
-				.values(Cards.DECOMPRESSION, FakeScript.class.getName(), TargetType.ALL_BUSY.name(), EffectType.DAMAGE_ABSORPTION.name(), 1, -1, 2);
+				.set("health", 0)
+				.into("code", "targetType", "bloodCost", "power", "durability")
+				.values(Cards.CALM, TargetType.ALL_FRIEND_UNIT.name(), 1, 1, 3)
+				.values(Cards.WAVE, TargetType.SINGLE_ENEMY_UNIT.name(), 2, 4, 1)
+				.values(Cards.WHIRLPOOL, TargetType.SINGLE_ENEMY_EMPTY.name(), 1, 0, 1)
+				.values(Cards.TRIDENT_BLOW, TargetType.SINGLE_ENEMY_UNIT.name(), 2, 6, 1)
+				.values(Cards.SWIM_AWAY, TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 1)
+				.values(Cards.STORM, TargetType.ALL_FRIEND_UNIT.name(), 2, 0, 1)
+				.values(Cards.DROP_OF_THE_OCEAN, TargetType.SINGLE_ENEMY_UNIT.name(), 2, 0, 2)
+				.values(Cards.SCRAMBLE, TargetType.SINGLE_FRIEND_HERO.name(), 1, 0, 1)
+				.values(Cards.SCRATCH, TargetType.SINGLE_ENEMY_HERO.name(), 1, 5, 1)
+				.values(Cards.SNOWBALL, TargetType.ALL_ENEMY_UNIT.name(), 1, 2, 1)
+				.values(Cards.THROW, TargetType.SINGLE_ENEMY_UNIT.name(), 1, 3, 1)
+				.values(Cards.FALLING_BOULDER, TargetType.SINGLE_ENEMY_UNIT.name(), 1, 7, 1)
+				.values(Cards.ECHO_MOUNTAIN, TargetType.ALL_UNIT.name(), 2, 4, 1)
+				.values(Cards.DECOMPRESSION, TargetType.ALL_UNIT.name(), 1, -1, 2);
 		insert(Tables.TRANSLATION)
 				.set("type", Tables.CARD)
 				.into("code", "locale", "variant", "value")
