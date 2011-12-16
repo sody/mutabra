@@ -32,6 +32,10 @@ public class EffectImpl extends BaseEntityImpl implements Effect {
 		this.castable = Keys.getKey(castable);
 	}
 
+	public Castable getCastable() {
+		return Keys.getInstance(castable);
+	}
+
 	public String getScriptClass() {
 		return scriptClass;
 	}

@@ -24,7 +24,7 @@ public class SummonScript implements EffectScript {
 
 		for (BattleField field : context.getTargets()) {
 			if (!field.hasUnit()) {
-				final BattleCreature creature = ReflectionUtils.newInstance(realCreatureClass, caster, effect);
+				final BattleCreature creature = ReflectionUtils.newInstance(realCreatureClass, caster, effect.getCastable());
 				creature.setHealth(effect.getHealth());
 				creature.setPosition(field.getPosition());
 				creature.setExhausted(true);

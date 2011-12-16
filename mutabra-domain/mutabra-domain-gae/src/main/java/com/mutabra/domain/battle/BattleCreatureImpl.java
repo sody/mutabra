@@ -5,8 +5,8 @@ import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.Keys;
-import com.mutabra.domain.common.Effect;
-import com.mutabra.domain.common.EffectImpl;
+import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.CardImpl;
 
 import javax.persistence.Entity;
 
@@ -21,22 +21,22 @@ public class BattleCreatureImpl extends BattleUnitImpl implements BattleCreature
 	private Key<BattleHeroImpl> owner;
 
 	@Unindexed
-	private Key<EffectImpl> effect;
+	private Key<CardImpl> card;
 
 	public BattleCreatureImpl() {
 	}
 
-	public BattleCreatureImpl(final BattleHero owner, final Effect effect) {
+	public BattleCreatureImpl(final BattleHero owner, final Card card) {
 		this.owner = Keys.getKey(owner);
-		this.effect = Keys.getKey(effect);
+		this.card = Keys.getKey(card);
 	}
 
 	public BattleHero getOwner() {
 		return Keys.getInstance(owner);
 	}
 
-	public Effect getEffect() {
-		return Keys.getInstance(effect);
+	public Card getCard() {
+		return Keys.getInstance(card);
 	}
 
 	@Override

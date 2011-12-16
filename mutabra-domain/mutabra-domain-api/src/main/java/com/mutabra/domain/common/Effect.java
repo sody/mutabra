@@ -8,6 +8,8 @@ import com.mutabra.domain.BaseEntity;
  */
 public interface Effect extends BaseEntity {
 
+	Castable getCastable();
+
 	String getScriptClass();
 
 	void setScriptClass(String scriptClass);

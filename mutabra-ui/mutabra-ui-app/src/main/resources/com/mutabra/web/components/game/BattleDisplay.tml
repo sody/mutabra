@@ -19,6 +19,9 @@
 					</t:loop>
 				</t:if>
 			</t:if>
+			<t:if test="field.hasCreature()">
+				<t:game.creaturedescription value="field.creature"/>
+			</t:if>
 		</t:loop>
 	</div>
 	<div id="battle-actions" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
