@@ -104,23 +104,48 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 
 	@Transactional
 	public void endRound(final Battle battle) {
-		final List<BattleEffect> exhaustedEffects = new ArrayList<BattleEffect>();
+		// process effects
+		final List<BattleEffect> deadEffects = new ArrayList<BattleEffect>();
 		for (BattleEffect battleEffect : battle.getEffects()) {
 			scriptExecutor.executeScript(new ScriptContextImpl(battle, battleEffect));
 			battleEffect.setDuration(battleEffect.getDuration() - 1);
 			if (battleEffect.getDuration() <= 0) {
-				exhaustedEffects.add(battleEffect);
+				deadEffects.add(battleEffect);
 			}
 		}
-		battle.getEffects().removeAll(exhaustedEffects);
-		for (BattleEffect effect : exhaustedEffects) {
+		// remove dead effects
+		battle.getEffects().removeAll(deadEffects);
+		for (BattleEffect effect : deadEffects) {
 			repository().delete(effect);
 		}
 
+		// remove dead creatures
+		for (BattleHero hero : battle.getHeroes()) {
+			final List<BattleCreature> deadCreatures = new ArrayList<BattleCreature>();
+			for (BattleCreature creature : hero.getCreatures()) {
+				if (creature.getHealth() <= 0) {
+					deadCreatures.add(creature);
+				}
+			}
+			hero.getCreatures().removeAll(deadCreatures);
+			for (BattleCreature creature : deadCreatures) {
+				repository().delete(creature);
+			}
+		}
+
+		for (BattleHero hero : battle.getHeroes()) {
+			if (hero.getHealth() < 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
+				endBattle(battle);
+				save(battle);
+				return;
+			}
+		}
+
+		//start new round
 		battle.setRound(battle.getRound() + 1);
 
 		for (BattleHero hero : battle.getHeroes()) {
-			hero.setExhausted(hero.getDeck().isEmpty());
+			hero.setExhausted(hero.getDeck().isEmpty() || hero.getPosition() == null);
 			hero.setMentalPower(hero.getMentalPower() + 1);
 			final List<Card> deck = hero.getDeck();
 			final List<Card> hand = hero.getHand();
@@ -132,12 +157,6 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			}
 		}
 		save(battle);
-
-		for (BattleHero hero : battle.getHeroes()) {
-			if (hero.getHealth() < 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
-				endBattle(battle);
-			}
-		}
 	}
 
 	public void endBattle(final Battle battle) {

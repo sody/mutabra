@@ -156,12 +156,54 @@ public class Release_1_0 extends ChangeLog {
 				.values(Cards.DECOMPRESSION, Translations.DEFAULT, Translations.NAME, "Decompression")
 				.values(Cards.DECOMPRESSION, Translations.RUSSIAN, Translations.NAME, "Понижение давления");
 		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.ELECTRIC_RAY)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 3, 5);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.SEAHORSE)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 3);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.MERMAID)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 4);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.CHAMOIS)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 2, 6);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.CARRION_VULTURE)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 2, 5);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.CHIVES)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 1);
+
+
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.WAVE)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(AttackScript.class.getName(), EffectType.MAGIC_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 4, 1, 0);
+		insert(Tables.EFFECT)
 				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.TRIDENT_BLOW)))
 				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
 				.values(AttackScript.class.getName(), EffectType.MELEE_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 6, 1, 0);
 		insert(Tables.EFFECT)
-				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.MERMAID)))
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.SCRATCH)))
 				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
-				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 3);
+				.values(AttackScript.class.getName(), EffectType.MELEE_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 5, 1, 0);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.SNOWBALL)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(AttackScript.class.getName(), EffectType.MAGIC_ATTACK.name(), TargetType.ALL_ENEMY_UNIT.name(), 2, 1, 0);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.THROW)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(AttackScript.class.getName(), EffectType.RANGED_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 3, 1, 0);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.FALLING_BOULDER)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(AttackScript.class.getName(), EffectType.RANGED_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 7, 1, 0);
 	}
 }

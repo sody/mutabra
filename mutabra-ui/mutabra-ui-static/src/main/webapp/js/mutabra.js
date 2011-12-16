@@ -87,7 +87,7 @@ T5.extendInitializers({
 			supports_friend_side: spec.supports_friend_side,
 			supports_empty_point: spec.supports_empty_point,
 			supports_hero_point: spec.supports_hero_point,
-			supports_summon_point: spec.supports_summon_point
+			supports_creature_point: spec.supports_creature_point
 		});
 	}
 });

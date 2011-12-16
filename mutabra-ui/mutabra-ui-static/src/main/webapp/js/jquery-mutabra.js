@@ -126,7 +126,7 @@
 			supports_friend_side : false,
 			supports_empty_point : false,
 			supports_hero_point : false,
-			supports_summon_point: false
+			supports_creature_point: false
 		},
 
 		_create: function() {
@@ -241,8 +241,8 @@
 			if (this.options.supports_hero_point) {
 				fullSelector = fullSelector ? fullSelector + ',' + selector + '.hero' : selector + '.hero';
 			}
-			if (this.options.supports_summon_point) {
-				fullSelector = fullSelector ? fullSelector + ',' + selector + '.summon' : selector + '.summon';
+			if (this.options.supports_creature_point) {
+				fullSelector = fullSelector ? fullSelector + ',' + selector + '.creature' : selector + '.creature';
 			}
 			if (!fullSelector) {
 				fullSelector = selector;
