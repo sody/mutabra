@@ -3,7 +3,6 @@ package com.mutabra.scripts;
 import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.common.Effect;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,9 @@ import java.util.Map;
 public class ScriptExecutorImpl implements ScriptExecutor {
 	private final Map<String, EffectScript> scripts = new HashMap<String, EffectScript>();
 
-	public ScriptExecutorImpl(final Collection<Class> scriptClasses) throws Exception {
-		for (Class scriptClass : scriptClasses) {
-			scripts.put(scriptClass.getName(), (EffectScript) scriptClass.newInstance());
+	public ScriptExecutorImpl(final List<EffectScript> scripts) throws Exception {
+		for (EffectScript script : scripts) {
+			this.scripts.put(script.getClass().getName(), script);
 		}
 	}
 

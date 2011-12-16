@@ -10,12 +10,10 @@ import com.mutabra.domain.common.Effect;
 public class AttackScript implements EffectScript {
 
 	public void execute(final BattleUnit caster, final Effect effect, final Object target) {
-		if (target != null) {
+		if (target != null && target instanceof BattleUnit) {
 			final int power = effect.getPower();
-			if (target instanceof BattleUnit) {
-				final BattleUnit unit = (BattleUnit) target;
-				unit.setHealth(unit.getHealth() - power);
-			}
+			final BattleUnit unit = (BattleUnit) target;
+			unit.setHealth(unit.getHealth() - power);
 		}
 	}
 }

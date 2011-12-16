@@ -15,21 +15,15 @@ public interface BattleHero extends BattleUnit {
 
 	Hero getHero();
 
-	List<Card> getDeck();
-
-	void setDeck(List<Card> deck);
-
-	List<Card> getHand();
-
-	void setHand(List<Card> hand);
-
-	List<Card> getGraveyard();
-
-	void setGraveyard(List<Card> graveyard);
-
-	List<BattleCreature> getCreatures();
-
 	int getMentalPower();
 
 	void setMentalPower(int mentalPower);
+
+	List<Card> getDeck();
+
+	List<Card> getHand();
+
+	List<Card> getGraveyard();
+
+	List<BattleCreature> getCreatures();
 }

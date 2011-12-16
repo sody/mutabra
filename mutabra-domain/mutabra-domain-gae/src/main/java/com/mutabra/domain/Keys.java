@@ -35,6 +35,16 @@ public class Keys {
 		});
 	}
 
+	public static <T, V extends T> List<Key<V>> getKeys(final Class<V> entityClass, final List<T> entities) {
+		final List keys = new ArrayList();
+		for (T entity : entities) {
+			if (entity != null) {
+				keys.add(((BaseEntityImpl) entity).getKey());
+			}
+		}
+		return keys;
+	}
+
 	public static <T, V extends T> List<T> getInstances(final Class<T> entityClass, final List<Key<V>> keys) {
 		return keys == null ? null : executor.execute(new SessionCallback<List<T>, Objectify>() {
 			public List<T> doInSession(final Objectify session) throws Exception {

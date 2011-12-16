@@ -1,6 +1,6 @@
 package com.mutabra.domain.battle;
 
-import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.Effect;
 
 /**
  * @author Ivan Khalopik
@@ -10,5 +10,5 @@ public interface BattleCreature extends BattleUnit {
 
 	BattleHero getOwner();
 
-	Card getCard();
+	Effect getEffect();
 }

@@ -3,6 +3,7 @@ package com.mutabra.domain;
 import com.google.appengine.api.datastore.Transaction;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
+import com.googlecode.objectify.ObjectifyOpts;
 import com.mutabra.db.MutabraChangeLog;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.battle.BattleCreature;
@@ -56,14 +57,13 @@ public class DomainModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(EntityRepository.class, ObjectifyRepository.class);
-		binder.bind(TransactionExecutor.class, ObjectifyExecutor.class);
 	}
 
 	public DatabaseService buildDatabaseService() {
 		return new DefaultDatabaseService(new GAEDatabase(), new MutabraChangeLog());
 	}
 
-	public ObjectifyFactory buildObjectifyFactory() {
+	public TransactionExecutor buildObjectifyExecutor() {
 		final ObjectifyFactory objectifyFactory = new ObjectifyFactory();
 
 		objectifyFactory.register(TranslationImpl.class);
@@ -85,7 +85,10 @@ public class DomainModule {
 		objectifyFactory.register(BattleCreatureImpl.class);
 		objectifyFactory.register(BattleEffectImpl.class);
 
-		return objectifyFactory;
+		final ObjectifyOpts options = new ObjectifyOpts();
+		options.setSessionCache(true);
+
+		return new ObjectifyExecutor(objectifyFactory, options);
 	}
 
 	@Contribute(EntityRepository.class)

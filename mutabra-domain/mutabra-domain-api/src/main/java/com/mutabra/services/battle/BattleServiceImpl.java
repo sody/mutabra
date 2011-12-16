@@ -61,8 +61,10 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		battle.setState(BattleState.STARTED);
 		save(battle);
 
-		addMember(battle, hero1, new Position(1, 2));
-		addMember(battle, hero2, new Position(1, 0));
+		final List<BattleHero> heroes = battle.getHeroes();
+		heroes.add(createHero(battle, hero1, new Position(1, 2)));
+		heroes.add(createHero(battle, hero2, new Position(1, 0)));
+		save(battle);
 
 		hero1.setBattle(battle);
 		hero2.setBattle(battle);
@@ -75,13 +77,15 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 							   final Castable castable,
 							   final Position target) {
 
+		final List<BattleEffect> effects = battle.getEffects();
 		for (Effect effect : castable.getEffects()) {
 			final BattleEffect battleEffect = ReflectionUtils.newInstance(realEffectClass, battle, effect);
 			battleEffect.setCaster(caster);
 			battleEffect.setTarget(target);
 			battleEffect.setDuration(effect.getDuration());
-			repository().save(battleEffect);
+			effects.add(battleEffect);
 		}
+
 		caster.setHealth(caster.getHealth() - castable.getBloodCost());
 		caster.setExhausted(true);
 		if (caster instanceof BattleHero) {
@@ -90,10 +94,9 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			final List<Card> graveyard = hero.getGraveyard();
 			hand.remove((Card) castable);
 			graveyard.add((Card) castable);
-			hero.setHand(hand);
-			hero.setGraveyard(graveyard);
 		}
-		repository().save(caster);
+
+		save(battle);
 
 		for (BattleHero battleMember : battle.getHeroes()) {
 			if (!battleMember.isExhausted()) {
@@ -123,19 +126,13 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			scriptExecutor.executeScript(caster, effect, targets);
 			battleEffect.setDuration(battleEffect.getDuration() - 1);
 			if (battleEffect.getDuration() <= 0) {
+				effects.remove(battleEffect);
 				repository().delete(battleEffect);
-			} else {
-				repository().save(battleEffect);
-			}
-			for (Object target : targets) {
-				if (target instanceof BattleUnit) {
-					repository().save((BattleUnit) target);
-				}
 			}
 		}
 
 		battle.setRound(battle.getRound() + 1);
-		save(battle);
+
 		for (BattleHero hero : battle.getHeroes()) {
 			hero.setExhausted(false);
 			hero.setMentalPower(hero.getMentalPower() + 1);
@@ -144,14 +141,11 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			if (deck.size() > 0) {
 				hand.add(deck.remove(0));
 			}
-			hero.setDeck(deck);
-			hero.setHand(hand);
-			repository().save(hero);
 			for (BattleCreature creature : hero.getCreatures()) {
 				creature.setExhausted(false);
-				repository().save(creature);
 			}
 		}
+		save(battle);
 	}
 
 	public List<BattleField> getBattleField(final Hero hero, final Battle battle) {
@@ -178,27 +172,23 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		return new ArrayList<BattleField>(battleField.values());
 	}
 
-	private void addMember(final Battle battle, final Hero hero, final Position position) {
+	private BattleHero createHero(final Battle battle, final Hero hero, final Position position) {
 		final BattleHero battleHero = ReflectionUtils.newInstance(realHeroClass, battle, hero);
 		battleHero.setHealth(hero.getHealth());
 		battleHero.setMentalPower(10);
 		battleHero.setPosition(position);
 		battleHero.setExhausted(false);
 
-		final List<Card> deck = new ArrayList<Card>();
+		final List<Card> deck = battleHero.getDeck();
 		for (HeroCard card : hero.getCards()) {
 			deck.add(card.getCard());
 		}
 		Collections.shuffle(deck);
-
-		final List<Card> hand = new ArrayList<Card>();
+		final List<Card> hand = battleHero.getHand();
 		for (int i = 0; i < deck.size() && i < 3; i++) {
 			hand.add(deck.remove(0));
 		}
-
-		battleHero.setDeck(deck);
-		battleHero.setHand(hand);
-		repository().save(battleHero);
+		return battleHero;
 	}
 
 	private List<?> getTargets(final TargetType targetType, final List<BattleField> battleFields, final Position position) {
