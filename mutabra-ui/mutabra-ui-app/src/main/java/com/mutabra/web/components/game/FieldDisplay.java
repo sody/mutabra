@@ -50,7 +50,7 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
 		path.attribute("id", clientId);
 
-		path.addClassName(field.hasHero() ? "hero" : field.hasSummon() ? "summon" : "empty");
+		path.addClassName(field.hasHero() ? "hero" : field.hasCreature() ? "summon" : "empty");
 		path.addClassName(field.isEnemySide() ? "enemy" : "friend");
 
 		final StringBuilder pathBuilder = new StringBuilder("m");
@@ -70,8 +70,8 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 				.put("id", getClientId())
 				.put("x", field.getPosition().getX())
 				.put("y", field.getPosition().getY())
-				.put("selected", field.isSelected())
-				.put("empty", !field.hasHero() && !field.hasSummon())
+				.put("selected", !field.isEnemySide() && field.hasHero())
+				.put("empty", !field.hasHero() && !field.hasCreature())
 		);
 	}
 }

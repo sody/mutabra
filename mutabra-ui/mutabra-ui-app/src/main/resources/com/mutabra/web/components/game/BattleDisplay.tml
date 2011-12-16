@@ -11,7 +11,7 @@
 
 	<div id="battle-description" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
-			<t:if test="field.hero">
+			<t:if test="field.hasHero()">
 				<t:game.herodescription value="field.hero"/>
 				<t:if test="!field.enemySide">
 					<t:loop source="field.hero.hand" value="card">
@@ -23,7 +23,7 @@
 	</div>
 	<div id="battle-actions" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
-			<t:if test="field.hero">
+			<t:if test="field.hasHero()">
 				<t:if test="!field.enemySide">
 					<div id="f_${field.position.id}_actions" style="display:none;">
 						<t:loop source="field.hero.hand" value="card">

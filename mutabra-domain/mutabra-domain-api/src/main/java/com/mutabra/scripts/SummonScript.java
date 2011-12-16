@@ -1,9 +1,8 @@
 package com.mutabra.scripts;
 
 import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleField;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.BattleUnit;
-import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.common.Effect;
 import org.greatage.domain.EntityRepository;
 import org.greatage.util.ReflectionUtils;
@@ -19,13 +18,19 @@ public class SummonScript implements EffectScript {
 		this.realCreatureClass = repository.create(BattleCreature.class).getClass();
 	}
 
-	public void execute(final BattleUnit caster, final Effect effect, final Object target) {
-		if (target != null && target instanceof Position && caster instanceof BattleHero) {
-			final BattleCreature creature = ReflectionUtils.newInstance(realCreatureClass, caster, effect);
-			creature.setHealth(effect.getHealth());
-			creature.setPosition((Position) target);
-			creature.setExhausted(true);
-			((BattleHero) caster).getCreatures().add(creature);
+	public void execute(final ScriptContext context) {
+		final BattleHero caster = (BattleHero) context.getCaster();
+		final Effect effect = context.getEffect();
+
+		for (BattleField field : context.getTargets()) {
+			if (!field.hasUnit()) {
+				final BattleCreature creature = ReflectionUtils.newInstance(realCreatureClass, caster, effect);
+				creature.setHealth(effect.getHealth());
+				creature.setPosition(field.getPosition());
+				creature.setExhausted(true);
+
+				caster.getCreatures().add(creature);
+			}
 		}
 	}
 }

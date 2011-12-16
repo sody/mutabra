@@ -52,6 +52,6 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 				.put("supports_friend_side", targetType.supportsFriend())
 				.put("supports_empty_point", targetType.supportsEmpty())
 				.put("supports_hero_point", targetType.supportsHero())
-				.put("supports_summon_point", targetType.supportsSummon()));
+				.put("supports_summon_point", targetType.supportsCreature()));
 	}
 }

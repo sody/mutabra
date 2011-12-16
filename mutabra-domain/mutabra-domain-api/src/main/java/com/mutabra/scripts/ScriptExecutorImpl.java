@@ -1,11 +1,9 @@
 package com.mutabra.scripts;
 
-import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.common.Effect;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,11 +19,9 @@ public class ScriptExecutorImpl implements ScriptExecutor {
 		}
 	}
 
-	public void executeScript(final BattleUnit caster, final Effect effect, final List<?> targets) {
-		final EffectScript script = getScript(effect);
-		for (Object target : targets) {
-			script.execute(caster, effect, target);
-		}
+	public void executeScript(final ScriptContext context) {
+		final EffectScript script = getScript(context.getEffect());
+		script.execute(context);
 	}
 
 	private EffectScript getScript(final Effect effect) {

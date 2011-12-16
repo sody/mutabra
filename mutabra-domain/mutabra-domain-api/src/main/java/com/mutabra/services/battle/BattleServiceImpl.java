@@ -11,9 +11,9 @@ import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Castable;
 import com.mutabra.domain.common.Effect;
-import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
+import com.mutabra.scripts.ScriptContextImpl;
 import com.mutabra.scripts.ScriptExecutor;
 import com.mutabra.services.BaseEntityServiceImpl;
 import org.greatage.domain.EntityRepository;
@@ -115,15 +115,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 	public void endRound(final Battle battle) {
 		final List<BattleEffect> exhaustedEffects = new ArrayList<BattleEffect>();
 		for (BattleEffect battleEffect : battle.getEffects()) {
-			final BattleUnit caster = battleEffect.getCaster();
-			final Effect effect = battleEffect.getEffect();
-			final BattleHero hero = caster instanceof BattleCreature
-					? ((BattleCreature) caster).getOwner()
-					: (BattleHero) caster;
-
-			final List<BattleField> battleField = getBattleField(hero.getHero(), battle);
-			final List<?> targets = getTargets(effect.getTargetType(), battleField, battleEffect.getTarget());
-			scriptExecutor.executeScript(caster, effect, targets);
+			scriptExecutor.executeScript(new ScriptContextImpl(battle, battleEffect));
 			battleEffect.setDuration(battleEffect.getDuration() - 1);
 			if (battleEffect.getDuration() <= 0) {
 				exhaustedEffects.add(battleEffect);
@@ -137,7 +129,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		battle.setRound(battle.getRound() + 1);
 
 		for (BattleHero hero : battle.getHeroes()) {
-			hero.setExhausted(false);
+			hero.setExhausted(hero.getDeck().isEmpty());
 			hero.setMentalPower(hero.getMentalPower() + 1);
 			final List<Card> deck = hero.getDeck();
 			final List<Card> hand = hero.getHand();
@@ -145,7 +137,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 				hand.add(deck.remove(0));
 			}
 			for (BattleCreature creature : hero.getCreatures()) {
-				creature.setExhausted(false);
+				creature.setExhausted(true);
 			}
 		}
 		save(battle);
@@ -192,36 +184,5 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			hand.add(deck.remove(0));
 		}
 		return battleHero;
-	}
-
-	private List<?> getTargets(final TargetType targetType, final List<BattleField> battleFields, final Position position) {
-		final ArrayList<Object> targets = new ArrayList<Object>();
-		if (targetType.isMassive()) {
-			for (BattleField field : battleFields) {
-				if (field.supports(targetType)) {
-					if (field.hasHero()) {
-						targets.add(field.getHero());
-					} else if (field.hasSummon()) {
-						targets.add(field.getCreature());
-					} else {
-						targets.add(field.getPosition());
-					}
-				}
-			}
-		} else {
-			for (BattleField field : battleFields) {
-				if (field.supports(targetType) && field.getPosition().equals(position)) {
-					if (field.hasHero()) {
-						targets.add(field.getHero());
-					} else if (field.hasSummon()) {
-						targets.add(field.getCreature());
-					} else {
-						targets.add(field.getPosition());
-					}
-					break;
-				}
-			}
-		}
-		return targets;
 	}
 }

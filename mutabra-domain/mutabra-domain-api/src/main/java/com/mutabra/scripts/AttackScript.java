@@ -1,5 +1,7 @@
 package com.mutabra.scripts;
 
+import com.mutabra.domain.battle.BattleField;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.common.Effect;
 
@@ -9,11 +11,13 @@ import com.mutabra.domain.common.Effect;
  */
 public class AttackScript implements EffectScript {
 
-	public void execute(final BattleUnit caster, final Effect effect, final Object target) {
-		if (target != null && target instanceof BattleUnit) {
-			final int power = effect.getPower();
-			final BattleUnit unit = (BattleUnit) target;
-			unit.setHealth(unit.getHealth() - power);
+	public void execute(final ScriptContext context) {
+		final int power = context.getEffect().getPower();
+		for (BattleField field : context.getTargets()) {
+			if (field.hasUnit()) {
+				final BattleUnit unit = field.getUnit();
+				unit.setHealth(unit.getHealth() - power);
+			}
 		}
 	}
 }

@@ -220,7 +220,7 @@ public enum TargetType implements OrderedEnum {
 		return supportsHero;
 	}
 
-	public boolean supportsSummon() {
+	public boolean supportsCreature() {
 		return supportsCreature;
 	}
 }
