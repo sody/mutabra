@@ -32,15 +32,6 @@ import java.util.Map;
  * @since 1.0
  */
 public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements BattleService {
-	private static final Position[] DUEL_POSITIONS = {
-			new Position(0, 0),
-			new Position(0, 1),
-			new Position(1, 0),
-			new Position(1, 2),
-			new Position(2, 0),
-			new Position(2, 1),
-	};
-
 	private final ScriptExecutor scriptExecutor;
 	private final Class<? extends BattleHero> realHeroClass;
 	private final Class<? extends BattleEffect> realEffectClass;
@@ -141,6 +132,20 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			}
 		}
 		save(battle);
+
+		for (BattleHero hero : battle.getHeroes()) {
+			if (hero.getHealth() < 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
+				endBattle(battle);
+			}
+		}
+	}
+
+	public void endBattle(final Battle battle) {
+		for (BattleHero battleHero : battle.getHeroes()) {
+			final Hero hero = battleHero.getHero();
+			hero.setBattle(null);
+			repository().save(hero);
+		}
 	}
 
 	public List<BattleField> getBattleField(final Hero hero, final Battle battle) {
@@ -157,7 +162,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			}
 		}
 
-		for (Position position : DUEL_POSITIONS) {
+		for (Position position : BattleField.DUEL_POSITIONS) {
 			if (!battleField.containsKey(position)) {
 				final boolean enemy = (position.getY() == 0 && !upSide) || (position.getY() > 0 && upSide);
 				battleField.put(position, new BattleField(position, enemy));

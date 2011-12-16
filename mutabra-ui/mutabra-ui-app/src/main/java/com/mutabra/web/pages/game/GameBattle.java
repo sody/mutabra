@@ -45,7 +45,9 @@ public class GameBattle extends AbstractPage {
 						   final Card card,
 						   final @RequestParameter(value = "x") int x,
 						   final @RequestParameter(value = "y") int y) {
-		battleService.registerAction(battle, hero, card, new Position(x, y));
+		if (!hero.isExhausted()) {
+			battleService.registerAction(battle, hero, card, new Position(x, y));
+		}
 		return null;
 	}
 }
