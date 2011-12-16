@@ -8,6 +8,7 @@ import com.mutabra.domain.common.Races;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.security.Role;
 import com.mutabra.scripts.AttackScript;
+import com.mutabra.scripts.SummonScript;
 import org.greatage.db.ChangeLog;
 
 import java.util.ArrayList;
@@ -158,5 +159,9 @@ public class Release_1_0 extends ChangeLog {
 				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.TRIDENT_BLOW)))
 				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
 				.values(AttackScript.class.getName(), EffectType.MELEE_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 6, 1, 0);
+		insert(Tables.EFFECT)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.MERMAID)))
+				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")
+				.values(SummonScript.class.getName(), EffectType.SUMMON.name(), TargetType.SINGLE_FRIEND_EMPTY.name(), 0, 0, 3);
 	}
 }

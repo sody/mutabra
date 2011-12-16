@@ -113,8 +113,8 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 
 	@Transactional
 	public void endRound(final Battle battle) {
-		final List<BattleEffect> effects = battle.getEffects();
-		for (BattleEffect battleEffect : effects) {
+		final List<BattleEffect> exhaustedEffects = new ArrayList<BattleEffect>();
+		for (BattleEffect battleEffect : battle.getEffects()) {
 			final BattleUnit caster = battleEffect.getCaster();
 			final Effect effect = battleEffect.getEffect();
 			final BattleHero hero = caster instanceof BattleCreature
@@ -126,9 +126,12 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			scriptExecutor.executeScript(caster, effect, targets);
 			battleEffect.setDuration(battleEffect.getDuration() - 1);
 			if (battleEffect.getDuration() <= 0) {
-				effects.remove(battleEffect);
-				repository().delete(battleEffect);
+				exhaustedEffects.add(battleEffect);
 			}
+		}
+		battle.getEffects().removeAll(exhaustedEffects);
+		for (BattleEffect effect : exhaustedEffects) {
+			repository().delete(effect);
 		}
 
 		battle.setRound(battle.getRound() + 1);

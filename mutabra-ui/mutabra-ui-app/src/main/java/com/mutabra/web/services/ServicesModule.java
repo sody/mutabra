@@ -11,6 +11,7 @@ import com.mutabra.scripts.EffectScript;
 import com.mutabra.scripts.FakeScript;
 import com.mutabra.scripts.ScriptExecutor;
 import com.mutabra.scripts.ScriptExecutorImpl;
+import com.mutabra.scripts.SummonScript;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.CodedEntityService;
@@ -109,8 +110,9 @@ public class ServicesModule {
 	}
 
 	@Contribute(ScriptExecutor.class)
-	public void contributeScriptExecutor(final Configuration<Class<? extends EffectScript>> configuration) {
-		configuration.add(FakeScript.class);
-		configuration.add(AttackScript.class);
+	public void contributeScriptExecutor(final Configuration<EffectScript> configuration) {
+		configuration.addInstance(FakeScript.class);
+		configuration.addInstance(AttackScript.class);
+		configuration.addInstance(SummonScript.class);
 	}
 }
