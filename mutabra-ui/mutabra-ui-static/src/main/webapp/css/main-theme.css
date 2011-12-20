@@ -1726,7 +1726,7 @@ path.ui-state-active {
 }
 
 path.ui-state-highlight.hero,
-path.ui-state-highlight.summon,
+path.ui-state-highlight.creature,
 path.ui-state-highlight.empty,
 path.ui-state-highlight {
 	fill: #fedcba;
