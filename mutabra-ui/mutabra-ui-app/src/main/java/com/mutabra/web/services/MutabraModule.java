@@ -5,7 +5,9 @@ import com.mutabra.web.internal.AccountManagerImpl;
 import com.mutabra.web.internal.CustomValidationDecoratorFactory;
 import com.mutabra.web.internal.I18nPropertyConduitSource;
 import com.mutabra.web.internal.ImageSourceImpl;
+import com.mutabra.web.internal.SecurityPersistenceFilter;
 import com.mutabra.web.internal.TranslatorImpl;
+import com.mutabra.web.internal.UpdateCheckerFilter;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.Configuration;
@@ -121,6 +123,7 @@ public class MutabraModule {
 				});
 			}
 		});
+		configuration.addInstance("UpdateCheckerFilter", UpdateCheckerFilter.class, "after:RepositorySessionFilter");
 	}
 
 }

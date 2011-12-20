@@ -65,6 +65,25 @@ T5.extendInitializers({
 		});
 	},
 
+	updateChecker: function(spec) {
+		var updateCheckerHandler = function() {
+			j$.ajax({
+				url: spec.url,
+				data: {
+					check_hero: spec.hero_id
+				},
+				dataType: 'json',
+				success: function(data, status, xhr) {
+					if (data && data['ready']) {
+						location.reload();
+					}
+				}
+			});
+		};
+
+		setInterval(updateCheckerHandler, 10000);
+	},
+
 	field: function(spec) {
 		j$('#' + spec.id).field({
 			x: spec.x,

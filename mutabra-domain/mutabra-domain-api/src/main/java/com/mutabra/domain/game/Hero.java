@@ -8,7 +8,6 @@ import com.mutabra.domain.common.Race;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Ivan Khalopik
@@ -51,4 +50,8 @@ public interface Hero extends BaseEntity {
 	Date getLastActive();
 
 	void setLastActive(Date lastActive);
+
+	boolean isReady();
+
+	void setReady(boolean ready);
 }

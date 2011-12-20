@@ -173,7 +173,7 @@ public class SecurityModule {
 
 	@Contribute(RequestHandler.class)
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
-		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class, "after:RepositorySessionFilter");
+		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class, "after:UpdateCheckerFilter");
 	}
 
 	public OAuth2 buildFacebookService(@Symbol("facebook.app-id") final String clientId,

@@ -12,4 +12,6 @@
 	</t:eventlink>
 </t:loop>
 
+<t:game.updatechecker/>
+
 </html>

@@ -3,6 +3,7 @@ package com.mutabra.domain.game;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
@@ -45,6 +46,9 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	@Indexed
 	private Date lastActive;
+
+	@Unindexed
+	private boolean ready;
 
 	public HeroImpl() {
 	}
@@ -123,6 +127,14 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
 	public void setLastActive(final Date lastActive) {
 		this.lastActive = lastActive;
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(final boolean ready) {
+		this.ready = ready;
 	}
 
 	@Override

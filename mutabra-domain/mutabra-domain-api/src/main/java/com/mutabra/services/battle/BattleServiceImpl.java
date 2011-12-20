@@ -58,7 +58,9 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		save(battle);
 
 		hero1.setBattle(battle);
+		hero1.setReady(true);
 		hero2.setBattle(battle);
+		hero2.setReady(true);
 		repository().save(hero1);
 		repository().save(hero2);
 	}
@@ -157,12 +159,19 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			}
 		}
 		save(battle);
+
+		for (BattleHero hero : battle.getHeroes()) {
+			final Hero realHero = hero.getHero();
+			realHero.setReady(true);
+			repository().save(realHero);
+		}
 	}
 
 	public void endBattle(final Battle battle) {
 		for (BattleHero battleHero : battle.getHeroes()) {
 			final Hero hero = battleHero.getHero();
 			hero.setBattle(null);
+			hero.setReady(true);
 			repository().save(hero);
 		}
 	}
