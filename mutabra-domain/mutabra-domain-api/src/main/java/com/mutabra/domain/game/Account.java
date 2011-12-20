@@ -1,13 +1,10 @@
 package com.mutabra.domain.game;
 
 import com.mutabra.domain.BaseEntity;
-import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.security.Role;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.TimeZone;
 
 /**
@@ -52,6 +49,10 @@ public interface Account extends BaseEntity {
 
 	void setGoogleUser(String user);
 
+	Role getRole();
+
+	void setRole(Role role);
+
 	Date getRegistered();
 
 	void setRegistered(Date registered);
@@ -75,10 +76,6 @@ public interface Account extends BaseEntity {
 	TimeZone getTimeZone();
 
 	void setTimeZone(TimeZone timeZone);
-
-	Set<Role> getRoles();
-
-	void setRoles(Set<Role> roles);
 
 	Hero getHero();
 

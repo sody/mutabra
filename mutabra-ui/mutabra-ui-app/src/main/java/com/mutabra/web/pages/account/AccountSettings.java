@@ -1,9 +1,10 @@
 package com.mutabra.web.pages.account;
 
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.Permission;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.internal.Authorities;
+import com.mutabra.web.internal.Authority;
 import com.mutabra.web.services.AccountContext;
 import com.mutabra.web.services.AccountManager;
 import org.apache.tapestry5.EventConstants;
@@ -11,13 +12,12 @@ import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.greatage.security.annotations.Deny;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Deny(Authorities.STATUS_ANONYMOUS)
+@Authority(Permission.PLAY)
 public class AccountSettings extends AbstractPage {
 
 	@Property

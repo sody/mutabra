@@ -6,13 +6,10 @@ import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.Levels;
 import com.mutabra.domain.common.Races;
 import com.mutabra.domain.common.TargetType;
-import com.mutabra.domain.security.Role;
+import com.mutabra.domain.game.Role;
 import com.mutabra.scripts.AttackScript;
 import com.mutabra.scripts.SummonScript;
 import org.greatage.db.ChangeLog;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author Ivan Khalopik
@@ -37,13 +34,13 @@ public class Release_1_0 extends ChangeLog {
 
 		begin("2011-10-11/admin_account").comment("admin account added");
 		insert(Tables.ACCOUNT)
-				.set("roles", new ArrayList<String>(Arrays.asList(Role.ADMIN.name(), Role.USER.name())))
+				.set("role", Role.ADMIN.name())
 				.into("email", "password", "name")
 				.values("admin@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "admin");
 
 		begin("2011-10-11/test_accounts").comment("test accounts added");
 		insert(Tables.ACCOUNT)
-				.set("roles", new ArrayList<String>(Arrays.asList(Role.USER.name())))
+				.set("role", Role.USER.name())
 				.into("email", "password", "name")
 				.values("user1@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "sody")
 				.values("user2@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "hermes")

@@ -14,9 +14,12 @@ import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.internal.Authorities;
-import com.mutabra.web.internal.SecurityAnnotationWorker;
+import com.mutabra.web.internal.Authority;
+import com.mutabra.web.internal.AuthorityAnnotationExtractor;
 import com.mutabra.web.internal.SecurityExceptionHandler;
+import com.mutabra.web.internal.SecurityFilter;
 import com.mutabra.web.internal.SecurityPersistenceFilter;
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -25,11 +28,15 @@ import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.services.ComponentRequestFilter;
+import org.apache.tapestry5.services.ComponentRequestHandler;
+import org.apache.tapestry5.services.MetaDataLocator;
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.ResponseRenderer;
-import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
+import org.apache.tapestry5.services.meta.MetaDataExtractor;
+import org.apache.tapestry5.services.meta.MetaWorker;
 import org.greatage.security.Authentication;
 import org.greatage.security.AuthenticationProvider;
 import org.greatage.security.MessageDigestSecretEncoder;
@@ -143,9 +150,19 @@ public class SecurityModule {
 		configuration.addInstance("twitter", TwitterProvider.class);
 	}
 
-	public void contributeComponentClassTransformWorker(
-			final OrderedConfiguration<ComponentClassTransformWorker2> configuration) {
-		configuration.addInstance("PageSecurity", SecurityAnnotationWorker.class, "after:OnEvent");
+	@Contribute(MetaWorker.class)
+	public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
+		configuration.addInstance(Authority.class, AuthorityAnnotationExtractor.class);
+	}
+
+	@Contribute(MetaDataLocator.class)
+	public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
+		configuration.add(Authorities.PAGE_AUTHORITY_META, "");
+	}
+
+	@Contribute(ComponentRequestHandler.class)
+	public static void contributeComponentRequestHandler(final OrderedConfiguration<ComponentRequestFilter> configuration) {
+		configuration.addInstance("SecurityFilter", SecurityFilter.class);
 	}
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)

@@ -18,24 +18,14 @@ public class Authority {
 	private static final List<String> ANONYMOUS_AUTHORITIES = CollectionUtils.newList(Authorities.STATUS_ANONYMOUS);
 
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String allow;
-
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String deny;
+	private String value;
 
 	@Inject
 	private SecurityContext securityContext;
 
-	@SuppressWarnings({"RedundantIfStatement"})
 	boolean setupRender() {
 		final List<String> authorities = getAuthorities();
-		if (allow != null && !authorities.contains(allow)) {
-			return false;
-		}
-		if (deny != null && authorities.contains(deny)) {
-			return false;
-		}
-		return true;
+		return !(value != null && !authorities.contains(value));
 	}
 
 	private List<String> getAuthorities() {

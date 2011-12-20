@@ -2,19 +2,17 @@ package com.mutabra.domain.game;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
+import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
-import com.mutabra.domain.security.Role;
 import org.greatage.util.LocaleUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.TimeZone;
 
 /**
@@ -24,6 +22,7 @@ import java.util.TimeZone;
 @Entity(name = Tables.ACCOUNT)
 public class AccountImpl extends BaseEntityImpl implements Account {
 
+	@Indexed
 	private String email;
 
 	private String pendingEmail;
@@ -45,14 +44,19 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Indexed
 	private String googleUser;
 
+	private Role role;
+
+	@Unindexed
 	private Date registered;
 
 	private Date lastLogin;
 
 	private String name;
 
+	@Unindexed
 	private String place;
 
+	@Unindexed
 	private String locale = "";
 
 	@Transient
@@ -62,8 +66,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private TimeZone timeZone;
 
 	private Key<HeroImpl> hero;
-
-	private Set<Role> roles = new HashSet<Role>();
 
 	public String getEmail() {
 		return email;
@@ -137,6 +139,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 		googleUser = user;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(final Role role) {
+		this.role = role;
+	}
+
 	public Date getRegistered() {
 		return registered;
 	}
@@ -195,14 +205,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setHero(final Hero hero) {
 		this.hero = Keys.getKey(hero);
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(final Set<Role> roles) {
-		this.roles = roles;
 	}
 
 	public List<Hero> getHeroes() {

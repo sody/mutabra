@@ -30,7 +30,7 @@
 
 			<div class="column">
 				<div id="right" class="container ui-widget">
-					<t:authority allow="ROLE_ADMIN">
+					<t:authority value="PERMISSION_MANAGE_APPLICATION">
 						<t:menu.admin/>
 					</t:authority>
 				</div>

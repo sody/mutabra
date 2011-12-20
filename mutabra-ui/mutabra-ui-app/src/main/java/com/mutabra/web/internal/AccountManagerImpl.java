@@ -1,7 +1,7 @@
 package com.mutabra.web.internal;
 
 import com.mutabra.domain.game.Account;
-import com.mutabra.domain.security.Role;
+import com.mutabra.domain.game.Role;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.pages.Security;
 import com.mutabra.web.services.AccountManager;
@@ -15,8 +15,6 @@ import org.apache.tapestry5.services.ComponentClassResolver;
 import org.greatage.security.SecretEncoder;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import static com.mutabra.services.Mappers.account$;
 
@@ -59,9 +57,7 @@ public class AccountManagerImpl implements AccountManager {
 		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
-		final Set<Role> roles = new HashSet<Role>();
-		roles.add(Role.USER);
-		account.setRoles(roles);
+		account.setRole(Role.USER);
 
 		account.setPendingEmail(null);
 		account.setPendingToken(null);
