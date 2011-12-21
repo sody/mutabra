@@ -172,7 +172,6 @@
 					y: field.option('y')
 				}
 			});
-			alert('Card:' + this.element.attr('id') + ' Field:' + field.element.attr('id'));
 			this.cancel();
 		},
 

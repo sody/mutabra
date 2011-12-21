@@ -110,11 +110,8 @@ public class BattleHeroImpl extends BattleUnitImpl implements BattleHero {
 
 	@PrePersist
 	void saveRelations(final Objectify session) {
-		session.put(deckValueHolder);
 		deck = Keys.getKeys(CardImpl.class, deckValueHolder);
-		session.put(handValueHolder);
 		hand = Keys.getKeys(CardImpl.class, handValueHolder);
-		session.put(graveyardValueHolder);
 		graveyard = Keys.getKeys(CardImpl.class, graveyardValueHolder);
 		session.put(creaturesValueHolder);
 	}

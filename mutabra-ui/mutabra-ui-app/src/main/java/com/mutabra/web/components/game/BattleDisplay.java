@@ -3,6 +3,7 @@ package com.mutabra.web.components.game;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.battle.BattleField;
 import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.battle.BattleService;
@@ -42,6 +43,9 @@ public class BattleDisplay {
 
 	@Property
 	private Card card;
+
+	@Property
+	private Ability ability;
 
 	@SetupRender
 	void setupBattleField() {

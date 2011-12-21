@@ -50,19 +50,19 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		battle.setStartedAt(new Date());
 		battle.setRound(1);
 		battle.setState(BattleState.STARTED);
-		save(battle);
+		saveOrUpdate(battle);
 
 		final List<BattleHero> heroes = battle.getHeroes();
 		heroes.add(createHero(battle, hero1, new Position(1, 2)));
 		heroes.add(createHero(battle, hero2, new Position(1, 0)));
-		save(battle);
+		saveOrUpdate(battle);
 
 		hero1.setBattle(battle);
 		hero1.setReady(true);
 		hero2.setBattle(battle);
 		hero2.setReady(true);
-		repository().save(hero1);
-		repository().save(hero2);
+		repository().saveOrUpdate(hero1);
+		repository().saveOrUpdate(hero2);
 	}
 
 	public void registerAction(final Battle battle,
@@ -89,7 +89,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			graveyard.add((Card) castable);
 		}
 
-		save(battle);
+		saveOrUpdate(battle);
 
 		for (BattleHero battleMember : battle.getHeroes()) {
 			if (!battleMember.isExhausted()) {
@@ -138,7 +138,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		for (BattleHero hero : battle.getHeroes()) {
 			if (hero.getHealth() < 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
 				endBattle(battle);
-				save(battle);
+				saveOrUpdate(battle);
 				return;
 			}
 		}
@@ -155,15 +155,15 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 				hand.add(deck.remove(0));
 			}
 			for (BattleCreature creature : hero.getCreatures()) {
-				creature.setExhausted(true);
+				creature.setExhausted(creature.getCard().getAbilities().isEmpty());
 			}
 		}
-		save(battle);
+		saveOrUpdate(battle);
 
 		for (BattleHero hero : battle.getHeroes()) {
 			final Hero realHero = hero.getHero();
 			realHero.setReady(true);
-			repository().save(realHero);
+			repository().saveOrUpdate(realHero);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 			final Hero hero = battleHero.getHero();
 			hero.setBattle(null);
 			hero.setReady(true);
-			repository().save(hero);
+			repository().saveOrUpdate(hero);
 		}
 	}
 

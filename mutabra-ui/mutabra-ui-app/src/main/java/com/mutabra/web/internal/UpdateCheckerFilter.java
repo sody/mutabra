@@ -48,7 +48,7 @@ public class UpdateCheckerFilter implements RequestFilter {
 				writer.close();
 				if (hero.isReady()) {
 					hero.setReady(false);
-					heroService.save(hero);
+					heroService.saveOrUpdate(hero);
 				}
 				return true;
 			}

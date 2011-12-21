@@ -1,5 +1,6 @@
 package com.mutabra.web.services;
 
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
@@ -19,6 +20,8 @@ public interface ImageSource {
 	Asset getFaceImage(Face face);
 
 	Asset getCardImage(Card card);
+
+	Asset getAbilityImage(Ability ability);
 
 	Asset getCardBack();
 

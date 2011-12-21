@@ -94,7 +94,7 @@ public class Release_1_0 extends ChangeLog {
 		//todo: add effects
 		insert(Tables.CARD)
 				.set("health", 0)
-				.into("code", "targetType", "bloodCost", "power", "durability")
+				.into("code", "targetType", "bloodCost", "power", "duration")
 				.values(Cards.CALM, TargetType.ALL_FRIEND_UNIT.name(), 1, 1, 3)
 				.values(Cards.WAVE, TargetType.SINGLE_ENEMY_UNIT.name(), 2, 4, 1)
 				.values(Cards.WHIRLPOOL, TargetType.SINGLE_ENEMY_EMPTY.name(), 1, 0, 1)
@@ -152,6 +152,12 @@ public class Release_1_0 extends ChangeLog {
 				.values(Cards.ECHO_MOUNTAIN, Translations.RUSSIAN, Translations.NAME, "Эхо горы")
 				.values(Cards.DECOMPRESSION, Translations.DEFAULT, Translations.NAME, "Decompression")
 				.values(Cards.DECOMPRESSION, Translations.RUSSIAN, Translations.NAME, "Понижение давления");
+		insert(Tables.ABILITY)
+				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.CHAMOIS)))
+				.set("health", 0)
+				.into("code", "targetType", "bloodCost", "power", "duration")
+				.values("attack", TargetType.SINGLE_ENEMY_UNIT.name(), 0, 3, 1);
+
 		insert(Tables.EFFECT)
 				.set("__parent__", select(Tables.CARD).where(condition("code").equal(Cards.ELECTRIC_RAY)))
 				.into("scriptClass", "effectType", "targetType", "power", "duration", "health")

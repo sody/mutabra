@@ -79,6 +79,6 @@ public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements Hero
 	private void addCard(final Hero hero, final String cardCode) {
 		final HeroCard card = ReflectionUtils.newInstance(realHeroCardClass, hero);
 		card.setCard(cardService.get(cardCode));
-		repository().save(card);
+		repository().saveOrUpdate(card);
 	}
 }

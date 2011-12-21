@@ -1,6 +1,8 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
@@ -17,15 +19,15 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class CardDisplay extends AbstractComponent implements ClientElement {
+public class AbilityDisplay extends AbstractComponent implements ClientElement {
 
 	@Property
 	@Parameter
-	private BattleHero hero;
+	private BattleCreature creature;
 
 	@Property
 	@Parameter
-	private Card value;
+	private Ability value;
 
 	@Inject
 	private JavaScriptSupport support;
@@ -38,7 +40,7 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 
 	@SetupRender
 	void setupCard() {
-		clientId = "c_" + value.getCode();
+		clientId = "a_" + value.getCode();
 	}
 
 	@AfterRender
@@ -46,7 +48,7 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 		final TargetType targetType = value.getTargetType();
 		support.addInitializerCall("card", new JSONObject()
 				.put("id", getClientId())
-				.put("url", getResources().createEventLink("registerHeroAction", hero, value).toAbsoluteURI())
+				.put("url", getResources().createEventLink("registerCreatureAction", creature, value).toAbsoluteURI())
 				.put("massive", targetType.isMassive())
 				.put("supports_enemy_side", targetType.supportsEnemy())
 				.put("supports_friend_side", targetType.supportsFriend())

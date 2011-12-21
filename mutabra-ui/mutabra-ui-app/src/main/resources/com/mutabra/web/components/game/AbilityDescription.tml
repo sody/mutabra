@@ -1,0 +1,16 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+			 xmlns:p="tapestry:parameter">
+
+	<div id="${clientId}" style="display:none;">
+		<h4>${value:name}</h4>
+		<br/>
+		<t:image.abilityimage ability="value" width="150" height="150"/>
+		<br/>
+		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.power}</span>
+		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.health}</span>
+		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
+		<br/>
+		<p>${value:description}</p>
+	</div>
+
+</t:container>

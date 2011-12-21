@@ -21,16 +21,28 @@
 			</t:if>
 			<t:if test="field.hasCreature()">
 				<t:game.creaturedescription value="field.creature"/>
+				<t:if test="!field.enemySide">
+					<t:loop source="field.creature.card.abilities" value="ability">
+						<t:game.abilitydescription value="ability"/>
+					</t:loop>
+				</t:if>
 			</t:if>
 		</t:loop>
 	</div>
 	<div id="battle-actions" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
 		<t:loop source="fields" value="field">
-			<t:if test="field.hasHero()">
-				<t:if test="!field.enemySide">
+			<t:if test="!field.enemySide">
+				<t:if test="field.hasHero()">
 					<div id="f_${field.position.id}_actions" style="display:none;">
 						<t:loop source="field.hero.hand" value="card">
 							<t:game.carddisplay value="card" hero="field.hero"/>
+						</t:loop>
+					</div>
+				</t:if>
+				<t:if test="field.hasCreature()">
+					<div id="f_${field.position.id}_actions" style="display:none;">
+						<t:loop source="field.creature.card.abilities" value="ability">
+							<t:game.abilitydisplay value="ability" creature="field.creature"/>
 						</t:loop>
 					</div>
 				</t:if>

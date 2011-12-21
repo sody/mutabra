@@ -60,7 +60,7 @@ public class SwitchHero extends AbstractPage {
 		// enter the game with just created character
 		final Account account = accountContext.getAccount();
 		account.setHero(hero);
-		accountService.save(account);
+		accountService.saveOrUpdate(account);
 
 		return back();
 	}

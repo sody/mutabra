@@ -1,5 +1,6 @@
 package com.mutabra.web.internal;
 
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
@@ -17,6 +18,7 @@ public class ImageSourceImpl implements ImageSource {
 	private static final String RACE_REPOSITORY = "img/races/";
 	private static final String FACE_REPOSITORY = "img/faces/";
 	private static final String CARD_REPOSITORY = "img/cards/";
+	private static final String ABILITY_REPOSITORY = "img/abilities/";
 	private static final String HERO_REPOSITORY = "img/heroes/";
 
 	private final AssetSource assetSource;
@@ -57,13 +59,19 @@ public class ImageSourceImpl implements ImageSource {
 				getNotFoundImage();
 	}
 
+	public Asset getAbilityImage(final Ability ability) {
+		return ability != null ?
+				getContextAsset(ABILITY_REPOSITORY, ability.getCode()) :
+				getNotFoundImage();
+	}
+
 	public Asset getCardBack() {
 		return cardBack;
 	}
 
 	public Asset getHeroImage(final Hero hero) {
 		return hero != null ?
-				getRaceImage(hero.getRace()) :
+				getFaceImage(hero.getFace()) :
 //				getContextAsset(HERO_REPOSITORY, hero.getRace().getCode() + "_" + hero.getFace().getCode(), size, notFound) :
 				getNotFoundImage();
 	}
