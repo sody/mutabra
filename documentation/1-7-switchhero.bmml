@@ -1,88 +1,154 @@
-<mockup version="1.0" skin="sketch" measuredW="976" measuredH="1427" mockupW="960" mockupH="1421">
+<mockup version="1.0" skin="sketch" measuredW="1320" measuredH="1560" mockupW="1280" mockupH="1520">
   <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="16" y="6" w="960" h="700" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Mutabra%0Ahttp%3A//mutabra.com</text>
-      </controlProperties>
-    </control>
-    <control controlID="27" controlTypeID="com.balsamiq.mockups::RoundButton" x="246" y="189" w="500" h="400" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="-1">
-      <controlProperties>
-        <shape>roundRect</shape>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="30" controlTypeID="com.balsamiq.mockups::Button" x="289" y="517" w="92" h="32" measuredW="56" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Enter</text>
-      </controlProperties>
-    </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Button" x="411" y="517" w="92" h="32" measuredW="96" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
-      <controlProperties>
-        <href>1-6-creationhero%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22395%2C511%2C487%2C543%22%20href%3D%221-6-creationhero.bmml%22%20alt%3D%221-6-creationhero%22%20id%3D%2233%22/%3E</map>
-        <text>Create%20New</text>
-      </controlProperties>
-    </control>
-    <control controlID="34" controlTypeID="com.balsamiq.mockups::Image" x="411" y="317" w="170" h="170" measuredW="77" measuredH="79" zOrder="4" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Avatar%20of%20pers</text>
-      </controlProperties>
-    </control>
-    <control controlID="35" controlTypeID="com.balsamiq.mockups::Icon" x="596" y="394" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="5" locked="false" isInGroup="-1">
-      <controlProperties>
-        <icon>RightFillTriangleIcon%7Csmall</icon>
-      </controlProperties>
-    </control>
-    <control controlID="36" controlTypeID="com.balsamiq.mockups::Icon" x="372" y="394" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
-      <controlProperties>
-        <icon>LeftFillTriangleIcon%7Csmall</icon>
-      </controlProperties>
-    </control>
-    <control controlID="37" controlTypeID="com.balsamiq.mockups::Image" x="79" y="97" w="120" h="68" measuredW="77" measuredH="79" zOrder="7" locked="false" isInGroup="-1">
-      <controlProperties>
-        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2263%2C91%2C183%2C159%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2237%22/%3E</map>
-        <src>./logo80x60.png</src>
-        <text>logo</text>
-      </controlProperties>
-    </control>
-    <control controlID="38" controlTypeID="com.balsamiq.mockups::IconLabel" x="763" y="94" w="-1" h="-1" measuredW="101" measuredH="45" zOrder="8" locked="false" isInGroup="-1">
-      <controlProperties>
-        <href>1-5-accountsettings%26bm%3B1-5-accountsettings.bmml%26bm%3B1-5-accountsettings.bmml%26bm%3B1-5-accountsettings.bmml</href>
-        <icon>TableIcon%7Csmall</icon>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22747%2C88%2C848%2C133%22%20href%3D%221-5-accountsettings.bmml%22%20alt%3D%221-5-accountsettings%22%20id%3D%2238%22/%3E</map>
-        <text>Account%20Settings</text>
-      </controlProperties>
-    </control>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::IconLabel" x="896" y="94" w="-1" h="-1" measuredW="44" measuredH="45" zOrder="9" locked="false" isInGroup="-1">
-      <controlProperties>
-        <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
-        <icon>PowerIcon%7Csmall</icon>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22880%2C88%2C924%2C133%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%2239%22/%3E</map>
-        <text>Logout</text>
-      </controlProperties>
-    </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::StickyNote" x="16" y="727" w="960" h="700" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::StickyNote" x="40" y="860" w="1280" h="700" measuredW="109" measuredH="123" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
         <text>7.1.%20Hero%20chooser%20%u043F%u043E%u0437%u0432%u0430%u043B%u044F%u0435%u0442%20%u0432%u044B%u0431%u0440%u0430%u0442%u044C%20%u043F%u0435%u0440%u0441%u043E%u043D%u0430%u0436%u0430%20%u0438%u0437%20%u0441%u043E%u0437%u0434%u0430%u043D%u043D%u044B%u0445%20%u043D%u0430%20%u0430%u043A%u043A%u0430%u0443%u043D%u0442%u0435.%0A%20%0A7.2.%20Accept%20%u043F%u0440%u0438%u0432%u043E%u0434%u0438%u0442%20%u043A%20%u0432%u0445%u043E%u0434%u0443%20%u0432%20%u0438%u0433%u0440%u0443%20%u0432%u044B%u0431%u0440%u0430%u043D%u043D%u044B%u043C%20%u043F%u0435%u0440%u0441%u043E%u043D%u0430%u0436%u0435%u043C%20%u0438%20%u043F%u0435%u0440%u0435%u0445%u043E%u0434%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0443%20%3Cgame%3E%0A%20%0A7.3.%20Create%20hero%20%u043F%u0440%u0438%u0432%u043E%u0434%u0438%u0442%20%u043A%20%u043F%u0435%u0440%u0435%u0445%u043E%u0434%u0443%20%u043D%u0430%20%u0441%u0442%u0440%u0430%u043D%u0438%u0446%u0443%20%3Ccreate%20hero%3E</text>
       </controlProperties>
     </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::Label" x="289" y="220" w="-1" h="-1" measuredW="109" measuredH="28" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="45" controlTypeID="__group__" x="40" y="40" w="1280" h="800" measuredW="1280" measuredH="800" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
-        <size>20</size>
-        <text>Switch%20Hero</text>
+        <controlName>page</controlName>
       </controlProperties>
-    </control>
-    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="289" y="251" w="-1" h="-1" measuredW="131" measuredH="24" zOrder="12" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>16</size>
-        <text>Choose%20your%20hero</text>
-      </controlProperties>
-    </control>
-    <control controlID="43" controlTypeID="com.balsamiq.mockups::Paragraph" x="289" y="275" w="406" h="27" measuredW="200" measuredH="140" zOrder="13" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Your%20choive%20will%20affect%20on%20what%20hero%20will%20represent%20you%20in%20the%20game.%20</text>
-      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1280" h="800" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="45">
+          <controlProperties>
+            <text>Mutabra%0Ahttp%3A//www.mutabra.com/game/hero/create</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="160" y="200" w="960" h="500" measuredW="960" measuredH="500" zOrder="1" locked="false" isInGroup="45">
+          <controlProperties>
+            <controlName>content</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="960" h="500" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="2">
+              <controlProperties>
+                <borderStyle>roundedSolid</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="30" y="30" w="140" h="-1" measuredW="131" measuredH="33" zOrder="1" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>Switch%20Hero</text>
+              </controlProperties>
+            </control>
+            <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="30" y="434" w="92" h="32" measuredW="56" measuredH="27" zOrder="2" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>Enter</text>
+              </controlProperties>
+            </control>
+            <control controlID="47" controlTypeID="com.balsamiq.mockups::Image" x="330" y="114" w="300" h="300" measuredW="77" measuredH="79" zOrder="3" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>Avatar%20of%20pers</text>
+              </controlProperties>
+            </control>
+            <control controlID="60" controlTypeID="com.balsamiq.mockups::Label" x="30" y="63" w="-1" h="-1" measuredW="131" measuredH="24" zOrder="4" locked="false" isInGroup="2">
+              <controlProperties>
+                <size>16</size>
+                <text>Choose%20your%20hero</text>
+              </controlProperties>
+            </control>
+            <control controlID="61" controlTypeID="com.balsamiq.mockups::Paragraph" x="30" y="87" w="406" h="27" measuredW="200" measuredH="140" zOrder="5" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>Your%20choive%20will%20affect%20on%20what%20hero%20will%20represent%20you%20in%20the%20game.%20</text>
+              </controlProperties>
+            </control>
+            <control controlID="67" controlTypeID="com.balsamiq.mockups::Image" x="530" y="314" w="100" h="100" measuredW="77" measuredH="79" zOrder="6" locked="false" isInGroup="2">
+              <controlProperties>
+                <text>race%20image</text>
+              </controlProperties>
+            </control>
+            <control controlID="69" controlTypeID="com.balsamiq.mockups::Button" x="137" y="434" w="92" h="32" measuredW="96" measuredH="27" zOrder="7" locked="false" isInGroup="2">
+              <controlProperties>
+                <href>1-6-creationhero%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml%26bm%3B1-6-creationhero.bmml</href>
+                <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22297%2C634%2C389%2C666%22%20href%3D%221-6-creationhero.bmml%22%20alt%3D%221-6-creationhero%22%20id%3D%2269%22/%3E</map>
+                <text>Create%20New</text>
+              </controlProperties>
+            </control>
+            <control controlID="71" controlTypeID="com.balsamiq.mockups::Icon" x="645" y="240" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="8" locked="false" isInGroup="2">
+              <controlProperties>
+                <icon>RightFillTriangleIcon%7Clarge</icon>
+              </controlProperties>
+            </control>
+            <control controlID="72" controlTypeID="com.balsamiq.mockups::Icon" x="267" y="240" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="9" locked="false" isInGroup="2">
+              <controlProperties>
+                <icon>LeftFillTriangleIcon%7Clarge</icon>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="12" controlTypeID="__group__" x="800" y="75" w="320" h="80" measuredW="320" measuredH="80" zOrder="2" locked="false" isInGroup="45">
+          <controlProperties>
+            <controlName>user</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="320" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="12">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="15" y="8" w="64" h="64" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="12"/>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="85" y="38" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="12">
+              <controlProperties>
+                <icon>ColumnsIcon%7Cmedium</icon>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::Icon" x="117" y="38" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="12">
+              <controlProperties>
+                <icon>ColumnsIcon%7Cmedium</icon>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Icon" x="149" y="38" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="4" locked="false" isInGroup="12">
+              <controlProperties>
+                <icon>ColumnsIcon%7Cmedium</icon>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::ComboBox" x="85" y="15" w="-1" h="-1" measuredW="114" measuredH="23" zOrder="5" locked="false" isInGroup="12">
+              <controlProperties>
+                <rotation>270</rotation>
+                <state>closed</state>
+                <text>%25username%25%0ASettings%0ASwitch%20Hero%0ASign%20Out</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="14" controlTypeID="__group__" x="160" y="155" w="960" h="45" measuredW="960" measuredH="45" zOrder="3" locked="false" isInGroup="45">
+          <controlProperties>
+            <controlName>menu</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="960" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="14">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::ButtonBar" x="80" y="7" w="800" h="30" measuredW="264" measuredH="29" zOrder="1" locked="false" isInGroup="14">
+              <controlProperties>
+                <selectedIndex>-1</selectedIndex>
+                <text>World%2C%20Hero%2C%20Merchant%2C%20Battle</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="16" controlTypeID="__group__" x="160" y="75" w="160" h="80" measuredW="160" measuredH="80" zOrder="4" locked="false" isInGroup="45">
+          <controlProperties>
+            <controlName>logo</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="160" h="80" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="16">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="0" y="8" w="160" h="64" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="16">
+              <controlProperties>
+                <href>1-1-home%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml%26bm%3B1-1-home.bmml</href>
+                <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22160%2C83%2C320%2C147%22%20href%3D%221-1-home.bmml%22%20alt%3D%221-1-home%22%20id%3D%221%22/%3E</map>
+                <src>./logo80x60.png</src>
+                <text>logo</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
     </control>
   </controls>
 </mockup>
