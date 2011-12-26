@@ -3,7 +3,6 @@ package com.mutabra.domain.battle;
 import com.googlecode.objectify.Objectify;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.Keys;
 
 import javax.persistence.Entity;
 import javax.persistence.PostLoad;
@@ -59,6 +58,21 @@ public class BattleImpl extends BaseEntityImpl implements Battle {
 
 	public List<BattleEffect> getEffects() {
 		return effectsValueHolder;
+	}
+
+	public boolean isReady() {
+		for (BattleHero hero : getHeroes()) {
+			if (!hero.isExhausted()) {
+				return false;
+			}
+			for (BattleCreature creature : hero.getCreatures()) {
+				if (!creature.isExhausted()) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	@PostLoad

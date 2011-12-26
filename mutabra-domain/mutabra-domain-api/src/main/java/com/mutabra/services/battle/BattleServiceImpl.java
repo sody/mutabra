@@ -91,17 +91,21 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 
 		saveOrUpdate(battle);
 
-		for (BattleHero battleMember : battle.getHeroes()) {
-			if (!battleMember.isExhausted()) {
-				return;
-			}
-			for (BattleCreature battleCreature : battleMember.getCreatures()) {
-				if (!battleCreature.isExhausted()) {
-					return;
-				}
-			}
+		if (battle.isReady()) {
+			endRound(battle);
 		}
-		endRound(battle);
+	}
+
+	public void skipTurn(final Battle battle, final BattleHero hero) {
+		hero.setExhausted(true);
+		for (BattleCreature creature : hero.getCreatures()) {
+			creature.setExhausted(true);
+		}
+		saveOrUpdate(battle);
+
+		if (battle.isReady()) {
+			endRound(battle);
+		}
 	}
 
 	@Transactional
@@ -136,7 +140,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 		}
 
 		for (BattleHero hero : battle.getHeroes()) {
-			if (hero.getHealth() < 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
+			if (hero.getHealth() <= 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
 				endBattle(battle);
 				saveOrUpdate(battle);
 				return;

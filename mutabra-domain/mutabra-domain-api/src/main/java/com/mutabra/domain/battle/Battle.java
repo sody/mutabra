@@ -4,7 +4,6 @@ import com.mutabra.domain.BaseEntity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Ivan Khalopik
@@ -27,4 +26,6 @@ public interface Battle extends BaseEntity {
 	List<BattleHero> getHeroes();
 
 	List<BattleEffect> getEffects();
+
+	boolean isReady();
 }

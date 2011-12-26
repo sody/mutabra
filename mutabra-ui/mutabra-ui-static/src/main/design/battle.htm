@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Битва</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8;"/>
+	<link type="text/css" rel="stylesheet" href="css/base.css"/>
+</head>
+<body>
+<div id="page" class="container">
+	<div id="header" class="unit ui-widget">
+		<div id="logo" class="column">
+			<a class="logo" href="/">UTABRA</a>
+		</div>
+		<div id="user" class="column">
+			<a href="/game/home">
+				<img src="img/f1.svg" height="64" width="64" title="admin" alt="admin"/>
+			</a>
+		</div>
+	</div>
+
+	<div id="menu" class="unit ui-widget">
+		<ul class="sidebar ui-menu ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+			<li>
+				<a id="button_4" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="/">
+					<span class="ui-button-text">Главная</span>
+				</a>
+			</li>
+			<li>
+				<a id="button_5" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="/game/home">
+					<span class="ui-button-text">Игра</span>
+				</a>
+			</li>
+			<li>
+				<a id="button_6" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="/">
+					<span class="ui-button-text">Fake 1</span>
+				</a>
+			</li>
+			<li>
+				<a id="button_7" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="/">
+					<span class="ui-button-text">Fake 2</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="content" class="unit ui-widget">
+		<h2>Раунд: 1</h2>
+
+		<div class="unit">
+			<div id="members" class="column">
+			</div>
+			<div id="field" class="column">
+				<svg version="1.1" width="400" height="400" id="battle-field" xmlns="http://www.w3.org/2000/svg">
+					<path d="m40,120,80,0,40,40,-40,40,-80,0,-40,-40,40,-40z" class="empty friend" id="f_0_0"
+						  fill="transparent" stroke="#333"></path>
+					<path d="m160,240,80,0,40,40,-40,40,-80,0,-40,-40,40,-40z" class="hero enemy" id="f_1_2"
+						  fill="transparent" stroke="#333"></path>
+					<path d="m280,200,80,0,40,40,-40,40,-80,0,-40,-40,40,-40z" class="empty enemy" id="f_2_1"
+						  fill="transparent" stroke="#333"></path>
+					<path d="m280,120,80,0,40,40,-40,40,-80,0,-40,-40,40,-40z" class="empty friend" id="f_2_0"
+						  fill="transparent" stroke="#333"></path>
+					<path d="m160,80,80,0,40,40,-40,40,-80,0,-40,-40,40,-40z" class="hero friend" id="f_1_0"
+						  fill="transparent" stroke="#333"></path>
+					<path d="m40,200,80,0,40,40,-40,40,-80,0,-40,-40,40,-40z" class="empty enemy" id="f_0_1"
+						  fill="transparent" stroke="#333"></path>
+				</svg>
+			</div>
+			<div id="log" class="column">
+			</div>
+		</div>
+		<div class="unit">
+			<div id="description" class="column">
+			</div>
+			<div id="actions" class="column">
+			</div>
+		</div>
+
+		<div class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix" id="battle-description">
+			<div style="display:none;" id="f_1_2_description"><h4>sody</h4><br clear="none"/><img
+					src="/assets/1.0-SNAPSHOT/ctx/img/faces/f1.svg" height="150" width="150" title="sody"
+					alt="sody"/><br clear="none"/><span class="ui-icon ui-icon-heart"></span><span
+					class="icon-text">15</span><span class="ui-icon ui-icon-skull"></span><span
+					class="icon-text">10</span></div>
+			<div style="display:none;" id="f_1_0_description"><h4>admin</h4><br clear="none"/><img
+					src="/assets/1.0-SNAPSHOT/ctx/img/faces/f1.svg" height="150" width="150" title="admin"
+					alt="admin"/><br clear="none"/><span class="ui-icon ui-icon-heart"></span><span
+					class="icon-text">15</span><span class="ui-icon ui-icon-skull"></span><span
+					class="icon-text">10</span></div>
+			<div style="display:none;" id="c_scratch_description"><h4>Поцарапать</h4><br clear="none"/><img
+					src="/assets/1.0-SNAPSHOT/ctx/img/heroes/anonymous.svg" height="150" width="150"
+					title="Поцарапать" alt="scratch"/><br clear="none"/><span
+					class="ui-icon ui-icon-skull"></span><span class="icon-text">5</span><span
+					class="ui-icon ui-icon-heart"></span><span class="icon-text">0</span><span
+					class="ui-icon ui-icon-blood"></span><span class="icon-text">1</span><br clear="none"/>
+
+				<p></p></div>
+			<div style="display:none;" id="c_snowball_description"><h4>Снежный Ком</h4><br clear="none"/><img
+					src="/assets/1.0-SNAPSHOT/ctx/img/heroes/anonymous.svg" height="150" width="150"
+					title="Снежный Ком" alt="snowball"/><br clear="none"/><span
+					class="ui-icon ui-icon-skull"></span><span class="icon-text">2</span><span
+					class="ui-icon ui-icon-heart"></span><span class="icon-text">0</span><span
+					class="ui-icon ui-icon-blood"></span><span class="icon-text">1</span><br clear="none"/>
+
+				<p></p></div>
+			<div style="display:none;" id="c_carrion-vulture_description"><h4>Гриф Падальщик</h4><br
+					clear="none"/><img src="/assets/1.0-SNAPSHOT/ctx/img/heroes/anonymous.svg" height="150"
+									   width="150" title="Гриф Падальщик" alt="carrion-vulture"/><br
+					clear="none"/><span class="ui-icon ui-icon-skull"></span><span
+					class="icon-text">2</span><span class="ui-icon ui-icon-heart"></span><span
+					class="icon-text">5</span><span class="ui-icon ui-icon-blood"></span><span
+					class="icon-text">2</span><br clear="none"/>
+
+				<p></p></div>
+		</div>
+		<div class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix" id="battle-actions">
+			<div style="display:none;" id="f_1_0_actions">
+				<div class="card ui-widget ui-widget-content ui-corner-all" id="c_scratch"><img
+						src="/assets/1.0-SNAPSHOT/ctx/img/heroes/anonymous.svg" height="64" width="64"
+						title="Поцарапать" alt="scratch"/><br clear="none"/><span
+						class="ui-icon ui-icon-skull"></span><span class="icon-text">5</span><span
+						class="ui-icon ui-icon-heart"></span><span class="icon-text">0</span><span
+						class="ui-icon ui-icon-blood"></span><span class="icon-text">1</span><br clear="none"/>
+				</div>
+				<div class="card ui-widget ui-widget-content ui-corner-all" id="c_snowball"><img
+						src="/assets/1.0-SNAPSHOT/ctx/img/heroes/anonymous.svg" height="64" width="64"
+						title="Снежный Ком" alt="snowball"/><br clear="none"/><span
+						class="ui-icon ui-icon-skull"></span><span class="icon-text">2</span><span
+						class="ui-icon ui-icon-heart"></span><span class="icon-text">0</span><span
+						class="ui-icon ui-icon-blood"></span><span class="icon-text">1</span><br clear="none"/>
+				</div>
+				<div class="card ui-widget ui-widget-content ui-corner-all" id="c_carrion-vulture"><img
+						src="/assets/1.0-SNAPSHOT/ctx/img/heroes/anonymous.svg" height="64" width="64"
+						title="Гриф Падальщик" alt="carrion-vulture"/><br clear="none"/><span
+						class="ui-icon ui-icon-skull"></span><span class="icon-text">2</span><span
+						class="ui-icon ui-icon-heart"></span><span class="icon-text">5</span><span
+						class="ui-icon ui-icon-blood"></span><span class="icon-text">2</span><br clear="none"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer" class="unit ui-widget">
+		Copyright © 2010-2012 Mutabra Team. All rights reserved.
+		<br clear="none"/>
+		App Version: 1.0-SNAPSHOT, Tapestry Version: 5.3
+		<br clear="none"/>
+		<a shape="rect" href="mailto:ikhalopik@gmail.com">Contact Us</a>
+	</div>
+</div>
+</body>
+</html>

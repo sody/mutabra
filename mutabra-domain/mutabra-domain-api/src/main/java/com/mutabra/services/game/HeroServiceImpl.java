@@ -40,7 +40,7 @@ public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements Hero
 		final Hero hero = ReflectionUtils.newInstance(realEntityClass, account);
 		hero.setName(account.getName());
 		hero.setLevel(levelService.get(Levels.NEWBIE));
-		hero.setHealth(15);
+		hero.setHealth(30);
 		return hero;
 	}
 

@@ -108,5 +108,13 @@ T5.extendInitializers({
 			supports_hero_point: spec.supports_hero_point,
 			supports_creature_point: spec.supports_creature_point
 		});
+	},
+
+	skipButton: function (spec) {
+		j$('#' + spec.id).click(function() {
+			j$.ajax({
+				url: spec.url
+			});
+		});
 	}
 });

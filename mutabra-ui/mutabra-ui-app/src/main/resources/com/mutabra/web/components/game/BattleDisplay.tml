@@ -48,6 +48,7 @@
 				</t:if>
 			</t:if>
 		</t:loop>
+		<t:game.skipturndisplay hero="you"/>
 	</div>
 
 </t:container>

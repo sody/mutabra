@@ -2,6 +2,7 @@ package com.mutabra.services.battle;
 
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.battle.BattleField;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.common.Castable;
@@ -25,6 +26,9 @@ public interface BattleService extends BaseEntityService<Battle> {
 
 	@Transactional
 	void registerAction(Battle battle, BattleUnit caster, Castable castable, Position target);
+
+	@Transactional
+	void skipTurn(Battle battle, BattleHero hero);
 
 	List<BattleField> getBattleField(Hero hero, Battle battle);
 

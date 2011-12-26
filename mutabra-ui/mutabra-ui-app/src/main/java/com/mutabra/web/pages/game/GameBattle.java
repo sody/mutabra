@@ -42,6 +42,12 @@ public class GameBattle extends AbstractPage {
 		return null;
 	}
 
+	@OnEvent("skipTurn")
+	Object skipTurn(final BattleHero hero) {
+		battleService.skipTurn(battle, hero);
+		return null;
+	}
+
 	@OnEvent("registerHeroAction")
 	Object registerHeroAction(final BattleHero hero,
 							  final Card card,
@@ -55,9 +61,9 @@ public class GameBattle extends AbstractPage {
 
 	@OnEvent("registerCreatureAction")
 	Object registerCreatureAction(final BattleCreature creature,
-							  final Ability ability,
-							  final @RequestParameter(value = "x") int x,
-							  final @RequestParameter(value = "y") int y) {
+								  final Ability ability,
+								  final @RequestParameter(value = "x") int x,
+								  final @RequestParameter(value = "y") int y) {
 		if (!creature.isExhausted()) {
 			battleService.registerAction(battle, creature, ability, new Position(x, y));
 		}
