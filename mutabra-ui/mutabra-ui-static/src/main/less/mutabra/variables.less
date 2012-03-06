@@ -2,6 +2,15 @@
 // Variables to customize the look and feel of Bootstrap
 // -----------------------------------------------------
 
+// GRID
+// --------------------------------------------------
+
+// Default 940px grid
+@gridColumns:             12;
+@gridColumnWidth:         60px;
+@gridGutterWidth:         20px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
 // Typography
 @baseFontSize:            13px;
 @baseFontFamily:          "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -40,11 +49,6 @@
 @pink:                    #c3325f;
 @purple:                  #7a43b6;
 
-// Buttons
-@primaryButtonBackground:    @linkColor;
-
-
-
 // COMPONENT VARIABLES
 // --------------------------------------------------
 
@@ -62,12 +66,6 @@
 @iconSpritePath:          "../img/icons_96x96x24.png";
 @smallIconSpritePath:     "../img/icons_64x64x16.png";
 @largeIconSpritePath:     "../img/icons_128x128x32.png";
-
-// Input placeholder text color
-@placeholderText:         @grayLight;
-
-// Hr border color
-@hrBorder:                @grayLighter;
 
 // Navbar
 @navbarHeight:                    40px;
@@ -95,14 +93,3 @@
 @infoText:                #3a87ad;
 @infoBackground:          #d9edf7;
 @infoBorder:              darken(spin(@infoBackground, -10), 7%);
-
-
-
-// GRID
-// --------------------------------------------------
-
-// Default 940px grid
-@gridColumns:             12;
-@gridColumnWidth:         60px;
-@gridGutterWidth:         20px;
-@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
