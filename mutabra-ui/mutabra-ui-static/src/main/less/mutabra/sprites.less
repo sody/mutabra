@@ -1,0 +1,83 @@
+// ICONS
+// -----
+
+// All icons receive the styles of the <i> tag with a base class 
+// of .i and are then given a unique class to add width, height, 
+// and background-position. Your resulting HTML will look like
+// <i class="icon-facebook"></i>.
+
+// For the small and large version of the icons, just add the .small or .large class:
+// <i class="icon-facebook small"></i>
+
+// For the iterable version of the icons, just add the .active class:
+// <i class="icon-facebook active"></i>
+
+@smallIconSize : 16px;
+@iconSize :      24px;
+@largeIconSize : 32px;
+
+.icon(@x, @y) {
+  background-position: -(@x * @iconSize) -(@y * @iconSize);
+
+  &.small {
+    background-position: -(@x * @smallIconSize) -(@y * @smallIconSize);
+  }
+
+  &.large {
+    background-position: -(@x * @largeIconSize) -(@y * @largeIconSize);
+  }
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: @iconSize;
+  height: @iconSize;
+  line-height: @iconSize;
+  vertical-align: text-top;
+  background-image: url(@iconSpritePath);
+  background-repeat: no-repeat;
+
+  .ie7-restore-right-whitespace();
+
+  &.small {
+    width: @smallIconSize;
+    height: @smallIconSize;
+    line-height: @smallIconSize;
+    background-image: url(@smallIconSpritePath);
+  }
+
+  &.large {
+    width: @largeIconSize;
+    height: @largeIconSize;
+    line-height: @largeIconSize;
+    background-image: url(@largeIconSpritePath);
+  }
+
+  &.active {
+    opacity: 0.5;
+  }
+
+  &.active:hover {
+    opacity: 1;
+  }
+}
+
+.icon-triangle-l { .icon(0, 0); }
+.icon-triangle-r { .icon(1, 0); }
+.icon-triangle-u { .icon(2, 0); }
+.icon-triangle-d { .icon(3, 0); }
+
+.icon-arrow-l { .icon(0, 1); }
+.icon-arrow-r { .icon(1, 1); }
+.icon-arrow-u { .icon(2, 1); }
+.icon-arrow-d { .icon(3, 1); }
+
+.icon-facebook { .icon(0, 2); }
+.icon-twitter { .icon(1, 2); }
+.icon-google { .icon(2, 2); }
+.icon-vk { .icon(3, 2); }
+
+.icon-blood { .icon(0, 3); }
+.icon-heart { .icon(1, 3); }
+.icon-skull { .icon(2, 3); }

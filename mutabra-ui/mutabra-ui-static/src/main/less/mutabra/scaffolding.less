@@ -1,0 +1,48 @@
+// Scaffolding
+// Basic and global styles for generating a grid system, structural layout, and page templates
+// -------------------------------------------------------------------------------------------
+
+
+// STRUCTURAL LAYOUT
+// -----------------
+
+body {
+  min-width: @gridRowWidth + 2 * @gridGutterWidth;
+}
+
+// LINKS
+// -----
+
+a {
+  color: @headerTextColor;
+  text-decoration: none;
+  &:hover {
+    color: @headerTextColor;
+  }
+}
+
+#header {
+  .logo {
+    background: url("../img/logo80x60.png") no-repeat;
+    padding-top: 40px;
+    padding-left: 80px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+  }
+}
+
+#footer {
+  text-align: center;
+}
+
+#content {
+  margin: 0 -@gridGutterWidth;
+  padding: @gridGutterWidth - 1;
+  background: @foregroundColor;
+  border: 1px solid @borderColor;
+  .border-radius(@gridGutterWidth);
+  .clearfix();
+}
+
