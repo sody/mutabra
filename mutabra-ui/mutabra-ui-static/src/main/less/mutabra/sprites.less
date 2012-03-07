@@ -28,6 +28,10 @@
   }
 }
 
+.flag(@n) {
+  background-position: 0 -(@n * @iconSize);
+}
+
 [class^="icon-"],
 [class*=" icon-"] {
   display: inline-block;
@@ -81,3 +85,107 @@
 .icon-blood { .icon(0, 3); }
 .icon-heart { .icon(1, 3); }
 .icon-skull { .icon(2, 3); }
+
+.icon-flag {
+  width: @largeIconSize;
+  height: @iconSize;
+  line-height: @iconSize;
+  background-image: url(@flagIconSpritePath);
+
+  /* AZERBAIJAN */
+  &.AZ,
+  &.AZE { .flag(0); }
+
+  /* BELARUS */
+  &.BY,
+  &.BLR { .flag(1); }
+
+  /* BULGARIA */
+  &.BG,
+  &.BGR { .flag(2); }
+
+  /* BOSNIA AND HERZEGOWINA */
+  &.BA,
+  &.BIH { .flag(3); }
+
+  /* CZECH REPUBLIC */
+  &.CZ,
+  &.CHE { .flag(4); }
+
+  /* DENMARK */
+  &.DK,
+  &.DNK { .flag(5); }
+
+  /* GERMANY */
+  &.DE,
+  &.DEU { .flag(6); }
+
+  /* GREECE */
+  &.GR
+  &.GRC { .flag(7); }
+
+  /* UNITED KINGDOM */
+  &.GB,
+  &.GBR { .flag(8); }
+
+  /* UNITED STATES */
+  &.US,
+  &.USA { .flag(9); }
+
+  /* SPAIN */
+  &.ES,
+  &.ESP { .flag(10); }
+
+  /* FINLAND */
+  &.FI,
+  &.FIN { .flag(11); }
+
+  /* FRANCE */
+  &.FR,
+  &.FRA { .flag(12); }
+
+  /* CROATIA */
+  &.HR,
+  &.HRV { .flag(13); }
+
+  /* ARMENIA */
+  &.AM,
+  &.ARM { .flag(14); }
+
+  /* ITALY */
+  &.IT,
+  &.ITA { .flag(15); }
+
+  /* JAPAN */
+  &.JP,
+  &.JPN { .flag(16); }
+
+  /* NETHERLANDS */
+  &.NL,
+  &.NLD { .flag(17); }
+
+  /* BRAZIL */
+  &.BR,
+  &.BRA { .flag(18); }
+
+  /* PORTUGAL */
+  &.PT,
+  &.PRT { .flag(19); }
+
+  /* RUSSIAN FEDERATION */
+  &.RU,
+  &.RUS { .flag(20); }
+
+  /* ALBANIA */
+  &.AL,
+  &.ALB { .flag(21); }
+
+  /* SWEDEN */
+  &.SE,
+  &.SWE { .flag(22); }
+
+  /* CHINA */
+  &.CN,
+  &.CHN { .flag(23); }
+
+}
