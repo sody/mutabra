@@ -14,27 +14,9 @@
 	</t:replace>
 
 	<t:replace id="content-area">
-		<div id="content" class="unit c-5">
-			<div class="column">
-				<div id="left" class="container ui-widget">
-					<t:menu.sidebarmenu/>
-				</div>
-			</div>
-
-			<div class="column s-3">
-				<div id="center" class="container ui-widget ui-widget-content">
-					<h1>${title}</h1>
-					<t:body/>
-				</div>
-			</div>
-
-			<div class="column">
-				<div id="right" class="container ui-widget">
-					<t:authority value="PERMISSION_MANAGE_APPLICATION">
-						<t:menu.admin/>
-					</t:authority>
-				</div>
-			</div>
+		<div id="content">
+			<h1>${title} <t:if test="subtitle"><small>${subtitle}</small></t:if></h1>
+			<t:body/>
 		</div>
 	</t:replace>
 </t:extend>

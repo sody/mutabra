@@ -26,6 +26,10 @@ public class ExceptionReport extends org.apache.tapestry5.corelib.pages.Exceptio
 		return messages.get("page.error" + (status > 0 ? "-" + status : "") + ".title");
 	}
 
+	public String getSubtitle() {
+		return messages.get("page.error" + (status > 0 ? "-" + status : "") + ".subtitle");
+	}
+
 	public String getMessage() {
 		return messages.get("message.error" + (status > 0 ? "-" + status : ""));
 	}

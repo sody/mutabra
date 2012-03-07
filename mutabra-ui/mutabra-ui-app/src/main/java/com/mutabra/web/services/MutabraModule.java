@@ -94,12 +94,13 @@ public class MutabraModule {
 	@Local
 	@Contribute(JavaScriptStack.class)
 	public void contributeJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
-		configuration.add("reset", new StackExtension(StackExtensionType.STYLESHEET, "context:css/reset.css"));
-		configuration.add("fonts", new StackExtension(StackExtensionType.STYLESHEET, "context:css/fonts.css"));
-		configuration.add("layout", new StackExtension(StackExtensionType.STYLESHEET, "context:css/layout.css"));
+		configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
+		configuration.add("flag", new StackExtension(StackExtensionType.STYLESHEET, "context:css/flag.css"));
 
 		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-1.7.1.js"));
 		configuration.add("jquery-ui", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-ui-1.8.17.js"));
+
+		configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-dropdown.js"));
 		configuration.add("jquery-jcarousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery.jcarousel.js"));
 		configuration.add("jquery-mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-mutabra.js"));
 		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));

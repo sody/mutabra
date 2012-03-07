@@ -1,46 +1,36 @@
-<div id="header" class="unit c-5 ui-widget"
-	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	 xmlns:p="tapestry:parameter">
-	<div class="column">
-		<t:layout.logo/>
-	</div>
-	<div class="column s-2">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+			 xmlns:p="tapestry:parameter">
+	<div class="span1 offset4">
 		<div id="user-pic">
 			<div class="t-beaneditor-row">
-				<t:button primary="big ui-icon-facebook" text="false">
-					<t:social.facebookconnect t:id="facebook" class="transparent" scope="email">${message:button.facebook}</t:social.facebookconnect>
-				</t:button>
-				<t:button primary="big ui-icon-twitter" text="false">
-					<t:social.twitterconnect t:id="twitter" class="transparent">${message:button.twitter}</t:social.twitterconnect>
-				</t:button>
+				<t:social.facebookconnect t:id="facebook" scope="email">
+					<i class="icon-facebook active"/>
+				</t:social.facebookconnect>
+				<t:social.twitterconnect t:id="twitter">
+					<i class="icon-twitter active"/>
+				</t:social.twitterconnect>
 			</div>
 			<div class="t-beaneditor-row">
-				<t:button primary="big ui-icon-google" text="false">
-					<t:social.googleconnect t:id="google" class="transparent" scope="https://mail.google.com/">${message:button.google}</t:social.googleconnect>
-				</t:button>
-				<t:button primary="big ui-icon-vkontakte" text="false">
-					<t:social.vkontakteconnect t:id="vkontakte" class="transparent">${message:button.vkontakte}</t:social.vkontakteconnect>
-				</t:button>
+				<t:social.googleconnect t:id="google" scope="https://mail.google.com/">
+					<i class="icon-google active"/>
+				</t:social.googleconnect>
+				<t:social.vkontakteconnect t:id="vk">
+					<i class="icon-vk active"/>
+				</t:social.vkontakteconnect>
 			</div>
 		</div>
 	</div>
-	<div class="column s-2">
-		<div class="t-beaneditor-row">
-			<t:form t:id="signIn">
-				<t:textfield t:id="email" value="email"  validate="required,email" label="message:label.email" class="first ui-corner-left"/>
-				<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password" class="second ui-corner-right"/>
-				<t:button primary="ui-icon-triangle-1-e" text="false">
-					<t:linksubmit>${message:button.sign-in}</t:linksubmit>
-				</t:button>
+	<div class="span4">
+		<div>
+			<t:form t:id="signIn" class="form-inline">
+				<t:textfield t:id="email" value="email"  validate="required,email" label="message:label.email" class="input-small"/>
+				<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password" class="input-small"/>
+				<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
 			</t:form>
-		</div>
-		<div class="t-beaneditor-row">
-			<t:form t:id="signUp">
-				<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="double ui-corner-all"/>
-				<t:button primary="ui-icon-triangle-1-e" text="false">
-					<t:linksubmit>${message:button.sign-up}</t:linksubmit>
-				</t:button>
+			<t:form t:id="signUp" class="form-inline">
+				<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="input-small"/>
+				<t:linksubmit class="btn">${message:button.sign-up}</t:linksubmit>
 			</t:form>
 		</div>
 	</div>
-</div>
+</t:container>

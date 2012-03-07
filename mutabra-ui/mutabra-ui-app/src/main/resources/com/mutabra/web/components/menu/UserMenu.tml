@@ -1,36 +1,15 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
-	<t:button secondary="ui-icon-triangle-1-s">
-		<a id="user-menu-button" href="#">${userName}</a>
-	</t:button>
-	<t:menu id="user-menu" class="sidebar" items="settings,switch,signOut">
+	<t:dropdown items="settings,switch,signOut" label="prop:userName">
 		<p:settingsMenuItem>
-			<t:button>
-				<t:pagelink page="account/settings">${message:button.account-settings}</t:pagelink>
-			</t:button>
+			<t:pagelink page="account/settings">${message:button.account-settings}</t:pagelink>
 		</p:settingsMenuItem>
 		<p:switchMenuItem>
-			<t:button>
-				<t:pagelink page="game/hero/switch">${message:button.switch-hero}</t:pagelink>
-			</t:button>
+			<t:pagelink page="game/hero/switch">${message:button.switch-hero}</t:pagelink>
 		</p:switchMenuItem>
 		<p:signOutMenuItem>
-			<t:button>
-				<t:eventlink event="signOut">${message:button.sign-out}</t:eventlink>
-			</t:button>
+			<t:eventlink event="signOut">${message:button.sign-out}</t:eventlink>
 		</p:signOutMenuItem>
-	</t:menu>
-
-<script type="text/javascript">
-	j$(function() {
-		j$("#user-menu-button").click(function() {
-			var menu = j$("#user-menu");
-			menu.toggle();
-			setTimeout(function() {
-				menu.hide();
-			}, 3000)
-		});
-	});
-</script>
+	</t:dropdown>
 </t:container>

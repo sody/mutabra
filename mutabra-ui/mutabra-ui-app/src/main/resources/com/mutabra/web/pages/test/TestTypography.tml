@@ -1,0 +1,201 @@
+<html t:type="layout/default"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+	<small>
+		Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+		ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+		amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+		odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+	</small>
+</p>
+
+<div class="lead">
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</div>
+
+<h1>The main header H1 <small>with small comment</small></h1>
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+
+<h2>The main header H2 <small>with small comment</small></h2>
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+
+<h3>The main header H3 <small>with small comment</small></h3>
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+
+<h4>The main header H4 <small>with small comment</small></h4>
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+
+<h5>The main header H5 <small>with small comment</small></h5>
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+
+<h6>The main header H6 <small>with small comment</small></h6>
+<p>
+	Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+	ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+	amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+	odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+</p>
+
+<h2>Emphasis, address, and abbreviation</h2>
+<div class="row">
+	<div class="span4">
+		<h3>Using emphasis</h3>
+
+		<p>
+			<a href="#">Link</a>,
+			<strong>strong text</strong>,
+			<em>emphasis text</em>,
+			<span class="muted">muted text</span>,
+			simple text
+		</p>
+	</div>
+	<div class="span4">
+		<h3>Example addresses</h3>
+		<address>
+			<strong>Twitter, Inc.</strong><br/>
+			795 Folsom Ave, Suite 600<br/>
+			San Francisco, CA 94107<br/>
+			<abbr title="Phone">P:</abbr> (123) 456-7890
+		</address>
+		<address>
+			<strong>Full Name</strong><br/>
+			<a href="mailto:#">first.last@gmail.com</a>
+		</address>
+	</div>
+	<div class="span4">
+		<h3>Example abbreviations</h3>
+		<p><abbr title="HyperText Markup Language">HTML</abbr> is the best thing since sliced bread.</p>
+		<p>An abbreviation of the word attribute is <abbr title="attribute">attr</abbr>.</p>
+	</div>
+</div>
+
+<h2>Blockquotes</h2>
+<div class="row">
+	<div class="span6">
+		<p>Default blockquotes are styled as such:</p>
+		<blockquote>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</p>
+			<small>Someone famous in <cite title="">Body of work</cite></small>
+		</blockquote>
+	</div>
+	<div class="span6">
+		<p>To float your blockquote to the right, add <code>class="pull-right"</code>:</p>
+		<blockquote class="pull-right">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</p>
+			<small>Someone famous in <cite title="">Body of work</cite></small>
+		</blockquote>
+	</div>
+</div>
+
+<h2>Lists</h2>
+<div class="row">
+	<div class="span3">
+		<h4>Unordered</h4>
+		<p><code>&lt;ul&gt;</code></p>
+		<ul>
+			<li>Lorem ipsum dolor sit amet</li>
+			<li>Consectetur adipiscing elit</li>
+			<li>Integer molestie lorem at massa</li>
+			<li>Facilisis in pretium nisl aliquet</li>
+			<li>Nulla volutpat aliquam velit
+				<ul>
+					<li>Phasellus iaculis neque</li>
+					<li>Purus sodales ultricies</li>
+					<li>Vestibulum laoreet porttitor sem</li>
+					<li>Ac tristique libero volutpat at</li>
+				</ul>
+			</li>
+			<li>Faucibus porta lacus fringilla vel</li>
+			<li>Aenean sit amet erat nunc</li>
+			<li>Eget porttitor lorem</li>
+		</ul>
+	</div>
+	<div class="span3">
+		<h4>Unstyled</h4>
+		<p><code>&lt;ul class="unstyled"&gt;</code></p>
+		<ul class="unstyled">
+			<li>Lorem ipsum dolor sit amet</li>
+			<li>Consectetur adipiscing elit</li>
+			<li>Integer molestie lorem at massa</li>
+			<li>Facilisis in pretium nisl aliquet</li>
+			<li>Nulla volutpat aliquam velit
+				<ul>
+					<li>Phasellus iaculis neque</li>
+					<li>Purus sodales ultricies</li>
+					<li>Vestibulum laoreet porttitor sem</li>
+					<li>Ac tristique libero volutpat at</li>
+				</ul>
+			</li>
+			<li>Faucibus porta lacus fringilla vel</li>
+			<li>Aenean sit amet erat nunc</li>
+			<li>Eget porttitor lorem</li>
+		</ul>
+	</div>
+	<div class="span3">
+		<h4>Ordered</h4>
+		<p><code>&lt;ol&gt;</code></p>
+		<ol>
+			<li>Lorem ipsum dolor sit amet</li>
+			<li>Consectetur adipiscing elit</li>
+			<li>Integer molestie lorem at massa</li>
+			<li>Facilisis in pretium nisl aliquet</li>
+			<li>Nulla volutpat aliquam velit</li>
+			<li>Faucibus porta lacus fringilla vel</li>
+			<li>Aenean sit amet erat nunc</li>
+			<li>Eget porttitor lorem</li>
+		</ol>
+	</div>
+	<div class="span3">
+		<h4>Description</h4>
+		<p><code>&lt;dl&gt;</code></p>
+		<dl>
+			<dt>Description lists</dt>
+			<dd>A description list is perfect for defining terms.</dd>
+			<dt>Euismod</dt>
+			<dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+			<dd>Donec id elit non mi porta gravida at eget metus.</dd>
+			<dt>Malesuada porta</dt>
+			<dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+		</dl>
+	</div>
+</div>
+
+</html>

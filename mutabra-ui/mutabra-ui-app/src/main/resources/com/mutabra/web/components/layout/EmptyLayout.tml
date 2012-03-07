@@ -25,20 +25,24 @@
 <body>
 
 <div class="container">
-	<t:extension-point id="header-area">
-		<div id="header" class="unit">
-			<t:layout.logo/>
+	<header id="header" class="row">
+		<div class="span3">
+			<a href="/" class="logo">UTABRA</a>
 		</div>
-	</t:extension-point>
-
+		<t:extension-point id="header-area"/>
+	</header>
 
 	<t:extension-point id="content-area">
 		<t:body/>
 	</t:extension-point>
 
-	<t:extension-point id="footer-area">
-		<t:layout.footer/>
-	</t:extension-point>
+	<footer id="footer" class="row">
+		<t:extension-point id="footer-area">
+			${message:message.copyright} <br/>
+			App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>
+			<a href="mailto:support@mutabra.com">Contact Us</a>
+		</t:extension-point>
+	</footer>
 </div>
 
 </body>

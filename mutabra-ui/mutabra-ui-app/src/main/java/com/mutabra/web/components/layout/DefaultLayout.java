@@ -15,11 +15,7 @@ import org.apache.tapestry5.annotations.SupportsInformalParameters;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Import(stack = "mutabra",
-		stylesheet = {
-				"context:css/flag.css",
-				"context:css/main-theme.css"
-		})
+@Import(stack = "mutabra")
 @SupportsInformalParameters
 public class DefaultLayout extends EmptyLayout {
 

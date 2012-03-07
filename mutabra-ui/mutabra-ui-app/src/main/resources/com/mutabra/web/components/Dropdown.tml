@@ -1,0 +1,16 @@
+<div class="prop:containerClass" id="prop:clientId" t:id="container"
+	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<a class="${toggleClass}" data-toggle="dropdown" href="#">${label} <span class="${caretClass}"/> </a>
+
+	<ul class="${menuClass}">
+		<t:block id="defaultItemBody">
+			<t:actionlink context="item">${menuItemTitle}</t:actionlink>
+		</t:block>
+
+		<t:loop source="items" value="item">
+			<li>
+				<t:delegate to="menuItemBody"/>
+			</li>
+		</t:loop>
+	</ul>
+</div>

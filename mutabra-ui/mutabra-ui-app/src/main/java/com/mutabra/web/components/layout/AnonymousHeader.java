@@ -75,7 +75,7 @@ public class AnonymousHeader extends AbstractComponent {
 		return GameHome.class;
 	}
 
-	@OnEvent(value = EventConstants.SUCCESS, component = "vkontakte")
+	@OnEvent(value = EventConstants.SUCCESS, component = "vk")
 	Object vkontakteConnected(final OAuth.Session session) {
 		System.out.println();
 		return GameHome.class;

@@ -20,4 +20,8 @@ public class AbstractPage extends AbstractComponent {
 		final String key = "page." + getResources().getPageName().toLowerCase().replaceAll("/","-") + ".title";
 		return getMessages().get(key);
 	}
+
+	public String getSubtitle() {
+		return null;
+	}
 }

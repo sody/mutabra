@@ -1,0 +1,313 @@
+<html t:type="layout/default"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<h2>Buttons</h2>
+
+<div class="row">
+	<div class="span6">
+		<h3>Button group</h3>
+		<div class="btn-group" style="margin: 9px 0;">
+			<a class="btn" href="#">Left</a>
+			<a class="btn" href="#">Middle</a>
+			<a class="btn" href="#">Right</a>
+		</div>
+	</div>
+
+	<div class="span6">
+		<h3>Toolbar</h3>
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<a class="btn" href="#">1</a>
+				<a class="btn" href="#">2</a>
+				<a class="btn" href="#">3</a>
+				<a class="btn" href="#">4</a>
+			</div>
+			<div class="btn-group">
+				<a class="btn" href="#">5</a>
+				<a class="btn" href="#">6</a>
+				<a class="btn" href="#">7</a>
+			</div>
+			<div class="btn-group">
+				<a class="btn" href="#">8</a>
+			</div>
+		</div>
+	</div>
+</div>
+<br/>
+
+<div class="row">
+	<div class="span6">
+		<h3>Dropdown</h3>
+
+		<div class="btn-group">
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="#">Action</a></li>
+				<li><a href="#">Another action</a></li>
+				<li><a href="#">Something else here</a></li>
+				<li class="divider"/>
+				<li><a href="#">Separated link</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="span6">
+		<h3>Split Button</h3>
+
+		<div class="btn-group">
+			<a class="btn" href="#">Action</a>
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="#">Action</a></li>
+				<li><a href="#">Another action</a></li>
+				<li><a href="#">Something else here</a></li>
+				<li class="divider"/>
+				<li><a href="#">Separated link</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br/>
+
+<h2>Nav tabs</h2>
+
+<div class="row">
+	<div class="span6">
+		<h3>Simple tabs</h3>
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Messages</a></li>
+		</ul>
+	</div>
+	<div class="span6">
+		<h3>Tabs with dropdown</h3>
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<br/>
+
+<div class="row">
+	<div class="span6">
+		<h3>Tabs Stacked</h3>
+		<ul class="nav nav-tabs nav-stacked">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Messages</a></li>
+		</ul>
+	</div>
+	<div class="span6">
+		<h3>Nav List</h3>
+		<ul class="nav nav-list">
+			<li class="nav-header">List header</li>
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Library</a></li>
+			<li><a href="#">Applications</a></li>
+			<li class="nav-header">Another list header</li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Settings</a></li>
+			<li><a href="#">Help</a></li>
+		</ul>
+	</div>
+</div>
+<br/>
+
+<div class="row">
+	<div class="span6">
+		<h3>Default Tabbable</h3>
+		<div class="tabbable" style="margin-bottom: 9px;">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#1" data-toggle="tab">Section 1</a></li>
+				<li class=""><a href="#2" data-toggle="tab">Section 2</a></li>
+				<li class=""><a href="#3" data-toggle="tab">Section 3</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="1">
+					<p>I'm in Section 1.</p>
+				</div>
+				<div class="tab-pane" id="2">
+					<p>Howdy, I'm in Section 2.</p>
+				</div>
+				<div class="tab-pane" id="3">
+					<p>What up girl, this is Section 3.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="span6">
+		<h3>Tabs Below</h3>
+		<div class="tabbable tabs-below">
+			<div class="tab-content">
+				<div class="tab-pane" id="A">
+					<p>I'm in Section A.</p>
+				</div>
+				<div class="tab-pane" id="B">
+					<p>Howdy, I'm in Section B.</p>
+				</div>
+				<div class="tab-pane active" id="C">
+					<p>What up girl, this is Section C.</p>
+				</div>
+			</div>
+			<ul class="nav nav-tabs">
+				<li class=""><a href="#A" data-toggle="tab">Section 1</a></li>
+				<li class=""><a href="#B" data-toggle="tab">Section 2</a></li>
+				<li class="active"><a href="#C" data-toggle="tab">Section 3</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br/>
+
+<div class="row">
+	<div class="span6">
+		<h3>Tabs Left</h3>
+		<div class="tabbable tabs-left">
+			<ul class="nav nav-tabs">
+				<li class=""><a href="#lA" data-toggle="tab">Section 1</a></li>
+				<li class=""><a href="#lB" data-toggle="tab">Section 2</a></li>
+				<li class="active"><a href="#lC" data-toggle="tab">Section 3</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane" id="lA">
+					<p>I'm in Section A.</p>
+				</div>
+				<div class="tab-pane" id="lB">
+					<p>Howdy, I'm in Section B.</p>
+				</div>
+				<div class="tab-pane active" id="lC">
+					<p>What up girl, this is Section C.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="span6">
+		<h3>Tabs Right</h3>
+		<div class="tabbable tabs-right">
+			<ul class="nav nav-tabs">
+				<li class=""><a href="#rA" data-toggle="tab">Section 1</a></li>
+				<li class=""><a href="#rB" data-toggle="tab">Section 2</a></li>
+				<li class="active"><a href="#rC" data-toggle="tab">Section 3</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane" id="rA">
+					<p>I'm in Section A.</p>
+				</div>
+				<div class="tab-pane" id="rB">
+					<p>Howdy, I'm in Section B.</p>
+				</div>
+				<div class="tab-pane active" id="rC">
+					<p>What up girl, this is Section C.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br/>
+
+<h2>Nav pills</h2>
+
+<div class="row">
+	<div class="span4">
+		<h3>Default pills</h3>
+		<ul class="nav nav-pills">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Messages</a></li>
+		</ul>
+	</div>
+
+	<div class="span4">
+		<h3>Pills with dropdown</h3>
+		<ul class="nav nav-pills">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li class="dropdown open">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<div class="span4">
+		<h3>Stacked pills</h3>
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Messages</a></li>
+		</ul>
+	</div>
+</div>
+<br/>
+
+<h2>Navbar</h2>
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container" style="width: auto;">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="#">Project name</a>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li class="nav-header">Nav header</li>
+							<li><a href="#">Separated link</a></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul>
+					</li>
+				</ul>
+				<form class="navbar-search pull-left" action="">
+					<input type="text" class="search-query span2" placeholder="Search"/>
+				</form>
+				<ul class="nav pull-right">
+					<li><a href="#">Link</a></li>
+					<li class="divider-vertical"></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div><!-- /.nav-collapse -->
+		</div>
+	</div><!-- /navbar-inner -->
+</div>
+
+</html>

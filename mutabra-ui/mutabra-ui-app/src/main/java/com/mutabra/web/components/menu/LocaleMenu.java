@@ -41,7 +41,7 @@ public class LocaleMenu {
 	}
 
 	public String getMenuItemClass() {
-		return locale + (currentLocale.toString().equals(locale) ? " " + CSSConstants.STATE_HIGHLIGHT : "");
+		return "icon-flag " + COUNTRY_CODES.get(locale);
 	}
 
 	void onChangeLocale(final String newLocale) {
