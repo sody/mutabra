@@ -1,6 +1,6 @@
 package com.mutabra.web.components.menu;
 
-import com.mutabra.web.internal.CSSConstants;
+import com.mutabra.web.internal.CSSConstantsEx;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -40,8 +40,16 @@ public class LocaleMenu {
 		return locales;
 	}
 
+	public String getMenuClass() {
+		return CSSConstantsEx.MENU_HORIZONTAL + " " + CSSConstantsEx.CLEARFIX;
+	}
+
 	public String getMenuItemClass() {
-		return "icon-flag " + COUNTRY_CODES.get(locale);
+		return new StringBuilder(currentLocale.toString().equals(locale) ? CSSConstantsEx.ACTIVE : "")
+				.append(' ').append(CSSConstantsEx.ICON_FLAG)
+				.append(' ').append(COUNTRY_CODES.get(locale))
+				.append(' ').append(CSSConstantsEx.INTERACTIVE)
+				.toString();
 	}
 
 	void onChangeLocale(final String newLocale) {

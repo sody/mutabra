@@ -36,18 +36,13 @@ public class Dropdown extends AbstractComponent implements ClientElement {
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
 	private String className;
 
+	@Property
 	@Parameter(value = "this", allowNull = false)
 	private PropertyOverrides overrides;
 
 	@Component(inheritInformalParameters = true)
 	@MixinClasses(RenderInformals.class)
 	private Any container;
-
-	@Inject
-	private Block defaultItemBody;
-
-	@Property
-	private String item;
 
 	public String getClientId() {
 		return clientId;
@@ -72,17 +67,5 @@ public class Dropdown extends AbstractComponent implements ClientElement {
 
 	public String getMenuClass() {
 		return CSSConstantsEx.DROPDOWN_MENU;
-	}
-
-	public String getMenuItemTitle() {
-		return getMessages().get("button." + item);
-	}
-
-	public Block getMenuItemBody() {
-		final Block block = overrides.getOverrideBlock(item + "MenuItem");
-		if (block != null) {
-			return block;
-		}
-		return defaultItemBody;
 	}
 }

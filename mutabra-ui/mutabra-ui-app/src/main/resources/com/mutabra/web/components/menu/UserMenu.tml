@@ -1,6 +1,7 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
+
 	<t:dropdown items="settings,switch,signOut" label="prop:userName">
 		<p:settingsMenuItem>
 			<t:pagelink page="account/settings">${message:button.account-settings}</t:pagelink>
@@ -12,4 +13,5 @@
 			<t:eventlink event="signOut">${message:button.sign-out}</t:eventlink>
 		</p:signOutMenuItem>
 	</t:dropdown>
+
 </t:container>

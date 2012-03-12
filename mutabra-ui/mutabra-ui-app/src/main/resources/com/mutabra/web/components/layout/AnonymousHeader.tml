@@ -1,36 +1,28 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
-	<div class="span1 offset4">
-		<div id="user-pic">
-			<div class="t-beaneditor-row">
-				<t:social.facebookconnect t:id="facebook" scope="email">
-					<i class="icon-facebook active"/>
-				</t:social.facebookconnect>
-				<t:social.twitterconnect t:id="twitter">
-					<i class="icon-twitter active"/>
-				</t:social.twitterconnect>
-			</div>
-			<div class="t-beaneditor-row">
-				<t:social.googleconnect t:id="google" scope="https://mail.google.com/">
-					<i class="icon-google active"/>
-				</t:social.googleconnect>
-				<t:social.vkontakteconnect t:id="vk">
-					<i class="icon-vk active"/>
-				</t:social.vkontakteconnect>
-			</div>
-		</div>
-	</div>
-	<div class="span4">
-		<div>
-			<t:form t:id="signIn" class="form-inline">
-				<t:textfield t:id="email" value="email"  validate="required,email" label="message:label.email" class="input-small"/>
-				<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password" class="input-small"/>
-				<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
-			</t:form>
-			<t:form t:id="signUp" class="form-inline">
-				<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="input-small"/>
-				<t:linksubmit class="btn">${message:button.sign-up}</t:linksubmit>
-			</t:form>
-		</div>
+	<div class="span4 offset5">
+		<t:form t:id="signIn" class="form-inline">
+			<t:textfield t:id="email" value="email"  validate="required,email" label="message:label.email" class="input-small"/>
+			<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password" class="input-small"/>
+			<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
+		</t:form>
+
+		<t:form t:id="signUp" class="form-inline">
+			<t:social.facebookconnect t:id="facebook" scope="email" class="icon-facebook interactive" title="Facebook">
+				Facebook
+			</t:social.facebookconnect>
+			<t:social.twitterconnect t:id="twitter"  class="icon-twitter interactive" title="Twitter">
+				Twitter
+			</t:social.twitterconnect>
+			<t:social.googleconnect t:id="google" scope="https://mail.google.com/" class="icon-google interactive" title="Google">
+				Google
+			</t:social.googleconnect>
+			<t:social.vkontakteconnect t:id="vk"  class="icon-vk interactive" title="VKontakte">
+				VKontakte
+			</t:social.vkontakteconnect>
+
+			<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="input-small"/>
+			<t:linksubmit class="btn">${message:button.sign-up}</t:linksubmit>
+		</t:form>
 	</div>
 </t:container>

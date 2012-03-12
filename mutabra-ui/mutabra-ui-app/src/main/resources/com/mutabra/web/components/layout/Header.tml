@@ -6,10 +6,10 @@
 		</t:pagelink>
 	</div>
 	<div class="span3">
-		<div class="t-beaneditor-row">
+		<div class="control-group">
 			<t:menu.user/>
 		</div>
-		<div class="t-beaneditor-row">
+		<div class="control-group">
 			<t:menu.locale/>
 		</div>
 	</div>

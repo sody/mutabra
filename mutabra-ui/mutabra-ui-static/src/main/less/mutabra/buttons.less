@@ -25,12 +25,15 @@
 
   &:hover, &:active, &.active, &.disabled, &[disabled] {
     background-color: @backgroundColor;
-    border: 1px solid @activeBorderColor;
   }
 
   &:hover {
     color: @textColor;
     text-decoration: none;
+  }
+
+  &:active, &.active {
+    border: 1px solid @activeBorderColor;
   }
 
   &:focus {

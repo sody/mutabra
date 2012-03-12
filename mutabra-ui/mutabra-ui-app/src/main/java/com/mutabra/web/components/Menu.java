@@ -26,15 +26,14 @@ public class Menu extends AbstractComponent {
 	private String[] items;
 
 	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String selected;
-
-	@Property
 	@Parameter
 	private String item;
 
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
-	private String className;
+	private String menuClass;
+
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	private String itemClass;
 
 	@Parameter(value = "this", allowNull = false)
 	private PropertyOverrides overrides;
@@ -47,20 +46,11 @@ public class Menu extends AbstractComponent {
 	private Block defaultItemBody;
 
 	public String getMenuClass() {
-		final StringBuilder builder = new StringBuilder();
-		if (className != null) {
-			builder.append(className).append(' ');
-		}
-		builder.append(CSSConstants.MENU).append(' ')
-				.append(CSSConstants.WIDGET).append(' ')
-				.append(CSSConstants.WIDGET_CONTENT).append(' ')
-				.append(CSSConstants.CORNER_ALL).append(' ')
-				.append(CSSConstants.HELPER_CLEAR_FIX);
-		return builder.toString();
+		return menuClass;
 	}
 
 	public String getMenuItemClass() {
-		return item + (item.equals(selected) ? " " + CSSConstants.STATE_HIGHLIGHT : "");
+		return itemClass;
 	}
 
 	public String getMenuItemTitle() {

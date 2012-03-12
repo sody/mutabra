@@ -41,6 +41,8 @@
   vertical-align: text-top;
   background-image: url(@iconSpritePath);
   background-repeat: no-repeat;
+  text-indent: -99999px;
+  *text-indent: 0;
 
   .ie7-restore-right-whitespace();
 
@@ -58,12 +60,11 @@
     background-image: url(@largeIconSpritePath);
   }
 
-  &.active {
+  &.interactive {
     opacity: 0.5;
-  }
-
-  &.active:hover {
-    opacity: 1;
+    &:hover, &:active, &.active, &:focus {
+      opacity: 1;
+    }
   }
 }
 

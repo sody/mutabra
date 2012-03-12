@@ -1,7 +1,8 @@
-<ul class="${menuClass}" t:id="list"
+<ul class="prop:menuClass" t:id="list"
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
 	<t:block id="defaultItemBody">
-		<t:actionlink context="item" class="${menuItemClass} btn">${menuItemTitle}</t:actionlink>
+		<t:actionlink context="item" class="prop:menuItemClass">${menuItemTitle}</t:actionlink>
 	</t:block>
 
 	<t:loop source="items" value="item">
