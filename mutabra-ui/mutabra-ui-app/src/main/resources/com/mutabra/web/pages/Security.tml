@@ -1,87 +1,74 @@
 <html t:type="layout/empty"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+		>
 
-<div id="content" class="unit">
-	<div id="center-panel" class="container">
-		<ul>
-			<li><a href="#sign-in-tab">${message:button.sign-in}</a></li>
-			<li><a href="#sign-up-tab">${message:button.sign-up}</a></li>
-			<li><a href="#restore-tab">${message:button.restore}</a></li>
+<div class="span6 offset3">
+	<div class="tabbable tabs-below tabs-panel" style="he">
+		<div class="tab-content">
+			<div id="sign-in-tab" class="tab-pane active">
+				<t:form t:id="signIn" class="form-horizontal">
+					<legend>${message:page.security-sign-in.title}</legend>
+					<t:customerrors/>
+					<div class="control-group">
+						<t:delegate to="block:email"/>
+					</div>
+					<div class="control-group">
+						<t:label for="password" class="control-label"/>
+						<div class="controls">
+							<t:passwordfield t:id="password" value="password" validate="required"
+											 label="message:label.password"/>
+						</div>
+					</div>
+
+					<div class="form-actions">
+						<t:menu.oauthmenu>
+							<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
+						</t:menu.oauthmenu>
+					</div>
+				</t:form>
+			</div>
+			<div id="sign-up-tab" class="tab-pane">
+				<t:form t:id="signUp" class="form-horizontal">
+					<legend>${message:page.security-sign-up.title}</legend>
+					<t:customerrors/>
+					<div class="control-group">
+						<t:delegate to="block:email"/>
+					</div>
+
+					<div class="form-actions">
+						<t:menu.oauthmenu>
+							<t:linksubmit class="btn">${message:button.sign-up}</t:linksubmit>
+						</t:menu.oauthmenu>
+					</div>
+				</t:form>
+			</div>
+			<div id="restore-tab" class="tab-pane">
+				<t:form t:id="restore" class="form-horizontal">
+					<legend>${message:page.security-restore.title}</legend>
+					<t:customerrors/>
+					<div class="control-group">
+						<t:delegate to="block:email"/>
+					</div>
+
+					<div class="form-actions">
+						<t:menu.oauthmenu>
+							<t:linksubmit class="btn">${message:button.restore}</t:linksubmit>
+						</t:menu.oauthmenu>
+					</div>
+				</t:form>
+			</div>
+		</div>
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#sign-in-tab" data-toggle="tab">${message:button.sign-in}</a></li>
+			<li><a href="#sign-up-tab" data-toggle="tab">${message:button.sign-up}</a></li>
+			<li><a href="#restore-tab" data-toggle="tab">${message:button.restore}</a></li>
 		</ul>
-		<div id="sign-in-tab">
-			<h1>${message:page.security-sign-in.title}</h1>
-			<t:form t:id="signIn">
-				<t:customerrors/>
-				<div class="t-beaneditor-row">
-					<div class="t-beaneditor-row">
-						<t:delegate to="block:email"/>
-					</div>
-					<div class="t-beaneditor-row">
-						<t:label for="password"/>
-						<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password"/>
-					</div>
-				</div>
-
-				<t:menu.oauthmenu>
-					<t:button>
-						<t:linksubmit>${message:button.sign-in}</t:linksubmit>
-					</t:button>
-				</t:menu.oauthmenu>
-			</t:form>
-		</div>
-		<div id="sign-up-tab">
-			<h1>${message:page.security-sign-up.title}</h1>
-			<t:form t:id="signUp">
-				<t:customerrors/>
-				<div class="t-beaneditor-row">
-					<div class="t-beaneditor-row">
-						<t:delegate to="block:email"/>
-					</div>
-					<div class="t-beaneditor-row">
-						<a href="#">Additional Options</a>
-					</div>
-				</div>
-
-				<t:menu.oauthmenu>
-					<t:button>
-						<t:linksubmit>${message:button.sign-up}</t:linksubmit>
-					</t:button>
-				</t:menu.oauthmenu>
-			</t:form>
-		</div>
-		<div id="restore-tab">
-			<h1>${message:page.security-restore.title}</h1>
-			<t:form t:id="restore">
-				<t:customerrors/>
-				<div class="t-beaneditor-row">
-					<div class="t-beaneditor-row">
-						<t:delegate to="block:email"/>
-					</div>
-				</div>
-
-				<t:menu.oauthmenu>
-					<t:button>
-						<t:linksubmit>${message:button.restore}</t:linksubmit>
-					</t:button>
-				</t:menu.oauthmenu>
-			</t:form>
-		</div>
 		<t:block id="email">
-			<t:label for="email"/>
-			<t:textfield t:id="email" value="email" validate="required,email" label="message:label.email"/>
+			<t:label for="email" class="control-label"/>
+			<div class="controls">
+				<t:textfield t:id="email" value="email" validate="required,email" label="message:label.email"/>
+			</div>
 		</t:block>
 	</div>
 </div>
-
-<script type="text/javascript">
-	j$(function() {
-		j$("#center-panel").tabs();
-		j$("#center-panel .ui-tabs-nav, #center-panel .ui-tabs-nav > *")
-				.removeClass("ui-corner-all ui-corner-top")
-				.addClass("ui-corner-bottom");
-	});
-</script>
-
-
 </html>

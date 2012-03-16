@@ -1,6 +1,7 @@
 package com.mutabra.web.components;
 
 import com.mutabra.web.internal.CSSConstants;
+import com.mutabra.web.internal.CSSConstantsEx;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.ValidationTracker;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -27,6 +28,7 @@ public class CustomErrors {
 		if (tracker.getHasErrors()) {
 			final List<String> errors = tracker.getErrors();
 			if (!errors.isEmpty()) {
+				writer.element("div", "class", "control-group");
 				for (String message : errors) {
 					writer.element("div").addClassName(CSSConstants.STATE_ERROR, CSSConstants.CORNER_ALL);
 					writer.element("p");
@@ -37,7 +39,6 @@ public class CustomErrors {
 					writer.end();
 					writer.end();
 				}
-				writer.element("br");
 				writer.end();
 			}
 		}

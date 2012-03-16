@@ -14,9 +14,11 @@
 	</t:replace>
 
 	<t:replace id="content-area">
-		<div id="content">
-			<h1>${title} <t:if test="subtitle"><small>${subtitle}</small></t:if></h1>
-			<t:body/>
+		<div class="span12">
+			<div class="wrapper">
+				<h1>${title} <t:if test="subtitle"><small>${subtitle}</small></t:if></h1>
+				<t:body/>
+			</div>
 		</div>
 	</t:replace>
 </t:extend>

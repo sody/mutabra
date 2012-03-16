@@ -47,7 +47,7 @@ public class MutabraModule {
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
-		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
+//		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
 		binder.bind(AccountManager.class, AccountManagerImpl.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
 		binder.bind(ImageSource.class, ImageSourceImpl.class);
@@ -60,20 +60,20 @@ public class MutabraModule {
 		configuration.add(SymbolConstants.START_PAGE_NAME, "/");
 	}
 
+/*
 	@Contribute(ServiceOverride.class)
 	public static void contributeServiceOverrides(final MappedConfiguration<Class, Object> configuration,
 												  final @Local ValidationDecoratorFactory decoratorFactory) {
 		configuration.add(ValidationDecoratorFactory.class, decoratorFactory);
 	}
 
-	/*
 	@Contribute(ValueEncoderSource.class)
 	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
 											 final TypeCoercer typeCoercer,
 											 final EntityRepository repository) {
 		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
 	}
-	*/
+*/
 
 	@Decorate(serviceInterface = PropertyConduitSource.class)
 	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
@@ -101,6 +101,8 @@ public class MutabraModule {
 		configuration.add("jquery-ui", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-ui-1.8.17.js"));
 
 		configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-dropdown.js"));
+		configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-tab.js"));
+
 		configuration.add("jquery-jcarousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery.jcarousel.js"));
 		configuration.add("jquery-mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-mutabra.js"));
 		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));

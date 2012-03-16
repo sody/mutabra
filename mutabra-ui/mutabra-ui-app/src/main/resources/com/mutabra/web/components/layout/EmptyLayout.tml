@@ -32,9 +32,11 @@
 		<t:extension-point id="header-area"/>
 	</header>
 
-	<t:extension-point id="content-area">
-		<t:body/>
-	</t:extension-point>
+	<section id="content" class="row">
+		<t:extension-point id="content-area">
+			<t:body/>
+		</t:extension-point>
+	</section>
 
 	<footer id="footer" class="row">
 		<t:extension-point id="footer-area">

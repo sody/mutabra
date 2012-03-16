@@ -8,17 +8,17 @@
 		</t:form>
 
 		<t:form t:id="signUp" class="form-inline">
-			<t:social.facebookconnect t:id="facebook" scope="email" class="icon-facebook interactive" title="Facebook">
-				Facebook
+			<t:social.facebookconnect t:id="facebook" scope="email" class="icon-facebook interactive" title="message:button.facebook">
+				${message:button.facebook}
 			</t:social.facebookconnect>
-			<t:social.twitterconnect t:id="twitter"  class="icon-twitter interactive" title="Twitter">
-				Twitter
+			<t:social.twitterconnect t:id="twitter"  class="icon-twitter interactive" title="message:button.twitter">
+				${message:button.twitter}
 			</t:social.twitterconnect>
-			<t:social.googleconnect t:id="google" scope="https://mail.google.com/" class="icon-google interactive" title="Google">
-				Google
+			<t:social.googleconnect t:id="google" scope="https://mail.google.com/" class="icon-google interactive" title="message:button.google">
+				${message:button.google}
 			</t:social.googleconnect>
-			<t:social.vkontakteconnect t:id="vk"  class="icon-vk interactive" title="VKontakte">
-				VKontakte
+			<t:social.vkontakteconnect t:id="vk"  class="icon-vk interactive" title="message:button.vk">
+				${message:button.vk}
 			</t:social.vkontakteconnect>
 
 			<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="input-small"/>

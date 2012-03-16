@@ -35,13 +35,25 @@ body {
   text-align: center;
 }
 
-#content {
+.wrapper {
   margin: 0 -@gridGutterWidth;
   padding: @gridGutterWidth - 1;
   background: @foregroundColor;
   border: 1px solid @borderColor;
   .border-radius(@gridGutterWidth);
   .clearfix();
+}
+
+.tabs-panel {
+  margin: 0 -@gridGutterWidth;
+  .tab-content {
+    padding: @gridGutterWidth - 1;
+    background: @foregroundColor;
+    border: 1px solid @borderColor;
+    border-bottom: 0;
+    @borderRadius: @gridGutterWidth @gridGutterWidth 0 0;
+    .border-radius(@borderRadius);
+  }
 }
 
 .menu-horizontal {
