@@ -32,7 +32,8 @@ public class Menu extends AbstractComponent {
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
 	private String menuClass;
 
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
+	@Property
+	@Parameter(defaultPrefix = BindingConstants.LITERAL, cache = false)
 	private String itemClass;
 
 	@Parameter(value = "this", allowNull = false)

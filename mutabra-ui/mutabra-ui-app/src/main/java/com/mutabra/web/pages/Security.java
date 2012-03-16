@@ -27,13 +27,10 @@ public class Security extends AbstractPage {
 	private String password;
 
 	@InjectComponent
-	private Form signIn;
+	private Form signInForm;
 
 	@InjectComponent
-	private Form signUp;
-
-	@InjectComponent
-	private Form restore;
+	private Form restoreForm;
 
 	@Inject
 	private SecurityContext securityContext;
@@ -41,7 +38,7 @@ public class Security extends AbstractPage {
 	@Inject
 	private AccountManager accountManager;
 
-	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
+	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
 	Object signIn() {
 		securityContext.signIn(new Credentials(email, password));
 		return GameHome.class;
@@ -53,26 +50,14 @@ public class Security extends AbstractPage {
 		return GameHome.class;
 	}
 
-	@OnEvent(value = EventConstants.SUCCESS, component = "signUp")
-	Object signUp() {
-		try {
-			accountManager.signUp(email);
-			//todo: add success notification
-			return Index.class;
-		} catch (ValidationException e) {
-			signUp.recordError(e.getMessage());
-		}
-		return null;
-	}
-
-	@OnEvent(value = EventConstants.SUCCESS, component = "restore")
+	@OnEvent(value = EventConstants.SUCCESS, component = "restoreForm")
 	Object restorePassword() {
 		try {
 			accountManager.restorePassword(email);
 			//todo: add success notification
 			return Index.class;
 		} catch (ValidationException e) {
-			restore.recordError(e.getMessage());
+			restoreForm.recordError(e.getMessage());
 		}
 		return null;
 	}

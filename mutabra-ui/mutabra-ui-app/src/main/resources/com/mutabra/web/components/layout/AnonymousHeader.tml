@@ -2,27 +2,17 @@
 			 xmlns:p="tapestry:parameter">
 	<div class="span4 offset5">
 		<t:form t:id="signIn" class="form-inline">
-			<t:textfield t:id="email" value="email"  validate="required,email" label="message:label.email" class="input-small"/>
-			<t:passwordfield t:id="password" value="password" validate="required" label="message:label.password" class="input-small"/>
-			<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
-		</t:form>
-
-		<t:form t:id="signUp" class="form-inline">
-			<t:social.facebookconnect t:id="facebook" scope="email" class="icon-facebook interactive" title="message:button.facebook">
-				${message:button.facebook}
-			</t:social.facebookconnect>
-			<t:social.twitterconnect t:id="twitter"  class="icon-twitter interactive" title="message:button.twitter">
-				${message:button.twitter}
-			</t:social.twitterconnect>
-			<t:social.googleconnect t:id="google" scope="https://mail.google.com/" class="icon-google interactive" title="message:button.google">
-				${message:button.google}
-			</t:social.googleconnect>
-			<t:social.vkontakteconnect t:id="vk"  class="icon-vk interactive" title="message:button.vk">
-				${message:button.vk}
-			</t:social.vkontakteconnect>
-
-			<t:textfield t:id="registrationEmail" value="email" validate="required,email" label="message:label.email" class="input-small"/>
-			<t:linksubmit class="btn">${message:button.sign-up}</t:linksubmit>
+			<div class="control-group">
+				<t:textfield t:id="email" value="email"  validate="required,email" class="span2"
+							 placeholder="message:label.email" label="message:label.email" />
+				<t:passwordfield t:id="password" value="password" validate="required" class="span2"
+								 placeholder="message:label.password" label="message:label.password"/>
+			</div>
+			<div class="control-group">
+				<t:menu.oauthmenu>
+					<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
+				</t:menu.oauthmenu>
+			</div>
 		</t:form>
 	</div>
 </t:container>

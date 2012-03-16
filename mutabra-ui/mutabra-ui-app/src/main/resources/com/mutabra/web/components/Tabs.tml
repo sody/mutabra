@@ -1,0 +1,30 @@
+<div class="prop:containerClass" id="prop:clientId" t:id="container"
+	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+	 xmlns:p="tapestry:parameter">
+
+	<t:if test="tabsBelow">
+		<t:delegate to="block:content"/>
+		<t:delegate to="block:menu"/>
+		<p:else>
+			<t:delegate to="block:menu"/>
+			<t:delegate to="block:content"/>
+		</p:else>
+	</t:if>
+
+	<t:block id="menu">
+		<t:menu items="prop:tabs" item="prop:tab" class="prop:menuClass" itemClass="prop:menuItemClass"
+				overrides="prop:overrides">
+			<a href="#${tab}" data-toggle="tab">${tabTitle}</a>
+		</t:menu>
+	</t:block>
+
+	<t:block id="content">
+		<div class="tab-content">
+			<t:loop source="tabs" value="tab">
+				<div class="${tabClass}" id="${tab}">
+					<t:delegate to="tabBody"/>
+				</div>
+			</t:loop>
+		</div>
+	</t:block>
+</div>

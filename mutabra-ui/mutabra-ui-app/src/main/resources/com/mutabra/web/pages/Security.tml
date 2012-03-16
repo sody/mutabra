@@ -1,74 +1,54 @@
 <html t:type="layout/empty"
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		>
+	  xmlns:p="tapestry:parameter">
 
 <div class="span6 offset3">
-	<div class="tabbable tabs-below tabs-panel" style="he">
-		<div class="tab-content">
-			<div id="sign-in-tab" class="tab-pane active">
-				<t:form t:id="signIn" class="form-horizontal">
-					<legend>${message:page.security-sign-in.title}</legend>
-					<t:customerrors/>
-					<div class="control-group">
-						<t:delegate to="block:email"/>
+	<t:tabs tabs="signIn,restore" class="tabs-panel tabs-below" active="signIn">
+		<p:signInTab>
+			<t:form t:id="signInForm" class="form-horizontal">
+				<legend>${message:page.security-sign-in.title}</legend>
+				<t:customerrors/>
+				<div class="control-group">
+					<t:label for="email" class="control-label"/>
+					<div class="controls">
+						<t:textfield t:id="email" value="email" validate="required,email"
+									 placeholder="message:label.email" label="message:label.email"/>
 					</div>
-					<div class="control-group">
-						<t:label for="password" class="control-label"/>
-						<div class="controls">
-							<t:passwordfield t:id="password" value="password" validate="required"
-											 label="message:label.password"/>
-						</div>
+				</div>
+				<div class="control-group">
+					<t:label for="password" class="control-label"/>
+					<div class="controls">
+						<t:passwordfield t:id="password" value="password" validate="required"
+										 placeholder="message:label.password" label="message:label.password"/>
 					</div>
+				</div>
 
-					<div class="form-actions">
-						<t:menu.oauthmenu>
-							<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
-						</t:menu.oauthmenu>
-					</div>
-				</t:form>
-			</div>
-			<div id="sign-up-tab" class="tab-pane">
-				<t:form t:id="signUp" class="form-horizontal">
-					<legend>${message:page.security-sign-up.title}</legend>
-					<t:customerrors/>
-					<div class="control-group">
-						<t:delegate to="block:email"/>
-					</div>
+				<div class="form-actions">
+					<t:menu.oauthmenu>
+						<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
+					</t:menu.oauthmenu>
+				</div>
+			</t:form>
+		</p:signInTab>
 
-					<div class="form-actions">
-						<t:menu.oauthmenu>
-							<t:linksubmit class="btn">${message:button.sign-up}</t:linksubmit>
-						</t:menu.oauthmenu>
+		<p:restoreTab>
+			<t:form t:id="restoreForm" class="form-horizontal">
+				<legend>${message:page.security-restore.title}</legend>
+				<t:customerrors/>
+				<div class="control-group">
+					<t:label for="restoreEmail" class="control-label"/>
+					<div class="controls">
+						<t:textfield t:id="restoreEmail" value="email" validate="required,email"
+									 placeholder="message:label.email" label="message:label.email"/>
 					</div>
-				</t:form>
-			</div>
-			<div id="restore-tab" class="tab-pane">
-				<t:form t:id="restore" class="form-horizontal">
-					<legend>${message:page.security-restore.title}</legend>
-					<t:customerrors/>
-					<div class="control-group">
-						<t:delegate to="block:email"/>
-					</div>
+				</div>
 
-					<div class="form-actions">
-						<t:menu.oauthmenu>
-							<t:linksubmit class="btn">${message:button.restore}</t:linksubmit>
-						</t:menu.oauthmenu>
-					</div>
-				</t:form>
-			</div>
-		</div>
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#sign-in-tab" data-toggle="tab">${message:button.sign-in}</a></li>
-			<li><a href="#sign-up-tab" data-toggle="tab">${message:button.sign-up}</a></li>
-			<li><a href="#restore-tab" data-toggle="tab">${message:button.restore}</a></li>
-		</ul>
-		<t:block id="email">
-			<t:label for="email" class="control-label"/>
-			<div class="controls">
-				<t:textfield t:id="email" value="email" validate="required,email" label="message:label.email"/>
-			</div>
-		</t:block>
-	</div>
+				<div class="form-actions">
+					<t:linksubmit class="btn">${message:button.restore}</t:linksubmit>
+				</div>
+			</t:form>
+		</p:restoreTab>
+	</t:tabs>
+
 </div>
 </html>
