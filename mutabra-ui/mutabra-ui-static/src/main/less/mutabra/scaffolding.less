@@ -25,10 +25,6 @@ body {
     font-weight: bold;
     display: block;
   }
-
-  form {
-    margin-bottom: 5px;
-  }
 }
 
 #footer {
@@ -42,6 +38,16 @@ body {
   border: 1px solid @borderColor;
   .border-radius(@gridGutterWidth);
   .clearfix();
+}
+
+.page-header {
+  padding-bottom: @baseLineHeight - 1;
+  margin: @baseLineHeight 0;
+  border-bottom: 1px solid @borderColor;
+
+  h1 {
+    line-height: 1;
+  }
 }
 
 .tabs-panel {
