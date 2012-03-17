@@ -3,49 +3,59 @@
 	  xmlns:p="tapestry:parameter">
 
 
-<t:form t:id="changeEmailForm">
+<t:form t:id="changeEmailForm" class="form-horizontal">
+	<legend>${message:change-email}</legend>
+
 	<t:customerrors/>
 
-	<div class="t-beaneditor-row">
-		<t:label for="email"/>
-		<t:textfield t:id="email" value="email" validate="required" label="message:label.email"/>
+	<div class="control-group">
+		<t:label for="email" class="control-label"/>
+		<div class="controls">
+			<t:textfield t:id="email" value="email" validate="required" label="message:label.email"/>
+		</div>
 	</div>
 
-	<t:button>
-		<t:linksubmit>${message:button.change}</t:linksubmit>
-	</t:button>
+	<div class="form-actions">
+		<t:linksubmit class="btn">${message:label.change}</t:linksubmit>
+	</div>
 </t:form>
 
-<hr/>
+<t:form t:id="changePasswordForm" class="form-horizontal">
+	<legend>${message:change-password}</legend>
 
-<t:form t:id="changePasswordForm">
 	<t:customerrors/>
 
-	<div class="t-beaneditor-row">
-		<t:label for="password"/>
-		<t:textfield t:id="password" value="password" validate="required" label="message:label.password"/>
+	<div class="control-group">
+		<t:label for="password" class="control-label"/>
+		<div class="controls">
+			<t:textfield t:id="password" value="password" validate="required" label="message:label.password"/>
+		</div>
 	</div>
 
-	<t:button>
-		<t:linksubmit>${message:button.change}</t:linksubmit>
-	</t:button>
+	<div class="form-actions">
+		<t:linksubmit class="btn">${message:label.change}</t:linksubmit>
+	</div>
 </t:form>
 
-<hr/>
+<t:form t:id="accountForm" class="form-horizontal">
+	<legend>${message:change-profile}</legend>
 
-<t:form t:id="accountForm">
-	<div class="t-beaneditor-row">
-		<t:label for="name"/>
-		<t:textfield t:id="name" value="value.name" label="message:label.name"/>
+	<div class="control-group">
+		<t:label for="name" class="control-label"/>
+		<div class="controls">
+			<t:textfield t:id="name" value="value.name" label="message:label.name"/>
+		</div>
 	</div>
-	<div class="t-beaneditor-row">
-		<t:label for="place"/>
-		<t:textfield t:id="place" value="value.place" label="message:label.place"/>
+	<div class="control-group">
+		<t:label for="place" class="control-label"/>
+		<div class="controls">
+			<t:textfield t:id="place" value="value.place" label="message:label.place"/>
+		</div>
 	</div>
 
-	<t:button>
-		<t:linksubmit>${message:button.save}</t:linksubmit>
-	</t:button>
+	<div class="form-actions">
+		<t:linksubmit class="btn">${message:label.save}</t:linksubmit>
+	</div>
 </t:form>
 
 </html>

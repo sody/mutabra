@@ -2,15 +2,15 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:indexMenuItem>
-		<t:button><t:pagelink page="index">${message:page.index.title}</t:pagelink></t:button>
+		<t:pagelink page="index" class="btn">${message:page.index.title}</t:pagelink>
 	</p:indexMenuItem>
 	<p:securityMenuItem>
-		<t:button><t:pagelink page="game/home">${message:page.game-home.title}</t:pagelink></t:button>
+		<t:pagelink page="game/home" class="btn">${message:page.game-home.title}</t:pagelink>
 	</p:securityMenuItem>
 	<p:fake1MenuItem>
-		<t:button><t:pagelink page="index">Fake 1</t:pagelink></t:button>
+		<t:pagelink page="index" class="btn">Fake 1</t:pagelink>
 	</p:fake1MenuItem>
 	<p:fake2MenuItem>
-		<t:button><t:pagelink page="index">Fake 2</t:pagelink></t:button>
+		<t:pagelink page="index" class="btn">Fake 2</t:pagelink>
 	</p:fake2MenuItem>
 </t:menu>

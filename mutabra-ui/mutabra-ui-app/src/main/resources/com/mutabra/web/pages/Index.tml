@@ -1,14 +1,14 @@
 <html t:type="layout/default"
-	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div class="unit c-2">
-		<div class="column">
-			<img align="middle" src="${logo}" alt="logo"/>
-		</div>
-
-		<div class="column">
-			${message:content-text}
-		</div>
+<div class="row">
+	<div class="span6">
+		<img align="middle" src="${logo}" alt="logo"/>
 	</div>
+
+	<div class="span6">
+		${message:content-text}
+	</div>
+</div>
+
 </html>

@@ -2,6 +2,7 @@ package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.CSSConstantsEx;
+import com.mutabra.web.internal.MessageUtils;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ClientElement;
@@ -78,7 +79,7 @@ public class Tabs extends AbstractComponent implements ClientElement {
 	}
 
 	public String getTabTitle() {
-		return getMessages().get("button." + tab);
+		return getMessages().get(MessageUtils.label(tab));
 	}
 
 	public Block getTabBody() {

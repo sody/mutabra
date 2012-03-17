@@ -38,9 +38,7 @@
 
 	<t:menu class="toolbar" items="create,cancel">
 		<p:createMenuItem>
-			<t:button>
-				<t:submit value="message:button.create"/>
-			</t:button>
+			<t:submit value="message:label.create" class="btn"/>
 		</p:createMenuItem>
 	</t:menu>
 </t:form>

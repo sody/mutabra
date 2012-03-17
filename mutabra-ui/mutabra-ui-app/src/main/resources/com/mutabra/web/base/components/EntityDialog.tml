@@ -17,10 +17,10 @@
 					<t:extension-point id="toolbar">
 						<t:menu items="cancel,save" class="toolbar">
 							<p:saveMenuItem>
-								<t:linksubmit class="btn">${message:button.save}</t:linksubmit>
+								<t:linksubmit class="btn">${message:label.save}</t:linksubmit>
 							</p:saveMenuItem>
 							<p:cancelMenuItem>
-								<t:dialoglink dialog="${dialogId}" action="close" class="btn">${message:button.cancel}</t:dialoglink>
+								<t:dialoglink dialog="${dialogId}" action="close" class="btn">${message:label.cancel}</t:dialoglink>
 							</p:cancelMenuItem>
 						</t:menu>
 					</t:extension-point>

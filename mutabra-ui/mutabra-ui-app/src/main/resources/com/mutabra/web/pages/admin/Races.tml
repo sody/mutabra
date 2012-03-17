@@ -13,7 +13,7 @@
 	<p:nameCell>${row:name}</p:nameCell>
 	<p:descriptionCell>${row:description}</p:descriptionCell>
 	<p:actionsCell>
-		<t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink>
+		<t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
 	</p:actionsCell>
 </t:grid>
 

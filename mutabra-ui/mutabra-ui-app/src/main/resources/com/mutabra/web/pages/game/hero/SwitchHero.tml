@@ -11,16 +11,12 @@
 	<p:enterMenuItem>
 		<t:loop source="source" value="row" index="index">
 			<div id="hero-${index}" style="display:none;">
-				<t:button>
-					<t:eventlink event="enter" context="row">${message:button.enter}</t:eventlink>
-				</t:button>
+				<t:eventlink event="enter" context="row" class="btn">${message:label.enter}</t:eventlink>
 			</div>
 		</t:loop>
 	</p:enterMenuItem>
 	<p:createMenuItem>
-		<t:button>
-			<t:pagelink page="game/hero/create">${message:button.create}</t:pagelink>
-		</t:button>
+		<t:pagelink page="game/hero/create" class="btn">${message:label.create}</t:pagelink>
 	</p:createMenuItem>
 </t:menu>
 

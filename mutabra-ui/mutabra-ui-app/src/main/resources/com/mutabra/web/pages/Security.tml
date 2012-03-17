@@ -25,7 +25,7 @@
 
 				<div class="form-actions">
 					<t:menu.oauthmenu>
-						<t:linksubmit class="btn">${message:button.sign-in}</t:linksubmit>
+						<t:linksubmit class="btn">${message:label.sign-in}</t:linksubmit>
 					</t:menu.oauthmenu>
 				</div>
 			</t:form>
@@ -44,7 +44,7 @@
 				</div>
 
 				<div class="form-actions">
-					<t:linksubmit class="btn">${message:button.restore}</t:linksubmit>
+					<t:linksubmit class="btn">${message:label.restore}</t:linksubmit>
 				</div>
 			</t:form>
 		</p:restoreTab>

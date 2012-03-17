@@ -2,24 +2,24 @@
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 		xmlns:p="tapestry:parameter">
 	<p:changeSetsMenuItem>
-		<t:button><t:pagelink page="admin/changesets">${message:page.admin-changesets.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/changesets" class="btn">${message:page.admin-changesets.title}</t:pagelink>
 	</p:changeSetsMenuItem>
 	<p:accountsMenuItem>
-		<t:button><t:pagelink page="admin/accounts">${message:page.admin-accounts.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/accounts" class="btn">${message:page.admin-accounts.title}</t:pagelink>
 	</p:accountsMenuItem>
 	<p:levelsMenuItem>
-		<t:button><t:pagelink page="admin/levels">${message:page.admin-levels.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/levels" class="btn">${message:page.admin-levels.title}</t:pagelink>
 	</p:levelsMenuItem>
 	<p:facesMenuItem>
-		<t:button><t:pagelink page="admin/faces">${message:page.admin-faces.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/faces" class="btn">${message:page.admin-faces.title}</t:pagelink>
 	</p:facesMenuItem>
 	<p:racesMenuItem>
-		<t:button><t:pagelink page="admin/races">${message:page.admin-races.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/races" class="btn">${message:page.admin-races.title}</t:pagelink>
 	</p:racesMenuItem>
 	<p:cardsMenuItem>
-		<t:button><t:pagelink page="admin/cards">${message:page.admin-cards.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/cards" class="btn">${message:page.admin-cards.title}</t:pagelink>
 	</p:cardsMenuItem>
 	<p:testMenuItem>
-		<t:button><t:pagelink page="admin/test">${message:page.admin-test.title}</t:pagelink></t:button>
+		<t:pagelink page="admin/test" class="btn">${message:page.admin-test.title}</t:pagelink>
 	</p:testMenuItem>
 </t:menu>

@@ -2,6 +2,7 @@ package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.CSSConstants;
+import com.mutabra.web.internal.MessageUtils;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.PropertyOverrides;
@@ -55,7 +56,7 @@ public class Menu extends AbstractComponent {
 	}
 
 	public String getMenuItemTitle() {
-		return getMessages().get("button." + item);
+		return getMessages().get(MessageUtils.label(item));
 	}
 
 	public Block getMenuItemBody() {

@@ -18,14 +18,10 @@
 
 		<t:menu items="cancel,update" class="toolbar">
 			<p:updateMenuItem>
-				<t:button>
-					<t:linksubmit>${message:button.update}</t:linksubmit>
-				</t:button>
+				<t:linksubmit class="btn">${message:label.update}</t:linksubmit>
 			</p:updateMenuItem>
 			<p:cancelMenuItem>
-				<t:button>
-					<t:dialoglink dialog="updateDialog" action="close">${message:button.cancel}</t:dialoglink>
-				</t:button>
+				<t:dialoglink dialog="updateDialog" action="close" class="btn">${message:label.cancel}</t:dialoglink>
 			</p:cancelMenuItem>
 		</t:menu>
 	</t:form>
@@ -33,9 +29,7 @@
 
 <t:menu class="toolbar" items="update">
 	<p:updateMenuItem>
-		<t:button>
-			<t:dialoglink dialog="updateDialog">${message:button.update}</t:dialoglink>
-		</t:button>
+		<t:dialoglink dialog="updateDialog" class="btn">${message:label.update}</t:dialoglink>
 	</p:updateMenuItem>
 </t:menu>
 

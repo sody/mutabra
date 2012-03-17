@@ -4,16 +4,14 @@
 
 <t:grid source="source" row="row" include="name,email,lastLogin,registered" add="actions">
 	<p:actionsCell>
-		<t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink> |
-		<t:eventlink event="delete" context="row">${message:button.delete}</t:eventlink>
+		<t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink> |
+		<t:eventlink event="delete" context="row">${message:label.delete}</t:eventlink>
 	</p:actionsCell>
 </t:grid>
 
 <t:menu class="toolbar" items="add">
 	<p:addMenuItem>
-		<t:button>
-			<t:eventlink event="add" zone="entityDialog">${message:button.add}</t:eventlink>
-		</t:button>
+		<t:eventlink event="add" zone="entityDialog" class="btn">${message:label.add}</t:eventlink>
 	</p:addMenuItem>
 </t:menu>
 
