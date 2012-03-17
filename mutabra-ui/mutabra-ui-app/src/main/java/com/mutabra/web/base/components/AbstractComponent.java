@@ -1,5 +1,6 @@
 package com.mutabra.web.base.components;
 
+import com.mutabra.web.internal.MessageUtils;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -31,5 +32,17 @@ public class AbstractComponent {
 
 	public Locale getLocale() {
 		return locale;
+	}
+
+	protected String format(final String key, final Object... parameters) {
+		return messages.format(key, parameters);
+	}
+
+	protected String message(final String key) {
+		return messages.get(key);
+	}
+
+	protected String label(final String key) {
+		return messages.get(MessageUtils.label(key));
 	}
 }

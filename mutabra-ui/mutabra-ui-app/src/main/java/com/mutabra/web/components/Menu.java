@@ -30,6 +30,7 @@ public class Menu extends AbstractComponent {
 	@Parameter
 	private String item;
 
+	@Property
 	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
 	private String menuClass;
 
@@ -47,19 +48,11 @@ public class Menu extends AbstractComponent {
 	@Inject
 	private Block defaultItemBody;
 
-	public String getMenuClass() {
-		return menuClass;
+	public String getItemTitle() {
+		return label(item);
 	}
 
-	public String getMenuItemClass() {
-		return itemClass;
-	}
-
-	public String getMenuItemTitle() {
-		return getMessages().get(MessageUtils.label(item));
-	}
-
-	public Block getMenuItemBody() {
+	public Block getItemBody() {
 		final Block block = overrides.getOverrideBlock(item + "MenuItem");
 		if (block != null) {
 			return block;

@@ -2,7 +2,6 @@ package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.CSSConstantsEx;
-import com.mutabra.web.internal.MessageUtils;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ClientElement;
@@ -11,7 +10,6 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.MixinClasses;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.corelib.components.Any;
 import org.apache.tapestry5.corelib.mixins.RenderInformals;
@@ -31,6 +29,10 @@ public class Tabs extends AbstractComponent implements ClientElement {
 	private String[] tabs;
 
 	@Property
+	@Parameter
+	private String tab;
+
+	@Property
 	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String active;
 
@@ -41,9 +43,6 @@ public class Tabs extends AbstractComponent implements ClientElement {
 	@Parameter(value = "this", allowNull = false)
 	private PropertyOverrides overrides;
 
-	@Property
-	private String tab;
-
 	@Component(inheritInformalParameters = true)
 	@MixinClasses(RenderInformals.class)
 	private Any container;
@@ -52,34 +51,36 @@ public class Tabs extends AbstractComponent implements ClientElement {
 		return clientId;
 	}
 
-	public boolean isTabsBelow() {
-		return className != null && className.contains(CSSConstantsEx.TABS_BELOW);
-	}
-
 	public String getContainerClass() {
-		return new StringBuilder(className != null ? className : "")
-				.append(' ').append(CSSConstantsEx.TABBABLE)
-				.toString();
+		return className != null ?
+				CSSConstantsEx.TABBABLE + " " + className :
+				CSSConstantsEx.TABBABLE;
 	}
 
 	public String getMenuClass() {
-		return new StringBuilder(CSSConstantsEx.NAV)
-				.append(' ').append(CSSConstantsEx.NAV_TABS)
-				.toString();
+		return CSSConstantsEx.NAV + " " + CSSConstantsEx.NAV_TABS;
 	}
 
 	public String getMenuItemClass() {
-		return tab.equals(active) ? CSSConstantsEx.ACTIVE : "";
+		return tab.equals(active) ? CSSConstantsEx.ACTIVE : null;
+	}
+
+	public String getTabContentClass() {
+		return CSSConstantsEx.TAB_CONTENT;
+	}
+
+	public String getTabId() {
+		return clientId + "_" + tab;
 	}
 
 	public String getTabClass() {
-		return new StringBuilder(tab.equals(active) ? CSSConstantsEx.ACTIVE : "")
-				.append(' ').append(CSSConstantsEx.TAB_PANE)
-				.toString();
+		return tab.equals(active) ?
+				CSSConstantsEx.TAB_PANE + " " + CSSConstantsEx.ACTIVE :
+				CSSConstantsEx.TAB_PANE;
 	}
 
 	public String getTabTitle() {
-		return getMessages().get(MessageUtils.label(tab));
+		return label(tab);
 	}
 
 	public Block getTabBody() {
@@ -91,5 +92,9 @@ public class Tabs extends AbstractComponent implements ClientElement {
 			return getResources().getBody();
 		}
 		return null;
+	}
+
+	public boolean isTabsBelow() {
+		return className != null && className.contains(CSSConstantsEx.TABS_BELOW);
 	}
 }

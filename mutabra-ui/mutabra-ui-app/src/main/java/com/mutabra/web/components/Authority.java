@@ -3,6 +3,7 @@ package com.mutabra.web.components;
 import com.mutabra.web.internal.Authorities;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.security.Authentication;
 import org.greatage.security.SecurityContext;
@@ -23,6 +24,7 @@ public class Authority {
 	@Inject
 	private SecurityContext securityContext;
 
+	@SetupRender
 	boolean setupRender() {
 		final List<String> authorities = getAuthorities();
 		return !(value != null && !authorities.contains(value));

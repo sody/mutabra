@@ -28,15 +28,10 @@ public class CustomErrors {
 		if (tracker.getHasErrors()) {
 			final List<String> errors = tracker.getErrors();
 			if (!errors.isEmpty()) {
-				writer.element("div", "class", "control-group");
+				writer.element("div", "class", CSSConstantsEx.ALERT + " " + CSSConstantsEx.ALERT_BLOCK + " " + CSSConstantsEx.ALERT_ERROR);
 				for (String message : errors) {
-					writer.element("div").addClassName(CSSConstants.STATE_ERROR, CSSConstants.CORNER_ALL);
 					writer.element("p");
-					writer.element("span", "style", "float: left; margin-right: 5px;")
-							.addClassName(CSSConstants.ICON, "ui-icon-alert");
-					writer.end();
 					writer.write(message);
-					writer.end();
 					writer.end();
 				}
 				writer.end();

@@ -2,12 +2,12 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 	<t:block id="defaultItemBody">
-		<t:actionlink context="item">${menuItemTitle}</t:actionlink>
+		<t:actionlink context="item">${itemTitle}</t:actionlink>
 	</t:block>
 
 	<t:loop source="items" value="item">
-		<li t:type="any" class="prop:menuItemClass">
-			<t:delegate to="menuItemBody"/>
+		<li t:type="any" class="prop:itemClass">
+			<t:delegate to="itemBody"/>
 		</li>
 	</t:loop>
 </ul>

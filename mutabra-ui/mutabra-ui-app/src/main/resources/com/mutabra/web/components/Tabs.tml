@@ -14,14 +14,14 @@
 	<t:block id="menu">
 		<t:menu items="prop:tabs" item="prop:tab" class="prop:menuClass" itemClass="prop:menuItemClass"
 				overrides="prop:overrides">
-			<a href="#${tab}" data-toggle="tab">${tabTitle}</a>
+			<a href="#${tabId}" data-toggle="tab">${tabTitle}</a>
 		</t:menu>
 	</t:block>
 
 	<t:block id="content">
-		<div class="tab-content">
+		<div t:type="any" class="prop:tabContentClass">
 			<t:loop source="tabs" value="tab">
-				<div class="${tabClass}" id="${tab}">
+				<div t:type="any" class="prop:tabClass" id="prop:tabId">
 					<t:delegate to="tabBody"/>
 				</div>
 			</t:loop>

@@ -14,6 +14,7 @@ import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.corelib.components.Any;
 import org.apache.tapestry5.corelib.mixins.RenderInformals;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 
 /**
  * @author Ivan Khalopik
@@ -49,16 +50,13 @@ public class Dropdown extends AbstractComponent implements ClientElement {
 	}
 
 	public String getContainerClass() {
-		return new StringBuilder(className != null ? className : "")
-				.append(' ').append(CSSConstantsEx.BUTTON_GROUP)
-				.append(' ').append(CSSConstantsEx.DROPDOWN)
-				.toString();
+		return className != null ?
+				CSSConstantsEx.BUTTON_GROUP + " " + CSSConstantsEx.DROPDOWN + " " + className :
+				CSSConstantsEx.BUTTON_GROUP + " " + CSSConstantsEx.DROPDOWN;
 	}
 
 	public String getToggleClass() {
-		return new StringBuilder(CSSConstantsEx.BUTTON)
-				.append(' ').append(CSSConstantsEx.DROPDOWN_TOGGLE)
-				.toString();
+		return CSSConstantsEx.BUTTON + " " + CSSConstantsEx.DROPDOWN_TOGGLE;
 	}
 
 	public String getCaretClass() {
