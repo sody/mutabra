@@ -1,17 +1,15 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
 	<div class="span1 offset5">
-		<div id="user-pic">
-			<t:pagelink page="account/settings">
-				<t:image.accountimage account="account"/>
-			</t:pagelink>
-		</div>
+		<t:pagelink page="account/settings">
+			<t:image.accountimage account="account"/>
+		</t:pagelink>
 	</div>
 	<div class="span3">
-		<div class="t-beaneditor-row">
+		<div class="control-group">
 			<t:menu.user/>
 		</div>
-		<div class="t-beaneditor-row">
+		<div class="control-group">
 			<t:menu.locale/>
 		</div>
 	</div>
