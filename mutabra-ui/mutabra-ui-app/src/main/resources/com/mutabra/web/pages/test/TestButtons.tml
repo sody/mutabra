@@ -6,6 +6,7 @@
 <div class="row">
 	<div class="span6">
 		<h3>Button group</h3>
+
 		<div class="btn-group" style="margin: 9px 0;">
 			<a class="btn" href="#">Left</a>
 			<a class="btn" href="#">Middle</a>
@@ -15,6 +16,7 @@
 
 	<div class="span6">
 		<h3>Toolbar</h3>
+
 		<div class="btn-toolbar">
 			<div class="btn-group">
 				<a class="btn" href="#">1</a>
@@ -128,6 +130,7 @@
 <div class="row">
 	<div class="span6">
 		<h3>Default Tabbable</h3>
+
 		<div class="tabbable" style="margin-bottom: 9px;">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#1" data-toggle="tab">Section 1</a></li>
@@ -149,6 +152,7 @@
 	</div>
 	<div class="span6">
 		<h3>Tabs Below</h3>
+
 		<div class="tabbable tabs-below">
 			<div class="tab-content">
 				<div class="tab-pane" id="A">
@@ -174,6 +178,7 @@
 <div class="row">
 	<div class="span6">
 		<h3>Tabs Left</h3>
+
 		<div class="tabbable tabs-left">
 			<ul class="nav nav-tabs">
 				<li class=""><a href="#lA" data-toggle="tab">Section 1</a></li>
@@ -196,6 +201,7 @@
 
 	<div class="span6">
 		<h3>Tabs Right</h3>
+
 		<div class="tabbable tabs-right">
 			<ul class="nav nav-tabs">
 				<li class=""><a href="#rA" data-toggle="tab">Section 1</a></li>
@@ -259,6 +265,24 @@
 </div>
 <br/>
 
+<h2>Modals</h2>
+<a class="btn" data-toggle="modal" href="#myModal">Launch Modal</a>
+<div class="modal hide" id="myModal">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+
+		<h3>Modal header</h3>
+	</div>
+	<div class="modal-body">
+		<p>One fine body…</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" class="btn btn-primary">Save changes</a>
+	</div>
+</div>
+<br/>
+
 <h2>Navbar</h2>
 <div class="navbar">
 	<div class="navbar-inner">
@@ -269,6 +293,7 @@
 				<span class="icon-bar"></span>
 			</a>
 			<a class="brand" href="#">Project name</a>
+
 			<div class="nav-collapse">
 				<ul class="nav">
 					<li class="active"><a href="#">Home</a></li>
@@ -305,9 +330,11 @@
 						</ul>
 					</li>
 				</ul>
-			</div><!-- /.nav-collapse -->
+			</div>
+			<!-- /.nav-collapse -->
 		</div>
-	</div><!-- /navbar-inner -->
+	</div>
+	<!-- /navbar-inner -->
 </div>
 
 </html>

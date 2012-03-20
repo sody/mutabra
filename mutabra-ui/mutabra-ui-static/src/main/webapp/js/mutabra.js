@@ -1,53 +1,7 @@
 T5.extendInitializers({
-	button: function(id) {
-		(function($) {
-			// create buttons from every element of 'ui-button' class
-			$("#" + id).each(function() {
-				// get element
-				var element = $(this);
-				// find element representing primary icon ang parse it's class attribute
-				var primary = element.find(".ui-button-icon-primary")
-						.removeClass("ui-button-icon-primary ui-button-icon-secondary ui-icon")
-						.attr("class");
-				// find element representing secondary icon ang parse it's class attribute
-				var secondary = element.find(".ui-button-icon-secondary")
-						.removeClass("ui-button-icon-primary ui-button-icon-secondary ui-icon")
-						.attr("class");
-				// find element representing button text and get it's content
-				var label = element.find(".ui-button-text").html();
-				// check if element should have text
-				var text = !element.hasClass("ui-button-icon-only") && !element.hasClass("ui-button-icons-only");
-				// if element is label we should create button from input it references for
-				if (element.is("label")) {
-					element = $("#" + element.attr("for"));
-				}
-				// create button
-				element.button({
-					text: text,
-					label: label,
-					icons: {
-						primary: primary,
-						secondary: secondary
-					}
-				});
-			});
-		})(jQuery);
-	},
 
-	dialog: function(spec) {
-		var d = j$("#" + spec.id).dialog(spec.options);
-		if (spec.options.autoDestroy) {
-			d.bind("dialogclose", function() {
-				d.remove().dialog("destroy");
-			});
-		}
-	},
-
-	dialoglink : function(spec) {
-		j$('#' + spec.id).click(function() {
-			j$('#' + spec.dialogId).dialog(spec.action);
-			return false;
-		});
+	modal: function(spec) {
+		j$("#" + spec.id).modal('show');
 	},
 
 	carousel: function(spec) {

@@ -4,33 +4,30 @@
 
 <t:grid source="source" row="row" include="title,author,location,executedAt,checkSum,comment"/>
 
-<t:dialog t:id="updateDialog" title="${message:update.title}" modal="true">
-	<t:form>
-		<div class="t-beaneditor-row">
-			<t:label for="dropFirst"/>
-			<t:checkbox t:id="dropFirst" value="dropFirst" label="${message:label.drop-first}"/>
+<div class="btn-group">
+	<a class="btn" data-toggle="modal" href="#updateModal">${message:label.update}</a>
+</div>
+
+<t:form class="form-horizontal">
+	<t:modal t:id="updateModal" title="${message:update.title}">
+		<div class="control-group">
+			<t:label for="dropFirst" class="control-label"/>
+			<div class="controls">
+				<t:checkbox t:id="dropFirst" value="dropFirst" label="${message:label.drop-first}"/>
+			</div>
 		</div>
 
-		<div class="t-beaneditor-row">
-			<t:label for="clearCheckSums"/>
-			<t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:label.clear-check-sums}"/>
+		<div class="control-group">
+			<t:label for="clearCheckSums" class="control-label"/>
+			<div class="controls">
+				<t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:label.clear-check-sums}"/>
+			</div>
 		</div>
-
-		<t:menu items="cancel,update" class="toolbar">
-			<p:updateMenuItem>
-				<t:linksubmit class="btn">${message:label.update}</t:linksubmit>
-			</p:updateMenuItem>
-			<p:cancelMenuItem>
-				<t:dialoglink dialog="updateDialog" action="close" class="btn">${message:label.cancel}</t:dialoglink>
-			</p:cancelMenuItem>
-		</t:menu>
-	</t:form>
-</t:dialog>
-
-<t:menu class="toolbar" items="update">
-	<p:updateMenuItem>
-		<t:dialoglink dialog="updateDialog" class="btn">${message:label.update}</t:dialoglink>
-	</p:updateMenuItem>
-</t:menu>
+		<p:footer>
+			<t:linksubmit class="btn">${message:label.update}</t:linksubmit>
+			<a href="#" class="btn" data-dismiss="modal">${message:label.cancel}</a>
+		</p:footer>
+	</t:modal>
+</t:form>
 
 </html>

@@ -23,6 +23,12 @@ public class CSSConstantsEx {
 	public static final String ALERT_ERROR = "alert-error";
 	public static final String ALERT_INFO = "alert-info";
 
+	public static final String MODAL = "modal";
+	public static final String MODAL_HEADER = "modal-header";
+	public static final String MODAL_BODY = "modal-body";
+	public static final String MODAL_FOOTER = "modal-footer";
+	public static final String MODAL_BACKDROP = "modal-backdrop";
+
 	// Buttons
 	public static final String BUTTON = "btn";
 	public static final String BUTTON_GROUP = "btn-group";

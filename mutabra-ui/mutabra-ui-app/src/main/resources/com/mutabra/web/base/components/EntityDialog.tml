@@ -1,32 +1,25 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
 
-	<t:zone id="${clientId}"/>
+	<t:zone id="prop:clientId"/>
 
-	<t:block>
-		<t:dialog t:id="dialog" id="${dialogId}"
-				  width="500"
-				  title="${title}" modal="true"
-				  autoOpen="true" autoDestroy="true">
-			<t:zone t:id="formZone" id="${formZoneId}" update="show">
-				<t:form t:id="form" context="value" zone="${formZoneId}">
+	<t:block t:id="modalBlock">
+		<t:zone t:id="formZone" id="prop:formZoneId" update="show">
+			<t:form t:id="form" context="value" zone="prop:formZoneId">
+				<t:modal t:id="modal" id="prop:modalId" title="prop:title" active="true">
 					<t:customerrors/>
 					<t:extension-point id="body">
 						<t:beaneditor object="value"/>
 					</t:extension-point>
-					<t:extension-point id="toolbar">
-						<t:menu items="cancel,save" class="toolbar">
-							<p:saveMenuItem>
-								<t:linksubmit class="btn">${message:label.save}</t:linksubmit>
-							</p:saveMenuItem>
-							<p:cancelMenuItem>
-								<t:dialoglink dialog="${dialogId}" action="close" class="btn">${message:label.cancel}</t:dialoglink>
-							</p:cancelMenuItem>
-						</t:menu>
-					</t:extension-point>
-				</t:form>
-			</t:zone>
-		</t:dialog>
+					<p:footer>
+						<t:extension-point id="footer">
+							<t:linksubmit class="btn">${message:label.save}</t:linksubmit>
+							<a href="#" class="btn" data-dismiss="modal">${message:label.cancel}</a>
+						</t:extension-point>
+					</p:footer>
+				</t:modal>
+			</t:form>
+		</t:zone>
 	</t:block>
 </t:container>
 
