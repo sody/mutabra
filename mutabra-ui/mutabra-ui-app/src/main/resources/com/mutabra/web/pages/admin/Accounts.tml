@@ -2,19 +2,14 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="source" row="row" include="name,email,lastLogin,registered" add="actions">
+<t:grid source="source" row="row" include="name,email,lastLogin,registered" add="actions" class="table">
 	<p:actionsCell>
 		<t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink> |
 		<t:eventlink event="delete" context="row">${message:label.delete}</t:eventlink>
 	</p:actionsCell>
 </t:grid>
 
-<t:menu class="toolbar" items="add">
-	<p:addMenuItem>
-		<t:eventlink event="add" zone="entityDialog" class="btn">${message:label.add}</t:eventlink>
-	</p:addMenuItem>
-</t:menu>
-
+<t:eventlink event="add" zone="entityDialog" class="btn">${message:label.add}</t:eventlink>
 
 <t:admin.accountDialog t:id="entityDialog"/>
 

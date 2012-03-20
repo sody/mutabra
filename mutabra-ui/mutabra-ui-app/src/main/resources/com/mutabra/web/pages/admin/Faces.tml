@@ -5,7 +5,8 @@
 <t:grid source="source" row="row"
 		include="code"
 		add="picture,name,actions"
-		reorder="picture,code,name,actions">
+		reorder="picture,code,name,actions"
+		class="table">
 	<p:pictureCell>
 		<t:image.faceimage face="row"/>
 	</p:pictureCell>

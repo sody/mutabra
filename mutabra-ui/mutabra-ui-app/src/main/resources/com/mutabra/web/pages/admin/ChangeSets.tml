@@ -2,11 +2,9 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:grid source="source" row="row" include="title,author,location,executedAt,checkSum,comment"/>
+<t:grid source="source" row="row" include="title,author,location,executedAt,checkSum,comment" class="table"/>
 
-<div class="btn-group">
-	<a class="btn" data-toggle="modal" href="#updateModal">${message:label.update}</a>
-</div>
+<a class="btn" data-toggle="modal" href="#updateModal">${message:label.update}</a>
 
 <t:form class="form-horizontal">
 	<t:modal t:id="updateModal" title="${message:update.title}">
