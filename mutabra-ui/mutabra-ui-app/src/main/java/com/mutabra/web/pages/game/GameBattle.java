@@ -33,6 +33,11 @@ public class GameBattle extends AbstractPage {
 	@Property
 	private Battle battle;
 
+	@Override
+	public String getSubtitle() {
+		return format("subtitle", label("round"), battle.getRound());
+	}
+
 	@OnEvent(EventConstants.ACTIVATE)
 	Object activate() {
 		battle = accountContext.getBattle();

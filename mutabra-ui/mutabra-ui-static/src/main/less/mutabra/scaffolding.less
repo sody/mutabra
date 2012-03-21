@@ -7,7 +7,8 @@
 // -----------------
 
 body {
-  min-width: @gridRowWidth + 2 * @gridGutterWidth;
+  @minWidth: (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns + 1));
+  min-width: @minWidth;
 }
 
 // LINKS
@@ -15,6 +16,7 @@ body {
 
 #header {
   margin-top: 10px;
+  height: 70px;
 
   .logo {
     background: url("../img/logo80x60.png") no-repeat;
@@ -25,13 +27,29 @@ body {
     font-weight: bold;
     display: block;
   }
+
+  form {
+    margin: 0;
+  }
+}
+
+#navigation {
+  height: 30px;
+}
+
+#content {
+  min-height: 600px;
 }
 
 #footer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 80px;
   text-align: center;
 }
 
 .wrapper {
+  min-height: 600px;
   margin: 0 -@gridGutterWidth;
   padding: @gridGutterWidth - 1;
   background: @foregroundColor;
@@ -40,18 +58,8 @@ body {
   .clearfix();
 }
 
-.page-header {
-  padding-bottom: @baseLineHeight - 1;
-  margin: @baseLineHeight 0;
-  border-bottom: 1px solid @borderColor;
-
-  h1 {
-    line-height: 1;
-  }
-}
-
-.tabs-panel {
-  margin: 0 -@gridGutterWidth;
+.tabs-wrapper {
+  margin: 30% -@gridGutterWidth 0;
   .tab-content {
     padding: @gridGutterWidth - 1;
     background: @foregroundColor;

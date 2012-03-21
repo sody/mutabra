@@ -32,6 +32,10 @@
 		<t:extension-point id="header-area"/>
 	</header>
 
+	<nav id="navigation" class="row">
+		<t:extension-point id="navigation-area"/>
+	</nav>
+
 	<section id="content" class="row">
 		<t:extension-point id="content-area">
 			<t:body/>

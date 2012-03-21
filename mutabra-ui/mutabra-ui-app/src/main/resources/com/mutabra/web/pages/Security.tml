@@ -3,7 +3,7 @@
 	  xmlns:p="tapestry:parameter">
 
 <div class="span6 offset3">
-	<t:tabs tabs="signIn,restore" class="tabs-panel tabs-below" active="signIn">
+	<t:tabs tabs="signIn,restore" class="tabs-below tabs-wrapper" active="signIn">
 		<p:signInTab>
 			<t:form t:id="signInForm" class="form-horizontal">
 				<legend>${message:page.security-sign-in.title}</legend>
