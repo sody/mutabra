@@ -77,14 +77,14 @@
 				case 'selected':
 					if (value) {
 						this.element.attr('class', function(index, attr) {
-							return attr + ' ui-state-active';
+							return attr + ' active';
 						});
 						if (this.actions) {
 							this.actions.show();
 						}
 					} else {
 						this.element.attr('class', function(index, attr) {
-							return attr.replace(' ui-state-active', '');
+							return attr.replace(' active', '');
 						});
 						if (this.actions) {
 							this.actions.hide();
@@ -94,17 +94,17 @@
 				case 'disabled':
 					if (value) {
 						this.element.attr('class', function(index, attr) {
-							return attr + ' ui-state-disabled';
+							return attr + ' disabled';
 						});
-						this.description.addClass('ui-state-disabled');
+						this.description.addClass('disabled');
 						this.actions.find(':mutabra-card').each(function() {
 							$(this).data('card').disable();
 						});
 					} else {
 						this.element.attr('class', function(index, attr) {
-							return attr.replace(' ui-state-disabled', '');
+							return attr.replace(' disabled', '');
 						});
-						this.description.removeClass('ui-state-disabled');
+						this.description.removeClass('disabled');
 						this.actions.find(':mutabra-card').data('card').enable();
 					}
 					break;
@@ -194,18 +194,18 @@
 				case 'selected':
 					var possible = this._getPossible();
 					if (value) {
-						this.element.addClass('ui-state-highlight');
+						this.element.addClass('active');
 						if (possible) {
 							possible.attr('class', function(index, attr) {
-								return attr + ' ui-state-highlight';
+								return attr + ' highlight';
 							});
 							possible.click(applyHandler);
 						}
 					} else {
-						this.element.removeClass('ui-state-highlight');
+						this.element.removeClass('active');
 						if (possible) {
 							possible.attr('class', function(index, attr) {
-								return attr.replace(' ui-state-highlight', '');
+								return attr.replace(' highlight', '');
 							});
 							possible.unbind('click', applyHandler);
 						}
@@ -213,11 +213,11 @@
 					break;
 				case 'disabled':
 					if (value) {
-						this.element.addClass('ui-state-disabled');
-						this.description.addClass('ui-state-disabled');
+						this.element.addClass('disabled');
+						this.description.addClass('disabled');
 					} else {
-						this.element.removeClass('ui-state-disabled');
-						this.description.removeClass('ui-state-disabled');
+						this.element.removeClass('disabled');
+						this.description.removeClass('disabled');
 					}
 					break;
 			}

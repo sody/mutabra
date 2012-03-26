@@ -1,8 +1,9 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div id="${clientId}" class="card ui-widget ui-widget-content ui-corner-all">
-		<t:image.cardbackimage/>
-		<br/>
+	<div id="${clientId}" class="card span2">
+		<div class="card-body">
+			<t:image.cardbackimage width="100" height="100"/>
+		</div>
 	</div>
 
 </t:container>

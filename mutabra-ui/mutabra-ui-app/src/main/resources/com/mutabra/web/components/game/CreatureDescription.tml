@@ -1,13 +1,13 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div id="${clientId}" style="display:none;">
+	<div id="${clientId}" class="description span4">
 		<h4>${value.card:name}</h4>
 		<br/>
 		<t:image.cardimage card="value.card" width="150" height="150"/>
 		<br/>
-		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.health}</span>
-		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.card.power}</span>
+		<i class="icon-heart"/>${value.health}
+		<i class="icon-skull"/>${value.card.power}
 		<br/>
 		<p>${value.card:description}</p>
 	</div>

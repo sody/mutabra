@@ -1,0 +1,132 @@
+// Battle page styles
+// -----
+
+.grid-cell(@columns, @rows) {
+  @width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
+  @height: (@gridColumnWidth * @rows) + (@gridGutterWidth * (@rows - 1));
+  width: @width;
+  height: @height;
+  margin-left: @gridGutterWidth;
+  margin-top: @gridGutterWidth;
+  float: left;
+}
+
+.description {
+  .grid-cell(4, 4);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+  &.disabled {
+    background-color: @backgroundColor;
+  }
+}
+
+.card {
+  .grid-cell(2, 2);
+  position: relative;
+  cursor: pointer;
+
+  .card-ne,
+  .card-nw,
+  .card-sw,
+  .card-se {
+    @size: 24px;
+    @padding: ((2* @gridGutterWidth - @size)/2) - 1;
+    width: @size;
+    height: @size;
+    padding: @padding;
+    border: 1px solid @borderColor;
+    .border-radius(@gridGutterWidth);
+    background-color: @foregroundColor;
+    position: absolute;
+    z-index: 1010;
+  }
+  .card-ne {
+    float: left;
+    top: 0;
+    left: 0;
+  }
+  .card-nw {
+    float: right;
+    top: 0;
+    right: 0;
+  }
+  .card-sw {
+    float: right;
+    bottom: 0;
+    right: 0;
+  }
+  .card-se {
+    float: left;
+    bottom: 0;
+    left: 0;
+  }
+
+  .card-body {
+    margin: 9px;
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid @borderColor;
+    .border-radius(@gridGutterWidth);
+    background-color: @foregroundColor;
+    z-index: 1000;
+  }
+
+  &.active {
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @backgroundColor;
+      border-color: @activeBorderColor;
+    }
+  }
+  &.disabled {
+    cursor: default;
+
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @backgroundColor;
+    }
+  }
+}
+
+.hero {
+  .grid-cell(2, 2);
+}
+
+.log {
+  .grid-cell(4, 5);
+}
+
+.field {
+  .grid-cell(6, 5);
+
+  path {
+    &.hero,
+    &.creature {
+      fill: @backgroundColor;
+
+      &.highlight {
+        fill:  #fedcba;
+      }
+    }
+
+    &.active {
+      stroke-width: 3px;
+    }
+
+    &.highlight {
+      fill:  #fedcba;
+    }
+  }
+}
+
+

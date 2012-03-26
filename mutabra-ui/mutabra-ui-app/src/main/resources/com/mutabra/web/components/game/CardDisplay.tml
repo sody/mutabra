@@ -1,13 +1,14 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
 
-	<div id="${clientId}" class="card ui-widget ui-widget-content ui-corner-all">
-		<t:image.cardimage card="value"/>
-		<br/>
-		<span class="ui-icon ui-icon-skull"/><span class="icon-text">${value.power}</span>
-		<span class="ui-icon ui-icon-heart"/><span class="icon-text">${value.health}</span>
-		<span class="ui-icon ui-icon-blood"/><span class="icon-text">${value.bloodCost}</span>
-		<br/>
+	<div id="${clientId}" class="card span2">
+		<div class="card-ne"><i class="icon-blood"/></div>
+		<div class="card-nw">${value.bloodCost}</div>
+		<div class="card-se">${value.power}</div>
+		<div class="card-sw">${value.health}</div>
+		<div class="card-body">
+			<t:image.cardimage card="value" width="100" height="100"/>
+		</div>
 	</div>
 
 </t:container>
