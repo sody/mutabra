@@ -2,24 +2,20 @@
 	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 	  xmlns:p="tapestry:parameter">
 
-<t:form>
-<t:carousel source="source" row="row" value="value" callback="heroChangeCallback">
-	<t:image.heroimage hero="row"/>
-</t:carousel>
-
-<t:menu class="toolbar" items="enter,create,cancel">
-	<p:enterMenuItem>
+<t:form class="form-horizontal">
+	<div class="control-group">
+		<div class="controls">
+			<t:carousel source="source" row="row" value="value" callback="heroChangeCallback">
+				<t:image.heroimage hero="row" width="100" height="100"/>
+			</t:carousel>
+		</div>
+	</div>
+	<div class="form-actions">
 		<t:loop source="source" value="row" index="index">
-			<div id="hero-${index}" style="display:none;">
-				<t:eventlink event="enter" context="row" class="btn">${message:label.enter}</t:eventlink>
-			</div>
+			<t:eventlink id="hero-${index}" event="enter" context="row" class="hide btn">${message:label.enter}</t:eventlink>
 		</t:loop>
-	</p:enterMenuItem>
-	<p:createMenuItem>
 		<t:pagelink page="game/hero/create" class="btn">${message:label.create}</t:pagelink>
-	</p:createMenuItem>
-</t:menu>
-
+	</div>
 </t:form>
 
 <script type="text/javascript">
