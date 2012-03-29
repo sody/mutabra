@@ -1,7 +1,7 @@
 package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.CSSConstantsEx;
+import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ClientElement;
@@ -56,8 +56,8 @@ public class Modal extends AbstractComponent implements ClientElement {
 
 	public String getContainerClass() {
 		return className != null ?
-				CSSConstantsEx.MODAL + " " + className :
-				CSSConstantsEx.MODAL;
+				CSSConstants.MODAL + " " + className :
+				CSSConstants.MODAL;
 	}
 
 	public Block getFooter() {

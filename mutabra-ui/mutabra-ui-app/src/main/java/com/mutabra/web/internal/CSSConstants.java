@@ -5,37 +5,59 @@ package com.mutabra.web.internal;
  * @since 1.0
  */
 public class CSSConstants {
-	public static final String HELPER_CLEAR_FIX = "ui-helper-clearfix";
-	public static final String HELPER_HIDDEN_ACCESSIBLE = "ui-helper-hidden-accessible";
+	public static final String CLEARFIX = "clearfix";
 
-	public static final String CORNER_ALL = "ui-corner-all";
-	public static final String CORNER_TOP = "ui-corner-top";
-	public static final String CORNER_BOTTOM = "ui-corner-bottom";
+	// Forms
+	public static final String FORM_VERTICAL = "form-vertical";
+	public static final String FORM_HORIZONTAL = "form-horizontal";
+	public static final String FORM_INLINE = "form-inline";
+	public static final String FORM_SEARCH = "form-search";
+	public static final String CONTROL_GROUP = "control-group";
+	public static final String CONTROL_LABEL = "control-label";
+	public static final String CONTROLS = "controls";
 
-	public static final String WIDGET = "ui-widget";
-	public static final String WIDGET_HEADER = "ui-widget-header";
-	public static final String WIDGET_CONTENT = "ui-widget-content";
+	// Alerts
+	public static final String ALERT = "alert";
+	public static final String ALERT_BLOCK = "alert-block";
+	public static final String ALERT_SUCCESS = "alert-success";
+	public static final String ALERT_ERROR = "alert-error";
+	public static final String ALERT_INFO = "alert-info";
 
-	public static final String STATE_DEFAULT = "ui-state-default";
-	public static final String STATE_HOVER = "ui-state-hover";
-	public static final String STATE_FOCUS = "ui-state-focus";
-	public static final String STATE_ACTIVE = "ui-state-active";
-	public static final String STATE_HIGHLIGHT = "ui-state-highlight";
-	public static final String STATE_ERROR = "ui-state-error";
+	public static final String MODAL = "modal";
+	public static final String MODAL_HEADER = "modal-header";
+	public static final String MODAL_BODY = "modal-body";
+	public static final String MODAL_FOOTER = "modal-footer";
+	public static final String MODAL_BACKDROP = "modal-backdrop";
 
-	public static final String ICON = "ui-icon";
+	// Buttons
+	public static final String BUTTON = "btn";
+	public static final String BUTTON_GROUP = "btn-group";
+	public static final String BUTTON_TOOLBAR = "btn-toolbar";
+	public static final String DROPDOWN = "dropdown";
+	public static final String DROPDOWN_TOGGLE = "dropdown-toggle";
+	public static final String DROPDOWN_MENU = "dropdown-menu";
+	public static final String CARET = "caret";
+	public static final String DIVIDER = "divider";
+	public static final String ACTIVE = "active";
 
-	public static final String BUTTON = "ui-button";
-	public static final String BUTTON_ICONS_ONLY = "ui-button-icons-only";
-	public static final String BUTTON_ICON_ONLY = "ui-button-icon-only";
-	public static final String BUTTON_TEXT_ICONS = "ui-button-text-icons";
-	public static final String BUTTON_TEXT_ICON_PRIMARY = "ui-button-text-icon-primary";
-	public static final String BUTTON_TEXT_ICON_SECONDARY = "ui-button-text-icon-secondary";
-	public static final String BUTTON_TEXT_ONLY = "ui-button-text-only";
-	public static final String BUTTON_TEXT = "ui-button-text";
-	public static final String BUTTON_ICON_PRIMARY = "ui-button-icon-primary";
-	public static final String BUTTON_ICON_SECONDARY = "ui-button-icon-secondary";
+	// Icons
+	public static final String ICON_FLAG = "icon-flag";
+	public static final String INTERACTIVE = "interactive";
 
-	public static final String MENU = "ui-menu";
-	public static final String MENU_ITEM = "ui-menu-item";
+	// Navs
+	public static final String NAV = "nav";
+	public static final String NAV_PILLS = "nav-pills";
+	public static final String NAV_STACKED = "nav-stacked";
+	public static final String NAV_LIST = "nav-list";
+	public static final String NAV_HEADER = "nav-header";
+	public static final String NAV_TABS = "nav-tabs";
+	public static final String TABBABLE = "tabbable";
+	public static final String TAB_CONTENT = "tab-content";
+	public static final String TAB_PANE = "tab-pane";
+	public static final String TABS_BELOW = "tabs-below";
+	public static final String TABS_LEFT = "tabs-left";
+	public static final String TABS_RIGHT = "tabs-right";
+
+	// Custom
+	public static final String MENU_HORIZONTAL = "menu-horizontal";
 }

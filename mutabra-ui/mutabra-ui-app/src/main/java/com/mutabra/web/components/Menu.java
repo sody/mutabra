@@ -1,16 +1,10 @@
 package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.CSSConstants;
-import com.mutabra.web.internal.MessageUtils;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.PropertyOverrides;
-import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.MixinClasses;
-import org.apache.tapestry5.annotations.Parameter;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SupportsInformalParameters;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Any;
 import org.apache.tapestry5.corelib.mixins.RenderInformals;
 import org.apache.tapestry5.ioc.annotations.Inject;

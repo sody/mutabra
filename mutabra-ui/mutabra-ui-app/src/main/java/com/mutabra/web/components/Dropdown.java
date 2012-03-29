@@ -1,9 +1,8 @@
 package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.CSSConstantsEx;
+import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.PropertyOverrides;
 import org.apache.tapestry5.annotations.Component;
@@ -13,8 +12,6 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.corelib.components.Any;
 import org.apache.tapestry5.corelib.mixins.RenderInformals;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 
 /**
  * @author Ivan Khalopik
@@ -51,19 +48,19 @@ public class Dropdown extends AbstractComponent implements ClientElement {
 
 	public String getContainerClass() {
 		return className != null ?
-				CSSConstantsEx.BUTTON_GROUP + " " + CSSConstantsEx.DROPDOWN + " " + className :
-				CSSConstantsEx.BUTTON_GROUP + " " + CSSConstantsEx.DROPDOWN;
+				CSSConstants.BUTTON_GROUP + " " + CSSConstants.DROPDOWN + " " + className :
+				CSSConstants.BUTTON_GROUP + " " + CSSConstants.DROPDOWN;
 	}
 
 	public String getToggleClass() {
-		return CSSConstantsEx.BUTTON + " " + CSSConstantsEx.DROPDOWN_TOGGLE;
+		return CSSConstants.BUTTON + " " + CSSConstants.DROPDOWN_TOGGLE;
 	}
 
 	public String getCaretClass() {
-		return CSSConstantsEx.CARET;
+		return CSSConstants.CARET;
 	}
 
 	public String getMenuClass() {
-		return CSSConstantsEx.DROPDOWN_MENU;
+		return CSSConstants.DROPDOWN_MENU;
 	}
 }

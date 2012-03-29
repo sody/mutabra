@@ -1,7 +1,7 @@
 package com.mutabra.web.components;
 
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.CSSConstantsEx;
+import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ClientElement;
@@ -53,20 +53,20 @@ public class Tabs extends AbstractComponent implements ClientElement {
 
 	public String getContainerClass() {
 		return className != null ?
-				CSSConstantsEx.TABBABLE + " " + className :
-				CSSConstantsEx.TABBABLE;
+				CSSConstants.TABBABLE + " " + className :
+				CSSConstants.TABBABLE;
 	}
 
 	public String getMenuClass() {
-		return CSSConstantsEx.NAV + " " + CSSConstantsEx.NAV_TABS;
+		return CSSConstants.NAV + " " + CSSConstants.NAV_TABS;
 	}
 
 	public String getMenuItemClass() {
-		return tab.equals(active) ? CSSConstantsEx.ACTIVE : null;
+		return tab.equals(active) ? CSSConstants.ACTIVE : null;
 	}
 
 	public String getTabContentClass() {
-		return CSSConstantsEx.TAB_CONTENT;
+		return CSSConstants.TAB_CONTENT;
 	}
 
 	public String getTabId() {
@@ -75,8 +75,8 @@ public class Tabs extends AbstractComponent implements ClientElement {
 
 	public String getTabClass() {
 		return tab.equals(active) ?
-				CSSConstantsEx.TAB_PANE + " " + CSSConstantsEx.ACTIVE :
-				CSSConstantsEx.TAB_PANE;
+				CSSConstants.TAB_PANE + " " + CSSConstants.ACTIVE :
+				CSSConstants.TAB_PANE;
 	}
 
 	public String getTabTitle() {
@@ -95,6 +95,6 @@ public class Tabs extends AbstractComponent implements ClientElement {
 	}
 
 	public boolean isTabsBelow() {
-		return className != null && className.contains(CSSConstantsEx.TABS_BELOW);
+		return className != null && className.contains(CSSConstants.TABS_BELOW);
 	}
 }
