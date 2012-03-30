@@ -5,14 +5,7 @@
 <t:form class="form-horizontal">
 	<div class="control-group">
 		<div class="controls">
-			<t:game.raceselect value="value.race" callback="raceChangeCallback"/>
-			<div class="help-inline">
-				<t:loop source="races" value="row" index="index">
-					<div id="race-${index}" class="hide">
-						${row:description}
-					</div>
-				</t:loop>
-			</div>
+			<t:game.raceselect value="value.race"/>
 		</div>
 	</div>
 
@@ -39,16 +32,5 @@
 		<t:actionlink context="literal:cancel" class="btn">${message:label.cancel}</t:actionlink>
 	</div>
 </t:form>
-
-<script type="text/javascript">
-	var selectedRace;
-	var raceChangeCallback = function(carousel, item, index) {
-		if (selectedRace) {
-			selectedRace.hide();
-		}
-		selectedRace = j$("#race-" + (index-1));
-		selectedRace.show();
-	};
-</script>
 
 </html>

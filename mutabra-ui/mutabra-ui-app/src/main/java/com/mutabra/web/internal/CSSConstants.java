@@ -29,7 +29,7 @@ public class CSSConstants {
 	public static final String MODAL_FOOTER = "modal-footer";
 	public static final String MODAL_BACKDROP = "modal-backdrop";
 
-	// Buttons
+	// Buttons and dropdowns
 	public static final String BUTTON = "btn";
 	public static final String BUTTON_GROUP = "btn-group";
 	public static final String BUTTON_TOOLBAR = "btn-toolbar";
@@ -57,6 +57,11 @@ public class CSSConstants {
 	public static final String TABS_BELOW = "tabs-below";
 	public static final String TABS_LEFT = "tabs-left";
 	public static final String TABS_RIGHT = "tabs-right";
+
+	public static final String CAROUSEL = "carousel";
+	public static final String CAROUSEL_INNER = "carousel";
+	public static final String CAROUSEL_CONTROL = "carousel";
+	public static final String CAROUSEL_ITEM = "item";
 
 	// Custom
 	public static final String MENU_HORIZONTAL = "menu-horizontal";

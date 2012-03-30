@@ -4,18 +4,10 @@ T5.extendInitializers({
 		j$("#" + spec.id).modal('show');
 	},
 
-	carousel: function(spec) {
-		j$('#' + spec.id).jcarousel({
-			scroll: 1,
-			start: spec.selected,
-			itemVisibleInCallback: function(carousel, item, index) {
-				if (spec.hiddenId) {
-					j$('#' + spec.hiddenId).val(spec.values[index - 1]);
-				}
-				if (spec.callback) {
-					spec.callback(carousel, item, index);
-				}
-			}
+	chooser: function(spec) {
+		j$("#" + spec.id).on("slid", function() {
+			var hiddenValue = j$(this).find(".active").data("hidden");
+			j$("#" + spec.hiddenId).val(hiddenValue);
 		});
 	},
 

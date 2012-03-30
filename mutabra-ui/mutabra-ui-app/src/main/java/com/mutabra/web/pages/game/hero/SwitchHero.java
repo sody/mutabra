@@ -55,11 +55,11 @@ public class SwitchHero extends AbstractPage {
 		return null;
 	}
 
-	@OnEvent("enter")
-	Object enter(final Hero hero) {
+	@OnEvent(value = EventConstants.SUCCESS)
+	Object enter() {
 		// enter the game with just created character
 		final Account account = accountContext.getAccount();
-		account.setHero(hero);
+		account.setHero(value);
 		accountService.saveOrUpdate(account);
 
 		return back();

@@ -4,12 +4,14 @@ import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.dom.Element;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
+@SupportsInformalParameters
 public abstract class AbstractImage extends AbstractComponent {
 
 	@Parameter(value = "64")
