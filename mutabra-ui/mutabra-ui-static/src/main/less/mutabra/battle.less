@@ -6,9 +6,13 @@
   @height: (@gridColumnWidth * @rows) + (@gridGutterWidth * (@rows - 1));
   width: @width;
   height: @height;
-  margin-left: @gridGutterWidth;
-  margin-top: @gridGutterWidth;
-  float: left;
+}
+
+.actions {
+  display: none;
+  &.active {
+    display: block;
+  }
 }
 
 .description {
@@ -72,6 +76,7 @@
     border: 1px solid @borderColor;
     .border-radius(@gridGutterWidth);
     background-color: @foregroundColor;
+    position: absolute;
     z-index: 1000;
   }
 

@@ -1,7 +1,7 @@
 <t:container
 		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div id="${clientId}" class="description span4">
+	<div id="${clientId}" class="description active">
 		<h4>${value.hero.name}</h4>
 		<br/>
 		<t:image.heroimage hero="value.hero" width="150" height="150"/>

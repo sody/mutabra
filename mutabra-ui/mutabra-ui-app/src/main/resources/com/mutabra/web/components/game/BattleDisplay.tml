@@ -23,41 +23,50 @@
 	<div class="row">
 		<t:loop source="fields" value="field">
 			<t:if test="field.hasHero()">
-				<t:game.herodescription value="field.hero"/>
-				<t:if test="!field.enemySide">
-					<t:loop source="field.hero.hand" value="card">
-						<t:game.carddescription value="card"/>
-					</t:loop>
-				</t:if>
+				<div id="f_${field.position.id}_actions" class="actions">
+					<div class="span4">
+						<t:game.herodescription value="field.hero"/>
+						<t:if test="!field.enemySide">
+							<t:loop source="field.hero.hand" value="card">
+								<t:game.carddescription value="card"/>
+							</t:loop>
+						</t:if>
+					</div>
+					<t:if test="!field.enemySide">
+						<t:loop source="field.hero.hand" value="card">
+							<div class="span2">
+								<t:game.carddisplay value="card" hero="field.hero"/>
+							</div>
+						</t:loop>
+						<div class="span2">
+							<t:game.skipturndisplay hero="you"/>
+						</div>
+					</t:if>
+				</div>
 			</t:if>
 			<t:if test="field.hasCreature()">
-				<t:game.creaturedescription value="field.creature"/>
-				<t:if test="!field.enemySide">
-					<t:loop source="field.creature.card.abilities" value="ability">
-						<t:game.abilitydescription value="ability"/>
-					</t:loop>
-				</t:if>
-			</t:if>
-		</t:loop>
-		<t:loop source="fields" value="field">
-			<t:if test="!field.enemySide">
-				<t:if test="field.hasHero()">
-					<div id="f_${field.position.id}_actions" class="hide">
-						<t:loop source="field.hero.hand" value="card">
-							<t:game.carddisplay value="card" hero="field.hero"/>
-						</t:loop>
+				<div id="f_${field.position.id}_actions" class="actions">
+					<div class="span4">
+						<t:game.creaturedescription value="field.creature"/>
+						<t:if test="!field.enemySide">
+							<t:loop source="field.creature.card.abilities" value="ability">
+								<t:game.abilitydescription value="ability"/>
+							</t:loop>
+						</t:if>
 					</div>
-				</t:if>
-				<t:if test="field.hasCreature()">
-					<div id="f_${field.position.id}_actions" class="hide">
+					<t:if test="!field.enemySide">
 						<t:loop source="field.creature.card.abilities" value="ability">
-							<t:game.abilitydisplay value="ability" creature="field.creature"/>
+							<div class="span2">
+								<t:game.abilitydisplay value="ability" creature="field.creature"/>
+							</div>
 						</t:loop>
+					</t:if>
+					<div class="span2">
+						<t:game.skipturndisplay hero="you"/>
 					</div>
-				</t:if>
+				</div>
 			</t:if>
 		</t:loop>
-		<t:game.skipturndisplay hero="you"/>
 	</div>
 
 </t:container>

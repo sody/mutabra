@@ -107,7 +107,9 @@ public class MutabraModule {
 		configuration.add("bootstrap-modal", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-modal.js"));
 		configuration.add("bootstrap-carousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-carousel.js"));
 
-		configuration.add("jquery-mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-mutabra.js"));
+		configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra-battle.js"));
+
+//		configuration.add("jquery-mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-mutabra.js"));
 		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));
 	}
 
