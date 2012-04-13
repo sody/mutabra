@@ -17,14 +17,21 @@ public class HeroDescription extends AbstractComponent implements ClientElement 
 	@Parameter(required = true, allowNull = false)
 	private BattleHero value;
 
+	@Parameter
+	private boolean enemy;
+
 	private String clientId;
 
 	public String getClientId() {
 		return clientId;
 	}
 
+	public String getContainerClass() {
+		return enemy ? "description" : "description active";
+	}
+
 	@SetupRender
 	void setupClientId() {
-		clientId = "f_" + value.getPosition().getId() + "_description";
+		clientId = "description_" + value.getPosition().getId();
 	}
 }

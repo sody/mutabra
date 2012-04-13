@@ -25,6 +25,6 @@ public class AbilityDescription extends AbstractComponent implements ClientEleme
 
 	@SetupRender
 	void setupCard() {
-		clientId = "a_" + value.getCode() + "_description";
+		clientId = "description_" + value.getCode();
 	}
 }

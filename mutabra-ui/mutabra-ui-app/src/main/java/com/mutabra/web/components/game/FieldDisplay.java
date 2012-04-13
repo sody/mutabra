@@ -49,9 +49,12 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 
 		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
 		path.attribute("id", clientId);
-		path.attribute("data-hover", "description");
-		path.attribute("data-select", "description");
-		path.attribute("data-target", "#"+ clientId + "_actions");
+		if (field.hasUnit()) {
+			path.attribute("data-hover", "description");
+			path.attribute("data-description-target", "#description_" + field.getPosition().getId());
+			path.attribute("data-select", "field");
+			path.attribute("data-field-target", "#actions_" + field.getPosition().getId());
+		}
 
 		path.addClassName(field.hasHero() ? "hero" : field.hasCreature() ? "creature" : "empty");
 		path.addClassName(field.isEnemySide() ? "enemy" : "friend");

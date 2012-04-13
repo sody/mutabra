@@ -25,6 +25,6 @@ public class CardDescription extends AbstractComponent implements ClientElement 
 
 	@SetupRender
 	void setupCard() {
-		clientId = "c_" + value.getCode() + "_description";
+		clientId = "description_" + value.getCode();
 	}
 }

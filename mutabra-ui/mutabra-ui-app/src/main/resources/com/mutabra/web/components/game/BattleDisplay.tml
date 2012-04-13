@@ -21,31 +21,17 @@
 	</div>
 
 	<div class="row">
-		<t:loop source="fields" value="field">
-			<t:if test="field.hasHero()">
-				<div id="f_${field.position.id}_actions" class="actions">
-					<div class="span4">
-						<t:game.herodescription value="field.hero"/>
-						<t:if test="!field.enemySide">
-							<t:loop source="field.hero.hand" value="card">
-								<t:game.carddescription value="card"/>
-							</t:loop>
-						</t:if>
-					</div>
+		<div class="span4">
+			<t:loop source="fields" value="field">
+				<t:if test="field.hasHero()">
+					<t:game.herodescription value="field.hero" enemy="field.enemySide"/>
 					<t:if test="!field.enemySide">
 						<t:loop source="field.hero.hand" value="card">
-							<div class="span2">
-								<t:game.carddisplay value="card" hero="field.hero"/>
-							</div>
+							<t:game.carddescription value="card"/>
 						</t:loop>
-						<div class="span2">
-							<t:game.skipturndisplay hero="you"/>
-						</div>
 					</t:if>
-				</div>
-			</t:if>
-			<t:if test="field.hasCreature()">
-				<div id="f_${field.position.id}_actions" class="actions">
+				</t:if>
+				<t:if test="field.hasCreature()">
 					<div class="span4">
 						<t:game.creaturedescription value="field.creature"/>
 						<t:if test="!field.enemySide">
@@ -54,19 +40,37 @@
 							</t:loop>
 						</t:if>
 					</div>
-					<t:if test="!field.enemySide">
-						<t:loop source="field.creature.card.abilities" value="ability">
+				</t:if>
+			</t:loop>
+		</div>
+
+		<div class="span8">
+			<t:loop source="fields" value="field">
+				<t:if test="field.hasUnit()">
+					<div id="actions_${field.position.id}" class="row actions">
+						<t:if test="!field.enemySide">
+							<t:if test="field.hasHero()">
+								<t:loop source="field.hero.hand" value="card">
+									<div class="span2">
+										<t:game.carddisplay value="card" hero="field.hero"/>
+									</div>
+								</t:loop>
+							</t:if>
+							<t:if test="field.hasCreature()">
+								<t:loop source="field.creature.card.abilities" value="ability">
+									<div class="span2">
+										<t:game.abilitydisplay value="ability" creature="field.creature"/>
+									</div>
+								</t:loop>
+							</t:if>
 							<div class="span2">
-								<t:game.abilitydisplay value="ability" creature="field.creature"/>
+								<t:game.skipturndisplay hero="you"/>
 							</div>
-						</t:loop>
-					</t:if>
-					<div class="span2">
-						<t:game.skipturndisplay hero="you"/>
+						</t:if>
 					</div>
-				</div>
-			</t:if>
-		</t:loop>
+				</t:if>
+			</t:loop>
+		</div>
 	</div>
 
 </t:container>

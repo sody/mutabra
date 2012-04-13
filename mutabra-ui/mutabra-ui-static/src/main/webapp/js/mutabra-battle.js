@@ -1,42 +1,34 @@
 !function ($) {
 
-  "use strict"
-
   /* DESCRIPTION CLASS DEFINITION
    * ========================= */
-  var Description = function (element, options) {
+  var Description = function (element, target) {
     this.$element = $(element);
-    this.options = options;
+    this.$target = target && $(target);
   };
 
   Description.prototype = {
     constructor:Description,
 
     show:function () {
-      var selector = this.$element.data('target'),
-          $target = selector && $(selector),
-          $active = $target && $target.parent().children('.active');
+      var $active = this.$target && this.$target.parent().children('.active');
 
       $active && $active.hide();
-      $target && $target.show();
+      this.$target && this.$target.show();
     },
 
     hide:function () {
-      var selector = this.$element.data('target'),
-          $target = selector && $(selector),
-          $active = $target && $target.parent().children('.active');
+      var $active = this.$target && this.$target.parent().children('.active');
 
-      $target && $target.hide();
+      this.$target && this.$target.hide();
       $active && $active.show();
     },
 
-    select:function () {
-      var selector = this.$element.data('target'),
-          $target = selector && $(selector),
-          $active = $target && $target.parent().children('.active');
+    select: function() {
+      var $active = this.$target && this.$target.parent().children('.active');
 
-      $active && $active.removeClass('active');
-      $target && $target.addClass('active');
+      this.$target && this.$target.removeClass('active');
+      $active && $active.addClass('active');
     }
   };
 
@@ -46,13 +38,54 @@
     return this.each(function () {
       var $this = $(this),
           data = $this.data('description');
-      if (!data) $this.data('description', (data = new Description(this)));
+      if (!data) $this.data('description', (data = new Description(this, $this.data('description-target'))));
       if (typeof option == 'string') data[option]();
     });
   };
 
   $.fn.description.Constructor = Description;
 
+
+  /* FIELD CLASS DEFINITION
+   * ========================= */
+  var Field = function (element, target) {
+    this.$element = $(element);
+    this.$target = target && $(target);
+  };
+
+  Field.prototype = {
+    constructor:Field,
+
+    select:function () {
+      var $active = this.$target && this.$target.parent().children('.active'),
+          $activeField = this.$element.parent().find('.active');
+
+      this.$element.description('select');
+
+      $active && $active.removeClass('active');
+      this.$target && this.$target.addClass('active');
+
+      $activeField && $activeField.attr('class', function(index, attr) {
+        return attr.replace(' active', '');
+      });
+      this.$element.attr('class', function(index, attr) {
+        return attr + ' active';
+      });
+    }
+  };
+
+  /* DESCRIPTION PLUGIN DEFINITION
+   * ========================== */
+  $.fn.field = function (option) {
+    return this.each(function () {
+      var $this = $(this),
+          data = $this.data('field');
+      if (!data) $this.data('field', (data = new Field(this, $this.data('field-target'))));
+      if (typeof option == 'string') data[option]();
+    });
+  };
+
+  $.fn.field.Constructor = Field;
 
   /* DESCRIPTION DATA-API
    * ============== */
@@ -63,8 +96,8 @@
       $(this).description('hide');
     });
 
-    $('body').on('click.description.data-api', '[data-select="description"]', function () {
-      $(this).description('select');
+    $('body').on('click.field.data-api', '[data-select="field"]', function () {
+      $(this).field('select');
     });
   });
 

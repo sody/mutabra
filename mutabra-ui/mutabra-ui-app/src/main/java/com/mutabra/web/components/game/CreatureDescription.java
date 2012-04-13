@@ -26,6 +26,6 @@ public class CreatureDescription extends AbstractComponent implements ClientElem
 
 	@SetupRender
 	void setupClientId() {
-		clientId = "f_" + value.getPosition().getId() + "_description";
+		clientId = "description_" + value.getPosition().getId();
 	}
 }
