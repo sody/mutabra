@@ -1,7 +1,10 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-			 xmlns:p="tapestry:parameter">
+		>
 
-	<div id="${clientId}" class="card" data-hover="description" data-target="#${clientId}_description">
+	<div id="${clientId}" class="card"
+		 data-hover="description" data-description-target="${descriptionSelector}"
+		 data-select="card" data-card-target="${fieldSelector}" data-card-url="${actionLink}">
+
 		<div class="card-ne"><i class="icon-blood"/></div>
 		<div class="card-nw">${value.bloodCost}</div>
 		<div class="card-se">${value.power}</div>

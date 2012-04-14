@@ -100,6 +100,7 @@
 
     var selector = this.$element.data('card-target');
     this.$target = selector && $(selector);
+    this.url = this.$element.data('card-url');
   };
 
   Card.prototype = {
@@ -114,6 +115,17 @@
       this.$target && this.$target.attr('class', function(index, attr) {
         return attr + ' highlight';
       });
+
+      var card = this;
+      this.$target && this.$target.on('click.card.data-api', function() {
+        var $this = $(this),
+            x = $this.data('position-x'),
+            y = $this.data('position-y');
+        card.apply(x, y);
+      });
+      $(document).on('keydown.card.data-api', function(event) {
+        event.keyCode == 27 && card.cancel();
+      });
     },
 
     cancel: function() {
@@ -121,6 +133,19 @@
       this.$target && this.$target.attr('class', function(index, attr) {
         return attr.replace(' highlight', '');
       });
+      this.$target && this.$target.off('click.card.data-api');
+      $(document).off('keydown.card.data-api');
+    },
+
+    apply: function(x, y) {
+      $.ajax({
+        url: this.url,
+        data: {
+          x: x,
+          y: y
+        }
+      });
+      this.cancel();
     }
   };
 

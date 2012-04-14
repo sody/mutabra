@@ -6,11 +6,9 @@ import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.IdUtils;
 import org.apache.tapestry5.ClientElement;
-import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
@@ -44,7 +42,7 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 		final StringBuilder sideSelector = new StringBuilder("path");
 		if (targetType.supportsEnemy() && !targetType.supportsFriend()) {
 			sideSelector.append(".enemy");
-		} else if(targetType.supportsFriend() && !targetType.supportsEnemy()) {
+		} else if (targetType.supportsFriend() && !targetType.supportsEnemy()) {
 			sideSelector.append(".friend");
 		}
 
@@ -71,17 +69,7 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 		return selector.toString();
 	}
 
-	@AfterRender
-	void renderScript() {
-		final TargetType targetType = value.getTargetType();
-		support.addInitializerCall("card", new JSONObject()
-				.put("id", getClientId())
-				.put("url", getResources().createEventLink("registerHeroAction", hero, value).toAbsoluteURI())
-				.put("massive", targetType.isMassive())
-				.put("supports_enemy_side", targetType.supportsEnemy())
-				.put("supports_friend_side", targetType.supportsFriend())
-				.put("supports_empty_point", targetType.supportsEmpty())
-				.put("supports_hero_point", targetType.supportsHero())
-				.put("supports_creature_point", targetType.supportsCreature()));
+	public String getActionLink() {
+		return getResources().createEventLink("registerHeroAction", hero, value).toAbsoluteURI();
 	}
 }

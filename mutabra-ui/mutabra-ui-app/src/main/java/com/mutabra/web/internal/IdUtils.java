@@ -1,5 +1,6 @@
 package com.mutabra.web.internal;
 
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 
 /**
@@ -12,7 +13,15 @@ public class IdUtils {
 		return "card_" + card.getCode();
 	}
 
+	public static String generateId(final Ability ability) {
+		return "ability_" + ability.getCode();
+	}
+
 	public static String generateDescriptionId(final Card card) {
 		return "description_" + card.getCode();
+	}
+
+	public static String generateDescriptionId(final Ability ability) {
+		return "description_" + ability.getCode();
 	}
 }

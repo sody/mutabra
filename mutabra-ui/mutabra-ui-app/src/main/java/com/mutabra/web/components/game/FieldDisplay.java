@@ -55,9 +55,14 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 			path.attribute("data-select", "field");
 			path.attribute("data-field-target", "#actions_" + field.getPosition().getId());
 		}
+		path.attribute("data-position-x", String.valueOf(field.getPosition().getX()));
+		path.attribute("data-position-y", String.valueOf(field.getPosition().getY()));
 
 		path.addClassName(field.hasHero() ? "hero" : field.hasCreature() ? "creature" : "empty");
 		path.addClassName(field.isEnemySide() ? "enemy" : "friend");
+		if (field.hasHero() && !field.isEnemySide()) {
+			path.addClassName("active");
+		}
 
 		final StringBuilder pathBuilder = new StringBuilder("m");
 		pathBuilder.append(startX).append(',').append(startY);
