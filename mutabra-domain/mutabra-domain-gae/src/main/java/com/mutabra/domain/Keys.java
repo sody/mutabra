@@ -1,10 +1,8 @@
 package com.mutabra.domain;
 
-import com.google.appengine.api.datastore.Transaction;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
-import org.greatage.domain.SessionCallback;
-import org.greatage.domain.TransactionExecutor;
+import org.greatage.domain.internal.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +12,10 @@ import java.util.List;
  * @since 1.0
  */
 public class Keys {
-	private static volatile TransactionExecutor<Transaction, Objectify> executor;
+	private static volatile SessionManager<Objectify> sessionManager;
 
-	public static void init(final TransactionExecutor<Transaction, Objectify> executor) {
-		Keys.executor = executor;
+	public static void init(final SessionManager<Objectify> manager) {
+		Keys.sessionManager = manager;
 	}
 
 	public static <T, V extends T> Key<V> getKey(final T entity) {
@@ -28,7 +26,7 @@ public class Keys {
 	}
 
 	public static <T> T getInstance(final Key<T> key) {
-		return key == null ? null : executor.execute(new SessionCallback<T, Objectify>() {
+		return key == null ? null : sessionManager.execute(new SessionManager.Callback<T, Objectify>() {
 			public T doInSession(final Objectify session) throws Exception {
 				return session.get(key);
 			}
@@ -46,7 +44,7 @@ public class Keys {
 	}
 
 	public static <T, V extends T> List<T> getInstances(final Class<T> entityClass, final List<Key<V>> keys) {
-		return keys == null ? null : executor.execute(new SessionCallback<List<T>, Objectify>() {
+		return keys == null ? null : sessionManager.execute(new SessionManager.Callback<List<T>, Objectify>() {
 			public List<T> doInSession(final Objectify session) throws Exception {
 				return new ArrayList<T>(session.get(keys).values());
 			}
@@ -54,7 +52,7 @@ public class Keys {
 	}
 
 	public static <T, V extends T, P> List<T> getChildren(final Class<T> entityClass, final Class<V> realClass, final P parent) {
-		return executor.execute(new SessionCallback<List<T>, Objectify>() {
+		return sessionManager.execute(new SessionManager.Callback<List<T>, Objectify>() {
 			public List<T> doInSession(final Objectify session) throws Exception {
 				return new ArrayList<T>(session.query(realClass).ancestor(parent).list());
 			}

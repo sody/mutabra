@@ -47,7 +47,9 @@ public class TwitterProvider extends AbstractAuthenticationProvider<User, Twitte
 		if (StringUtils.isEmpty(profileId)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		Account account = accountService.query(account$.twitterUser.eq(profileId)).unique();
+		Account account = accountService.query()
+				.filter(account$.twitterUser.eq(profileId))
+				.unique();
 		if (account != null) {
 			return authenticate(account);
 		}

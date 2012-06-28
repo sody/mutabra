@@ -20,7 +20,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.services.ValueEncoderFactory;
-import org.greatage.domain.EntityRepository;
+import org.greatage.domain.Repository;
 import org.greatage.util.StringUtils;
 
 /**
@@ -30,9 +30,9 @@ import org.greatage.util.StringUtils;
 public class GAEEntityEncoderFactory implements ValueEncoderFactory<BaseEntity> {
 	private static final String NEW_ENTITY_VALUE = "new";
 
-	private final EntityRepository repository;
+	private final Repository repository;
 
-	public GAEEntityEncoderFactory(final EntityRepository repository) {
+	public GAEEntityEncoderFactory(final Repository repository) {
 		assert repository != null;
 
 		this.repository = repository;

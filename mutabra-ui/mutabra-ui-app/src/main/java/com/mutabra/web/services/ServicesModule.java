@@ -1,5 +1,6 @@
 package com.mutabra.web.services;
 
+import com.mutabra.annotations.Transactional;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
@@ -16,6 +17,7 @@ import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.CodedEntityServiceImpl;
+import com.mutabra.services.TransactionExecutor;
 import com.mutabra.services.TranslationService;
 import com.mutabra.services.TranslationServiceImpl;
 import com.mutabra.services.battle.BattleService;
@@ -32,19 +34,17 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.plastic.MethodAdvice;
 import org.apache.tapestry5.plastic.MethodInvocation;
-import org.greatage.domain.EntityRepository;
-import org.greatage.domain.TransactionCallback;
-import org.greatage.domain.TransactionExecutor;
-import org.greatage.domain.annotations.Transactional;
+import org.greatage.domain.Repository;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class ServicesModule {
-	private final EntityRepository repository;
+	private final Repository repository;
 
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(TranslationService.class, TranslationServiceImpl.class);
@@ -52,7 +52,7 @@ public class ServicesModule {
 		binder.bind(ScriptExecutor.class, ScriptExecutorImpl.class);
 	}
 
-	public ServicesModule(final EntityRepository repository) {
+	public ServicesModule(final Repository repository) {
 		this.repository = repository;
 	}
 
@@ -90,11 +90,12 @@ public class ServicesModule {
 	}
 
 	@Advise(serviceInterface = BaseEntityService.class)
-	public void adviseTransactionalServices(final MethodAdviceReceiver receiver, final TransactionExecutor<Object, Object> executor) {
+	public void adviseTransactionalServices(final MethodAdviceReceiver receiver,
+											final TransactionExecutor transactionExecutor) {
 		final MethodAdvice advice = new MethodAdvice() {
 			public void advise(final MethodInvocation invocation) {
-				executor.execute(new TransactionCallback<Object, Object>() {
-					public Object doInTransaction(final Object transaction) throws Exception {
+				transactionExecutor.doInTransaction(new Callable<Object>() {
+					public Object call() throws Exception {
 						invocation.proceed();
 						return invocation.getReturnValue();
 					}

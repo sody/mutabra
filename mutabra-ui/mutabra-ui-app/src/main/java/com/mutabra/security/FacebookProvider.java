@@ -43,7 +43,9 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		if (StringUtils.isEmpty(profileId)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		Account account = accountService.query(account$.facebookUser.eq(profileId)).unique();
+		Account account = accountService.query()
+				.filter(account$.facebookUser.eq(profileId))
+				.unique();
 		if (account != null) {
 			return authenticate(account);
 		}
@@ -52,7 +54,9 @@ public class FacebookProvider extends AbstractAuthenticationProvider<User, Faceb
 		if (StringUtils.isEmpty(email)) {
 			throw new AuthenticationException("Invalid credentials");
 		}
-		account = accountService.query(account$.email.eq(email)).unique();
+		account = accountService.query()
+				.filter(account$.email.eq(email))
+				.unique();
 		if (account != null) {
 			account.setFacebookUser(profileId);
 			return authenticate(account);

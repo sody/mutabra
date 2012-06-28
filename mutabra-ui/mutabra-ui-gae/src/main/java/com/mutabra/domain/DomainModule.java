@@ -1,6 +1,5 @@
 package com.mutabra.domain;
 
-import com.google.appengine.api.datastore.Transaction;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyOpts;
@@ -33,6 +32,8 @@ import com.mutabra.domain.game.HeroCardImpl;
 import com.mutabra.domain.game.HeroImpl;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.domain.security.ChangeSetImpl;
+import com.mutabra.services.GAETransactionExecutor;
+import com.mutabra.services.TransactionExecutor;
 import com.mutabra.services.db.DatabaseService;
 import com.mutabra.services.db.DefaultDatabaseService;
 import org.apache.tapestry5.SymbolConstants;
@@ -44,10 +45,10 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.services.ValueEncoderSource;
 import org.greatage.db.gae.GAEDatabase;
-import org.greatage.domain.EntityRepository;
-import org.greatage.domain.TransactionExecutor;
-import org.greatage.domain.objectify.ObjectifyExecutor;
+import org.greatage.domain.Repository;
+import org.greatage.domain.internal.SessionManager;
 import org.greatage.domain.objectify.ObjectifyRepository;
+import org.greatage.domain.objectify.ObjectifySessionManager;
 
 /**
  * @author Ivan Khalopik
@@ -56,14 +57,15 @@ import org.greatage.domain.objectify.ObjectifyRepository;
 public class DomainModule {
 
 	public static void bind(final ServiceBinder binder) {
-		binder.bind(EntityRepository.class, ObjectifyRepository.class);
+		binder.bind(Repository.class, ObjectifyRepository.class);
+		binder.bind(TransactionExecutor.class, GAETransactionExecutor.class);
 	}
 
 	public DatabaseService buildDatabaseService() {
 		return new DefaultDatabaseService(new GAEDatabase(), new MutabraChangeLog());
 	}
 
-	public TransactionExecutor buildObjectifyExecutor() {
+	public SessionManager<Objectify> buildObjectifySessionManager() {
 		final ObjectifyFactory objectifyFactory = new ObjectifyFactory();
 
 		objectifyFactory.register(TranslationImpl.class);
@@ -88,10 +90,10 @@ public class DomainModule {
 		final ObjectifyOpts options = new ObjectifyOpts();
 		options.setSessionCache(true);
 
-		return new ObjectifyExecutor(objectifyFactory, options);
+		return new ObjectifySessionManager(objectifyFactory, options);
 	}
 
-	@Contribute(EntityRepository.class)
+	@Contribute(Repository.class)
 	public void contributeEntityRepository(final MappedConfiguration<Class, Class> configuration) {
 		configuration.add(Translation.class, TranslationImpl.class);
 		configuration.add(ChangeSet.class, ChangeSetImpl.class);
@@ -115,7 +117,7 @@ public class DomainModule {
 
 	@Contribute(ValueEncoderSource.class)
 	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
-											 final EntityRepository repository) {
+											 final Repository repository) {
 		configuration.add(BaseEntity.class, new GAEEntityEncoderFactory(repository));
 	}
 
@@ -129,7 +131,7 @@ public class DomainModule {
 	}
 
 	@Startup
-	public void linkExecutor(final TransactionExecutor<Transaction, Objectify> executor) {
-		Keys.init(executor);
+	public void linkSessionManager(final SessionManager<Objectify> sessionManager) {
+		Keys.init(sessionManager);
 	}
 }

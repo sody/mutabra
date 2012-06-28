@@ -1,7 +1,7 @@
 package com.mutabra.services;
 
 import com.mutabra.domain.CodedEntity;
-import org.greatage.domain.EntityRepository;
+import org.greatage.domain.Repository;
 import org.greatage.util.ReflectionUtils;
 
 /**
@@ -12,7 +12,7 @@ public class CodedEntityServiceImpl<E extends CodedEntity> extends BaseEntitySer
 	private final CodedEntityMapper<E> entity$ = new CodedEntityMapper<E>(null);
 	private final Class<? extends E> realEntityClass;
 
-	public CodedEntityServiceImpl(final EntityRepository repository, final Class<E> entityClass) {
+	public CodedEntityServiceImpl(final Repository repository, final Class<E> entityClass) {
 		super(repository, entityClass);
 		//noinspection unchecked
 		realEntityClass = (Class<? extends E>) repository.create(entityClass).getClass();
@@ -20,7 +20,7 @@ public class CodedEntityServiceImpl<E extends CodedEntity> extends BaseEntitySer
 
 	public E get(final String code) {
 		//noinspection unchecked
-		return code != null ? query(entity$.code.eq(code)).unique() : null;
+		return code != null ? query().filter(entity$.code.eq(code)).unique() : null;
 	}
 
 	public E create(final String code) {

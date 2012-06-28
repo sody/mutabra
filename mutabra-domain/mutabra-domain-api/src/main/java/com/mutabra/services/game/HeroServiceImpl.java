@@ -1,5 +1,6 @@
 package com.mutabra.services.game;
 
+import com.mutabra.annotations.Transactional;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Cards;
 import com.mutabra.domain.common.Level;
@@ -10,8 +11,7 @@ import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroCard;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.CodedEntityService;
-import org.greatage.domain.EntityRepository;
-import org.greatage.domain.annotations.Transactional;
+import org.greatage.domain.Repository;
 import org.greatage.util.ReflectionUtils;
 
 /**
@@ -25,7 +25,7 @@ public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements Hero
 	private final CodedEntityService<Level> levelService;
 	private final CodedEntityService<Card> cardService;
 
-	public HeroServiceImpl(final EntityRepository repository,
+	public HeroServiceImpl(final Repository repository,
 						   final CodedEntityService<Level> levelService,
 						   final CodedEntityService<Card> cardService) {
 		super(repository, Hero.class);

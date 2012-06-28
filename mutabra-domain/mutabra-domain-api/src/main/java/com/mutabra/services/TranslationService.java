@@ -1,8 +1,8 @@
 package com.mutabra.services;
 
+import com.mutabra.annotations.Transactional;
 import com.mutabra.domain.Translatable;
 import com.mutabra.domain.Translation;
-import org.greatage.domain.annotations.Transactional;
 
 import java.util.Collection;
 import java.util.List;

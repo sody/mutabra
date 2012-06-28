@@ -20,7 +20,7 @@ import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.greatage.domain.Entity;
-import org.greatage.domain.EntityRepository;
+import org.greatage.domain.Repository;
 
 import java.io.Serializable;
 
@@ -33,10 +33,10 @@ public class EntityEncoderFactory<PK extends Serializable> implements ValueEncod
 	private static final String NEW_ENTITY_VALUE = "new";
 
 	private final TypeCoercer typeCoercer;
-	private final EntityRepository repository;
+	private final Repository repository;
 	private final Class<PK> pkClass;
 
-	public EntityEncoderFactory(final TypeCoercer typeCoercer, final EntityRepository repository, final Class<PK> pkClass) {
+	public EntityEncoderFactory(final TypeCoercer typeCoercer, final Repository repository, final Class<PK> pkClass) {
 		assert typeCoercer != null;
 		assert repository != null;
 		assert pkClass != null;

@@ -2,10 +2,8 @@ package com.mutabra.web.services;
 
 import com.mutabra.domain.DomainModule;
 import com.mutabra.web.internal.AccountManagerImpl;
-import com.mutabra.web.internal.CustomValidationDecoratorFactory;
 import com.mutabra.web.internal.I18nPropertyConduitSource;
 import com.mutabra.web.internal.ImageSourceImpl;
-import com.mutabra.web.internal.SecurityPersistenceFilter;
 import com.mutabra.web.internal.TranslatorImpl;
 import com.mutabra.web.internal.UpdateCheckerFilter;
 import org.apache.tapestry5.SymbolConstants;
@@ -20,21 +18,18 @@ import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
-import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.PropertyConduitSource;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
-import org.apache.tapestry5.services.ValidationDecoratorFactory;
 import org.apache.tapestry5.services.javascript.ExtensibleJavaScriptStack;
 import org.apache.tapestry5.services.javascript.JavaScriptStack;
 import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
-import org.greatage.domain.SessionCallback;
-import org.greatage.domain.TransactionExecutor;
+import org.greatage.domain.internal.SessionManager;
 
 import java.io.IOException;
 
@@ -121,10 +116,10 @@ public class MutabraModule {
 
 	@Contribute(RequestHandler.class)
 	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration,
-										 final TransactionExecutor<Object, Object> executor) {
+										 final SessionManager<Object> executor) {
 		configuration.add("RepositorySessionFilter", new RequestFilter() {
 			public boolean service(final Request request, final Response response, final RequestHandler requestHandler) throws IOException {
-				return executor.execute(new SessionCallback<Boolean, Object>() {
+				return executor.execute(new SessionManager.Callback<Boolean, Object>() {
 					public Boolean doInSession(final Object session) throws Exception {
 						return requestHandler.service(request, response);
 					}

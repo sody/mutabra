@@ -3,8 +3,7 @@ package com.mutabra.web.internal;
 import com.mutabra.domain.BaseEntity;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.grid.SortConstraint;
-import org.greatage.domain.EntityQuery;
-import org.greatage.domain.PaginationBuilder;
+import org.greatage.domain.Repository;
 
 import java.util.List;
 
@@ -13,13 +12,13 @@ import java.util.List;
  * @since 1.0
  */
 public class BaseEntityDataSource<E extends BaseEntity> implements GridDataSource {
-	private final EntityQuery<Long, E> query;
+	private final Repository.Query<Long, E> query;
 	private final Class<E> rowType;
 
 	private List<E> selection;
 	private int indexFrom;
 
-	public BaseEntityDataSource(final EntityQuery<Long, E> query, final Class<E> rowType) {
+	public BaseEntityDataSource(final Repository.Query<Long, E> query, final Class<E> rowType) {
 		this.query = query;
 		this.rowType = rowType;
 	}
@@ -37,13 +36,12 @@ public class BaseEntityDataSource<E extends BaseEntity> implements GridDataSourc
 	}
 
 	public void prepare(final int startIndex, final int endIndex, final List<SortConstraint> sortConstraints) {
-		final PaginationBuilder builder = PaginationBuilder.create().start(startIndex).end(endIndex + 1);
 //		for (SortConstraint constraint : sortConstraints) {
 //			final String property = constraint.getPropertyModel().getPropertyName();
 //			final boolean ascending = constraint.getColumnSort() == ColumnSort.ASCENDING;
 //			builder.sort(property, ascending);
 //		}
-		selection = query.list(builder);
+		selection = query.paginate(startIndex, endIndex - startIndex + 1).list();
 		indexFrom = startIndex;
 	}
 }

@@ -1,5 +1,6 @@
 package com.mutabra.services.battle;
 
+import com.mutabra.annotations.Transactional;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleEffect;
@@ -16,8 +17,7 @@ import com.mutabra.domain.game.HeroCard;
 import com.mutabra.scripts.ScriptContextImpl;
 import com.mutabra.scripts.ScriptExecutor;
 import com.mutabra.services.BaseEntityServiceImpl;
-import org.greatage.domain.EntityRepository;
-import org.greatage.domain.annotations.Transactional;
+import org.greatage.domain.Repository;
 import org.greatage.util.ReflectionUtils;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
 	private final Class<? extends BattleHero> realHeroClass;
 	private final Class<? extends BattleEffect> realEffectClass;
 
-	public BattleServiceImpl(final EntityRepository repository, final ScriptExecutor scriptExecutor) {
+	public BattleServiceImpl(final Repository repository, final ScriptExecutor scriptExecutor) {
 		super(repository, Battle.class);
 		this.scriptExecutor = scriptExecutor;
 

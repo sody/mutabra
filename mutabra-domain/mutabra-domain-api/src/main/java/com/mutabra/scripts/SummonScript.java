@@ -4,7 +4,7 @@ import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleField;
 import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.common.Effect;
-import org.greatage.domain.EntityRepository;
+import org.greatage.domain.Repository;
 import org.greatage.util.ReflectionUtils;
 
 /**
@@ -14,7 +14,7 @@ import org.greatage.util.ReflectionUtils;
 public class SummonScript implements EffectScript {
 	private final Class<? extends BattleCreature> realCreatureClass;
 
-	public SummonScript(final EntityRepository repository) {
+	public SummonScript(final Repository repository) {
 		this.realCreatureClass = repository.create(BattleCreature.class).getClass();
 	}
 

@@ -66,8 +66,12 @@ public class SecurityModule {
 											  final HeroService heroService) {
 		final Authentication user = securityContext.getCurrentUser();
 		final Account account = user == null ? null : Authorities.isTwitterUser(user.getName()) ?
-				accountService.query(account$.twitterUser.eq(Authorities.getTwitterUser(user.getName()))).unique() :
-				accountService.query(account$.email.eq(user.getName())).unique();
+				accountService.query()
+						.filter(account$.twitterUser.eq(Authorities.getTwitterUser(user.getName())))
+						.unique() :
+				accountService.query()
+						.filter(account$.email.eq(user.getName()))
+						.unique();
 		final Hero hero = account != null ? account.getHero() : null;
 		final Battle battle = hero != null ? hero.getBattle() : null;
 
@@ -102,10 +106,10 @@ public class SecurityModule {
 		configuration.add("token", new UserCredentialsProvider("token") {
 			@Override
 			protected User getAuthentication(final String key, final String secret) {
-				final Account account = accountService.query(
-						account$.email.eq(key),
-						account$.token.eq(secret)
-				).unique();
+				final Account account = accountService.query()
+						.filter(account$.email.eq(key))
+						.filter(account$.token.eq(secret))
+						.unique();
 
 				if (account != null) {
 					account.setToken(null);
@@ -130,10 +134,10 @@ public class SecurityModule {
 		configuration.add("credentials", new UserCredentialsProvider(secretEncoder) {
 			@Override
 			protected User getAuthentication(final String key, final String secret) {
-				final Account account = accountService.query(
-						account$.email.eq(key),
-						account$.password.eq(secret)
-				).unique();
+				final Account account = accountService.query()
+						.filter(account$.email.eq(key))
+						.filter(account$.password.eq(secret))
+						.unique();
 
 				if (account != null) {
 					account.setLastLogin(new Date());

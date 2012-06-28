@@ -2,7 +2,7 @@ package com.mutabra.domain;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
-import org.greatage.domain.EntityRepository;
+import org.greatage.domain.Repository;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeSuite;
 public class TestJdoRepository extends Assert {
 	private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
-	private EntityRepository repository;
+	private Repository repository;
 
 	@BeforeSuite
 	public void setUp() {

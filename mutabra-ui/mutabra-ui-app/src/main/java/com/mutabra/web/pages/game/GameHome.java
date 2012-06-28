@@ -13,7 +13,6 @@ import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.domain.PaginationBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -41,8 +40,10 @@ public class GameHome extends AbstractPage {
 
 	public List<Hero> getPlayers() {
 		final Date timeout = new Date(System.currentTimeMillis() - 50000);
-		final PaginationBuilder pagination = PaginationBuilder.create().count(20);
-		return heroService.query(Mappers.hero$.lastActive.gt(timeout)).list(pagination);
+		return heroService.query()
+				.filter(Mappers.hero$.lastActive.gt(timeout))
+				.paginate(0, 20)
+				.list();
 	}
 
 	public boolean isCanCreateBattle() {

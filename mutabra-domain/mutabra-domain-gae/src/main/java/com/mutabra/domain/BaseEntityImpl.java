@@ -1,8 +1,7 @@
 package com.mutabra.domain;
 
 import com.googlecode.objectify.Key;
-import org.greatage.domain.AbstractEntity;
-import org.greatage.domain.Entity;
+import org.greatage.domain.internal.AbstractEntity;
 
 import javax.persistence.Id;
 
