@@ -166,7 +166,6 @@
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-ioc</artifactId>
 				<version>${tapestry.version}</version>
-
 				<exclusions>
 					<exclusion>
 						<groupId>org.slf4j</groupId>
@@ -213,13 +212,6 @@
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
 				<version>${mail.api.version}</version>
-			</dependency>
-
-			<!-- Testing dependencies -->
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>${testng.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -357,7 +349,6 @@
 		<slf4j.version>1.6.4</slf4j.version>
 		<logback.version>1.0.0</logback.version>
 		<javassist.version>3.12.1.GA</javassist.version>
-		<testng.version>6.3.1</testng.version>
 
 		<hibernate.version>4.0.0.CR7</hibernate.version>
 		<jpa.version>1.0</jpa.version>
