@@ -81,13 +81,11 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>lesscss-maven-plugin</artifactId>
-				<version>1.0-beta-3</version>
 				<configuration>
 					<includes>
 						<include>*.less</include>
 					</includes>
 					<outputDirectory>${project.build.directory}/${project.build.finalName}/css</outputDirectory>
-					<compress>${project.production.mode}</compress>
 				</configuration>
 				<executions>
 					<execution>

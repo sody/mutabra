@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="">
-	<Resource name="${jdbc.source}" auth="Container" type="javax.sql.DataSource"
+	<Resource name="jdbc/mutabra" auth="Container" type="javax.sql.DataSource"
 			  driverClassName="${jdbc.driver}"
 			  url="${jdbc.url}"
 			  username="${jdbc.username}" password="${jdbc.password}"
@@ -8,7 +8,7 @@
 			  maxIdle="15"
 			  maxWait="10000"
 			/>
-	<Resource name="mail/Session" auth="Container" type="javax.mail.Session"
+	<Resource name="mail/session" auth="Container" type="javax.mail.Session"
 			  mail.smtp.host="smtp.gmail.com" mail.smtp.user="haba.haba.game@gmail.com"
 			  mail.smtp.auth="true" password="habahabahaba" mail.smtp.starttls.enable="true"
 			/>
