@@ -32,6 +32,12 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 		return IdUtils.generateId(value);
 	}
 
+	public String getContainerClass() {
+		return hero.isExhausted() ?
+				"card disabled" :
+				"card";
+	}
+
 	public String getDescriptionSelector() {
 		return "#" + IdUtils.generateDescriptionId(value);
 	}

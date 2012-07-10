@@ -34,6 +34,12 @@ public class AbilityDisplay extends AbstractComponent implements ClientElement {
 		return IdUtils.generateId(value);
 	}
 
+	public String getContainerClass() {
+		return creature.isExhausted() ?
+				"card disabled" :
+				"card";
+	}
+
 	public String getDescriptionSelector() {
 		return "#" + IdUtils.generateDescriptionId(value);
 	}

@@ -1,7 +1,7 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
 
-	<div id="${clientId}" class="card"
+	<div id="${clientId}" class="${containerClass}"
 		 data-hover="description" data-description-target="${descriptionSelector}"
 		 data-select="card" data-card-target="${fieldSelector}" data-card-url="${actionLink}">
 

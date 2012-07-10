@@ -24,7 +24,7 @@
 		<div class="span4">
 			<t:loop source="fields" value="field">
 				<t:if test="field.hasHero()">
-					<t:game.herodescription value="field.hero" enemy="field.enemySide"/>
+					<t:game.herodescription value="field.hero" active="!field.enemySide"/>
 					<t:if test="!field.enemySide">
 						<t:loop source="field.hero.hand" value="card">
 							<t:game.carddescription value="card"/>
@@ -32,14 +32,12 @@
 					</t:if>
 				</t:if>
 				<t:if test="field.hasCreature()">
-					<div class="span4">
-						<t:game.creaturedescription value="field.creature"/>
-						<t:if test="!field.enemySide">
-							<t:loop source="field.creature.card.abilities" value="ability">
-								<t:game.abilitydescription value="ability"/>
-							</t:loop>
-						</t:if>
-					</div>
+					<t:game.creaturedescription value="field.creature"/>
+					<t:if test="!field.enemySide">
+						<t:loop source="field.creature.card.abilities" value="ability">
+							<t:game.abilitydescription value="ability"/>
+						</t:loop>
+					</t:if>
 				</t:if>
 			</t:loop>
 		</div>
@@ -47,7 +45,7 @@
 		<div class="span8">
 			<t:loop source="fields" value="field">
 				<t:if test="field.hasUnit()">
-					<div id="actions_${field.position.id}" class="row actions">
+					<div id="actions_${field.position.id}" class="${actionsClass}">
 						<t:if test="!field.enemySide">
 							<t:if test="field.hasHero()">
 								<t:loop source="field.hero.hand" value="card">

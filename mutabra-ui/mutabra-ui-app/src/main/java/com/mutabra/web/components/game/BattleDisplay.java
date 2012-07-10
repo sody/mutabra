@@ -47,6 +47,12 @@ public class BattleDisplay {
 	@Property
 	private Ability ability;
 
+	public String getActionsClass() {
+		return field.hasHero() && !field.isEnemySide() ?
+				"row actions active" :
+				"row actions";
+	}
+
 	@SetupRender
 	void setupBattleField() {
 		final Hero hero = accountContext.getHero();
