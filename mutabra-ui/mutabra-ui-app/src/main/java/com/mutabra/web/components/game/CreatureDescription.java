@@ -1,7 +1,6 @@
 package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;

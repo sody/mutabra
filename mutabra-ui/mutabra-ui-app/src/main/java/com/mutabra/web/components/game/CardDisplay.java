@@ -8,8 +8,6 @@ import com.mutabra.web.internal.IdUtils;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
@@ -24,9 +22,6 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
 	@Property
 	@Parameter
 	private Card value;
-
-	@Inject
-	private JavaScriptSupport support;
 
 	public String getClientId() {
 		return IdUtils.generateId(value);

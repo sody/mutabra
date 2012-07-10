@@ -92,19 +92,21 @@ public class MutabraModule {
 		configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
 		configuration.add("flag", new StackExtension(StackExtensionType.STYLESHEET, "context:css/flag.css"));
 
-		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-1.7.1.js"));
-		configuration.add("jquery-ui", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-ui-1.8.17.js"));
+		// jquery library
+		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery-1.7.1.js"));
 
-		configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-transition.js"));
-		configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-dropdown.js"));
-		configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-tab.js"));
-		configuration.add("bootstrap-alert", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-alert.js"));
-		configuration.add("bootstrap-modal", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-modal.js"));
-		configuration.add("bootstrap-carousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap-carousel.js"));
+		// bootstrap plugins
+		configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-transition.js"));
+		configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-dropdown.js"));
+		configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-tab.js"));
+		configuration.add("bootstrap-alert", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-alert.js"));
+		configuration.add("bootstrap-modal", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-modal.js"));
+		configuration.add("bootstrap-carousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-carousel.js"));
 
-		configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra-battle.js"));
+		// project plugins
+		configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra/mutabra-battle.js"));
 
-//		configuration.add("jquery-mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery-mutabra.js"));
+		// project library for tapestry
 		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));
 	}
 
