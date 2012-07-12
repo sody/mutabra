@@ -303,6 +303,7 @@
 	</build>
 
 	<properties>
+		<project.production-mode>true</project.production-mode>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -336,12 +337,11 @@
 		<profile>
 			<id>hibernate</id>
 			<properties>
-				<jdbc.driver>org.hsqldb.jdbcDriver</jdbc.driver>
-				<jdbc.url>jdbc:hsqldb:/mutabra/db/mutabra;shutdown=true</jdbc.url>
-				<jdbc.username>sa</jdbc.username>
-				<jdbc.password></jdbc.password>
-				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
-				<liquibase.changelog>changelog/hsqldb/project-changelog.xml</liquibase.changelog>
+				<project.db.driver>org.hsqldb.jdbcDriver</project.db.driver>
+				<project.db.url>jdbc:hsqldb:/mutabra/db/mutabra;shutdown=true</project.db.url>
+				<project.db.username>sa</project.db.username>
+				<project.db.password></project.db.password>
+				<project.db.dialect>org.hibernate.dialect.HSQLDialect</project.db.dialect>
 			</properties>
 		</profile>
 	</profiles>

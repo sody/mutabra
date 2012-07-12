@@ -165,7 +165,7 @@
   /* DATA-API
    * ============== */
   $(function () {
-    $('body').on('mouseover.description.data-api', '[data-hover="description"]', function () {
+    $('body').on('mouseover.description.data-api', '[data-description-target]', function () {
       $(this).description('show');
     }).on('mouseout.description.data-api', '[data-hover="description"]', function () {
       $(this).description('hide');

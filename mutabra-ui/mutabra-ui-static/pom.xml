@@ -18,66 +18,16 @@
 	<name>Mutabra UI Static Resources</name>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/js</directory>
+				<includes>
+					<include>**/*.js</include>
+				</includes>
+				<targetPath>${project.build.directory}/${project.build.finalName}/js</targetPath>
+			</resource>
+		</resources>
 		<plugins>
-<!--
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>batik-maven-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<configuration>
-				</configuration>
-				<executions>
-					<execution>
-						<id>icons</id>
-						<goals>
-							<goal>rasterize</goal>
-						</goals>
-						<configuration>
-							<srcIncludes>**/icons/icons.svg</srcIncludes>
-							<destDir>${project.build.directory}/${project.build.finalName}/img</destDir>
-							<width>96</width>
-						</configuration>
-					</execution>
-					<execution>
-						<id>icons-small</id>
-						<goals>
-							<goal>rasterize</goal>
-						</goals>
-						<configuration>
-							<srcIncludes>**/icons/icons.svg</srcIncludes>
-							<destDir>${project.build.directory}/${project.build.finalName}/img/small</destDir>
-							<height>64</height>
-						</configuration>
-					</execution>
-					<execution>
-						<id>icons-large</id>
-						<goals>
-							<goal>rasterize</goal>
-						</goals>
-						<configuration>
-							<srcIncludes>**/icons/icons.svg</srcIncludes>
-							<destDir>${project.build.directory}/${project.build.finalName}/img/large</destDir>
-							<height>128</height>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>batik</groupId>
-						<artifactId>batik-transcoder</artifactId>
-						<version>1.6-1</version>
-						<scope>compile</scope>
-						<exclusions>
-							<exclusion>
-								<artifactId>fop</artifactId>
-								<groupId>fop</groupId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-				</dependencies>
-			</plugin>
--->
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>lesscss-maven-plugin</artifactId>

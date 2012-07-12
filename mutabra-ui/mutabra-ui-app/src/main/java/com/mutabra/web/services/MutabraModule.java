@@ -90,7 +90,6 @@ public class MutabraModule {
 	@Contribute(JavaScriptStack.class)
 	public void contributeJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
 		configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
-		configuration.add("flag", new StackExtension(StackExtensionType.STYLESHEET, "context:css/flag.css"));
 
 		// jquery library
 		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery-1.7.1.js"));
@@ -107,7 +106,7 @@ public class MutabraModule {
 		configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra/mutabra-battle.js"));
 
 		// project library for tapestry
-		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra.js"));
+		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra-init.js"));
 	}
 
 	@Contribute(JavaScriptStackSource.class)

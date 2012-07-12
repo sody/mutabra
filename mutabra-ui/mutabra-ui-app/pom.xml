@@ -92,17 +92,6 @@
 						<targetPath>${project.build.directory}/${project.build.finalName}/WEB-INF</targetPath>
 					</resource>
 				</resources>
-
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webXml>src/main/config/web-gae.xml</webXml>
-							<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
-						</configuration>
-					</plugin>
-				</plugins>
 			</build>
 
 			<dependencies>
