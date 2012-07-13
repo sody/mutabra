@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>com.mutabra</groupId>
 		<artifactId>mutabra-ui</artifactId>
-		<version>1.0-pre-alpha-9-SNAPSHOT</version>
+		<version>1.0-pre-alpha-10-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.mutabra</groupId>
 	<artifactId>mutabra-ui-static</artifactId>
-	<version>1.0-pre-alpha-9-SNAPSHOT</version>
+	<version>1.0-pre-alpha-10-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>Mutabra UI Static Resources</name>
@@ -35,6 +35,7 @@
 					<includes>
 						<include>*.less</include>
 					</includes>
+					<compress>${project.production-mode}</compress>
 					<outputDirectory>${project.build.directory}/${project.build.finalName}/css</outputDirectory>
 				</configuration>
 				<executions>

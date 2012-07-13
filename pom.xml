@@ -5,7 +5,7 @@
 
 	<groupId>com.mutabra</groupId>
 	<artifactId>mutabra-parent</artifactId>
-	<version>1.0-pre-alpha-9-SNAPSHOT</version>
+	<version>1.0-pre-alpha-10-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Mutabra Project</name>
