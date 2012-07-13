@@ -43,9 +43,7 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 		final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
 		path.attribute("id", clientId);
 		if (field.hasUnit()) {
-			path.attribute("data-hover", "description");
 			path.attribute("data-description-target", "#description_" + field.getPosition().getId());
-			path.attribute("data-select", "field");
 			path.attribute("data-field-target", "#actions_" + field.getPosition().getId());
 		}
 		path.attribute("data-position-x", String.valueOf(field.getPosition().getX()));

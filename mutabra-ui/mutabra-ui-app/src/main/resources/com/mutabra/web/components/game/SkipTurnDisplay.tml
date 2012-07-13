@@ -1,6 +1,8 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div id="${clientId}" class="card" data-hover="description" data-target="#${clientId}_description">
+	<div id="${clientId}" class="${containerClass}"
+		 data-description-target="${descriptionSelector}"
+		 data-skip-url="${actionLink}">
 		<div class="card-body">
 			<t:image.cardbackimage width="100" height="100"/>
 		</div>

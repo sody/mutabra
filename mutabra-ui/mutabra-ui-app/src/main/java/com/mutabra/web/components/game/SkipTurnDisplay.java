@@ -2,14 +2,10 @@ package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.internal.IdUtils;
 import org.apache.tapestry5.ClientElement;
-import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SetupRender;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * @author Ivan Khalopik
@@ -21,25 +17,21 @@ public class SkipTurnDisplay extends AbstractComponent implements ClientElement 
 	@Parameter
 	private BattleHero hero;
 
-	@Inject
-	private JavaScriptSupport support;
-
-	private String clientId;
-
 	public String getClientId() {
-		return clientId;
+		return IdUtils.generateSkipId();
 	}
 
-	@SetupRender
-	void setupButton() {
-		clientId = support.allocateClientId("skipTurnButton");
+	public String getContainerClass() {
+		return hero.isExhausted() ?
+				"card disabled" :
+				"card";
 	}
 
-	@AfterRender
-	void renderScript() {
-		support.addInitializerCall("skipButton", new JSONObject()
-				.put("id", getClientId())
-				.put("url", getResources().createEventLink("skipTurn", hero).toAbsoluteURI())
-		);
+	public String getDescriptionSelector() {
+		return "#" + IdUtils.generateSkipDescriptionId();
+	}
+
+	public String getActionLink() {
+		return getResources().createEventLink("skipTurn", hero).toAbsoluteURI();
 	}
 }

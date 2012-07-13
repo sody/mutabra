@@ -28,13 +28,5 @@ T5.extendInitializers({
 		};
 
 		setInterval(updateCheckerHandler, 10000);
-	},
-
-	skipButton: function (spec) {
-		j$('#' + spec.id).click(function() {
-			j$.ajax({
-				url: spec.url
-			});
-		});
 	}
 });

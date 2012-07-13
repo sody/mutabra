@@ -26,7 +26,7 @@
       $active && $active.show();
     },
 
-    select: function() {
+    select:function () {
       var $active = this.$target && this.$target.parent().find('.active');
 
       $active && $active.removeClass('active');
@@ -58,21 +58,20 @@
   };
 
   Field.prototype = {
-    constructor: Field,
+    constructor:Field,
 
     select:function () {
-      var $active = this.$element.parent().find('.active');
-      $active && $active.field('cancel');
+      this.$element.parent().find('.active').field('cancel');
 
-      this.$element.attr('class', function(index, attr) {
+      this.$element.attr('class', function (index, attr) {
         return attr + ' active';
       });
       this.$element.description('select');
       this.$target && this.$target.addClass('active');
     },
 
-    cancel: function() {
-      this.$element.attr('class', function(index, attr) {
+    cancel:function () {
+      this.$element.attr('class', function (index, attr) {
         return attr.replace(' active', '');
       });
       this.$target && this.$target.removeClass('active');
@@ -104,48 +103,56 @@
   };
 
   Card.prototype = {
-    constructor: Card,
+    constructor:Card,
 
-    select: function () {
-      var $active = this.$element.parents('.actions').find('.active');
-      $active && $active.card('cancel');
+    select:function () {
+      var self = this;
+
+      this.$element.parents('.actions').find('.active').card('cancel');
 
       this.$element.addClass('active');
       this.$element.description('select');
-      this.$target && this.$target.attr('class', function(index, attr) {
-        return attr + ' highlight';
-      });
-
-      var card = this;
-      this.$target && this.$target.on('click.card.data-api', function() {
-        var $this = $(this),
-            x = $this.data('position-x'),
-            y = $this.data('position-y');
-        card.apply(x, y);
-      });
-      $(document).on('keydown.card.data-api', function(event) {
-        event.keyCode == 27 && card.cancel();
-      });
+      this.$target && this.$target
+          .attr('class', function (index, attr) {
+            return attr + ' highlight';
+          })
+          .on('click.card.data-api', function () {
+            var $this = $(this),
+                x = $this.data('position-x'),
+                y = $this.data('position-y');
+            self.apply(x, y);
+          });
+      $(document)
+          .on('keydown.card.data-api', function (event) {
+            event.keyCode == 27 && self.cancel();
+          });
     },
 
-    cancel: function() {
+    cancel:function () {
       this.$element.removeClass('active');
-      this.$target && this.$target.attr('class', function(index, attr) {
+      this.$target && this.$target.attr('class', function (index, attr) {
         return attr.replace(' highlight', '');
       });
-      this.$target && this.$target.off('click.card.data-api');
-      $(document).off('keydown.card.data-api');
+      this.$target && this.$target
+          .off('click.card.data-api');
+      $(document)
+          .off('keydown.card.data-api');
     },
 
-    apply: function(x, y) {
+    apply:function (x, y) {
       $.ajax({
-        url: this.url,
-        data: {
-          x: x,
-          y: y
+        url:this.url,
+        data:{
+          x:x,
+          y:y
         }
       });
       this.cancel();
+      this.$element.parents('.actions').find('[data-card-target]').addClass('disabled');
+      this.$element.remove();
+      if ($('[data-card-target]:not(.disabled)').size() == 0) {
+        $('[data-skip-url]').addClass('disabled');
+      }
     }
   };
 
@@ -162,22 +169,58 @@
 
   $.fn.card.Constructor = Card;
 
+
+  /* SKIP CLASS DEFINITION
+   * ========================= */
+  var Skip = function (element) {
+    this.$element = $(element);
+
+    this.url = this.$element.data('skip-url');
+  };
+
+  Skip.prototype = {
+    constructor:Skip,
+
+    apply:function () {
+      $.ajax({
+        url:this.url
+      });
+      $('.card').addClass('disabled');
+    }
+  };
+
+  /* CARD PLUGIN DEFINITION
+   * ========================== */
+  $.fn.skip = function (option) {
+    return this.each(function () {
+      var $this = $(this),
+          data = $this.data('skip');
+      if (!data) $this.data('skip', (data = new Skip(this)));
+      if (typeof option == 'string') data[option]();
+    });
+  };
+
+  $.fn.skip.Constructor = Skip;
+
   /* DATA-API
    * ============== */
   $(function () {
-    $('body').on('mouseover.description.data-api', '[data-description-target]', function () {
-      $(this).description('show');
-    }).on('mouseout.description.data-api', '[data-hover="description"]', function () {
-      $(this).description('hide');
-    });
-
-    $('body').on('click.field.data-api', '[data-select="field"]', function () {
-      $(this).field('select');
-    });
-
-    $('body').on('click.card.data-api', '[data-select="card"]', function () {
-      $(this).card('select');
-    });
+    $('body')
+        .on('mouseover.description.data-api', '[data-description-target]', function () {
+          $(this).description('show');
+        })
+        .on('mouseout.description.data-api', '[data-description-target]', function () {
+          $(this).description('hide');
+        })
+        .on('click.field.data-api', '[data-field-target]', function () {
+          $(this).field('select');
+        })
+        .on('click.card.data-api', '[data-card-target]:not(.disabled)', function () {
+          $(this).card('select');
+        })
+        .on('click.skip.data-api', '[data-skip-url]:not(.disabled)', function () {
+          $(this).skip('apply');
+        });
   });
 
 }(window.jQuery);

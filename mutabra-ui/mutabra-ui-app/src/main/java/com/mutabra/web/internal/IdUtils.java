@@ -9,12 +9,20 @@ import com.mutabra.domain.common.Card;
  */
 public class IdUtils {
 
+	public static String generateSkipId() {
+		return "card_skip";
+	}
+
 	public static String generateId(final Card card) {
 		return "card_" + card.getCode();
 	}
 
 	public static String generateId(final Ability ability) {
 		return "ability_" + ability.getCode();
+	}
+
+	public static String generateSkipDescriptionId() {
+		return "description_skip";
 	}
 
 	public static String generateDescriptionId(final Card card) {

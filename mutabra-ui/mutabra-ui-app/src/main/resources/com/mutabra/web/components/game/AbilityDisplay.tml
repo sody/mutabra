@@ -2,8 +2,9 @@
 		>
 
 	<div id="${clientId}" class="${containerClass}"
-		 data-hover="description" data-description-target="${descriptionSelector}"
-		 data-select="card" data-card-target="${fieldSelector}" data-card-url="${actionLink}">
+		 data-description-target="${descriptionSelector}"
+		 data-card-target="${fieldSelector}"
+		 data-card-url="${actionLink}">
 
 		<div class="card-ne"><i class="icon-blood"/></div>
 		<div class="card-nw">${value.bloodCost}</div>
