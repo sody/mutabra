@@ -1,10 +1,10 @@
 package com.mutabra.web.pages;
 
 import com.mutabra.web.internal.NotFoundException;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Response;
-import org.greatage.security.AccessDeniedException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,7 +39,7 @@ public class ExceptionReport extends org.apache.tapestry5.corelib.pages.Exceptio
 		final Throwable rootCause = getRootCause(exception);
 		if (rootCause instanceof NotFoundException) {
 			setStatus(HttpServletResponse.SC_NOT_FOUND);
-		} else if (rootCause instanceof AccessDeniedException) {
+		} else if (rootCause instanceof AuthorizationException) {
 			setStatus(HttpServletResponse.SC_FORBIDDEN);
 		} else {
 			setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

@@ -4,21 +4,31 @@ import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.security.Facebook;
-import com.mutabra.security.FacebookProvider;
 import com.mutabra.security.Google;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
-import com.mutabra.security.TwitterProvider;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.internal.Authorities;
-import com.mutabra.web.internal.Authority;
-import com.mutabra.web.internal.AuthorityAnnotationExtractor;
-import com.mutabra.web.internal.SecurityExceptionHandler;
-import com.mutabra.web.internal.SecurityFilter;
-import com.mutabra.web.internal.SecurityPersistenceFilter;
+import com.mutabra.web.internal.security.MainRealm;
+import com.mutabra.web.internal.security.SecurityExceptionHandler;
+import com.mutabra.web.internal.security.SecurityFilter;
+import com.mutabra.web.internal.security.SecurityRequestFilter;
+import com.mutabra.web.pages.Security;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresUser;
+import org.apache.shiro.realm.Realm;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.env.DefaultWebEnvironment;
+import org.apache.shiro.web.env.WebEnvironment;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.mgt.WebSecurityManager;
+import org.apache.shiro.web.session.mgt.ServletContainerSessionManager;
+import org.apache.shiro.web.session.mgt.WebSessionManager;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
@@ -28,25 +38,22 @@ import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
+import org.apache.tapestry5.model.MutableComponentModel;
+import org.apache.tapestry5.services.ApplicationGlobals;
 import org.apache.tapestry5.services.ComponentRequestFilter;
 import org.apache.tapestry5.services.ComponentRequestHandler;
+import org.apache.tapestry5.services.HttpServletRequestFilter;
+import org.apache.tapestry5.services.HttpServletRequestHandler;
 import org.apache.tapestry5.services.MetaDataLocator;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestExceptionHandler;
-import org.apache.tapestry5.services.RequestFilter;
-import org.apache.tapestry5.services.RequestHandler;
-import org.apache.tapestry5.services.ResponseRenderer;
+import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
-import org.greatage.security.Authentication;
-import org.greatage.security.AuthenticationProvider;
-import org.greatage.security.MessageDigestSecretEncoder;
-import org.greatage.security.SecretEncoder;
-import org.greatage.security.SecurityContext;
-import org.greatage.security.SecurityContextImpl;
-import org.greatage.security.User;
-import org.greatage.security.UserCredentialsProvider;
 
 import java.util.Date;
+import java.util.List;
 
 import static com.mutabra.services.Mappers.account$;
 
@@ -55,22 +62,21 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class SecurityModule {
-
 	public static void bind(final ServiceBinder binder) {
-		binder.bind(SecurityContext.class, SecurityContextImpl.class);
+		binder.bind(WebSessionManager.class, ServletContainerSessionManager.class);
 	}
 
 	@Scope(ScopeConstants.PERTHREAD)
 	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
-											  final SecurityContext securityContext,
 											  final HeroService heroService) {
-		final Authentication user = securityContext.getCurrentUser();
-		final Account account = user == null ? null : Authorities.isTwitterUser(user.getName()) ?
+		final Subject user = SecurityUtils.getSubject();
+		final String username = user != null ? (String) user.getPrincipal() : null;
+		final Account account = username == null ? null : Authorities.isTwitterUser(username) ?
 				accountService.query()
-						.filter(account$.twitterUser.eq(Authorities.getTwitterUser(user.getName())))
+						.filter(account$.twitterUser.eq(Authorities.getTwitterUser(username)))
 						.unique() :
 				accountService.query()
-						.filter(account$.email.eq(user.getName()))
+						.filter(account$.email.eq(username))
 						.unique();
 		final Hero hero = account != null ? account.getHero() : null;
 		final Battle battle = hero != null ? hero.getBattle() : null;
@@ -95,73 +101,35 @@ public class SecurityModule {
 		};
 	}
 
-	public SecretEncoder buildSecretEncoder() {
-		return new MessageDigestSecretEncoder("MD5", false);
+	public Account buildAccount(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
+		return shadowBuilder.build(accountContext, "account", Account.class);
 	}
 
-	@Contribute(SecurityContext.class)
-	public void contributeAuthenticationManager(final OrderedConfiguration<AuthenticationProvider> configuration,
-												@InjectService("accountService") final BaseEntityService<Account> accountService,
-												final SecretEncoder secretEncoder) {
-		configuration.add("token", new UserCredentialsProvider("token") {
-			@Override
-			protected User getAuthentication(final String key, final String secret) {
-				final Account account = accountService.query()
-						.filter(account$.email.eq(key))
-						.filter(account$.token.eq(secret))
-						.unique();
-
-				if (account != null) {
-					account.setToken(null);
-					account.setLastLogin(new Date());
-					if (account.getPendingPassword() != null) {
-						account.setPassword(account.getPendingPassword());
-						account.setPendingPassword(null);
-					}
-					if (account.getPendingEmail() != null && account.getPendingToken() == null) {
-						account.setEmail(account.getPendingEmail());
-						account.setPendingEmail(null);
-					}
-					accountService.saveOrUpdate(account);
-
-					return Authorities.createUser(account);
-				}
-
-				return null;
-			}
-		});
-
-		configuration.add("credentials", new UserCredentialsProvider(secretEncoder) {
-			@Override
-			protected User getAuthentication(final String key, final String secret) {
-				final Account account = accountService.query()
-						.filter(account$.email.eq(key))
-						.filter(account$.password.eq(secret))
-						.unique();
-
-				if (account != null) {
-					account.setLastLogin(new Date());
-					accountService.saveOrUpdate(account);
-
-					return Authorities.createUser(account);
-				}
-
-				return null;
-			}
-		});
-
-		configuration.addInstance("facebook", FacebookProvider.class);
-		configuration.addInstance("twitter", TwitterProvider.class);
+	public Hero buildHero(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
+		return shadowBuilder.build(accountContext, "hero", Hero.class);
 	}
 
-	@Contribute(MetaWorker.class)
-	public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
-		configuration.addInstance(Authority.class, AuthorityAnnotationExtractor.class);
+	public WebSecurityManager buildWebSecurityManager(final List<Realm> realms) {
+		return new DefaultWebSecurityManager(realms);
 	}
 
-	@Contribute(MetaDataLocator.class)
-	public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
-		configuration.add(Authorities.PAGE_AUTHORITY_META, "");
+	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
+											  final WebSecurityManager securityManager) {
+		final DefaultWebEnvironment environment = new DefaultWebEnvironment();
+		environment.setServletContext(applicationGlobals.getServletContext());
+		environment.setWebSecurityManager(securityManager);
+		return environment;
+	}
+
+	@Contribute(WebSecurityManager.class)
+	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
+											 @InjectService("accountService") final BaseEntityService<Account> accountService) {
+		configuration.add("main", new MainRealm(accountService));
+	}
+
+	@Contribute(HttpServletRequestHandler.class)
+	public void contributeHttpServletRequestHandler(final OrderedConfiguration<HttpServletRequestFilter> configuration) {
+		configuration.addInstance("shiro", SecurityRequestFilter.class);
 	}
 
 	@Contribute(ComponentRequestHandler.class)
@@ -169,15 +137,43 @@ public class SecurityModule {
 		configuration.addInstance("SecurityFilter", SecurityFilter.class);
 	}
 
-	@Decorate(serviceInterface = RequestExceptionHandler.class)
-	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
-																   final ResponseRenderer renderer) {
-		return new SecurityExceptionHandler(handler, renderer, "security");
+	@Contribute(MetaWorker.class)
+	public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
+		configuration.add(RequiresAuthentication.class, new MetaDataExtractor<RequiresAuthentication>() {
+			public void extractMetaData(final MutableComponentModel model, final RequiresAuthentication annotation) {
+				if (model.isPage()) {
+					model.setMeta(Authorities.SHIRO_REQUIRES_AUTHENTICATION_META, Boolean.TRUE.toString());
+				}
+			}
+		});
+		configuration.add(RequiresUser.class, new MetaDataExtractor<RequiresUser>() {
+			public void extractMetaData(final MutableComponentModel model, final RequiresUser annotation) {
+				if (model.isPage()) {
+					model.setMeta(Authorities.SHIRO_REQUIRES_USER_META, Boolean.TRUE.toString());
+				}
+			}
+		});
+		configuration.add(RequiresGuest.class, new MetaDataExtractor<RequiresGuest>() {
+			public void extractMetaData(final MutableComponentModel model, final RequiresGuest annotation) {
+				if (model.isPage()) {
+					model.setMeta(Authorities.SHIRO_REQUIRES_GUEST_META, Boolean.TRUE.toString());
+				}
+			}
+		});
 	}
 
-	@Contribute(RequestHandler.class)
-	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration) {
-		configuration.addInstance("SecurityPersistenceFilter", SecurityPersistenceFilter.class, "after:UpdateCheckerFilter");
+	@Contribute(MetaDataLocator.class)
+	public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
+		configuration.add(Authorities.SHIRO_REQUIRES_AUTHENTICATION_META, "");
+		configuration.add(Authorities.SHIRO_REQUIRES_USER_META, "");
+		configuration.add(Authorities.SHIRO_REQUIRES_GUEST_META, "");
+	}
+
+	@Decorate(serviceInterface = RequestExceptionHandler.class)
+	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
+																   final PageRenderLinkSource linkSource,
+																   final Response response) {
+		return new SecurityExceptionHandler(handler, linkSource, response, Security.class);
 	}
 
 	public OAuth2 buildFacebookService(@Symbol("facebook.app-id") final String clientId,

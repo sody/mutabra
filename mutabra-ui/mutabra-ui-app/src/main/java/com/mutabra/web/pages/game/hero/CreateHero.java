@@ -3,14 +3,13 @@ package com.mutabra.web.pages.game.hero;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.game.Permission;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.internal.Authority;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -24,7 +23,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(Permission.PLAY)
+@RequiresUser
 public class CreateHero extends AbstractPage {
 
 	@InjectService("accountService")

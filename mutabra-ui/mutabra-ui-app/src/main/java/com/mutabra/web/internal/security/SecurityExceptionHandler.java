@@ -1,8 +1,10 @@
-package com.mutabra.web.internal;
+package com.mutabra.web.internal.security;
 
+import org.apache.shiro.ShiroException;
+import org.apache.tapestry5.Link;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestExceptionHandler;
-import org.apache.tapestry5.services.ResponseRenderer;
-import org.greatage.security.AuthenticationException;
+import org.apache.tapestry5.services.Response;
 
 import java.io.IOException;
 
@@ -12,24 +14,27 @@ import java.io.IOException;
  */
 public class SecurityExceptionHandler implements RequestExceptionHandler {
 	private final RequestExceptionHandler delegate;
-	private final ResponseRenderer renderer;
-	private final String loginPage;
+	private final PageRenderLinkSource linkSource;
+	private final Response response;
+	private final Class loginPage;
 
 	public SecurityExceptionHandler(final RequestExceptionHandler delegate,
-									final ResponseRenderer renderer,
-									final String loginPage) {
-
+									final PageRenderLinkSource linkSource,
+									final Response response,
+									final Class loginPage) {
 		this.delegate = delegate;
-		this.renderer = renderer;
+		this.linkSource = linkSource;
+		this.response = response;
 		this.loginPage = loginPage;
 	}
 
 	@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 	public void handleRequestException(final Throwable exception) throws IOException {
 		final Throwable rootException = getRootCause(exception);
-		if (rootException instanceof AuthenticationException) {
+		if (rootException instanceof ShiroException) {
 			//todo: log it
-			renderer.renderPageMarkupResponse(loginPage);
+			final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
+			response.sendRedirect(loginPageLink);
 		} else {
 			delegate.handleRequestException(exception);
 		}

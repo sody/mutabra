@@ -1,12 +1,11 @@
 package com.mutabra.web.pages.admin;
 
-import com.mutabra.domain.game.Permission;
 import com.mutabra.domain.security.ChangeSet;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.db.DatabaseService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.internal.Authority;
 import com.mutabra.web.internal.BaseEntityDataSource;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -16,7 +15,7 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Authority(Permission.MANAGE_APPLICATION)
+@RequiresAuthentication
 public class ChangeSets extends AbstractPage {
 
 	@InjectService("changeSetService")

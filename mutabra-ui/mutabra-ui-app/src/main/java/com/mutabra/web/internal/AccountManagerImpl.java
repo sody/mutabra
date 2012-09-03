@@ -12,7 +12,6 @@ import org.apache.tapestry5.internal.services.RequestPageCache;
 import org.apache.tapestry5.internal.structure.Page;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.ComponentClassResolver;
-import org.greatage.security.SecretEncoder;
 
 import java.util.Date;
 
@@ -25,20 +24,17 @@ import static com.mutabra.services.Mappers.account$;
 public class AccountManagerImpl implements AccountManager {
 	private final BaseEntityService<Account> accountService;
 	private final MailService mailService;
-	private final SecretEncoder passwordEncoder;
 	private final RequestPageCache requestPageCache;
 	private final ComponentClassResolver componentClassResolver;
 
 	public AccountManagerImpl(
 			final @InjectService("accountService") BaseEntityService<Account> accountService,
-			final SecretEncoder passwordEncoder,
 			final MailService mailService,
 			final RequestPageCache requestPageCache,
 			final ComponentClassResolver componentClassResolver) {
 
 		this.accountService = accountService;
 		this.mailService = mailService;
-		this.passwordEncoder = passwordEncoder;
 		this.requestPageCache = requestPageCache;
 		this.componentClassResolver = componentClassResolver;
 	}
@@ -56,7 +52,7 @@ public class AccountManagerImpl implements AccountManager {
 
 		final Account account = accountService.create();
 		account.setEmail(email);
-		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
+//		account.setPendingPassword(passwordEncoder.encode(generatedPassword));
 		account.setToken(generatedToken);
 		account.setRegistered(new Date());
 		account.setRole(Role.USER);
@@ -103,7 +99,7 @@ public class AccountManagerImpl implements AccountManager {
 
 		final String generatedToken = Authorities.generateSecret();
 		account.setToken(generatedToken);
-		account.setPendingPassword(passwordEncoder.encode(password));
+//		account.setPendingPassword(passwordEncoder.encode(password));
 
 		account.setPendingEmail(null);
 		account.setPendingToken(null);
