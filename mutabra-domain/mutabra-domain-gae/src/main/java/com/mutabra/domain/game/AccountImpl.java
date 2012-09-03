@@ -25,15 +25,9 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Indexed
 	private String email;
 
-	private String pendingEmail;
-
 	private String password;
 
-	private String pendingPassword;
-
-	private String token;
-
-	private String pendingToken;
+	private String salt;
 
 	@Indexed
 	private String facebookUser;
@@ -43,6 +37,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	@Indexed
 	private String googleUser;
+
+	private String pendingEmail;
+
+	private String pendingPassword;
+
+	private String token;
+
+	private String pendingToken;
 
 	private Role role;
 
@@ -75,20 +77,28 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 		this.email = email;
 	}
 
-	public String getPendingEmail() {
-		return pendingEmail;
-	}
-
-	public void setPendingEmail(final String email) {
-		this.pendingEmail = email;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(final String salt) {
+		this.salt = salt;
+	}
+
+	public String getPendingEmail() {
+		return pendingEmail;
+	}
+
+	public void setPendingEmail(final String email) {
+		this.pendingEmail = email;
 	}
 
 	public String getPendingPassword() {

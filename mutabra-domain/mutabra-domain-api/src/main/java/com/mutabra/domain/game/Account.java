@@ -17,13 +17,17 @@ public interface Account extends BaseEntity {
 
 	void setEmail(String email);
 
-	String getPendingEmail();
-
-	void setPendingEmail(String email);
-
 	String getPassword();
 
 	void setPassword(String password);
+
+	String getSalt();
+
+	void setSalt(final String salt);
+
+	String getPendingEmail();
+
+	void setPendingEmail(String email);
 
 	String getPendingPassword();
 
