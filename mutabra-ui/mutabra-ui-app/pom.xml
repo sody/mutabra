@@ -51,8 +51,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.greatage</groupId>
-			<artifactId>greatage-security</artifactId>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
 		</dependency>
 
 		<dependency>

@@ -218,6 +218,18 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-web</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.scribe</groupId>
 				<artifactId>scribe</artifactId>
 				<version>${scribe.version}</version>
@@ -328,6 +340,7 @@
 		<objectify.version>3.0</objectify.version>
 
 		<tapestry.version>5.3.3</tapestry.version>
+		<shiro.version>1.2.0</shiro.version>
 		<scribe.version>1.2.3</scribe.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<mail-api.version>1.4.4</mail-api.version>
