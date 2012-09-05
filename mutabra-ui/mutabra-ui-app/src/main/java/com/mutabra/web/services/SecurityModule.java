@@ -3,6 +3,7 @@ package com.mutabra.web.services;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.Role;
 import com.mutabra.security.Facebook;
 import com.mutabra.security.Google;
 import com.mutabra.security.OAuth;
@@ -18,11 +19,25 @@ import com.mutabra.web.internal.security.SecurityFilter;
 import com.mutabra.web.internal.security.SecurityRequestFilter;
 import com.mutabra.web.pages.Security;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.SaltedAuthenticationInfo;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.HashingPasswordService;
+import org.apache.shiro.authc.credential.PasswordMatcher;
+import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresUser;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.hash.DefaultHashService;
+import org.apache.shiro.crypto.hash.Hash;
+import org.apache.shiro.crypto.hash.HashService;
+import org.apache.shiro.crypto.hash.Sha512Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.web.env.DefaultWebEnvironment;
 import org.apache.shiro.web.env.WebEnvironment;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -38,7 +53,9 @@ import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
+import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ApplicationGlobals;
 import org.apache.tapestry5.services.ComponentRequestFilter;
@@ -62,8 +79,20 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class SecurityModule {
+	private static final String SECURITY_HASH_ALGORITHM = "security.hash-algorithm";
+	private static final String SECURITY_HASH_ITERATIONS = "security.hash-iterations";
+	private static final String SECURITY_PRIVATE_SALT = "security.private-salt";
+
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(WebSessionManager.class, ServletContainerSessionManager.class);
+	}
+
+	@ApplicationDefaults
+	@Contribute(SymbolProvider.class)
+	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
+		configuration.add(SECURITY_HASH_ALGORITHM, Sha512Hash.ALGORITHM_NAME);
+		configuration.add(SECURITY_HASH_ITERATIONS, "512");
+		configuration.add(SECURITY_PRIVATE_SALT, "8carxXOr0uNa8aqhCYZZZA==");
 	}
 
 	@Scope(ScopeConstants.PERTHREAD)
@@ -109,6 +138,53 @@ public class SecurityModule {
 		return shadowBuilder.build(accountContext, "hero", Hero.class);
 	}
 
+	public HashService buildHashService(@Symbol(SECURITY_HASH_ALGORITHM) final String hashAlgorithmName,
+										@Symbol(SECURITY_HASH_ITERATIONS) final int hashIterations,
+										@Symbol(SECURITY_PRIVATE_SALT) final String privateSalt) {
+
+		final DefaultHashService hashService = new DefaultHashService();
+		hashService.setHashAlgorithmName(hashAlgorithmName);
+		hashService.setHashIterations(hashIterations);
+		hashService.setPrivateSalt(ByteSource.Util.bytes(Base64.decode(privateSalt)));
+		hashService.setGeneratePublicSalt(true);
+
+		return hashService;
+	}
+
+	public HashingPasswordService buildPasswordService(final HashService hashService) {
+		final DefaultPasswordService passwordService = new DefaultPasswordService();
+		passwordService.setHashService(hashService);
+		return passwordService;
+	}
+
+	public CredentialsMatcher buildCredentialsMatcher(final PasswordService passwordService) {
+		final PasswordMatcher passwordMatcher = new PasswordMatcher() {
+			@Override
+			protected Object getStoredPassword(final AuthenticationInfo storedAccountInfo) {
+				return storedAccountInfo == null ? null : new SimpleHash(null) {
+					{
+						final Object credentials = storedAccountInfo.getCredentials();
+						byte[] sourceBytes = toBytes(credentials);
+						if (credentials instanceof String || credentials instanceof char[]) {
+							sourceBytes = Base64.decode(sourceBytes);
+						}
+						setBytes(sourceBytes);
+						if (storedAccountInfo instanceof SaltedAuthenticationInfo) {
+							setSalt(((SaltedAuthenticationInfo) storedAccountInfo).getCredentialsSalt());
+						}
+					}
+
+					@Override
+					public int getIterations() {
+						return 0;
+					}
+				};
+			}
+		};
+		passwordMatcher.setPasswordService(passwordService);
+		return passwordMatcher;
+	}
+
 	public WebSecurityManager buildWebSecurityManager(final List<Realm> realms) {
 		return new DefaultWebSecurityManager(realms);
 	}
@@ -123,8 +199,24 @@ public class SecurityModule {
 
 	@Contribute(WebSecurityManager.class)
 	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
-											 @InjectService("accountService") final BaseEntityService<Account> accountService) {
-		configuration.add("main", new MainRealm(accountService));
+											 @InjectService("accountService") final BaseEntityService<Account> accountService,
+											 final CredentialsMatcher credentialsMatcher,
+											 final HashingPasswordService passwordService) {
+		configuration.add("main", new MainRealm(credentialsMatcher, accountService));
+
+		if (accountService.query().count() <= 0) {
+			final Account account = accountService.create();
+			account.setEmail("admin@mutabra.com");
+			account.setName("admin");
+			account.setRole(Role.ADMIN);
+			account.setRegistered(new Date());
+
+			final Hash hash = passwordService.hashPassword("admin");
+			account.setPassword(hash.toBase64());
+			account.setSalt(hash.getSalt().toBase64());
+
+			accountService.save(account);
+		}
 	}
 
 	@Contribute(HttpServletRequestHandler.class)

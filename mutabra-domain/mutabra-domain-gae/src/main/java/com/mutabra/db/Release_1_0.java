@@ -33,21 +33,6 @@ public class Release_1_0 extends ChangeLog {
 				.values(Role.USER.getTranslationCode(), Translations.DEFAULT, Translations.NAME, "User")
 				.values(Role.USER.getTranslationCode(), Translations.RUSSIAN, Translations.NAME, "Пользователь");
 
-		begin("2011-10-11/admin_account").comment("admin account added");
-		insert(Tables.ACCOUNT)
-				.set("role", Role.ADMIN.name())
-				.into("email", "password", "name")
-				.values("admin@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "admin");
-
-		begin("2011-10-11/test_accounts").comment("test accounts added");
-		insert(Tables.ACCOUNT)
-				.set("role", Role.USER.name())
-				.into("email", "password", "name")
-				.values("user1@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "sody")
-				.values("user2@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "hermes")
-				.values("user3@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "user")
-				.values("user4@mutabra.com", "21232f297a57a5a743894a0e4a801fc3", "cheater");
-
 		begin("2011-10-11/levels").comment("levels data");
 		insert(Tables.LEVEL)
 				.into("code", "rating")

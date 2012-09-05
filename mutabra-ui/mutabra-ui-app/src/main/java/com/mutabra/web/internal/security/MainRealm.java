@@ -9,10 +9,13 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
 import static com.mutabra.services.Mappers.account$;
 
@@ -23,7 +26,9 @@ import static com.mutabra.services.Mappers.account$;
 public class MainRealm extends AuthorizingRealm {
 	private final BaseEntityService<Account> accountService;
 
-	public MainRealm(final BaseEntityService<Account> accountService) {
+	public MainRealm(final CredentialsMatcher credentialsMatcher,
+					 final BaseEntityService<Account> accountService) {
+		super(credentialsMatcher);
 		this.accountService = accountService;
 	}
 
@@ -71,7 +76,10 @@ public class MainRealm extends AuthorizingRealm {
 		}
 
 		final SimpleAccount simpleAccount = new SimpleAccount(account.getEmail(), account.getPassword(), getName());
-//		simpleAccount.setCredentialsSalt(ByteSource.Util.bytes(account.getSalt()));
+		if (account.getSalt() != null) {
+			final ByteSource salt = ByteSource.Util.bytes(Base64.decode(account.getSalt()));
+			simpleAccount.setCredentialsSalt(salt);
+		}
 
 		final Role role = account.getRole();
 		simpleAccount.addRole(role.getTranslationCode());
