@@ -74,7 +74,7 @@ public class MainRealm extends AuthorizingRealm {
 			return null;
 		}
 
-		final SimpleAccount simpleAccount = new SimpleAccount(account.getEmail(), account.getPassword(), getName());
+		final SimpleAccount simpleAccount = new SimpleAccount(account.getId(), account.getPassword(), getName());
 		if (account.getSalt() != null) {
 			final ByteSource salt = ByteSource.Util.bytes(Base64.decode(account.getSalt()));
 			simpleAccount.setCredentialsSalt(salt);

@@ -13,20 +13,20 @@ import static com.mutabra.services.Mappers.account$;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class FacebookRealm extends OAuthRealm<FacebookRealm.Token> {
-	public FacebookRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
-						 final HashService hashService) {
+public class TwitterRealm extends OAuthRealm<TwitterRealm.Token> {
+	public TwitterRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
+						final HashService hashService) {
 		super(accountService, hashService, Token.class);
 	}
 
 	@Override
 	protected Account getAccountByProfileId(final String profileId) {
-		return findAccount(account$.facebookUser.eq(profileId));
+		return findAccount(account$.twitterUser.eq(profileId));
 	}
 
 	@Override
 	protected SimpleAccount attachAccount(final Account account, final String profileId) {
-		account.setFacebookUser(profileId);
+		account.setTwitterUser(profileId);
 		return super.attachAccount(account, profileId);
 	}
 

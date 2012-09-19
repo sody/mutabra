@@ -19,6 +19,7 @@ import com.mutabra.web.internal.security.MainRealm;
 import com.mutabra.web.internal.security.SecurityExceptionHandler;
 import com.mutabra.web.internal.security.SecurityFilter;
 import com.mutabra.web.internal.security.SecurityRequestFilter;
+import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.pages.Security;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -107,6 +108,7 @@ public class SecurityModule {
 											 final HashService hashService) {
 		configuration.add("main", new MainRealm(accountService, new HashedPasswordMatcher(hashService)));
 		configuration.add("facebook", new FacebookRealm(accountService, hashService));
+		configuration.add("twitter", new TwitterRealm(accountService, hashService));
 
 		if (accountService.query().count() <= 0) {
 			final Account account = accountService.create();
@@ -205,13 +207,9 @@ public class SecurityModule {
 	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
 											  final HeroService heroService) {
 		final Subject user = SecurityUtils.getSubject();
-		final String username = user != null ? (String) user.getPrincipal() : null;
-		final Account account = username == null ? null : Authorities.isTwitterUser(username) ?
-				accountService.query()
-						.filter(account$.twitterUser.eq(Authorities.getTwitterUser(username)))
-						.unique() :
-				accountService.query()
-						.filter(account$.email.eq(username))
+		final Long userId = user != null ? (Long) user.getPrincipal() : null;
+		final Account account = accountService.query()
+						.filter(account$.id$.eq(userId))
 						.unique();
 		final Hero hero = account != null ? account.getHero() : null;
 		final Battle battle = hero != null ? hero.getBattle() : null;
