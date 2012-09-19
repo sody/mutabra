@@ -10,7 +10,8 @@
 	<t:social.twitterconnect t:id="twitter"  class="btn" title="message:label.twitter">
 		<i class="icon-twitter small"/>
 	</t:social.twitterconnect>
-	<t:social.googleconnect t:id="google" scope="https://mail.google.com/" class="btn" title="message:label.google">
+	<t:social.googleconnect t:id="google" class="btn" title="message:label.google"
+							scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email">
 		<i class="icon-google small"/>
 	</t:social.googleconnect>
 	<t:social.vkontakteconnect t:id="vk"  class="btn" title="message:label.vk">

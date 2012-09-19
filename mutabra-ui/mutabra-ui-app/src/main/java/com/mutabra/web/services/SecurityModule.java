@@ -144,8 +144,8 @@ public class SecurityModule {
 		return new Twitter(consumerKey, consumerSecret);
 	}
 
-	public OAuth buildGoogleService(@Symbol(SECURITY_GOOGLE_KEY) final String consumerKey,
-									@Symbol(SECURITY_GOOGLE_SECRET) final String consumerSecret) {
+	public OAuth2 buildGoogleService(@Symbol(SECURITY_GOOGLE_KEY) final String consumerKey,
+									 @Symbol(SECURITY_GOOGLE_SECRET) final String consumerSecret) {
 		return new Google(consumerKey, consumerSecret);
 	}
 
@@ -209,8 +209,8 @@ public class SecurityModule {
 		final Subject user = SecurityUtils.getSubject();
 		final Long userId = user != null ? (Long) user.getPrincipal() : null;
 		final Account account = accountService.query()
-						.filter(account$.id$.eq(userId))
-						.unique();
+				.filter(account$.id$.eq(userId))
+				.unique();
 		final Hero hero = account != null ? account.getHero() : null;
 		final Battle battle = hero != null ? hero.getBattle() : null;
 
