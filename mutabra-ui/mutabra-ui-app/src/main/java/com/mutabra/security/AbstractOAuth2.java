@@ -24,7 +24,8 @@ public abstract class AbstractOAuth2 extends AbstractOAuth implements OAuth2 {
 		return null;
 	}
 
-	protected Token getAccessToken(final OAuthService service, final Token authorizedRequestToken) {
-		return service.getAccessToken(null, new Verifier(authorizedRequestToken.getSecret()));
+	@Override
+	protected Token getAccessToken(final OAuthService service, final String token, final String secret) {
+		return service.getAccessToken(null, new Verifier(secret));
 	}
 }

@@ -6,8 +6,6 @@ import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
-import java.util.Map;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -30,8 +28,7 @@ public abstract class AbstractOAuth implements OAuth {
 
 	public Session connect(final String token, final String secret, final String callbackUrl, final String scope) {
 		final OAuthService service = service(callbackUrl, scope);
-		final Token requestToken = new Token(token, secret);
-		final Token accessToken = getAccessToken(service, requestToken);
+		final Token accessToken = getAccessToken(service, token, secret);
 		return createSession(service, accessToken);
 	}
 
@@ -44,8 +41,9 @@ public abstract class AbstractOAuth implements OAuth {
 		return service.getRequestToken();
 	}
 
-	protected Token getAccessToken(final OAuthService service, final Token authorizedRequestToken) {
-		return service.getAccessToken(authorizedRequestToken, new Verifier(authorizedRequestToken.getSecret()));
+	protected Token getAccessToken(final OAuthService service, final String token, final String secret) {
+		final Token requestToken = new Token(token, secret);
+		return service.getAccessToken(requestToken, new Verifier(requestToken.getSecret()));
 	}
 
 	protected abstract Session createSession(OAuthService service, Token accessToken);
@@ -61,24 +59,5 @@ public abstract class AbstractOAuth implements OAuth {
 			builder.scope(scope);
 		}
 		return builder.build();
-	}
-
-	class SessionImpl implements Session {
-		private final OAuthService service;
-		private final Token accessToken;
-
-		SessionImpl(final OAuthService service, final Token accessToken) {
-			this.service = service;
-			this.accessToken = accessToken;
-		}
-
-		public Map<String, Object> getProfile() {
-
-			return null;  //To change body of implemented methods use File | Settings | File Templates.
-		}
-
-		public Map<String, Object> getProfile(final String id) {
-			return null;  //To change body of implemented methods use File | Settings | File Templates.
-		}
 	}
 }
