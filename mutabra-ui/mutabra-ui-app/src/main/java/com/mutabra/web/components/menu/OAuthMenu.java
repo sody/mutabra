@@ -3,6 +3,7 @@ package com.mutabra.web.components.menu;
 import com.mutabra.security.OAuth;
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.internal.security.FacebookRealm;
+import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.pages.game.GameHome;
 import org.apache.tapestry5.EventConstants;
@@ -28,7 +29,13 @@ public class OAuthMenu extends AbstractComponent {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "google")
 	Object googleConnected(final OAuth.Session session) {
-		//TODO: implement this
+		getSubject().login(new GoogleRealm.Token(session));
+		return GameHome.class;
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "vk")
+	Object vkConnected(final OAuth.Session session) {
+//		getSubject().login(new GoogleRealm.Token(session));
 		return GameHome.class;
 	}
 }

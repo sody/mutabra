@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Ivan Khalopik
- * @since 1.19
+ * @since 1.0
  */
 public class GoogleApi20 extends DefaultApi20 {
 	private static final String AUTHORIZE_URL = "https://accounts.google.com/o/oauth2/auth?client_id=%s&redirect_uri=%s&response_type=code";

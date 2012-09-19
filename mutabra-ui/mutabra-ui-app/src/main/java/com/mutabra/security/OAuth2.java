@@ -1,7 +1,5 @@
 package com.mutabra.security;
 
-import java.util.Map;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0

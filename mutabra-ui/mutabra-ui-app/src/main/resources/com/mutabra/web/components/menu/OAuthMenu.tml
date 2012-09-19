@@ -14,7 +14,7 @@
 							scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email">
 		<i class="icon-google small"/>
 	</t:social.googleconnect>
-	<t:social.vkontakteconnect t:id="vk"  class="btn" title="message:label.vk">
+	<t:social.vkontakteconnect t:id="vk" class="btn" title="message:label.vk">
 		<i class="icon-vk small"/>
 	</t:social.vkontakteconnect>
 

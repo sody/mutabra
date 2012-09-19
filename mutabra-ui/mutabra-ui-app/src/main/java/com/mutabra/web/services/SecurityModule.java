@@ -9,11 +9,12 @@ import com.mutabra.security.Google;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
-import com.mutabra.security.VKontakte;
+import com.mutabra.security.VK;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.internal.security.FacebookRealm;
+import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.HashedPasswordMatcher;
 import com.mutabra.web.internal.security.MainRealm;
 import com.mutabra.web.internal.security.SecurityExceptionHandler;
@@ -73,14 +74,18 @@ public class SecurityModule {
 	private static final String SECURITY_HASH_ALGORITHM = "security.hash-algorithm";
 	private static final String SECURITY_HASH_ITERATIONS = "security.hash-iterations";
 	private static final String SECURITY_PRIVATE_SALT = "security.private-salt";
+
 	private static final String SECURITY_FACEBOOK_KEY = "facebook.app-id";
 	private static final String SECURITY_FACEBOOK_SECRET = "facebook.app-secret";
+
 	private static final String SECURITY_TWITTER_KEY = "twitter.consumer-key";
 	private static final String SECURITY_TWITTER_SECRET = "twitter.consumer-secret";
+
 	private static final String SECURITY_GOOGLE_KEY = "google.consumer-key";
 	private static final String SECURITY_GOOGLE_SECRET = "google.consumer-secret";
-	private static final String SECURITY_VK_KEY = "vkontakte.consumer-key";
-	private static final String SECURITY_VK_SECRET = "vkontakte.consumer-secret";
+
+	private static final String SECURITY_VK_KEY = "vk.consumer-key";
+	private static final String SECURITY_VK_SECRET = "vk.consumer-secret";
 
 	@ApplicationDefaults
 	@Contribute(SymbolProvider.class)
@@ -109,6 +114,7 @@ public class SecurityModule {
 		configuration.add("main", new MainRealm(accountService, new HashedPasswordMatcher(hashService)));
 		configuration.add("facebook", new FacebookRealm(accountService, hashService));
 		configuration.add("twitter", new TwitterRealm(accountService, hashService));
+		configuration.add("google", new GoogleRealm(accountService, hashService));
 
 		if (accountService.query().count() <= 0) {
 			final Account account = accountService.create();
@@ -151,7 +157,7 @@ public class SecurityModule {
 
 	public OAuth2 buildVkontakteService(@Symbol(SECURITY_VK_KEY) final String consumerKey,
 										@Symbol(SECURITY_VK_SECRET) final String consumerSecret) {
-		return new VKontakte(consumerKey, consumerSecret);
+		return new VK(consumerKey, consumerSecret);
 	}
 
 	@Contribute(HttpServletRequestHandler.class)
