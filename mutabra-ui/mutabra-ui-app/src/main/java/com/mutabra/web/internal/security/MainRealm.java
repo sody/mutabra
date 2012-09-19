@@ -26,8 +26,7 @@ import static com.mutabra.services.Mappers.account$;
 public class MainRealm extends AuthorizingRealm {
 	private final BaseEntityService<Account> accountService;
 
-	public MainRealm(final CredentialsMatcher credentialsMatcher,
-					 final BaseEntityService<Account> accountService) {
+	public MainRealm(final BaseEntityService<Account> accountService, final CredentialsMatcher credentialsMatcher) {
 		super(credentialsMatcher);
 		this.accountService = accountService;
 	}

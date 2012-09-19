@@ -2,6 +2,7 @@ package com.mutabra.web.components.menu;
 
 import com.mutabra.security.OAuth;
 import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.internal.security.FacebookToken;
 import com.mutabra.web.pages.game.GameHome;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -14,7 +15,7 @@ public class OAuthMenu extends AbstractComponent {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
 	Object facebookConnected(final OAuth.Session session) {
-		//TODO: implement this
+		getSubject().login(new FacebookToken(session));
 		return GameHome.class;
 	}
 

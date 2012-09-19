@@ -13,6 +13,7 @@ import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.internal.Authorities;
+import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.HashedPasswordMatcher;
 import com.mutabra.web.internal.security.MainRealm;
 import com.mutabra.web.internal.security.SecurityExceptionHandler;
@@ -104,7 +105,8 @@ public class SecurityModule {
 	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
 											 @InjectService("accountService") final BaseEntityService<Account> accountService,
 											 final HashService hashService) {
-		configuration.add("main", new MainRealm(new HashedPasswordMatcher(hashService), accountService));
+		configuration.add("main", new MainRealm(accountService, new HashedPasswordMatcher(hashService)));
+		configuration.add("facebook", new FacebookRealm(accountService, hashService));
 
 		if (accountService.query().count() <= 0) {
 			final Account account = accountService.create();
@@ -240,5 +242,9 @@ public class SecurityModule {
 
 	public Hero buildHero(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
 		return shadowBuilder.build(accountContext, "hero", Hero.class);
+	}
+
+	public Battle buildBattle(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
+		return shadowBuilder.build(accountContext, "battle", Battle.class);
 	}
 }
