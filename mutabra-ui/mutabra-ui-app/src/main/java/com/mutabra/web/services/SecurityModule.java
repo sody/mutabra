@@ -13,28 +13,20 @@ import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.internal.Authorities;
+import com.mutabra.web.internal.security.HashedPasswordMatcher;
 import com.mutabra.web.internal.security.MainRealm;
 import com.mutabra.web.internal.security.SecurityExceptionHandler;
 import com.mutabra.web.internal.security.SecurityFilter;
 import com.mutabra.web.internal.security.SecurityRequestFilter;
 import com.mutabra.web.pages.Security;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.SaltedAuthenticationInfo;
-import org.apache.shiro.authc.credential.CredentialsMatcher;
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.HashingPasswordService;
-import org.apache.shiro.authc.credential.PasswordMatcher;
-import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.DefaultHashService;
-import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.crypto.hash.HashService;
 import org.apache.shiro.crypto.hash.Sha512Hash;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
@@ -42,12 +34,9 @@ import org.apache.shiro.web.env.DefaultWebEnvironment;
 import org.apache.shiro.web.env.WebEnvironment;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.mgt.WebSecurityManager;
-import org.apache.shiro.web.session.mgt.ServletContainerSessionManager;
-import org.apache.shiro.web.session.mgt.WebSessionManager;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
-import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.InjectService;
@@ -82,10 +71,14 @@ public class SecurityModule {
 	private static final String SECURITY_HASH_ALGORITHM = "security.hash-algorithm";
 	private static final String SECURITY_HASH_ITERATIONS = "security.hash-iterations";
 	private static final String SECURITY_PRIVATE_SALT = "security.private-salt";
-
-	public static void bind(final ServiceBinder binder) {
-		binder.bind(WebSessionManager.class, ServletContainerSessionManager.class);
-	}
+	private static final String SECURITY_FACEBOOK_KEY = "facebook.app-id";
+	private static final String SECURITY_FACEBOOK_SECRET = "facebook.app-secret";
+	private static final String SECURITY_TWITTER_KEY = "twitter.consumer-key";
+	private static final String SECURITY_TWITTER_SECRET = "twitter.consumer-secret";
+	private static final String SECURITY_GOOGLE_KEY = "google.consumer-key";
+	private static final String SECURITY_GOOGLE_SECRET = "google.consumer-secret";
+	private static final String SECURITY_VK_KEY = "vkontakte.consumer-key";
+	private static final String SECURITY_VK_SECRET = "vkontakte.consumer-secret";
 
 	@ApplicationDefaults
 	@Contribute(SymbolProvider.class)
@@ -95,47 +88,33 @@ public class SecurityModule {
 		configuration.add(SECURITY_PRIVATE_SALT, "8carxXOr0uNa8aqhCYZZZA==");
 	}
 
-	@Scope(ScopeConstants.PERTHREAD)
-	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
-											  final HeroService heroService) {
-		final Subject user = SecurityUtils.getSubject();
-		final String username = user != null ? (String) user.getPrincipal() : null;
-		final Account account = username == null ? null : Authorities.isTwitterUser(username) ?
-				accountService.query()
-						.filter(account$.twitterUser.eq(Authorities.getTwitterUser(username)))
-						.unique() :
-				accountService.query()
-						.filter(account$.email.eq(username))
-						.unique();
-		final Hero hero = account != null ? account.getHero() : null;
-		final Battle battle = hero != null ? hero.getBattle() : null;
+	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
+											  final WebSecurityManager securityManager) {
+		final DefaultWebEnvironment environment = new DefaultWebEnvironment();
+		environment.setServletContext(applicationGlobals.getServletContext());
+		environment.setWebSecurityManager(securityManager);
+		return environment;
+	}
 
-		if (hero != null) {
-			hero.setLastActive(new Date());
-			heroService.update(hero);
+	public WebSecurityManager buildWebSecurityManager(final List<Realm> realms) {
+		return new DefaultWebSecurityManager(realms);
+	}
+
+	@Contribute(WebSecurityManager.class)
+	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
+											 @InjectService("accountService") final BaseEntityService<Account> accountService,
+											 final HashService hashService) {
+		configuration.add("main", new MainRealm(new HashedPasswordMatcher(hashService), accountService));
+
+		if (accountService.query().count() <= 0) {
+			final Account account = accountService.create();
+			account.setEmail("admin@mutabra.com");
+			account.setName("admin");
+			account.setRole(Role.ADMIN);
+			account.setRegistered(new Date());
+
+			accountService.save(account);
 		}
-
-		return new AccountContext() {
-			public Account getAccount() {
-				return account;
-			}
-
-			public Hero getHero() {
-				return hero;
-			}
-
-			public Battle getBattle() {
-				return battle;
-			}
-		};
-	}
-
-	public Account buildAccount(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
-		return shadowBuilder.build(accountContext, "account", Account.class);
-	}
-
-	public Hero buildHero(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
-		return shadowBuilder.build(accountContext, "hero", Hero.class);
 	}
 
 	public HashService buildHashService(@Symbol(SECURITY_HASH_ALGORITHM) final String hashAlgorithmName,
@@ -151,72 +130,24 @@ public class SecurityModule {
 		return hashService;
 	}
 
-	public HashingPasswordService buildPasswordService(final HashService hashService) {
-		final DefaultPasswordService passwordService = new DefaultPasswordService();
-		passwordService.setHashService(hashService);
-		return passwordService;
+	public OAuth2 buildFacebookService(@Symbol(SECURITY_FACEBOOK_KEY) final String clientId,
+									   @Symbol(SECURITY_FACEBOOK_SECRET) final String clientSecret) {
+		return new Facebook(clientId, clientSecret);
 	}
 
-	public CredentialsMatcher buildCredentialsMatcher(final PasswordService passwordService) {
-		final PasswordMatcher passwordMatcher = new PasswordMatcher() {
-			@Override
-			protected Object getStoredPassword(final AuthenticationInfo storedAccountInfo) {
-				return storedAccountInfo == null ? null : new SimpleHash(null) {
-					{
-						final Object credentials = storedAccountInfo.getCredentials();
-						byte[] sourceBytes = toBytes(credentials);
-						if (credentials instanceof String || credentials instanceof char[]) {
-							sourceBytes = Base64.decode(sourceBytes);
-						}
-						setBytes(sourceBytes);
-						if (storedAccountInfo instanceof SaltedAuthenticationInfo) {
-							setSalt(((SaltedAuthenticationInfo) storedAccountInfo).getCredentialsSalt());
-						}
-					}
-
-					@Override
-					public int getIterations() {
-						return 0;
-					}
-				};
-			}
-		};
-		passwordMatcher.setPasswordService(passwordService);
-		return passwordMatcher;
+	public OAuth buildTwitterService(@Symbol(SECURITY_TWITTER_KEY) final String consumerKey,
+									 @Symbol(SECURITY_TWITTER_SECRET) final String consumerSecret) {
+		return new Twitter(consumerKey, consumerSecret);
 	}
 
-	public WebSecurityManager buildWebSecurityManager(final List<Realm> realms) {
-		return new DefaultWebSecurityManager(realms);
+	public OAuth buildGoogleService(@Symbol(SECURITY_GOOGLE_KEY) final String consumerKey,
+									@Symbol(SECURITY_GOOGLE_SECRET) final String consumerSecret) {
+		return new Google(consumerKey, consumerSecret);
 	}
 
-	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
-											  final WebSecurityManager securityManager) {
-		final DefaultWebEnvironment environment = new DefaultWebEnvironment();
-		environment.setServletContext(applicationGlobals.getServletContext());
-		environment.setWebSecurityManager(securityManager);
-		return environment;
-	}
-
-	@Contribute(WebSecurityManager.class)
-	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
-											 @InjectService("accountService") final BaseEntityService<Account> accountService,
-											 final CredentialsMatcher credentialsMatcher,
-											 final HashingPasswordService passwordService) {
-		configuration.add("main", new MainRealm(credentialsMatcher, accountService));
-
-		if (accountService.query().count() <= 0) {
-			final Account account = accountService.create();
-			account.setEmail("admin@mutabra.com");
-			account.setName("admin");
-			account.setRole(Role.ADMIN);
-			account.setRegistered(new Date());
-
-			final Hash hash = passwordService.hashPassword("admin");
-			account.setPassword(hash.toBase64());
-			account.setSalt(hash.getSalt().toBase64());
-
-			accountService.save(account);
-		}
+	public OAuth2 buildVkontakteService(@Symbol(SECURITY_VK_KEY) final String consumerKey,
+										@Symbol(SECURITY_VK_SECRET) final String consumerSecret) {
+		return new VKontakte(consumerKey, consumerSecret);
 	}
 
 	@Contribute(HttpServletRequestHandler.class)
@@ -268,23 +199,46 @@ public class SecurityModule {
 		return new SecurityExceptionHandler(handler, linkSource, response, Security.class);
 	}
 
-	public OAuth2 buildFacebookService(@Symbol("facebook.app-id") final String clientId,
-									   @Symbol("facebook.app-secret") final String clientSecret) {
-		return new Facebook(clientId, clientSecret);
+	@Scope(ScopeConstants.PERTHREAD)
+	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
+											  final HeroService heroService) {
+		final Subject user = SecurityUtils.getSubject();
+		final String username = user != null ? (String) user.getPrincipal() : null;
+		final Account account = username == null ? null : Authorities.isTwitterUser(username) ?
+				accountService.query()
+						.filter(account$.twitterUser.eq(Authorities.getTwitterUser(username)))
+						.unique() :
+				accountService.query()
+						.filter(account$.email.eq(username))
+						.unique();
+		final Hero hero = account != null ? account.getHero() : null;
+		final Battle battle = hero != null ? hero.getBattle() : null;
+
+		if (hero != null) {
+			hero.setLastActive(new Date());
+			heroService.update(hero);
+		}
+
+		return new AccountContext() {
+			public Account getAccount() {
+				return account;
+			}
+
+			public Hero getHero() {
+				return hero;
+			}
+
+			public Battle getBattle() {
+				return battle;
+			}
+		};
 	}
 
-	public OAuth buildTwitterService(@Symbol("twitter.consumer-key") final String consumerKey,
-									 @Symbol("twitter.consumer-secret") final String consumerSecret) {
-		return new Twitter(consumerKey, consumerSecret);
+	public Account buildAccount(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
+		return shadowBuilder.build(accountContext, "account", Account.class);
 	}
 
-	public OAuth buildGoogleService(@Symbol("google.consumer-key") final String consumerKey,
-									@Symbol("google.consumer-secret") final String consumerSecret) {
-		return new Google(consumerKey, consumerSecret);
-	}
-
-	public OAuth2 buildVkontakteService(@Symbol("vkontakte.consumer-key") final String consumerKey,
-										@Symbol("vkontakte.consumer-secret") final String consumerSecret) {
-		return new VKontakte(consumerKey, consumerSecret);
+	public Hero buildHero(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
+		return shadowBuilder.build(accountContext, "hero", Hero.class);
 	}
 }

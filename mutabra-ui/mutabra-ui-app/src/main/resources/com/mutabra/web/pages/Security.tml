@@ -18,7 +18,7 @@
 				<div class="control-group">
 					<t:label for="password" class="control-label"/>
 					<div class="controls">
-						<t:passwordfield t:id="password" value="password" validate="required"
+						<t:passwordfield t:id="password" value="password"
 										 placeholder="message:label.password" label="message:label.password"/>
 					</div>
 				</div>
