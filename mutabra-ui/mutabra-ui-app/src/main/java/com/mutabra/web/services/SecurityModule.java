@@ -9,7 +9,7 @@ import com.mutabra.security.Google;
 import com.mutabra.security.OAuth;
 import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
-import com.mutabra.security.VK;
+import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.internal.Authorities;
@@ -21,6 +21,7 @@ import com.mutabra.web.internal.security.SecurityExceptionHandler;
 import com.mutabra.web.internal.security.SecurityFilter;
 import com.mutabra.web.internal.security.SecurityRequestFilter;
 import com.mutabra.web.internal.security.TwitterRealm;
+import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.Security;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -115,6 +116,7 @@ public class SecurityModule {
 		configuration.add("facebook", new FacebookRealm(accountService, hashService));
 		configuration.add("twitter", new TwitterRealm(accountService, hashService));
 		configuration.add("google", new GoogleRealm(accountService, hashService));
+		configuration.add("vk", new VKRealm(accountService, hashService));
 
 		if (accountService.query().count() <= 0) {
 			final Account account = accountService.create();
@@ -165,7 +167,7 @@ public class SecurityModule {
 								 @Symbol(SECURITY_VK_SECRET) final String consumerSecret,
 								 final PageRenderLinkSource linkSource) {
 		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".vk:connected";
-		return new VK(consumerKey, consumerSecret, redirectUri);
+		return new VKontakte(consumerKey, consumerSecret, redirectUri);
 	}
 
 	@Contribute(HttpServletRequestHandler.class)

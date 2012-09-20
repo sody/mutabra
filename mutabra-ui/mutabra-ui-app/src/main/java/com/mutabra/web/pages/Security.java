@@ -5,6 +5,7 @@ import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.TwitterRealm;
+import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountManager;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -16,6 +17,8 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.greatage.util.StringUtils;
+
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -64,7 +67,7 @@ public class Security extends AbstractPage {
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "vk")
 	Object vkConnected(final OAuth.Session session) {
-//		getSubject().login(new GoogleRealm.Token(session));
+		getSubject().login(new VKRealm.Token(session));
 		return GameHome.class;
 	}
 

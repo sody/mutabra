@@ -38,6 +38,9 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Indexed
 	private String googleUser;
 
+	@Indexed
+	private String vkUser;
+
 	private String pendingEmail;
 
 	private String pendingPassword;
@@ -147,6 +150,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setGoogleUser(final String user) {
 		googleUser = user;
+	}
+
+	public String getVkUser() {
+		return vkUser;
+	}
+
+	public void setVkUser(final String vkUser) {
+		this.vkUser = vkUser;
 	}
 
 	public Role getRole() {

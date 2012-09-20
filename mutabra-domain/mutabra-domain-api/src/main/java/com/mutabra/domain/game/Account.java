@@ -53,6 +53,10 @@ public interface Account extends BaseEntity {
 
 	void setGoogleUser(String user);
 
+	String getVkUser();
+
+	void setVkUser(String user);
+
 	Role getRole();
 
 	void setRole(Role role);

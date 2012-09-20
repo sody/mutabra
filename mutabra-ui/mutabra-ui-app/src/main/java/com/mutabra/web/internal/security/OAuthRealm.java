@@ -50,6 +50,7 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 	protected AuthenticationInfo doGetAuthenticationInfo(final AuthenticationToken token)
 			throws AuthenticationException {
 		try {
+			@SuppressWarnings("unchecked")
 			final OAuth.Session session = ((T) token).getSession();
 
 			final Map<String, Object> profile = session != null ? session.getProfile() : null;
@@ -57,7 +58,7 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 				throw new AccountException("Null profiles are not allowed by this realm.");
 			}
 
-			final String profileId = String.valueOf(profile.get("id"));
+			final String profileId = String.valueOf(profile.get(OAuth.Session.ID));
 			if (StringUtils.isEmpty(profileId)) {
 				throw new AccountException("Invalid facebook identifier");
 			}
@@ -66,7 +67,7 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 				return fillAccount(account);
 			}
 
-			final String email = String.valueOf(profile.get("email"));
+			final String email = String.valueOf(profile.get(OAuth.Session.EMAIL));
 			if (!StringUtils.isEmpty(email)) {
 				account = getAccountByEmail(email);
 				if (account != null) {
@@ -111,10 +112,10 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 
 	protected SimpleAccount createAccount(final Map<String, Object> profile) {
 		final Account account = accountService.create();
-		account.setEmail(String.valueOf(profile.get("email")));
+		account.setEmail(String.valueOf(profile.get(OAuth.Session.EMAIL)));
 		account.setRegistered(new Date());
-		account.setName(String.valueOf(profile.get("name")));
-		account.setLocale(LocaleUtils.parseLocale(String.valueOf(profile.get("locale"))));
+		account.setName(String.valueOf(profile.get(OAuth.Session.NAME)));
+		account.setLocale(LocaleUtils.parseLocale(String.valueOf(profile.get(OAuth.Session.LOCALE))));
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
 		account.setRole(Role.USER);
@@ -125,7 +126,7 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 			account.setSalt(hash.getSalt().toBase64());
 		}
 
-		return attachAccount(account, String.valueOf(profile.get("id")));
+		return attachAccount(account, String.valueOf(profile.get(OAuth.Session.ID)));
 	}
 
 	protected Hash generateHash() {
