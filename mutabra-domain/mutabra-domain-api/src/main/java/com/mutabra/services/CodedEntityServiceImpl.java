@@ -20,7 +20,7 @@ public class CodedEntityServiceImpl<E extends CodedEntity> extends BaseEntitySer
 
 	public E get(final String code) {
 		//noinspection unchecked
-		return code != null ? query().filter(entity$.code.eq(code)).unique() : null;
+		return code != null ? query().filter(entity$.code$.eq(code)).unique() : null;
 	}
 
 	public E create(final String code) {

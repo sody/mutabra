@@ -9,17 +9,16 @@ import org.greatage.domain.PropertyMapper;
  * @since 1.0
  */
 public class AccountMapper<E extends BaseEntity> extends BaseEntityMapper<E> {
-	public final PropertyMapper<Long, E, String> email = property("email");
-	public final PropertyMapper<Long, E, String> password = property("password");
-	public final PropertyMapper<Long, E, String> token = property("token");
+	public final PropertyMapper<Long, E, String> email$ = property("email");
+	public final PropertyMapper<Long, E, String> pendingEmail$ = property("pendingEmail");
 
-	public final PropertyMapper<Long, E, String> pendingEmail = property("pendingEmail");
-	public final PropertyMapper<Long, E, String> pendingToken = property("pendingToken");
-
-	public final PropertyMapper<Long, E, String> facebookUser = property("facebookUser");
-	public final PropertyMapper<Long, E, String> twitterUser = property("twitterUser");
-	public final PropertyMapper<Long, E, String> googleUser = property("googleUser");
+	public final PropertyMapper<Long, E, String> facebookUser$ = property("facebookUser");
+	public final PropertyMapper<Long, E, String> twitterUser$ = property("twitterUser");
+	public final PropertyMapper<Long, E, String> googleUser$ = property("googleUser");
 	public final PropertyMapper<Long, E, String> vkUser$ = property("vkUser");
+
+	//todo: delete
+	public final PropertyMapper<Long, E, String> pendingToken = property("pendingToken");
 
 	public AccountMapper(final String path) {
 		super(path);

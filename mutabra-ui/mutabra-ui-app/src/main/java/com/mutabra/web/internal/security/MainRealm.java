@@ -67,7 +67,7 @@ public class MainRealm extends AuthorizingRealm {
 
 	private SimpleAccount getAccount(final String username) {
 		final Account account = accountService.query()
-				.filter(account$.email.eq(username))
+				.filter(account$.email$.eq(username))
 				.unique();
 
 		if (account == null) {

@@ -41,7 +41,7 @@ public class AccountManagerImpl implements AccountManager {
 
 	public void signUp(final String email) throws ValidationException {
 		if (accountService.query()
-				.filter(account$.email.eq(email))
+				.filter(account$.email$.eq(email))
 				.unique() != null) {
 			//todo: add localization
 			throw new ValidationException("Account already exists.");
@@ -68,7 +68,7 @@ public class AccountManagerImpl implements AccountManager {
 
 	public void restorePassword(final String email) throws ValidationException {
 		final Account account = accountService.query()
-				.filter(account$.email.eq(email))
+				.filter(account$.email$.eq(email))
 				.unique();
 		if (account == null) {
 			//todo: add localization
@@ -94,7 +94,7 @@ public class AccountManagerImpl implements AccountManager {
 
 	public void changePassword(final String email, final String password) {
 		final Account account = accountService.query()
-				.filter(account$.email.eq(email))
+				.filter(account$.email$.eq(email))
 				.unique();
 
 		final String generatedToken = Authorities.generateSecret();
@@ -115,7 +115,7 @@ public class AccountManagerImpl implements AccountManager {
 		tempAccount.setEmail(newEmail);
 
 		final Account account = accountService.query()
-				.filter(account$.email.eq(oldEmail))
+				.filter(account$.email$.eq(oldEmail))
 				.unique();
 		final String generatedToken = Authorities.generateSecret();
 		account.setToken(generatedToken);
@@ -139,7 +139,7 @@ public class AccountManagerImpl implements AccountManager {
 
 	public void confirmEmail(final String email, final String token) throws ValidationException {
 		final Account account = accountService.query()
-				.filter(account$.email.eq(email))
+				.filter(account$.email$.eq(email))
 				.filter(account$.pendingToken.eq(token))
 				.unique();
 		if (account == null) {
@@ -148,7 +148,7 @@ public class AccountManagerImpl implements AccountManager {
 		}
 		if (account.getToken() == null && account.getPendingEmail() != null) {
 			final Account tempAccount = accountService.query()
-					.filter(account$.pendingEmail.eq(account.getPendingEmail()))
+					.filter(account$.pendingEmail$.eq(account.getPendingEmail()))
 					.unique();
 			accountService.delete(tempAccount);
 			account.setEmail(account.getPendingEmail());

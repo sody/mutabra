@@ -21,7 +21,7 @@ public class FacebookRealm extends OAuthRealm<FacebookRealm.Token> {
 
 	@Override
 	protected Account getAccountByProfileId(final String profileId) {
-		return findAccount(account$.facebookUser.eq(profileId));
+		return findAccount(account$.facebookUser$.eq(profileId));
 	}
 
 	@Override

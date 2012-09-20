@@ -21,7 +21,7 @@ public class GoogleRealm extends OAuthRealm<GoogleRealm.Token> {
 
 	@Override
 	protected Account getAccountByProfileId(final String profileId) {
-		return findAccount(account$.googleUser.eq(profileId));
+		return findAccount(account$.googleUser$.eq(profileId));
 	}
 
 	@Override

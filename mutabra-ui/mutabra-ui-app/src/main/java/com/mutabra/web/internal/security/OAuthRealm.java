@@ -88,7 +88,7 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 	protected abstract Account getAccountByProfileId(final String profileId);
 
 	protected Account getAccountByEmail(final String email) {
-		return findAccount(account$.email.eq(email));
+		return findAccount(account$.email$.eq(email));
 	}
 
 	protected Account findAccount(final Repository.Criteria<Long, Account> criteria) {

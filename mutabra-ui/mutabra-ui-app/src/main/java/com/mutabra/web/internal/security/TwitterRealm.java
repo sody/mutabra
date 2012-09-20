@@ -21,7 +21,7 @@ public class TwitterRealm extends OAuthRealm<TwitterRealm.Token> {
 
 	@Override
 	protected Account getAccountByProfileId(final String profileId) {
-		return findAccount(account$.twitterUser.eq(profileId));
+		return findAccount(account$.twitterUser$.eq(profileId));
 	}
 
 	@Override

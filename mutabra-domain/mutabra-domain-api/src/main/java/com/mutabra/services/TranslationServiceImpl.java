@@ -26,9 +26,9 @@ public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation> i
 		return translatable.getTranslationCode() == null ?
 				Collections.<Translation>emptyList() :
 				query()
-						.filter(translation$.type.eq(translatable.getTranslationType()))
-						.filter(translation$.locale.eq(locale.toString()))
-						.filter(translation$.code.eq(translatable.getTranslationCode()))
+						.filter(translation$.type$.eq(translatable.getTranslationType()))
+						.filter(translation$.locale$.eq(locale.toString()))
+						.filter(translation$.code$.eq(translatable.getTranslationCode()))
 						.list();
 	}
 
@@ -43,8 +43,8 @@ public class TranslationServiceImpl extends BaseEntityServiceImpl<Translation> i
 	public void deleteTranslations(final Translatable translatable) {
 		if (translatable.getTranslationCode() != null) {
 			final List<Translation> translations = query()
-					.filter(translation$.type.eq(translatable.getTranslationType()))
-					.filter(translation$.code.eq(translatable.getTranslationCode()))
+					.filter(translation$.type$.eq(translatable.getTranslationType()))
+					.filter(translation$.code$.eq(translatable.getTranslationCode()))
 					.list();
 
 			for (Translation translation : translations) {

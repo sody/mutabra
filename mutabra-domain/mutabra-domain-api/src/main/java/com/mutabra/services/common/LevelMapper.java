@@ -9,7 +9,7 @@ import org.greatage.domain.PropertyMapper;
  * @since 1.0
  */
 public class LevelMapper<E extends BaseEntity> extends CodedEntityMapper<E> {
-	public final PropertyMapper<Long, E, Long> rating = property("rating");
+	public final PropertyMapper<Long, E, Long> rating$ = property("rating");
 
 	public LevelMapper(final String path) {
 		super(path);

@@ -40,7 +40,7 @@ public class GameHome extends AbstractPage {
 	public List<Hero> getPlayers() {
 		final Date timeout = new Date(System.currentTimeMillis() - 50000);
 		return heroService.query()
-				.filter(Mappers.hero$.lastActive.gt(timeout))
+				.filter(Mappers.hero$.lastActive$.gt(timeout))
 				.paginate(0, 20)
 				.list();
 	}
