@@ -14,26 +14,31 @@ public abstract class AbstractOAuth implements OAuth {
 	private final Class<? extends Api> apiClass;
 	private final String consumerKey;
 	private final String consumerSecret;
+	private final String callbackUrl;
 
-	public AbstractOAuth(final Class<? extends Api> apiClass, final String consumerKey, final String consumerSecret) {
+	public AbstractOAuth(final Class<? extends Api> apiClass,
+						 final String consumerKey,
+						 final String consumerSecret,
+						 final String callbackUrl) {
 		this.apiClass = apiClass;
 		this.consumerKey = consumerKey;
 		this.consumerSecret = consumerSecret;
+		this.callbackUrl = callbackUrl;
 	}
 
-	public String getAuthorizationUrl(final String callbackUrl, final String scope) {
-		final OAuthService service = service(callbackUrl, scope);
+	public String getAuthorizationUrl(final String state, final String scope) {
+		final OAuthService service = service(state, scope);
 		return service.getAuthorizationUrl(getRequestToken(service));
 	}
 
-	public Session connect(final String token, final String secret, final String callbackUrl, final String scope) {
-		final OAuthService service = service(callbackUrl, scope);
+	public Session connect(final String token, final String secret) {
+		final OAuthService service = service();
 		final Token accessToken = getAccessToken(service, token, secret);
 		return createSession(service, accessToken);
 	}
 
 	public Session connect() {
-		final OAuthService service = service(null, null);
+		final OAuthService service = service();
 		return createSession(service, null);
 	}
 
@@ -48,16 +53,20 @@ public abstract class AbstractOAuth implements OAuth {
 
 	protected abstract Session createSession(OAuthService service, Token accessToken);
 
-	protected OAuthService service(final String callbackUrl, final String scope) {
+	protected OAuthService service() {
+		return service(null, null);
+	}
+
+	protected OAuthService service(final String state, final String scope) {
 		final ServiceBuilder builder = new ServiceBuilder()
 				.provider(apiClass)
-				.apiKey(consumerKey).apiSecret(consumerSecret);
-		if (callbackUrl != null) {
-			builder.callback(callbackUrl);
-		}
+				.apiKey(consumerKey)
+				.apiSecret(consumerSecret)
+				.callback(callbackUrl);
 		if (scope != null) {
 			builder.scope(scope);
 		}
+		//todo: add state
 		return builder.build();
 	}
 }

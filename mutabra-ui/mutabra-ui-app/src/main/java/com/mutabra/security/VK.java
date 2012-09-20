@@ -11,19 +11,22 @@ import java.util.Map;
  * @since 1.0
  */
 public class VK extends AbstractOAuth2 implements OAuth2 {
+	private static final String API_URL = "https://api.vk.com/method/";
 
-	public VK(final String consumerKey, final String consumerSecret) {
-		super(VkontakteApi.class, consumerKey, consumerSecret);
+	public VK(final String consumerKey,
+			  final String consumerSecret,
+			  final String redirectUri) {
+		super(VkontakteApi.class, consumerKey, consumerSecret, redirectUri);
 	}
 
 	@Override
-	protected Session createSession(final OAuthService service, final Token accessToken) {
-		return new VKSession(service, accessToken);
+	protected OAuth.Session createSession(final OAuthService service, final Token accessToken) {
+		return new Session(service, accessToken);
 	}
 
-	class VKSession extends AbstractOAuthSession implements Session {
-		VKSession(final OAuthService service, final Token accessToken) {
-			super(service, accessToken);
+	class Session extends AbstractOAuthSession {
+		Session(final OAuthService service, final Token accessToken) {
+			super(service, accessToken, API_URL);
 		}
 
 		public Map<String, Object> getProfile() {

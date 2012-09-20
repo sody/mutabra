@@ -15,37 +15,39 @@ import java.util.Map;
  * @since 1.0
  */
 public class Twitter extends AbstractOAuth implements OAuth {
+	private static final String API_URL = "https://api.twitter.com/";
 
-	public Twitter(final String consumerKey, final String consumerSecret) {
-		super(TwitterApi.class, consumerKey, consumerSecret);
+	public Twitter(final String consumerKey,
+				   final String consumerSecret,
+				   final String callbackUrl) {
+		super(TwitterApi.class, consumerKey, consumerSecret, callbackUrl);
 	}
 
 	@Override
-	protected Session createSession(final OAuthService service, final Token accessToken) {
-		return new TwitterSession(service, accessToken);
+	protected OAuth.Session createSession(final OAuthService service, final Token accessToken) {
+		return new Session(service, accessToken);
 	}
 
-	class TwitterSession extends AbstractOAuthSession implements Session {
-		TwitterSession(final OAuthService service, final Token accessToken) {
-			super(service, accessToken);
+	class Session extends AbstractOAuthSession {
+		Session(final OAuthService service, final Token accessToken) {
+			super(service, accessToken, API_URL);
 		}
 
 		public Map<String, Object> getProfile() {
-			final OAuthRequest request = new OAuthRequest(Verb.GET, "https://api.twitter.com/account/verify_credentials.json");
+			final OAuthRequest request = new OAuthRequest(Verb.GET, api("account/verify_credentials.json"));
 
 			final JSONObject result = process(request);
 			if (result != null) {
 				final Map<String, Object> profile = new HashMap<String, Object>();
-				profile.put("id", parse(result, "id"));
-				profile.put("name", parse(result, "name"));
-				profile.put("language", parse(result, "language"));
+				profile.put(ID, parse(result, "id"));
+				profile.put(NAME, parse(result, "name"));
+				profile.put(LOCALE, parse(result, "language"));
 				return profile;
 			}
 			return null;
 		}
 
 		public Map<String, Object> getProfile(final String id) {
-
 			return null;
 		}
 	}

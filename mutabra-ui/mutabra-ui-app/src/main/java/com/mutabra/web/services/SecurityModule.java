@@ -141,23 +141,31 @@ public class SecurityModule {
 	}
 
 	public OAuth2 buildFacebookService(@Symbol(SECURITY_FACEBOOK_KEY) final String clientId,
-									   @Symbol(SECURITY_FACEBOOK_SECRET) final String clientSecret) {
-		return new Facebook(clientId, clientSecret);
+									   @Symbol(SECURITY_FACEBOOK_SECRET) final String clientSecret,
+									   final PageRenderLinkSource linkSource) {
+		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".facebook:connected";
+		return new Facebook(clientId, clientSecret, redirectUri);
 	}
 
 	public OAuth buildTwitterService(@Symbol(SECURITY_TWITTER_KEY) final String consumerKey,
-									 @Symbol(SECURITY_TWITTER_SECRET) final String consumerSecret) {
-		return new Twitter(consumerKey, consumerSecret);
+									 @Symbol(SECURITY_TWITTER_SECRET) final String consumerSecret,
+									 final PageRenderLinkSource linkSource) {
+		final String callbackUrl = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".twitter:connected";
+		return new Twitter(consumerKey, consumerSecret, callbackUrl);
 	}
 
 	public OAuth2 buildGoogleService(@Symbol(SECURITY_GOOGLE_KEY) final String consumerKey,
-									 @Symbol(SECURITY_GOOGLE_SECRET) final String consumerSecret) {
-		return new Google(consumerKey, consumerSecret);
+									 @Symbol(SECURITY_GOOGLE_SECRET) final String consumerSecret,
+									 final PageRenderLinkSource linkSource) {
+		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".google:connected";
+		return new Google(consumerKey, consumerSecret, redirectUri);
 	}
 
-	public OAuth2 buildVkontakteService(@Symbol(SECURITY_VK_KEY) final String consumerKey,
-										@Symbol(SECURITY_VK_SECRET) final String consumerSecret) {
-		return new VK(consumerKey, consumerSecret);
+	public OAuth2 buildVkService(@Symbol(SECURITY_VK_KEY) final String consumerKey,
+								 @Symbol(SECURITY_VK_SECRET) final String consumerSecret,
+								 final PageRenderLinkSource linkSource) {
+		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".vk:connected";
+		return new VK(consumerKey, consumerSecret, redirectUri);
 	}
 
 	@Contribute(HttpServletRequestHandler.class)

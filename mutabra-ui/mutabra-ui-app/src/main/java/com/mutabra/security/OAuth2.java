@@ -6,8 +6,5 @@ package com.mutabra.security;
  */
 public interface OAuth2 extends OAuth {
 
-	String getAuthorizationUrl(String redirectUri, String scope);
-
-	Session connect(String code, String redirectUri, String scope);
-
+	Session connect(String code);
 }

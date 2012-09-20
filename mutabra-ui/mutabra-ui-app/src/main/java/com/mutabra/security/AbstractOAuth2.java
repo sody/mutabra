@@ -11,12 +11,15 @@ import org.scribe.oauth.OAuthService;
  */
 public abstract class AbstractOAuth2 extends AbstractOAuth implements OAuth2 {
 
-	protected AbstractOAuth2(final Class<? extends Api> apiClass, final String consumerKey, final String consumerSecret) {
-		super(apiClass, consumerKey, consumerSecret);
+	protected AbstractOAuth2(final Class<? extends Api> apiClass,
+							 final String consumerKey,
+							 final String consumerSecret,
+							 final String redirectUri) {
+		super(apiClass, consumerKey, consumerSecret, redirectUri);
 	}
 
-	public Session connect(final String code, final String redirectUri, final String scope) {
-		return connect(null, code, redirectUri, scope);
+	public Session connect(final String code) {
+		return connect(null, code);
 	}
 
 	@Override

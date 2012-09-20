@@ -1,6 +1,10 @@
 package com.mutabra.web.pages;
 
+import com.mutabra.security.OAuth;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.internal.security.FacebookRealm;
+import com.mutabra.web.internal.security.GoogleRealm;
+import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountManager;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -37,6 +41,30 @@ public class Security extends AbstractPage {
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
 	Object signIn() {
 		getSubject().login(new UsernamePasswordToken(email, password));
+		return GameHome.class;
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
+	Object facebookConnected(final OAuth.Session session) {
+		getSubject().login(new FacebookRealm.Token(session));
+		return GameHome.class;
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "twitter")
+	Object twitterConnected(final OAuth.Session session) {
+		getSubject().login(new TwitterRealm.Token(session));
+		return GameHome.class;
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "google")
+	Object googleConnected(final OAuth.Session session) {
+		getSubject().login(new GoogleRealm.Token(session));
+		return GameHome.class;
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "vk")
+	Object vkConnected(final OAuth.Session session) {
+//		getSubject().login(new GoogleRealm.Token(session));
 		return GameHome.class;
 	}
 

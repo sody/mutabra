@@ -13,10 +13,12 @@ import org.scribe.oauth.OAuthService;
 public abstract class AbstractOAuthSession implements OAuth.Session {
 	private final OAuthService service;
 	private final Token accessToken;
+	private final String apiUri;
 
-	protected AbstractOAuthSession(final OAuthService service, final Token accessToken) {
+	protected AbstractOAuthSession(final OAuthService service, final Token accessToken, final String apiUri) {
 		this.service = service;
 		this.accessToken = accessToken;
+		this.apiUri = apiUri;
 	}
 
 	protected OAuthService service() {
@@ -45,5 +47,9 @@ public abstract class AbstractOAuthSession implements OAuth.Session {
 
 	protected Object parse(final JSONObject object, final String key) {
 		return object.has(key) ? object.get(key) : null;
+	}
+
+	protected String api(final String uri) {
+		return apiUri + uri;
 	}
 }

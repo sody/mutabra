@@ -13,12 +13,12 @@ import org.greatage.util.DescriptionBuilder;
  */
 public class VKontakteConnect extends AbstractOAuth2Connect {
 
-	@InjectService("vkontakteService")
-	private OAuth2 vkontakteService;
+	@InjectService("vkService")
+	private OAuth2 vkService;
 
 	@Override
 	protected OAuth2 getOAuth() {
-		return vkontakteService;
+		return vkService;
 	}
 
 	@OnEvent(CONNECTED_EVENT)
@@ -28,7 +28,7 @@ public class VKontakteConnect extends AbstractOAuth2Connect {
 			@RequestParameter(value = "error_reason", allowBlank = true) final String errorReason,
 			@RequestParameter(value = "error_description", allowBlank = true) final String errorDescription) {
 
-		final String info = new DescriptionBuilder("VKONTAKTE TOKEN")
+		final String info = new DescriptionBuilder("VK TOKEN")
 				.append("code", code)
 				.append("error", error)
 				.append("error_reason", errorReason)

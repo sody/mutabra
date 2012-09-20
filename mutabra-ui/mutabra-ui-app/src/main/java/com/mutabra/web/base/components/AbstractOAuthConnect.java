@@ -31,7 +31,7 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 
 	@Cached
 	protected String getRedirectUri() {
-		return resources.createEventLink(CONNECTED_EVENT).toAbsoluteURI();
+		return resources.createEventLink(CONNECTED_EVENT).toRedirectURI();
 	}
 
 	protected String getScope() {
@@ -51,7 +51,7 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 	protected abstract OAuth getOAuth();
 
 	protected OAuth.Session startSession(final String token, final String secret) {
-		return getOAuth().connect(token, secret, getRedirectUri(), scope);
+		return getOAuth().connect(token, secret);
 	}
 
 	protected Object doConnected(final String token, final String secret, final String error) {
