@@ -32,7 +32,7 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class Security extends AbstractPage {
-	private static final String APPLY_CHANGES_EVENT = "applyChanges";
+	private static final String APPLY_EVENT = "apply";
 
 	private static final RandomNumberGenerator GENERATOR = new SecureRandomNumberGenerator();
 
@@ -56,6 +56,10 @@ public class Security extends AbstractPage {
 
 	@Inject
 	private MailService mailService;
+
+	public Link createApplyChangesLink(final String email, final String token) {
+		return getResources().createEventLink(APPLY_EVENT, email, token);
+	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
 	Object signIn() {
@@ -106,7 +110,7 @@ public class Security extends AbstractPage {
 		account.setPendingPassword(hash.toBase64());
 		account.setPendingSalt(hash.getSalt().toBase64());
 
-		final Link link = getResources().createEventLink(APPLY_CHANGES_EVENT, email, token);
+		final Link link = createApplyChangesLink(email, token);
 		mailService.send(
 				email,
 				message("mail.restore-password.title"),
@@ -115,7 +119,7 @@ public class Security extends AbstractPage {
 		return Index.class;
 	}
 
-	@OnEvent(APPLY_CHANGES_EVENT)
+	@OnEvent(APPLY_EVENT)
 	Object applyPendingChanges(final String email, final String token) {
 //		securityContext.signIn(new Credentials("token", email, token));
 		return GameHome.class;
