@@ -1,6 +1,5 @@
 package com.mutabra.web.internal.security;
 
-import com.mutabra.web.internal.Authorities;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
@@ -19,6 +18,12 @@ import java.io.IOException;
  * @since 1.0
  */
 public class SecurityFilter implements ComponentRequestFilter {
+	public static final String SHIRO_REQUIRES_AUTHENTICATION_META = "shiro.requires-authentication";
+	public static final String SHIRO_REQUIRES_USER_META = "shiro.requires-user";
+	public static final String SHIRO_REQUIRES_GUEST_META = "shiro.requires-guest";
+	public static final String SHIRO_REQUIRES_ROLES_META = "shiro.requires-roles";
+	public static final String SHIRO_REQUIRES_PERMISSIONS_META = "shiro.requires-permissions";
+
 	private final MetaDataLocator locator;
 
 	public SecurityFilter(final MetaDataLocator locator) {
@@ -32,28 +37,28 @@ public class SecurityFilter implements ComponentRequestFilter {
 
 	public void handlePageRender(final PageRenderRequestParameters parameters, final ComponentRequestHandler handler) throws IOException {
 		final String pageName = parameters.getLogicalPageName();
-		final boolean authenticated = locator.findMeta(Authorities.SHIRO_REQUIRES_AUTHENTICATION_META, pageName, Boolean.class);
+		final boolean authenticated = locator.findMeta(SHIRO_REQUIRES_AUTHENTICATION_META, pageName, Boolean.class);
 		if (authenticated) {
 			checkAuthenticated();
 		}
 
-		final boolean user = locator.findMeta(Authorities.SHIRO_REQUIRES_USER_META, pageName, Boolean.class);
+		final boolean user = locator.findMeta(SHIRO_REQUIRES_USER_META, pageName, Boolean.class);
 		if (user) {
 			checkUser();
 		}
 
-		final boolean guest = locator.findMeta(Authorities.SHIRO_REQUIRES_GUEST_META, pageName, Boolean.class);
+		final boolean guest = locator.findMeta(SHIRO_REQUIRES_GUEST_META, pageName, Boolean.class);
 		if (guest) {
 			checkGuest();
 		}
 
 /*
-		final String[] roles = locator.findMeta(Authorities.SHIRO_REQUIRES_ROLES_META, pageName, String[].class);
+		final String[] roles = locator.findMeta(SHIRO_REQUIRES_ROLES_META, pageName, String[].class);
 		if (roles != null) {
 			checkRoles(Logical.AND, roles);
 		}
 
-		final String[] permissions = locator.findMeta(Authorities.SHIRO_REQUIRES_PERMISSIONS_META, pageName, String[].class);
+		final String[] permissions = locator.findMeta(SHIRO_REQUIRES_PERMISSIONS_META, pageName, String[].class);
 		if (permissions != null) {
 			checkPermissions(Logical.AND, permissions);
 		}
@@ -84,7 +89,7 @@ public class SecurityFilter implements ComponentRequestFilter {
 		}
 	}
 
-	private void checkRoles(final Logical logical, final String... roles) throws AuthorizationException  {
+	private void checkRoles(final Logical logical, final String... roles) throws AuthorizationException {
 		if (roles.length == 1) {
 			getSubject().checkRole(roles[0]);
 			return;
@@ -108,7 +113,7 @@ public class SecurityFilter implements ComponentRequestFilter {
 		}
 	}
 
-	private void checkPermissions(final Logical logical, final String... permissions) throws AuthorizationException  {
+	private void checkPermissions(final Logical logical, final String... permissions) throws AuthorizationException {
 		if (permissions.length == 1) {
 			getSubject().checkPermission(permissions[0]);
 			return;

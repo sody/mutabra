@@ -45,6 +45,8 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	private String pendingPassword;
 
+	private String pendingSalt;
+
 	private String token;
 
 	private String pendingToken;
@@ -110,6 +112,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setPendingPassword(final String password) {
 		pendingPassword = password;
+	}
+
+	public String getPendingSalt() {
+		return pendingSalt;
+	}
+
+	public void setPendingSalt(final String pendingSalt) {
+		this.pendingSalt = pendingSalt;
 	}
 
 	public String getToken() {

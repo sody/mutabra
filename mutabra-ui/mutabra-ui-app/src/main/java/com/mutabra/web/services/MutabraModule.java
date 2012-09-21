@@ -1,7 +1,6 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.DomainModule;
-import com.mutabra.web.internal.AccountManagerImpl;
 import com.mutabra.web.internal.I18nPropertyConduitSource;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.TranslatorImpl;
@@ -43,7 +42,6 @@ public class MutabraModule {
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
 //		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
-		binder.bind(AccountManager.class, AccountManagerImpl.class);
 		binder.bind(Translator.class, TranslatorImpl.class);
 		binder.bind(ImageSource.class, ImageSourceImpl.class);
 	}

@@ -1,30 +1,40 @@
 package com.mutabra.web.pages;
 
+import com.mutabra.domain.game.Account;
 import com.mutabra.security.OAuth;
+import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.game.GameHome;
-import com.mutabra.web.services.AccountManager;
+import com.mutabra.web.services.MailService;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Hash;
+import org.apache.shiro.crypto.hash.HashRequest;
+import org.apache.shiro.crypto.hash.HashService;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.ValidationException;
+import org.apache.tapestry5.Link;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.greatage.util.StringUtils;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 
-import java.util.Map;
+import static com.mutabra.services.Mappers.account$;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class Security extends AbstractPage {
+	private static final String APPLY_CHANGES_EVENT = "applyChanges";
+
+	private static final RandomNumberGenerator GENERATOR = new SecureRandomNumberGenerator();
 
 	@Property
 	private String email;
@@ -38,8 +48,14 @@ public class Security extends AbstractPage {
 	@InjectComponent
 	private Form restoreForm;
 
+	@InjectService("accountService")
+	private BaseEntityService<Account> accountService;
+
 	@Inject
-	private AccountManager accountManager;
+	private HashService hashService;
+
+	@Inject
+	private MailService mailService;
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
 	Object signIn() {
@@ -71,37 +87,45 @@ public class Security extends AbstractPage {
 		return GameHome.class;
 	}
 
-	@OnEvent("signIn")
-	Object signInOnce(final String email, final String token) {
+	@OnEvent(value = EventConstants.SUCCESS, component = "restoreForm")
+	Object restorePassword() {
+		final Account account = accountService.query()
+				.filter(account$.email$.eq(email))
+				.unique();
+		// validate
+		if (account == null || account.getToken() != null) {
+			restoreForm.recordError(message("error.restore-error"));
+			return null;
+		}
+
+		final String token = generateSecret();
+		final String password = generateSecret();
+		final Hash hash = generateHash(password);
+
+		account.setToken(token);
+		account.setPendingPassword(hash.toBase64());
+		account.setPendingSalt(hash.getSalt().toBase64());
+
+		final Link link = getResources().createEventLink(APPLY_CHANGES_EVENT, email, token);
+		mailService.send(
+				email,
+				message("mail.restore-password.title"),
+				format("mail.restore-password.body", email, password, link.toAbsoluteURI()));
+		accountService.saveOrUpdate(account);
+		return Index.class;
+	}
+
+	@OnEvent(APPLY_CHANGES_EVENT)
+	Object applyPendingChanges(final String email, final String token) {
 //		securityContext.signIn(new Credentials("token", email, token));
 		return GameHome.class;
 	}
 
-	@OnEvent(value = EventConstants.SUCCESS, component = "restoreForm")
-	Object restorePassword() {
-		try {
-			accountManager.restorePassword(email);
-			//todo: add success notification
-			return Index.class;
-		} catch (ValidationException e) {
-			restoreForm.recordError(e.getMessage());
-		}
-		return null;
+	private Hash generateHash(final String secret) {
+		return hashService.computeHash(new HashRequest.Builder().setSource(secret).build());
 	}
 
-	@OnEvent("confirmEmail")
-	Object confirmEmail(final String email, final String token) {
-		if (StringUtils.isEmpty(email) || StringUtils.isEmpty(token)) {
-			//todo: add failure notification
-		} else {
-			try {
-				accountManager.confirmEmail(email, token);
-				//todo: add success notification
-			} catch (ValidationException e) {
-				//todo: add failure notification
-				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-			}
-		}
-		return Index.class;
+	private String generateSecret() {
+		return GENERATOR.nextBytes().toBase64();
 	}
 }

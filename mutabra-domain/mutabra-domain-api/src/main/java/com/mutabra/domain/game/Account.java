@@ -25,6 +25,10 @@ public interface Account extends BaseEntity {
 
 	void setSalt(final String salt);
 
+	String getToken();
+
+	void setToken(String token);
+
 	String getPendingEmail();
 
 	void setPendingEmail(String email);
@@ -33,9 +37,9 @@ public interface Account extends BaseEntity {
 
 	void setPendingPassword(String password);
 
-	String getToken();
+	String getPendingSalt();
 
-	void setToken(String token);
+	void setPendingSalt(String salt);
 
 	String getPendingToken();
 

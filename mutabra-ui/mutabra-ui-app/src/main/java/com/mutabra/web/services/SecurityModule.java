@@ -12,7 +12,6 @@ import com.mutabra.security.Twitter;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
-import com.mutabra.web.internal.Authorities;
 import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.HashedPasswordMatcher;
@@ -49,7 +48,6 @@ import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
-import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ApplicationGlobals;
 import org.apache.tapestry5.services.ComponentRequestFilter;
 import org.apache.tapestry5.services.ComponentRequestHandler;
@@ -59,6 +57,7 @@ import org.apache.tapestry5.services.MetaDataLocator;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestExceptionHandler;
 import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.services.meta.FixedExtractor;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
 
@@ -182,34 +181,16 @@ public class SecurityModule {
 
 	@Contribute(MetaWorker.class)
 	public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
-		configuration.add(RequiresAuthentication.class, new MetaDataExtractor<RequiresAuthentication>() {
-			public void extractMetaData(final MutableComponentModel model, final RequiresAuthentication annotation) {
-				if (model.isPage()) {
-					model.setMeta(Authorities.SHIRO_REQUIRES_AUTHENTICATION_META, Boolean.TRUE.toString());
-				}
-			}
-		});
-		configuration.add(RequiresUser.class, new MetaDataExtractor<RequiresUser>() {
-			public void extractMetaData(final MutableComponentModel model, final RequiresUser annotation) {
-				if (model.isPage()) {
-					model.setMeta(Authorities.SHIRO_REQUIRES_USER_META, Boolean.TRUE.toString());
-				}
-			}
-		});
-		configuration.add(RequiresGuest.class, new MetaDataExtractor<RequiresGuest>() {
-			public void extractMetaData(final MutableComponentModel model, final RequiresGuest annotation) {
-				if (model.isPage()) {
-					model.setMeta(Authorities.SHIRO_REQUIRES_GUEST_META, Boolean.TRUE.toString());
-				}
-			}
-		});
+		configuration.add(RequiresAuthentication.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META));
+		configuration.add(RequiresUser.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_USER_META));
+		configuration.add(RequiresGuest.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_GUEST_META));
 	}
 
 	@Contribute(MetaDataLocator.class)
 	public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
-		configuration.add(Authorities.SHIRO_REQUIRES_AUTHENTICATION_META, "");
-		configuration.add(Authorities.SHIRO_REQUIRES_USER_META, "");
-		configuration.add(Authorities.SHIRO_REQUIRES_GUEST_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_USER_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_GUEST_META, "");
 	}
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)
