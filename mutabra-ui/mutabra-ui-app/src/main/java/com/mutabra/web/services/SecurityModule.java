@@ -12,6 +12,7 @@ import com.mutabra.security.Twitter;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
+import com.mutabra.web.internal.security.ConfirmationRealm;
 import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.HashedPasswordMatcher;
@@ -28,7 +29,6 @@ import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.DefaultHashService;
-import org.apache.shiro.crypto.hash.HashService;
 import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
@@ -46,7 +46,6 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
-import org.apache.tapestry5.ioc.services.PropertyShadowBuilder;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.ApplicationGlobals;
 import org.apache.tapestry5.services.ComponentRequestFilter;
@@ -110,12 +109,13 @@ public class SecurityModule {
 	@Contribute(WebSecurityManager.class)
 	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
 											 @InjectService("accountService") final BaseEntityService<Account> accountService,
-											 final HashService hashService) {
-		configuration.add("main", new MainRealm(accountService, new HashedPasswordMatcher(hashService)));
-		configuration.add("facebook", new FacebookRealm(accountService, hashService));
-		configuration.add("twitter", new TwitterRealm(accountService, hashService));
-		configuration.add("google", new GoogleRealm(accountService, hashService));
-		configuration.add("vk", new VKRealm(accountService, hashService));
+											 final HashedPasswordMatcher generator) {
+		configuration.add("main", new MainRealm(accountService, generator));
+		configuration.add("facebook", new FacebookRealm(accountService, generator));
+		configuration.add("twitter", new TwitterRealm(accountService, generator));
+		configuration.add("google", new GoogleRealm(accountService, generator));
+		configuration.add("vk", new VKRealm(accountService, generator));
+		configuration.add("confirmation", new ConfirmationRealm(accountService));
 
 		if (accountService.query().count() <= 0) {
 			final Account account = accountService.create();
@@ -128,9 +128,9 @@ public class SecurityModule {
 		}
 	}
 
-	public HashService buildHashService(@Symbol(SECURITY_HASH_ALGORITHM) final String hashAlgorithmName,
-										@Symbol(SECURITY_HASH_ITERATIONS) final int hashIterations,
-										@Symbol(SECURITY_PRIVATE_SALT) final String privateSalt) {
+	public HashedPasswordMatcher buildHashedPasswordMatcher(@Symbol(SECURITY_HASH_ALGORITHM) final String hashAlgorithmName,
+															@Symbol(SECURITY_HASH_ITERATIONS) final int hashIterations,
+															@Symbol(SECURITY_PRIVATE_SALT) final String privateSalt) {
 
 		final DefaultHashService hashService = new DefaultHashService();
 		hashService.setHashAlgorithmName(hashAlgorithmName);
@@ -138,7 +138,7 @@ public class SecurityModule {
 		hashService.setPrivateSalt(ByteSource.Util.bytes(Base64.decode(privateSalt)));
 		hashService.setGeneratePublicSalt(true);
 
-		return hashService;
+		return new HashedPasswordMatcher(hashService);
 	}
 
 	public OAuth2 buildFacebookService(@Symbol(SECURITY_FACEBOOK_KEY) final String clientId,
@@ -229,17 +229,5 @@ public class SecurityModule {
 				return battle;
 			}
 		};
-	}
-
-	public Account buildAccount(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
-		return shadowBuilder.build(accountContext, "account", Account.class);
-	}
-
-	public Hero buildHero(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
-		return shadowBuilder.build(accountContext, "hero", Hero.class);
-	}
-
-	public Battle buildBattle(final AccountContext accountContext, final PropertyShadowBuilder shadowBuilder) {
-		return shadowBuilder.build(accountContext, "battle", Battle.class);
 	}
 }

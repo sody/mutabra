@@ -3,8 +3,7 @@ package com.mutabra.web.internal.security;
 import com.mutabra.domain.game.Account;
 import com.mutabra.security.OAuth;
 import com.mutabra.services.BaseEntityService;
-import org.apache.shiro.authc.SimpleAccount;
-import org.apache.shiro.crypto.hash.HashService;
+import com.mutabra.web.services.PasswordGenerator;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
 import static com.mutabra.services.Mappers.account$;
@@ -15,8 +14,8 @@ import static com.mutabra.services.Mappers.account$;
  */
 public class VKRealm extends OAuthRealm<VKRealm.Token> {
 	public VKRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
-				   final HashService hashService) {
-		super(accountService, hashService, Token.class);
+				   final PasswordGenerator generator) {
+		super(accountService, generator, Token.class);
 	}
 
 	@Override
@@ -25,12 +24,11 @@ public class VKRealm extends OAuthRealm<VKRealm.Token> {
 	}
 
 	@Override
-	protected SimpleAccount attachAccount(final Account account, final String profileId) {
+	protected void setAccountProfileId(final Account account, final String profileId) {
 		account.setVkUser(profileId);
-		return super.attachAccount(account, profileId);
 	}
 
-	public static class Token extends OAuthToken {
+	public static class Token extends OAuthRealm.Token {
 		public Token(final OAuth.Session session) {
 			super(session);
 		}

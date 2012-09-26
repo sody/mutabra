@@ -4,18 +4,16 @@ import com.mutabra.domain.game.Account;
 import com.mutabra.security.OAuth;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.internal.security.ConfirmationRealm;
 import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.MailService;
+import com.mutabra.web.services.PasswordGenerator;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.RandomNumberGenerator;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Hash;
-import org.apache.shiro.crypto.hash.HashRequest;
-import org.apache.shiro.crypto.hash.HashService;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -34,13 +32,13 @@ import static com.mutabra.services.Mappers.account$;
 public class Security extends AbstractPage {
 	private static final String APPLY_EVENT = "apply";
 
-	private static final RandomNumberGenerator GENERATOR = new SecureRandomNumberGenerator();
-
 	@Property
 	private String email;
 
 	@Property
 	private String password;
+
+	private Account account;
 
 	@InjectComponent
 	private Form signInForm;
@@ -52,13 +50,13 @@ public class Security extends AbstractPage {
 	private BaseEntityService<Account> accountService;
 
 	@Inject
-	private HashService hashService;
+	private PasswordGenerator generator;
 
 	@Inject
 	private MailService mailService;
 
-	public Link createApplyChangesLink(final String email, final String token) {
-		return getResources().createEventLink(APPLY_EVENT, email, token);
+	public Link createApplyChangesLink(final Account account, final String token) {
+		return getResources().createEventLink(APPLY_EVENT, account, token);
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
@@ -91,45 +89,48 @@ public class Security extends AbstractPage {
 		return GameHome.class;
 	}
 
-	@OnEvent(value = EventConstants.SUCCESS, component = "restoreForm")
-	Object restorePassword() {
-		final Account account = accountService.query()
+	@OnEvent(value = EventConstants.VALIDATE, component = "restoreForm")
+	void validateRestoreForm() {
+		account = accountService.query()
 				.filter(account$.email$.eq(email))
 				.unique();
-		// validate
-		if (account == null || account.getToken() != null) {
-			restoreForm.recordError(message("error.restore-error"));
-			return null;
+		if (account == null) {
+			// user with specified email doesn't exist
+			restoreForm.recordError(message("error.restore-password.unknown"));
+		} else if (account.getToken() != null) {
+			// user already has pending changes
+			restoreForm.recordError(message("error.restore-password.try-again-later"));
 		}
+	}
 
-		final String token = generateSecret();
-		final String password = generateSecret();
-		final Hash hash = generateHash(password);
+	@OnEvent(value = EventConstants.SUCCESS, component = "restoreForm")
+	Object restorePassword() {
+		// we should generate new password
+		// and create auth token to confirm password changes
+		// when user will confirm this from his email new password will be applied
+		// and he will be automatically authenticated
+		final String token = generator.generateSecret();
+		final String password = generator.generateSecret();
+		final Hash hash = generator.generateHash(password);
 
 		account.setToken(token);
 		account.setPendingPassword(hash.toBase64());
 		account.setPendingSalt(hash.getSalt().toBase64());
 
-		final Link link = createApplyChangesLink(email, token);
+		final Link link = createApplyChangesLink(account, token);
 		mailService.send(
-				email,
+				account.getEmail(),
 				message("mail.restore-password.title"),
-				format("mail.restore-password.body", email, password, link.toAbsoluteURI()));
+				format("mail.restore-password.body", account.getEmail(), password, link.toAbsoluteURI()));
 		accountService.saveOrUpdate(account);
+		//todo: add mail sent notification
 		return Index.class;
 	}
 
 	@OnEvent(APPLY_EVENT)
-	Object applyPendingChanges(final String email, final String token) {
-//		securityContext.signIn(new Credentials("token", email, token));
+	Object applyPendingChanges(final Account account, final String token) {
+		getSubject().login(new ConfirmationRealm.Token(account, token));
+		//todo: add notification when pending changes was confirmed
 		return GameHome.class;
-	}
-
-	private Hash generateHash(final String secret) {
-		return hashService.computeHash(new HashRequest.Builder().setSource(secret).build());
-	}
-
-	private String generateSecret() {
-		return GENERATOR.nextBytes().toBase64();
 	}
 }

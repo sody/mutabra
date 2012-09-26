@@ -1,21 +1,27 @@
 package com.mutabra.web.internal.security;
 
+import com.mutabra.web.services.PasswordGenerator;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SaltedAuthenticationInfo;
-import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.codec.CodecSupport;
 import org.apache.shiro.codec.Hex;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.crypto.hash.HashRequest;
 import org.apache.shiro.crypto.hash.HashService;
-import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.crypto.hash.SimpleHash;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class HashedPasswordMatcher extends SimpleCredentialsMatcher {
+public class HashedPasswordMatcher extends CodecSupport implements PasswordGenerator, CredentialsMatcher {
+	private final RandomNumberGenerator generator = new SecureRandomNumberGenerator();
+
 	private final HashService hashService;
 
 	private boolean storedCredentialsHexEncoded;
@@ -32,10 +38,21 @@ public class HashedPasswordMatcher extends SimpleCredentialsMatcher {
 		this.storedCredentialsHexEncoded = storedCredentialsHexEncoded;
 	}
 
-	@Override
+	public String generateSecret() {
+		return generator.nextBytes().toBase64();
+	}
+
+	public Hash generateHash(final String secret) {
+		return hashService.computeHash(new HashRequest.Builder().setSource(secret).build());
+	}
+
+	public Hash generateHash() {
+		return hashService.computeHash(new HashRequest.Builder().setSource(generator.nextBytes()).build());
+	}
+
 	public boolean doCredentialsMatch(final AuthenticationToken token, final AuthenticationInfo info) {
-		final Hash tokenHash = getCredentials(token);
-		final Hash accountHash = getCredentials(info);
+		final Hash tokenHash = getHash(token, info);
+		final Hash accountHash = getHash(info);
 
 		// it makes possible to have empty passwords
 		if (accountHash == null || accountHash.isEmpty()) {
@@ -49,16 +66,11 @@ public class HashedPasswordMatcher extends SimpleCredentialsMatcher {
 		return accountHash.equals(tokenHash);
 	}
 
-	@Override
-	protected Hash getCredentials(final AuthenticationInfo info) {
+	protected Hash getHash(final AuthenticationInfo info) {
 		final Object credentials = info != null ? info.getCredentials() : null;
 		// it makes possible to have empty passwords
 		if (credentials == null) {
 			return null;
-		}
-		// we can retrieve already generated hash from realm
-		if (credentials instanceof Hash) {
-			return (Hash) credentials;
 		}
 
 		byte[] bytes = toBytes(credentials);
@@ -70,29 +82,27 @@ public class HashedPasswordMatcher extends SimpleCredentialsMatcher {
 				bytes = Base64.decode(bytes);
 			}
 		}
-		// generate hash using hash service
-		return hashService.computeHash(new HashRequest.Builder()
-				.setSource(ByteSource.Util.bytes(bytes))
-				.setSalt(getSalt(info))
-				.build());
+		// hash has already been calculated
+		// so we don't need to calculate it with HashService
+		final SimpleHash hash = new SimpleHash(null);
+		hash.setBytes(bytes);
+		return hash;
 	}
 
-	@Override
-	protected Hash getCredentials(final AuthenticationToken token) {
+	protected Hash getHash(final AuthenticationToken token, final AuthenticationInfo info) {
 		final Object credentials = token != null ? token.getCredentials() : null;
+		final Object salt = info instanceof SaltedAuthenticationInfo ?
+				((SaltedAuthenticationInfo) info).getCredentialsSalt() :
+				null;
 		// it makes possible to have empty passwords
 		if (credentials == null) {
 			return null;
 		}
+
 		// generate hash using hash service
 		return hashService.computeHash(new HashRequest.Builder()
 				.setSource(credentials)
+				.setSalt(salt)
 				.build());
-	}
-
-	protected Object getSalt(final AuthenticationInfo info) {
-		return info instanceof SaltedAuthenticationInfo ?
-				((SaltedAuthenticationInfo) info).getCredentialsSalt() :
-				null;
 	}
 }

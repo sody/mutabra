@@ -4,17 +4,14 @@ import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Role;
 import com.mutabra.security.OAuth;
 import com.mutabra.services.BaseEntityService;
+import com.mutabra.web.services.PasswordGenerator;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
-import org.apache.shiro.crypto.RandomNumberGenerator;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Hash;
-import org.apache.shiro.crypto.hash.HashRequest;
-import org.apache.shiro.crypto.hash.HashService;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.greatage.domain.Repository;
@@ -30,17 +27,15 @@ import static com.mutabra.services.Mappers.account$;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRealm {
-	private final RandomNumberGenerator rng = new SecureRandomNumberGenerator();
-
+public abstract class OAuthRealm<T extends OAuthRealm.Token> extends AuthenticatingRealm {
 	private final BaseEntityService<Account> accountService;
-	private final HashService hashService;
+	private final PasswordGenerator generator;
 
 	public OAuthRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
-					  final HashService hashService,
+					  final PasswordGenerator generator,
 					  final Class<T> authenticationTokenClass) {
 		this.accountService = accountService;
-		this.hashService = hashService;
+		this.generator = generator;
 
 		setAuthenticationTokenClass(authenticationTokenClass);
 		setCredentialsMatcher(new AllowAllCredentialsMatcher());
@@ -67,7 +62,7 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 				return fillAccount(account);
 			}
 
-			final String email = String.valueOf(profile.get(OAuth.Session.EMAIL));
+			final String email = (String) profile.get(OAuth.Session.EMAIL);
 			if (!StringUtils.isEmpty(email)) {
 				account = getAccountByEmail(email);
 				if (account != null) {
@@ -85,7 +80,9 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 		}
 	}
 
-	protected abstract Account getAccountByProfileId(final String profileId);
+	protected abstract Account getAccountByProfileId(String profileId);
+
+	protected abstract void setAccountProfileId(Account account, String profileId);
 
 	protected Account getAccountByEmail(final String email) {
 		return findAccount(account$.email$.eq(email));
@@ -96,31 +93,27 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 	}
 
 	protected SimpleAccount fillAccount(final Account account) {
-		final SimpleAccount simpleAccount = new SimpleAccount(account.getId(), null, getName());
-
-		final Role role = account.getRole();
-		simpleAccount.addRole(role.getTranslationCode());
-		simpleAccount.addStringPermissions(role.getPermissions());
-
-		return simpleAccount;
+		return new SimpleAccount(account.getId(), null, getName());
 	}
 
 	protected SimpleAccount attachAccount(final Account account, final String profileId) {
+		setAccountProfileId(account, profileId);
 		accountService.save(account);
 		return fillAccount(account);
 	}
 
 	protected SimpleAccount createAccount(final Map<String, Object> profile) {
 		final Account account = accountService.create();
-		account.setEmail(String.valueOf(profile.get(OAuth.Session.EMAIL)));
+		account.setEmail((String) profile.get(OAuth.Session.EMAIL));
 		account.setRegistered(new Date());
-		account.setName(String.valueOf(profile.get(OAuth.Session.NAME)));
-		account.setLocale(LocaleUtils.parseLocale(String.valueOf(profile.get(OAuth.Session.LOCALE))));
+		account.setName((String) profile.get(OAuth.Session.NAME));
+		account.setLocale(LocaleUtils.parseLocale((String) profile.get(OAuth.Session.LOCALE)));
 		//todo: account.setTimeZone(...);
 		//todo: account.setGender(...);
 		account.setRole(Role.USER);
 
-		final Hash hash = generateHash();
+		// generate random password
+		final Hash hash = generator.generateHash();
 		account.setPassword(hash.toBase64());
 		if (hash.getSalt() != null) {
 			account.setSalt(hash.getSalt().toBase64());
@@ -129,7 +122,27 @@ public abstract class OAuthRealm<T extends OAuthToken> extends AuthenticatingRea
 		return attachAccount(account, String.valueOf(profile.get(OAuth.Session.ID)));
 	}
 
-	protected Hash generateHash() {
-		return hashService.computeHash(new HashRequest.Builder().setSource(rng.nextBytes()).build());
+	/**
+	 * @author Ivan Khalopik
+	 * @since 1.0
+	 */
+	public static class Token implements AuthenticationToken {
+		private final OAuth.Session session;
+
+		public Token(final OAuth.Session session) {
+			this.session = session;
+		}
+
+		public OAuth.Session getSession() {
+			return session;
+		}
+
+		public Object getPrincipal() {
+			return session;
+		}
+
+		public Object getCredentials() {
+			return null;
+		}
 	}
 }

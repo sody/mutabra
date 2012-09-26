@@ -20,22 +20,24 @@
 	</div>
 </t:form>
 
-<t:form t:id="changePasswordForm" class="form-horizontal">
-	<legend>${message:label.change-password}</legend>
+<t:if test="value.email">
+	<t:form t:id="changePasswordForm" class="form-horizontal">
+		<legend>${message:label.change-password}</legend>
 
-	<t:customerrors/>
+		<t:customerrors/>
 
-	<div class="control-group">
-		<t:label for="password" class="control-label"/>
-		<div class="controls">
-			<t:textfield t:id="password" value="password" validate="required" label="message:label.password"/>
+		<div class="control-group">
+			<t:label for="password" class="control-label"/>
+			<div class="controls">
+				<t:textfield t:id="password" value="password" validate="required" label="message:label.password"/>
+			</div>
 		</div>
-	</div>
 
-	<div class="form-actions">
-		<t:linksubmit class="btn">${message:label.change}</t:linksubmit>
-	</div>
-</t:form>
+		<div class="form-actions">
+			<t:linksubmit class="btn">${message:label.change}</t:linksubmit>
+		</div>
+	</t:form>
+</t:if>
 
 <t:form t:id="accountForm" class="form-horizontal">
 	<legend>${message:label.change-profile}</legend>
