@@ -9,7 +9,7 @@ import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAccount;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.realm.AuthenticatingRealm;
@@ -92,17 +92,17 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
 		return accountService.query().filter(criteria).unique();
 	}
 
-	protected SimpleAccount fillAccount(final Account account) {
-		return new SimpleAccount(account.getId(), null, getName());
+	protected AuthenticationInfo fillAccount(final Account account) {
+		return new SimpleAuthenticationInfo(account.getId(), null, getName());
 	}
 
-	protected SimpleAccount attachAccount(final Account account, final String profileId) {
+	protected AuthenticationInfo attachAccount(final Account account, final String profileId) {
 		setAccountProfileId(account, profileId);
 		accountService.save(account);
 		return fillAccount(account);
 	}
 
-	protected SimpleAccount createAccount(final Map<String, Object> profile) {
+	protected AuthenticationInfo createAccount(final Map<String, Object> profile) {
 		final Account account = accountService.create();
 		account.setEmail((String) profile.get(OAuth.Session.EMAIL));
 		account.setRegistered(new Date());

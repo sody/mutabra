@@ -5,7 +5,7 @@ import com.mutabra.services.BaseEntityService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAccount;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.realm.AuthenticatingRealm;
@@ -31,7 +31,7 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 			throw new UnknownAccountException("No account found");
 		}
 
-		return new SimpleAccount(
+		return new SimpleAuthenticationInfo(
 				account.getId(),
 				new String[]{account.getToken(), account.getPendingToken()},
 				getName());
