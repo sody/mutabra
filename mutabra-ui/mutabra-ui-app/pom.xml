@@ -51,6 +51,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 		</dependency>
@@ -96,6 +101,13 @@
 						<filtering>true</filtering>
 						<targetPath>${project.build.directory}/${project.build.finalName}/WEB-INF</targetPath>
 					</resource>
+					<resource>
+						<directory>src/main/config</directory>
+						<includes>
+							<include>logback.xml</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
 				</resources>
 			</build>
 
@@ -108,11 +120,6 @@
 				<dependency>
 					<groupId>com.mutabra</groupId>
 					<artifactId>mutabra-ui-gae</artifactId>
-				</dependency>
-
-				<dependency>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-simple</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>
@@ -175,11 +182,6 @@
 				<dependency>
 					<groupId>com.mutabra</groupId>
 					<artifactId>mutabra-ui-hibernate</artifactId>
-				</dependency>
-
-				<dependency>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-classic</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>

@@ -5,7 +5,6 @@ import com.mutabra.web.base.components.AbstractOAuthConnect;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.RequestParameter;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.greatage.util.DescriptionBuilder;
 
 /**
  * @author Ivan Khalopik
@@ -26,13 +25,6 @@ public class TwitterConnect extends AbstractOAuthConnect {
 			@RequestParameter(value = "oauth_token", allowBlank = true) String token,
 			@RequestParameter(value = "oauth_verifier", allowBlank = true) final String verifier,
 			@RequestParameter(value = "denied", allowBlank = true) final String denied) {
-
-		final String info = new DescriptionBuilder("TWITTER TOKEN")
-				.append("oauth_token", token)
-				.append("oauth_verifier", verifier)
-				.append("denied", denied)
-				.toString();
-		System.out.println(info);
 
 		return doConnected(token, verifier, denied);
 	}

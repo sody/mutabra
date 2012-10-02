@@ -1,6 +1,8 @@
 package com.mutabra.web.internal;
 
 import com.mutabra.web.services.MailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -14,6 +16,8 @@ import java.util.Properties;
  * @since 1.0
  */
 public class MailServiceImpl implements MailService {
+	private final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
+
 	private final Properties properties = new Properties();
 	private final String adminAddress;
 
@@ -31,9 +35,11 @@ public class MailServiceImpl implements MailService {
 			message.setSubject(subject);
 			message.setText(body);
 			Transport.send(message);
-			System.out.println("MESSAGE: " + body);
+			logger.debug("Sending mail 'to:{}/{}':\n{}", new Object[] {to, subject, body});
 		} catch (Exception e) {
-			throw new RuntimeException(String.format("Error occurs while sending email 'to:%s/%s'", to, subject), e);
+			final String error = String.format("Error occurs while sending email 'to:%s/%s'", to, subject);
+			logger.error(error, e);
+			throw new RuntimeException(error, e);
 		}
 	}
 }

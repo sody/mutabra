@@ -11,6 +11,7 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.corelib.base.AbstractComponentEventLink;
 import org.apache.tapestry5.internal.util.CaptureResultCallback;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.slf4j.Logger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,6 +30,9 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 	@Inject
 	private ComponentResources resources;
 
+	@Inject
+	private Logger logger;
+
 	@Cached
 	protected String getRedirectUri() {
 		return resources.createEventLink(CONNECTED_EVENT).toRedirectURI();
@@ -45,7 +49,9 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 
 	@OnEvent(CONNECT_EVENT)
 	protected URL connect() throws MalformedURLException {
-		return new URL(getOAuth().getAuthorizationUrl(getRedirectUri(), scope));
+		final String authorizationUrl = getOAuth().getAuthorizationUrl(getRedirectUri(), scope);
+		logger.debug("Redirecting to OAuth authorization URL: '{}'", authorizationUrl);
+		return new URL(authorizationUrl);
 	}
 
 	protected abstract OAuth getOAuth();
@@ -55,6 +61,10 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 	}
 
 	protected Object doConnected(final String token, final String secret, final String error) {
+		logger.debug("Reply from OAuth authorization screen:\n" +
+				"\ttoken : {}\n" +
+				"\tsecret: {}\n" +
+				"\terror : {}", new Object[] {token, secret, error});
 		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
 		if (secret != null) {
 			try {
@@ -67,8 +77,7 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 				}
 				return null;
 			} catch (Exception e) {
-				System.out.println();
-				//todo: log error
+				logger.error("Can not connect to OAuth provider", e);
 			}
 		}
 
