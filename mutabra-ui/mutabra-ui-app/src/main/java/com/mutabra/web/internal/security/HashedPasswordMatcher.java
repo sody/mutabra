@@ -23,11 +23,13 @@ public class HashedPasswordMatcher extends CodecSupport implements PasswordGener
 	private final RandomNumberGenerator generator = new SecureRandomNumberGenerator();
 
 	private final HashService hashService;
+	private final long expirationTime;
 
 	private boolean storedCredentialsHexEncoded;
 
-	public HashedPasswordMatcher(final HashService hashService) {
+	public HashedPasswordMatcher(final HashService hashService, final long expirationTime) {
 		this.hashService = hashService;
+		this.expirationTime = expirationTime;
 	}
 
 	public boolean isStoredCredentialsHexEncoded() {
@@ -48,6 +50,10 @@ public class HashedPasswordMatcher extends CodecSupport implements PasswordGener
 
 	public Hash generateHash() {
 		return hashService.computeHash(new HashRequest.Builder().setSource(generator.nextBytes()).build());
+	}
+
+	public long generateExpirationTime() {
+		return System.currentTimeMillis() + expirationTime;
 	}
 
 	public boolean doCredentialsMatch(final AuthenticationToken token, final AuthenticationInfo info) {

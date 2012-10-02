@@ -55,8 +55,8 @@ public class Security extends AbstractPage {
 	@Inject
 	private MailService mailService;
 
-	public Link createApplyChangesLink(final Account account, final String token) {
-		return getResources().createEventLink(APPLY_EVENT, account, token);
+	public Link createApplyChangesLink(final Long userId, final String token) {
+		return getResources().createEventLink(APPLY_EVENT, userId, token);
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
@@ -97,7 +97,8 @@ public class Security extends AbstractPage {
 		if (account == null) {
 			// user with specified email doesn't exist
 			restoreForm.recordError(message("error.restore-password.unknown"));
-		} else if (account.getToken() != null) {
+		} else if (account.getTokenExpired() != null &&
+				account.getTokenExpired() > System.currentTimeMillis()) {
 			// user already has pending changes
 			restoreForm.recordError(message("error.restore-password.try-again-later"));
 		}
@@ -109,15 +110,19 @@ public class Security extends AbstractPage {
 		// and create auth token to confirm password changes
 		// when user will confirm this from his email new password will be applied
 		// and he will be automatically authenticated
-		final String token = generator.generateSecret();
 		final String password = generator.generateSecret();
 		final Hash hash = generator.generateHash(password);
 
-		account.setToken(token);
+		final String token = generator.generateSecret();
+		final long expired = generator.generateExpirationTime();
+
 		account.setPendingPassword(hash.toBase64());
 		account.setPendingSalt(hash.getSalt().toBase64());
 
-		final Link link = createApplyChangesLink(account, token);
+		account.setToken(token);
+		account.setTokenExpired(expired);
+
+		final Link link = createApplyChangesLink(account.getId(), token);
 		mailService.send(
 				account.getEmail(),
 				message("mail.restore-password.title"),
@@ -128,8 +133,8 @@ public class Security extends AbstractPage {
 	}
 
 	@OnEvent(APPLY_EVENT)
-	Object applyPendingChanges(final Account account, final String token) {
-		getSubject().login(new ConfirmationRealm.Token(account, token));
+	Object applyPendingChanges(final Long userId, final String token) {
+		getSubject().login(new ConfirmationRealm.Token(userId, token));
 		//todo: add notification when pending changes was confirmed
 		return GameHome.class;
 	}

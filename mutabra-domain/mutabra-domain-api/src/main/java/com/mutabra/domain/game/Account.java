@@ -13,6 +13,7 @@ import java.util.TimeZone;
  */
 public interface Account extends BaseEntity {
 
+	/* Security Information */
 	String getEmail();
 
 	void setEmail(String email);
@@ -25,26 +26,20 @@ public interface Account extends BaseEntity {
 
 	void setSalt(final String salt);
 
-	String getToken();
+	Role getRole();
 
-	void setToken(String token);
+	void setRole(Role role);
 
-	String getPendingEmail();
+	Date getRegistered();
 
-	void setPendingEmail(String email);
+	void setRegistered(Date registered);
 
-	String getPendingPassword();
+	Date getLastLogin();
 
-	void setPendingPassword(String password);
+	void setLastLogin(Date lastLogin);
 
-	String getPendingSalt();
 
-	void setPendingSalt(String salt);
-
-	String getPendingToken();
-
-	void setPendingToken(String token);
-
+	/* Social Network Profiles */
 	String getFacebookUser();
 
 	void setFacebookUser(String user);
@@ -61,18 +56,34 @@ public interface Account extends BaseEntity {
 
 	void setVkUser(String user);
 
-	Role getRole();
 
-	void setRole(Role role);
+	/* Pending Changes */
+	String getToken();
 
-	Date getRegistered();
+	void setToken(String token);
 
-	void setRegistered(Date registered);
+	String getPendingToken();
 
-	Date getLastLogin();
+	void setPendingToken(String token);
 
-	void setLastLogin(Date lastLogin);
+	Long getTokenExpired();
 
+	void setTokenExpired(Long tokenExpired);
+
+	String getPendingEmail();
+
+	void setPendingEmail(String email);
+
+	String getPendingPassword();
+
+	void setPendingPassword(String password);
+
+	String getPendingSalt();
+
+	void setPendingSalt(String salt);
+
+
+	/* General Information */
 	String getName();
 
 	void setName(String name);

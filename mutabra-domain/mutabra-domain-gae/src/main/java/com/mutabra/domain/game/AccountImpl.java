@@ -29,6 +29,14 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	private String salt;
 
+	private Role role;
+
+	@Unindexed
+	private Date registered;
+
+	private Date lastLogin;
+
+
 	@Indexed
 	private String facebookUser;
 
@@ -41,22 +49,19 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	@Indexed
 	private String vkUser;
 
+
+	private String token;
+
+	private String pendingToken;
+
+	private Long tokenExpired;
+
 	private String pendingEmail;
 
 	private String pendingPassword;
 
 	private String pendingSalt;
 
-	private String token;
-
-	private String pendingToken;
-
-	private Role role;
-
-	@Unindexed
-	private Date registered;
-
-	private Date lastLogin;
 
 	private String name;
 
@@ -73,6 +78,7 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 	private TimeZone timeZone;
 
 	private Key<HeroImpl> hero;
+
 
 	public String getEmail() {
 		return email;
@@ -98,78 +104,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 		this.salt = salt;
 	}
 
-	public String getPendingEmail() {
-		return pendingEmail;
-	}
-
-	public void setPendingEmail(final String email) {
-		this.pendingEmail = email;
-	}
-
-	public String getPendingPassword() {
-		return pendingPassword;
-	}
-
-	public void setPendingPassword(final String password) {
-		pendingPassword = password;
-	}
-
-	public String getPendingSalt() {
-		return pendingSalt;
-	}
-
-	public void setPendingSalt(final String pendingSalt) {
-		this.pendingSalt = pendingSalt;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(final String token) {
-		this.token = token;
-	}
-
-	public String getPendingToken() {
-		return pendingToken;
-	}
-
-	public void setPendingToken(final String token) {
-		this.pendingToken = token;
-	}
-
-	public String getFacebookUser() {
-		return facebookUser;
-	}
-
-	public void setFacebookUser(final String user) {
-		facebookUser = user;
-	}
-
-	public String getTwitterUser() {
-		return twitterUser;
-	}
-
-	public void setTwitterUser(final String user) {
-		twitterUser = user;
-	}
-
-	public String getGoogleUser() {
-		return googleUser;
-	}
-
-	public void setGoogleUser(final String user) {
-		googleUser = user;
-	}
-
-	public String getVkUser() {
-		return vkUser;
-	}
-
-	public void setVkUser(final String vkUser) {
-		this.vkUser = vkUser;
-	}
-
 	public Role getRole() {
 		return role;
 	}
@@ -192,6 +126,88 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
 	public void setLastLogin(final Date lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+
+
+	public String getFacebookUser() {
+		return facebookUser;
+	}
+
+	public void setFacebookUser(final String facebookUser) {
+		this.facebookUser = facebookUser;
+	}
+
+	public String getTwitterUser() {
+		return twitterUser;
+	}
+
+	public void setTwitterUser(final String twitterUser) {
+		this.twitterUser = twitterUser;
+	}
+
+	public String getGoogleUser() {
+		return googleUser;
+	}
+
+	public void setGoogleUser(final String googleUser) {
+		this.googleUser = googleUser;
+	}
+
+	public String getVkUser() {
+		return vkUser;
+	}
+
+	public void setVkUser(final String vkUser) {
+		this.vkUser = vkUser;
+	}
+
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(final String token) {
+		this.token = token;
+	}
+
+	public String getPendingToken() {
+		return pendingToken;
+	}
+
+	public void setPendingToken(final String pendingToken) {
+		this.pendingToken = pendingToken;
+	}
+
+	public Long getTokenExpired() {
+		return tokenExpired;
+	}
+
+	public void setTokenExpired(final Long tokenExpired) {
+		this.tokenExpired = tokenExpired;
+	}
+
+	public String getPendingEmail() {
+		return pendingEmail;
+	}
+
+	public void setPendingEmail(final String pendingEmail) {
+		this.pendingEmail = pendingEmail;
+	}
+
+	public String getPendingPassword() {
+		return pendingPassword;
+	}
+
+	public void setPendingPassword(final String pendingPassword) {
+		this.pendingPassword = pendingPassword;
+	}
+
+	public String getPendingSalt() {
+		return pendingSalt;
+	}
+
+	public void setPendingSalt(final String pendingSalt) {
+		this.pendingSalt = pendingSalt;
 	}
 
 	public String getName() {

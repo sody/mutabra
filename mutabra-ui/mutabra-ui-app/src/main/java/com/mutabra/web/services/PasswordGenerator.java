@@ -13,4 +13,6 @@ public interface PasswordGenerator {
 	Hash generateHash(String secret);
 
 	Hash generateHash();
+
+	long generateExpirationTime();
 }

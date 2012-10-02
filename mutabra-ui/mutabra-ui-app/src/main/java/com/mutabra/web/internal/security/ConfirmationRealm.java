@@ -2,13 +2,17 @@ package com.mutabra.web.internal.security;
 
 import com.mutabra.domain.game.Account;
 import com.mutabra.services.BaseEntityService;
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.realm.AuthenticatingRealm;
+
+import static com.mutabra.services.Mappers.account$;
 
 /**
  * @author Ivan Khalopik
@@ -25,28 +29,30 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(final AuthenticationToken token) throws AuthenticationException {
-		final Account account = ((Token) token).getAccount();
+		final Account account = getAccount(token);
 
 		if (account == null) {
-			throw new UnknownAccountException("No account found");
+			throw new UnknownAccountException("Account not found");
+		}
+		if (account.getToken() == null) {
+			throw new AccountException("Account has no pending changes");
+		}
+		final long currentTime = System.currentTimeMillis();
+		if (account.getTokenExpired() == null || account.getTokenExpired() < currentTime) {
+			throw new ExpiredCredentialsException(String.format(
+					"Submitted credentials for token [%s] has been expired.", token));
 		}
 
-		return new SimpleAuthenticationInfo(
-				account.getId(),
-				new String[]{account.getToken(), account.getPendingToken()},
-				getName());
+		final String[] credentials = {account.getToken(), account.getPendingToken()};
+		return new SimpleAuthenticationInfo(account.getId(), credentials, getName());
 	}
 
 	public boolean doCredentialsMatch(final AuthenticationToken token, final AuthenticationInfo info) {
-		final String submittedToken = getCredentials(token);
-		final String[] accountTokens = getCredentials(info);
+		final String submittedToken = (String) token.getCredentials();
+		final String[] accountTokens = (String[]) info.getCredentials();
 
-		// submitted token or account tokens is null
-		if (submittedToken == null ||
-				accountTokens == null ||
-				accountTokens.length != 2 ||
-				accountTokens[0] == null) {
-			// illegal arguments
+		// submitted token can not be null
+		if (submittedToken == null) {
 			return false;
 		}
 
@@ -56,7 +62,7 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 
 		// main token matches
 		if (submittedToken.equals(mainToken)) {
-			final Account account = ((Token) token).getAccount();
+			final Account account = getAccount(token);
 			// pending token is not null
 			if (pendingToken != null) {
 				// replace main token with pending token
@@ -65,8 +71,12 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 			} else {
 				// apply all pending changes
 				if (account.getPendingEmail() != null) {
-					//todo: check if email is free
-					account.setEmail(account.getPendingEmail());
+					final long count = accountService.query()
+							.filter(account$.email$.eq(account.getPendingEmail()))
+							.count();
+					if (count == 0) {
+						account.setEmail(account.getPendingEmail());
+					}
 					account.setPendingEmail(null);
 				}
 				if (account.getPendingPassword() != null) {
@@ -77,6 +87,7 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 				}
 				// reset token
 				account.setToken(null);
+				account.setTokenExpired(null);
 			}
 			// save account changes and authenticate
 			accountService.save(account);
@@ -85,7 +96,7 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 
 		// pending token matches
 		if (submittedToken.equals(pendingToken)) {
-			final Account account = ((Token) token).getAccount();
+			final Account account = getAccount(token);
 			// reset pending token
 			account.setPendingToken(null);
 			// save account changes
@@ -98,29 +109,26 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 		return false;
 	}
 
-	private String[] getCredentials(final AuthenticationInfo info) {
-		return (String[]) info.getCredentials();
-	}
-
-	private String getCredentials(final AuthenticationToken token) {
-		return (String) token.getCredentials();
+	private Account getAccount(final AuthenticationToken token) {
+		final Long userId = ((Token) token).getUserId();
+		return userId != null ? accountService.get(userId) : null;
 	}
 
 	public static class Token implements AuthenticationToken {
-		private final Account account;
+		private final Long userId;
 		private final String token;
 
-		public Token(final Account account, final String token) {
-			this.account = account;
+		public Token(final Long userId, final String token) {
+			this.userId = userId;
 			this.token = token;
 		}
 
-		public Account getAccount() {
-			return account;
+		public Long getUserId() {
+			return userId;
 		}
 
 		public Object getPrincipal() {
-			return account;
+			return userId;
 		}
 
 		public Object getCredentials() {

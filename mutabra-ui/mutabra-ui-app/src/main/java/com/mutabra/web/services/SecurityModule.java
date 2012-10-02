@@ -70,6 +70,8 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class SecurityModule {
+	private static final String SECURITY_TOKEN_EXPIRATION_TIME = "security.token-expiration-time";
+
 	private static final String SECURITY_HASH_ALGORITHM = "security.hash-algorithm";
 	private static final String SECURITY_HASH_ITERATIONS = "security.hash-iterations";
 	private static final String SECURITY_PRIVATE_SALT = "security.private-salt";
@@ -92,6 +94,8 @@ public class SecurityModule {
 		configuration.add(SECURITY_HASH_ALGORITHM, Sha512Hash.ALGORITHM_NAME);
 		configuration.add(SECURITY_HASH_ITERATIONS, "512");
 		configuration.add(SECURITY_PRIVATE_SALT, "8carxXOr0uNa8aqhCYZZZA==");
+
+		configuration.add(SECURITY_TOKEN_EXPIRATION_TIME, "60000");
 	}
 
 	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
@@ -130,7 +134,8 @@ public class SecurityModule {
 
 	public HashedPasswordMatcher buildHashedPasswordMatcher(@Symbol(SECURITY_HASH_ALGORITHM) final String hashAlgorithmName,
 															@Symbol(SECURITY_HASH_ITERATIONS) final int hashIterations,
-															@Symbol(SECURITY_PRIVATE_SALT) final String privateSalt) {
+															@Symbol(SECURITY_PRIVATE_SALT) final String privateSalt,
+															@Symbol(SECURITY_TOKEN_EXPIRATION_TIME) final long tokenExpirationTime) {
 
 		final DefaultHashService hashService = new DefaultHashService();
 		hashService.setHashAlgorithmName(hashAlgorithmName);
@@ -138,7 +143,7 @@ public class SecurityModule {
 		hashService.setPrivateSalt(ByteSource.Util.bytes(Base64.decode(privateSalt)));
 		hashService.setGeneratePublicSalt(true);
 
-		return new HashedPasswordMatcher(hashService);
+		return new HashedPasswordMatcher(hashService, tokenExpirationTime);
 	}
 
 	public OAuth2 buildFacebookService(@Symbol(SECURITY_FACEBOOK_KEY) final String clientId,

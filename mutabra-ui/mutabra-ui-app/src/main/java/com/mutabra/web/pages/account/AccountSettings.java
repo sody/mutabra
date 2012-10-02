@@ -71,7 +71,8 @@ public class AccountSettings extends AbstractPage {
 		if (account == null) {
 			// user is not authenticated(impossible)
 			changeEmailForm.recordError(message("error.change-email.unknown"));
-		} else if (account.getToken() != null) {
+		} else if (account.getTokenExpired() != null &&
+				account.getTokenExpired() > System.currentTimeMillis()) {
 			// user already has pending changes
 			changeEmailForm.recordError(message("error.change-email.try-again-later"));
 		} else {
@@ -96,11 +97,14 @@ public class AccountSettings extends AbstractPage {
 			// when user will confirm this email new email will be applied
 			// and he will be automatically authenticated
 			final String token = generator.generateSecret();
+			final long expired = generator.generateExpirationTime();
 
-			account.setToken(token);
 			account.setPendingEmail(email);
 
-			final Link link = security.createApplyChangesLink(account, token);
+			account.setToken(token);
+			account.setTokenExpired(expired);
+
+			final Link link = security.createApplyChangesLink(account.getId(), token);
 			mailService.send(
 					account.getPendingEmail(),
 					message("mail.change-email.title"),
@@ -115,12 +119,15 @@ public class AccountSettings extends AbstractPage {
 			// and he will be automatically authenticated
 			final String token = generator.generateSecret();
 			final String pendingToken = generator.generateSecret();
+			final long expired = generator.generateExpirationTime();
+
+			account.setPendingEmail(email);
 
 			account.setToken(token);
 			account.setPendingToken(pendingToken);
-			account.setPendingEmail(email);
+			account.setTokenExpired(expired);
 
-			final Link link = security.createApplyChangesLink(account, token);
+			final Link link = security.createApplyChangesLink(account.getId(), token);
 			mailService.send(
 					account.getEmail(),
 					message("mail.change-email.title"),
@@ -129,7 +136,7 @@ public class AccountSettings extends AbstractPage {
 							account.getPendingEmail(),
 							link.toAbsoluteURI()));
 
-			final Link pendingLink = security.createApplyChangesLink(account, pendingToken);
+			final Link pendingLink = security.createApplyChangesLink(account.getId(), pendingToken);
 			mailService.send(
 					account.getPendingEmail(),
 					message("mail.change-email.title"),
@@ -149,7 +156,8 @@ public class AccountSettings extends AbstractPage {
 		if (account == null) {
 			// user is not authenticated(impossible)
 			changePasswordForm.recordError(message("error.change-password.unknown"));
-		} else if (account.getToken() != null) {
+		} else if (account.getTokenExpired() != null &&
+				account.getTokenExpired() > System.currentTimeMillis()) {
 			// user already has pending changes
 			changePasswordForm.recordError(message("error.change-password.try-again-later"));
 		} else if (account.getEmail() == null) {
@@ -167,12 +175,15 @@ public class AccountSettings extends AbstractPage {
 		// and he will be automatically authenticated
 		final String token = generator.generateSecret();
 		final Hash hash = generator.generateHash(password);
+		final long expired = generator.generateExpirationTime();
 
-		account.setToken(token);
 		account.setPendingPassword(hash.toBase64());
 		account.setPendingSalt(hash.getSalt().toBase64());
 
-		final Link link = security.createApplyChangesLink(account, token);
+		account.setToken(token);
+		account.setTokenExpired(expired);
+
+		final Link link = security.createApplyChangesLink(account.getId(), token);
 		mailService.send(
 				account.getEmail(),
 				message("mail.change-password.title"),
