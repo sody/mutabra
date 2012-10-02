@@ -41,7 +41,7 @@ public class HashedPasswordMatcher extends CodecSupport implements PasswordGener
 	}
 
 	public String generateSecret() {
-		return generator.nextBytes().toBase64();
+		return generator.nextBytes().toBase64().replaceAll("=", "");
 	}
 
 	public Hash generateHash(final String secret) {

@@ -16,8 +16,10 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
+import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -32,16 +34,27 @@ import static com.mutabra.services.Mappers.account$;
 public class Security extends AbstractPage {
 	private static final String APPLY_EVENT = "apply";
 
+	private static final String SIGN_IN_TAB = "signIn";
+	private static final String SIGN_UP_TAB = "signUp";
+	private static final String RESTORE_TAB = "restore";
+
 	@Property
 	private String email;
 
 	@Property
 	private String password;
 
+	@Property
+	@Persist(PersistenceConstants.FLASH)
+	private String activeTab;
+
 	private Account account;
 
 	@InjectComponent
 	private Form signInForm;
+
+	@InjectComponent
+	private Form signUpForm;
 
 	@InjectComponent
 	private Form restoreForm;
@@ -57,6 +70,18 @@ public class Security extends AbstractPage {
 
 	public Link createApplyChangesLink(final Long userId, final String token) {
 		return getResources().createEventLink(APPLY_EVENT, userId, token);
+	}
+
+	@OnEvent(EventConstants.ACTIVATE)
+	void activateDefaultTab() {
+		if (activeTab == null) {
+			activeTab = SIGN_IN_TAB;
+		}
+	}
+
+	@OnEvent(value = EventConstants.PREPARE_FOR_SUBMIT, component = "signInForm")
+	void activateSignInTab() {
+		activeTab = SIGN_IN_TAB;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
@@ -87,6 +112,58 @@ public class Security extends AbstractPage {
 	Object vkConnected(final OAuth.Session session) {
 		getSubject().login(new VKRealm.Token(session));
 		return GameHome.class;
+	}
+
+	@OnEvent(value = EventConstants.PREPARE_FOR_SUBMIT, component = "signUpForm")
+	void activateSignUpTab() {
+		activeTab = SIGN_UP_TAB;
+	}
+
+	@OnEvent(value = EventConstants.VALIDATE, component = "signUpForm")
+	void validateSignUpForm() {
+		account = accountService.query()
+				.filter(account$.email$.eq(email))
+				.unique();
+		if (account != null) {
+			// user with specified email doesn't exist
+			signUpForm.recordError(message("error.sign-up.unknown"));
+		}
+	}
+
+	@OnEvent(value = EventConstants.SUCCESS, component = "signUpForm")
+	Object signUp() {
+		account = accountService.create();
+		// we should generate new password
+		// and create auth token to confirm password changes
+		// when user will confirm this from his email new password will be applied
+		// and he will be automatically authenticated
+		final String password = generator.generateSecret();
+		final Hash hash = generator.generateHash(password);
+
+		final String token = generator.generateSecret();
+		final long expired = generator.generateExpirationTime();
+
+		account.setEmail(email);
+
+		account.setPendingPassword(hash.toBase64());
+		account.setPendingSalt(hash.getSalt().toBase64());
+
+		account.setToken(token);
+		account.setTokenExpired(expired);
+		accountService.saveOrUpdate(account);
+
+		final Link link = createApplyChangesLink(account.getId(), token);
+		mailService.send(
+				account.getEmail(),
+				message("mail.sign-up.title"),
+				format("mail.sign-up.body", account.getEmail(), password, link.toAbsoluteURI()));
+		//todo: add mail sent notification
+		return Index.class;
+	}
+
+	@OnEvent(value = EventConstants.PREPARE_FOR_SUBMIT, component = "restoreForm")
+	void activateRestoreTab() {
+		activeTab = RESTORE_TAB;
 	}
 
 	@OnEvent(value = EventConstants.VALIDATE, component = "restoreForm")
@@ -121,13 +198,13 @@ public class Security extends AbstractPage {
 
 		account.setToken(token);
 		account.setTokenExpired(expired);
+		accountService.saveOrUpdate(account);
 
 		final Link link = createApplyChangesLink(account.getId(), token);
 		mailService.send(
 				account.getEmail(),
 				message("mail.restore-password.title"),
 				format("mail.restore-password.body", account.getEmail(), password, link.toAbsoluteURI()));
-		accountService.saveOrUpdate(account);
 		//todo: add mail sent notification
 		return Index.class;
 	}
