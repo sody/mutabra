@@ -6,6 +6,7 @@ import com.mutabra.services.db.DatabaseService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.BaseEntityDataSource;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -16,6 +17,7 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
  * @since 1.0
  */
 @RequiresAuthentication
+@RequiresPermissions("db:manage")
 public class ChangeSets extends AbstractPage {
 
 	@InjectService("changeSetService")

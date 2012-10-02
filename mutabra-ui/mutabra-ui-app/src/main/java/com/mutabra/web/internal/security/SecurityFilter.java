@@ -22,7 +22,9 @@ public class SecurityFilter implements ComponentRequestFilter {
 	public static final String SHIRO_REQUIRES_USER_META = "shiro.requires-user";
 	public static final String SHIRO_REQUIRES_GUEST_META = "shiro.requires-guest";
 	public static final String SHIRO_REQUIRES_ROLES_META = "shiro.requires-roles";
+	public static final String SHIRO_REQUIRES_ROLES_LOGICAL_META = "shiro.requires-roles-logical";
 	public static final String SHIRO_REQUIRES_PERMISSIONS_META = "shiro.requires-permissions";
+	public static final String SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META = "shiro.requires-permissions-logical";
 
 	private final MetaDataLocator locator;
 
@@ -52,17 +54,17 @@ public class SecurityFilter implements ComponentRequestFilter {
 			checkGuest();
 		}
 
-/*
 		final String[] roles = locator.findMeta(SHIRO_REQUIRES_ROLES_META, pageName, String[].class);
 		if (roles != null) {
-			checkRoles(Logical.AND, roles);
+			final boolean logical = locator.findMeta(SHIRO_REQUIRES_ROLES_LOGICAL_META, pageName, Boolean.class);
+			checkRoles(logical ? Logical.AND : Logical.OR, roles);
 		}
 
 		final String[] permissions = locator.findMeta(SHIRO_REQUIRES_PERMISSIONS_META, pageName, String[].class);
 		if (permissions != null) {
-			checkPermissions(Logical.AND, permissions);
+			final boolean logical = locator.findMeta(SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META, pageName, Boolean.class);
+			checkPermissions(logical ? Logical.AND : Logical.OR, permissions);
 		}
-*/
 
 		handler.handlePageRender(parameters);
 	}

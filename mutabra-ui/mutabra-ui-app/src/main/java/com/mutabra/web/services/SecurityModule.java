@@ -24,8 +24,11 @@ import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.Security;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.DefaultHashService;
@@ -47,6 +50,7 @@ import org.apache.tapestry5.ioc.annotations.Scope;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ApplicationGlobals;
 import org.apache.tapestry5.services.ComponentRequestFilter;
 import org.apache.tapestry5.services.ComponentRequestHandler;
@@ -60,7 +64,9 @@ import org.apache.tapestry5.services.meta.FixedExtractor;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.mutabra.services.Mappers.account$;
@@ -189,6 +195,40 @@ public class SecurityModule {
 		configuration.add(RequiresAuthentication.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META));
 		configuration.add(RequiresUser.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_USER_META));
 		configuration.add(RequiresGuest.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_GUEST_META));
+		configuration.add(RequiresRoles.class, new MetaDataExtractor<RequiresRoles>() {
+			public void extractMetaData(final MutableComponentModel model, final RequiresRoles annotation) {
+				final Iterator<String> iterator = Arrays.asList(annotation.value()).iterator();
+				final StringBuilder builder = new StringBuilder();
+				if (iterator.hasNext()) {
+					builder.append(iterator.next());
+					while (iterator.hasNext()) {
+						builder.append(",");
+						builder.append(iterator.next());
+					}
+				}
+
+				model.setMeta(SecurityFilter.SHIRO_REQUIRES_ROLES_META, builder.toString());
+				model.setMeta(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META,
+						String.valueOf(annotation.logical() == Logical.AND));
+			}
+		});
+		configuration.add(RequiresPermissions.class, new MetaDataExtractor<RequiresPermissions>() {
+			public void extractMetaData(final MutableComponentModel model, final RequiresPermissions annotation) {
+				final Iterator<String> iterator = Arrays.asList(annotation.value()).iterator();
+				final StringBuilder builder = new StringBuilder();
+				if (iterator.hasNext()) {
+					builder.append(iterator.next());
+					while (iterator.hasNext()) {
+						builder.append(",");
+						builder.append(iterator.next());
+					}
+				}
+
+				model.setMeta(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, builder.toString());
+				model.setMeta(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META,
+						String.valueOf(annotation.logical() == Logical.AND));
+			}
+		});
 	}
 
 	@Contribute(MetaDataLocator.class)
@@ -196,6 +236,10 @@ public class SecurityModule {
 		configuration.add(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META, "");
 		configuration.add(SecurityFilter.SHIRO_REQUIRES_USER_META, "");
 		configuration.add(SecurityFilter.SHIRO_REQUIRES_GUEST_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, "");
+		configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META, "");
 	}
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)

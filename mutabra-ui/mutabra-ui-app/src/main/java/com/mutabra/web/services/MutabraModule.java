@@ -82,7 +82,7 @@ public class MutabraModule {
 	public void contributeTypeCoercer(final Configuration<CoercionTuple> configuration) {
 		configuration.add(CoercionTuple.create(String.class, String[].class, new Coercion<String, String[]>() {
 			public String[] coerce(String input) {
-				return input != null ? input.split(",") : null;
+				return input != null && !input.isEmpty() ? input.split(",") : null;
 			}
 		}));
 	}

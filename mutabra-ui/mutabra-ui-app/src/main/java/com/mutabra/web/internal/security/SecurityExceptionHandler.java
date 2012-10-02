@@ -1,6 +1,6 @@
 package com.mutabra.web.internal.security;
 
-import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestExceptionHandler;
@@ -31,7 +31,7 @@ public class SecurityExceptionHandler implements RequestExceptionHandler {
 	@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 	public void handleRequestException(final Throwable exception) throws IOException {
 		final Throwable rootException = getRootCause(exception);
-		if (rootException instanceof ShiroException) {
+		if (rootException instanceof AuthenticationException) {
 			//todo: log it
 			final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
 			response.sendRedirect(loginPageLink);
