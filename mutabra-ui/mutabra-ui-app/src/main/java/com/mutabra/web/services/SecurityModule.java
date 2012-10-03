@@ -20,6 +20,7 @@ import com.mutabra.web.internal.security.MainRealm;
 import com.mutabra.web.internal.security.SecurityExceptionHandler;
 import com.mutabra.web.internal.security.SecurityFilter;
 import com.mutabra.web.internal.security.SecurityRequestFilter;
+import com.mutabra.web.internal.security.SecurityWorker;
 import com.mutabra.web.internal.security.TwitterRealm;
 import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.Security;
@@ -63,6 +64,7 @@ import org.apache.tapestry5.services.Response;
 import org.apache.tapestry5.services.meta.FixedExtractor;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
+import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -240,6 +242,11 @@ public class SecurityModule {
 		configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META, "");
 		configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, "");
 		configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META, "");
+	}
+
+	@Contribute(ComponentClassTransformWorker2.class)
+	public static void contributeComponentClassTransformWorker2(final OrderedConfiguration<ComponentClassTransformWorker2> configuration) {
+		configuration.addInstance("SecurityWorker", SecurityWorker.class, "after:OnEvent");
 	}
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)
