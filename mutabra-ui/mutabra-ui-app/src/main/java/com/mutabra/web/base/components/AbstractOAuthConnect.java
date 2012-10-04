@@ -5,7 +5,6 @@ import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
-import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.corelib.base.AbstractComponentEventLink;
@@ -33,7 +32,6 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 	@Inject
 	private Logger logger;
 
-	@Cached
 	protected String getRedirectUri() {
 		return resources.createEventLink(CONNECTED_EVENT).toRedirectURI();
 	}
@@ -64,7 +62,7 @@ public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
 		logger.debug("Reply from OAuth authorization screen:\n" +
 				"\ttoken : {}\n" +
 				"\tsecret: {}\n" +
-				"\terror : {}", new Object[] {token, secret, error});
+				"\terror : {}", new Object[]{token, secret, error});
 		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
 		if (secret != null) {
 			try {

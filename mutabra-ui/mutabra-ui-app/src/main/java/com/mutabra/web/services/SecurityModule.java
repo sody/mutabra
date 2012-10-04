@@ -60,7 +60,7 @@ import org.apache.tapestry5.services.HttpServletRequestHandler;
 import org.apache.tapestry5.services.MetaDataLocator;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestExceptionHandler;
-import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.meta.FixedExtractor;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
@@ -78,6 +78,7 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class SecurityModule {
+	private static final String SECURITY_LOGIN_PAGE = "security.login-page";
 	private static final String SECURITY_TOKEN_EXPIRATION_TIME = "security.token-expiration-time";
 
 	private static final String SECURITY_HASH_ALGORITHM = "security.hash-algorithm";
@@ -99,11 +100,12 @@ public class SecurityModule {
 	@ApplicationDefaults
 	@Contribute(SymbolProvider.class)
 	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
+		configuration.add(SECURITY_LOGIN_PAGE, "security");
+		configuration.add(SECURITY_TOKEN_EXPIRATION_TIME, "60000");
+
 		configuration.add(SECURITY_HASH_ALGORITHM, Sha512Hash.ALGORITHM_NAME);
 		configuration.add(SECURITY_HASH_ITERATIONS, "512");
 		configuration.add(SECURITY_PRIVATE_SALT, "8carxXOr0uNa8aqhCYZZZA==");
-
-		configuration.add(SECURITY_TOKEN_EXPIRATION_TIME, "60000");
 	}
 
 	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
@@ -251,9 +253,10 @@ public class SecurityModule {
 
 	@Decorate(serviceInterface = RequestExceptionHandler.class)
 	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
+																   final RequestGlobals globals,
 																   final PageRenderLinkSource linkSource,
-																   final Response response) {
-		return new SecurityExceptionHandler(handler, linkSource, response, Security.class);
+																   @Symbol(SECURITY_LOGIN_PAGE) final String loginPage) {
+		return new SecurityExceptionHandler(handler, globals, linkSource, loginPage);
 	}
 
 	@Scope(ScopeConstants.PERTHREAD)

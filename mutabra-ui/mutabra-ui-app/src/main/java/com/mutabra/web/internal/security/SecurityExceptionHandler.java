@@ -2,10 +2,11 @@ package com.mutabra.web.internal.security;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.web.util.WebUtils;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestExceptionHandler;
-import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.services.RequestGlobals;
 
 import java.io.IOException;
 
@@ -15,17 +16,17 @@ import java.io.IOException;
  */
 public class SecurityExceptionHandler implements RequestExceptionHandler {
 	private final RequestExceptionHandler delegate;
+	private final RequestGlobals globals;
 	private final PageRenderLinkSource linkSource;
-	private final Response response;
-	private final Class loginPage;
+	private final String loginPage;
 
 	public SecurityExceptionHandler(final RequestExceptionHandler delegate,
+									final RequestGlobals globals,
 									final PageRenderLinkSource linkSource,
-									final Response response,
-									final Class loginPage) {
+									final String loginPage) {
 		this.delegate = delegate;
+		this.globals = globals;
 		this.linkSource = linkSource;
-		this.response = response;
 		this.loginPage = loginPage;
 	}
 
@@ -34,8 +35,16 @@ public class SecurityExceptionHandler implements RequestExceptionHandler {
 		final Throwable rootException = getRootCause(exception);
 		if (rootException instanceof AuthenticationException || rootException instanceof UnauthenticatedException) {
 			//todo: log it
+			// save current request for later use after successful authentication
+			WebUtils.saveRequest(globals.getHTTPServletRequest());
+
 			final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
-			response.sendRedirect(loginPageLink);
+			if (rootException instanceof UnauthenticatedException) {
+				loginPageLink.addParameter("not_authenticated", "y");
+			} else {
+				loginPageLink.addParameter("error", "y");
+			}
+			globals.getResponse().sendRedirect(loginPageLink);
 		} else {
 			delegate.handleRequestException(exception);
 		}

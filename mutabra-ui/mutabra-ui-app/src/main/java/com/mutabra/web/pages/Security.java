@@ -12,8 +12,11 @@ import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.MailService;
 import com.mutabra.web.services.PasswordGenerator;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Hash;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.PersistenceConstants;
@@ -24,6 +27,10 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.RequestGlobals;
+
+import java.io.IOException;
 
 import static com.mutabra.services.Mappers.account$;
 
@@ -68,12 +75,26 @@ public class Security extends AbstractPage {
 	@Inject
 	private MailService mailService;
 
+	@Inject
+	private RequestGlobals globals;
+
 	public Link createApplyChangesLink(final Long userId, final String token) {
 		return getResources().createEventLink(APPLY_EVENT, userId, token);
 	}
 
 	@OnEvent(EventConstants.ACTIVATE)
-	void activateDefaultTab() {
+	void activatePage() {
+		final Request request = globals.getRequest();
+		if (request.getParameter("error") != null) {
+			// error request parameter means that authentication failed
+			signInForm.clearErrors();
+			signInForm.recordError(message("error.sign-in"));
+		} else if (request.getParameter("not_authenticated") != null) {
+			// not_authenticated request parameter means that user is not authenticated
+			signInForm.clearErrors();
+			signInForm.recordError(message("error.sign-in.not-authenticated"));
+		}
+		// setup default tab if not specified
 		if (activeTab == null) {
 			activeTab = SIGN_IN_TAB;
 		}
@@ -81,13 +102,31 @@ public class Security extends AbstractPage {
 
 	@OnEvent(value = EventConstants.PREPARE_FOR_SUBMIT, component = "signInForm")
 	void activateSignInTab() {
+		// keep in mind that current tab is sign in
 		activeTab = SIGN_IN_TAB;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "signInForm")
-	Object signIn() {
-		getSubject().login(new UsernamePasswordToken(email, password));
-		return GameHome.class;
+	Object signIn() throws IOException {
+		try {
+			// try to sign in
+			final String remoteHost = globals.getRequest().getRemoteHost();
+			getSubject().login(new UsernamePasswordToken(email, password, remoteHost));
+			// if authentication is successful user will be redirected to earlier requested page
+			final SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(globals.getHTTPServletRequest());
+			if (savedRequest != null && "GET".equals(savedRequest.getMethod())) {
+				final String savedUrl = savedRequest.getRequestUrl();
+				globals.getResponse().sendRedirect(savedUrl);
+				return null;
+			}
+			// if there are no saved redirect page
+			// user will be redirected to game home page
+			return GameHome.class;
+		} catch (AuthenticationException e) {
+			// if authentication was failed user will stay on this page with reported error
+			signInForm.recordError(message("error.sign-in"));
+		}
+		return null;
 	}
 
 	@OnEvent(value = EventConstants.SUCCESS, component = "facebook")
@@ -116,6 +155,7 @@ public class Security extends AbstractPage {
 
 	@OnEvent(value = EventConstants.PREPARE_FOR_SUBMIT, component = "signUpForm")
 	void activateSignUpTab() {
+		// keep in mind that current tab is sign up
 		activeTab = SIGN_UP_TAB;
 	}
 
@@ -126,7 +166,7 @@ public class Security extends AbstractPage {
 				.unique();
 		if (account != null) {
 			// user with specified email doesn't exist
-			signUpForm.recordError(message("error.sign-up.unknown"));
+			signUpForm.recordError(message("error.sign-up"));
 		}
 	}
 
@@ -163,6 +203,7 @@ public class Security extends AbstractPage {
 
 	@OnEvent(value = EventConstants.PREPARE_FOR_SUBMIT, component = "restoreForm")
 	void activateRestoreTab() {
+		// keep in mind that current tab is restore
 		activeTab = RESTORE_TAB;
 	}
 
@@ -173,11 +214,11 @@ public class Security extends AbstractPage {
 				.unique();
 		if (account == null) {
 			// user with specified email doesn't exist
-			restoreForm.recordError(message("error.restore-password.unknown"));
+			restoreForm.recordError(message("error.restore-password"));
 		} else if (account.getTokenExpired() != null &&
 				account.getTokenExpired() > System.currentTimeMillis()) {
 			// user already has pending changes
-			restoreForm.recordError(message("error.restore-password.try-again-later"));
+			restoreForm.recordError(message("error.restore-password"));
 		}
 	}
 
