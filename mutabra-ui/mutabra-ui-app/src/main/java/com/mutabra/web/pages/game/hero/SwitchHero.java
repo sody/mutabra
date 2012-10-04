@@ -7,6 +7,7 @@ import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -21,6 +22,7 @@ import java.util.List;
  * @since 1.0
  */
 @RequiresUser
+@RequiresPermissions("game:play")
 public class SwitchHero extends AbstractPage {
 
 	@InjectService("accountService")

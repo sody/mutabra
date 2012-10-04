@@ -6,7 +6,10 @@ import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.AccountDialog;
 import com.mutabra.web.internal.BaseEntityDataSource;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.InjectService;
@@ -16,6 +19,7 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
  * @since 1.0
  */
 @RequiresAuthentication
+@RequiresPermissions("account:view")
 public class Accounts extends AbstractPage {
 
 	@InjectService("accountService")
@@ -31,19 +35,25 @@ public class Accounts extends AbstractPage {
 		return new BaseEntityDataSource<Account>(accountService.query(), Account.class);
 	}
 
-	Object onAdd() {
+	@OnEvent(value = "add")
+	Object addAccount() {
 		return entityDialog.show(accountService.create());
 	}
 
-	Object onEdit(final Account account) {
+	@OnEvent(value = "edit")
+	Object editAccount(final Account account) {
 		return entityDialog.show(account);
 	}
 
-	void onDelete(final Account account) {
+	@OnEvent(value = "delete")
+	@RequiresPermissions("account:edit")
+	void deleteAccount(final Account account) {
 		accountService.delete(account);
 	}
 
-	Object onSuccess() {
+	@OnEvent(value = EventConstants.SUCCESS)
+	@RequiresPermissions("account:edit")
+	Object saveAccount() {
 		accountService.saveOrUpdate(entityDialog.getValue());
 		return this;
 	}

@@ -7,6 +7,8 @@ import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.BaseEntityDataSource;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -39,7 +41,8 @@ public class ChangeSets extends AbstractPage {
 		return new BaseEntityDataSource<ChangeSet>(changeSetService.query(), ChangeSet.class);
 	}
 
-	void onSuccess() {
+	@OnEvent(value = EventConstants.SUCCESS)
+	void updateDatabase() {
 		databaseService.update(dropFirst, clearCheckSums);
 	}
 }
