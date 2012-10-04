@@ -1,9 +1,16 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
 			 xmlns:p="tapestry:parameter">
 	<div class="span1 offset5">
-		<t:pagelink page="account/settings">
-			<t:image.accountimage account="account"/>
-		</t:pagelink>
+		<t:if test="hero">
+			<t:pagelink page="game/home">
+				<t:image.heroimage hero="hero"/>
+			</t:pagelink>
+			<p:else>
+				<t:pagelink page="account/settings">
+					<t:image.accountimage account="account"/>
+				</t:pagelink>
+			</p:else>
+		</t:if>
 	</div>
 	<div class="span3">
 		<div class="control-group">
