@@ -9,6 +9,18 @@
 	<packaging>pom</packaging>
 
 	<name>Mutabra Project</name>
+	<scm>
+		<url>https://github.com/sody/mutabra</url>
+		<developerConnection>scm:git:https://github.com/sody/mutabra.git</developerConnection>
+		<connection>scm:git:git://github.com/sody/mutabra.git</connection>
+		<tag>HEAD</tag>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>distribution</id>
+			<url>file://${user.home}/distribute/mutabra</url>
+		</repository>
+	</distributionManagement>
 
 	<repositories>
 		<repository>
@@ -299,6 +311,11 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${release-plugin.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -309,6 +326,18 @@
 					<source>6</source>
 					<target>6</target>
 					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<pushChanges>false</pushChanges>
+					<localCheckout>true</localCheckout>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+					<tagNameFormat>mutabra-@{project.version}</tagNameFormat>
+					<goals>deploy</goals>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -324,6 +353,7 @@
 		<war-plugin.version>2.1.1</war-plugin.version>
 		<lesscss-plugin.version>1.0-beta-3</lesscss-plugin.version>
 		<jetty-plugin.version>8.1.4.v20120524</jetty-plugin.version>
+		<release-plugin.version>2.3.2</release-plugin.version>
 
 		<ga.version>1.0-SNAPSHOT</ga.version>
 		<slf4j.version>1.6.4</slf4j.version>
