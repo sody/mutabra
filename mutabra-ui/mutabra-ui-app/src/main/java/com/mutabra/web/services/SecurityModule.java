@@ -12,6 +12,7 @@ import com.mutabra.security.Twitter;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.game.HeroService;
+import com.mutabra.web.SecurityConstants;
 import com.mutabra.web.internal.security.ConfirmationRealm;
 import com.mutabra.web.internal.security.FacebookRealm;
 import com.mutabra.web.internal.security.GoogleRealm;
@@ -33,7 +34,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.DefaultHashService;
-import org.apache.shiro.crypto.hash.Sha512Hash;
+import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
@@ -48,8 +49,9 @@ import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Scope;
+import org.apache.tapestry5.ioc.annotations.Startup;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.ioc.services.ApplicationDefaults;
+import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.ApplicationGlobals;
@@ -79,32 +81,34 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class SecurityModule {
-	private static final String SECURITY_TOKEN_EXPIRATION_TIME = "security.token-expiration-time";
 
-	private static final String SECURITY_HASH_ALGORITHM = "security.hash-algorithm";
-	private static final String SECURITY_HASH_ITERATIONS = "security.hash-iterations";
-	private static final String SECURITY_PRIVATE_SALT = "security.private-salt";
-
-	private static final String SECURITY_FACEBOOK_KEY = "facebook.app-id";
-	private static final String SECURITY_FACEBOOK_SECRET = "facebook.app-secret";
-
-	private static final String SECURITY_TWITTER_KEY = "twitter.consumer-key";
-	private static final String SECURITY_TWITTER_SECRET = "twitter.consumer-secret";
-
-	private static final String SECURITY_GOOGLE_KEY = "google.consumer-key";
-	private static final String SECURITY_GOOGLE_SECRET = "google.consumer-secret";
-
-	private static final String SECURITY_VK_KEY = "vk.consumer-key";
-	private static final String SECURITY_VK_SECRET = "vk.consumer-secret";
-
-	@ApplicationDefaults
+	@FactoryDefaults
 	@Contribute(SymbolProvider.class)
-	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
-		configuration.add(SECURITY_HASH_ALGORITHM, Sha512Hash.ALGORITHM_NAME);
-		configuration.add(SECURITY_HASH_ITERATIONS, "512");
-		configuration.add(SECURITY_PRIVATE_SALT, "8carxXOr0uNa8aqhCYZZZA==");
+	public void setupDefaultValues(final MappedConfiguration<String, String> configuration) {
+		// we can override all this values with system properties and servlet context parameters
 
-		configuration.add(SECURITY_TOKEN_EXPIRATION_TIME, "60000");
+		configuration.add(SecurityConstants.ROBOT_EMAIL, "${evn.robot_email}");
+
+		// hash service constants should be retrieved from environment values by default
+		configuration.add(SecurityConstants.HASH_ALGORITHM, "${evn.hash_algorithm}");
+		configuration.add(SecurityConstants.HASH_ITERATIONS, "${evn.hash_iterations}");
+		configuration.add(SecurityConstants.HASH_PRIVATE_SALT, "${evn.hash_private_salt}");
+
+		// add default value for token expiration time
+		configuration.add(SecurityConstants.TOKEN_EXPIRATION_TIME, "60000");
+
+		// created here https://developers.facebook.com/apps
+		configuration.add(SecurityConstants.FACEBOOK_KEY, "${env.facebook_id}");
+		configuration.add(SecurityConstants.FACEBOOK_SECRET, "${env.facebook_secret}");
+		// created here https://dev.twitter.com/apps/new
+		configuration.add(SecurityConstants.TWITTER_KEY, "${env.twitter_id}");
+		configuration.add(SecurityConstants.TWITTER_SECRET, "${env.twitter_secret}");
+		// created here https://code.google.com/apis/console
+		configuration.add(SecurityConstants.GOOGLE_KEY, "${env.google_id}");
+		configuration.add(SecurityConstants.GOOGLE_SECRET, "${env.google_secret}");
+		// created here https://vk.com/editapp?act=create
+		configuration.add(SecurityConstants.VK_KEY, "${env.vk_id}");
+		configuration.add(SecurityConstants.VK_SECRET, "${env.vk_secret}");
 	}
 
 	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
@@ -129,22 +133,12 @@ public class SecurityModule {
 		configuration.add("google", new GoogleRealm(accountService, generator));
 		configuration.add("vk", new VKRealm(accountService, generator));
 		configuration.add("confirmation", new ConfirmationRealm(accountService));
-
-		if (accountService.query().count() <= 0) {
-			final Account account = accountService.create();
-			account.setEmail("admin@mutabra.com");
-			account.setName("admin");
-			account.setRole(Role.ADMIN);
-			account.setRegistered(new Date());
-
-			accountService.save(account);
-		}
 	}
 
-	public HashedPasswordMatcher buildHashedPasswordMatcher(@Symbol(SECURITY_HASH_ALGORITHM) final String hashAlgorithmName,
-															@Symbol(SECURITY_HASH_ITERATIONS) final int hashIterations,
-															@Symbol(SECURITY_PRIVATE_SALT) final String privateSalt,
-															@Symbol(SECURITY_TOKEN_EXPIRATION_TIME) final long tokenExpirationTime) {
+	public HashedPasswordMatcher buildHashedPasswordMatcher(@Symbol(SecurityConstants.HASH_ALGORITHM) final String hashAlgorithmName,
+															@Symbol(SecurityConstants.HASH_ITERATIONS) final int hashIterations,
+															@Symbol(SecurityConstants.HASH_PRIVATE_SALT) final String privateSalt,
+															@Symbol(SecurityConstants.TOKEN_EXPIRATION_TIME) final long tokenExpirationTime) {
 
 		final DefaultHashService hashService = new DefaultHashService();
 		hashService.setHashAlgorithmName(hashAlgorithmName);
@@ -155,29 +149,29 @@ public class SecurityModule {
 		return new HashedPasswordMatcher(hashService, tokenExpirationTime);
 	}
 
-	public OAuth2 buildFacebookService(@Symbol(SECURITY_FACEBOOK_KEY) final String clientId,
-									   @Symbol(SECURITY_FACEBOOK_SECRET) final String clientSecret,
+	public OAuth2 buildFacebookService(@Symbol(SecurityConstants.FACEBOOK_KEY) final String clientId,
+									   @Symbol(SecurityConstants.FACEBOOK_SECRET) final String clientSecret,
 									   final PageRenderLinkSource linkSource) {
 		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".facebook:connected";
 		return new Facebook(clientId, clientSecret, redirectUri);
 	}
 
-	public OAuth buildTwitterService(@Symbol(SECURITY_TWITTER_KEY) final String consumerKey,
-									 @Symbol(SECURITY_TWITTER_SECRET) final String consumerSecret,
+	public OAuth buildTwitterService(@Symbol(SecurityConstants.TWITTER_KEY) final String consumerKey,
+									 @Symbol(SecurityConstants.TWITTER_SECRET) final String consumerSecret,
 									 final PageRenderLinkSource linkSource) {
 		final String callbackUrl = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".twitter:connected";
 		return new Twitter(consumerKey, consumerSecret, callbackUrl);
 	}
 
-	public OAuth2 buildGoogleService(@Symbol(SECURITY_GOOGLE_KEY) final String consumerKey,
-									 @Symbol(SECURITY_GOOGLE_SECRET) final String consumerSecret,
+	public OAuth2 buildGoogleService(@Symbol(SecurityConstants.GOOGLE_KEY) final String consumerKey,
+									 @Symbol(SecurityConstants.GOOGLE_SECRET) final String consumerSecret,
 									 final PageRenderLinkSource linkSource) {
 		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".google:connected";
 		return new Google(consumerKey, consumerSecret, redirectUri);
 	}
 
-	public OAuth2 buildVkService(@Symbol(SECURITY_VK_KEY) final String consumerKey,
-								 @Symbol(SECURITY_VK_SECRET) final String consumerSecret,
+	public OAuth2 buildVkService(@Symbol(SecurityConstants.VK_KEY) final String consumerKey,
+								 @Symbol(SecurityConstants.VK_SECRET) final String consumerSecret,
 								 final PageRenderLinkSource linkSource) {
 		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".vk:connected";
 		return new VKontakte(consumerKey, consumerSecret, redirectUri);
@@ -185,7 +179,7 @@ public class SecurityModule {
 
 	@Contribute(HttpServletRequestHandler.class)
 	public void contributeHttpServletRequestHandler(final OrderedConfiguration<HttpServletRequestFilter> configuration) {
-		configuration.addInstance("shiro", SecurityRequestFilter.class);
+		configuration.addInstance("Shiro", SecurityRequestFilter.class);
 	}
 
 	@Contribute(ComponentRequestHandler.class)
@@ -289,5 +283,28 @@ public class SecurityModule {
 				return battle;
 			}
 		};
+	}
+
+	@Startup
+	public void createAdminAccount(@InjectService("accountService") final BaseEntityService<Account> accountService,
+								   final HashedPasswordMatcher generator,
+								   @Symbol(SecurityConstants.ADMIN_EMAIL) final String adminEmail,
+								   @Symbol(SecurityConstants.ADMIN_PASSWORD) final String adminPassword) {
+
+		if (adminEmail != null && accountService.query().count() <= 0) {
+			final Account account = accountService.create();
+			account.setEmail(adminEmail);
+			account.setName("admin");
+			account.setRole(Role.ADMIN);
+			account.setRegistered(new Date());
+
+			if (adminPassword != null) {
+				final Hash hash = generator.generateHash(adminPassword);
+				account.setPassword(hash.toBase64());
+				account.setSalt(hash.getSalt().toBase64());
+			}
+
+			accountService.save(account);
+		}
 	}
 }

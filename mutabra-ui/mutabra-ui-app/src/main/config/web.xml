@@ -20,50 +20,19 @@
 		<param-value>${project.production-mode}</param-value>
 	</context-param>
 
-
 	<context-param>
-		<param-name>mail.admin-address</param-name>
-		<param-value>${project.mail.admin-address}</param-value>
+		<param-name>security.token-expiration-time</param-name>
+		<param-value>${project.token-expiration-time}</param-value>
 	</context-param>
 
 	<context-param>
-		<param-name>twitter.consumer-key</param-name>
-		<param-value>${project.twitter-key}</param-value>
+		<param-name>security.admin-email</param-name>
+		<param-value>${project.admin-email}</param-value>
 	</context-param>
 
 	<context-param>
-		<param-name>twitter.consumer-secret</param-name>
-		<param-value>${project.twitter-secret}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>facebook.app-id</param-name>
-		<param-value>${project.facebook-key}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>facebook.app-secret</param-name>
-		<param-value>${project.facebook-secret}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>google.consumer-key</param-name>
-		<param-value>${project.google-key}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>google.consumer-secret</param-name>
-		<param-value>${project.google-secret}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>vk.consumer-key</param-name>
-		<param-value>${project.vk-key}</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>vk.consumer-secret</param-name>
-		<param-value>${project.vk-secret}</param-value>
+		<param-name>security.admin-password</param-name>
+		<param-value>${project.admin-password}</param-value>
 	</context-param>
 
 	<filter>

@@ -5,6 +5,7 @@ import com.mutabra.web.internal.I18nPropertyConduitSource;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.TranslatorImpl;
 import com.mutabra.web.internal.UpdateCheckerFilter;
+import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.Configuration;
@@ -17,8 +18,10 @@ import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Value;
+import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.PropertyConduitSource;
 import org.apache.tapestry5.services.Request;
@@ -42,18 +45,22 @@ import java.io.IOException;
 @SubModule(value = {DomainModule.class, ServicesModule.class, SecurityModule.class})
 public class MutabraModule {
 
+	@ApplicationDefaults
+	@Contribute(SymbolProvider.class)
+	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
+		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
+		configuration.add(SymbolConstants.START_PAGE_NAME, "/");
+		configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
+		configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
+		configuration.add(ComponentParameterConstants.ZONE_UPDATE_METHOD, "none");
+		configuration.add(ComponentParameterConstants.ZONE_SHOW_METHOD, "none");
+	}
+
 	public static void bind(final ServiceBinder binder) {
 		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
 //		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
 		binder.bind(Translator.class, TranslatorImpl.class);
 		binder.bind(ImageSource.class, ImageSourceImpl.class);
-	}
-
-	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
-		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
-		configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
-		configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
-		configuration.add(SymbolConstants.START_PAGE_NAME, "/");
 	}
 
 /*

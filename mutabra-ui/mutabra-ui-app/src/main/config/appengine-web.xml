@@ -6,4 +6,24 @@
 	<inbound-services>
 		<service>mail</service>
 	</inbound-services>
+
+	<system-properties>
+		<property name="security.robot-email" value="${project.robot-email}"/>
+
+		<property name="security.hash-algorithm" value="${project.hash-algorithm}"/>
+		<property name="security.hash-iterations" value="${project.hash-iterations}"/>
+		<property name="security.hash-private-salt" value="${project.hash-private-salt}"/>
+
+		<property name="security.facebook-key" value="${project.facebook-key}"/>
+		<property name="security.facebook-secret" value="${project.facebook-secret}"/>
+
+		<property name="security.twitter-key" value="${project.twitter-key}"/>
+		<property name="security.twitter-secret" value="${project.twitter-secret}"/>
+
+		<property name="security.google-key" value="${project.google-key}"/>
+		<property name="security.google-secret" value="${project.google-secret}"/>
+
+		<property name="security.vk-key" value="${project.vk-key}"/>
+		<property name="security.vk-secret" value="${project.vk-secret}"/>
+	</system-properties>
 </appengine-web-app>

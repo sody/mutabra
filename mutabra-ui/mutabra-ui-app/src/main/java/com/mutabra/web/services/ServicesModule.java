@@ -24,6 +24,7 @@ import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.battle.BattleServiceImpl;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
+import com.mutabra.web.SecurityConstants;
 import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
@@ -56,8 +57,8 @@ public class ServicesModule {
 		this.repository = repository;
 	}
 
-	public MailService buildMailService(final @Symbol("mail.admin-address") String adminAddress) {
-		return new MailServiceImpl(adminAddress);
+	public MailService buildMailService(final @Symbol(SecurityConstants.ROBOT_EMAIL) String robotEmail) {
+		return new MailServiceImpl(robotEmail);
 	}
 
 	public BaseEntityService<ChangeSet> buildChangeSetService() {
