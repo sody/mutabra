@@ -15,7 +15,6 @@
 	<name>Mutabra UI Aggregator</name>
 
 	<modules>
-		<module>mutabra-ui-static</module>
 		<module>mutabra-ui-app</module>
 		<module>mutabra-ui-gae</module>
 	</modules>

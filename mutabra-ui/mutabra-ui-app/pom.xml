@@ -20,9 +20,34 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
+			<resource>
+				<directory>src/main/js</directory>
+				<includes>
+					<include>**/*.js</include>
+				</includes>
+				<targetPath>${project.build.directory}/${project.build.finalName}/js</targetPath>
+			</resource>
 		</resources>
 
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>lesscss-maven-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>*.less</include>
+					</includes>
+					<compress>${project.production-mode}</compress>
+					<outputDirectory>${project.build.directory}/${project.build.finalName}/css</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -38,13 +63,6 @@
 		<dependency>
 			<groupId>com.mutabra</groupId>
 			<artifactId>mutabra-domain-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.mutabra</groupId>
-			<artifactId>mutabra-ui-static</artifactId>
-			<type>war</type>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
