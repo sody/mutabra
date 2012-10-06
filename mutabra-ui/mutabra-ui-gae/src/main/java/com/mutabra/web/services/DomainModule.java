@@ -1,9 +1,12 @@
-package com.mutabra.domain;
+package com.mutabra.web.services;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyOpts;
 import com.mutabra.db.MutabraChangeLog;
+import com.mutabra.domain.Keys;
+import com.mutabra.domain.Translation;
+import com.mutabra.domain.TranslationImpl;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleCreatureImpl;
@@ -42,8 +45,6 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Startup;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.ValueEncoderFactory;
-import org.apache.tapestry5.services.ValueEncoderSource;
 import org.greatage.db.gae.GAEDatabase;
 import org.greatage.domain.Repository;
 import org.greatage.domain.internal.SessionManager;
@@ -114,13 +115,6 @@ public class DomainModule {
 		configuration.add(BattleCreature.class, BattleCreatureImpl.class);
 		configuration.add(BattleEffect.class, BattleEffectImpl.class);
 	}
-
-	@Contribute(ValueEncoderSource.class)
-	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
-											 final Repository repository) {
-		configuration.add(BaseEntity.class, new GAEEntityEncoderFactory(repository));
-	}
-
 
 	@Startup
 	public void updateDatabase(final DatabaseService databaseService,

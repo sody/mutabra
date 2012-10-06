@@ -77,14 +77,16 @@
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-ui-hibernate</artifactId>
+				<artifactId>mutabra-ui-app</artifactId>
 				<version>${project.version}</version>
+				<type>war</type>
 			</dependency>
 
 			<dependency>
 				<groupId>com.mutabra</groupId>
-				<artifactId>mutabra-ui-gae</artifactId>
+				<artifactId>mutabra-ui-app</artifactId>
 				<version>${project.version}</version>
+				<classifier>classes</classifier>
 			</dependency>
 
 			<!-- Common dependencies -->

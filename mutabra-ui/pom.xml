@@ -17,21 +17,6 @@
 	<modules>
 		<module>mutabra-ui-static</module>
 		<module>mutabra-ui-app</module>
+		<module>mutabra-ui-gae</module>
 	</modules>
-
-	<profiles>
-		<profile>
-			<id>gae</id>
-			<modules>
-				<module>mutabra-ui-gae</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>hibernate</id>
-			<modules>
-				<module>mutabra-ui-hibernate</module>
-			</modules>
-		</profile>
-	</profiles>
 </project>

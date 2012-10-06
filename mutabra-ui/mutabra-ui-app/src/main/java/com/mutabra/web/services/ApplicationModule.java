@@ -1,6 +1,5 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.DomainModule;
 import com.mutabra.web.internal.I18nPropertyConduitSource;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.TranslatorImpl;
@@ -16,7 +15,6 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.Local;
-import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.Coercion;
@@ -42,8 +40,7 @@ import java.io.IOException;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@SubModule(value = {DomainModule.class, ServicesModule.class, SecurityModule.class})
-public class MutabraModule {
+public class ApplicationModule {
 
 	@ApplicationDefaults
 	@Contribute(SymbolProvider.class)

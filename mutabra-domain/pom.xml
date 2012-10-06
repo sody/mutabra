@@ -16,21 +16,6 @@
 
 	<modules>
 		<module>mutabra-domain-api</module>
+		<module>mutabra-domain-gae</module>
 	</modules>
-
-	<profiles>
-		<profile>
-			<id>gae</id>
-			<modules>
-				<module>mutabra-domain-gae</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>hibernate</id>
-			<modules>
-				<module>mutabra-domain-hibernate</module>
-			</modules>
-		</profile>
-	</profiles>
 </project>

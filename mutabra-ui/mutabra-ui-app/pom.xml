@@ -27,9 +27,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warSourceDirectory>src/main/webapp</warSourceDirectory>
-					<webXml>src/main/config/web.xml</webXml>
-					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<attachClasses>true</attachClasses>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -45,11 +44,7 @@
 			<groupId>com.mutabra</groupId>
 			<artifactId>mutabra-ui-static</artifactId>
 			<type>war</type>
-		</dependency>
-
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -86,41 +81,6 @@
 	</dependencies>
 
 	<profiles>
-		<profile>
-			<id>gae</id>
-			<build>
-				<resources>
-					<resource>
-						<directory>src/main/config</directory>
-						<includes>
-							<include>appengine-web.xml</include>
-						</includes>
-						<filtering>true</filtering>
-						<targetPath>${project.build.directory}/${project.build.finalName}/WEB-INF</targetPath>
-					</resource>
-					<resource>
-						<directory>src/main/config</directory>
-						<includes>
-							<include>logback.xml</include>
-						</includes>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
-
-			<dependencies>
-				<dependency>
-					<groupId>com.mutabra</groupId>
-					<artifactId>mutabra-domain-gae</artifactId>
-				</dependency>
-
-				<dependency>
-					<groupId>com.mutabra</groupId>
-					<artifactId>mutabra-ui-gae</artifactId>
-				</dependency>
-			</dependencies>
-		</profile>
-
 		<profile>
 			<id>hibernate</id>
 			<build>

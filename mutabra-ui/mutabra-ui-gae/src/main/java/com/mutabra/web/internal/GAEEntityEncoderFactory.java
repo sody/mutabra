@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package com.mutabra.domain;
+package com.mutabra.web.internal;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.mutabra.domain.BaseEntity;
+import com.mutabra.domain.BaseEntityImpl;
+import com.mutabra.domain.Keys;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.greatage.domain.Repository;
