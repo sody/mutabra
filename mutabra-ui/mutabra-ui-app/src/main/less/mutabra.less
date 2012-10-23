@@ -3,38 +3,54 @@
  */
 
 // CSS Reset
-@import "mutabra/reset.less";
+@import "bootstrap/reset.less";
 
 // Core variables and mixins
 @import "mutabra/variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "mutabra/mixins.less"; //todo: separate
+@import "bootstrap/mixins.less";
 
-// Grid system
-@import "mutabra/grid.less";
+// Grid system and page structure
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/grid.less";
+@import "bootstrap/layouts.less";
 
 // Base CSS
-@import "mutabra/type.less";
-@import "mutabra/tables.less";
-@import "mutabra/forms.less";
-@import "mutabra/sprites.less";
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/tables.less";
 
-// Components: Buttons and Dropdowns
-@import "mutabra/buttons.less";
-@import "mutabra/button-groups.less";
-@import "mutabra/dropdowns.less";
+// Components: common
+@import "bootstrap/sprites.less";
+@import "bootstrap/dropdowns.less";
+@import "bootstrap/wells.less";
+@import "bootstrap/component-animations.less";
+@import "bootstrap/close.less";
+
+// Components: Buttons & Alerts
+@import "bootstrap/buttons.less";
+@import "bootstrap/button-groups.less";
+@import "bootstrap/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
 
 // Components: Nav
-@import "mutabra/navs.less";
+@import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+@import "bootstrap/breadcrumbs.less";
+@import "bootstrap/pagination.less";
+@import "bootstrap/pager.less";
 
 // Components: Popovers
-@import "mutabra/alerts.less";
-@import "mutabra/modals.less";
+@import "bootstrap/modals.less";
+@import "bootstrap/tooltip.less";
+@import "bootstrap/popovers.less";
 
 // Components: Misc
-@import "mutabra/carousel.less";
+@import "bootstrap/thumbnails.less";
+@import "bootstrap/labels-badges.less";
+@import "bootstrap/progress-bars.less";
+@import "bootstrap/accordion.less";
+@import "bootstrap/carousel.less";
+@import "bootstrap/hero-unit.less";
 
-// Application specific styles
-@import "mutabra/scaffolding.less"; //todo: add app specific staff
-
-@import "mutabra/battle.less"; //todo: add app specific staff
-
+// Utility classes
+@import "bootstrap/utilities.less"; // Has to be last to override when necessary

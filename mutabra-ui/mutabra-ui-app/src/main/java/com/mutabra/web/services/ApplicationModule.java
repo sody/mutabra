@@ -103,7 +103,7 @@ public class ApplicationModule {
 		configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
 
 		// jquery library
-		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery-1.7.1.js"));
+		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery.js"));
 
 		// bootstrap plugins
 		configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-transition.js"));
