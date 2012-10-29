@@ -1,108 +1,99 @@
-// Typography.less
-// Headings, body text, lists, code, and more for a versatile and durable typography system
-// ----------------------------------------------------------------------------------------
+//
+// Typography
+// --------------------------------------------------
 
 
-// BODY TEXT
-// ---------
-body {
-  margin: 0;
-  font-family: @baseFontFamily;
-  font-size: @baseFontSize;
-  line-height: @baseLineHeight;
-  color: @textColor;
-  background-color: @backgroundColor;
-}
-
-a {
-  color: @headerTextColor;
-  text-decoration: none;
-  &:hover {
-    color: @headerTextColor;
-  }
-}
+// Body text
+// -------------------------
 
 p {
   margin: 0 0 @baseLineHeight / 2;
-  font-family: @baseFontFamily;
-  font-size: @baseFontSize;
-  line-height: @baseLineHeight;
-  small {
-    font-size: @baseFontSize - 2;
-    color: @helpTextColor;
-  }
 }
 .lead {
   margin-bottom: @baseLineHeight;
-  font-size: 20px;
+  font-size: @baseFontSize * 1.5;
   font-weight: 200;
   line-height: @baseLineHeight * 1.5;
 }
 
-// HEADINGS
-// --------
+
+// Emphasis & misc
+// -------------------------
+
+small {
+  font-size: 85%; // Ex: 14px base font * 85% = about 12px
+}
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+cite {
+  font-style: normal;
+}
+
+// Utility classes
+.muted {
+  color: @grayLight;
+}
+.text-warning {
+  color: @warningText;
+}
+.text-error {
+  color: @errorText;
+}
+.text-info {
+  color: @infoText;
+}
+.text-success {
+  color: @successText;
+}
+
+
+// Headings
+// -------------------------
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: bold;
-  color: @headerTextColor;
+  margin: (@baseLineHeight / 2) 0;
+  font-family: @headingsFontFamily;
+  font-weight: @headingsFontWeight;
+  line-height: 1;
+  color: @headingsColor;
   text-rendering: optimizelegibility; // Fix the character spacing for headings
   small {
     font-weight: normal;
-    color: @helpTextColor;
+    line-height: 1;
+    color: @grayLight;
   }
 }
-h1 {
-  font-size: 30px;
-  line-height: @baseLineHeight * 2;
-  small {
-    font-size: 18px;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: @baseLineHeight * 2;
-  small {
-    font-size: 18px;
-  }
-}
-h3 {
-  line-height: @baseLineHeight * 1.5;
-  font-size: 18px;
-  small {
-    font-size: 14px;
-  }
-}
-h4, h5, h6 {
-  line-height: @baseLineHeight;
-}
-h4 {
-  font-size: 14px;
-  small {
-    font-size: 12px;
-  }
-}
-h5 {
-  font-size: 12px;
-}
-h6 {
-  font-size: 11px;
-  color: @helpTextColor;
-  text-transform: uppercase;
-}
+h1 { font-size: 36px; line-height: 40px; }
+h2 { font-size: 30px; line-height: 40px; }
+h3 { font-size: 24px; line-height: 40px; }
+h4 { font-size: 18px; line-height: 20px; }
+h5 { font-size: 14px; line-height: 20px; }
+h6 { font-size: 12px; line-height: 20px; }
+
+h1 small { font-size: 24px; }
+h2 small { font-size: 18px; }
+h3 small { font-size: 14px; }
+h4 small { font-size: 14px; }
+
+
+// Page header
+// -------------------------
 
 .page-header {
-  padding-bottom: @baseLineHeight - 1;
-  margin: @baseLineHeight 0;
-  border-bottom: 1px solid @borderColor;
-
-  h1 {
-    line-height: 1;
-  }
+  padding-bottom: (@baseLineHeight / 2) - 1;
+  margin: @baseLineHeight 0 (@baseLineHeight * 1.5);
+  //CHANGED: added page header border color setting
+  border-bottom: 1px solid @pageHeaderBorder;
 }
 
-// LISTS
-// -----
+
+
+// Lists
+// --------------------------------------------------
 
 // Unordered and Ordered lists
 ul, ol {
@@ -114,12 +105,6 @@ ul ol,
 ol ol,
 ol ul {
   margin-bottom: 0;
-}
-ul {
-  list-style: disc;
-}
-ol {
-  list-style: decimal;
 }
 li {
   line-height: @baseLineHeight;
@@ -144,6 +129,20 @@ dt {
 dd {
   margin-left: @baseLineHeight / 2;
 }
+// Horizontal layout (like forms)
+.dl-horizontal {
+  .clearfix(); // Ensure dl clears floats if empty dd elements present
+  dt {
+    float: left;
+    width: @horizontalComponentOffset - 20;
+    clear: left;
+    text-align: right;
+    .text-overflow();
+  }
+  dd {
+    margin-left: @horizontalComponentOffset;
+  }
+}
 
 // MISC
 // ----
@@ -152,43 +151,34 @@ dd {
 hr {
   margin: @baseLineHeight 0;
   border: 0;
-  border-top: 1px solid @borderColor;
-}
-
-// Emphasis
-strong {
-  font-weight: bold;
-}
-em {
-  font-style: italic;
-}
-.muted {
-  color: @helpTextColor;
+  border-top: 1px solid @hrBorder;
+  border-bottom: 1px solid @white;
 }
 
 // Abbreviations and acronyms
-abbr {
+abbr[title] {
+  cursor: help;
+  border-bottom: 1px dotted @grayLight;
+}
+abbr.initialism {
   font-size: 90%;
   text-transform: uppercase;
-  border-bottom: 1px dotted @borderColor;
-  cursor: help;
 }
 
 // Blockquotes
 blockquote {
   padding: 0 0 0 15px;
   margin: 0 0 @baseLineHeight;
-  border-left: 5px solid @borderColor;
+  //CHANGED: added border color setting
+  border-left: 5px solid @blockquoteBorder;
   p {
     margin-bottom: 0;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: @baseLineHeight * 1.25;
+    #font > .shorthand(16px,300,@baseLineHeight * 1.25);
   }
   small {
     display: block;
     line-height: @baseLineHeight;
-    color: @helpTextColor;
+    color: @grayLight;
     &:before {
       content: '\2014 \00A0';
     }
@@ -197,13 +187,22 @@ blockquote {
   // Float right with text-align: right
   &.pull-right {
     float: right;
-    padding-left: 0;
     padding-right: 15px;
+    padding-left: 0;
+    //CHANGED: added border color setting
+    border-right: 5px solid @blockquoteBorder;
     border-left: 0;
-    border-right: 5px solid @borderColor;
     p,
     small {
       text-align: right;
+    }
+    small {
+      &:before {
+        content: '';
+      }
+      &:after {
+        content: '\00A0 \2014';
+      }
     }
   }
 }
@@ -211,7 +210,7 @@ blockquote {
 // Quotes
 q:before,
 q:after,
-blockquote:before, 
+blockquote:before,
 blockquote:after {
   content: "";
 }
@@ -220,23 +219,6 @@ blockquote:after {
 address {
   display: block;
   margin-bottom: @baseLineHeight;
+  font-style: normal;
   line-height: @baseLineHeight;
-  font-style: normal;
-}
-
-// Misc
-small {
-  font-size: 100%;
-}
-cite {
-  font-style: normal;
-}
-
-.well {
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
-  background-color: @foregroundColor;
-  border: 1px solid @borderColor;
-  .border-radius(4px);
 }

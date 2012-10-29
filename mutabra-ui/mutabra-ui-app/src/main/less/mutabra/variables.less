@@ -30,16 +30,24 @@
 @purple:                #7a43b6;
 
 
+// Mutabra colors
+// -------------------------
+@mutabraLight:          #fee8ae;
+@mutabraLighter:        #e6d29d;
+@mutabraDefault:        #c7a663;
+@mutabraDark:           #6d440c;
+
+
 // Scaffolding
 // -------------------------
-@bodyBackground:        @white;
+@bodyBackground:        @mutabraLighter;
 @textColor:             @grayDark;
 
 
 // Links
 // -------------------------
-@linkColor:             #08c;
-@linkColorHover:        darken(@linkColor, 15%);
+@linkColor:             @mutabraDark;
+@linkColorHover:        @mutabraDark;
 
 
 // Typography
@@ -55,7 +63,7 @@
 
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    bold;    // instead of browser default, bold
-@headingsColor:         inherit; // empty to use BS default, @textColor
+@headingsColor:         @mutabraDark; // empty to use BS default, @textColor
 
 // Tables
 // -------------------------
@@ -141,8 +149,9 @@
 
 // Hr border color
 // -------------------------
-@hrBorder:                @grayLighter;
-
+@hrBorder:                @mutabraDefault;
+@pageHeaderBorder:        @mutabraDefault;
+@blockquoteBorder:        @mutabraDefault;
 
 // Horizontal forms & lists
 // -------------------------
