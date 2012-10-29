@@ -29,6 +29,23 @@
 			</resource>
 		</resources>
 
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>src/main/webapp</directory>
+        <targetPath>${project.build.testOutputDirectory}/design</targetPath>
+      </testResource>
+      <testResource>
+        <directory>src/main/js</directory>
+        <includes>
+          <include>**/*.js</include>
+        </includes>
+        <targetPath>${project.build.testOutputDirectory}/design/js</targetPath>
+      </testResource>
+    </testResources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.lesscss</groupId>
@@ -46,6 +63,17 @@
 							<goal>compile</goal>
 						</goals>
 					</execution>
+          <execution>
+            <id>test-css</id>
+            <phase>process-test-sources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <compress>false</compress>
+              <outputDirectory>${project.build.testOutputDirectory}/design/css</outputDirectory>
+            </configuration>
+          </execution>
 				</executions>
 			</plugin>
 			<plugin>
