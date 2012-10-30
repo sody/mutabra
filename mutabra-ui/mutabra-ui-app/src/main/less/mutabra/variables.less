@@ -65,6 +65,9 @@
 @headingsFontWeight:    bold;    // instead of browser default, bold
 @headingsColor:         @mutabraDark; // empty to use BS default, @textColor
 
+@pageHeaderBorder:      @mutabraDefault;
+@blockquoteBorder:      @mutabraDefault;
+
 // Tables
 // -------------------------
 @tableBackground:                   transparent; // overall background-color
@@ -100,10 +103,15 @@
 // Forms
 // -------------------------
 @inputBackground:               @white;
-@inputBorder:                   #ccc;
+@inputBorder:                   @mutabraDefault;
+@inputBorderFocus:              @mutabraDark;
 @inputBorderRadius:             3px;
 @inputDisabledBackground:       @grayLighter;
-@formActionsBackground:         #f5f5f5;
+@formActionsBackground:         transparent;
+@formActionsBorder:             @mutabraDefault;
+@legendBorder:                  @mutabraDefault;
+@legendText:                    @mutabraDark;
+@addonBorder:                   @mutabraDefault;
 
 // Dropdowns
 // -------------------------
@@ -150,8 +158,6 @@
 // Hr border color
 // -------------------------
 @hrBorder:                @mutabraDefault;
-@pageHeaderBorder:        @mutabraDefault;
-@blockquoteBorder:        @mutabraDefault;
 
 // Horizontal forms & lists
 // -------------------------
