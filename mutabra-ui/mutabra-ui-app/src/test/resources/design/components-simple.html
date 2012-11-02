@@ -241,6 +241,130 @@
         </div>
     </div>
 
+    <h2>Popovers</h2>
+
+    <div class="row">
+        <div class="span4">
+            <h4>Tooltips</h4>
+            <div class="btn-group btn-group-vertical">
+                <a href="#" class="btn" rel="tooltip"
+                   data-placement="top"
+                   data-original-title="Tooltip on top">Tooltip on top</a>
+
+                <a href="#" class="btn" rel="tooltip"
+                   data-placement="right"
+                   data-original-title="Tooltip on right">Tooltip on right</a>
+
+                <a href="#" class="btn" rel="tooltip"
+                   data-placement="bottom"
+                   data-original-title="Tooltip on bottom">Tooltip on bottom</a>
+
+                <a href="#" class="btn" rel="tooltip"
+                   data-placement="left"
+                   data-original-title="Tooltip on left">Tooltip on left</a>
+            </div>
+        </div>
+
+        <div class="span4">
+            <h4>Popovers</h4>
+            <div class="btn-group btn-group-vertical">
+                <a href="#" class="btn" rel="popover"
+                   data-placement="top"
+                   data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                   data-original-title="Popover on top">Popover on top</a>
+
+                <a href="#" class="btn" rel="popover"
+                   data-placement="right"
+                   data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                   data-original-title="Popover on right">Popover on right</a>
+
+                <a href="#" class="btn" rel="popover"
+                   data-placement="bottom"
+                   data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                   data-original-title="Popover on bottom">Popover on bottom</a>
+
+                <a href="#" class="btn" rel="popover"
+                   data-placement="left"
+                   data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                   data-original-title="Popover on left">Popover on left</a>
+            </div>
+        </div>
+
+        <div class="span4">
+            <h4>Modals</h4>
+            <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
+            <div id="myModal" class="modal hide">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Modal Heading</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Text in a modal</h4>
+                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.</p>
+
+                    <h4>Popover in a modal</h4>
+                    <p>
+                        This
+                        <a href="#" class="btn" rel="popover"
+                           data-content="And here's some amazing content. It's very engaging. right?"
+                           data-original-title="A Title">button</a>
+                        should trigger a popover on click.
+                    </p>
+
+                    <h4>Tooltips in a modal</h4>
+                    <p>
+                        <a href="#" rel="tooltip"
+                           data-original-title="Tooltip">This link</a>
+                        and
+                        <a href="#" rel="tooltip"
+                           data-original-title="Tooltip">that link</a>
+                        should have tooltips on hover.
+                    </p>
+
+                    <hr>
+
+                    <h4>Overflowing text to show optional scrollbar</h4>
+                    <p>
+                        We set a fixed <code>max-height</code> on the <code>.modal-body</code>.
+                        Watch it overflow with all this extra lorem ipsum text we've included.
+                    </p>
+                    <p>
+                        Cras mattis consectetur purus sit amet fermentum.
+                        Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                        Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                    </p>
+                    <p>
+                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                    </p>
+                    <p>
+                        Aenean lacinia bibendum nulla sed consectetur.
+                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                        Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                    </p>
+                    <p>
+                        Cras mattis consectetur purus sit amet fermentum.
+                        Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                        Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                    </p>
+                    <p>
+                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                        Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                    </p>
+                    <p>
+                        Aenean lacinia bibendum nulla sed consectetur.
+                        Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                        Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr/>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 </div>
@@ -261,6 +385,19 @@
 <script src="js/bootstrap/bootstrap-collapse.js"></script>
 <script src="js/bootstrap/bootstrap-carousel.js"></script>
 <script src="js/bootstrap/bootstrap-typeahead.js"></script>
+
+<script type="text/javascript">
+    (function($) {
+        $(function() {
+            $('[rel=tooltip]').tooltip();
+            $('[rel=popover]')
+                    .popover()
+                    .click(function(e) {
+                        e.preventDefault();
+                    });
+        });
+    })(jQuery);
+</script>
 
 </body>
 </html>
