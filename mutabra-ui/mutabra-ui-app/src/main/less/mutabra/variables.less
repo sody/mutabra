@@ -35,6 +35,7 @@
 @mutabraLight:          #fee8ae;
 @mutabraLighter:        #e6d29d;
 @mutabraDefault:        #c7a663;
+@mutabraDarker:         #836030;
 @mutabraDark:           #6d440c;
 
 
@@ -99,7 +100,7 @@
 @btnBorder:                         @mutabraDefault;
 
 @btnPrimaryBackground:              @mutabraDark;
-@btnPrimaryBackgroundHighlight:     #836030;
+@btnPrimaryBackgroundHighlight:     @mutabraDarker;
 
 @btnInfoBackground:                 #5bc0de;
 @btnInfoBackgroundHighlight:        #2f96b4;
@@ -206,32 +207,32 @@
 @navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
 
 @navbarHeight:                    40px;
-@navbarBackgroundHighlight:       #ffffff;
-@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
-@navbarBorder:                    darken(@navbarBackground, 12%);
+@navbarBackgroundHighlight:       @mutabraDefault;
+@navbarBackground:                @mutabraLight;
+@navbarBorder:                    @mutabraDefault;
 
 @navbarText:                      #777;
 @navbarLinkColor:                 #777;
 @navbarLinkColorHover:            @grayDark;
 @navbarLinkColorActive:           @gray;
 @navbarLinkBackgroundHover:       transparent;
-@navbarLinkBackgroundActive:      darken(@navbarBackground, 5%);
+@navbarLinkBackgroundActive:      @mutabraLighter;
 
 @navbarBrandColor:                @navbarLinkColor;
 
 // Inverted navbar
-@navbarInverseBackground:                #111111;
-@navbarInverseBackgroundHighlight:       #222222;
-@navbarInverseBorder:                    #252525;
+@navbarInverseBackground:                @mutabraDark;
+@navbarInverseBackgroundHighlight:       @mutabraDarker;
+@navbarInverseBorder:                    transparent;
 
-@navbarInverseText:                      @grayLight;
-@navbarInverseLinkColor:                 @grayLight;
+@navbarInverseText:                      @grayLighter;
+@navbarInverseLinkColor:                 @grayLighter;
 @navbarInverseLinkColorHover:            @white;
 @navbarInverseLinkColorActive:           @navbarInverseLinkColorHover;
 @navbarInverseLinkBackgroundHover:       transparent;
-@navbarInverseLinkBackgroundActive:      @navbarInverseBackground;
+@navbarInverseLinkBackgroundActive:      @mutabraDarker;
 
-@navbarInverseSearchBackground:          lighten(@navbarInverseBackground, 25%);
+@navbarInverseSearchBackground:          @mutabraDarker;
 @navbarInverseSearchBackgroundFocus:     @white;
 @navbarInverseSearchBorder:              @navbarInverseBackground;
 @navbarInverseSearchPlaceholderColor:    #ccc;
