@@ -1,0 +1,115 @@
+//
+// Scaffolding
+// --------------------------------------------------
+
+
+// Body reset
+// -------------------------
+
+body {
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  color: @textColor;
+  background-color: @bodyBackground;
+  //CHANGED: added body min-width
+  min-width: @gridRowWidth + 2 * @gridGutterWidth;
+}
+
+
+// Links
+// -------------------------
+
+a {
+  color: @linkColor;
+  text-decoration: none;
+}
+a:hover {
+  color: @linkColorHover;
+  text-decoration: underline;
+}
+
+
+// Images
+// -------------------------
+
+// Rounded corners
+.img-rounded {
+  .border-radius(6px);
+}
+
+// Add polaroid-esque trim
+.img-polaroid {
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.2);
+  .box-shadow(0 1px 3px rgba(0,0,0,.1));
+}
+
+// Perfect circle
+.img-circle {
+  .border-radius(500px); // crank the border-radius so it works with most reasonably sized images
+}
+
+
+//CHANGED: added static bottom footer styles
+// Static bottom footer
+html, body {
+    height: 100%;
+}
+.page {
+    min-height: 100%;
+    margin-bottom: -@pageFooterHeight;
+
+    .buffer {
+        height: @pageFooterHeight;
+    }
+}
+* html .page {
+    height: 100%;
+}
+
+
+//CHANGED: added page layout styles
+// Page layout
+.page {
+    .header {
+        margin-top: 10px;
+        height: 70px;
+
+        .logo {
+            background: url("../img/logo80x60.png") no-repeat;
+            padding-top: 40px;
+            padding-left: 80px;
+            color: @textColor;
+            font-size: 20px;
+            font-weight: bold;
+            display: block;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        form {
+            margin: 0;
+        }
+    }
+    .content {
+        min-height: 600px;
+    }
+    .wrapper {
+        margin: 0 -@gridGutterWidth;
+        padding: @gridGutterWidth - 1;
+        background: @mutabraLight;
+        border: 1px solid @mutabraDefault;
+        .border-radius(@gridGutterWidth);
+        .clearfix();
+    }
+}
+.footer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
