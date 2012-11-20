@@ -1,0 +1,10 @@
+.layout-block {
+  min-height: 40px;
+  line-height: 40px;
+  background-color: #ccc;
+  display: block;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}

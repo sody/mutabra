@@ -5,8 +5,14 @@
 
 // Body reset
 // -------------------------
+//CHANGED: added static bottom footer styles
+html {
+  height: 100%;
+}
 
 body {
+  //CHANGED: added static bottom footer styles
+  height: 100%;
   margin: 0;
   font-family: @baseFontFamily;
   font-size: @baseFontSize;
@@ -54,29 +60,16 @@ a:hover {
 }
 
 
-//CHANGED: added static bottom footer styles
-// Static bottom footer
-html, body {
-    height: 100%;
-}
-.page {
-    min-height: 100%;
-    margin-bottom: -@pageFooterHeight;
-
-    .buffer {
-        height: @pageFooterHeight;
-    }
-}
-* html .page {
-    height: 100%;
-}
-
-
 //CHANGED: added page layout styles
 // Page layout
 .page {
+    // for static bottom footer
+    min-height: 100%;
+    margin-bottom: -@pageFooterHeight;
+
     .header {
         margin-top: 10px;
+        margin-bottom: 10px;
         height: 70px;
 
         .logo {
@@ -95,16 +88,16 @@ html, body {
             margin: 0;
         }
     }
-    .content {
-        min-height: 600px;
-    }
     .wrapper {
-        margin: 0 -@gridGutterWidth;
+        min-height: @pageMinHeight;
         padding: @gridGutterWidth - 1;
-        background: @mutabraLight;
+        background-color: @mutabraLight;
         border: 1px solid @mutabraDefault;
         .border-radius(@gridGutterWidth);
-        .clearfix();
+    }
+    // for static bottom footer
+    .buffer {
+        height: @pageFooterHeight;
     }
 }
 .footer {
