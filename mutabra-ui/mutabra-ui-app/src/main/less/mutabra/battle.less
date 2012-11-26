@@ -2,14 +2,16 @@
 // -----
 
 .grid-cell(@columns, @rows) {
-  @width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
-  @height: (@gridColumnWidth * @rows) + (@gridGutterWidth * (@rows - 1));
-  width: @width;
-  height: @height;
+  float: left;
+  margin-left: @gridGutterWidth;
+  margin-bottom: @gridGutterWidth;
+  width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
+  height: (@gridColumnWidth * @rows) + (@gridGutterWidth * (@rows - 1));
 }
 
 .actions {
   display: none;
+
   &.active {
     display: block;
   }
@@ -17,13 +19,45 @@
 
 .description {
   .grid-cell(4, 4);
+  border: 1px solid @descriptionBorder;
+  .border-radius(@gridGutterWidth);
+  padding: 0 @gridGutterWidth;
+  .box-sizing(border-box);
   display: none;
+
+  .description-title {
+    border-bottom: 1px solid @descriptionBorder;
+  }
+  .description-picture {
+    float: left;
+    width: (@gridColumnWidth * 2) + (@gridGutterWidth);
+    height: (@gridColumnWidth * 2) + (@gridGutterWidth);
+  }
+  dl.description-attrs {
+      float: left;
+      .clearfix(); // Ensure dl clears floats if empty dd elements present
+
+      dt {
+          float: left;
+          width: @gridColumnWidth - @gridGutterWidth;
+          clear: left;
+          text-align: right;
+          .text-overflow();
+      }
+      dd {
+          margin-left: @gridColumnWidth - (@gridGutterWidth / 2);
+      }
+  }
+  .description-text {
+      padding-top: @gridGutterWidth / 2;
+      display: inline-block;
+  }
 
   &.active {
     display: block;
   }
   &.disabled {
-    background-color: @backgroundColor;
+    .opacity(65);
   }
 }
 
@@ -35,15 +69,62 @@
   .card-ne,
   .card-nw,
   .card-sw,
-  .card-se {
-    @size: 24px;
-    @padding: ((2* @gridGutterWidth - @size)/2) - 1;
-    width: @size;
-    height: @size;
-    padding: @padding;
-    border: 1px solid @borderColor;
+  .card-se,
+  .card-body {
+    border: 1px solid @cardBorder;
     .border-radius(@gridGutterWidth);
-    background-color: @foregroundColor;
+    background-color: @cardBackground;
+  }
+
+  &:hover {
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @cardBackgroundHover;
+    }
+  }
+
+  &.active {
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @cardBackgroundActive;
+      border-color: @cardBorderActive;
+      .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    .opacity(65);
+
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @cardBackgroundDisabled;
+    }
+  }
+
+  .card-body {
+    margin: @gridGutterWidth / 2 - 1;
+    padding: @gridGutterWidth / 2;
+    position: absolute;
+    z-index: 1000;
+  }
+  .card-ne,
+  .card-nw,
+  .card-sw,
+  .card-se {
+    width: @gridGutterWidth * 2;
+    height: @gridGutterWidth * 2;
+    line-height: @gridGutterWidth * 2;
+    text-align: center;
     position: absolute;
     z-index: 1010;
   }
@@ -67,40 +148,6 @@
     bottom: 0;
     left: 0;
   }
-
-  .card-body {
-    margin: 9px;
-    padding: 10px;
-    width: 100px;
-    height: 100px;
-    border: 1px solid @borderColor;
-    .border-radius(@gridGutterWidth);
-    background-color: @foregroundColor;
-    position: absolute;
-    z-index: 1000;
-  }
-
-  &.active {
-    .card-ne,
-    .card-nw,
-    .card-sw,
-    .card-se,
-    .card-body {
-      background-color: @backgroundColor;
-      border-color: @activeBorderColor;
-    }
-  }
-  &.disabled {
-    cursor: default;
-
-    .card-ne,
-    .card-nw,
-    .card-sw,
-    .card-se,
-    .card-body {
-      background-color: @backgroundColor;
-    }
-  }
 }
 
 .hero {
@@ -115,21 +162,22 @@
   .grid-cell(6, 5);
 
   path {
+    &.empty {
+      stroke-dasharray: 5,5;
+    }
     &.hero,
     &.creature {
-      fill: @backgroundColor;
-
-      &.highlight {
-        fill:  #fedcba;
-      }
+      stroke-dasharray: none;
     }
 
     &.active {
-      stroke-width: 3px;
+      fill:  @fieldBackgroundActive;
     }
-
-    &.highlight {
-      fill:  #fedcba;
+    &.highlight{
+      fill:  @fieldBackgroundHighlight;
+    }
+    &.disabled {
+      .opacity(65);
     }
   }
 }
