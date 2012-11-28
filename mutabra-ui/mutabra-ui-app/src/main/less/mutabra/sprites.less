@@ -1,65 +1,46 @@
+//
+// Sprites
+// --------------------------------------------------
+
+
 // ICONS
 // -----
 
-// All icons receive the styles of the <i> tag with a base class 
-// of .i and are then given a unique class to add width, height, 
+// All icons receive the styles of the <i> tag with a base class
+// of .i and are then given a unique class to add width, height,
 // and background-position. Your resulting HTML will look like
-// <i class="icon-facebook"></i>.
+// <i class="icon-inbox"></i>.
 
-// For the small and large version of the icons, just add the .small or .large class:
-// <i class="icon-facebook small"></i>
-
-// For the iterable version of the icons, just add the .active class:
-// <i class="icon-facebook active"></i>
-
-@smallIconSize : 16px;
-@iconSize :      24px;
-@largeIconSize : 32px;
-
-.icon(@x, @y) {
-  background-position: -(@x * @iconSize) -(@y * @iconSize);
-
-  &.small {
-    background-position: -(@x * @smallIconSize) -(@y * @smallIconSize);
-  }
-
-  &.large {
-    background-position: -(@x * @largeIconSize) -(@y * @largeIconSize);
-  }
-}
-
-.flag(@n) {
-  background-position: 0 -(@n * @iconSize);
-}
+// For the white version of the icons, just add the .icon-white class:
+// <i class="icon-inbox icon-white"></i>
 
 [class^="icon-"],
 [class*=" icon-"] {
   display: inline-block;
+  //CHANGED: added icon size setting
   width: @iconSize;
   height: @iconSize;
+  .ie7-restore-right-whitespace();
+  //CHANGED: added icon size setting
   line-height: @iconSize;
   vertical-align: text-top;
-  background-image: url(@iconSpritePath);
+  background-image: url("@{iconSpritePath}");
+  //CHANGED: added icon size setting
+  background-position: @iconSize @iconSize;
   background-repeat: no-repeat;
-  text-indent: -99999px;
-  *text-indent: 0;
+  margin-top: 1px;
 
-  .ie7-restore-right-whitespace();
-
-  &.small {
-    width: @smallIconSize;
-    height: @smallIconSize;
-    line-height: @smallIconSize;
-    background-image: url(@smallIconSpritePath);
-  }
-
+  //CHANGED: added large icon styles
   &.large {
     width: @largeIconSize;
     height: @largeIconSize;
     line-height: @largeIconSize;
-    background-image: url(@largeIconSpritePath);
+    background-image: url("@{largeIconSpritePath}");
+    vertical-align: middle;
+    margin: 0;
   }
 
+  //CHANGED: added interactive icon behavior
   &.interactive {
     opacity: 0.5;
     &:hover, &:active, &.active, &:focus {
@@ -68,125 +49,147 @@
   }
 }
 
-.icon-triangle-l { .icon(0, 0); }
-.icon-triangle-r { .icon(1, 0); }
-.icon-triangle-u { .icon(2, 0); }
-.icon-triangle-d { .icon(3, 0); }
+/* White icons with optional class, or on hover/active states of certain elements */
+.icon-white,
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"] {
+  background-image: url("@{iconWhiteSpritePath}");
+}
 
-.icon-arrow-l { .icon(0, 1); }
-.icon-arrow-r { .icon(1, 1); }
-.icon-arrow-u { .icon(2, 1); }
-.icon-arrow-d { .icon(3, 1); }
+//CHANGED: added icon positioning mixin
+.icon-position(@x, @y) {
+  background-position: -(@x * @iconSpriteSize + 1) -(@y * @iconSpriteSize + 1);
 
-.icon-facebook { .icon(0, 2); }
-.icon-twitter { .icon(1, 2); }
-.icon-google { .icon(2, 2); }
-.icon-vk { .icon(3, 2); }
+  &.large {
+    background-position: -(@x * @largeIconSpriteSize) -(@y * @largeIconSpriteSize);
+  }
+}
 
-.icon-blood { .icon(0, 3); }
-.icon-heart { .icon(1, 3); }
-.icon-skull { .icon(2, 3); }
+//CHANGED: added flag positioning mixin
+.flag-position(@n) {
+  background-position: 0 -(@n * @flagHeight);
+}
+
+//CHANGED: bootstrap icons replaced with own
+.icon-blood { .icon-position(0, 0); }
+.icon-heart { .icon-position(1, 0); }
+.icon-skull { .icon-position(2, 0); }
+
+.icon-facebook { .icon-position(0, 1); }
+.icon-twitter { .icon-position(1, 1); }
+.icon-google { .icon-position(2, 1); }
+.icon-vk { .icon-position(3, 1); }
 
 .icon-flag {
-  width: @largeIconSize;
-  height: @iconSize;
-  line-height: @iconSize;
-  background-image: url(@flagIconSpritePath);
+  width: @flagWidth;
+  height: @flagHeight;
+  line-height: @flagHeight;
+  background-image: url("@{flagIconSpritePath}");
 
   /* AZERBAIJAN */
-  &.AZ,
-  &.AZE { .flag(0); }
+  &.az,
+  &.aze { .flag-position(0); }
 
   /* BELARUS */
-  &.BY,
-  &.BLR { .flag(1); }
+  &.by,
+  &.blr { .flag-position(1); }
 
   /* BULGARIA */
-  &.BG,
-  &.BGR { .flag(2); }
+  &.bg,
+  &.bgr { .flag-position(2); }
 
   /* BOSNIA AND HERZEGOWINA */
-  &.BA,
-  &.BIH { .flag(3); }
+  &.ba,
+  &.bih { .flag-position(3); }
 
   /* CZECH REPUBLIC */
-  &.CZ,
-  &.CHE { .flag(4); }
+  &.cz,
+  &.che { .flag-position(4); }
 
   /* DENMARK */
-  &.DK,
-  &.DNK { .flag(5); }
+  &.dk,
+  &.dnk { .flag-position(5); }
 
   /* GERMANY */
-  &.DE,
-  &.DEU { .flag(6); }
+  &.de,
+  &.deu { .flag-position(6); }
 
   /* GREECE */
-  &.GR
-  &.GRC { .flag(7); }
+  &.gr,
+  &.grc { .flag-position(7); }
 
   /* UNITED KINGDOM */
-  &.GB,
-  &.GBR { .flag(8); }
+  &.gb,
+  &.gbr { .flag-position(8); }
 
   /* UNITED STATES */
-  &.US,
-  &.USA { .flag(9); }
+  &.us,
+  &.usa { .flag-position(9); }
 
   /* SPAIN */
-  &.ES,
-  &.ESP { .flag(10); }
+  &.es,
+  &.esp { .flag-position(10); }
 
   /* FINLAND */
-  &.FI,
-  &.FIN { .flag(11); }
+  &.fi,
+  &.fin { .flag-position(11); }
 
   /* FRANCE */
-  &.FR,
-  &.FRA { .flag(12); }
+  &.fr,
+  &.fra { .flag-position(12); }
 
   /* CROATIA */
-  &.HR,
-  &.HRV { .flag(13); }
+  &.hr,
+  &.hrv { .flag-position(13); }
 
   /* ARMENIA */
-  &.AM,
-  &.ARM { .flag(14); }
+  &.am,
+  &.arm { .flag-position(14); }
 
   /* ITALY */
-  &.IT,
-  &.ITA { .flag(15); }
+  &.it,
+  &.ita { .flag-position(15); }
 
   /* JAPAN */
-  &.JP,
-  &.JPN { .flag(16); }
+  &.jp,
+  &.jpn { .flag-position(16); }
 
   /* NETHERLANDS */
-  &.NL,
-  &.NLD { .flag(17); }
+  &.nl,
+  &.nld { .flag-position(17); }
 
   /* BRAZIL */
-  &.BR,
-  &.BRA { .flag(18); }
+  &.br,
+  &.bra { .flag-position(18); }
 
   /* PORTUGAL */
-  &.PT,
-  &.PRT { .flag(19); }
+  &.pt,
+  &.prt { .flag-position(19); }
 
   /* RUSSIAN FEDERATION */
-  &.RU,
-  &.RUS { .flag(20); }
+  &.ru,
+  &.rus { .flag-position(20); }
 
   /* ALBANIA */
-  &.AL,
-  &.ALB { .flag(21); }
+  &.al,
+  &.alb { .flag-position(21); }
 
   /* SWEDEN */
-  &.SE,
-  &.SWE { .flag(22); }
+  &.se,
+  &.swe { .flag-position(22); }
 
   /* CHINA */
-  &.CN,
-  &.CHN { .flag(23); }
+  &.cn,
+  &.chn { .flag-position(23); }
 
 }
