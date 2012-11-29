@@ -34,23 +34,25 @@
     height: (@gridColumnWidth * 2) + (@gridGutterWidth);
   }
   dl.description-attrs {
-      float: left;
-      .clearfix(); // Ensure dl clears floats if empty dd elements present
+    float: left;
+    .clearfix(); // Ensure dl clears floats if empty dd elements present
 
-      dt {
-          float: left;
-          width: @gridColumnWidth - @gridGutterWidth;
-          clear: left;
-          text-align: right;
-          .text-overflow();
-      }
-      dd {
-          margin-left: @gridColumnWidth - (@gridGutterWidth / 2);
-      }
+    dt {
+      float: left;
+      width: @gridColumnWidth - @gridGutterWidth;
+      clear: left;
+      text-align: right;
+      .text-overflow();
+    }
+    dd {
+      margin-left: @gridColumnWidth - (@gridGutterWidth / 2);
+      line-height: @largeIconSize;
+    }
   }
   .description-text {
-      padding-top: @gridGutterWidth / 2;
-      display: inline-block;
+    padding-top: @gridGutterWidth / 2;
+    display: inline-block;
+    width: 100%;
   }
 
   &.active {
