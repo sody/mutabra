@@ -37,11 +37,11 @@
         <t:extension-point id="navigation-area"/>
     </nav>
 
-    <section id="content" class="wrapper container">
-        <t:extension-point id="content-area">
+    <t:extension-point id="content-area">
+        <section id="content" class="container">
             <t:body/>
-        </t:extension-point>
-    </section>
+        </section>
+    </t:extension-point>
 
     <div class="buffer"></div>
 </div>

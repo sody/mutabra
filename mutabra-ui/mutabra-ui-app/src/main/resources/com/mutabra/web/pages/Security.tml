@@ -6,22 +6,24 @@
     <t:tabs tabs="signIn,signUp,restore" class="tabs-below tabs-wrapper" active="prop:activeTab">
         <p:signInTab>
             <t:form t:id="signInForm" class="form-horizontal">
-                <legend>${message:page.security-sign-in.title}</legend>
-                <t:customerrors/>
-                <div class="control-group">
-                    <t:label for="email" class="control-label"/>
-                    <div class="controls">
-                        <t:textfield t:id="email" value="email" validate="required,email"
-                                     placeholder="message:label.email" label="message:label.email"/>
+                <fieldset>
+                    <legend>${message:page.security-sign-in.title}</legend>
+                    <t:customerrors/>
+                    <div class="control-group">
+                        <t:label for="email" class="control-label"/>
+                        <div class="controls">
+                            <t:textfield t:id="email" value="email" validate="required,email"
+                                         placeholder="message:label.email" label="message:label.email"/>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <t:label for="password" class="control-label"/>
-                    <div class="controls">
-                        <t:passwordfield t:id="password" value="password"
-                                         placeholder="message:label.password" label="message:label.password"/>
+                    <div class="control-group">
+                        <t:label for="password" class="control-label"/>
+                        <div class="controls">
+                            <t:passwordfield t:id="password" value="password"
+                                             placeholder="message:label.password" label="message:label.password"/>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
 
                 <div class="form-actions">
                     <div class="btn-group">
@@ -51,15 +53,18 @@
 
         <p:signUpTab>
             <t:form t:id="signUpForm" class="form-horizontal">
-                <legend>${message:page.security-sign-up.title}</legend>
-                <t:customerrors/>
-                <div class="control-group">
-                    <t:label for="signUpEmail" class="control-label"/>
-                    <div class="controls">
-                        <t:textfield t:id="signUpEmail" value="email" validate="required,email"
-                                     placeholder="message:label.email" label="message:label.email"/>
+                <fieldset>
+                    <legend>${message:page.security-sign-up.title}</legend>
+                    <t:customerrors/>
+                    <div class="control-group">
+                        <t:label for="signUpEmail" class="control-label"/>
+                        <div class="controls">
+                            <t:textfield t:id="signUpEmail" value="email" validate="required,email"
+                                         placeholder="message:label.email" label="message:label.email"/>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
+
                 <div class="form-actions">
                     <div class="btn-group">
                         <t:linksubmit class="btn">${message:label.sign-up}</t:linksubmit>
@@ -88,15 +93,17 @@
 
         <p:restoreTab>
             <t:form t:id="restoreForm" class="form-horizontal">
-                <legend>${message:page.security-restore.title}</legend>
-                <t:customerrors/>
-                <div class="control-group">
-                    <t:label for="restoreEmail" class="control-label"/>
-                    <div class="controls">
-                        <t:textfield t:id="restoreEmail" value="email" validate="required,email"
-                                     placeholder="message:label.email" label="message:label.email"/>
+                <fieldset>
+                    <legend>${message:page.security-restore.title}</legend>
+                    <t:customerrors/>
+                    <div class="control-group">
+                        <t:label for="restoreEmail" class="control-label"/>
+                        <div class="controls">
+                            <t:textfield t:id="restoreEmail" value="email" validate="required,email"
+                                         placeholder="message:label.email" label="message:label.email"/>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
 
                 <div class="form-actions">
                     <t:linksubmit class="btn">${message:label.restore}</t:linksubmit>
