@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.mutabra</groupId>
   <artifactId>mutabra-parent</artifactId>
-  <version>1.0-pre-alpha-11-SNAPSHOT</version>
+  <version>1.0-pre-alpha-11</version>
   <packaging>pom</packaging>
 
   <name>Mutabra Project</name>
@@ -12,7 +11,7 @@
     <url>https://github.com/sody/mutabra</url>
     <developerConnection>scm:git:https://github.com/sody/mutabra.git</developerConnection>
     <connection>scm:git:git://github.com/sody/mutabra.git</connection>
-    <tag>HEAD</tag>
+    <tag>mutabra-1.0-pre-alpha-11</tag>
   </scm>
   <distributionManagement>
     <repository>
@@ -379,7 +378,7 @@
         <project.db.driver>org.hsqldb.jdbcDriver</project.db.driver>
         <project.db.url>jdbc:hsqldb:/mutabra/db/mutabra;shutdown=true</project.db.url>
         <project.db.username>sa</project.db.username>
-        <project.db.password/>
+        <project.db.password />
         <project.db.dialect>org.hibernate.dialect.HSQLDialect</project.db.dialect>
       </properties>
     </profile>
