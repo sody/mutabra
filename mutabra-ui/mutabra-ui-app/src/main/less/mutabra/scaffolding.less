@@ -63,59 +63,79 @@ a:hover {
 //CHANGED: added page layout styles
 // Page layout
 .page {
-    // for static bottom footer
-    min-height: 100%;
-    margin-bottom: -@pageFooterHeight;
+  // for static bottom footer
+  min-height: 100%;
+  margin-bottom: -@pageFooterHeight;
 
-    .header {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        height: 70px;
+  .header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 70px;
 
-        .logo {
-            background: url("../img/logo80x60.png") no-repeat;
-            padding-top: 40px;
-            padding-left: 80px;
-            color: @textColor;
-            font-size: 20px;
-            font-weight: bold;
-            display: block;
-            &:hover {
-                text-decoration: none;
-            }
-        }
-        form {
-            margin: 0;
-        }
+    .logo {
+      background: url("../img/logo80x60.png") no-repeat;
+      padding-top: 40px;
+      padding-left: 80px;
+      color: @textColor;
+      font-size: 20px;
+      font-weight: bold;
+      display: block;
+      &:hover {
+          text-decoration: none;
+      }
     }
-    .wrapper {
-        min-height: @pageMinHeight;
-        padding: @gridGutterWidth - 1;
-        background-color: @mutabraLight;
-        border: 1px solid @mutabraDefault;
-        .border-radius(@gridGutterWidth);
+    form {
+      margin: 0;
     }
-    // for static bottom footer
-    .buffer {
-        height: @pageFooterHeight;
-    }
+  }
+  .wrapper {
+    min-height: @pageMinHeight;
+    padding: @gridGutterWidth - 1;
+    background-color: @mutabraLight;
+    border: 1px solid @mutabraDefault;
+    .border-radius(@gridGutterWidth);
+  }
+  // for static bottom footer
+  .buffer {
+    height: @pageFooterHeight;
+  }
 }
 .footer {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
 }
 
 //CHANGED: added horizontal menu styles
 // Horizontal menu
 ul.horizontal-menu,
 ol.horizontal-menu {
-    list-style: none;
-    margin: 0;
-    .clearfix();
+  list-style: none;
+  margin: 0;
+  .clearfix();
 
-    li {
-        float: left;
-    }
+  li {
+    float: left;
+  }
 }
 
+//CHANGED: added custom tabs styles
+// Pretty tabs wrapper
+.tabs-wrapper {
+  margin: 30% -@gridGutterWidth 0;
+
+  fieldset {
+    min-height: (@gridGutterWidth * 3) + (@gridColumnWidth * 2);
+  }
+
+  .tab-content {
+    padding: @gridGutterWidth - 1;
+    background: @mutabraLight;
+    border: 1px solid @mutabraDefault;
+  }
+
+  &.tabs-below .tab-content {
+    border-bottom: 0;
+    .border-radius(@gridGutterWidth @gridGutterWidth 0 0);
+  }
+}
