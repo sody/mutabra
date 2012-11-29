@@ -25,37 +25,37 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 @RequiresPermissions("card:view")
 public class Cards extends AbstractPage {
 
-	@InjectService("cardService")
-	private CodedEntityService<Card> cardService;
+    @InjectService("cardService")
+    private CodedEntityService<Card> cardService;
 
-	@Inject
-	private TranslationService translationService;
+    @Inject
+    private TranslationService translationService;
 
-	@Inject
-	private Translator translator;
+    @Inject
+    private Translator translator;
 
-	@InjectComponent
-	private CardDialog entityDialog;
+    @InjectComponent
+    private CardDialog entityDialog;
 
-	@Property
-	private Card row;
+    @Property
+    private Card row;
 
-	public GridDataSource getSource() {
-		return new BaseEntityDataSource<Card>(cardService.query(), Card.class);
-	}
+    public GridDataSource getSource() {
+        return new BaseEntityDataSource<Card>(cardService.query(), Card.class);
+    }
 
-	@OnEvent(value = "edit")
-	Object editCard(final Card card) {
-		return entityDialog.show(card);
-	}
+    @OnEvent(value = "edit")
+    Object editCard(final Card card) {
+        return entityDialog.show(card);
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	@RequiresPermissions("card:edit")
-	Object saveCard() {
-		cardService.saveOrUpdate(entityDialog.getValue());
-		translationService.saveTranslations(entityDialog.getTranslations());
-		//todo: should be automatic
-		translator.invalidateCache(entityDialog.getValue());
-		return this;
-	}
+    @OnEvent(value = EventConstants.SUCCESS)
+    @RequiresPermissions("card:edit")
+    Object saveCard() {
+        cardService.saveOrUpdate(entityDialog.getValue());
+        translationService.saveTranslations(entityDialog.getTranslations());
+        //todo: should be automatic
+        translator.invalidateCache(entityDialog.getValue());
+        return this;
+    }
 }

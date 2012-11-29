@@ -9,7 +9,7 @@ import com.mutabra.services.CodedEntityMapper;
  */
 public class FaceMapper<E extends BaseEntity> extends CodedEntityMapper<E> {
 
-	public FaceMapper(final String path) {
-		super(path);
-	}
+    public FaceMapper(final String path) {
+        super(path);
+    }
 }

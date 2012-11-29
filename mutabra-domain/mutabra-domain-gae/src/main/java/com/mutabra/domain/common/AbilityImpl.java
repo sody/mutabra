@@ -15,24 +15,24 @@ import javax.persistence.Entity;
 @Entity(name = Tables.ABILITY)
 public class AbilityImpl extends CastableImpl implements Ability {
 
-	@Parent
-	private Key<CardImpl> card;
+    @Parent
+    private Key<CardImpl> card;
 
-	public AbilityImpl() {
-		this(null, null);
-	}
+    public AbilityImpl() {
+        this(null, null);
+    }
 
-	public AbilityImpl(final Card card, final String code) {
-		super(Tables.ABILITY, code, TranslationType.DESCRIPTION);
-		this.card = Keys.getKey(card);
-	}
+    public AbilityImpl(final Card card, final String code) {
+        super(Tables.ABILITY, code, TranslationType.DESCRIPTION);
+        this.card = Keys.getKey(card);
+    }
 
-	public Card getCard() {
-		return Keys.getInstance(card);
-	}
+    public Card getCard() {
+        return Keys.getInstance(card);
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return card;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return card;
+    }
 }

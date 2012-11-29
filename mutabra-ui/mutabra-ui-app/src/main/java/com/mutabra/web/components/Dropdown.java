@@ -20,47 +20,47 @@ import org.apache.tapestry5.corelib.mixins.RenderInformals;
 @SupportsInformalParameters
 public class Dropdown extends AbstractComponent implements ClientElement {
 
-	@Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
-	private String clientId;
+    @Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
+    private String clientId;
 
-	@Property
-	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-	private String label;
+    @Property
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String label;
 
-	@Property
-	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-	private String[] items;
+    @Property
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String[] items;
 
-	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
-	private String className;
+    @Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
+    private String className;
 
-	@Property
-	@Parameter(value = "this", allowNull = false)
-	private PropertyOverrides overrides;
+    @Property
+    @Parameter(value = "this", allowNull = false)
+    private PropertyOverrides overrides;
 
-	@Component(inheritInformalParameters = true)
-	@MixinClasses(RenderInformals.class)
-	private Any container;
+    @Component(inheritInformalParameters = true)
+    @MixinClasses(RenderInformals.class)
+    private Any container;
 
-	public String getClientId() {
-		return clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public String getContainerClass() {
-		return className != null ?
-				CSSConstants.BUTTON_GROUP + " " + CSSConstants.DROPDOWN + " " + className :
-				CSSConstants.BUTTON_GROUP + " " + CSSConstants.DROPDOWN;
-	}
+    public String getContainerClass() {
+        return className != null ?
+                CSSConstants.BUTTON_GROUP + " " + CSSConstants.DROPDOWN + " " + className :
+                CSSConstants.BUTTON_GROUP + " " + CSSConstants.DROPDOWN;
+    }
 
-	public String getToggleClass() {
-		return CSSConstants.BUTTON + " " + CSSConstants.DROPDOWN_TOGGLE;
-	}
+    public String getToggleClass() {
+        return CSSConstants.BUTTON + " " + CSSConstants.DROPDOWN_TOGGLE;
+    }
 
-	public String getCaretClass() {
-		return CSSConstants.CARET;
-	}
+    public String getCaretClass() {
+        return CSSConstants.CARET;
+    }
 
-	public String getMenuClass() {
-		return CSSConstants.DROPDOWN_MENU;
-	}
+    public String getMenuClass() {
+        return CSSConstants.DROPDOWN_MENU;
+    }
 }

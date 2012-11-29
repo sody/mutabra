@@ -12,8 +12,8 @@ import static org.apache.tapestry5.EventConstants.PREPARE_FOR_SUBMIT;
  */
 public class AccountDialog extends EntityDialog<Account> {
 
-	@OnEvent(PREPARE_FOR_SUBMIT)
-	void prepare(final Account entity) {
-		init(entity);
-	}
+    @OnEvent(PREPARE_FOR_SUBMIT)
+    void prepare(final Account entity) {
+        init(entity);
+    }
 }

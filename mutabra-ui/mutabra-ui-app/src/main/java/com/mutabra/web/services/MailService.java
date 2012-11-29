@@ -6,5 +6,5 @@ package com.mutabra.web.services;
  */
 public interface MailService {
 
-	void send(String to, String topic, String body);
+    void send(String to, String topic, String body);
 }

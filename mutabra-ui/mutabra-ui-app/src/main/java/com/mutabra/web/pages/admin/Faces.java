@@ -25,37 +25,37 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 @RequiresPermissions("face:view")
 public class Faces extends AbstractPage {
 
-	@InjectService("faceService")
-	private CodedEntityService<Face> faceService;
+    @InjectService("faceService")
+    private CodedEntityService<Face> faceService;
 
-	@Inject
-	private TranslationService translationService;
+    @Inject
+    private TranslationService translationService;
 
-	@Inject
-	private Translator translator;
+    @Inject
+    private Translator translator;
 
-	@InjectComponent
-	private FaceDialog entityDialog;
+    @InjectComponent
+    private FaceDialog entityDialog;
 
-	@Property
-	private Face row;
+    @Property
+    private Face row;
 
-	public GridDataSource getSource() {
-		return new BaseEntityDataSource<Face>(faceService.query(), Face.class);
-	}
+    public GridDataSource getSource() {
+        return new BaseEntityDataSource<Face>(faceService.query(), Face.class);
+    }
 
-	@OnEvent(value = "edit")
-	Object editFace(final Face face) {
-		return entityDialog.show(face);
-	}
+    @OnEvent(value = "edit")
+    Object editFace(final Face face) {
+        return entityDialog.show(face);
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	@RequiresPermissions("face:edit")
-	Object saveFace() {
-		faceService.saveOrUpdate(entityDialog.getValue());
-		translationService.saveTranslations(entityDialog.getTranslations());
-		//todo: should be automatic
-		translator.invalidateCache(entityDialog.getValue());
-		return this;
-	}
+    @OnEvent(value = EventConstants.SUCCESS)
+    @RequiresPermissions("face:edit")
+    Object saveFace() {
+        faceService.saveOrUpdate(entityDialog.getValue());
+        translationService.saveTranslations(entityDialog.getTranslations());
+        //todo: should be automatic
+        translator.invalidateCache(entityDialog.getValue());
+        return this;
+    }
 }

@@ -8,16 +8,16 @@ import java.util.List;
  * @since 1.0
  */
 public enum TranslationType {
-	NAME(Translations.NAME),
-	DESCRIPTION(Translations.NAME, Translations.DESCRIPTION);
+    NAME(Translations.NAME),
+    DESCRIPTION(Translations.NAME, Translations.DESCRIPTION);
 
-	private final List<String> variants;
+    private final List<String> variants;
 
-	TranslationType(final String... variants) {
-		this.variants = Arrays.asList(variants);
-	}
+    TranslationType(final String... variants) {
+        this.variants = Arrays.asList(variants);
+    }
 
-	public List<String> getVariants() {
-		return variants;
-	}
+    public List<String> getVariants() {
+        return variants;
+    }
 }

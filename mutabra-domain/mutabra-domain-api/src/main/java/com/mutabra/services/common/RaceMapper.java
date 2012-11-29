@@ -9,7 +9,7 @@ import com.mutabra.services.CodedEntityMapper;
  */
 public class RaceMapper<E extends BaseEntity> extends CodedEntityMapper<E> {
 
-	public RaceMapper(final String path) {
-		super(path);
-	}
+    public RaceMapper(final String path) {
+        super(path);
+    }
 }

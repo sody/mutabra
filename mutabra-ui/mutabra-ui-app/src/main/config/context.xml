@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="">
-	<Resource name="jdbc/mutabra" auth="Container" type="javax.sql.DataSource"
-			  driverClassName="${project.db.driver}"
-			  url="${project.db.url}"
-			  username="${project.db.username}" password="${project.db.password}"
-			  maxActive="150"
-			  maxIdle="15"
-			  maxWait="10000"
-			/>
-	<Resource name="mail/session" auth="Container" type="javax.mail.Session"
-			  mail.smtp.host="smtp.gmail.com" mail.smtp.user="${project.mail.admin-address}"
-			  mail.smtp.auth="true" password="${project.mail.admin-password}" mail.smtp.starttls.enable="true"
-			/>
+  <Resource name="jdbc/mutabra" auth="Container" type="javax.sql.DataSource"
+            driverClassName="${project.db.driver}"
+            url="${project.db.url}"
+            username="${project.db.username}" password="${project.db.password}"
+            maxActive="150"
+            maxIdle="15"
+            maxWait="10000"
+      />
+  <Resource name="mail/session" auth="Container" type="javax.mail.Session"
+            mail.smtp.host="smtp.gmail.com" mail.smtp.user="${project.mail.admin-address}"
+            mail.smtp.auth="true" password="${project.mail.admin-password}" mail.smtp.starttls.enable="true"
+      />
 </Context>

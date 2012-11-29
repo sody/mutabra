@@ -9,15 +9,15 @@ import com.mutabra.security.OAuth2;
  */
 public abstract class AbstractOAuth2Connect extends AbstractOAuthConnect {
 
-	@Override
-	protected abstract OAuth2 getOAuth();
+    @Override
+    protected abstract OAuth2 getOAuth();
 
-	@Override
-	protected OAuth.Session startSession(final String token, final String secret) {
-		return getOAuth().connect(secret);
-	}
+    @Override
+    protected OAuth.Session startSession(final String token, final String secret) {
+        return getOAuth().connect(secret);
+    }
 
-	protected Object doConnected(final String secret, final String error) {
-		return super.doConnected(null, secret, error);
-	}
+    protected Object doConnected(final String secret, final String error) {
+        return super.doConnected(null, secret, error);
+    }
 }

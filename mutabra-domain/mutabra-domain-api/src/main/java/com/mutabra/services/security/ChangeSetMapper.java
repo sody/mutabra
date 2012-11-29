@@ -9,7 +9,7 @@ import com.mutabra.services.BaseEntityMapper;
  */
 public class ChangeSetMapper<E extends BaseEntity> extends BaseEntityMapper<E> {
 
-	public ChangeSetMapper(final String path) {
-		super(path);
-	}
+    public ChangeSetMapper(final String path) {
+        super(path);
+    }
 }

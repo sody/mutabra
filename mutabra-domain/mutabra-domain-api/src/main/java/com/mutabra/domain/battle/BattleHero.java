@@ -11,19 +11,19 @@ import java.util.List;
  */
 public interface BattleHero extends BattleUnit {
 
-	Battle getBattle();
+    Battle getBattle();
 
-	Hero getHero();
+    Hero getHero();
 
-	int getMentalPower();
+    int getMentalPower();
 
-	void setMentalPower(int mentalPower);
+    void setMentalPower(int mentalPower);
 
-	List<Card> getDeck();
+    List<Card> getDeck();
 
-	List<Card> getHand();
+    List<Card> getHand();
 
-	List<Card> getGraveyard();
+    List<Card> getGraveyard();
 
-	List<BattleCreature> getCreatures();
+    List<BattleCreature> getCreatures();
 }

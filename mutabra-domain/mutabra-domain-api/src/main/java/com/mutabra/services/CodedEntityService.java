@@ -8,7 +8,7 @@ import com.mutabra.domain.CodedEntity;
  */
 public interface CodedEntityService<E extends CodedEntity> extends BaseEntityService<E> {
 
-	E get(String code);
+    E get(String code);
 
-	E create(String code);
+    E create(String code);
 }

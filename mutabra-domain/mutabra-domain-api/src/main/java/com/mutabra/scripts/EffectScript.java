@@ -6,5 +6,5 @@ package com.mutabra.scripts;
  */
 public interface EffectScript {
 
-	void execute(ScriptContext context);
+    void execute(ScriptContext context);
 }

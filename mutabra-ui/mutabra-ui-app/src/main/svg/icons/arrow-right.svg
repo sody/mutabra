@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" version="1.1">
 
-	<title>Right Arrow Icon</title>
-	<desc>Right Arrow Icon</desc>
+  <title>Right Arrow Icon</title>
+  <desc>Right Arrow Icon</desc>
 
-	<path stroke="#000" fill="none"
-		  d="m19,6c8,18,8,34,0,52l25-26z"/>
+  <path stroke="#000" fill="none"
+        d="m19,6c8,18,8,34,0,52l25-26z"/>
 
 </svg>
 

@@ -14,12 +14,12 @@ import java.util.Locale;
  */
 public interface TranslationService extends BaseEntityService<Translation> {
 
-	List<Translation> getTranslations(final Translatable translatable, final Locale locale);
+    List<Translation> getTranslations(final Translatable translatable, final Locale locale);
 
-	@Transactional
-	void saveTranslations(final Collection<Translation> translations);
+    @Transactional
+    void saveTranslations(final Collection<Translation> translations);
 
-	@Transactional
-	void deleteTranslations(final Translatable translatable);
+    @Transactional
+    void deleteTranslations(final Translatable translatable);
 
 }

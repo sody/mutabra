@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" version="1.1">
-	<title>Facebook Icon</title>
-	<desc>Facebook Icon</desc>
+  <title>Facebook Icon</title>
+  <desc>Facebook Icon</desc>
 
-	<path stroke="#000" fill="none"
-		  d="m32,58,0-29-7,0,0-7,7,0,0-6c0-10,8-10,15-10h7l-1,7h-6c-5,0-5,2-5,6v3h11l-1,7h-10v29z"/>
+  <path stroke="#000" fill="none"
+        d="m32,58,0-29-7,0,0-7,7,0,0-6c0-10,8-10,15-10h7l-1,7h-6c-5,0-5,2-5,6v3h11l-1,7h-10v29z"/>
 
 </svg>
 

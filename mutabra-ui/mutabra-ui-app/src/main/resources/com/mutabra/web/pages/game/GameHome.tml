@@ -1,15 +1,15 @@
 <html t:type="layout/default"
-	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+        >
 
 <t:loop source="players" value="row">
-	<t:eventlink event="createBattle" context="row" disabled="canCreateBattle">
-		<div>
-			${message:label.name}: ${row.name}
-			<br/>
-			<t:image.heroimage hero="row"/>
-		</div>
-	</t:eventlink>
+    <t:eventlink event="createBattle" context="row" disabled="canCreateBattle">
+        <div>
+            ${message:label.name}: ${row.name}
+            <br/>
+            <t:image.heroimage hero="row"/>
+        </div>
+    </t:eventlink>
 </t:loop>
 
 <t:game.updatechecker/>

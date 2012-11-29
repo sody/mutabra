@@ -9,19 +9,19 @@ import com.mutabra.domain.common.Effect;
  */
 public interface BattleEffect extends BaseEntity {
 
-	Battle getBattle();
+    Battle getBattle();
 
-	Effect getEffect();
+    Effect getEffect();
 
-	BattleUnit getCaster();
+    BattleUnit getCaster();
 
-	void setCaster(BattleUnit caster);
+    void setCaster(BattleUnit caster);
 
-	Position getTarget();
+    Position getTarget();
 
-	void setTarget(Position target);
+    void setTarget(Position target);
 
-	int getDuration();
+    int getDuration();
 
-	void setDuration(int duration);
+    void setDuration(int duration);
 }

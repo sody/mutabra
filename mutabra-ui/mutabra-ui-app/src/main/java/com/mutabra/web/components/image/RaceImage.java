@@ -7,7 +7,6 @@ import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.Value;
 
 /**
  * @author Ivan Khalopik
@@ -15,28 +14,28 @@ import org.apache.tapestry5.ioc.annotations.Value;
  */
 public class RaceImage extends AbstractImage {
 
-	@Property
-	@Parameter(required = true, allowNull = false)
-	private Race race;
+    @Property
+    @Parameter(required = true, allowNull = false)
+    private Race race;
 
-	@Parameter(value = "prop:race:name")
-	private String title;
+    @Parameter(value = "prop:race:name")
+    private String title;
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return title;
-	}
+    @Override
+    protected String getTitle() {
+        return title;
+    }
 
-	@Override
-	protected String getAlt() {
-		return race.getCode();
-	}
+    @Override
+    protected String getAlt() {
+        return race.getCode();
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getRaceImage(race);
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getRaceImage(race);
+    }
 }

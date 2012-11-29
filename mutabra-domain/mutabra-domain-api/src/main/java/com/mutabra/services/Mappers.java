@@ -11,7 +11,7 @@ import com.mutabra.services.game.HeroMapper;
  * @since 1.0
  */
 public interface Mappers {
-	TranslationMapper<Translation> translation$ = new TranslationMapper<Translation>(null);
-	AccountMapper<Account> account$ = new AccountMapper<Account>(null);
-	HeroMapper<Hero> hero$ = new HeroMapper<Hero>(null);
+    TranslationMapper<Translation> translation$ = new TranslationMapper<Translation>(null);
+    AccountMapper<Account> account$ = new AccountMapper<Account>(null);
+    HeroMapper<Hero> hero$ = new HeroMapper<Hero>(null);
 }

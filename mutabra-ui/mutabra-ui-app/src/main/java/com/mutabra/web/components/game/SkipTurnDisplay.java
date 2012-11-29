@@ -13,25 +13,25 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class SkipTurnDisplay extends AbstractComponent implements ClientElement {
 
-	@Property
-	@Parameter
-	private BattleHero hero;
+    @Property
+    @Parameter
+    private BattleHero hero;
 
-	public String getClientId() {
-		return IdUtils.generateSkipId();
-	}
+    public String getClientId() {
+        return IdUtils.generateSkipId();
+    }
 
-	public String getContainerClass() {
-		return hero.isExhausted() ?
-				"card disabled" :
-				"card";
-	}
+    public String getContainerClass() {
+        return hero.isExhausted() ?
+                "card disabled" :
+                "card";
+    }
 
-	public String getDescriptionSelector() {
-		return "#" + IdUtils.generateSkipDescriptionId();
-	}
+    public String getDescriptionSelector() {
+        return "#" + IdUtils.generateSkipDescriptionId();
+    }
 
-	public String getActionLink() {
-		return getResources().createEventLink("skipTurn", hero).toAbsoluteURI();
-	}
+    public String getActionLink() {
+        return getResources().createEventLink("skipTurn", hero).toAbsoluteURI();
+    }
 }

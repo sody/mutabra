@@ -15,26 +15,26 @@ import java.util.List;
  */
 public class CustomErrors {
 
-	@Environmental(false)
-	private ValidationTracker tracker;
+    @Environmental(false)
+    private ValidationTracker tracker;
 
-	@BeginRender
-	void beginRender(final MarkupWriter writer) {
-		if (tracker == null) {
-			throw new RuntimeException(InternalMessages.encloseErrorsInForm());
-		}
+    @BeginRender
+    void beginRender(final MarkupWriter writer) {
+        if (tracker == null) {
+            throw new RuntimeException(InternalMessages.encloseErrorsInForm());
+        }
 
-		if (tracker.getHasErrors()) {
-			final List<String> errors = tracker.getErrors();
-			if (!errors.isEmpty()) {
-				writer.element("div", "class", CSSConstants.ALERT + " " + CSSConstants.ALERT_BLOCK + " " + CSSConstants.ALERT_ERROR);
-				for (String message : errors) {
-					writer.element("p");
-					writer.write(message);
-					writer.end();
-				}
-				writer.end();
-			}
-		}
-	}
+        if (tracker.getHasErrors()) {
+            final List<String> errors = tracker.getErrors();
+            if (!errors.isEmpty()) {
+                writer.element("div", "class", CSSConstants.ALERT + " " + CSSConstants.ALERT_BLOCK + " " + CSSConstants.ALERT_ERROR);
+                for (String message : errors) {
+                    writer.element("p");
+                    writer.write(message);
+                    writer.end();
+                }
+                writer.end();
+            }
+        }
+    }
 }

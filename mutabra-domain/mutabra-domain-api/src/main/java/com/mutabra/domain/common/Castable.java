@@ -10,25 +10,25 @@ import java.util.List;
  */
 public interface Castable extends CodedEntity {
 
-	TargetType getTargetType();
+    TargetType getTargetType();
 
-	void setTargetType(TargetType targetType);
+    void setTargetType(TargetType targetType);
 
-	int getBloodCost();
+    int getBloodCost();
 
-	void setBloodCost(int bloodCost);
+    void setBloodCost(int bloodCost);
 
-	int getPower();
+    int getPower();
 
-	void setPower(int power);
+    void setPower(int power);
 
-	int getDuration();
+    int getDuration();
 
-	void setDuration(int duration);
+    void setDuration(int duration);
 
-	int getHealth();
+    int getHealth();
 
-	void setHealth(int health);
+    void setHealth(int health);
 
-	List<Effect> getEffects();
+    List<Effect> getEffects();
 }

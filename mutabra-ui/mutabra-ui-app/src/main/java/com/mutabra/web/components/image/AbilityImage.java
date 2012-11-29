@@ -1,7 +1,6 @@
 package com.mutabra.web.components.image;
 
 import com.mutabra.domain.common.Ability;
-import com.mutabra.domain.common.Card;
 import com.mutabra.web.base.components.AbstractImage;
 import com.mutabra.web.services.ImageSource;
 import org.apache.tapestry5.Asset;
@@ -15,28 +14,28 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class AbilityImage extends AbstractImage {
 
-	@Property
-	@Parameter(required = true, allowNull = false)
-	private Ability ability;
+    @Property
+    @Parameter(required = true, allowNull = false)
+    private Ability ability;
 
-	@Parameter(value = "prop:ability:name")
-	private String title;
+    @Parameter(value = "prop:ability:name")
+    private String title;
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return title;
-	}
+    @Override
+    protected String getTitle() {
+        return title;
+    }
 
-	@Override
-	protected String getAlt() {
-		return ability.getCode();
-	}
+    @Override
+    protected String getAlt() {
+        return ability.getCode();
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getAbilityImage(ability);
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getAbilityImage(ability);
+    }
 }

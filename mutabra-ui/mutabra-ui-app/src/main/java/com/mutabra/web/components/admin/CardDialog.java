@@ -16,20 +16,20 @@ import static org.apache.tapestry5.EventConstants.PREPARE_FOR_SUBMIT;
  */
 public class CardDialog extends EntityDialog<Card> {
 
-	@InjectComponent
-	private TranslationEditor translationEditor;
+    @InjectComponent
+    private TranslationEditor translationEditor;
 
-	public List<Translation> getTranslations() {
-		return translationEditor.getTranslations();
-	}
+    public List<Translation> getTranslations() {
+        return translationEditor.getTranslations();
+    }
 
-	@Override
-	public String getTitle() {
-		return getMessages().get("edit.title");
-	}
+    @Override
+    public String getTitle() {
+        return getMessages().get("edit.title");
+    }
 
-	@OnEvent(PREPARE_FOR_SUBMIT)
-	void prepare(final Card entity) {
-		init(entity);
-	}
+    @OnEvent(PREPARE_FOR_SUBMIT)
+    void prepare(final Card entity) {
+        init(entity);
+    }
 }

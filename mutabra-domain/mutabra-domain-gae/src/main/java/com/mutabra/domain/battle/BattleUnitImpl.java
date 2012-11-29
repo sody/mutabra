@@ -11,37 +11,37 @@ import javax.persistence.Embedded;
  */
 public class BattleUnitImpl extends BaseEntityImpl implements BattleUnit {
 
-	@Unindexed
-	@Embedded
-	private Position position;
+    @Unindexed
+    @Embedded
+    private Position position;
 
-	@Unindexed
-	private int health;
+    @Unindexed
+    private int health;
 
-	@Unindexed
-	private boolean exhausted;
+    @Unindexed
+    private boolean exhausted;
 
-	public Position getPosition() {
-		return position;
-	}
+    public Position getPosition() {
+        return position;
+    }
 
-	public void setPosition(final Position position) {
-		this.position = position;
-	}
+    public void setPosition(final Position position) {
+        this.position = position;
+    }
 
-	public int getHealth() {
-		return health;
-	}
+    public int getHealth() {
+        return health;
+    }
 
-	public void setHealth(final int health) {
-		this.health = health;
-	}
+    public void setHealth(final int health) {
+        this.health = health;
+    }
 
-	public boolean isExhausted() {
-		return exhausted;
-	}
+    public boolean isExhausted() {
+        return exhausted;
+    }
 
-	public void setExhausted(final boolean exhausted) {
-		this.exhausted = exhausted;
-	}
+    public void setExhausted(final boolean exhausted) {
+        this.exhausted = exhausted;
+    }
 }

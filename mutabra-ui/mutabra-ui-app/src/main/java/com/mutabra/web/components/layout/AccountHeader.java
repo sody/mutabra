@@ -11,14 +11,14 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class AccountHeader {
 
-	@Inject
-	private AccountContext accountContext;
+    @Inject
+    private AccountContext accountContext;
 
-	public Account getAccount() {
-		return accountContext.getAccount();
-	}
+    public Account getAccount() {
+        return accountContext.getAccount();
+    }
 
-	public Hero getHero() {
-		return accountContext.getHero();
-	}
+    public Hero getHero() {
+        return accountContext.getHero();
+    }
 }

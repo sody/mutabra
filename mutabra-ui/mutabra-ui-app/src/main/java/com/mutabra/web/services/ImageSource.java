@@ -13,17 +13,17 @@ import org.apache.tapestry5.Asset;
  */
 public interface ImageSource {
 
-	Asset getNotFoundImage();
+    Asset getNotFoundImage();
 
-	Asset getRaceImage(Race race);
+    Asset getRaceImage(Race race);
 
-	Asset getFaceImage(Face face);
+    Asset getFaceImage(Face face);
 
-	Asset getCardImage(Card card);
+    Asset getCardImage(Card card);
 
-	Asset getAbilityImage(Ability ability);
+    Asset getAbilityImage(Ability ability);
 
-	Asset getCardBack();
+    Asset getCardBack();
 
-	Asset getHeroImage(Hero hero);
+    Asset getHeroImage(Hero hero);
 }

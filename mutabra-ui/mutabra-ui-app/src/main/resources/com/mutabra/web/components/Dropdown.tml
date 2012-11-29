@@ -1,6 +1,6 @@
 <div class="prop:containerClass" id="prop:clientId" t:id="container"
-	 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<a class="${toggleClass}" data-toggle="dropdown" href="#">${label} <span class="${caretClass}"/> </a>
-	<t:menu items="prop:items" class="prop:menuClass" overrides="prop:overrides"/>
+    <a class="${toggleClass}" data-toggle="dropdown" href="#">${label} <span class="${caretClass}"/> </a>
+    <t:menu items="prop:items" class="prop:menuClass" overrides="prop:overrides"/>
 </div>

@@ -19,64 +19,64 @@ import javax.persistence.Entity;
 @Entity(name = Tables.BATTLE_ACTION)
 public class BattleEffectImpl extends BaseEntityImpl implements BattleEffect {
 
-	@Parent
-	private Key<BattleImpl> battle;
+    @Parent
+    private Key<BattleImpl> battle;
 
-	@Unindexed
-	private Key<EffectImpl> effect;
+    @Unindexed
+    private Key<EffectImpl> effect;
 
-	@Unindexed
-	private Key<BattleUnitImpl> caster;
+    @Unindexed
+    private Key<BattleUnitImpl> caster;
 
-	@Unindexed
-	@Embedded
-	private Position target;
+    @Unindexed
+    @Embedded
+    private Position target;
 
-	@Unindexed
-	private int duration;
+    @Unindexed
+    private int duration;
 
-	public BattleEffectImpl() {
-	}
+    public BattleEffectImpl() {
+    }
 
-	public BattleEffectImpl(final Battle battle, final Effect effect) {
-		this.battle = Keys.getKey(battle);
-		this.effect = Keys.getKey(effect);
-	}
+    public BattleEffectImpl(final Battle battle, final Effect effect) {
+        this.battle = Keys.getKey(battle);
+        this.effect = Keys.getKey(effect);
+    }
 
-	public Battle getBattle() {
-		return Keys.getInstance(battle);
-	}
+    public Battle getBattle() {
+        return Keys.getInstance(battle);
+    }
 
-	public Effect getEffect() {
-		return Keys.getInstance(effect);
-	}
+    public Effect getEffect() {
+        return Keys.getInstance(effect);
+    }
 
-	public BattleUnit getCaster() {
-		return Keys.getInstance(caster);
-	}
+    public BattleUnit getCaster() {
+        return Keys.getInstance(caster);
+    }
 
-	public void setCaster(final BattleUnit caster) {
-		this.caster = Keys.getKey(caster);
-	}
+    public void setCaster(final BattleUnit caster) {
+        this.caster = Keys.getKey(caster);
+    }
 
-	public Position getTarget() {
-		return target;
-	}
+    public Position getTarget() {
+        return target;
+    }
 
-	public void setTarget(final Position target) {
-		this.target = target;
-	}
+    public void setTarget(final Position target) {
+        this.target = target;
+    }
 
-	public int getDuration() {
-		return duration;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	public void setDuration(final int duration) {
-		this.duration = duration;
-	}
+    public void setDuration(final int duration) {
+        this.duration = duration;
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return battle;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return battle;
+    }
 }

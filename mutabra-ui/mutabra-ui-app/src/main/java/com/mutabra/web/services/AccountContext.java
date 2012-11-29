@@ -10,9 +10,9 @@ import com.mutabra.domain.game.Hero;
  */
 public interface AccountContext {
 
-	Account getAccount();
+    Account getAccount();
 
-	Hero getHero();
+    Hero getHero();
 
-	Battle getBattle();
+    Battle getBattle();
 }

@@ -9,7 +9,7 @@ import com.mutabra.services.CodedEntityMapper;
  */
 public class CardMapper<E extends BaseEntity> extends CodedEntityMapper<E> {
 
-	public CardMapper(final String path) {
-		super(path);
-	}
+    public CardMapper(final String path) {
+        super(path);
+    }
 }

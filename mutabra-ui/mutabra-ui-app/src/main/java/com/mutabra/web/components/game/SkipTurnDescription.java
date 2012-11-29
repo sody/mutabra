@@ -10,7 +10,7 @@ import org.apache.tapestry5.ClientElement;
  */
 public class SkipTurnDescription extends AbstractComponent implements ClientElement {
 
-	public String getClientId() {
-		return IdUtils.generateSkipDescriptionId();
-	}
+    public String getClientId() {
+        return IdUtils.generateSkipDescriptionId();
+    }
 }

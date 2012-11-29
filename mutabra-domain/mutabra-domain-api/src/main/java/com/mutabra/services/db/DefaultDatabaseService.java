@@ -8,21 +8,21 @@ import org.greatage.db.Database;
  * @since 1.0
  */
 public class DefaultDatabaseService implements DatabaseService {
-	private final Database database;
-	private final ChangeLog changeLog;
+    private final Database database;
+    private final ChangeLog changeLog;
 
-	public DefaultDatabaseService(final Database database, final ChangeLog changeLog) {
-		this.database = database;
-		this.changeLog = changeLog;
-	}
+    public DefaultDatabaseService(final Database database, final ChangeLog changeLog) {
+        this.database = database;
+        this.changeLog = changeLog;
+    }
 
-	public void update(final boolean dropFirst, final boolean clearCheckSums) {
-		final Database.Options updateOptions = database.options();
-		if (dropFirst) {
-			updateOptions.dropFirst();
-		} else if (clearCheckSums) {
-			updateOptions.clearCheckSums();
-		}
-		updateOptions.update(changeLog);
-	}
+    public void update(final boolean dropFirst, final boolean clearCheckSums) {
+        final Database.Options updateOptions = database.options();
+        if (dropFirst) {
+            updateOptions.dropFirst();
+        } else if (clearCheckSums) {
+            updateOptions.clearCheckSums();
+        }
+        updateOptions.update(changeLog);
+    }
 }

@@ -10,12 +10,12 @@ import org.apache.tapestry5.corelib.base.AbstractConditional;
  */
 public class AuthenticatedSecurity extends AbstractConditional {
 
-	@Override
-	protected boolean test() {
-		return getSubject() != null && getSubject().isAuthenticated();
-	}
+    @Override
+    protected boolean test() {
+        return getSubject() != null && getSubject().isAuthenticated();
+    }
 
-	private Subject getSubject() {
-		return SecurityUtils.getSubject();
-	}
+    private Subject getSubject() {
+        return SecurityUtils.getSubject();
+    }
 }

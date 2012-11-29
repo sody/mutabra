@@ -14,30 +14,30 @@ import java.util.Set;
  * @since 1.0
  */
 public enum Role implements Translatable {
-	ADMIN("*"),
-	USER("game:play");
+    ADMIN("*"),
+    USER("game:play");
 
-	private final String code;
-	private final Set<String> permissions;
+    private final String code;
+    private final Set<String> permissions;
 
-	Role(final String... permissions) {
-		this.permissions = new HashSet<String>(Arrays.asList(permissions));
-		this.code = name().toLowerCase();
-	}
+    Role(final String... permissions) {
+        this.permissions = new HashSet<String>(Arrays.asList(permissions));
+        this.code = name().toLowerCase();
+    }
 
-	public Set<String> getPermissions() {
-		return permissions;
-	}
+    public Set<String> getPermissions() {
+        return permissions;
+    }
 
-	public String getTranslationType() {
-		return Tables.ROLE;
-	}
+    public String getTranslationType() {
+        return Tables.ROLE;
+    }
 
-	public String getTranslationCode() {
-		return code;
-	}
+    public String getTranslationCode() {
+        return code;
+    }
 
-	public Collection<String> getTranslationVariants() {
-		return TranslationType.DESCRIPTION.getVariants();
-	}
+    public Collection<String> getTranslationVariants() {
+        return TranslationType.DESCRIPTION.getVariants();
+    }
 }

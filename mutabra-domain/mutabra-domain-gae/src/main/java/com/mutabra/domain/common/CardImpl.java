@@ -14,15 +14,15 @@ import java.util.List;
 @Entity(name = Tables.CARD)
 public class CardImpl extends CastableImpl implements Card {
 
-	public CardImpl() {
-		this(null);
-	}
+    public CardImpl() {
+        this(null);
+    }
 
-	public CardImpl(final String code) {
-		super(Tables.CARD, code, TranslationType.DESCRIPTION);
-	}
+    public CardImpl(final String code) {
+        super(Tables.CARD, code, TranslationType.DESCRIPTION);
+    }
 
-	public List<Ability> getAbilities() {
-		return Keys.getChildren(Ability.class, AbilityImpl.class, this);
-	}
+    public List<Ability> getAbilities() {
+        return Keys.getChildren(Ability.class, AbilityImpl.class, this);
+    }
 }

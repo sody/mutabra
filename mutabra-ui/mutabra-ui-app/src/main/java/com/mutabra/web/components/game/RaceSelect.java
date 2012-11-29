@@ -16,22 +16,22 @@ import java.util.List;
  */
 public class RaceSelect {
 
-	@Property
-	@Parameter
-	private Race value;
+    @Property
+    @Parameter
+    private Race value;
 
-	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String callback;
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String callback;
 
-	@InjectService("raceService")
-	private CodedEntityService<Race> raceService;
+    @InjectService("raceService")
+    private CodedEntityService<Race> raceService;
 
-	@Property
-	private Race row;
+    @Property
+    private Race row;
 
-	@Cached
-	public List<Race> getSource() {
-		return raceService.query().list();
-	}
+    @Cached
+    public List<Race> getSource() {
+        return raceService.query().list();
+    }
 }

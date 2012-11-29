@@ -15,77 +15,77 @@ import javax.persistence.Entity;
 @Entity(name = Tables.EFFECT)
 public class EffectImpl extends BaseEntityImpl implements Effect {
 
-	@Parent
-	private Key<CastableImpl> castable;
+    @Parent
+    private Key<CastableImpl> castable;
 
-	private String scriptClass;
-	private EffectType effectType;
-	private TargetType targetType;
-	private int power;
-	private int duration;
-	private int health;
+    private String scriptClass;
+    private EffectType effectType;
+    private TargetType targetType;
+    private int power;
+    private int duration;
+    private int health;
 
-	public EffectImpl() {
-	}
+    public EffectImpl() {
+    }
 
-	public EffectImpl(final Castable castable) {
-		this.castable = Keys.getKey(castable);
-	}
+    public EffectImpl(final Castable castable) {
+        this.castable = Keys.getKey(castable);
+    }
 
-	public Castable getCastable() {
-		return Keys.getInstance(castable);
-	}
+    public Castable getCastable() {
+        return Keys.getInstance(castable);
+    }
 
-	public String getScriptClass() {
-		return scriptClass;
-	}
+    public String getScriptClass() {
+        return scriptClass;
+    }
 
-	public void setScriptClass(final String scriptClass) {
-		this.scriptClass = scriptClass;
-	}
+    public void setScriptClass(final String scriptClass) {
+        this.scriptClass = scriptClass;
+    }
 
-	public EffectType getEffectType() {
-		return effectType;
-	}
+    public EffectType getEffectType() {
+        return effectType;
+    }
 
-	public void setEffectType(final EffectType effectType) {
-		this.effectType = effectType;
-	}
+    public void setEffectType(final EffectType effectType) {
+        this.effectType = effectType;
+    }
 
-	public TargetType getTargetType() {
-		return targetType;
-	}
+    public TargetType getTargetType() {
+        return targetType;
+    }
 
-	public void setTargetType(final TargetType targetType) {
-		this.targetType = targetType;
-	}
+    public void setTargetType(final TargetType targetType) {
+        this.targetType = targetType;
+    }
 
-	public int getPower() {
-		return power;
-	}
+    public int getPower() {
+        return power;
+    }
 
-	public void setPower(final int power) {
-		this.power = power;
-	}
+    public void setPower(final int power) {
+        this.power = power;
+    }
 
-	public int getDuration() {
-		return duration;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	public void setDuration(final int duration) {
-		this.duration = duration;
-	}
+    public void setDuration(final int duration) {
+        this.duration = duration;
+    }
 
-	public int getHealth() {
-		return health;
-	}
+    public int getHealth() {
+        return health;
+    }
 
-	public void setHealth(final int health) {
-		this.health = health;
-	}
+    public void setHealth(final int health) {
+        this.health = health;
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return castable;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return castable;
+    }
 }

@@ -16,9 +16,9 @@ import org.greatage.domain.Repository;
 @SubModule({DomainModule.class, ServicesModule.class, SecurityModule.class, ApplicationModule.class})
 public class UiModule {
 
-	@Contribute(ValueEncoderSource.class)
-	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
-											 final Repository repository) {
-		configuration.add(BaseEntity.class, new GAEEntityEncoderFactory(repository));
-	}
+    @Contribute(ValueEncoderSource.class)
+    public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
+                                             final Repository repository) {
+        configuration.add(BaseEntity.class, new GAEEntityEncoderFactory(repository));
+    }
 }

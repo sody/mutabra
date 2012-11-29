@@ -13,11 +13,11 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class CardDescription extends AbstractComponent implements ClientElement {
 
-	@Property
-	@Parameter
-	private Card value;
+    @Property
+    @Parameter
+    private Card value;
 
-	public String getClientId() {
-		return IdUtils.generateDescriptionId(value);
-	}
+    public String getClientId() {
+        return IdUtils.generateDescriptionId(value);
+    }
 }

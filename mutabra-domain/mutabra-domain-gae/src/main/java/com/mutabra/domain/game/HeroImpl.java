@@ -27,118 +27,118 @@ import java.util.List;
 @Entity(name = Tables.HERO)
 public class HeroImpl extends BaseEntityImpl implements Hero {
 
-	@Parent
-	private Key<AccountImpl> account;
+    @Parent
+    private Key<AccountImpl> account;
 
-	private String name;
+    private String name;
 
-	private Key<RaceImpl> race;
+    private Key<RaceImpl> race;
 
-	private Key<FaceImpl> face;
+    private Key<FaceImpl> face;
 
-	private Key<LevelImpl> level;
+    private Key<LevelImpl> level;
 
-	private long rating;
+    private long rating;
 
-	private int health;
+    private int health;
 
-	private Key<BattleImpl> battle;
+    private Key<BattleImpl> battle;
 
-	@Indexed
-	private Date lastActive;
+    @Indexed
+    private Date lastActive;
 
-	@Unindexed
-	private boolean ready;
+    @Unindexed
+    private boolean ready;
 
-	public HeroImpl() {
-	}
+    public HeroImpl() {
+    }
 
-	public HeroImpl(final Account account) {
-		this.account = Keys.getKey(account);
-	}
+    public HeroImpl(final Account account) {
+        this.account = Keys.getKey(account);
+    }
 
-	public Account getAccount() {
-		return Keys.getInstance(account);
-	}
+    public Account getAccount() {
+        return Keys.getInstance(account);
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public long getRating() {
-		return rating;
-	}
+    public long getRating() {
+        return rating;
+    }
 
-	public void setRating(final long rating) {
-		this.rating = rating;
-	}
+    public void setRating(final long rating) {
+        this.rating = rating;
+    }
 
-	public Face getFace() {
-		return Keys.getInstance(face);
-	}
+    public Face getFace() {
+        return Keys.getInstance(face);
+    }
 
-	public void setFace(final Face face) {
-		this.face = Keys.getKey(face);
-	}
+    public void setFace(final Face face) {
+        this.face = Keys.getKey(face);
+    }
 
-	public Race getRace() {
-		return Keys.getInstance(race);
-	}
+    public Race getRace() {
+        return Keys.getInstance(race);
+    }
 
-	public void setRace(final Race race) {
-		this.race = Keys.getKey(race);
-	}
+    public void setRace(final Race race) {
+        this.race = Keys.getKey(race);
+    }
 
-	public Level getLevel() {
-		return Keys.getInstance(level);
-	}
+    public Level getLevel() {
+        return Keys.getInstance(level);
+    }
 
-	public void setLevel(final Level level) {
-		this.level = Keys.getKey(level);
-	}
+    public void setLevel(final Level level) {
+        this.level = Keys.getKey(level);
+    }
 
-	public int getHealth() {
-		return health;
-	}
+    public int getHealth() {
+        return health;
+    }
 
-	public void setHealth(final int health) {
-		this.health = health;
-	}
+    public void setHealth(final int health) {
+        this.health = health;
+    }
 
-	public List<HeroCard> getCards() {
-		return Keys.getChildren(HeroCard.class, HeroCardImpl.class, this);
-	}
+    public List<HeroCard> getCards() {
+        return Keys.getChildren(HeroCard.class, HeroCardImpl.class, this);
+    }
 
-	public Battle getBattle() {
-		return Keys.getInstance(battle);
-	}
+    public Battle getBattle() {
+        return Keys.getInstance(battle);
+    }
 
-	public void setBattle(final Battle battle) {
-		this.battle = Keys.getKey(battle);
-	}
+    public void setBattle(final Battle battle) {
+        this.battle = Keys.getKey(battle);
+    }
 
-	public Date getLastActive() {
-		return lastActive;
-	}
+    public Date getLastActive() {
+        return lastActive;
+    }
 
-	public void setLastActive(final Date lastActive) {
-		this.lastActive = lastActive;
-	}
+    public void setLastActive(final Date lastActive) {
+        this.lastActive = lastActive;
+    }
 
-	public boolean isReady() {
-		return ready;
-	}
+    public boolean isReady() {
+        return ready;
+    }
 
-	public void setReady(final boolean ready) {
-		this.ready = ready;
-	}
+    public void setReady(final boolean ready) {
+        this.ready = ready;
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return account;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return account;
+    }
 }

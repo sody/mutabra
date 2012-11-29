@@ -8,11 +8,11 @@ import org.apache.shiro.crypto.hash.Hash;
  */
 public interface PasswordGenerator {
 
-	String generateSecret();
+    String generateSecret();
 
-	Hash generateHash(String secret);
+    Hash generateHash(String secret);
 
-	Hash generateHash();
+    Hash generateHash();
 
-	long generateExpirationTime();
+    long generateExpirationTime();
 }

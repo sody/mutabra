@@ -25,53 +25,53 @@ import java.util.List;
 @RequiresPermissions("game:play")
 public class SwitchHero extends AbstractPage {
 
-	@InjectService("accountService")
-	private BaseEntityService<Account> accountService;
+    @InjectService("accountService")
+    private BaseEntityService<Account> accountService;
 
-	@Inject
-	private HeroService heroService;
+    @Inject
+    private HeroService heroService;
 
-	@Inject
-	private AccountContext accountContext;
+    @Inject
+    private AccountContext accountContext;
 
-	@Property
-	private List<Hero> source;
+    @Property
+    private List<Hero> source;
 
-	@Property
-	private Hero value;
+    @Property
+    private Hero value;
 
-	@Property
-	private Hero row;
+    @Property
+    private Hero row;
 
-	@Property
-	private int index;
+    @Property
+    private int index;
 
-	@OnEvent(EventConstants.ACTIVATE)
-	Object activate() {
-		value = accountContext.getHero();
-		source = accountContext.getAccount().getHeroes();
-		if (source.isEmpty()) {
-			return CreateHero.class;
-		}
-		return null;
-	}
+    @OnEvent(EventConstants.ACTIVATE)
+    Object activate() {
+        value = accountContext.getHero();
+        source = accountContext.getAccount().getHeroes();
+        if (source.isEmpty()) {
+            return CreateHero.class;
+        }
+        return null;
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	Object enter() {
-		// enter the game with just created character
-		final Account account = accountContext.getAccount();
-		account.setHero(value);
-		accountService.saveOrUpdate(account);
+    @OnEvent(value = EventConstants.SUCCESS)
+    Object enter() {
+        // enter the game with just created character
+        final Account account = accountContext.getAccount();
+        account.setHero(value);
+        accountService.saveOrUpdate(account);
 
-		return back();
-	}
+        return back();
+    }
 
-	@OnEvent
-	Object cancel(final String source) {
-		return back();
-	}
+    @OnEvent
+    Object cancel(final String source) {
+        return back();
+    }
 
-	private Object back() {
-		return GameHome.class;
-	}
+    private Object back() {
+        return GameHome.class;
+    }
 }

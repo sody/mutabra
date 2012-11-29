@@ -10,19 +10,18 @@ import java.util.List;
 
 /**
  * @author Ivan Khalopik
- * @version $Revision$ $Date$
  * @since 1.11
  */
 public interface ScriptContext {
 
-	Battle getBattle();
+    Battle getBattle();
 
-	BattleUnit getCaster();
+    BattleUnit getCaster();
 
-	Effect getEffect();
+    Effect getEffect();
 
-	Position getTarget();
+    Position getTarget();
 
-	List<BattleField> getTargets();
+    List<BattleField> getTargets();
 
 }

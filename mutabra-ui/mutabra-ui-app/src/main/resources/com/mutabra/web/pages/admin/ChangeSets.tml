@@ -1,31 +1,31 @@
 <html t:type="layout/default"
-	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 
 <t:grid source="source" row="row" include="title,author,location,executedAt,checkSum,comment" class="table"/>
 
 <a class="btn" data-toggle="modal" href="#updateModal">${message:label.update}</a>
 
 <t:form class="form-horizontal">
-	<t:modal t:id="updateModal" title="${message:update.title}">
-		<div class="control-group">
-			<t:label for="dropFirst" class="control-label"/>
-			<div class="controls">
-				<t:checkbox t:id="dropFirst" value="dropFirst" label="${message:label.drop-first}"/>
-			</div>
-		</div>
+    <t:modal t:id="updateModal" title="${message:update.title}">
+        <div class="control-group">
+            <t:label for="dropFirst" class="control-label"/>
+            <div class="controls">
+                <t:checkbox t:id="dropFirst" value="dropFirst" label="${message:label.drop-first}"/>
+            </div>
+        </div>
 
-		<div class="control-group">
-			<t:label for="clearCheckSums" class="control-label"/>
-			<div class="controls">
-				<t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:label.clear-check-sums}"/>
-			</div>
-		</div>
-		<p:footer>
-			<t:linksubmit class="btn">${message:label.update}</t:linksubmit>
-			<a href="#" class="btn" data-dismiss="modal">${message:label.cancel}</a>
-		</p:footer>
-	</t:modal>
+        <div class="control-group">
+            <t:label for="clearCheckSums" class="control-label"/>
+            <div class="controls">
+                <t:checkbox t:id="clearCheckSums" value="clearCheckSums" label="${message:label.clear-check-sums}"/>
+            </div>
+        </div>
+        <p:footer>
+            <t:linksubmit class="btn">${message:label.update}</t:linksubmit>
+            <a href="#" class="btn" data-dismiss="modal">${message:label.cancel}</a>
+        </p:footer>
+    </t:modal>
 </t:form>
 
 </html>

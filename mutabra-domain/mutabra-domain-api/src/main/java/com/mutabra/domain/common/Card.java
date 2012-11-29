@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface Card extends Castable {
 
-	List<Ability> getAbilities();
+    List<Ability> getAbilities();
 }

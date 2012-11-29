@@ -15,18 +15,18 @@ import java.util.List;
  */
 public class FaceSelect {
 
-	@Property
-	@Parameter
-	private Face value;
+    @Property
+    @Parameter
+    private Face value;
 
-	@InjectService("faceService")
-	private CodedEntityService<Face> faceService;
+    @InjectService("faceService")
+    private CodedEntityService<Face> faceService;
 
-	@Property
-	private Face row;
+    @Property
+    private Face row;
 
-	@Cached
-	public List<Face> getSource() {
-		return faceService.query().list();
-	}
+    @Cached
+    public List<Face> getSource() {
+        return faceService.query().list();
+    }
 }

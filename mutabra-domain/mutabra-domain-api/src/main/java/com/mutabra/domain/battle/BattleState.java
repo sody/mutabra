@@ -5,7 +5,7 @@ package com.mutabra.domain.battle;
  * @since 1.0
  */
 public enum BattleState {
-	NOT_STARTED,
-	STARTED,
-	ENDED
+    NOT_STARTED,
+    STARTED,
+    ENDED
 }

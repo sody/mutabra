@@ -42,23 +42,23 @@ import java.io.IOException;
  */
 public class ApplicationModule {
 
-	@ApplicationDefaults
-	@Contribute(SymbolProvider.class)
-	public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
-		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
-		configuration.add(SymbolConstants.START_PAGE_NAME, "/");
-		configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
-		configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
-		configuration.add(ComponentParameterConstants.ZONE_UPDATE_METHOD, "none");
-		configuration.add(ComponentParameterConstants.ZONE_SHOW_METHOD, "none");
-	}
+    @ApplicationDefaults
+    @Contribute(SymbolProvider.class)
+    public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
+        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
+        configuration.add(SymbolConstants.START_PAGE_NAME, "/");
+        configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
+        configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
+        configuration.add(ComponentParameterConstants.ZONE_UPDATE_METHOD, "none");
+        configuration.add(ComponentParameterConstants.ZONE_SHOW_METHOD, "none");
+    }
 
-	public static void bind(final ServiceBinder binder) {
-		binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
+    public static void bind(final ServiceBinder binder) {
+        binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
 //		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
-		binder.bind(Translator.class, TranslatorImpl.class);
-		binder.bind(ImageSource.class, ImageSourceImpl.class);
-	}
+        binder.bind(Translator.class, TranslatorImpl.class);
+        binder.bind(ImageSource.class, ImageSourceImpl.class);
+    }
 
 /*
 	@Contribute(ServiceOverride.class)
@@ -75,70 +75,70 @@ public class ApplicationModule {
 	}
 */
 
-	@Decorate(serviceInterface = PropertyConduitSource.class)
-	public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
-															   final Translator translator,
-															   final StringInterner interner) {
-		return new I18nPropertyConduitSource(conduitSource, translator, interner);
-	}
+    @Decorate(serviceInterface = PropertyConduitSource.class)
+    public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
+                                                               final Translator translator,
+                                                               final StringInterner interner) {
+        return new I18nPropertyConduitSource(conduitSource, translator, interner);
+    }
 
-	@Contribute(TypeCoercer.class)
-	public void contributeTypeCoercer(final Configuration<CoercionTuple> configuration) {
-		configuration.add(CoercionTuple.create(String.class, String[].class, new Coercion<String, String[]>() {
-			public String[] coerce(String input) {
-				return input != null && !input.isEmpty() ? input.split(",") : null;
-			}
-		}));
-	}
+    @Contribute(TypeCoercer.class)
+    public void contributeTypeCoercer(final Configuration<CoercionTuple> configuration) {
+        configuration.add(CoercionTuple.create(String.class, String[].class, new Coercion<String, String[]>() {
+            public String[] coerce(String input) {
+                return input != null && !input.isEmpty() ? input.split(",") : null;
+            }
+        }));
+    }
 
-	@Contribute(ComponentMessagesSource.class)
-	public void contributeComponentMessagesSource(@Value("context:WEB-INF/mail") final Resource mailMessages,
-												  final OrderedConfiguration<Resource> configuration) {
-		configuration.add("mail", mailMessages);
-	}
+    @Contribute(ComponentMessagesSource.class)
+    public void contributeComponentMessagesSource(@Value("context:WEB-INF/mail") final Resource mailMessages,
+                                                  final OrderedConfiguration<Resource> configuration) {
+        configuration.add("mail", mailMessages);
+    }
 
-	@Local
-	@Contribute(JavaScriptStack.class)
-	public void contributeJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
-		configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
+    @Local
+    @Contribute(JavaScriptStack.class)
+    public void contributeJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
+        configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
 
-		// jquery library
-		configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery.js"));
+        // jquery library
+        configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery.js"));
 
-		// bootstrap plugins
-		configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-transition.js"));
-		configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-dropdown.js"));
-		configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-tab.js"));
-		configuration.add("bootstrap-alert", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-alert.js"));
-		configuration.add("bootstrap-modal", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-modal.js"));
-		configuration.add("bootstrap-carousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-carousel.js"));
+        // bootstrap plugins
+        configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-transition.js"));
+        configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-dropdown.js"));
+        configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-tab.js"));
+        configuration.add("bootstrap-alert", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-alert.js"));
+        configuration.add("bootstrap-modal", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-modal.js"));
+        configuration.add("bootstrap-carousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/bootstrap-carousel.js"));
 
-		// project plugins
-		configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra/mutabra-battle.js"));
+        // project plugins
+        configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra/mutabra-battle.js"));
 
-		// project library for tapestry
-		configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra-init.js"));
-	}
+        // project library for tapestry
+        configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra-init.js"));
+    }
 
-	@Contribute(JavaScriptStackSource.class)
-	public void contributeJavaScriptStackSource(final MappedConfiguration<String, JavaScriptStack> configuration,
-												final @Local JavaScriptStack stack) {
-		configuration.add("mutabra", stack);
-	}
+    @Contribute(JavaScriptStackSource.class)
+    public void contributeJavaScriptStackSource(final MappedConfiguration<String, JavaScriptStack> configuration,
+                                                final @Local JavaScriptStack stack) {
+        configuration.add("mutabra", stack);
+    }
 
-	@Contribute(RequestHandler.class)
-	public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration,
-										 final SessionManager<Object> executor) {
-		configuration.add("RepositorySessionFilter", new RequestFilter() {
-			public boolean service(final Request request, final Response response, final RequestHandler requestHandler) throws IOException {
-				return executor.execute(new SessionManager.Callback<Boolean, Object>() {
-					public Boolean doInSession(final Object session) throws Exception {
-						return requestHandler.service(request, response);
-					}
-				});
-			}
-		});
-		configuration.addInstance("UpdateCheckerFilter", UpdateCheckerFilter.class, "after:RepositorySessionFilter");
-	}
+    @Contribute(RequestHandler.class)
+    public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration,
+                                         final SessionManager<Object> executor) {
+        configuration.add("RepositorySessionFilter", new RequestFilter() {
+            public boolean service(final Request request, final Response response, final RequestHandler requestHandler) throws IOException {
+                return executor.execute(new SessionManager.Callback<Boolean, Object>() {
+                    public Boolean doInSession(final Object session) throws Exception {
+                        return requestHandler.service(request, response);
+                    }
+                });
+            }
+        });
+        configuration.addInstance("UpdateCheckerFilter", UpdateCheckerFilter.class, "after:RepositorySessionFilter");
+    }
 
 }

@@ -13,15 +13,15 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class AnonymousHeader extends AbstractComponent {
 
-	@Property
-	private String email;
+    @Property
+    private String email;
 
-	@Property
-	private String password;
+    @Property
+    private String password;
 
-	@OnEvent(value = EventConstants.SUCCESS, component = "signIn")
-	Object signIn() {
-		getSubject().login(new UsernamePasswordToken(email, password));
-		return GameHome.class;
-	}
+    @OnEvent(value = EventConstants.SUCCESS, component = "signIn")
+    Object signIn() {
+        getSubject().login(new UsernamePasswordToken(email, password));
+        return GameHome.class;
+    }
 }

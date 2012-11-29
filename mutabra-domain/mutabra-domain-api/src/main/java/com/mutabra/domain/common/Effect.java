@@ -8,29 +8,29 @@ import com.mutabra.domain.BaseEntity;
  */
 public interface Effect extends BaseEntity {
 
-	Castable getCastable();
+    Castable getCastable();
 
-	String getScriptClass();
+    String getScriptClass();
 
-	void setScriptClass(String scriptClass);
+    void setScriptClass(String scriptClass);
 
-	EffectType getEffectType();
+    EffectType getEffectType();
 
-	void setEffectType(EffectType effectType);
+    void setEffectType(EffectType effectType);
 
-	TargetType getTargetType();
+    TargetType getTargetType();
 
-	void setTargetType(TargetType targetType);
+    void setTargetType(TargetType targetType);
 
-	int getPower();
+    int getPower();
 
-	void setPower(int power);
+    void setPower(int power);
 
-	int getDuration();
+    int getDuration();
 
-	void setDuration(int duration);
+    void setDuration(int duration);
 
-	int getHealth();
+    int getHealth();
 
-	void setHealth(int health);
+    void setHealth(int health);
 }

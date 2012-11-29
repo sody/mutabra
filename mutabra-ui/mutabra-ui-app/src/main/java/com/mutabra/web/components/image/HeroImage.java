@@ -14,25 +14,25 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class HeroImage extends AbstractImage {
 
-	@Property
-	@Parameter(required = true)
-	private Hero hero;
+    @Property
+    @Parameter(required = true)
+    private Hero hero;
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return hero != null ? hero.getName() : "<anonymous>";
-	}
+    @Override
+    protected String getTitle() {
+        return hero != null ? hero.getName() : "<anonymous>";
+    }
 
-	@Override
-	protected String getAlt() {
-		return hero != null ? hero.getName() : "<anonymous>";
-	}
+    @Override
+    protected String getAlt() {
+        return hero != null ? hero.getName() : "<anonymous>";
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getHeroImage(hero);
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getHeroImage(hero);
+    }
 }

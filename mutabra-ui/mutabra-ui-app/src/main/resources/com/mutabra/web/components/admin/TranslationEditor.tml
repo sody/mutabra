@@ -1,11 +1,11 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-	<t:loop source="variants" value="variant">
-		<div class="control-group">
-			<t:label for="translation" class="control-label"/>
-			<div class="controls">
-				<t:textfield t:id="translation" clientId="prop:variant" label="prop:label"
-							 value="translation.value" validate="required"/>
-			</div>
-		</div>
-	</t:loop>
+    <t:loop source="variants" value="variant">
+        <div class="control-group">
+            <t:label for="translation" class="control-label"/>
+            <div class="controls">
+                <t:textfield t:id="translation" clientId="prop:variant" label="prop:label"
+                             value="translation.value" validate="required"/>
+            </div>
+        </div>
+    </t:loop>
 </t:container>

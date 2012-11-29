@@ -28,55 +28,55 @@ import java.util.List;
 @RequiresPermissions("game:play")
 public class CreateHero extends AbstractPage {
 
-	@InjectService("accountService")
-	private BaseEntityService<Account> accountService;
+    @InjectService("accountService")
+    private BaseEntityService<Account> accountService;
 
-	@InjectService("raceService")
-	private CodedEntityService<Race> raceService;
+    @InjectService("raceService")
+    private CodedEntityService<Race> raceService;
 
-	@Inject
-	private HeroService heroService;
+    @Inject
+    private HeroService heroService;
 
-	@Property
-	private Hero value;
+    @Property
+    private Hero value;
 
-	@Property
-	private Race row;
+    @Property
+    private Race row;
 
-	@Property
-	private int index;
+    @Property
+    private int index;
 
-	@Inject
-	private AccountContext accountContext;
+    @Inject
+    private AccountContext accountContext;
 
-	@Cached
-	public List<Race> getRaces() {
-		return raceService.query().list();
-	}
+    @Cached
+    public List<Race> getRaces() {
+        return raceService.query().list();
+    }
 
-	@OnEvent(EventConstants.ACTIVATE)
-	void activate() {
-		value = heroService.create(accountContext.getAccount());
-	}
+    @OnEvent(EventConstants.ACTIVATE)
+    void activate() {
+        value = heroService.create(accountContext.getAccount());
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	Object createHero() {
-		heroService.saveOrUpdate(value);
+    @OnEvent(value = EventConstants.SUCCESS)
+    Object createHero() {
+        heroService.saveOrUpdate(value);
 
-		// enter the game with just created character
-		final Account account = accountContext.getAccount();
-		account.setHero(value);
-		accountService.save(account);
+        // enter the game with just created character
+        final Account account = accountContext.getAccount();
+        account.setHero(value);
+        accountService.save(account);
 
-		return back();
-	}
+        return back();
+    }
 
-	@OnEvent
-	Object cancel(final String source) {
-		return back();
-	}
+    @OnEvent
+    Object cancel(final String source) {
+        return back();
+    }
 
-	private Object back() {
-		return GameHome.class;
-	}
+    private Object back() {
+        return GameHome.class;
+    }
 }

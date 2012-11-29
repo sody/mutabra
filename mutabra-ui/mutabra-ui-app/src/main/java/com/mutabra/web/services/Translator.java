@@ -15,10 +15,10 @@ import java.util.Map;
  */
 public interface Translator {
 
-	Map<String, String> translate(Translatable translatable);
+    Map<String, String> translate(Translatable translatable);
 
-	Map<String, String> translate(Translatable translatable, Locale locale);
+    Map<String, String> translate(Translatable translatable, Locale locale);
 
-	void invalidateCache(Translatable translatable);
+    void invalidateCache(Translatable translatable);
 
 }

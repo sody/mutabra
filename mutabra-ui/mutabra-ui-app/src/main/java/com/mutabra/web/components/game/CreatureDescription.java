@@ -13,18 +13,18 @@ import org.apache.tapestry5.annotations.SetupRender;
  */
 public class CreatureDescription extends AbstractComponent implements ClientElement {
 
-	@Property
-	@Parameter(required = true, allowNull = false)
-	private BattleCreature value;
+    @Property
+    @Parameter(required = true, allowNull = false)
+    private BattleCreature value;
 
-	private String clientId;
+    private String clientId;
 
-	public String getClientId() {
-		return clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	@SetupRender
-	void setupClientId() {
-		clientId = "description_" + value.getPosition().getId();
-	}
+    @SetupRender
+    void setupClientId() {
+        clientId = "description_" + value.getPosition().getId();
+    }
 }

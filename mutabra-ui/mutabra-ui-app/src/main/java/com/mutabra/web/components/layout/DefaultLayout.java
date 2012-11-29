@@ -19,12 +19,12 @@ import org.apache.tapestry5.annotations.SupportsInformalParameters;
 @SupportsInformalParameters
 public class DefaultLayout extends EmptyLayout {
 
-	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String[] buttons;
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String[] buttons;
 
-	@Property
-	@Parameter(value = "this", allowNull = false)
-	private PropertyOverrides overrides;
+    @Property
+    @Parameter(value = "this", allowNull = false)
+    private PropertyOverrides overrides;
 
 }

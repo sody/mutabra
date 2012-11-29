@@ -13,25 +13,25 @@ import org.apache.tapestry5.annotations.SetupRender;
  */
 public class HeroDescription extends AbstractComponent implements ClientElement {
 
-	@Property
-	@Parameter(required = true, allowNull = false)
-	private BattleHero value;
+    @Property
+    @Parameter(required = true, allowNull = false)
+    private BattleHero value;
 
-	@Parameter
-	private boolean active;
+    @Parameter
+    private boolean active;
 
-	private String clientId;
+    private String clientId;
 
-	public String getClientId() {
-		return clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public String getContainerClass() {
-		return active ? "description active" : "description";
-	}
+    public String getContainerClass() {
+        return active ? "description active" : "description";
+    }
 
-	@SetupRender
-	void setupClientId() {
-		clientId = "description_" + value.getPosition().getId();
-	}
+    @SetupRender
+    void setupClientId() {
+        clientId = "description_" + value.getPosition().getId();
+    }
 }

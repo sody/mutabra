@@ -25,69 +25,69 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class MainRealm extends AuthorizingRealm {
-	private final BaseEntityService<Account> accountService;
+    private final BaseEntityService<Account> accountService;
 
-	public MainRealm(final BaseEntityService<Account> accountService, final CredentialsMatcher credentialsMatcher) {
-		super(credentialsMatcher);
-		this.accountService = accountService;
-	}
+    public MainRealm(final BaseEntityService<Account> accountService, final CredentialsMatcher credentialsMatcher) {
+        super(credentialsMatcher);
+        this.accountService = accountService;
+    }
 
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(final PrincipalCollection principals) {
-		if (principals == null) {
-			throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
-		}
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(final PrincipalCollection principals) {
+        if (principals == null) {
+            throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
+        }
 
-		final Long userId = (Long) getAvailablePrincipal(principals);
+        final Long userId = (Long) getAvailablePrincipal(principals);
 
-		if (userId == null) {
-			throw new AccountException("Null user identifiers are not allowed by this realm.");
-		}
+        if (userId == null) {
+            throw new AccountException("Null user identifiers are not allowed by this realm.");
+        }
 
-		try {
-			final Account account = accountService.get(userId);
+        try {
+            final Account account = accountService.get(userId);
 
-			if (account == null) {
-				return null;
-			}
+            if (account == null) {
+                return null;
+            }
 
-			final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			final Role role = account.getRole();
-			info.addRole(role.getTranslationCode());
-			info.addStringPermissions(role.getPermissions());
+            final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+            final Role role = account.getRole();
+            info.addRole(role.getTranslationCode());
+            info.addStringPermissions(role.getPermissions());
 
-			return info;
-		} catch (RuntimeException ex) {
-			throw new AuthorizationException(ex.getMessage(), ex);
-		}
-	}
+            return info;
+        } catch (RuntimeException ex) {
+            throw new AuthorizationException(ex.getMessage(), ex);
+        }
+    }
 
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(final AuthenticationToken token) throws AuthenticationException {
-		final String username = ((UsernamePasswordToken) token).getUsername();
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(final AuthenticationToken token) throws AuthenticationException {
+        final String username = ((UsernamePasswordToken) token).getUsername();
 
-		if (username == null) {
-			throw new AccountException("Null usernames are not allowed by this realm.");
-		}
+        if (username == null) {
+            throw new AccountException("Null usernames are not allowed by this realm.");
+        }
 
-		try {
-			final Account account = accountService.query()
-					.filter(account$.email$.eq(username))
-					.unique();
+        try {
+            final Account account = accountService.query()
+                    .filter(account$.email$.eq(username))
+                    .unique();
 
-			if (account == null) {
-				return null;
-			}
+            if (account == null) {
+                return null;
+            }
 
-			final SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account.getId(), account.getPassword(), getName());
-			if (account.getSalt() != null) {
-				final ByteSource salt = ByteSource.Util.bytes(Base64.decode(account.getSalt()));
-				info.setCredentialsSalt(salt);
-			}
+            final SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account.getId(), account.getPassword(), getName());
+            if (account.getSalt() != null) {
+                final ByteSource salt = ByteSource.Util.bytes(Base64.decode(account.getSalt()));
+                info.setCredentialsSalt(salt);
+            }
 
-			return info;
-		} catch (RuntimeException ex) {
-			throw new AuthenticationException(ex.getMessage(), ex);
-		}
-	}
+            return info;
+        } catch (RuntimeException ex) {
+            throw new AuthenticationException(ex.getMessage(), ex);
+        }
+    }
 }

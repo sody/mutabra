@@ -15,46 +15,46 @@ import java.io.IOException;
  * @since 1.0
  */
 public class SecurityExceptionHandler implements RequestExceptionHandler {
-	private final RequestExceptionHandler delegate;
-	private final RequestGlobals globals;
-	private final PageRenderLinkSource linkSource;
-	private final String loginPage;
+    private final RequestExceptionHandler delegate;
+    private final RequestGlobals globals;
+    private final PageRenderLinkSource linkSource;
+    private final String loginPage;
 
-	public SecurityExceptionHandler(final RequestExceptionHandler delegate,
-									final RequestGlobals globals,
-									final PageRenderLinkSource linkSource,
-									final String loginPage) {
-		this.delegate = delegate;
-		this.globals = globals;
-		this.linkSource = linkSource;
-		this.loginPage = loginPage;
-	}
+    public SecurityExceptionHandler(final RequestExceptionHandler delegate,
+                                    final RequestGlobals globals,
+                                    final PageRenderLinkSource linkSource,
+                                    final String loginPage) {
+        this.delegate = delegate;
+        this.globals = globals;
+        this.linkSource = linkSource;
+        this.loginPage = loginPage;
+    }
 
-	@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
-	public void handleRequestException(final Throwable exception) throws IOException {
-		final Throwable rootException = getRootCause(exception);
-		if (rootException instanceof AuthenticationException || rootException instanceof UnauthenticatedException) {
-			//todo: log it
-			// save current request for later use after successful authentication
-			WebUtils.saveRequest(globals.getHTTPServletRequest());
+    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
+    public void handleRequestException(final Throwable exception) throws IOException {
+        final Throwable rootException = getRootCause(exception);
+        if (rootException instanceof AuthenticationException || rootException instanceof UnauthenticatedException) {
+            //todo: log it
+            // save current request for later use after successful authentication
+            WebUtils.saveRequest(globals.getHTTPServletRequest());
 
-			final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
-			if (rootException instanceof UnauthenticatedException) {
-				loginPageLink.addParameter("not_authenticated", "y");
-			} else {
-				loginPageLink.addParameter("error", "y");
-			}
-			globals.getResponse().sendRedirect(loginPageLink);
-		} else {
-			delegate.handleRequestException(exception);
-		}
-	}
+            final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
+            if (rootException instanceof UnauthenticatedException) {
+                loginPageLink.addParameter("not_authenticated", "y");
+            } else {
+                loginPageLink.addParameter("error", "y");
+            }
+            globals.getResponse().sendRedirect(loginPageLink);
+        } else {
+            delegate.handleRequestException(exception);
+        }
+    }
 
-	private static Throwable getRootCause(Throwable throwable) {
-		Throwable cause;
-		while ((cause = throwable.getCause()) != null) {
-			throwable = cause;
-		}
-		return throwable;
-	}
+    private static Throwable getRootCause(Throwable throwable) {
+        Throwable cause;
+        while ((cause = throwable.getCause()) != null) {
+            throwable = cause;
+        }
+        return throwable;
+    }
 }

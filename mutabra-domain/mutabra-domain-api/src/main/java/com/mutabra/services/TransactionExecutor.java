@@ -8,5 +8,5 @@ import java.util.concurrent.Callable;
  */
 public interface TransactionExecutor {
 
-	<V> V doInTransaction(Callable<V> callback);
+    <V> V doInTransaction(Callable<V> callback);
 }

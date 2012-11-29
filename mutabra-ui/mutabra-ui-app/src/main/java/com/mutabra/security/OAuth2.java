@@ -6,5 +6,5 @@ package com.mutabra.security;
  */
 public interface OAuth2 extends OAuth {
 
-	Session connect(String code);
+    Session connect(String code);
 }

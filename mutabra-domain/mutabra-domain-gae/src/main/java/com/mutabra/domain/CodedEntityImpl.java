@@ -11,42 +11,42 @@ import java.util.Collection;
  */
 public class CodedEntityImpl extends BaseEntityImpl implements CodedEntity {
 
-	@Indexed
-	private String code;
+    @Indexed
+    private String code;
 
-	@Transient
-	private final String type;
+    @Transient
+    private final String type;
 
-	@Transient
-	private final Collection<String> variants;
+    @Transient
+    private final Collection<String> variants;
 
-	protected CodedEntityImpl(final String type, final TranslationType translationType) {
-		this(type, null, translationType);
-	}
+    protected CodedEntityImpl(final String type, final TranslationType translationType) {
+        this(type, null, translationType);
+    }
 
-	protected CodedEntityImpl(final String type, final String code, final TranslationType translationType) {
-		this(type, code, translationType.getVariants());
-	}
+    protected CodedEntityImpl(final String type, final String code, final TranslationType translationType) {
+        this(type, code, translationType.getVariants());
+    }
 
-	protected CodedEntityImpl(final String type, final String code, final Collection<String> variants) {
-		this.code = code;
-		this.type = type.toUpperCase();
-		this.variants = variants;
-	}
+    protected CodedEntityImpl(final String type, final String code, final Collection<String> variants) {
+        this.code = code;
+        this.type = type.toUpperCase();
+        this.variants = variants;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getTranslationType() {
-		return type;
-	}
+    public String getTranslationType() {
+        return type;
+    }
 
-	public String getTranslationCode() {
-		return code;
-	}
+    public String getTranslationCode() {
+        return code;
+    }
 
-	public Collection<String> getTranslationVariants() {
-		return variants;
-	}
+    public Collection<String> getTranslationVariants() {
+        return variants;
+    }
 }

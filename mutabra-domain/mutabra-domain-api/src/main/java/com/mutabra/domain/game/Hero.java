@@ -15,43 +15,43 @@ import java.util.List;
  */
 public interface Hero extends BaseEntity {
 
-	Account getAccount();
+    Account getAccount();
 
-	String getName();
+    String getName();
 
-	void setName(String name);
+    void setName(String name);
 
-	long getRating();
+    long getRating();
 
-	void setRating(long rating);
+    void setRating(long rating);
 
-	Face getFace();
+    Face getFace();
 
-	void setFace(Face face);
+    void setFace(Face face);
 
-	Race getRace();
+    Race getRace();
 
-	void setRace(Race race);
+    void setRace(Race race);
 
-	Level getLevel();
+    Level getLevel();
 
-	void setLevel(Level level);
+    void setLevel(Level level);
 
-	int getHealth();
+    int getHealth();
 
-	void setHealth(int health);
+    void setHealth(int health);
 
-	List<HeroCard> getCards();
+    List<HeroCard> getCards();
 
-	Battle getBattle();
+    Battle getBattle();
 
-	void setBattle(Battle battle);
+    void setBattle(Battle battle);
 
-	Date getLastActive();
+    Date getLastActive();
 
-	void setLastActive(Date lastActive);
+    void setLastActive(Date lastActive);
 
-	boolean isReady();
+    boolean isReady();
 
-	void setReady(boolean ready);
+    void setReady(boolean ready);
 }

@@ -13,21 +13,21 @@ import javax.persistence.Entity;
 @Entity(name = Tables.LEVEL)
 public class LevelImpl extends CodedEntityImpl implements Level {
 
-	private long rating;
+    private long rating;
 
-	public LevelImpl() {
-		this(null);
-	}
+    public LevelImpl() {
+        this(null);
+    }
 
-	public LevelImpl(final String code) {
-		super(Tables.LEVEL, code, TranslationType.NAME);
-	}
+    public LevelImpl(final String code) {
+        super(Tables.LEVEL, code, TranslationType.NAME);
+    }
 
-	public long getRating() {
-		return rating;
-	}
+    public long getRating() {
+        return rating;
+    }
 
-	public void setRating(final long rating) {
-		this.rating = rating;
-	}
+    public void setRating(final long rating) {
+        this.rating = rating;
+    }
 }

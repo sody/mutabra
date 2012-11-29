@@ -17,30 +17,30 @@ import javax.persistence.Entity;
 @Entity(name = Tables.BATTLE_SUMMON)
 public class BattleCreatureImpl extends BattleUnitImpl implements BattleCreature {
 
-	@Parent
-	private Key<BattleHeroImpl> owner;
+    @Parent
+    private Key<BattleHeroImpl> owner;
 
-	@Unindexed
-	private Key<CardImpl> card;
+    @Unindexed
+    private Key<CardImpl> card;
 
-	public BattleCreatureImpl() {
-	}
+    public BattleCreatureImpl() {
+    }
 
-	public BattleCreatureImpl(final BattleHero owner, final Card card) {
-		this.owner = Keys.getKey(owner);
-		this.card = Keys.getKey(card);
-	}
+    public BattleCreatureImpl(final BattleHero owner, final Card card) {
+        this.owner = Keys.getKey(owner);
+        this.card = Keys.getKey(card);
+    }
 
-	public BattleHero getOwner() {
-		return Keys.getInstance(owner);
-	}
+    public BattleHero getOwner() {
+        return Keys.getInstance(owner);
+    }
 
-	public Card getCard() {
-		return Keys.getInstance(card);
-	}
+    public Card getCard() {
+        return Keys.getInstance(card);
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return owner;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return owner;
+    }
 }

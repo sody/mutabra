@@ -8,7 +8,7 @@ import com.mutabra.domain.CodedEntity;
  */
 public interface Level extends CodedEntity {
 
-	long getRating();
+    long getRating();
 
-	void setRating(long rating);
+    void setRating(long rating);
 }

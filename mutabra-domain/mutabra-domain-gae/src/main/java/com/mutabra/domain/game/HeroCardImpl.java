@@ -17,42 +17,42 @@ import javax.persistence.Entity;
 @Entity(name = Tables.HERO_CARD)
 public class HeroCardImpl extends BaseEntityImpl implements HeroCard {
 
-	@Parent
-	private Key<HeroImpl> hero;
+    @Parent
+    private Key<HeroImpl> hero;
 
-	private Key<CardImpl> card;
+    private Key<CardImpl> card;
 
-	private long rating;
+    private long rating;
 
-	public HeroCardImpl() {
-	}
+    public HeroCardImpl() {
+    }
 
-	public HeroCardImpl(final Hero hero) {
-		this.hero = Keys.getKey(hero);
-	}
+    public HeroCardImpl(final Hero hero) {
+        this.hero = Keys.getKey(hero);
+    }
 
-	public Hero getHero() {
-		return Keys.getInstance(hero);
-	}
+    public Hero getHero() {
+        return Keys.getInstance(hero);
+    }
 
-	public Card getCard() {
-		return Keys.getInstance(card);
-	}
+    public Card getCard() {
+        return Keys.getInstance(card);
+    }
 
-	public void setCard(final Card card) {
-		this.card = Keys.getKey(card);
-	}
+    public void setCard(final Card card) {
+        this.card = Keys.getKey(card);
+    }
 
-	public long getRating() {
-		return rating;
-	}
+    public long getRating() {
+        return rating;
+    }
 
-	public void setRating(final long rating) {
-		this.rating = rating;
-	}
+    public void setRating(final long rating) {
+        this.rating = rating;
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return hero;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return hero;
+    }
 }

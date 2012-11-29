@@ -9,9 +9,9 @@ import java.util.Collection;
  */
 public interface Translatable extends Serializable {
 
-	String getTranslationType();
+    String getTranslationType();
 
-	String getTranslationCode();
+    String getTranslationCode();
 
-	Collection<String> getTranslationVariants();
+    Collection<String> getTranslationVariants();
 }

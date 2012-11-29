@@ -10,5 +10,5 @@ import com.mutabra.services.BaseEntityService;
  */
 public interface HeroService extends BaseEntityService<Hero> {
 
-	Hero create(Account account);
+    Hero create(Account account);
 }

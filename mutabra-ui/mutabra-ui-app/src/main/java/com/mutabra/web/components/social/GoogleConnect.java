@@ -12,21 +12,21 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
  */
 public class GoogleConnect extends AbstractOAuth2Connect {
 
-	@InjectService("googleService")
-	private OAuth2 googleService;
+    @InjectService("googleService")
+    private OAuth2 googleService;
 
-	@Override
-	protected OAuth2 getOAuth() {
-		return googleService;
-	}
+    @Override
+    protected OAuth2 getOAuth() {
+        return googleService;
+    }
 
-	@OnEvent(CONNECTED_EVENT)
-	Object connected(
-			@RequestParameter(value = "code", allowBlank = true) final String code,
-			@RequestParameter(value = "error", allowBlank = true) final String error,
-			@RequestParameter(value = "error_reason", allowBlank = true) final String errorReason,
-			@RequestParameter(value = "error_description", allowBlank = true) final String errorDescription) {
+    @OnEvent(CONNECTED_EVENT)
+    Object connected(
+            @RequestParameter(value = "code", allowBlank = true) final String code,
+            @RequestParameter(value = "error", allowBlank = true) final String error,
+            @RequestParameter(value = "error_reason", allowBlank = true) final String errorReason,
+            @RequestParameter(value = "error_description", allowBlank = true) final String errorDescription) {
 
-		return doConnected(code, errorDescription);
-	}
+        return doConnected(code, errorDescription);
+    }
 }

@@ -20,53 +20,53 @@ import java.util.List;
  */
 public class BattleDisplay {
 
-	@Inject
-	private AccountContext accountContext;
+    @Inject
+    private AccountContext accountContext;
 
-	@Inject
-	private BattleService battleService;
+    @Inject
+    private BattleService battleService;
 
-	@Property
-	private Battle battle;
+    @Property
+    private Battle battle;
 
-	@Property
-	private BattleHero you;
+    @Property
+    private BattleHero you;
 
-	@Property
-	private BattleHero opponent;
+    @Property
+    private BattleHero opponent;
 
-	@Property
-	private BattleField field;
+    @Property
+    private BattleField field;
 
-	@Property
-	private List<BattleField> fields;
+    @Property
+    private List<BattleField> fields;
 
-	@Property
-	private Card card;
+    @Property
+    private Card card;
 
-	@Property
-	private Ability ability;
+    @Property
+    private Ability ability;
 
-	public String getActionsClass() {
-		return field.hasHero() && !field.isEnemySide() ?
-				"row actions active" :
-				"row actions";
-	}
+    public String getActionsClass() {
+        return field.hasHero() && !field.isEnemySide() ?
+                "row actions active" :
+                "row actions";
+    }
 
-	@SetupRender
-	void setupBattleField() {
-		final Hero hero = accountContext.getHero();
-		battle = accountContext.getBattle();
+    @SetupRender
+    void setupBattleField() {
+        final Hero hero = accountContext.getHero();
+        battle = accountContext.getBattle();
 
-		fields = battleService.getBattleField(hero, battle);
-		for (BattleField battleField : fields) {
-			if (battleField.hasHero()) {
-				if (battleField.isEnemySide()) {
-					opponent = battleField.getHero();
-				} else {
-					you = battleField.getHero();
-				}
-			}
-		}
-	}
+        fields = battleService.getBattleField(hero, battle);
+        for (BattleField battleField : fields) {
+            if (battleField.hasHero()) {
+                if (battleField.isEnemySide()) {
+                    opponent = battleField.getHero();
+                } else {
+                    you = battleField.getHero();
+                }
+            }
+        }
+    }
 }

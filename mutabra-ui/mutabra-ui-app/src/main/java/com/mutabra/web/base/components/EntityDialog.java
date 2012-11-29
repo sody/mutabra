@@ -20,55 +20,55 @@ import static org.apache.tapestry5.EventConstants.FAILURE;
  */
 public class EntityDialog<E extends BaseEntity> extends AbstractComponent implements ClientElement {
 
-	@Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
-	private String clientId;
+    @Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
+    private String clientId;
 
-	@InjectComponent
-	private Modal modal;
+    @InjectComponent
+    private Modal modal;
 
-	@InjectComponent
-	private Zone formZone;
+    @InjectComponent
+    private Zone formZone;
 
-	@InjectComponent
-	private Form form;
+    @InjectComponent
+    private Form form;
 
-	@Inject
-	private Block modalBlock;
+    @Inject
+    private Block modalBlock;
 
-	private E value;
+    private E value;
 
-	public String getClientId() {
-		return clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public String getModalId() {
-		return clientId + "_modal";
-	}
+    public String getModalId() {
+        return clientId + "_modal";
+    }
 
-	public String getFormZoneId() {
-		return clientId + "_form_zone";
-	}
+    public String getFormZoneId() {
+        return clientId + "_form_zone";
+    }
 
-	public String getTitle() {
-		return getMessages().get(value.isNew() ? "add.title" : "edit.title");
-	}
+    public String getTitle() {
+        return getMessages().get(value.isNew() ? "add.title" : "edit.title");
+    }
 
-	public E getValue() {
-		return value;
-	}
+    public E getValue() {
+        return value;
+    }
 
-	public Object show(final E entity) {
-		init(entity);
-		form.clearErrors();
-		return modalBlock;
-	}
+    public Object show(final E entity) {
+        init(entity);
+        form.clearErrors();
+        return modalBlock;
+    }
 
-	protected void init(final E entity) {
-		value = entity;
-	}
+    protected void init(final E entity) {
+        value = entity;
+    }
 
-	@OnEvent(value = FAILURE)
-	public Object onFailure() {
-		return formZone;
-	}
+    @OnEvent(value = FAILURE)
+    public Object onFailure() {
+        return formZone;
+    }
 }

@@ -12,16 +12,16 @@ import com.mutabra.web.base.components.AbstractComponent;
  */
 public class AbstractPage extends AbstractComponent {
 
-	public String getTitle() {
-		//todo: make more complex title obtaining(with prefix and suffix)
-		if (getMessages().contains("title")) {
-			return getMessages().get("title");
-		}
-		final String key = "page." + getResources().getPageName().toLowerCase().replaceAll("/","-") + ".title";
-		return getMessages().get(key);
-	}
+    public String getTitle() {
+        //todo: make more complex title obtaining(with prefix and suffix)
+        if (getMessages().contains("title")) {
+            return getMessages().get("title");
+        }
+        final String key = "page." + getResources().getPageName().toLowerCase().replaceAll("/", "-") + ".title";
+        return getMessages().get(key);
+    }
 
-	public String getSubtitle() {
-		return null;
-	}
+    public String getSubtitle() {
+        return null;
+    }
 }

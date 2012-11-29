@@ -25,37 +25,37 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 @RequiresPermissions("level:view")
 public class Levels extends AbstractPage {
 
-	@InjectService("levelService")
-	private CodedEntityService<Level> levelService;
+    @InjectService("levelService")
+    private CodedEntityService<Level> levelService;
 
-	@Inject
-	private TranslationService translationService;
+    @Inject
+    private TranslationService translationService;
 
-	@Inject
-	private Translator translator;
+    @Inject
+    private Translator translator;
 
-	@InjectComponent
-	private LevelDialog entityDialog;
+    @InjectComponent
+    private LevelDialog entityDialog;
 
-	@Property
-	private Level row;
+    @Property
+    private Level row;
 
-	public GridDataSource getSource() {
-		return new BaseEntityDataSource<Level>(levelService.query(), Level.class);
-	}
+    public GridDataSource getSource() {
+        return new BaseEntityDataSource<Level>(levelService.query(), Level.class);
+    }
 
-	@OnEvent(value = "edit")
-	Object editLevel(final Level level) {
-		return entityDialog.show(level);
-	}
+    @OnEvent(value = "edit")
+    Object editLevel(final Level level) {
+        return entityDialog.show(level);
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	@RequiresPermissions("level:edit")
-	Object saveLevel() {
-		levelService.saveOrUpdate(entityDialog.getValue());
-		translationService.saveTranslations(entityDialog.getTranslations());
-		//todo: should be automatic
-		translator.invalidateCache(entityDialog.getValue());
-		return this;
-	}
+    @OnEvent(value = EventConstants.SUCCESS)
+    @RequiresPermissions("level:edit")
+    Object saveLevel() {
+        levelService.saveOrUpdate(entityDialog.getValue());
+        translationService.saveTranslations(entityDialog.getTranslations());
+        //todo: should be automatic
+        translator.invalidateCache(entityDialog.getValue());
+        return this;
+    }
 }

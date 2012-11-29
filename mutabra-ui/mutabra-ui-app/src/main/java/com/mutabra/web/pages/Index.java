@@ -11,11 +11,11 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class Index extends AbstractPage {
 
-	@Inject
-	@Path("gomer.jpg")
-	private Asset logo;
+    @Inject
+    @Path("gomer.jpg")
+    private Asset logo;
 
-	public Asset getLogo() {
-		return logo;
-	}
+    public Asset getLogo() {
+        return logo;
+    }
 }

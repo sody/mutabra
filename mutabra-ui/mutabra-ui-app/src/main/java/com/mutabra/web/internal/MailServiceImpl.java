@@ -16,30 +16,30 @@ import java.util.Properties;
  * @since 1.0
  */
 public class MailServiceImpl implements MailService {
-	private final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
 
-	private final Properties properties = new Properties();
-	private final String adminAddress;
+    private final Properties properties = new Properties();
+    private final String adminAddress;
 
-	public MailServiceImpl(final String adminAddress) {
-		this.adminAddress = adminAddress;
-	}
+    public MailServiceImpl(final String adminAddress) {
+        this.adminAddress = adminAddress;
+    }
 
-	public void send(final String to, final String subject, final String body) {
-		final Session session = Session.getDefaultInstance(properties, null);
+    public void send(final String to, final String subject, final String body) {
+        final Session session = Session.getDefaultInstance(properties, null);
 
-		try {
-			final Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(adminAddress));
-			message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject(subject);
-			message.setText(body);
-			Transport.send(message);
-			logger.debug("Sending mail 'to:{}/{}':\n{}", new Object[] {to, subject, body});
-		} catch (Exception e) {
-			final String error = String.format("Error occurs while sending email 'to:%s/%s'", to, subject);
-			logger.error(error, e);
-			throw new RuntimeException(error, e);
-		}
-	}
+        try {
+            final Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(adminAddress));
+            message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(body);
+            Transport.send(message);
+            logger.debug("Sending mail 'to:{}/{}':\n{}", new Object[]{to, subject, body});
+        } catch (Exception e) {
+            final String error = String.format("Error occurs while sending email 'to:%s/%s'", to, subject);
+            logger.error(error, e);
+            throw new RuntimeException(error, e);
+        }
+    }
 }

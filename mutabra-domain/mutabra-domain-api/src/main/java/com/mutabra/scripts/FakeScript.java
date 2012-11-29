@@ -6,7 +6,7 @@ package com.mutabra.scripts;
  */
 public class FakeScript implements EffectScript {
 
-	public void execute(final ScriptContext context) {
-		//do nothing
-	}
+    public void execute(final ScriptContext context) {
+        //do nothing
+    }
 }

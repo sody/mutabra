@@ -22,39 +22,39 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 @RequiresPermissions("account:view")
 public class Accounts extends AbstractPage {
 
-	@InjectService("accountService")
-	private BaseEntityService<Account> accountService;
+    @InjectService("accountService")
+    private BaseEntityService<Account> accountService;
 
-	@InjectComponent
-	private AccountDialog entityDialog;
+    @InjectComponent
+    private AccountDialog entityDialog;
 
-	@Property
-	private Account row;
+    @Property
+    private Account row;
 
-	public GridDataSource getSource() {
-		return new BaseEntityDataSource<Account>(accountService.query(), Account.class);
-	}
+    public GridDataSource getSource() {
+        return new BaseEntityDataSource<Account>(accountService.query(), Account.class);
+    }
 
-	@OnEvent(value = "add")
-	Object addAccount() {
-		return entityDialog.show(accountService.create());
-	}
+    @OnEvent(value = "add")
+    Object addAccount() {
+        return entityDialog.show(accountService.create());
+    }
 
-	@OnEvent(value = "edit")
-	Object editAccount(final Account account) {
-		return entityDialog.show(account);
-	}
+    @OnEvent(value = "edit")
+    Object editAccount(final Account account) {
+        return entityDialog.show(account);
+    }
 
-	@OnEvent(value = "delete")
-	@RequiresPermissions("account:edit")
-	void deleteAccount(final Account account) {
-		accountService.delete(account);
-	}
+    @OnEvent(value = "delete")
+    @RequiresPermissions("account:edit")
+    void deleteAccount(final Account account) {
+        accountService.delete(account);
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	@RequiresPermissions("account:edit")
-	Object saveAccount() {
-		accountService.saveOrUpdate(entityDialog.getValue());
-		return this;
-	}
+    @OnEvent(value = EventConstants.SUCCESS)
+    @RequiresPermissions("account:edit")
+    Object saveAccount() {
+        accountService.saveOrUpdate(entityDialog.getValue());
+        return this;
+    }
 }

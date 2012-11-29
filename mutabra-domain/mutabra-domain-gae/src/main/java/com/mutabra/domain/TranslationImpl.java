@@ -15,61 +15,61 @@ import java.util.Locale;
 @Entity(name = Tables.TRANSLATION)
 public class TranslationImpl extends BaseEntityImpl implements Translation {
 
-	private String type;
+    private String type;
 
-	private String code;
+    private String code;
 
-	private String variant;
+    private String variant;
 
-	private String locale = "";
+    private String locale = "";
 
-	@Transient
-	private Locale localeValue;
+    @Transient
+    private Locale localeValue;
 
-	@Unindexed
-	private String value;
+    @Unindexed
+    private String value;
 
-	public String getValue() {
-		return value;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	public void setValue(final String value) {
-		this.value = value;
-	}
+    public void setValue(final String value) {
+        this.value = value;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(final String type) {
-		this.type = type;
-	}
+    public void setType(final String type) {
+        this.type = type;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setCode(final String code) {
-		this.code = code;
-	}
+    public void setCode(final String code) {
+        this.code = code;
+    }
 
-	public String getVariant() {
-		return variant;
-	}
+    public String getVariant() {
+        return variant;
+    }
 
-	public void setVariant(final String variant) {
-		this.variant = variant;
-	}
+    public void setVariant(final String variant) {
+        this.variant = variant;
+    }
 
-	public Locale getLocale() {
-		if (localeValue == null) {
-			localeValue = LocaleUtils.parseLocale(locale);
-		}
-		return localeValue;
-	}
+    public Locale getLocale() {
+        if (localeValue == null) {
+            localeValue = LocaleUtils.parseLocale(locale);
+        }
+        return localeValue;
+    }
 
-	public void setLocale(final Locale locale) {
-		localeValue = locale;
-		this.locale = locale != null ? locale.toString() : null;
-	}
+    public void setLocale(final Locale locale) {
+        localeValue = locale;
+        this.locale = locale != null ? locale.toString() : null;
+    }
 }

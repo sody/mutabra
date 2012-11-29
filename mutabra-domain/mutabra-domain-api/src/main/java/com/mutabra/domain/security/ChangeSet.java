@@ -10,15 +10,15 @@ import java.util.Date;
  */
 public interface ChangeSet extends BaseEntity {
 
-	String getTitle();
+    String getTitle();
 
-	String getAuthor();
+    String getAuthor();
 
-	String getLocation();
+    String getLocation();
 
-	String getComment();
+    String getComment();
 
-	Date getExecutedAt();
+    Date getExecutedAt();
 
-	String getCheckSum();
+    String getCheckSum();
 }

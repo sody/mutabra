@@ -82,229 +82,229 @@ import static com.mutabra.services.Mappers.account$;
  */
 public class SecurityModule {
 
-	@FactoryDefaults
-	@Contribute(SymbolProvider.class)
-	public void setupDefaultValues(final MappedConfiguration<String, String> configuration) {
-		// we can override all this values with system properties and servlet context parameters
+    @FactoryDefaults
+    @Contribute(SymbolProvider.class)
+    public void setupDefaultValues(final MappedConfiguration<String, String> configuration) {
+        // we can override all this values with system properties and servlet context parameters
 
-		configuration.add(SecurityConstants.ROBOT_EMAIL, "${evn.robot_email}");
+        configuration.add(SecurityConstants.ROBOT_EMAIL, "${evn.robot_email}");
 
-		// hash service constants should be retrieved from environment values by default
-		configuration.add(SecurityConstants.HASH_ALGORITHM, "${evn.hash_algorithm}");
-		configuration.add(SecurityConstants.HASH_ITERATIONS, "${evn.hash_iterations}");
-		configuration.add(SecurityConstants.HASH_PRIVATE_SALT, "${evn.hash_private_salt}");
+        // hash service constants should be retrieved from environment values by default
+        configuration.add(SecurityConstants.HASH_ALGORITHM, "${evn.hash_algorithm}");
+        configuration.add(SecurityConstants.HASH_ITERATIONS, "${evn.hash_iterations}");
+        configuration.add(SecurityConstants.HASH_PRIVATE_SALT, "${evn.hash_private_salt}");
 
-		// add default value for token expiration time
-		configuration.add(SecurityConstants.TOKEN_EXPIRATION_TIME, "60000");
+        // add default value for token expiration time
+        configuration.add(SecurityConstants.TOKEN_EXPIRATION_TIME, "60000");
 
-		// created here https://developers.facebook.com/apps
-		configuration.add(SecurityConstants.FACEBOOK_KEY, "${env.facebook_id}");
-		configuration.add(SecurityConstants.FACEBOOK_SECRET, "${env.facebook_secret}");
-		// created here https://dev.twitter.com/apps/new
-		configuration.add(SecurityConstants.TWITTER_KEY, "${env.twitter_id}");
-		configuration.add(SecurityConstants.TWITTER_SECRET, "${env.twitter_secret}");
-		// created here https://code.google.com/apis/console
-		configuration.add(SecurityConstants.GOOGLE_KEY, "${env.google_id}");
-		configuration.add(SecurityConstants.GOOGLE_SECRET, "${env.google_secret}");
-		// created here https://vk.com/editapp?act=create
-		configuration.add(SecurityConstants.VK_KEY, "${env.vk_id}");
-		configuration.add(SecurityConstants.VK_SECRET, "${env.vk_secret}");
-	}
+        // created here https://developers.facebook.com/apps
+        configuration.add(SecurityConstants.FACEBOOK_KEY, "${env.facebook_id}");
+        configuration.add(SecurityConstants.FACEBOOK_SECRET, "${env.facebook_secret}");
+        // created here https://dev.twitter.com/apps/new
+        configuration.add(SecurityConstants.TWITTER_KEY, "${env.twitter_id}");
+        configuration.add(SecurityConstants.TWITTER_SECRET, "${env.twitter_secret}");
+        // created here https://code.google.com/apis/console
+        configuration.add(SecurityConstants.GOOGLE_KEY, "${env.google_id}");
+        configuration.add(SecurityConstants.GOOGLE_SECRET, "${env.google_secret}");
+        // created here https://vk.com/editapp?act=create
+        configuration.add(SecurityConstants.VK_KEY, "${env.vk_id}");
+        configuration.add(SecurityConstants.VK_SECRET, "${env.vk_secret}");
+    }
 
-	public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
-											  final WebSecurityManager securityManager) {
-		final DefaultWebEnvironment environment = new DefaultWebEnvironment();
-		environment.setServletContext(applicationGlobals.getServletContext());
-		environment.setWebSecurityManager(securityManager);
-		return environment;
-	}
+    public WebEnvironment buildWebEnvironment(final ApplicationGlobals applicationGlobals,
+                                              final WebSecurityManager securityManager) {
+        final DefaultWebEnvironment environment = new DefaultWebEnvironment();
+        environment.setServletContext(applicationGlobals.getServletContext());
+        environment.setWebSecurityManager(securityManager);
+        return environment;
+    }
 
-	public WebSecurityManager buildWebSecurityManager(final List<Realm> realms) {
-		return new DefaultWebSecurityManager(realms);
-	}
+    public WebSecurityManager buildWebSecurityManager(final List<Realm> realms) {
+        return new DefaultWebSecurityManager(realms);
+    }
 
-	@Contribute(WebSecurityManager.class)
-	public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
-											 @InjectService("accountService") final BaseEntityService<Account> accountService,
-											 final HashedPasswordMatcher generator) {
-		configuration.add("main", new MainRealm(accountService, generator));
-		configuration.add("facebook", new FacebookRealm(accountService, generator));
-		configuration.add("twitter", new TwitterRealm(accountService, generator));
-		configuration.add("google", new GoogleRealm(accountService, generator));
-		configuration.add("vk", new VKRealm(accountService, generator));
-		configuration.add("confirmation", new ConfirmationRealm(accountService));
-	}
+    @Contribute(WebSecurityManager.class)
+    public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
+                                             @InjectService("accountService") final BaseEntityService<Account> accountService,
+                                             final HashedPasswordMatcher generator) {
+        configuration.add("main", new MainRealm(accountService, generator));
+        configuration.add("facebook", new FacebookRealm(accountService, generator));
+        configuration.add("twitter", new TwitterRealm(accountService, generator));
+        configuration.add("google", new GoogleRealm(accountService, generator));
+        configuration.add("vk", new VKRealm(accountService, generator));
+        configuration.add("confirmation", new ConfirmationRealm(accountService));
+    }
 
-	public HashedPasswordMatcher buildHashedPasswordMatcher(@Symbol(SecurityConstants.HASH_ALGORITHM) final String hashAlgorithmName,
-															@Symbol(SecurityConstants.HASH_ITERATIONS) final int hashIterations,
-															@Symbol(SecurityConstants.HASH_PRIVATE_SALT) final String privateSalt,
-															@Symbol(SecurityConstants.TOKEN_EXPIRATION_TIME) final long tokenExpirationTime) {
+    public HashedPasswordMatcher buildHashedPasswordMatcher(@Symbol(SecurityConstants.HASH_ALGORITHM) final String hashAlgorithmName,
+                                                            @Symbol(SecurityConstants.HASH_ITERATIONS) final int hashIterations,
+                                                            @Symbol(SecurityConstants.HASH_PRIVATE_SALT) final String privateSalt,
+                                                            @Symbol(SecurityConstants.TOKEN_EXPIRATION_TIME) final long tokenExpirationTime) {
 
-		final DefaultHashService hashService = new DefaultHashService();
-		hashService.setHashAlgorithmName(hashAlgorithmName);
-		hashService.setHashIterations(hashIterations);
-		hashService.setPrivateSalt(ByteSource.Util.bytes(Base64.decode(privateSalt)));
-		hashService.setGeneratePublicSalt(true);
+        final DefaultHashService hashService = new DefaultHashService();
+        hashService.setHashAlgorithmName(hashAlgorithmName);
+        hashService.setHashIterations(hashIterations);
+        hashService.setPrivateSalt(ByteSource.Util.bytes(Base64.decode(privateSalt)));
+        hashService.setGeneratePublicSalt(true);
 
-		return new HashedPasswordMatcher(hashService, tokenExpirationTime);
-	}
+        return new HashedPasswordMatcher(hashService, tokenExpirationTime);
+    }
 
-	public OAuth2 buildFacebookService(@Symbol(SecurityConstants.FACEBOOK_KEY) final String clientId,
-									   @Symbol(SecurityConstants.FACEBOOK_SECRET) final String clientSecret,
-									   final PageRenderLinkSource linkSource) {
-		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".facebook:connected";
-		return new Facebook(clientId, clientSecret, redirectUri);
-	}
+    public OAuth2 buildFacebookService(@Symbol(SecurityConstants.FACEBOOK_KEY) final String clientId,
+                                       @Symbol(SecurityConstants.FACEBOOK_SECRET) final String clientSecret,
+                                       final PageRenderLinkSource linkSource) {
+        final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".facebook:connected";
+        return new Facebook(clientId, clientSecret, redirectUri);
+    }
 
-	public OAuth buildTwitterService(@Symbol(SecurityConstants.TWITTER_KEY) final String consumerKey,
-									 @Symbol(SecurityConstants.TWITTER_SECRET) final String consumerSecret,
-									 final PageRenderLinkSource linkSource) {
-		final String callbackUrl = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".twitter:connected";
-		return new Twitter(consumerKey, consumerSecret, callbackUrl);
-	}
+    public OAuth buildTwitterService(@Symbol(SecurityConstants.TWITTER_KEY) final String consumerKey,
+                                     @Symbol(SecurityConstants.TWITTER_SECRET) final String consumerSecret,
+                                     final PageRenderLinkSource linkSource) {
+        final String callbackUrl = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".twitter:connected";
+        return new Twitter(consumerKey, consumerSecret, callbackUrl);
+    }
 
-	public OAuth2 buildGoogleService(@Symbol(SecurityConstants.GOOGLE_KEY) final String consumerKey,
-									 @Symbol(SecurityConstants.GOOGLE_SECRET) final String consumerSecret,
-									 final PageRenderLinkSource linkSource) {
-		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".google:connected";
-		return new Google(consumerKey, consumerSecret, redirectUri);
-	}
+    public OAuth2 buildGoogleService(@Symbol(SecurityConstants.GOOGLE_KEY) final String consumerKey,
+                                     @Symbol(SecurityConstants.GOOGLE_SECRET) final String consumerSecret,
+                                     final PageRenderLinkSource linkSource) {
+        final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".google:connected";
+        return new Google(consumerKey, consumerSecret, redirectUri);
+    }
 
-	public OAuth2 buildVkService(@Symbol(SecurityConstants.VK_KEY) final String consumerKey,
-								 @Symbol(SecurityConstants.VK_SECRET) final String consumerSecret,
-								 final PageRenderLinkSource linkSource) {
-		final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".vk:connected";
-		return new VKontakte(consumerKey, consumerSecret, redirectUri);
-	}
+    public OAuth2 buildVkService(@Symbol(SecurityConstants.VK_KEY) final String consumerKey,
+                                 @Symbol(SecurityConstants.VK_SECRET) final String consumerSecret,
+                                 final PageRenderLinkSource linkSource) {
+        final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".vk:connected";
+        return new VKontakte(consumerKey, consumerSecret, redirectUri);
+    }
 
-	@Contribute(HttpServletRequestHandler.class)
-	public void contributeHttpServletRequestHandler(final OrderedConfiguration<HttpServletRequestFilter> configuration) {
-		configuration.addInstance("Shiro", SecurityRequestFilter.class);
-	}
+    @Contribute(HttpServletRequestHandler.class)
+    public void contributeHttpServletRequestHandler(final OrderedConfiguration<HttpServletRequestFilter> configuration) {
+        configuration.addInstance("Shiro", SecurityRequestFilter.class);
+    }
 
-	@Contribute(ComponentRequestHandler.class)
-	public static void contributeComponentRequestHandler(final OrderedConfiguration<ComponentRequestFilter> configuration) {
-		configuration.addInstance("SecurityFilter", SecurityFilter.class);
-	}
+    @Contribute(ComponentRequestHandler.class)
+    public static void contributeComponentRequestHandler(final OrderedConfiguration<ComponentRequestFilter> configuration) {
+        configuration.addInstance("SecurityFilter", SecurityFilter.class);
+    }
 
-	@Contribute(MetaWorker.class)
-	public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
-		configuration.add(RequiresAuthentication.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META));
-		configuration.add(RequiresUser.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_USER_META));
-		configuration.add(RequiresGuest.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_GUEST_META));
-		configuration.add(RequiresRoles.class, new MetaDataExtractor<RequiresRoles>() {
-			public void extractMetaData(final MutableComponentModel model, final RequiresRoles annotation) {
-				final Iterator<String> iterator = Arrays.asList(annotation.value()).iterator();
-				final StringBuilder builder = new StringBuilder();
-				if (iterator.hasNext()) {
-					builder.append(iterator.next());
-					while (iterator.hasNext()) {
-						builder.append(",");
-						builder.append(iterator.next());
-					}
-				}
+    @Contribute(MetaWorker.class)
+    public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
+        configuration.add(RequiresAuthentication.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META));
+        configuration.add(RequiresUser.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_USER_META));
+        configuration.add(RequiresGuest.class, new FixedExtractor(SecurityFilter.SHIRO_REQUIRES_GUEST_META));
+        configuration.add(RequiresRoles.class, new MetaDataExtractor<RequiresRoles>() {
+            public void extractMetaData(final MutableComponentModel model, final RequiresRoles annotation) {
+                final Iterator<String> iterator = Arrays.asList(annotation.value()).iterator();
+                final StringBuilder builder = new StringBuilder();
+                if (iterator.hasNext()) {
+                    builder.append(iterator.next());
+                    while (iterator.hasNext()) {
+                        builder.append(",");
+                        builder.append(iterator.next());
+                    }
+                }
 
-				model.setMeta(SecurityFilter.SHIRO_REQUIRES_ROLES_META, builder.toString());
-				model.setMeta(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META,
-						String.valueOf(annotation.logical() == Logical.AND));
-			}
-		});
-		configuration.add(RequiresPermissions.class, new MetaDataExtractor<RequiresPermissions>() {
-			public void extractMetaData(final MutableComponentModel model, final RequiresPermissions annotation) {
-				final Iterator<String> iterator = Arrays.asList(annotation.value()).iterator();
-				final StringBuilder builder = new StringBuilder();
-				if (iterator.hasNext()) {
-					builder.append(iterator.next());
-					while (iterator.hasNext()) {
-						builder.append(",");
-						builder.append(iterator.next());
-					}
-				}
+                model.setMeta(SecurityFilter.SHIRO_REQUIRES_ROLES_META, builder.toString());
+                model.setMeta(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META,
+                        String.valueOf(annotation.logical() == Logical.AND));
+            }
+        });
+        configuration.add(RequiresPermissions.class, new MetaDataExtractor<RequiresPermissions>() {
+            public void extractMetaData(final MutableComponentModel model, final RequiresPermissions annotation) {
+                final Iterator<String> iterator = Arrays.asList(annotation.value()).iterator();
+                final StringBuilder builder = new StringBuilder();
+                if (iterator.hasNext()) {
+                    builder.append(iterator.next());
+                    while (iterator.hasNext()) {
+                        builder.append(",");
+                        builder.append(iterator.next());
+                    }
+                }
 
-				model.setMeta(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, builder.toString());
-				model.setMeta(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META,
-						String.valueOf(annotation.logical() == Logical.AND));
-			}
-		});
-	}
+                model.setMeta(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, builder.toString());
+                model.setMeta(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META,
+                        String.valueOf(annotation.logical() == Logical.AND));
+            }
+        });
+    }
 
-	@Contribute(MetaDataLocator.class)
-	public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META, "");
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_USER_META, "");
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_GUEST_META, "");
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_META, "");
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META, "");
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, "");
-		configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META, "");
-	}
+    @Contribute(MetaDataLocator.class)
+    public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_AUTHENTICATION_META, "");
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_USER_META, "");
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_GUEST_META, "");
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_META, "");
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_ROLES_LOGICAL_META, "");
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_META, "");
+        configuration.add(SecurityFilter.SHIRO_REQUIRES_PERMISSIONS_LOGICAL_META, "");
+    }
 
-	@Contribute(ComponentClassTransformWorker2.class)
-	public static void contributeComponentClassTransformWorker2(final OrderedConfiguration<ComponentClassTransformWorker2> configuration) {
-		configuration.addInstance("SecurityWorker", SecurityWorker.class, "after:OnEvent");
-	}
+    @Contribute(ComponentClassTransformWorker2.class)
+    public static void contributeComponentClassTransformWorker2(final OrderedConfiguration<ComponentClassTransformWorker2> configuration) {
+        configuration.addInstance("SecurityWorker", SecurityWorker.class, "after:OnEvent");
+    }
 
-	@Decorate(serviceInterface = RequestExceptionHandler.class)
-	public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
-																   final RequestGlobals globals,
-																   final PageRenderLinkSource linkSource,
-																   final ComponentClassResolver resolver) {
+    @Decorate(serviceInterface = RequestExceptionHandler.class)
+    public RequestExceptionHandler decorateRequestExceptionHandler(final RequestExceptionHandler handler,
+                                                                   final RequestGlobals globals,
+                                                                   final PageRenderLinkSource linkSource,
+                                                                   final ComponentClassResolver resolver) {
 
-		final String loginPage = resolver.resolvePageClassNameToPageName(Security.class.getName());
-		return new SecurityExceptionHandler(handler, globals, linkSource, loginPage);
-	}
+        final String loginPage = resolver.resolvePageClassNameToPageName(Security.class.getName());
+        return new SecurityExceptionHandler(handler, globals, linkSource, loginPage);
+    }
 
-	@Scope(ScopeConstants.PERTHREAD)
-	public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
-											  final HeroService heroService) {
-		final Subject user = SecurityUtils.getSubject();
-		final Long userId = user != null ? (Long) user.getPrincipal() : null;
-		final Account account = accountService.query()
-				.filter(account$.id$.eq(userId))
-				.unique();
-		final Hero hero = account != null ? account.getHero() : null;
-		final Battle battle = hero != null ? hero.getBattle() : null;
+    @Scope(ScopeConstants.PERTHREAD)
+    public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
+                                              final HeroService heroService) {
+        final Subject user = SecurityUtils.getSubject();
+        final Long userId = user != null ? (Long) user.getPrincipal() : null;
+        final Account account = accountService.query()
+                .filter(account$.id$.eq(userId))
+                .unique();
+        final Hero hero = account != null ? account.getHero() : null;
+        final Battle battle = hero != null ? hero.getBattle() : null;
 
-		if (hero != null) {
-			hero.setLastActive(new Date());
-			heroService.update(hero);
-		}
+        if (hero != null) {
+            hero.setLastActive(new Date());
+            heroService.update(hero);
+        }
 
-		return new AccountContext() {
-			public Account getAccount() {
-				return account;
-			}
+        return new AccountContext() {
+            public Account getAccount() {
+                return account;
+            }
 
-			public Hero getHero() {
-				return hero;
-			}
+            public Hero getHero() {
+                return hero;
+            }
 
-			public Battle getBattle() {
-				return battle;
-			}
-		};
-	}
+            public Battle getBattle() {
+                return battle;
+            }
+        };
+    }
 
-	@Startup
-	public void createAdminAccount(@InjectService("accountService") final BaseEntityService<Account> accountService,
-								   final HashedPasswordMatcher generator,
-								   @Symbol(SecurityConstants.ADMIN_EMAIL) final String adminEmail,
-								   @Symbol(SecurityConstants.ADMIN_PASSWORD) final String adminPassword) {
+    @Startup
+    public void createAdminAccount(@InjectService("accountService") final BaseEntityService<Account> accountService,
+                                   final HashedPasswordMatcher generator,
+                                   @Symbol(SecurityConstants.ADMIN_EMAIL) final String adminEmail,
+                                   @Symbol(SecurityConstants.ADMIN_PASSWORD) final String adminPassword) {
 
-		if (adminEmail != null && accountService.query().count() <= 0) {
-			final Account account = accountService.create();
-			account.setEmail(adminEmail);
-			account.setName("admin");
-			account.setRole(Role.ADMIN);
-			account.setRegistered(new Date());
+        if (adminEmail != null && accountService.query().count() <= 0) {
+            final Account account = accountService.create();
+            account.setEmail(adminEmail);
+            account.setName("admin");
+            account.setRole(Role.ADMIN);
+            account.setRegistered(new Date());
 
-			if (adminPassword != null) {
-				final Hash hash = generator.generateHash(adminPassword);
-				account.setPassword(hash.toBase64());
-				account.setSalt(hash.getSalt().toBase64());
-			}
+            if (adminPassword != null) {
+                final Hash hash = generator.generateHash(adminPassword);
+                account.setPassword(hash.toBase64());
+                account.setSalt(hash.getSalt().toBase64());
+            }
 
-			accountService.save(account);
-		}
-	}
+            accountService.save(account);
+        }
+    }
 }

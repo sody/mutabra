@@ -5,5 +5,5 @@ package com.mutabra.domain.common;
  * @since 1.0
  */
 public abstract class Levels {
-	public static final String NEWBIE = "newbie";
+    public static final String NEWBIE = "newbie";
 }

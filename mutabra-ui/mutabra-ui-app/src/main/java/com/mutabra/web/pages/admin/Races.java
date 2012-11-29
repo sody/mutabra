@@ -25,37 +25,37 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 @RequiresPermissions("race:view")
 public class Races extends AbstractPage {
 
-	@InjectService("raceService")
-	private CodedEntityService<Race> raceService;
+    @InjectService("raceService")
+    private CodedEntityService<Race> raceService;
 
-	@Inject
-	private TranslationService translationService;
+    @Inject
+    private TranslationService translationService;
 
-	@Inject
-	private Translator translator;
+    @Inject
+    private Translator translator;
 
-	@InjectComponent
-	private RaceDialog entityDialog;
+    @InjectComponent
+    private RaceDialog entityDialog;
 
-	@Property
-	private Race row;
+    @Property
+    private Race row;
 
-	public GridDataSource getSource() {
-		return new BaseEntityDataSource<Race>(raceService.query(), Race.class);
-	}
+    public GridDataSource getSource() {
+        return new BaseEntityDataSource<Race>(raceService.query(), Race.class);
+    }
 
-	@OnEvent(value = "edit")
-	Object editRace(final Race race) {
-		return entityDialog.show(race);
-	}
+    @OnEvent(value = "edit")
+    Object editRace(final Race race) {
+        return entityDialog.show(race);
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	@RequiresPermissions("race:edit")
-	Object saveRace() {
-		raceService.saveOrUpdate(entityDialog.getValue());
-		translationService.saveTranslations(entityDialog.getTranslations());
-		//todo: should be automatic
-		translator.invalidateCache(entityDialog.getValue());
-		return this;
-	}
+    @OnEvent(value = EventConstants.SUCCESS)
+    @RequiresPermissions("race:edit")
+    Object saveRace() {
+        raceService.saveOrUpdate(entityDialog.getValue());
+        translationService.saveTranslations(entityDialog.getTranslations());
+        //todo: should be automatic
+        translator.invalidateCache(entityDialog.getValue());
+        return this;
+    }
 }

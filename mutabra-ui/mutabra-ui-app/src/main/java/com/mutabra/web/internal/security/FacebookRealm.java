@@ -13,24 +13,24 @@ import static com.mutabra.services.Mappers.account$;
  * @since 1.0
  */
 public class FacebookRealm extends OAuthRealm<FacebookRealm.Token> {
-	public FacebookRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
-						 final PasswordGenerator generator) {
-		super(accountService, generator, Token.class);
-	}
+    public FacebookRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
+                         final PasswordGenerator generator) {
+        super(accountService, generator, Token.class);
+    }
 
-	@Override
-	protected Account getAccountByProfileId(final String profileId) {
-		return findAccount(account$.facebookUser$.eq(profileId));
-	}
+    @Override
+    protected Account getAccountByProfileId(final String profileId) {
+        return findAccount(account$.facebookUser$.eq(profileId));
+    }
 
-	@Override
-	protected void setAccountProfileId(final Account account, final String profileId) {
-		account.setFacebookUser(profileId);
-	}
+    @Override
+    protected void setAccountProfileId(final Account account, final String profileId) {
+        account.setFacebookUser(profileId);
+    }
 
-	public static class Token extends OAuthRealm.Token {
-		public Token(final OAuth.Session session) {
-			super(session);
-		}
-	}
+    public static class Token extends OAuthRealm.Token {
+        public Token(final OAuth.Session session) {
+            super(session);
+        }
+    }
 }

@@ -1,19 +1,18 @@
-<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		  xmlns:p="tapestry:parameter">
-	<t:replace id="body">
-		<div class="control-group">
-			<t:label for="code" class="control-label"/>
-			<div class="controls">
-				<t:textfield t:id="code" value="value.code" validate="required" label="message:label.code"
-							 disabled="true"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<t:label for="rating" class="control-label"/>
-			<div class="controls">
-				<t:textfield t:id="rating" value="value.rating" validate="required" label="message:label.rating"/>
-			</div>
-		</div>
-		<t:admin.translationEditor t:id="translationEditor" value="value"/>
-	</t:replace>
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+    <t:replace id="body">
+        <div class="control-group">
+            <t:label for="code" class="control-label"/>
+            <div class="controls">
+                <t:textfield t:id="code" value="value.code" validate="required" disabled="true"
+                             label="message:label.code"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <t:label for="rating" class="control-label"/>
+            <div class="controls">
+                <t:textfield t:id="rating" value="value.rating" validate="required" label="message:label.rating"/>
+            </div>
+        </div>
+        <t:admin.translationEditor t:id="translationEditor" value="value"/>
+    </t:replace>
 </t:extend>

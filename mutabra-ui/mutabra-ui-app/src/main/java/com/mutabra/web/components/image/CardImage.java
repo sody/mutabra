@@ -7,7 +7,6 @@ import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.annotations.Value;
 
 /**
  * @author Ivan Khalopik
@@ -15,28 +14,28 @@ import org.apache.tapestry5.ioc.annotations.Value;
  */
 public class CardImage extends AbstractImage {
 
-	@Property
-	@Parameter(required = true, allowNull = false)
-	private Card card;
+    @Property
+    @Parameter(required = true, allowNull = false)
+    private Card card;
 
-	@Parameter(value = "prop:card:name")
-	private String title;
+    @Parameter(value = "prop:card:name")
+    private String title;
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return title;
-	}
+    @Override
+    protected String getTitle() {
+        return title;
+    }
 
-	@Override
-	protected String getAlt() {
-		return card.getCode();
-	}
+    @Override
+    protected String getAlt() {
+        return card.getCode();
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getCardImage(card);
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getCardImage(card);
+    }
 }

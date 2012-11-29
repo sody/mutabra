@@ -22,27 +22,27 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 @RequiresPermissions("db:manage")
 public class ChangeSets extends AbstractPage {
 
-	@InjectService("changeSetService")
-	private BaseEntityService<ChangeSet> changeSetService;
+    @InjectService("changeSetService")
+    private BaseEntityService<ChangeSet> changeSetService;
 
-	@Inject
-	private DatabaseService databaseService;
+    @Inject
+    private DatabaseService databaseService;
 
-	@Property
-	private ChangeSet row;
+    @Property
+    private ChangeSet row;
 
-	@Property
-	private boolean dropFirst;
+    @Property
+    private boolean dropFirst;
 
-	@Property
-	private boolean clearCheckSums;
+    @Property
+    private boolean clearCheckSums;
 
-	public GridDataSource getSource() {
-		return new BaseEntityDataSource<ChangeSet>(changeSetService.query(), ChangeSet.class);
-	}
+    public GridDataSource getSource() {
+        return new BaseEntityDataSource<ChangeSet>(changeSetService.query(), ChangeSet.class);
+    }
 
-	@OnEvent(value = EventConstants.SUCCESS)
-	void updateDatabase() {
-		databaseService.update(dropFirst, clearCheckSums);
-	}
+    @OnEvent(value = EventConstants.SUCCESS)
+    void updateDatabase() {
+        databaseService.update(dropFirst, clearCheckSums);
+    }
 }

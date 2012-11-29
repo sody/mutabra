@@ -8,23 +8,23 @@ import java.util.Locale;
  */
 public interface Translation extends BaseEntity {
 
-	String getValue();
+    String getValue();
 
-	void setValue(String value);
+    void setValue(String value);
 
-	String getType();
+    String getType();
 
-	void setType(String type);
+    void setType(String type);
 
-	String getCode();
+    String getCode();
 
-	void setCode(String code);
+    void setCode(String code);
 
-	String getVariant();
+    String getVariant();
 
-	void setVariant(String variant);
+    void setVariant(String variant);
 
-	Locale getLocale();
+    Locale getLocale();
 
-	void setLocale(Locale locale);
+    void setLocale(Locale locale);
 }

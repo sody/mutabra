@@ -13,96 +13,96 @@ import java.util.TimeZone;
  */
 public interface Account extends BaseEntity {
 
-	/* Security Information */
-	String getEmail();
+    /* Security Information */
+    String getEmail();
 
-	void setEmail(String email);
+    void setEmail(String email);
 
-	String getPassword();
+    String getPassword();
 
-	void setPassword(String password);
+    void setPassword(String password);
 
-	String getSalt();
+    String getSalt();
 
-	void setSalt(final String salt);
+    void setSalt(final String salt);
 
-	Role getRole();
+    Role getRole();
 
-	void setRole(Role role);
+    void setRole(Role role);
 
-	Date getRegistered();
+    Date getRegistered();
 
-	void setRegistered(Date registered);
+    void setRegistered(Date registered);
 
-	Date getLastLogin();
+    Date getLastLogin();
 
-	void setLastLogin(Date lastLogin);
-
-
-	/* Social Network Profiles */
-	String getFacebookUser();
-
-	void setFacebookUser(String user);
-
-	String getTwitterUser();
-
-	void setTwitterUser(String user);
-
-	String getGoogleUser();
-
-	void setGoogleUser(String user);
-
-	String getVkUser();
-
-	void setVkUser(String user);
+    void setLastLogin(Date lastLogin);
 
 
-	/* Pending Changes */
-	String getToken();
+    /* Social Network Profiles */
+    String getFacebookUser();
 
-	void setToken(String token);
+    void setFacebookUser(String user);
 
-	String getPendingToken();
+    String getTwitterUser();
 
-	void setPendingToken(String token);
+    void setTwitterUser(String user);
 
-	Long getTokenExpired();
+    String getGoogleUser();
 
-	void setTokenExpired(Long tokenExpired);
+    void setGoogleUser(String user);
 
-	String getPendingEmail();
+    String getVkUser();
 
-	void setPendingEmail(String email);
-
-	String getPendingPassword();
-
-	void setPendingPassword(String password);
-
-	String getPendingSalt();
-
-	void setPendingSalt(String salt);
+    void setVkUser(String user);
 
 
-	/* General Information */
-	String getName();
+    /* Pending Changes */
+    String getToken();
 
-	void setName(String name);
+    void setToken(String token);
 
-	String getPlace();
+    String getPendingToken();
 
-	void setPlace(String place);
+    void setPendingToken(String token);
 
-	Locale getLocale();
+    Long getTokenExpired();
 
-	void setLocale(Locale locale);
+    void setTokenExpired(Long tokenExpired);
 
-	TimeZone getTimeZone();
+    String getPendingEmail();
 
-	void setTimeZone(TimeZone timeZone);
+    void setPendingEmail(String email);
 
-	Hero getHero();
+    String getPendingPassword();
 
-	void setHero(Hero hero);
+    void setPendingPassword(String password);
 
-	List<Hero> getHeroes();
+    String getPendingSalt();
+
+    void setPendingSalt(String salt);
+
+
+    /* General Information */
+    String getName();
+
+    void setName(String name);
+
+    String getPlace();
+
+    void setPlace(String place);
+
+    Locale getLocale();
+
+    void setLocale(Locale locale);
+
+    TimeZone getTimeZone();
+
+    void setTimeZone(TimeZone timeZone);
+
+    Hero getHero();
+
+    void setHero(Hero hero);
+
+    List<Hero> getHeroes();
 }

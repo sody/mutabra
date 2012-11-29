@@ -18,27 +18,27 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
  */
 public class UpdateChecker extends AbstractComponent {
 
-	@Inject
-	private AccountContext accountContext;
+    @Inject
+    private AccountContext accountContext;
 
-	@Inject
-	private JavaScriptSupport support;
+    @Inject
+    private JavaScriptSupport support;
 
-	@Inject
-	private ValueEncoderSource encoderSource;
+    @Inject
+    private ValueEncoderSource encoderSource;
 
-	@Inject
-	private PageRenderLinkSource linkSource;
+    @Inject
+    private PageRenderLinkSource linkSource;
 
-	@AfterRender
-	void renderScript() {
-		final ValueEncoder<Hero> encoder = encoderSource.getValueEncoder(Hero.class);
-		final String heroId = encoder.toClient(accountContext.getHero());
-		final Link link = linkSource.createPageRenderLink(getResources().getPageName());
+    @AfterRender
+    void renderScript() {
+        final ValueEncoder<Hero> encoder = encoderSource.getValueEncoder(Hero.class);
+        final String heroId = encoder.toClient(accountContext.getHero());
+        final Link link = linkSource.createPageRenderLink(getResources().getPageName());
 
-		support.addInitializerCall("updateChecker", new JSONObject()
-				.put("hero_id", heroId)
-				.put("url", link.toAbsoluteURI())
-		);
-	}
+        support.addInitializerCall("updateChecker", new JSONObject()
+                .put("hero_id", heroId)
+                .put("url", link.toAbsoluteURI())
+        );
+    }
 }

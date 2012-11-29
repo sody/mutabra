@@ -8,15 +8,15 @@ import com.mutabra.domain.BaseEntity;
  */
 public interface BattleUnit extends BaseEntity {
 
-	Position getPosition();
+    Position getPosition();
 
-	void setPosition(Position position);
+    void setPosition(Position position);
 
-	int getHealth();
+    int getHealth();
 
-	void setHealth(int health);
+    void setHealth(int health);
 
-	boolean isExhausted();
+    boolean isExhausted();
 
-	void setExhausted(boolean exhausted);
+    void setExhausted(boolean exhausted);
 }

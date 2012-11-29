@@ -13,11 +13,11 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class AbilityDescription extends AbstractComponent implements ClientElement {
 
-	@Property
-	@Parameter
-	private Ability value;
+    @Property
+    @Parameter
+    private Ability value;
 
-	public String getClientId() {
-		return IdUtils.generateDescriptionId(value);
-	}
+    public String getClientId() {
+        return IdUtils.generateDescriptionId(value);
+    }
 }

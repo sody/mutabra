@@ -6,5 +6,5 @@ package com.mutabra.scripts;
  */
 public interface ScriptExecutor {
 
-	void executeScript(ScriptContext context);
+    void executeScript(ScriptContext context);
 }

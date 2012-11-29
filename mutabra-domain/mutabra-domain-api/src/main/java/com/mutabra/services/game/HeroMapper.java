@@ -11,9 +11,9 @@ import java.util.Date;
  * @since 1.0
  */
 public class HeroMapper<E extends BaseEntity> extends BaseEntityMapper<E> {
-	public final PropertyMapper<Long, E, Date> lastActive$ = property("lastActive");
+    public final PropertyMapper<Long, E, Date> lastActive$ = property("lastActive");
 
-	public HeroMapper(final String path) {
-		super(path);
-	}
+    public HeroMapper(final String path) {
+        super(path);
+    }
 }

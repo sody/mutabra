@@ -13,11 +13,11 @@ import javax.persistence.Entity;
 @Entity(name = Tables.RACE)
 public class RaceImpl extends CodedEntityImpl implements Race {
 
-	public RaceImpl() {
-		this(null);
-	}
+    public RaceImpl() {
+        this(null);
+    }
 
-	public RaceImpl(final String code) {
-		super(Tables.RACE, code, TranslationType.DESCRIPTION);
-	}
+    public RaceImpl(final String code) {
+        super(Tables.RACE, code, TranslationType.DESCRIPTION);
+    }
 }

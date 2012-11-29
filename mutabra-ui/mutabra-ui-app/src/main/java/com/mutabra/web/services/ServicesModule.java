@@ -45,76 +45,76 @@ import java.util.concurrent.Callable;
  * @since 1.0
  */
 public class ServicesModule {
-	private final Repository repository;
+    private final Repository repository;
 
-	public static void bind(final ServiceBinder binder) {
-		binder.bind(TranslationService.class, TranslationServiceImpl.class);
-		binder.bind(BattleService.class, BattleServiceImpl.class);
-		binder.bind(ScriptExecutor.class, ScriptExecutorImpl.class);
-	}
+    public static void bind(final ServiceBinder binder) {
+        binder.bind(TranslationService.class, TranslationServiceImpl.class);
+        binder.bind(BattleService.class, BattleServiceImpl.class);
+        binder.bind(ScriptExecutor.class, ScriptExecutorImpl.class);
+    }
 
-	public ServicesModule(final Repository repository) {
-		this.repository = repository;
-	}
+    public ServicesModule(final Repository repository) {
+        this.repository = repository;
+    }
 
-	public MailService buildMailService(final @Symbol(SecurityConstants.ROBOT_EMAIL) String robotEmail) {
-		return new MailServiceImpl(robotEmail);
-	}
+    public MailService buildMailService(final @Symbol(SecurityConstants.ROBOT_EMAIL) String robotEmail) {
+        return new MailServiceImpl(robotEmail);
+    }
 
-	public BaseEntityService<ChangeSet> buildChangeSetService() {
-		return new BaseEntityServiceImpl<ChangeSet>(repository, ChangeSet.class);
-	}
+    public BaseEntityService<ChangeSet> buildChangeSetService() {
+        return new BaseEntityServiceImpl<ChangeSet>(repository, ChangeSet.class);
+    }
 
-	public CodedEntityService<Level> buildLevelService() {
-		return new CodedEntityServiceImpl<Level>(repository, Level.class);
-	}
+    public CodedEntityService<Level> buildLevelService() {
+        return new CodedEntityServiceImpl<Level>(repository, Level.class);
+    }
 
-	public CodedEntityService<Face> buildFaceService() {
-		return new CodedEntityServiceImpl<Face>(repository, Face.class);
-	}
+    public CodedEntityService<Face> buildFaceService() {
+        return new CodedEntityServiceImpl<Face>(repository, Face.class);
+    }
 
-	public CodedEntityService<Race> buildRaceService() {
-		return new CodedEntityServiceImpl<Race>(repository, Race.class);
-	}
+    public CodedEntityService<Race> buildRaceService() {
+        return new CodedEntityServiceImpl<Race>(repository, Race.class);
+    }
 
-	public CodedEntityService<Card> buildCardService() {
-		return new CodedEntityServiceImpl<Card>(repository, Card.class);
-	}
+    public CodedEntityService<Card> buildCardService() {
+        return new CodedEntityServiceImpl<Card>(repository, Card.class);
+    }
 
-	public BaseEntityService<Account> buildAccountService() {
-		return new BaseEntityServiceImpl<Account>(repository, Account.class);
-	}
+    public BaseEntityService<Account> buildAccountService() {
+        return new BaseEntityServiceImpl<Account>(repository, Account.class);
+    }
 
-	public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService,
-										final @InjectService("cardService") CodedEntityService<Card> cardService) {
-		return new HeroServiceImpl(repository, levelService, cardService);
-	}
+    public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService,
+                                        final @InjectService("cardService") CodedEntityService<Card> cardService) {
+        return new HeroServiceImpl(repository, levelService, cardService);
+    }
 
-	@Advise(serviceInterface = BaseEntityService.class)
-	public void adviseTransactionalServices(final MethodAdviceReceiver receiver,
-											final TransactionExecutor transactionExecutor) {
-		final MethodAdvice advice = new MethodAdvice() {
-			public void advise(final MethodInvocation invocation) {
-				transactionExecutor.doInTransaction(new Callable<Object>() {
-					public Object call() throws Exception {
-						invocation.proceed();
-						return invocation.getReturnValue();
-					}
-				});
-			}
-		};
+    @Advise(serviceInterface = BaseEntityService.class)
+    public void adviseTransactionalServices(final MethodAdviceReceiver receiver,
+                                            final TransactionExecutor transactionExecutor) {
+        final MethodAdvice advice = new MethodAdvice() {
+            public void advise(final MethodInvocation invocation) {
+                transactionExecutor.doInTransaction(new Callable<Object>() {
+                    public Object call() throws Exception {
+                        invocation.proceed();
+                        return invocation.getReturnValue();
+                    }
+                });
+            }
+        };
 
-		for (Method method : receiver.getInterface().getMethods()) {
-			if (receiver.getMethodAnnotation(method, Transactional.class) != null) {
-				receiver.adviseMethod(method, advice);
-			}
-		}
-	}
+        for (Method method : receiver.getInterface().getMethods()) {
+            if (receiver.getMethodAnnotation(method, Transactional.class) != null) {
+                receiver.adviseMethod(method, advice);
+            }
+        }
+    }
 
-	@Contribute(ScriptExecutor.class)
-	public void contributeScriptExecutor(final Configuration<EffectScript> configuration) {
-		configuration.addInstance(FakeScript.class);
-		configuration.addInstance(AttackScript.class);
-		configuration.addInstance(SummonScript.class);
-	}
+    @Contribute(ScriptExecutor.class)
+    public void contributeScriptExecutor(final Configuration<EffectScript> configuration) {
+        configuration.addInstance(FakeScript.class);
+        configuration.addInstance(AttackScript.class);
+        configuration.addInstance(SummonScript.class);
+    }
 }

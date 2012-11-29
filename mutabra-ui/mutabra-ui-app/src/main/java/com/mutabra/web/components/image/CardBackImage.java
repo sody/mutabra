@@ -11,21 +11,21 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class CardBackImage extends AbstractImage {
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return getMessages().get("label.closed-card");
-	}
+    @Override
+    protected String getTitle() {
+        return getMessages().get("label.closed-card");
+    }
 
-	@Override
-	protected String getAlt() {
-		return "closed-card";
-	}
+    @Override
+    protected String getAlt() {
+        return "closed-card";
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getCardBack();
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getCardBack();
+    }
 }

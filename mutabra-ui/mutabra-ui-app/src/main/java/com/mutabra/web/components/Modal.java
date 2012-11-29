@@ -24,50 +24,50 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 @SupportsInformalParameters
 public class Modal extends AbstractComponent implements ClientElement {
 
-	@Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
-	private String clientId;
+    @Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
+    private String clientId;
 
-	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String title;
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String title;
 
-	@Parameter
-	private boolean active;
+    @Parameter
+    private boolean active;
 
-	@Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
-	private String className;
+    @Parameter(name = "class", defaultPrefix = BindingConstants.LITERAL)
+    private String className;
 
-	@Parameter
-	private Block footer;
+    @Parameter
+    private Block footer;
 
-	@Inject
-	private Block defaultFooter;
+    @Inject
+    private Block defaultFooter;
 
-	@Component(inheritInformalParameters = true)
-	@MixinClasses(RenderInformals.class)
-	private Any container;
+    @Component(inheritInformalParameters = true)
+    @MixinClasses(RenderInformals.class)
+    private Any container;
 
-	@Inject
-	private JavaScriptSupport support;
+    @Inject
+    private JavaScriptSupport support;
 
-	public String getClientId() {
-		return clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public String getContainerClass() {
-		return className != null ?
-				CSSConstants.MODAL + " " + className :
-				CSSConstants.MODAL;
-	}
+    public String getContainerClass() {
+        return className != null ?
+                CSSConstants.MODAL + " " + className :
+                CSSConstants.MODAL;
+    }
 
-	public Block getFooter() {
-		return footer != null ? footer : defaultFooter;
-	}
+    public Block getFooter() {
+        return footer != null ? footer : defaultFooter;
+    }
 
-	@AfterRender
-	void renderScript() {
-		if (active) {
-			support.addInitializerCall("modal", new JSONObject("id", clientId));
-		}
-	}
+    @AfterRender
+    void renderScript() {
+        if (active) {
+            support.addInitializerCall("modal", new JSONObject("id", clientId));
+        }
+    }
 }

@@ -12,15 +12,15 @@ import org.apache.tapestry5.corelib.base.AbstractConditional;
  */
 public class PermissionSecurity extends AbstractConditional {
 
-	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-	private String value;
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String value;
 
-	@Override
-	protected boolean test() {
-		return getSubject() != null && getSubject().isPermitted(value);
-	}
+    @Override
+    protected boolean test() {
+        return getSubject() != null && getSubject().isPermitted(value);
+    }
 
-	private Subject getSubject() {
-		return SecurityUtils.getSubject();
-	}
+    private Subject getSubject() {
+        return SecurityUtils.getSubject();
+    }
 }

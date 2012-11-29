@@ -13,11 +13,11 @@ import javax.persistence.Entity;
 @Entity(name = Tables.FACE)
 public class FaceImpl extends CodedEntityImpl implements Face {
 
-	public FaceImpl() {
-		this(null);
-	}
+    public FaceImpl() {
+        this(null);
+    }
 
-	public FaceImpl(final String code) {
-		super(Tables.FACE, code, TranslationType.NAME);
-	}
+    public FaceImpl(final String code) {
+        super(Tables.FACE, code, TranslationType.NAME);
+    }
 }

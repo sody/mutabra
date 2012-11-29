@@ -11,24 +11,24 @@ import org.scribe.oauth.OAuthService;
  */
 public abstract class AbstractOAuth2 extends AbstractOAuth implements OAuth2 {
 
-	protected AbstractOAuth2(final Class<? extends Api> apiClass,
-							 final String consumerKey,
-							 final String consumerSecret,
-							 final String redirectUri) {
-		super(apiClass, consumerKey, consumerSecret, redirectUri);
-	}
+    protected AbstractOAuth2(final Class<? extends Api> apiClass,
+                             final String consumerKey,
+                             final String consumerSecret,
+                             final String redirectUri) {
+        super(apiClass, consumerKey, consumerSecret, redirectUri);
+    }
 
-	public Session connect(final String code) {
-		return connect(null, code);
-	}
+    public Session connect(final String code) {
+        return connect(null, code);
+    }
 
-	@Override
-	protected Token getRequestToken(final OAuthService service) {
-		return null;
-	}
+    @Override
+    protected Token getRequestToken(final OAuthService service) {
+        return null;
+    }
 
-	@Override
-	protected Token getAccessToken(final OAuthService service, final String token, final String secret) {
-		return service.getAccessToken(null, new Verifier(secret));
-	}
+    @Override
+    protected Token getAccessToken(final OAuthService service, final String token, final String secret) {
+        return service.getAccessToken(null, new Verifier(secret));
+    }
 }

@@ -19,66 +19,66 @@ import org.greatage.util.ReflectionUtils;
  * @since 1.0
  */
 public class HeroServiceImpl extends BaseEntityServiceImpl<Hero> implements HeroService {
-	private final Class<? extends Hero> realEntityClass;
-	private final Class<? extends HeroCard> realHeroCardClass;
+    private final Class<? extends Hero> realEntityClass;
+    private final Class<? extends HeroCard> realHeroCardClass;
 
-	private final CodedEntityService<Level> levelService;
-	private final CodedEntityService<Card> cardService;
+    private final CodedEntityService<Level> levelService;
+    private final CodedEntityService<Card> cardService;
 
-	public HeroServiceImpl(final Repository repository,
-						   final CodedEntityService<Level> levelService,
-						   final CodedEntityService<Card> cardService) {
-		super(repository, Hero.class);
-		this.levelService = levelService;
-		this.cardService = cardService;
+    public HeroServiceImpl(final Repository repository,
+                           final CodedEntityService<Level> levelService,
+                           final CodedEntityService<Card> cardService) {
+        super(repository, Hero.class);
+        this.levelService = levelService;
+        this.cardService = cardService;
 
-		realEntityClass = repository.create(Hero.class).getClass();
-		realHeroCardClass = repository.create(HeroCard.class).getClass();
-	}
+        realEntityClass = repository.create(Hero.class).getClass();
+        realHeroCardClass = repository.create(HeroCard.class).getClass();
+    }
 
-	public Hero create(final Account account) {
-		final Hero hero = ReflectionUtils.newInstance(realEntityClass, account);
-		hero.setName(account.getName());
-		hero.setLevel(levelService.get(Levels.NEWBIE));
-		hero.setHealth(30);
-		return hero;
-	}
+    public Hero create(final Account account) {
+        final Hero hero = ReflectionUtils.newInstance(realEntityClass, account);
+        hero.setName(account.getName());
+        hero.setLevel(levelService.get(Levels.NEWBIE));
+        hero.setHealth(30);
+        return hero;
+    }
 
-	@Transactional
-	@Override
-	public void save(final Hero entity) {
-		super.save(entity);
+    @Transactional
+    @Override
+    public void save(final Hero entity) {
+        super.save(entity);
 
-		if (Races.PLUNGER.equals(entity.getRace().getCode())) {
-			addCard(entity, Cards.ELECTRIC_RAY);
-			addCard(entity, Cards.SEAHORSE);
-			addCard(entity, Cards.MERMAID);
-			addCard(entity, Cards.CALM);
-			addCard(entity, Cards.WAVE);
-			addCard(entity, Cards.WHIRLPOOL);
-			addCard(entity, Cards.TRIDENT_BLOW);
-			addCard(entity, Cards.SWIM_AWAY);
-			addCard(entity, Cards.STORM);
-			addCard(entity, Cards.DROP_OF_THE_OCEAN);
-		}
+        if (Races.PLUNGER.equals(entity.getRace().getCode())) {
+            addCard(entity, Cards.ELECTRIC_RAY);
+            addCard(entity, Cards.SEAHORSE);
+            addCard(entity, Cards.MERMAID);
+            addCard(entity, Cards.CALM);
+            addCard(entity, Cards.WAVE);
+            addCard(entity, Cards.WHIRLPOOL);
+            addCard(entity, Cards.TRIDENT_BLOW);
+            addCard(entity, Cards.SWIM_AWAY);
+            addCard(entity, Cards.STORM);
+            addCard(entity, Cards.DROP_OF_THE_OCEAN);
+        }
 
-		if (Races.FLYER.equals(entity.getRace().getCode())) {
-			addCard(entity, Cards.CHAMOIS);
-			addCard(entity, Cards.CARRION_VULTURE);
-			addCard(entity, Cards.CHIVES);
-			addCard(entity, Cards.SCRAMBLE);
-			addCard(entity, Cards.SCRATCH);
-			addCard(entity, Cards.SNOWBALL);
-			addCard(entity, Cards.THROW);
-			addCard(entity, Cards.FALLING_BOULDER);
-			addCard(entity, Cards.ECHO_MOUNTAIN);
-			addCard(entity, Cards.DECOMPRESSION);
-		}
-	}
+        if (Races.FLYER.equals(entity.getRace().getCode())) {
+            addCard(entity, Cards.CHAMOIS);
+            addCard(entity, Cards.CARRION_VULTURE);
+            addCard(entity, Cards.CHIVES);
+            addCard(entity, Cards.SCRAMBLE);
+            addCard(entity, Cards.SCRATCH);
+            addCard(entity, Cards.SNOWBALL);
+            addCard(entity, Cards.THROW);
+            addCard(entity, Cards.FALLING_BOULDER);
+            addCard(entity, Cards.ECHO_MOUNTAIN);
+            addCard(entity, Cards.DECOMPRESSION);
+        }
+    }
 
-	private void addCard(final Hero hero, final String cardCode) {
-		final HeroCard card = ReflectionUtils.newInstance(realHeroCardClass, hero);
-		card.setCard(cardService.get(cardCode));
-		repository().saveOrUpdate(card);
-	}
+    private void addCard(final Hero hero, final String cardCode) {
+        final HeroCard card = ReflectionUtils.newInstance(realHeroCardClass, hero);
+        card.setCard(cardService.get(cardCode));
+        repository().saveOrUpdate(card);
+    }
 }

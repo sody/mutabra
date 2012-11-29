@@ -8,10 +8,10 @@ import org.greatage.db.ChangeLog;
  */
 public class MutabraChangeLog extends ChangeLog {
 
-	@Override
-	protected void init() {
-		location("mutabra/changelogs");
+    @Override
+    protected void init() {
+        location("mutabra/changelogs");
 
-		add(new Release_1_0());
-	}
+        add(new Release_1_0());
+    }
 }

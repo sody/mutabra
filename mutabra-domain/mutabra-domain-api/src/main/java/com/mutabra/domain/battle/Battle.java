@@ -11,21 +11,21 @@ import java.util.List;
  */
 public interface Battle extends BaseEntity {
 
-	BattleState getState();
+    BattleState getState();
 
-	void setState(BattleState state);
+    void setState(BattleState state);
 
-	int getRound();
+    int getRound();
 
-	void setRound(int round);
+    void setRound(int round);
 
-	Date getStartedAt();
+    Date getStartedAt();
 
-	void setStartedAt(Date startedAt);
+    void setStartedAt(Date startedAt);
 
-	List<BattleHero> getHeroes();
+    List<BattleHero> getHeroes();
 
-	List<BattleEffect> getEffects();
+    List<BattleEffect> getEffects();
 
-	boolean isReady();
+    boolean isReady();
 }

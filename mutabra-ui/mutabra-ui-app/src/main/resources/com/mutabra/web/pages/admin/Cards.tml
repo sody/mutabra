@@ -1,20 +1,20 @@
 <html t:type="layout/default"
-	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 
 <t:grid source="source" row="row"
-		include="code"
-		add="picture,name,description,actions"
-		reorder="picture,code,name,description,actions"
-		class="table">
-	<p:pictureCell>
-		<t:image.cardimage card="row"/>
-	</p:pictureCell>
-	<p:nameCell>${row:name}</p:nameCell>
-	<p:descriptionCell>${row:description}</p:descriptionCell>
-	<p:actionsCell>
-		<t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
-	</p:actionsCell>
+        include="code"
+        add="picture,name,description,actions"
+        reorder="picture,code,name,description,actions"
+        class="table">
+    <p:pictureCell>
+        <t:image.cardimage card="row"/>
+    </p:pictureCell>
+    <p:nameCell>${row:name}</p:nameCell>
+    <p:descriptionCell>${row:description}</p:descriptionCell>
+    <p:actionsCell>
+        <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
+    </p:actionsCell>
 </t:grid>
 
 <t:admin.carddialog t:id="entityDialog"/>

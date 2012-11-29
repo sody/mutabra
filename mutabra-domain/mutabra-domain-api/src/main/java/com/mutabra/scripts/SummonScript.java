@@ -12,25 +12,25 @@ import org.greatage.util.ReflectionUtils;
  * @since 1.0
  */
 public class SummonScript implements EffectScript {
-	private final Class<? extends BattleCreature> realCreatureClass;
+    private final Class<? extends BattleCreature> realCreatureClass;
 
-	public SummonScript(final Repository repository) {
-		this.realCreatureClass = repository.create(BattleCreature.class).getClass();
-	}
+    public SummonScript(final Repository repository) {
+        this.realCreatureClass = repository.create(BattleCreature.class).getClass();
+    }
 
-	public void execute(final ScriptContext context) {
-		final BattleHero caster = (BattleHero) context.getCaster();
-		final Effect effect = context.getEffect();
+    public void execute(final ScriptContext context) {
+        final BattleHero caster = (BattleHero) context.getCaster();
+        final Effect effect = context.getEffect();
 
-		for (BattleField field : context.getTargets()) {
-			if (!field.hasUnit()) {
-				final BattleCreature creature = ReflectionUtils.newInstance(realCreatureClass, caster, effect.getCastable());
-				creature.setHealth(effect.getHealth());
-				creature.setPosition(field.getPosition());
-				creature.setExhausted(true);
+        for (BattleField field : context.getTargets()) {
+            if (!field.hasUnit()) {
+                final BattleCreature creature = ReflectionUtils.newInstance(realCreatureClass, caster, effect.getCastable());
+                creature.setHealth(effect.getHealth());
+                creature.setPosition(field.getPosition());
+                creature.setExhausted(true);
 
-				caster.getCreatures().add(creature);
-			}
-		}
-	}
+                caster.getCreatures().add(creature);
+            }
+        }
+    }
 }

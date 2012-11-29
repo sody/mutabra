@@ -6,5 +6,5 @@ package com.mutabra.domain;
  */
 public interface CodedEntity extends BaseEntity, Translatable {
 
-	String getCode();
+    String getCode();
 }

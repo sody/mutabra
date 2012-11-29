@@ -8,7 +8,7 @@ import org.greatage.domain.EntityMapper;
  * @since 1.0
  */
 public class BaseEntityMapper<E extends BaseEntity> extends EntityMapper<Long, E> {
-	public BaseEntityMapper(final String path) {
-		super(path);
-	}
+    public BaseEntityMapper(final String path) {
+        super(path);
+    }
 }

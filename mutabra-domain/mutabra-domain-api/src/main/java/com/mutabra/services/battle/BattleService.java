@@ -18,18 +18,18 @@ import java.util.List;
  */
 public interface BattleService extends BaseEntityService<Battle> {
 
-	@Transactional
-	void startBattle(Hero hero1, Hero hero2);
+    @Transactional
+    void startBattle(Hero hero1, Hero hero2);
 
-	@Transactional
-	void endRound(Battle battle);
+    @Transactional
+    void endRound(Battle battle);
 
-	@Transactional
-	void registerAction(Battle battle, BattleUnit caster, Castable castable, Position target);
+    @Transactional
+    void registerAction(Battle battle, BattleUnit caster, Castable castable, Position target);
 
-	@Transactional
-	void skipTurn(Battle battle, BattleHero hero);
+    @Transactional
+    void skipTurn(Battle battle, BattleHero hero);
 
-	List<BattleField> getBattleField(Hero hero, Battle battle);
+    List<BattleField> getBattleField(Hero hero, Battle battle);
 
 }

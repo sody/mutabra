@@ -22,37 +22,37 @@ import java.io.PrintWriter;
  * @since 1.0
  */
 public class UpdateCheckerFilter implements RequestFilter {
-	private final HeroService heroService;
-	private final ValueEncoder<Hero> encoder;
-	private final String outputEncoding;
-	private final boolean compactJSON;
+    private final HeroService heroService;
+    private final ValueEncoder<Hero> encoder;
+    private final String outputEncoding;
+    private final boolean compactJSON;
 
-	public UpdateCheckerFilter(final HeroService heroService, final ValueEncoderSource encoderSource,
-							   @Symbol(SymbolConstants.CHARSET) final String outputEncoding,
-							   @Symbol(SymbolConstants.COMPACT_JSON) final boolean compactJSON) {
-		this.outputEncoding = outputEncoding;
-		this.compactJSON = compactJSON;
-		this.heroService = heroService;
-		this.encoder = encoderSource.getValueEncoder(Hero.class);
-	}
+    public UpdateCheckerFilter(final HeroService heroService, final ValueEncoderSource encoderSource,
+                               @Symbol(SymbolConstants.CHARSET) final String outputEncoding,
+                               @Symbol(SymbolConstants.COMPACT_JSON) final boolean compactJSON) {
+        this.outputEncoding = outputEncoding;
+        this.compactJSON = compactJSON;
+        this.heroService = heroService;
+        this.encoder = encoderSource.getValueEncoder(Hero.class);
+    }
 
-	public boolean service(final Request request, final Response response, final RequestHandler handler) throws IOException {
-		final String heroId = request.getParameter("check_hero");
-		if (heroId != null) {
-			final Hero hero = encoder.toValue(heroId);
-			if (hero != null) {
-				final ContentType contentType = new ContentType(InternalConstants.JSON_MIME_TYPE, outputEncoding);
-				final PrintWriter writer = response.getPrintWriter(contentType.toString());
-				final JSONObject json = new JSONObject().put("ready", hero.isReady());
-				json.print(writer, compactJSON);
-				writer.close();
-				if (hero.isReady()) {
-					hero.setReady(false);
-					heroService.saveOrUpdate(hero);
-				}
-				return true;
-			}
-		}
-		return handler.service(request, response);
-	}
+    public boolean service(final Request request, final Response response, final RequestHandler handler) throws IOException {
+        final String heroId = request.getParameter("check_hero");
+        if (heroId != null) {
+            final Hero hero = encoder.toValue(heroId);
+            if (hero != null) {
+                final ContentType contentType = new ContentType(InternalConstants.JSON_MIME_TYPE, outputEncoding);
+                final PrintWriter writer = response.getPrintWriter(contentType.toString());
+                final JSONObject json = new JSONObject().put("ready", hero.isReady());
+                json.print(writer, compactJSON);
+                writer.close();
+                if (hero.isReady()) {
+                    hero.setReady(false);
+                    heroService.saveOrUpdate(hero);
+                }
+                return true;
+            }
+        }
+        return handler.service(request, response);
+    }
 }

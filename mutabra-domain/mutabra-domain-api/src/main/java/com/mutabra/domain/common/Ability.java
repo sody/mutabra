@@ -6,5 +6,5 @@ package com.mutabra.domain.common;
  */
 public interface Ability extends Castable {
 
-	Card getCard();
+    Card getCard();
 }

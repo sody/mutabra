@@ -14,25 +14,25 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class AccountImage extends AbstractImage {
 
-	@Property
-	@Parameter(required = true)
-	private Account account;
+    @Property
+    @Parameter(required = true)
+    private Account account;
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return account != null ? account.getName() : "<anonymous>";
-	}
+    @Override
+    protected String getTitle() {
+        return account != null ? account.getName() : "<anonymous>";
+    }
 
-	@Override
-	protected String getAlt() {
-		return account != null ? account.getName() : "<anonymous>";
-	}
+    @Override
+    protected String getAlt() {
+        return account != null ? account.getName() : "<anonymous>";
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getNotFoundImage();
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getNotFoundImage();
+    }
 }

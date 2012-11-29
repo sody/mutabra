@@ -10,13 +10,13 @@ import org.apache.tapestry5.services.ValidationDecoratorFactory;
  * @since 1.0
  */
 public class CustomValidationDecoratorFactory implements ValidationDecoratorFactory {
-	private final Environment environment;
+    private final Environment environment;
 
-	public CustomValidationDecoratorFactory(final Environment environment) {
-		this.environment = environment;
-	}
+    public CustomValidationDecoratorFactory(final Environment environment) {
+        this.environment = environment;
+    }
 
-	public ValidationDecorator newInstance(final MarkupWriter writer) {
-		return new CustomValidationDecorator(environment, writer);
-	}
+    public ValidationDecorator newInstance(final MarkupWriter writer) {
+        return new CustomValidationDecorator(environment, writer);
+    }
 }

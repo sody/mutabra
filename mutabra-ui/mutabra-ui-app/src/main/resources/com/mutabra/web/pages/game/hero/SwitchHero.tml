@@ -1,19 +1,19 @@
 <html t:type="layout/default"
-	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+        >
 
 <t:form class="form-horizontal">
-	<div class="control-group">
-		<div class="controls">
-			<t:carousel source="source" row="row" value="value" class="span4">
-				<t:image.heroimage hero="row" width="100" height="100" style="margin:auto;"/>
-			</t:carousel>
-		</div>
-	</div>
-	<div class="form-actions">
-		<t:submit value="message:label.enter" class="btn"/>
-		<t:pagelink page="game/hero/create" class="btn">${message:label.create}</t:pagelink>
-	</div>
+    <div class="control-group">
+        <div class="controls">
+            <t:carousel source="source" row="row" value="value" class="span4">
+                <t:image.heroimage hero="row" width="100" height="100" style="margin:auto;"/>
+            </t:carousel>
+        </div>
+    </div>
+    <div class="form-actions">
+        <t:submit value="message:label.enter" class="btn"/>
+        <t:pagelink page="game/hero/create" class="btn">${message:label.create}</t:pagelink>
+    </div>
 </t:form>
 
 </html>

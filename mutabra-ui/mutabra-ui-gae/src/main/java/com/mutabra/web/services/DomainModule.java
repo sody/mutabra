@@ -57,75 +57,75 @@ import org.greatage.domain.objectify.ObjectifySessionManager;
  */
 public class DomainModule {
 
-	public static void bind(final ServiceBinder binder) {
-		binder.bind(Repository.class, ObjectifyRepository.class);
-		binder.bind(TransactionExecutor.class, GAETransactionExecutor.class);
-	}
+    public static void bind(final ServiceBinder binder) {
+        binder.bind(Repository.class, ObjectifyRepository.class);
+        binder.bind(TransactionExecutor.class, GAETransactionExecutor.class);
+    }
 
-	public DatabaseService buildDatabaseService() {
-		return new DefaultDatabaseService(new GAEDatabase(), new MutabraChangeLog());
-	}
+    public DatabaseService buildDatabaseService() {
+        return new DefaultDatabaseService(new GAEDatabase(), new MutabraChangeLog());
+    }
 
-	public SessionManager<Objectify> buildObjectifySessionManager() {
-		final ObjectifyFactory objectifyFactory = new ObjectifyFactory();
+    public SessionManager<Objectify> buildObjectifySessionManager() {
+        final ObjectifyFactory objectifyFactory = new ObjectifyFactory();
 
-		objectifyFactory.register(TranslationImpl.class);
-		objectifyFactory.register(ChangeSetImpl.class);
+        objectifyFactory.register(TranslationImpl.class);
+        objectifyFactory.register(ChangeSetImpl.class);
 
-		objectifyFactory.register(FaceImpl.class);
-		objectifyFactory.register(RaceImpl.class);
-		objectifyFactory.register(LevelImpl.class);
-		objectifyFactory.register(CardImpl.class);
-		objectifyFactory.register(AbilityImpl.class);
-		objectifyFactory.register(EffectImpl.class);
+        objectifyFactory.register(FaceImpl.class);
+        objectifyFactory.register(RaceImpl.class);
+        objectifyFactory.register(LevelImpl.class);
+        objectifyFactory.register(CardImpl.class);
+        objectifyFactory.register(AbilityImpl.class);
+        objectifyFactory.register(EffectImpl.class);
 
-		objectifyFactory.register(AccountImpl.class);
-		objectifyFactory.register(HeroImpl.class);
-		objectifyFactory.register(HeroCardImpl.class);
+        objectifyFactory.register(AccountImpl.class);
+        objectifyFactory.register(HeroImpl.class);
+        objectifyFactory.register(HeroCardImpl.class);
 
-		objectifyFactory.register(BattleImpl.class);
-		objectifyFactory.register(BattleHeroImpl.class);
-		objectifyFactory.register(BattleCreatureImpl.class);
-		objectifyFactory.register(BattleEffectImpl.class);
+        objectifyFactory.register(BattleImpl.class);
+        objectifyFactory.register(BattleHeroImpl.class);
+        objectifyFactory.register(BattleCreatureImpl.class);
+        objectifyFactory.register(BattleEffectImpl.class);
 
-		final ObjectifyOpts options = new ObjectifyOpts();
-		options.setSessionCache(true);
+        final ObjectifyOpts options = new ObjectifyOpts();
+        options.setSessionCache(true);
 
-		return new ObjectifySessionManager(objectifyFactory, options);
-	}
+        return new ObjectifySessionManager(objectifyFactory, options);
+    }
 
-	@Contribute(Repository.class)
-	public void contributeEntityRepository(final MappedConfiguration<Class, Class> configuration) {
-		configuration.add(Translation.class, TranslationImpl.class);
-		configuration.add(ChangeSet.class, ChangeSetImpl.class);
+    @Contribute(Repository.class)
+    public void contributeEntityRepository(final MappedConfiguration<Class, Class> configuration) {
+        configuration.add(Translation.class, TranslationImpl.class);
+        configuration.add(ChangeSet.class, ChangeSetImpl.class);
 
-		configuration.add(Face.class, FaceImpl.class);
-		configuration.add(Race.class, RaceImpl.class);
-		configuration.add(Level.class, LevelImpl.class);
-		configuration.add(Card.class, CardImpl.class);
-		configuration.add(Ability.class, AbilityImpl.class);
-		configuration.add(Effect.class, EffectImpl.class);
+        configuration.add(Face.class, FaceImpl.class);
+        configuration.add(Race.class, RaceImpl.class);
+        configuration.add(Level.class, LevelImpl.class);
+        configuration.add(Card.class, CardImpl.class);
+        configuration.add(Ability.class, AbilityImpl.class);
+        configuration.add(Effect.class, EffectImpl.class);
 
-		configuration.add(Account.class, AccountImpl.class);
-		configuration.add(Hero.class, HeroImpl.class);
-		configuration.add(HeroCard.class, HeroCardImpl.class);
+        configuration.add(Account.class, AccountImpl.class);
+        configuration.add(Hero.class, HeroImpl.class);
+        configuration.add(HeroCard.class, HeroCardImpl.class);
 
-		configuration.add(Battle.class, BattleImpl.class);
-		configuration.add(BattleHero.class, BattleHeroImpl.class);
-		configuration.add(BattleCreature.class, BattleCreatureImpl.class);
-		configuration.add(BattleEffect.class, BattleEffectImpl.class);
-	}
+        configuration.add(Battle.class, BattleImpl.class);
+        configuration.add(BattleHero.class, BattleHeroImpl.class);
+        configuration.add(BattleCreature.class, BattleCreatureImpl.class);
+        configuration.add(BattleEffect.class, BattleEffectImpl.class);
+    }
 
-	@Startup
-	public void updateDatabase(final DatabaseService databaseService,
-							   final @Symbol(SymbolConstants.PRODUCTION_MODE) boolean productionMode) {
-		if (!productionMode) {
-			databaseService.update(false, false);
-		}
-	}
+    @Startup
+    public void updateDatabase(final DatabaseService databaseService,
+                               final @Symbol(SymbolConstants.PRODUCTION_MODE) boolean productionMode) {
+        if (!productionMode) {
+            databaseService.update(false, false);
+        }
+    }
 
-	@Startup
-	public void linkSessionManager(final SessionManager<Objectify> sessionManager) {
-		Keys.init(sessionManager);
-	}
+    @Startup
+    public void linkSessionManager(final SessionManager<Objectify> sessionManager) {
+        Keys.init(sessionManager);
+    }
 }

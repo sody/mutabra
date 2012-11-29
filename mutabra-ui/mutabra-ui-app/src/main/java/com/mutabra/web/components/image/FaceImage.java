@@ -14,28 +14,28 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class FaceImage extends AbstractImage {
 
-	@Property
-	@Parameter(required = true, allowNull = false)
-	private Face face;
+    @Property
+    @Parameter(required = true, allowNull = false)
+    private Face face;
 
-	@Parameter(value = "prop:face:name")
-	private String title;
+    @Parameter(value = "prop:face:name")
+    private String title;
 
-	@Inject
-	private ImageSource imageSource;
+    @Inject
+    private ImageSource imageSource;
 
-	@Override
-	protected String getTitle() {
-		return title;
-	}
+    @Override
+    protected String getTitle() {
+        return title;
+    }
 
-	@Override
-	protected Asset getAsset() {
-		return imageSource.getFaceImage(face);
-	}
+    @Override
+    protected Asset getAsset() {
+        return imageSource.getFaceImage(face);
+    }
 
-	@Override
-	protected String getAlt() {
-		return face.getCode();
-	}
+    @Override
+    protected String getAlt() {
+        return face.getCode();
+    }
 }

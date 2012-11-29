@@ -20,71 +20,71 @@ import java.net.URL;
  * @since 1.0
  */
 public abstract class AbstractOAuthConnect extends AbstractComponentEventLink {
-	protected static final String CONNECT_EVENT = "connect";
-	protected static final String CONNECTED_EVENT = "connected";
+    protected static final String CONNECT_EVENT = "connect";
+    protected static final String CONNECTED_EVENT = "connected";
 
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String scope;
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String scope;
 
-	@Inject
-	private ComponentResources resources;
+    @Inject
+    private ComponentResources resources;
 
-	@Inject
-	private Logger logger;
+    @Inject
+    private Logger logger;
 
-	protected String getRedirectUri() {
-		return resources.createEventLink(CONNECTED_EVENT).toRedirectURI();
-	}
+    protected String getRedirectUri() {
+        return resources.createEventLink(CONNECTED_EVENT).toRedirectURI();
+    }
 
-	protected String getScope() {
-		return scope;
-	}
+    protected String getScope() {
+        return scope;
+    }
 
-	@Override
-	protected Link createLink(final Object[] eventContext) {
-		return resources.createEventLink(CONNECT_EVENT);
-	}
+    @Override
+    protected Link createLink(final Object[] eventContext) {
+        return resources.createEventLink(CONNECT_EVENT);
+    }
 
-	@OnEvent(CONNECT_EVENT)
-	protected URL connect() throws MalformedURLException {
-		final String authorizationUrl = getOAuth().getAuthorizationUrl(getRedirectUri(), scope);
-		logger.debug("Redirecting to OAuth authorization URL: '{}'", authorizationUrl);
-		return new URL(authorizationUrl);
-	}
+    @OnEvent(CONNECT_EVENT)
+    protected URL connect() throws MalformedURLException {
+        final String authorizationUrl = getOAuth().getAuthorizationUrl(getRedirectUri(), scope);
+        logger.debug("Redirecting to OAuth authorization URL: '{}'", authorizationUrl);
+        return new URL(authorizationUrl);
+    }
 
-	protected abstract OAuth getOAuth();
+    protected abstract OAuth getOAuth();
 
-	protected OAuth.Session startSession(final String token, final String secret) {
-		return getOAuth().connect(token, secret);
-	}
+    protected OAuth.Session startSession(final String token, final String secret) {
+        return getOAuth().connect(token, secret);
+    }
 
-	protected Object doConnected(final String token, final String secret, final String error) {
-		logger.debug("Reply from OAuth authorization screen:\n" +
-				"\ttoken : {}\n" +
-				"\tsecret: {}\n" +
-				"\terror : {}", new Object[]{token, secret, error});
-		final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
-		if (secret != null) {
-			try {
-				final OAuth.Session session = startSession(token, secret);
-				final Object[] context = {session};
-				final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
+    protected Object doConnected(final String token, final String secret, final String error) {
+        logger.debug("Reply from OAuth authorization screen:\n" +
+                "\ttoken : {}\n" +
+                "\tsecret: {}\n" +
+                "\terror : {}", new Object[]{token, secret, error});
+        final CaptureResultCallback<Object> callback = new CaptureResultCallback<Object>();
+        if (secret != null) {
+            try {
+                final OAuth.Session session = startSession(token, secret);
+                final Object[] context = {session};
+                final boolean handled = resources.triggerEvent(EventConstants.SUCCESS, context, callback);
 
-				if (handled) {
-					return callback.getResult();
-				}
-				return null;
-			} catch (Exception e) {
-				logger.error("Can not connect to OAuth provider", e);
-			}
-		}
+                if (handled) {
+                    return callback.getResult();
+                }
+                return null;
+            } catch (Exception e) {
+                logger.error("Can not connect to OAuth provider", e);
+            }
+        }
 
-		final Object[] context = {error};
-		final boolean handled = resources.triggerEvent(EventConstants.FAILURE, context, callback);
+        final Object[] context = {error};
+        final boolean handled = resources.triggerEvent(EventConstants.FAILURE, context, callback);
 
-		if (handled) {
-			return callback.getResult();
-		}
-		return null;
-	}
+        if (handled) {
+            return callback.getResult();
+        }
+        return null;
+    }
 }

@@ -12,39 +12,39 @@ import java.util.Date;
 @Entity(name = "DATABASE_CHANGE_LOG")
 public class ChangeSetImpl extends BaseEntityImpl implements ChangeSet {
 
-	private String title;
+    private String title;
 
-	private String author;
+    private String author;
 
-	private String location;
+    private String location;
 
-	private String comment;
+    private String comment;
 
-	private Date executedAt;
+    private Date executedAt;
 
-	private String checkSum;
+    private String checkSum;
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getComment() {
-		return comment;
-	}
+    public String getComment() {
+        return comment;
+    }
 
-	public Date getExecutedAt() {
-		return executedAt;
-	}
+    public Date getExecutedAt() {
+        return executedAt;
+    }
 
-	public String getCheckSum() {
-		return checkSum;
-	}
+    public String getCheckSum() {
+        return checkSum;
+    }
 }

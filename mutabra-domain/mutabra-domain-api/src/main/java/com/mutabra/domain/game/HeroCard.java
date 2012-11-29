@@ -9,13 +9,13 @@ import com.mutabra.domain.common.Card;
  */
 public interface HeroCard extends BaseEntity {
 
-	Hero getHero();
+    Hero getHero();
 
-	Card getCard();
+    Card getCard();
 
-	void setCard(Card card);
+    void setCard(Card card);
 
-	long getRating();
+    long getRating();
 
-	void setRating(long rating);
+    void setRating(long rating);
 }

@@ -23,35 +23,35 @@ import org.apache.tapestry5.services.BindingSource;
 @Import(stack = "mutabra")
 @SupportsInformalParameters
 public class EmptyLayout extends AbstractComponent {
-	private static final String PAGE_TITLE_PROPERTY = "title";
-	private static final String PAGE_SUBTITLE_PROPERTY = "subtitle";
+    private static final String PAGE_TITLE_PROPERTY = "title";
+    private static final String PAGE_SUBTITLE_PROPERTY = "subtitle";
 
-	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String title;
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String title;
 
-	@Property
-	@Parameter(defaultPrefix = BindingConstants.LITERAL)
-	private String subtitle;
+    @Property
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String subtitle;
 
-	@Property
-	@Inject
-	@Symbol(SymbolConstants.APPLICATION_VERSION)
-	private String applicationVersion;
+    @Property
+    @Inject
+    @Symbol(SymbolConstants.APPLICATION_VERSION)
+    private String applicationVersion;
 
-	@Property
-	@Inject
-	@Symbol(SymbolConstants.TAPESTRY_VERSION)
-	private String tapestryVersion;
+    @Property
+    @Inject
+    @Symbol(SymbolConstants.TAPESTRY_VERSION)
+    private String tapestryVersion;
 
-	@Inject
-	private BindingSource bindingSource;
+    @Inject
+    private BindingSource bindingSource;
 
-	Binding defaultTitle() {
-		return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
-	}
+    Binding defaultTitle() {
+        return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
+    }
 
-	Binding defaultSubtitle() {
-		return bindingSource.newBinding("Page subtitle", getResources().getContainerResources(), BindingConstants.PROP, PAGE_SUBTITLE_PROPERTY);
-	}
+    Binding defaultSubtitle() {
+        return bindingSource.newBinding("Page subtitle", getResources().getContainerResources(), BindingConstants.PROP, PAGE_SUBTITLE_PROPERTY);
+    }
 }

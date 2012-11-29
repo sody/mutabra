@@ -22,239 +22,239 @@ import java.util.TimeZone;
 @Entity(name = Tables.ACCOUNT)
 public class AccountImpl extends BaseEntityImpl implements Account {
 
-	@Indexed
-	private String email;
+    @Indexed
+    private String email;
 
-	private String password;
+    private String password;
 
-	private String salt;
+    private String salt;
 
-	private Role role;
+    private Role role;
 
-	@Unindexed
-	private Date registered;
+    @Unindexed
+    private Date registered;
 
-	private Date lastLogin;
+    private Date lastLogin;
 
 
-	@Indexed
-	private String facebookUser;
+    @Indexed
+    private String facebookUser;
 
-	@Indexed
-	private String twitterUser;
+    @Indexed
+    private String twitterUser;
 
-	@Indexed
-	private String googleUser;
+    @Indexed
+    private String googleUser;
 
-	@Indexed
-	private String vkUser;
+    @Indexed
+    private String vkUser;
 
 
-	private String token;
+    private String token;
 
-	private String pendingToken;
+    private String pendingToken;
 
-	private Long tokenExpired;
+    private Long tokenExpired;
 
-	private String pendingEmail;
+    private String pendingEmail;
 
-	private String pendingPassword;
+    private String pendingPassword;
 
-	private String pendingSalt;
+    private String pendingSalt;
 
 
-	private String name;
+    private String name;
 
-	@Unindexed
-	private String place;
+    @Unindexed
+    private String place;
 
-	@Unindexed
-	private String locale = "";
+    @Unindexed
+    private String locale = "";
 
-	@Transient
-	private Locale localeValue;
+    @Transient
+    private Locale localeValue;
 
-	@Transient
-	private TimeZone timeZone;
+    @Transient
+    private TimeZone timeZone;
 
-	private Key<HeroImpl> hero;
+    private Key<HeroImpl> hero;
 
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(final String email) {
-		this.email = email;
-	}
+    public void setEmail(final String email) {
+        this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(final String password) {
-		this.password = password;
-	}
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 
-	public String getSalt() {
-		return salt;
-	}
+    public String getSalt() {
+        return salt;
+    }
 
-	public void setSalt(final String salt) {
-		this.salt = salt;
-	}
+    public void setSalt(final String salt) {
+        this.salt = salt;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setRole(final Role role) {
-		this.role = role;
-	}
+    public void setRole(final Role role) {
+        this.role = role;
+    }
 
-	public Date getRegistered() {
-		return registered;
-	}
+    public Date getRegistered() {
+        return registered;
+    }
 
-	public void setRegistered(final Date registered) {
-		this.registered = registered;
-	}
+    public void setRegistered(final Date registered) {
+        this.registered = registered;
+    }
 
-	public Date getLastLogin() {
-		return lastLogin;
-	}
+    public Date getLastLogin() {
+        return lastLogin;
+    }
 
-	public void setLastLogin(final Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
+    public void setLastLogin(final Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
 
 
-	public String getFacebookUser() {
-		return facebookUser;
-	}
+    public String getFacebookUser() {
+        return facebookUser;
+    }
 
-	public void setFacebookUser(final String facebookUser) {
-		this.facebookUser = facebookUser;
-	}
+    public void setFacebookUser(final String facebookUser) {
+        this.facebookUser = facebookUser;
+    }
 
-	public String getTwitterUser() {
-		return twitterUser;
-	}
+    public String getTwitterUser() {
+        return twitterUser;
+    }
 
-	public void setTwitterUser(final String twitterUser) {
-		this.twitterUser = twitterUser;
-	}
+    public void setTwitterUser(final String twitterUser) {
+        this.twitterUser = twitterUser;
+    }
 
-	public String getGoogleUser() {
-		return googleUser;
-	}
+    public String getGoogleUser() {
+        return googleUser;
+    }
 
-	public void setGoogleUser(final String googleUser) {
-		this.googleUser = googleUser;
-	}
+    public void setGoogleUser(final String googleUser) {
+        this.googleUser = googleUser;
+    }
 
-	public String getVkUser() {
-		return vkUser;
-	}
+    public String getVkUser() {
+        return vkUser;
+    }
 
-	public void setVkUser(final String vkUser) {
-		this.vkUser = vkUser;
-	}
+    public void setVkUser(final String vkUser) {
+        this.vkUser = vkUser;
+    }
 
 
-	public String getToken() {
-		return token;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public void setToken(final String token) {
-		this.token = token;
-	}
+    public void setToken(final String token) {
+        this.token = token;
+    }
 
-	public String getPendingToken() {
-		return pendingToken;
-	}
+    public String getPendingToken() {
+        return pendingToken;
+    }
 
-	public void setPendingToken(final String pendingToken) {
-		this.pendingToken = pendingToken;
-	}
+    public void setPendingToken(final String pendingToken) {
+        this.pendingToken = pendingToken;
+    }
 
-	public Long getTokenExpired() {
-		return tokenExpired;
-	}
+    public Long getTokenExpired() {
+        return tokenExpired;
+    }
 
-	public void setTokenExpired(final Long tokenExpired) {
-		this.tokenExpired = tokenExpired;
-	}
+    public void setTokenExpired(final Long tokenExpired) {
+        this.tokenExpired = tokenExpired;
+    }
 
-	public String getPendingEmail() {
-		return pendingEmail;
-	}
+    public String getPendingEmail() {
+        return pendingEmail;
+    }
 
-	public void setPendingEmail(final String pendingEmail) {
-		this.pendingEmail = pendingEmail;
-	}
+    public void setPendingEmail(final String pendingEmail) {
+        this.pendingEmail = pendingEmail;
+    }
 
-	public String getPendingPassword() {
-		return pendingPassword;
-	}
+    public String getPendingPassword() {
+        return pendingPassword;
+    }
 
-	public void setPendingPassword(final String pendingPassword) {
-		this.pendingPassword = pendingPassword;
-	}
+    public void setPendingPassword(final String pendingPassword) {
+        this.pendingPassword = pendingPassword;
+    }
 
-	public String getPendingSalt() {
-		return pendingSalt;
-	}
+    public String getPendingSalt() {
+        return pendingSalt;
+    }
 
-	public void setPendingSalt(final String pendingSalt) {
-		this.pendingSalt = pendingSalt;
-	}
+    public void setPendingSalt(final String pendingSalt) {
+        this.pendingSalt = pendingSalt;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(final String name) {
-		this.name = name;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public String getPlace() {
-		return place;
-	}
+    public String getPlace() {
+        return place;
+    }
 
-	public void setPlace(final String place) {
-		this.place = place;
-	}
+    public void setPlace(final String place) {
+        this.place = place;
+    }
 
-	public Locale getLocale() {
-		if (localeValue == null) {
-			localeValue = LocaleUtils.parseLocale(locale);
-		}
-		return localeValue;
-	}
+    public Locale getLocale() {
+        if (localeValue == null) {
+            localeValue = LocaleUtils.parseLocale(locale);
+        }
+        return localeValue;
+    }
 
-	public void setLocale(final Locale locale) {
-		localeValue = locale;
-		this.locale = locale != null ? locale.toString() : null;
-	}
+    public void setLocale(final Locale locale) {
+        localeValue = locale;
+        this.locale = locale != null ? locale.toString() : null;
+    }
 
-	public TimeZone getTimeZone() {
-		return timeZone;
-	}
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
 
-	public void setTimeZone(final TimeZone timeZone) {
-		this.timeZone = timeZone;
-	}
+    public void setTimeZone(final TimeZone timeZone) {
+        this.timeZone = timeZone;
+    }
 
-	public Hero getHero() {
-		return Keys.getInstance(hero);
-	}
+    public Hero getHero() {
+        return Keys.getInstance(hero);
+    }
 
-	public void setHero(final Hero hero) {
-		this.hero = Keys.getKey(hero);
-	}
+    public void setHero(final Hero hero) {
+        this.hero = Keys.getKey(hero);
+    }
 
-	public List<Hero> getHeroes() {
-		return Keys.getChildren(Hero.class, HeroImpl.class, this);
-	}
+    public List<Hero> getHeroes() {
+        return Keys.getChildren(Hero.class, HeroImpl.class, this);
+    }
 }

@@ -25,51 +25,51 @@ import java.util.List;
 @RequiresPermissions("game:play")
 public class GameHome extends AbstractPage {
 
-	@Inject
-	private HeroService heroService;
+    @Inject
+    private HeroService heroService;
 
-	@Inject
-	private BattleService battleService;
+    @Inject
+    private BattleService battleService;
 
-	@Inject
-	private AccountContext accountContext;
+    @Inject
+    private AccountContext accountContext;
 
-	@Property
-	private Hero row;
+    @Property
+    private Hero row;
 
-	private Hero hero;
+    private Hero hero;
 
-	public List<Hero> getPlayers() {
-		final Date timeout = new Date(System.currentTimeMillis() - 50000);
-		return heroService.query()
-				.filter(Mappers.hero$.lastActive$.gt(timeout))
-				.paginate(0, 20)
-				.list();
-	}
+    public List<Hero> getPlayers() {
+        final Date timeout = new Date(System.currentTimeMillis() - 50000);
+        return heroService.query()
+                .filter(Mappers.hero$.lastActive$.gt(timeout))
+                .paginate(0, 20)
+                .list();
+    }
 
-	public boolean isCanCreateBattle() {
-		return row.equals(hero);
-	}
+    public boolean isCanCreateBattle() {
+        return row.equals(hero);
+    }
 
-	@OnEvent(EventConstants.ACTIVATE)
-	Object activate() {
-		if (accountContext.getHero() == null) {
-			//todo: add more complex rules
-			return CreateHero.class;
-		}
-		if (accountContext.getBattle() != null) {
-			return GameBattle.class;
-		}
-		hero = accountContext.getHero();
-		return null;
-	}
+    @OnEvent(EventConstants.ACTIVATE)
+    Object activate() {
+        if (accountContext.getHero() == null) {
+            //todo: add more complex rules
+            return CreateHero.class;
+        }
+        if (accountContext.getBattle() != null) {
+            return GameBattle.class;
+        }
+        hero = accountContext.getHero();
+        return null;
+    }
 
-	@OnEvent("createBattle")
-	Object createBattle(final Hero target) {
-		if (target.getBattle() == null && hero.getBattle() == null && !target.equals(hero)) {
-			battleService.startBattle(hero, target);
-			return GameBattle.class;
-		}
-		return null;
-	}
+    @OnEvent("createBattle")
+    Object createBattle(final Hero target) {
+        if (target.getBattle() == null && hero.getBattle() == null && !target.equals(hero)) {
+            battleService.startBattle(hero, target);
+            return GameBattle.class;
+        }
+        return null;
+    }
 }

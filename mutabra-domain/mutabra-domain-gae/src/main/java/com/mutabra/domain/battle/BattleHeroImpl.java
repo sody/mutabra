@@ -25,94 +25,94 @@ import java.util.List;
 @Entity(name = Tables.BATTLE_MEMBER)
 public class BattleHeroImpl extends BattleUnitImpl implements BattleHero {
 
-	@Parent
-	private Key<BattleImpl> battle;
+    @Parent
+    private Key<BattleImpl> battle;
 
-	@Unindexed
-	private Key<HeroImpl> hero;
+    @Unindexed
+    private Key<HeroImpl> hero;
 
-	@Unindexed
-	private int mentalPower;
+    @Unindexed
+    private int mentalPower;
 
-	@Unindexed
-	private List<Key<CardImpl>> deck = new ArrayList<Key<CardImpl>>();
+    @Unindexed
+    private List<Key<CardImpl>> deck = new ArrayList<Key<CardImpl>>();
 
-	@Unindexed
-	private List<Key<CardImpl>> hand = new ArrayList<Key<CardImpl>>();
+    @Unindexed
+    private List<Key<CardImpl>> hand = new ArrayList<Key<CardImpl>>();
 
-	@Unindexed
-	private List<Key<CardImpl>> graveyard = new ArrayList<Key<CardImpl>>();
+    @Unindexed
+    private List<Key<CardImpl>> graveyard = new ArrayList<Key<CardImpl>>();
 
-	@Transient
-	private List<Card> deckValueHolder = new ArrayList<Card>();
+    @Transient
+    private List<Card> deckValueHolder = new ArrayList<Card>();
 
-	@Transient
-	private List<Card> handValueHolder = new ArrayList<Card>();
+    @Transient
+    private List<Card> handValueHolder = new ArrayList<Card>();
 
-	@Transient
-	private List<Card> graveyardValueHolder = new ArrayList<Card>();
+    @Transient
+    private List<Card> graveyardValueHolder = new ArrayList<Card>();
 
-	@Transient
-	private List<BattleCreature> creaturesValueHolder = new ArrayList<BattleCreature>();
+    @Transient
+    private List<BattleCreature> creaturesValueHolder = new ArrayList<BattleCreature>();
 
-	public BattleHeroImpl() {
-	}
+    public BattleHeroImpl() {
+    }
 
-	public BattleHeroImpl(final Battle battle, final Hero hero) {
-		this.battle = Keys.getKey(battle);
-		this.hero = Keys.getKey(hero);
-	}
+    public BattleHeroImpl(final Battle battle, final Hero hero) {
+        this.battle = Keys.getKey(battle);
+        this.hero = Keys.getKey(hero);
+    }
 
-	public Battle getBattle() {
-		return Keys.getInstance(battle);
-	}
+    public Battle getBattle() {
+        return Keys.getInstance(battle);
+    }
 
-	public Hero getHero() {
-		return Keys.getInstance(hero);
-	}
+    public Hero getHero() {
+        return Keys.getInstance(hero);
+    }
 
-	public int getMentalPower() {
-		return mentalPower;
-	}
+    public int getMentalPower() {
+        return mentalPower;
+    }
 
-	public void setMentalPower(final int mentalPower) {
-		this.mentalPower = mentalPower;
-	}
+    public void setMentalPower(final int mentalPower) {
+        this.mentalPower = mentalPower;
+    }
 
-	public List<Card> getDeck() {
-		return deckValueHolder;
-	}
+    public List<Card> getDeck() {
+        return deckValueHolder;
+    }
 
-	public List<Card> getHand() {
-		return handValueHolder;
-	}
+    public List<Card> getHand() {
+        return handValueHolder;
+    }
 
-	public List<Card> getGraveyard() {
-		return graveyardValueHolder;
-	}
+    public List<Card> getGraveyard() {
+        return graveyardValueHolder;
+    }
 
-	public List<BattleCreature> getCreatures() {
-		return creaturesValueHolder;
-	}
+    public List<BattleCreature> getCreatures() {
+        return creaturesValueHolder;
+    }
 
-	@Override
-	public Key<?> getParentKey() {
-		return battle;
-	}
+    @Override
+    public Key<?> getParentKey() {
+        return battle;
+    }
 
-	@PostLoad
-	void loadRelations(final Objectify session) {
-		deckValueHolder = new ArrayList<Card>(session.get(deck).values());
-		handValueHolder = new ArrayList<Card>(session.get(hand).values());
-		graveyardValueHolder = new ArrayList<Card>(session.get(graveyard).values());
-		creaturesValueHolder = new ArrayList<BattleCreature>(session.query(BattleCreatureImpl.class).ancestor(this).list());
-	}
+    @PostLoad
+    void loadRelations(final Objectify session) {
+        deckValueHolder = new ArrayList<Card>(session.get(deck).values());
+        handValueHolder = new ArrayList<Card>(session.get(hand).values());
+        graveyardValueHolder = new ArrayList<Card>(session.get(graveyard).values());
+        creaturesValueHolder = new ArrayList<BattleCreature>(session.query(BattleCreatureImpl.class).ancestor(this).list());
+    }
 
-	@PrePersist
-	void saveRelations(final Objectify session) {
-		deck = Keys.getKeys(CardImpl.class, deckValueHolder);
-		hand = Keys.getKeys(CardImpl.class, handValueHolder);
-		graveyard = Keys.getKeys(CardImpl.class, graveyardValueHolder);
-		session.put(creaturesValueHolder);
-	}
+    @PrePersist
+    void saveRelations(final Objectify session) {
+        deck = Keys.getKeys(CardImpl.class, deckValueHolder);
+        hand = Keys.getKeys(CardImpl.class, handValueHolder);
+        graveyard = Keys.getKeys(CardImpl.class, graveyardValueHolder);
+        session.put(creaturesValueHolder);
+    }
 }
