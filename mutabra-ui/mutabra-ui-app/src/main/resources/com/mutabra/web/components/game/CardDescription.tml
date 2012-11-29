@@ -1,16 +1,23 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-			 xmlns:p="tapestry:parameter">
+        >
 
-	<div id="${clientId}" class="description">
-		<h4>${value:name}</h4>
-		<br/>
-		<t:image.cardimage card="value"  width="150" height="150"/>
-		<br/>
-		<i class="icon-skull"/>${value.power}
-		<i class="icon-heart"/>${value.health}
-		<i class="icon-blood"/>${value.bloodCost}
-		<br/>
-		<p>${value:description}</p>
-	</div>
+    <div id="${clientId}" class="description">
+        <h3 class="description-title">${value:name}</h3>
+
+        <t:image.cardimage card="value" width="150" height="150" class="description-picture"/>
+
+        <dl class="description-attrs">
+            <dt><i class="icon-skull large"/></dt>
+            <dd>${value.power}</dd>
+
+            <dt><i class="icon-heart large"/></dt>
+            <dd>${value.health}</dd>
+
+            <dt><i class="icon-blood large"/></dt>
+            <dd>${value.bloodCost}</dd>
+        </dl>
+
+        <p class="description-text">${value:description}</p>
+    </div>
 
 </t:container>

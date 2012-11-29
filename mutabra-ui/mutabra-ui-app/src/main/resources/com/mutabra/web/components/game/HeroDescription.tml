@@ -1,13 +1,17 @@
-<t:container
-		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<div id="${clientId}" class="${containerClass}">
-		<h4>${value.hero.name}</h4>
-		<br/>
-		<t:image.heroimage hero="value.hero" width="150" height="150"/>
-		<br/>
-		<i class="icon-heart"/>${value.health}
-		<i class="icon-skull"/>${value.mentalPower}
-	</div>
+    <div id="${clientId}" class="${containerClass}">
+        <h3 class="description-title">${value.hero.name}</h3>
+
+        <t:image.heroimage hero="value.hero" width="150" height="150" class="description-picture"/>
+
+        <dl class="description-attrs">
+            <dt><i class="icon-heart large"/></dt>
+            <dd>${value.health}</dd>
+
+            <dt><i class="icon-skull large"/></dt>
+            <dd>${value.mentalPower}</dd>
+        </dl>
+    </div>
 
 </t:container>

@@ -1,23 +1,19 @@
 <t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		  xmlns:p="tapestry:parameter">
+          xmlns:p="tapestry:parameter">
 
-	<t:replace id="header-area">
-		<t:security.user>
-			<t:layout.accountheader/>
-			<p:else>
-				<t:layout.anonymousheader/>
-			</p:else>
-		</t:security.user>
-	</t:replace>
+    <t:replace id="header-area">
+        <t:security.user>
+            <t:layout.accountheader/>
+            <p:else>
+                <t:layout.anonymousheader/>
+            </p:else>
+        </t:security.user>
+    </t:replace>
 
-	<t:replace id="content-area">
-		<div class="span12">
-			<div class="wrapper">
-				<div class="page-header">
-					<h1>${title} <t:if test="subtitle"><small>${subtitle}</small></t:if></h1>
-				</div>
-				<t:body/>
-			</div>
-		</div>
-	</t:replace>
+    <t:replace id="content-area">
+        <div class="page-header">
+            <h1>${title} <t:if test="subtitle"><small>${subtitle}</small></t:if></h1>
+        </div>
+        <t:body/>
+    </t:replace>
 </t:extend>

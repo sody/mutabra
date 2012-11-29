@@ -2,6 +2,7 @@ package com.mutabra.web.components.menu;
 
 import com.mutabra.web.internal.CSSConstants;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
@@ -16,43 +17,40 @@ import java.util.Map;
  * @since 1.0
  */
 public class LocaleMenu {
-	private static final Map<String, String> COUNTRY_CODES = new HashMap<String, String>();
+    private static final Map<String, String> COUNTRY_CODES = new HashMap<String, String>();
 
-	static {
-		COUNTRY_CODES.put("ru", "RU");
-		COUNTRY_CODES.put("en", "US");
-	}
+    static {
+        COUNTRY_CODES.put("ru", "ru");
+        COUNTRY_CODES.put("en", "us");
+    }
 
-	@Inject
-	private Locale currentLocale;
+    @Inject
+    private Locale currentLocale;
 
-	@Inject
-	private LocalizationSetter localizationSetter;
+    @Inject
+    private LocalizationSetter localizationSetter;
 
-	@Inject
-	@Symbol(SymbolConstants.SUPPORTED_LOCALES)
-	private String[] locales;
+    @Property(write = false)
+    @Inject
+    @Symbol(SymbolConstants.SUPPORTED_LOCALES)
+    private String[] locales;
 
-	@Property
-	private String locale;
+    @Property
+    private String locale;
 
-	public String[] getLocales() {
-		return locales;
-	}
+    public String getMenuItemClass() {
+        final String cssClass = getFlagIconClass(locale);
+        return currentLocale.toString().equals(locale) ?
+                cssClass + " " + CSSConstants.ACTIVE :
+                cssClass;
+    }
 
-	public String getMenuClass() {
-		return CSSConstants.MENU_HORIZONTAL + " " + CSSConstants.CLEARFIX;
-	}
+    @OnEvent("changeLocale")
+    void changeLocale(final String newLocale) {
+        localizationSetter.setLocaleFromLocaleName(newLocale);
+    }
 
-	public String getMenuItemClass() {
-		return new StringBuilder(currentLocale.toString().equals(locale) ? CSSConstants.ACTIVE : "")
-				.append(' ').append(CSSConstants.ICON_FLAG)
-				.append(' ').append(COUNTRY_CODES.get(locale))
-				.append(' ').append(CSSConstants.INTERACTIVE)
-				.toString();
-	}
-
-	void onChangeLocale(final String newLocale) {
-		localizationSetter.setLocaleFromLocaleName(newLocale);
-	}
+    private String getFlagIconClass(final String locale) {
+        return CSSConstants.ICON_FLAG + COUNTRY_CODES.get(locale) + " " + CSSConstants.INTERACTIVE;
+    }
 }

@@ -1,55 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-	  xmlns:p="tapestry:parameter">
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 <head>
-	<title>${title}</title>
-	<meta content="text/html; charset=utf-8;" http-equiv="content-type"/>
-	<meta name="google-site-verification" content="BDaAf-s_KBDJfS_c4izb6KTU26WHBMo-XlHoIDhnB0E"/>
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-23122478-2']);
-		_gaq.push(['_setDomainName', '.']);
-		_gaq.push(['_trackPageview']);
-		_gaq.push(['_trackPageLoadTime']);
+    <title>${title}</title>
+    <meta content="text/html; charset=utf-8;" http-equiv="content-type"/>
+    <meta name="google-site-verification" content="BDaAf-s_KBDJfS_c4izb6KTU26WHBMo-XlHoIDhnB0E"/>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-23122478-2']);
+        _gaq.push(['_setDomainName', '.']);
+        _gaq.push(['_trackPageview']);
+        _gaq.push(['_trackPageLoadTime']);
 
-		(function() {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 </head>
 <body>
 
-<div class="container">
-	<header id="header" class="row">
-		<div class="span3">
-			<a href="/" class="logo">UTABRA</a>
-		</div>
-		<t:extension-point id="header-area"/>
-	</header>
+<div class="page">
+    <header id="header" class="header container">
+        <div class="row">
+            <div class="span3">
+                <a href="/" class="logo">UTABRA</a>
+            </div>
+            <t:extension-point id="header-area"/>
+        </div>
+    </header>
 
-	<nav id="navigation" class="row">
-		<t:extension-point id="navigation-area"/>
-	</nav>
+    <nav id="navigation">
+        <t:extension-point id="navigation-area"/>
+    </nav>
 
-	<section id="content" class="row">
-		<t:extension-point id="content-area">
-			<t:body/>
-		</t:extension-point>
-	</section>
+    <section id="content" class="wrapper container">
+        <t:extension-point id="content-area">
+            <t:body/>
+        </t:extension-point>
+    </section>
 
-	<footer id="footer" class="row">
-		<t:extension-point id="footer-area">
-			${message:message.copyright} <br/>
-			App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>
-			<a href="mailto:support@mutabra.com">Contact Us</a>
-		</t:extension-point>
-	</footer>
+    <div class="buffer"></div>
 </div>
+<footer id="footer" class="footer container">
+    <t:extension-point id="footer-area">
+        ${message:message.copyright} <br/>
+        App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>
+        <a href="mailto:support@mutabra.com">Contact Us</a>
+    </t:extension-point>
+</footer>
 
 </body>
 </html>

@@ -1,9 +1,8 @@
-<t:container
-		xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-		xmlns:p="tapestry:parameter">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-	<t:menu id="locale" class="prop:menuClass" items="prop:locales" item="prop:locale">
-		<t:eventlink event="changeLocale" context="locale" class="prop:menuItemClass" title="prop:locale">${locale}</t:eventlink>
-	</t:menu>
+    <t:menu id="locale" class="horizontal-menu" items="prop:locales" item="prop:locale">
+        <t:eventlink event="changeLocale" context="locale"
+                     class="prop:menuItemClass" title="prop:locale">${locale}</t:eventlink>
+    </t:menu>
 
 </t:container>

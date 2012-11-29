@@ -41,7 +41,7 @@ public class CSSConstants {
 	public static final String ACTIVE = "active";
 
 	// Icons
-	public static final String ICON_FLAG = "icon-flag";
+	public static final String ICON_FLAG = "icon-flag-";
 	public static final String INTERACTIVE = "interactive";
 
 	// Navs
