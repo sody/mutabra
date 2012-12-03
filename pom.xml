@@ -8,9 +8,9 @@
 
   <name>Mutabra Project</name>
   <scm>
-    <url>https://bitbucket.org/sody/mutabra</url>
-    <developerConnection>scm:git:https://bitbucket.org/sody/mutabra.git</developerConnection>
-    <connection>scm:git:git@bitbucket.org:sody/mutabra.git</connection>
+    <url>https://bitbucket.org/mutabra/mutabra</url>
+    <developerConnection>scm:git:https://bitbucket.org/mutabra/mutabra.git</developerConnection>
+    <connection>scm:git:git@bitbucket.org:mutabra/mutabra.git</connection>
     <tag>HEAD</tag>
   </scm>
   <distributionManagement>
