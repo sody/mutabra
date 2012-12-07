@@ -3,11 +3,11 @@
     <div class="span1 offset5">
         <t:if test="hero">
             <t:pagelink page="game/home">
-                <t:image.heroimage hero="hero"/>
+                <t:svg type="faces" image="hero.face.code" width="64" height="64"/>
             </t:pagelink>
             <p:else>
                 <t:pagelink page="account/settings">
-                    <t:image.accountimage account="account"/>
+                    <t:svg image="literal:unknown" width="64" height="64"/>
                 </t:pagelink>
             </p:else>
         </t:if>

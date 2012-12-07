@@ -1,89 +1,76 @@
 package com.mutabra.web.internal;
 
-import com.mutabra.domain.common.Ability;
-import com.mutabra.domain.common.Card;
-import com.mutabra.domain.common.Face;
-import com.mutabra.domain.common.Race;
-import com.mutabra.domain.game.Hero;
 import com.mutabra.web.services.ImageSource;
-import org.apache.tapestry5.Asset;
-import org.apache.tapestry5.ioc.services.ThreadLocale;
+import org.apache.tapestry5.internal.parser.ComponentTemplate;
+import org.apache.tapestry5.internal.services.TemplateParser;
+import org.apache.tapestry5.ioc.Resource;
+import org.apache.tapestry5.ioc.annotations.PostInjection;
+import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
+import org.apache.tapestry5.ioc.internal.util.URLChangeTracker;
+import org.apache.tapestry5.ioc.services.ClasspathURLConverter;
 import org.apache.tapestry5.services.AssetSource;
+import org.apache.tapestry5.services.UpdateListener;
+import org.apache.tapestry5.services.UpdateListenerHub;
+
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class ImageSourceImpl implements ImageSource {
-    private static final String RACE_REPOSITORY = "img/races/";
-    private static final String FACE_REPOSITORY = "img/faces/";
-    private static final String CARD_REPOSITORY = "img/cards/";
-    private static final String ABILITY_REPOSITORY = "img/abilities/";
-    private static final String HERO_REPOSITORY = "img/heroes/";
+public class ImageSourceImpl implements ImageSource, UpdateListener {
+    private final Map<String, ComponentTemplate> templates = CollectionFactory.newConcurrentMap();
 
     private final AssetSource assetSource;
-    private final ThreadLocale locale;
+    private final TemplateParser parser;
+    private final URLChangeTracker tracker;
 
-    private final Asset notFound;
-    private final Asset cardBack;
+    private final Resource unknown;
 
-    public ImageSourceImpl(final AssetSource assetSource, final ThreadLocale locale) {
+    public ImageSourceImpl(final AssetSource assetSource,
+                           final TemplateParser parser,
+                           final ClasspathURLConverter classpathURLConverter) {
         this.assetSource = assetSource;
-        this.locale = locale;
+        this.parser = parser;
+        this.tracker = new URLChangeTracker(classpathURLConverter);
 
-        //todo: implement all different not found assets
-        notFound = assetSource.getContextAsset(HERO_REPOSITORY + "anonymous.svg", locale.getLocale());
-
-        cardBack = getContextAsset(CARD_REPOSITORY, "back");
+        //todo: inject default image using configured symbols
+        unknown = assetSource.resourceForPath("unknown.svg");
     }
 
-    public Asset getNotFoundImage() {
-        return notFound;
+    @PostInjection
+    public void registerAsUpdateListener(final UpdateListenerHub hub) {
+        hub.addUpdateListener(this);
     }
 
-    public Asset getRaceImage(final Race race) {
-        return race != null ?
-                getContextAsset(RACE_REPOSITORY, race.getCode()) :
-                getNotFoundImage();
-    }
-
-    public Asset getFaceImage(final Face face) {
-        return face != null ?
-                getContextAsset(FACE_REPOSITORY, face.getCode()) :
-                getNotFoundImage();
-    }
-
-    public Asset getCardImage(final Card card) {
-        return card != null ?
-                getContextAsset(CARD_REPOSITORY, card.getCode()) :
-                getNotFoundImage();
-    }
-
-    public Asset getAbilityImage(final Ability ability) {
-        return ability != null ?
-                getContextAsset(ABILITY_REPOSITORY, ability.getCode()) :
-                getNotFoundImage();
-    }
-
-    public Asset getCardBack() {
-        return cardBack;
-    }
-
-    public Asset getHeroImage(final Hero hero) {
-        return hero != null ?
-                getFaceImage(hero.getFace()) :
-//				getContextAsset(HERO_REPOSITORY, hero.getRace().getCode() + "_" + hero.getFace().getCode(), size, notFound) :
-                getNotFoundImage();
-    }
-
-    private Asset getContextAsset(final String repository, final String code) {
-        final StringBuilder builder = new StringBuilder(repository);
-        builder.append(code).append(".svg");
-        try {
-            return assetSource.getContextAsset(builder.toString(), locale.getLocale());
-        } catch (Exception e) {
-            // return default if not found
-            return getNotFoundImage();
+    public void checkForUpdates() {
+        if (tracker.containsChanges()) {
+            tracker.clear();
+            templates.clear();
         }
+    }
+
+    public ComponentTemplate getImage(final String type, final String image) {
+        return getImage(type != null ? type + "/" + image : image);
+    }
+
+    public ComponentTemplate getImage(final String path) {
+        final ComponentTemplate template = templates.get(path);
+        if (template != null) {
+            return template;
+        }
+
+        final Resource resource = assetSource.resourceForPath(path).withExtension("svg");
+        final ComponentTemplate parsedTemplate = parseTemplate(resource);
+        templates.put(path, parsedTemplate);
+        return parsedTemplate;
+    }
+
+    private ComponentTemplate parseTemplate(final Resource resource) {
+        if (resource.exists()) {
+            tracker.add(resource.toURL());
+            return parser.parseTemplate(resource);
+        }
+        return parseTemplate(unknown);
     }
 }

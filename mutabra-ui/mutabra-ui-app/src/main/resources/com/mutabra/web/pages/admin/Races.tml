@@ -9,7 +9,7 @@
         class="table">
 
     <p:pictureCell>
-        <t:image.raceimage race="row"/>
+        <t:svg type="races" image="row.code"/>
     </p:pictureCell>
     <p:nameCell>${row:name}</p:nameCell>
     <p:descriptionCell>${row:description}</p:descriptionCell>

@@ -4,7 +4,7 @@
          data-description-target="${descriptionSelector}"
          data-skip-url="${actionLink}">
         <div class="card-body">
-            <t:image.cardbackimage width="100" height="100"/>
+            <t:svg type="cards" image="literal:skip-turn" width="100" height="100"/>
         </div>
     </div>
 

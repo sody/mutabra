@@ -1,11 +1,6 @@
 package com.mutabra.web.services;
 
-import com.mutabra.domain.common.Ability;
-import com.mutabra.domain.common.Card;
-import com.mutabra.domain.common.Face;
-import com.mutabra.domain.common.Race;
-import com.mutabra.domain.game.Hero;
-import org.apache.tapestry5.Asset;
+import org.apache.tapestry5.internal.parser.ComponentTemplate;
 
 /**
  * @author Ivan Khalopik
@@ -13,17 +8,7 @@ import org.apache.tapestry5.Asset;
  */
 public interface ImageSource {
 
-    Asset getNotFoundImage();
+    ComponentTemplate getImage(String type, String image);
 
-    Asset getRaceImage(Race race);
-
-    Asset getFaceImage(Face face);
-
-    Asset getCardImage(Card card);
-
-    Asset getAbilityImage(Ability ability);
-
-    Asset getCardBack();
-
-    Asset getHeroImage(Hero hero);
+    ComponentTemplate getImage(String path);
 }

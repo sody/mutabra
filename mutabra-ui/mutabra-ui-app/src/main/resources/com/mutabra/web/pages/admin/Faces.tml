@@ -8,7 +8,7 @@
         reorder="picture,code,name,actions"
         class="table">
     <p:pictureCell>
-        <t:image.faceimage face="row"/>
+        <t:svg type="faces" image="row.code"/>
     </p:pictureCell>
     <p:nameCell>${row:name}</p:nameCell>
     <p:actionsCell>

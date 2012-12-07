@@ -3,7 +3,7 @@
     <div id="${clientId}" class="description">
         <h3 class="description-title">${message:label.skip-turn}</h3>
 
-        <t:image.cardbackimage width="150" height="150" class="description-picture"/>
+        <t:svg type="cards" image="literal:skip-turn" width="140" height="140" class="description-picture"/>
 
         <p class="description-text">${message:message.skip-turn}</p>
     </div>

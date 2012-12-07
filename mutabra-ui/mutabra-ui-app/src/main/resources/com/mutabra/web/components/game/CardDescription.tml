@@ -4,7 +4,7 @@
     <div id="${clientId}" class="description">
         <h3 class="description-title">${value:name}</h3>
 
-        <t:image.cardimage card="value" width="150" height="150" class="description-picture"/>
+        <t:svg type="cards" image="value.code" width="140" height="140" class="description-picture"/>
 
         <dl class="description-attrs">
             <dt><i class="icon-skull large"/></dt>

@@ -3,7 +3,7 @@
     <div id="${clientId}" class="${containerClass}">
         <h3 class="description-title">${value.hero.name}</h3>
 
-        <t:image.heroimage hero="value.hero" width="150" height="150" class="description-picture"/>
+        <t:svg type="faces" image="value.hero.face.code" width="140" height="140" class="description-picture"/>
 
         <dl class="description-attrs">
             <dt><i class="icon-heart large"/></dt>

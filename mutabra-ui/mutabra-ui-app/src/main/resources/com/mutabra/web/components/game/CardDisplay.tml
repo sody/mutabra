@@ -10,7 +10,7 @@
         <div class="card-se">${value.power}</div>
         <div class="card-sw">${value.health}</div>
         <div class="card-body">
-            <t:image.cardimage card="value" width="100" height="100"/>
+            <t:svg type="cards" image="value.code" width="100" height="100"/>
         </div>
     </div>
 

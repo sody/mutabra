@@ -6,7 +6,7 @@
     <div class="control-group">
         <div class="controls">
             <t:carousel source="source" row="row" value="value" class="span4">
-                <t:image.heroimage hero="row" width="100" height="100" style="margin:auto;"/>
+                <t:svg type="faces" image="row.face.code" width="100" height="100" style="margin:auto; display:block;"/>
             </t:carousel>
         </div>
     </div>

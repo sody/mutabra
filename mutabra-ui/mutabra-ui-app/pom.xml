@@ -21,6 +21,12 @@
         <directory>src/main/resources</directory>
       </resource>
       <resource>
+        <directory>src/main/svg</directory>
+        <includes>
+          <include>**/*.svg</include>
+        </includes>
+      </resource>
+      <resource>
         <directory>src/main/js</directory>
         <includes>
           <include>**/*.js</include>
