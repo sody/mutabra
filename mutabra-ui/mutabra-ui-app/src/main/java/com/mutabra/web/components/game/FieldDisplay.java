@@ -15,7 +15,8 @@ import org.apache.tapestry5.dom.Element;
  */
 @SupportsInformalParameters
 public class FieldDisplay extends AbstractComponent implements ClientElement {
-    private static final int CELL_SIZE = 40;
+    private static final int CELL_SIZE = 35;
+    private static final int CELL_OUTER_SIZE = 40;
     private static final int[][] CELL_PATH = {
             {2, 0},
             {1, 1},
@@ -37,10 +38,10 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
     @BeginRender
     void render(final MarkupWriter writer) {
         clientId = "f_" + field.getPosition().getId();
-        final int startX = CELL_SIZE * (3 * field.getPosition().getX() + 1);
-        final int startY = CELL_SIZE * (2 * field.getPosition().getY() + 2 + (field.getPosition().getX() + 1) % 2);
+        final int startX = CELL_OUTER_SIZE * (3 * field.getPosition().getX() + 1);
+        final int startY = CELL_OUTER_SIZE * (2 * field.getPosition().getY() + 2 + (field.getPosition().getX() + 1) % 2);
 
-        final Element path = writer.element("path", "stroke", "#333", "fill", "transparent");
+        final Element path = writer.element("path");
         path.attribute("id", clientId);
         if (field.hasUnit()) {
             path.attribute("data-description-target", "#description_" + field.getPosition().getId());
