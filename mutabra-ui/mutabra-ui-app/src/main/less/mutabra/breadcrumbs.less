@@ -10,17 +10,17 @@
   //CHANGED: added breadcrumb backgroung color setting
   background-color: @breadcrumbBackground;
   .border-radius(@baseBorderRadius);
-  li {
+  > li {
     display: inline-block;
     .ie7-inline-block();
     text-shadow: 0 1px 0 @white;
+    > .divider {
+      padding: 0 5px;
+      //CHANGED: added breadcrumb divider color setting
+      color: @breadcrumbDividerText;
+    }
   }
-  .divider {
-    padding: 0 5px;
-    //CHANGED: added breadcrumb divider color setting
-    color: @breadcrumbDividerText;
-  }
-  .active {
+  > .active {
     color: @grayLight;
   }
 }
