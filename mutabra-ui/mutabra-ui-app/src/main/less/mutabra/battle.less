@@ -152,38 +152,50 @@
   }
 }
 
-.hero {
-  .grid-cell(2, 2);
-}
-
 .log {
   .grid-cell(4, 5);
+
+  a {
+    text-decoration: none;
+  }
+
+  .friend {
+    color: @infoText;
+  }
+
+  .enemy {
+    color: @errorText;
+  }
+
+  .detail {
+    color: @successText;
+  }
 }
 
 .field {
-  .grid-cell(6, 5);
+  .grid-cell(8, 5);
+  text-align: center;
 
-  path {
+  .empty {
     fill: @fieldBackground;
     stroke: @fieldBorder;
+    stroke-dasharray: 5,5;
+  }
+  .hero,
+  .creature {
+    fill: @fieldBackground;
+    stroke: @fieldBorder;
+    stroke-dasharray: none;
+  }
 
-    &.empty {
-      stroke-dasharray: 5,5;
-    }
-    &.hero,
-    &.creature {
-      stroke-dasharray: none;
-    }
-
-    &.active {
-      fill:  @fieldBackgroundActive;
-    }
-    &.highlight{
-      fill:  @fieldBackgroundHighlight;
-    }
-    &.disabled {
-      .opacity(65);
-    }
+  .active {
+    fill:  @fieldBackgroundActive;
+  }
+  .highlight{
+    fill:  @fieldBackgroundHighlight;
+  }
+  .disabled {
+    .opacity(65);
   }
 }
 

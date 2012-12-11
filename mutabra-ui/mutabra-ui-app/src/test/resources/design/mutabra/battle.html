@@ -67,36 +67,61 @@
         </div>
 
         <div class="row">
-            <div class="span2">
-                <div class="hero">
-                    Hero-1
-                </div>
-                <div class="hero">
-                    Hero-2
-                </div>
-            </div>
-
             <div class="field">
-                <svg version="1.1" width="400" height="400" id="battle-field" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m40,120,70,0,35,35,-35,35,-70,0,-35,-35,35,-35z" class="empty enemy"
-                          data-position-y="0" data-position-x="0" id="f_0_0"></path>
-                    <path d="m160,240,70,0,35,35,-35,35,-70,0,-35,-35,35,-35z" class="hero friend active"
-                          data-position-y="2" data-position-x="1" data-field-target="#actions_1_2"
-                          data-description-target="#description_1_2" id="f_1_2"></path>
-                    <path d="m280,200,70,0,35,35,-35,35,-70,0,-35,-35,35,-35z" class="empty friend"
-                          data-position-y="1" data-position-x="2" id="f_2_1"></path>
-                    <path d="m280,120,70,0,35,35,-35,35,-70,0,-35,-35,35,-35z" class="creature enemy"
-                          data-position-y="0" data-position-x="2" id="f_2_0"></path>
-                    <path d="m160,80,70,0,35,35,-35,35,-70,0,-35,-35,35,-35z" class="hero enemy"
-                          data-position-y="0" data-position-x="1" data-field-target="#actions_1_0"
-                          data-description-target="#description_1_0" id="f_1_0"></path>
-                    <path d="m40,200,70,0,35,35,-35,35,-70,0,-35,-35,35,-35z" class="empty friend"
-                          data-position-y="1" data-position-x="0" id="f_0_1"></path>
+                <svg version="1.1" width="490" height="300" id="battle-field" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(0,50)" class="empty enemy"
+                       data-position-y="0" data-position-x="0" id="f_0_0">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                    </g>
+                    <g transform="translate(150,200)" class="hero friend active"
+                       data-position-y="2" data-position-x="1" data-field-target="#actions_1_2"
+                       data-description-target="#description_1_2" id="f_1_2">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                        <g transform="translate(50,5) scale(0.9,0.9)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </g>
+                    <g transform="translate(300,150)" class="empty friend"
+                       data-position-y="1" data-position-x="2" id="f_2_1">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                    </g>
+                    <g transform="translate(300,50)" class="creature enemy"
+                       data-position-y="0" data-position-x="2" data-field-target="#actions_2_0"
+                       data-description-target="#description_2_0"  id="f_2_0">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+
+                        <g transform="translate(50,5) scale(0.9,0.9)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </g>
+                    <g transform="translate(150,0)" class="hero enemy"
+                       data-position-y="0" data-position-x="1" data-field-target="#actions_1_0"
+                       data-description-target="#description_1_0" id="f_1_0">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                        <g transform="translate(50,5) scale(0.9,0.9)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </g>
+                    <g transform="translate(0,150)" class="empty friend"
+                       data-position-y="1" data-position-x="0" id="f_0_1">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                    </g>
                 </svg>
             </div>
 
             <div class="log">
-                Log
+                <h4>Round 12:</h4>
+                <p><a href="#" class="friend">[sody]</a> summoned a <a href="#" class="detail">[huge hydra]</a>...</p>
+                <p><a href="#" class="enemy">[hermes]</a> attacked <a href="#" class="friend">[sody]</a> with a <a href="#" class="detail">[wood sword]</a>...</p>
+
+                <h4>Round 11:</h4>
+                <p><a href="#" class="enemy">[hermes]</a> skips...</p>
+                <p><a href="#" class="friend">[sody]</a> attacks <a href="#" class="enemy">[hermes]</a> with a <a href="#" class="detail">[chain lighting]</a>...</p>
+
+                <p><a href="#" class="detail">[...]</a></p>
             </div>
         </div>
 
@@ -293,6 +318,32 @@
                         </p>
                     </div>
 
+                    <div class="description" id="description_2_0">
+                        <h3 class="description-title">Shadow</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>5</dd>
+
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>1</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            This is your enemy creature, asshole!
+                        </p>
+                    </div>
+
                     <div class="description" id="description_skip">
                         <h3 class="description-title">Skip Turn</h3>
 
@@ -319,7 +370,7 @@
                 <div class="row actions active" id="actions_1_2">
                     <div class="card" id="card_swim-away"
                          data-card-url="/apply"
-                         data-card-target="path.friend.empty"
+                         data-card-target=".friend.empty"
                          data-description-target="#description_swim-away">
 
                         <div class="card-ne"><i class="icon-heart"></i></div>
@@ -340,7 +391,7 @@
                     </div>
                     <div class="card" id="card_trident-blow"
                          data-card-url="/apply"
-                         data-card-target="path.enemy.hero,path.enemy.creature"
+                         data-card-target=".enemy.hero,.enemy.creature"
                          data-description-target="#description_trident-blow">
 
                         <div class="card-ne"><i class="icon-skull"></i></div>
@@ -361,7 +412,7 @@
                     </div>
                     <div class="card disabled" id="card_storm"
                          data-card-url="/apply"
-                         data-card-target="path.friend.hero,path.friend.creature"
+                         data-card-target=".friend.hero,.friend.creature"
                          data-description-target="#description_storm">
 
                         <div class="card-ne"><i class="icon-skull"></i></div>
@@ -382,7 +433,7 @@
                     </div>
                     <div class="card" id="card_seahorse"
                          data-card-url="/apply"
-                         data-card-target="path.friend.empty"
+                         data-card-target=".friend.empty"
                          data-description-target="#description_seahorse">
 
                         <div class="card-ne"><i class="icon-blood"></i></div>
@@ -403,7 +454,7 @@
                     </div>
                     <div class="card" id="card_mermaid"
                          data-card-url="/apply"
-                         data-card-target="path.friend.empty"
+                         data-card-target=".friend.empty"
                          data-description-target="#description_mermaid">
 
                         <div class="card-ne"><i class="icon-blood"></i></div>
@@ -444,6 +495,9 @@
                 </div>
 
                 <div class="row actions" id="actions_1_0">
+                </div>
+
+                <div class="row actions" id="actions_2_0">
                 </div>
             </div>
         </div>

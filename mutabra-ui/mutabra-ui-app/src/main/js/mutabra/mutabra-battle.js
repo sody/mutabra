@@ -61,7 +61,7 @@
     constructor:Field,
 
     select:function () {
-      this.$element.parent().find('.active').field('cancel');
+      this.$element.parents('svg').find('.active').field('cancel');
 
       this.$element.attr('class', function (index, attr) {
         return attr + ' active';
