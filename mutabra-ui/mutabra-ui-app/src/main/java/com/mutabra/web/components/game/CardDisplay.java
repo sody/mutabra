@@ -40,7 +40,7 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
     public String getFieldSelector() {
         final TargetType targetType = value.getTargetType();
 
-        final StringBuilder sideSelector = new StringBuilder("path");
+        final StringBuilder sideSelector = new StringBuilder();
         if (targetType.supportsEnemy() && !targetType.supportsFriend()) {
             sideSelector.append(".enemy");
         } else if (targetType.supportsFriend() && !targetType.supportsEnemy()) {

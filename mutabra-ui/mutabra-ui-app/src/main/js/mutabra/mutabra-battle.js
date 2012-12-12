@@ -205,13 +205,15 @@
   /* DATA-API
    * ============== */
   $(function () {
-    $('body')
-        .on('mouseover.description.data-api', '[data-description-target]', function () {
+    $('[data-description-target]')
+        .on('mouseenter.description.data-api', function () {
           $(this).description('show');
         })
-        .on('mouseout.description.data-api', '[data-description-target]', function () {
+        .on('mouseleave.description.data-api', function () {
           $(this).description('hide');
-        })
+        });
+
+    $(document)
         .on('click.field.data-api', '[data-field-target]', function () {
           $(this).field('select');
         })

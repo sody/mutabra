@@ -35,6 +35,15 @@ public class Svg extends AbstractComponent {
     @Parameter(value = "100")
     private int width;
 
+    @Parameter(value = "0")
+    private int x;
+
+    @Parameter(value = "0")
+    private int y;
+
+    @Parameter
+    private boolean inline;
+
     @Inject
     private ImageSource imageSource;
 
@@ -57,23 +66,45 @@ public class Svg extends AbstractComponent {
                             break;
                         case END_ELEMENT:
                             final Element element = writer.getElement();
-                            if ("g".equals(element.getName())) {
-                                final Element container = element.getContainer();
-                                final int widthValue = safeGet(container, "width");
-                                final int heightValue = safeGet(container, "height");
-
-                                if (widthValue > 0 && widthValue != width && heightValue > 0 && heightValue != height) {
-                                    final double scaleX = (double) width / widthValue;
-                                    final double scaleY = (double) height / heightValue;
-                                    element.forceAttributes("transform", String.format(Locale.US, "scale(%.3f,%.3f)", scaleX, scaleY));
-                                }
-                            } else if ("svg".equals(element.getName())) {
+                            if (!inline && "svg".equals(element.getName())) {
                                 getResources().renderInformalParameters(writer);
-                                element.forceAttributes(
-                                        "width", String.valueOf(width),
-                                        "height", String.valueOf(height));
                             }
                             writer.end();
+
+                            if ("g".equals(element.getName())) {
+                                final Element container = element.getContainer();
+                                if ("svg".equals(container.getName())) {
+                                    final int widthValue = safeGet(container, "width");
+                                    final int heightValue = safeGet(container, "height");
+
+                                    if (widthValue > 0 && widthValue != width && heightValue > 0 && heightValue != height) {
+                                        final double scaleX = (double) width / widthValue;
+                                        final double scaleY = (double) height / heightValue;
+                                        element.forceAttributes("transform", String.format(Locale.US, "scale(%.3f,%.3f)", scaleX, scaleY));
+                                    }
+                                    if (x != 0 || y != 0) {
+                                        final String translate = String.format("translate(%d,%d)", x, y);
+                                        final String transform = element.getAttribute("transform");
+                                        element.forceAttributes("transform", transform != null ?
+                                                translate + " " + transform :
+                                                translate);
+                                    }
+                                }
+                            } else if ("svg".equals(element.getName())) {
+                                if (inline) {
+                                    Element g = element.find("g");
+                                    while (g != null) {
+                                        g.moveBefore(element);
+                                        g = element.find("g");
+                                    }
+                                    element.remove();
+                                } else {
+                                    element.forceAttributes(
+                                            "width", String.valueOf(width),
+                                            "height", String.valueOf(height));
+                                }
+                            }
+
                             break;
                     }
                 }

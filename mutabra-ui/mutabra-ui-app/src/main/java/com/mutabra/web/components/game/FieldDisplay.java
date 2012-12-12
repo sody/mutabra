@@ -4,6 +4,7 @@ import com.mutabra.domain.battle.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
@@ -15,8 +16,8 @@ import org.apache.tapestry5.dom.Element;
  */
 @SupportsInformalParameters
 public class FieldDisplay extends AbstractComponent implements ClientElement {
-    private static final int CELL_SIZE = 35;
-    private static final int CELL_OUTER_SIZE = 40;
+    private static final int CELL_SIZE = 45;
+    private static final int CELL_OUTER_SIZE = 50;
     private static final int[][] CELL_PATH = {
             {2, 0},
             {1, 1},
@@ -36,34 +37,41 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
     }
 
     @BeginRender
-    void render(final MarkupWriter writer) {
+    void begin(final MarkupWriter writer) {
         clientId = "f_" + field.getPosition().getId();
-        final int startX = CELL_OUTER_SIZE * (3 * field.getPosition().getX() + 1);
-        final int startY = CELL_OUTER_SIZE * (2 * field.getPosition().getY() + 2 + (field.getPosition().getX() + 1) % 2);
+        final int startX = CELL_OUTER_SIZE * (3 * field.getPosition().getX());
+        final int startY = CELL_OUTER_SIZE * (2 * field.getPosition().getY() + (field.getPosition().getX() + 1) % 2);
 
-        final Element path = writer.element("path");
-        path.attribute("id", clientId);
+        final Element element = writer.element("g",
+                "id", clientId,
+                "transform", String.format("translate(%d, %d)", startX, startY),
+                "data-position-x", String.valueOf(field.getPosition().getX()),
+                "data-position-y", String.valueOf(field.getPosition().getY()))
+                .addClassName(field.hasHero() ? "hero" : field.hasCreature() ? "creature" : "empty")
+                .addClassName(field.isEnemySide() ? "enemy" : "friend");
+
         if (field.hasUnit()) {
-            path.attribute("data-description-target", "#description_" + field.getPosition().getId());
-            path.attribute("data-field-target", "#actions_" + field.getPosition().getId());
+            element.attributes(
+                    "data-description-target", "#description_" + field.getPosition().getId(),
+                    "data-field-target", "#actions_" + field.getPosition().getId());
         }
-        path.attribute("data-position-x", String.valueOf(field.getPosition().getX()));
-        path.attribute("data-position-y", String.valueOf(field.getPosition().getY()));
-
-        path.addClassName(field.hasHero() ? "hero" : field.hasCreature() ? "creature" : "empty");
-        path.addClassName(field.isEnemySide() ? "enemy" : "friend");
         if (field.hasHero() && !field.isEnemySide()) {
-            path.addClassName("active");
+            element.addClassName("active");
         }
 
         final StringBuilder pathBuilder = new StringBuilder("m");
-        pathBuilder.append(startX).append(',').append(startY);
+        pathBuilder.append(CELL_OUTER_SIZE).append(',').append(CELL_OUTER_SIZE - CELL_SIZE);
         for (int[] point : CELL_PATH) {
             pathBuilder.append(',').append(point[0] * CELL_SIZE).append(',').append(point[1] * CELL_SIZE);
         }
         pathBuilder.append("z");
-        path.attribute("d", pathBuilder.toString());
+        writer.element("path",
+                "d", pathBuilder.toString());
+        writer.end();
+    }
 
+    @AfterRender
+    void end(final MarkupWriter writer) {
         writer.end();
     }
 }

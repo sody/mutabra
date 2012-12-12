@@ -1,22 +1,21 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
     <div class="row">
-        <div class="span2">
-            <div class="hero">
-                Hero-1
-            </div>
-            <div class="hero">
-                Hero-2
-            </div>
-        </div>
-        <div class="span6 field">
-            <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="400" width="400" version="1.1">
+        <div class="field">
+            <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="300" width="500" version="1.1">
                 <t:loop source="fields" value="field">
-                    <t:game.fielddisplay field="field"/>
+                    <t:game.fielddisplay field="field">
+                        <t:if test="field.hasHero()">
+                            <t:svg type="faces" image="field.hero.hero.face.code" inline="true" width="90" height="90" x="50" y="5"/>
+                        </t:if>
+                        <t:if test="field.hasCreature()">
+                            <t:svg type="faces" image="field.creature.card.code" inline="true" width="90" height="90" x="50" y="5"/>
+                        </t:if>
+                    </t:game.fielddisplay>
                 </t:loop>
             </svg>
         </div>
-        <div class="span4 log">Log</div>
+        <div class="log">Log</div>
     </div>
 
     <div class="row">
