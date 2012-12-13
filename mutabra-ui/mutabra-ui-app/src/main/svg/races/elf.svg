@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="64" width="64">
-  <title>Elf Race Icon</title>
-  <desc>Elf Race Icon</desc>
-  <path stroke="none"
-        fill="#333"
-        d="m28.511,0.10817c-15.848,1.7474-28.194,15.214-28.194,31.582,0,17.555,14.199,31.783,31.693,31.783s31.673-14.228,31.673-31.783c0-1.3267-0.10263-2.6287-0.25994-3.9127-2.2332,11.577-12.385,20.326-24.574,20.326-13.826,0-25.034-11.248-25.034-25.121,0-10.168,6.0383-18.921,14.697-22.874z"/>
-</svg>
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">  <title>Elf Race Icon</title>  <desc>Elf Race Icon</desc>  <g>    <path fill="#333"          d="m 55,6             c -28,-5 -50,19 -50,44             s 20,45 45,45               49,-22 44,-50             c 0,13 -14,30 -34,30             s -35,-15 -35,-35               17,-34 30,-34             z"/>  </g></svg>
