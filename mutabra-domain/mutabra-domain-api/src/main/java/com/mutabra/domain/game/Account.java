@@ -3,7 +3,6 @@ package com.mutabra.domain.game;
 import com.mutabra.domain.BaseEntity;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -99,10 +98,4 @@ public interface Account extends BaseEntity {
     TimeZone getTimeZone();
 
     void setTimeZone(TimeZone timeZone);
-
-    Hero getHero();
-
-    void setHero(Hero hero);
-
-    List<Hero> getHeroes();
 }

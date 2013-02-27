@@ -37,6 +37,11 @@ public class Position {
     }
 
     @Override
+    public String toString() {
+        return String.format("(%d, %d)", x, y);
+    }
+
+    @Override
     public int hashCode() {
         long bits = java.lang.Double.doubleToLongBits(getX());
         bits ^= java.lang.Double.doubleToLongBits(getY()) * 31;

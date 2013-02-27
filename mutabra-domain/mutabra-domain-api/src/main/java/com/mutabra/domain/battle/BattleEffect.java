@@ -1,27 +1,40 @@
 package com.mutabra.domain.battle;
 
-import com.mutabra.domain.BaseEntity;
-import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.Ability;
+import com.mutabra.domain.common.EffectType;
+import com.mutabra.domain.common.TargetType;
+
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public interface BattleEffect extends BaseEntity {
+public interface BattleEffect {
 
-    Battle getBattle();
+    BattleTarget getCaster();
 
-    Effect getEffect();
+    BattleTarget getTarget();
 
-    BattleUnit getCaster();
+    EffectType getType();
 
-    void setCaster(BattleUnit caster);
+    void setType(EffectType type);
 
-    Position getTarget();
+    TargetType getTargetType();
 
-    void setTarget(Position target);
+    void setTargetType(TargetType targetType);
+
+    int getPower();
+
+    void setPower(int power);
 
     int getDuration();
 
     void setDuration(int duration);
+
+    int getHealth();
+
+    void setHealth(int health);
+
+    List<Ability> getAbilities();
 }

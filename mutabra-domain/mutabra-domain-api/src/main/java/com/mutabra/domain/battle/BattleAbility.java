@@ -1,4 +1,7 @@
-package com.mutabra.domain.common;
+package com.mutabra.domain.battle;
+
+import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.TargetType;
 
 import java.util.List;
 
@@ -6,9 +9,13 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public interface Ability {
+public interface BattleAbility {
+
+    Long getId();
 
     String getCode();
+
+    void setCode(String code);
 
     TargetType getTargetType();
 

@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface Battle extends BaseEntity {
 
-    BattleState getState();
+    boolean isActive();
 
-    void setState(BattleState state);
+    void setActive(boolean active);
 
     int getRound();
 
@@ -27,5 +27,6 @@ public interface Battle extends BaseEntity {
 
     List<BattleEffect> getEffects();
 
-    boolean isReady();
+    /* HELPERS */
+    boolean isAllReady();
 }

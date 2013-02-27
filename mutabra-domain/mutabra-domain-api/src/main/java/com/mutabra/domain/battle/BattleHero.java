@@ -1,7 +1,8 @@
 package com.mutabra.domain.battle;
 
-import com.mutabra.domain.common.Card;
 import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.HeroAppearance;
+import com.mutabra.domain.game.HeroLevel;
 
 import java.util.List;
 
@@ -9,21 +10,42 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public interface BattleHero extends BattleUnit {
+public interface BattleHero {
 
-    Battle getBattle();
+    Hero getHero(); //LAZY REF
 
-    Hero getHero();
+    void setHero(Hero hero);
+
+    HeroAppearance getAppearance();
+
+    HeroLevel getLevel();
+
+    int getHealth();
+
+    void setHealth(int health);
 
     int getMentalPower();
 
     void setMentalPower(int mentalPower);
 
-    List<Card> getDeck();
+    Position getPosition();
 
-    List<Card> getHand();
+    void setPosition(Position position);
 
-    List<Card> getGraveyard();
+    boolean isReady();
+
+    void setReady(boolean ready);
+
+    List<BattleCard> getCards();
 
     List<BattleCreature> getCreatures();
+
+    /* HELPERS */
+    boolean isAllReady();
+
+    List<BattleCard> getDeck();
+
+    List<BattleCard> getHand();
+
+    List<BattleCard> getGraveyard();
 }

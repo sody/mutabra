@@ -1,12 +1,10 @@
 package com.mutabra.domain.common;
 
-import org.greatage.hibernate.type.OrderedEnum;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public enum TargetType implements OrderedEnum {
+public enum TargetType {
 
     /**
      * Has no target.

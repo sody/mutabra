@@ -1,65 +1,53 @@
 package com.mutabra.domain.common;
 
-import org.greatage.hibernate.type.OrderedEnum;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public enum EffectType implements OrderedEnum {
-    UNKNOWN(0),
-
-    /* attacks */
-    MELEE_ATTACK(0),
-    RANGED_ATTACK(0),
-    MAGIC_ATTACK(0),
+public enum EffectType {
+    UNKNOWN,
 
     /* abilities */
-    SUMMON(1),
-    HEAL(0),
-    MOVE(0),
+    SUMMON,
+    HEAL,
+    MOVE,
+
+    /* attacks */
+    MELEE_ATTACK,
+    RANGED_ATTACK,
+    MAGIC_ATTACK,
 
     /* enhancements */
-    ATTACK_ENHANCEMENT(0),
-    MELEE_ATTACK_ENHANCEMENT(0),
-    RANGED_ATTACK_ENHANCEMENT(0),
-    MAGIC_ATTACK_ENHANCEMENT(0),
-
-    /* cancellations */
-    ATTACK_CANCELLATION(0),
-    MELEE_ATTACK_CANCELLATION(0),
-    RANGED_ATTACK_CANCELLATION(0),
-    MAGIC_ATTACK_CANCELLATION(0),
-
-    ABILITY_CANCELLATION(0),
-    SUMMON_CANCELLATION(0),
-    HEAL_CANCELLATION(0),
-    MOVE_CANCELLATION(0),
+    ATTACK_ENHANCEMENT,
+    MELEE_ATTACK_ENHANCEMENT,
+    RANGED_ATTACK_ENHANCEMENT,
+    MAGIC_ATTACK_ENHANCEMENT,
 
     /* absorptions */
-    DAMAGE_ABSORPTION(0),
-    MELEE_DAMAGE_ABSORPTION(0),
-    RANGED_DAMAGE_ABSORPTION(0),
-    MAGIC_DAMAGE_ABSORPTION(0),
+    DAMAGE_ABSORPTION,
+    MELEE_DAMAGE_ABSORPTION,
+    RANGED_DAMAGE_ABSORPTION,
+    MAGIC_DAMAGE_ABSORPTION,
+
+    /* cancellations */
+    ATTACK_CANCELLATION,
+    MELEE_ATTACK_CANCELLATION,
+    RANGED_ATTACK_CANCELLATION,
+    MAGIC_ATTACK_CANCELLATION,
+
+    ABILITY_CANCELLATION,
+    SUMMON_CANCELLATION,
+    HEAL_CANCELLATION,
+    MOVE_CANCELLATION,
 
     /* punishments */
-    ATTACK_PUNISHMENT(0),
-    MELEE_ATTACK_PUNISHMENT(0),
-    RANGED_ATTACK_PUNISHMENT(0),
-    MAGIC_ATTACK_PUNISHMENT(0),
+    ATTACK_PUNISHMENT,
+    MELEE_ATTACK_PUNISHMENT,
+    RANGED_ATTACK_PUNISHMENT,
+    MAGIC_ATTACK_PUNISHMENT,
 
-    ABILITY_PUNISHMENT(0),
-    SUMMON_PUNISHMENT(0),
-    HEAL_PUNISHMENT(0),
-    MOVE_PUNISHMENT(0),;
-
-    private final int order;
-
-    EffectType(final int order) {
-        this.order = order;
-    }
-
-    public int getOrder() {
-        return order;
-    }
+    ABILITY_PUNISHMENT,
+    SUMMON_PUNISHMENT,
+    HEAL_PUNISHMENT,
+    MOVE_PUNISHMENT
 }

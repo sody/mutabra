@@ -1,10 +1,6 @@
 package com.mutabra.domain.game;
 
 import com.mutabra.domain.BaseEntity;
-import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.common.Face;
-import com.mutabra.domain.common.Level;
-import com.mutabra.domain.common.Race;
 
 import java.util.Date;
 import java.util.List;
@@ -15,43 +11,29 @@ import java.util.List;
  */
 public interface Hero extends BaseEntity {
 
-    Account getAccount();
+    Account getAccount(); //LAZY REF
 
-    String getName();
+    void setAccount(Account account);
 
-    void setName(String name);
+    boolean isActive();
 
-    long getRating();
+    void setActive(boolean active);
 
-    void setRating(long rating);
+    HeroLevel getLevel();
 
-    Face getFace();
-
-    void setFace(Face face);
-
-    Race getRace();
-
-    void setRace(Race race);
-
-    Level getLevel();
-
-    void setLevel(Level level);
+    HeroAppearance getAppearance();
 
     int getHealth();
 
     void setHealth(int health);
 
-    List<HeroCard> getCards();
+    int getMentalPower();
 
-    Battle getBattle();
+    void setMentalPower(int mentalPower);
 
-    void setBattle(Battle battle);
+    List<String> getCards();
 
     Date getLastActive();
 
     void setLastActive(Date lastActive);
-
-    boolean isReady();
-
-    void setReady(boolean ready);
 }
