@@ -29,4 +29,14 @@ public interface Battle extends BaseEntity {
 
     /* HELPERS */
     boolean isAllReady();
+
+    BattleHero createHero();
+
+    BattleCard createCard();
+
+    BattleCreature createCreature();
+
+    BattleAbility createAbility();
+
+    BattleEffect createEffect();
 }

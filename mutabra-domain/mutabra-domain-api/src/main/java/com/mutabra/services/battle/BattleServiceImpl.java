@@ -1,225 +1,226 @@
 package com.mutabra.services.battle;
 
-import com.mutabra.annotations.Transactional;
 import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleAbility;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCardType;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleEffect;
-import com.mutabra.domain.battle.BattleField;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.BattleState;
-import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.battle.Position;
 import com.mutabra.domain.common.Card;
-import com.mutabra.domain.common.Castable;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.game.Hero;
-import com.mutabra.domain.game.HeroCard;
-import com.mutabra.scripts.ScriptContextImpl;
-import com.mutabra.scripts.ScriptExecutor;
 import com.mutabra.services.BaseEntityServiceImpl;
 import org.greatage.domain.Repository;
-import org.greatage.util.ReflectionUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static com.mutabra.services.Mappers.card$;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements BattleService {
-    private final ScriptExecutor scriptExecutor;
-    private final Class<? extends BattleHero> realHeroClass;
-    private final Class<? extends BattleEffect> realEffectClass;
+    private final ScriptEngine scriptEngine;
 
-    public BattleServiceImpl(final Repository repository, final ScriptExecutor scriptExecutor) {
+    public BattleServiceImpl(final Repository repository,
+                             final ScriptEngine scriptEngine) {
         super(repository, Battle.class);
-        this.scriptExecutor = scriptExecutor;
 
-        realHeroClass = repository.create(BattleHero.class).getClass();
-        realEffectClass = repository.create(BattleEffect.class).getClass();
+        this.scriptEngine = scriptEngine;
     }
 
-    @Transactional
-    public void startBattle(final Hero hero1, final Hero hero2) {
+    public void create(final Hero hero1, final Hero hero2) {
         final Battle battle = create();
+        battle.setActive(false);
+
+        // init heroes
+        for (Hero hero : Arrays.asList(hero1, hero2)) {
+            final BattleHero battleHero = battle.createHero();
+            fillHero(battleHero, hero);
+
+            battleHero.setReady(false);
+            battle.getHeroes().add(battleHero);
+        }
+        // set first hero ready for battle
+        battle.getHeroes().get(0).setReady(true);
+
+        save(battle);
+    }
+
+    public void start(final Battle battle) {
+        battle.setActive(true);
         battle.setStartedAt(new Date());
         battle.setRound(1);
-        battle.setState(BattleState.STARTED);
-        saveOrUpdate(battle);
 
-        final List<BattleHero> heroes = battle.getHeroes();
-        heroes.add(createHero(battle, hero1, new Position(1, 2)));
-        heroes.add(createHero(battle, hero2, new Position(1, 0)));
-        saveOrUpdate(battle);
+        for (BattleHero battleHero : battle.getHeroes()) {
+            final Hero hero = battleHero.getHero();
+            fillHero(battleHero, hero);
 
-        hero1.setBattle(battle);
-        hero1.setReady(true);
-        hero2.setBattle(battle);
-        hero2.setReady(true);
-        repository().saveOrUpdate(hero1);
-        repository().saveOrUpdate(hero2);
+            battleHero.setPosition(new Position(1, 0));
+            battleHero.setReady(false);
+
+            // init hero cards
+            final List<Card> cards = repository().query(Card.class)
+                    .filter(card$.code$.in(hero.getCards()))
+                    .list();
+            Collections.shuffle(cards);
+
+            for (Card card : cards) {
+                final BattleCard battleCard = battle.createCard();
+                fillCard(battleCard, card);
+
+                battleCard.setType(BattleCardType.DECK);
+                battleHero.getCards().add(battleCard);
+            }
+
+            // get 3 first cards from deck to hand
+            for (int i = 0; i < 3; i++) {
+                battleHero.getCards().get(i).setType(BattleCardType.HAND);
+            }
+        }
+
+        update(battle);
     }
 
-    public void registerAction(final Battle battle,
-                               final BattleUnit caster,
-                               final Castable castable,
-                               final Position target) {
-
-        final List<BattleEffect> effects = battle.getEffects();
-        for (Effect effect : castable.getEffects()) {
-            final BattleEffect battleEffect = ReflectionUtils.newInstance(realEffectClass, battle, effect);
-            battleEffect.setCaster(caster);
-            battleEffect.setTarget(target);
-            battleEffect.setDuration(effect.getDuration());
-            effects.add(battleEffect);
+    public void end(final Battle battle) {
+        for (BattleHero battleHero : battle.getHeroes()) {
+            final Hero hero = battleHero.getHero();
+            hero.getLevel().setRating(battleHero.getLevel().getRating());
+            repository().update(hero);
         }
-
-        caster.setHealth(caster.getHealth() - castable.getBloodCost());
-        caster.setExhausted(true);
-        if (caster instanceof BattleHero) {
-            final BattleHero hero = (BattleHero) caster;
-            final List<Card> hand = hero.getHand();
-            final List<Card> graveyard = hero.getGraveyard();
-            hand.remove((Card) castable);
-            graveyard.add((Card) castable);
-        }
-
-        saveOrUpdate(battle);
-
-        if (battle.isReady()) {
-            endRound(battle);
-        }
+        delete(battle);
     }
 
-    public void skipTurn(final Battle battle, final BattleHero hero) {
-        hero.setExhausted(true);
-        for (BattleCreature creature : hero.getCreatures()) {
-            creature.setExhausted(true);
-        }
-        saveOrUpdate(battle);
-
-        if (battle.isReady()) {
-            endRound(battle);
-        }
-    }
-
-    @Transactional
     public void endRound(final Battle battle) {
         // process effects
-        final List<BattleEffect> deadEffects = new ArrayList<BattleEffect>();
-        for (BattleEffect battleEffect : battle.getEffects()) {
-            scriptExecutor.executeScript(new ScriptContextImpl(battle, battleEffect));
-            battleEffect.setDuration(battleEffect.getDuration() - 1);
-            if (battleEffect.getDuration() <= 0) {
-                deadEffects.add(battleEffect);
-            }
-        }
-        // remove dead effects
-        battle.getEffects().removeAll(deadEffects);
-        for (BattleEffect effect : deadEffects) {
-            repository().delete(effect);
-        }
+        scriptEngine.executeScripts(battle);
 
-        // remove dead creatures
-        for (BattleHero hero : battle.getHeroes()) {
-            final List<BattleCreature> deadCreatures = new ArrayList<BattleCreature>();
-            for (BattleCreature creature : hero.getCreatures()) {
-                if (creature.getHealth() <= 0) {
-                    deadCreatures.add(creature);
-                }
-            }
-            hero.getCreatures().removeAll(deadCreatures);
-            for (BattleCreature creature : deadCreatures) {
-                repository().delete(creature);
-            }
-        }
-
-        for (BattleHero hero : battle.getHeroes()) {
-            if (hero.getHealth() <= 0 || hero.getMentalPower() >= 20 || hero.getMentalPower() <= 0) {
-                endBattle(battle);
-                saveOrUpdate(battle);
+        for (BattleHero battleHero : battle.getHeroes()) {
+            if (battleHero.getHealth() <= 0 || battleHero.getMentalPower() <= 0) {
+                end(battle);
                 return;
             }
         }
 
         //start new round
         battle.setRound(battle.getRound() + 1);
-
-        for (BattleHero hero : battle.getHeroes()) {
-            hero.setExhausted(hero.getDeck().isEmpty() || hero.getPosition() == null);
-            hero.setMentalPower(hero.getMentalPower() + 1);
-            final List<Card> deck = hero.getDeck();
-            final List<Card> hand = hero.getHand();
-            if (deck.size() > 0) {
-                hand.add(deck.remove(0));
-            }
-            for (BattleCreature creature : hero.getCreatures()) {
-                creature.setExhausted(creature.getCard().getAbilities().isEmpty());
-            }
-        }
-        saveOrUpdate(battle);
-
-        for (BattleHero hero : battle.getHeroes()) {
-            final Hero realHero = hero.getHero();
-            realHero.setReady(true);
-            repository().saveOrUpdate(realHero);
-        }
-    }
-
-    public void endBattle(final Battle battle) {
         for (BattleHero battleHero : battle.getHeroes()) {
-            final Hero hero = battleHero.getHero();
-            hero.setBattle(null);
-            hero.setReady(true);
-            repository().saveOrUpdate(hero);
+            battleHero.setMentalPower(battleHero.getMentalPower() + 1);
+
+            final List<BattleCard> deck = battleHero.getDeck();
+            if (deck.size() > 0) {
+                deck.get(0).setType(BattleCardType.HAND);
+            }
+            battleHero.setReady(battleHero.getHand().isEmpty());
+
+            for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                battleCreature.setReady(battleCreature.getAbilities().isEmpty());
+            }
+        }
+        update(battle);
+    }
+
+    public void cast(final Battle battle,
+                     final BattleHero hero,
+                     final BattleCard card,
+                     final Position target) {
+        for (Effect effect : card.getEffects()) {
+            final BattleEffect battleEffect = battle.createEffect();
+            fillEffect(battleEffect, effect);
+
+            battleEffect.getTarget().getPosition().setX(target.getX());
+            battleEffect.getTarget().getPosition().setY(target.getY());
+            battleEffect.getCaster().setHero(hero);
+
+            battle.getEffects().add(battleEffect);
+        }
+
+        hero.setReady(true);
+        //TODO: replace with some battle effect that takes place after round ends
+        hero.setHealth(hero.getHealth() - card.getBloodCost());
+        card.setType(BattleCardType.GRAVEYARD);
+
+        if (battle.isAllReady()) {
+            endRound(battle);
+        } else {
+            update(battle);
         }
     }
 
-    public List<BattleField> getBattleField(final Hero hero, final Battle battle) {
-        final Map<Position, BattleField> battleField = new HashMap<Position, BattleField>();
-        boolean upSide = false;
-        for (BattleHero member : battle.getHeroes()) {
-            final boolean enemy = !member.getHero().equals(hero);
-            if (!enemy && member.getPosition().getY() == 0) {
-                upSide = true;
-            }
-            battleField.put(member.getPosition(), new BattleField(member, enemy));
-            for (BattleCreature creature : member.getCreatures()) {
-                battleField.put(creature.getPosition(), new BattleField(creature, enemy));
-            }
+    public void cast(final Battle battle,
+                     final BattleCreature creature,
+                     final BattleAbility ability,
+                     final Position target) {
+        for (Effect effect : ability.getEffects()) {
+            final BattleEffect battleEffect = battle.createEffect();
+            fillEffect(battleEffect, effect);
+
+            battleEffect.getTarget().getPosition().setX(target.getX());
+            battleEffect.getTarget().getPosition().setY(target.getY());
+            battleEffect.getCaster().setCreature(creature);
+
+            battle.getEffects().add(battleEffect);
         }
 
-        for (Position position : BattleField.DUEL_POSITIONS) {
-            if (!battleField.containsKey(position)) {
-                final boolean enemy = (position.getY() == 0 && !upSide) || (position.getY() > 0 && upSide);
-                battleField.put(position, new BattleField(position, enemy));
-            }
-        }
+        creature.setReady(true);
+        //TODO: replace with some battle effect that takes place after round ends
+        creature.setHealth(creature.getHealth() - ability.getBloodCost());
 
-        return new ArrayList<BattleField>(battleField.values());
+        if (battle.isAllReady()) {
+            endRound(battle);
+        } else {
+            update(battle);
+        }
     }
 
-    private BattleHero createHero(final Battle battle, final Hero hero, final Position position) {
-        final BattleHero battleHero = ReflectionUtils.newInstance(realHeroClass, battle, hero);
+    public void skip(final Battle battle, final BattleHero hero) {
+        hero.setReady(true);
+
+        for (BattleCreature battleCreature : hero.getCreatures()) {
+            battleCreature.setReady(true);
+        }
+
+        if (battle.isAllReady()) {
+            endRound(battle);
+        } else {
+            update(battle);
+        }
+    }
+
+    private void fillHero(final BattleHero battleHero, final Hero hero) {
+        battleHero.setHero(hero);
+
         battleHero.setHealth(hero.getHealth());
-        battleHero.setMentalPower(10);
-        battleHero.setPosition(position);
-        battleHero.setExhausted(false);
+        battleHero.setMentalPower(hero.getMentalPower());
 
-        final List<Card> deck = battleHero.getDeck();
-        for (HeroCard card : hero.getCards()) {
-            deck.add(card.getCard());
-        }
-        Collections.shuffle(deck);
-        final List<Card> hand = battleHero.getHand();
-        for (int i = 0; i < deck.size() && i < 3; i++) {
-            hand.add(deck.remove(0));
-        }
-        return battleHero;
+        battleHero.getLevel().setCode(hero.getLevel().getCode());
+        battleHero.getLevel().setRating(hero.getLevel().getRating());
+        battleHero.getLevel().setNextLevelRating(hero.getLevel().getNextLevelRating());
+
+        battleHero.getAppearance().setName(hero.getAppearance().getName());
+        battleHero.getAppearance().setRace(hero.getAppearance().getRace());
+        battleHero.getAppearance().setFace(hero.getAppearance().getFace());
+    }
+
+    private void fillCard(final BattleCard battleCard, final Card card) {
+        battleCard.setCode(card.getCode());
+        battleCard.setTargetType(card.getTargetType());
+        battleCard.setBloodCost(card.getBloodCost());
+        battleCard.getEffects().addAll(card.getEffects());
+    }
+
+    private void fillEffect(final BattleEffect battleEffect, final Effect effect) {
+        battleEffect.setDuration(effect.getDuration());
+        battleEffect.setHealth(effect.getHealth());
+        battleEffect.setPower(effect.getPower());
+        battleEffect.setType(effect.getType());
+        battleEffect.setTargetType(effect.getTargetType());
+        battleEffect.getAbilities().addAll(effect.getAbilities());
     }
 }

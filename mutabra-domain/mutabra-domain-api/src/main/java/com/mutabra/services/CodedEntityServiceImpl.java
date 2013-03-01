@@ -8,6 +8,7 @@ import org.greatage.util.ReflectionUtils;
  * @author Ivan Khalopik
  * @since 1.0
  */
+@Deprecated
 public class CodedEntityServiceImpl<E extends CodedEntity> extends BaseEntityServiceImpl<E> implements CodedEntityService<E> {
     private final CodedEntityMapper<E> entity$ = new CodedEntityMapper<E>(null);
     private final Class<? extends E> realEntityClass;
