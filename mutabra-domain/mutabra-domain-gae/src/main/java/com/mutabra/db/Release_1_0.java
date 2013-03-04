@@ -1,15 +1,5 @@
 package com.mutabra.db;
 
-import com.mutabra.domain.Translations;
-import com.mutabra.domain.common.Abilities;
-import com.mutabra.domain.common.Cards;
-import com.mutabra.domain.common.EffectType;
-import com.mutabra.domain.common.Levels;
-import com.mutabra.domain.common.Races;
-import com.mutabra.domain.common.TargetType;
-import com.mutabra.domain.game.Role;
-import com.mutabra.scripts.AttackScript;
-import com.mutabra.scripts.SummonScript;
 import org.greatage.db.ChangeLog;
 
 /**
@@ -20,6 +10,7 @@ public class Release_1_0 extends ChangeLog {
 
     @Override
     protected void init() {
+/*
         location("mutabra/release_1.0");
 
         author("sody");
@@ -229,5 +220,6 @@ public class Release_1_0 extends ChangeLog {
                         select(Tables.ABILITY).where(condition("code").equal(Abilities.CARRION_VULTURE_ATTACK)),
                         AttackScript.class.getName(), EffectType.MAGIC_ATTACK.name(), TargetType.SINGLE_ENEMY_UNIT.name(), 2, 1, 0
                 );
+*/
     }
 }
