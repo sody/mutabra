@@ -1,46 +1,80 @@
 package com.mutabra.domain.battle;
 
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.annotation.Parent;
-import com.googlecode.objectify.annotation.Unindexed;
-import com.mutabra.db.Tables;
-import com.mutabra.domain.Keys;
-import com.mutabra.domain.common.Card;
-import com.mutabra.domain.common.CardImpl;
-
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity(name = Tables.BATTLE_SUMMON)
-public class BattleCreatureImpl extends BattleUnitImpl implements BattleCreature {
+@Embeddable
+public class BattleCreatureImpl implements BattleCreature {
 
-    @Parent
-    private Key<BattleHeroImpl> owner;
+    private Long id;
+    private String code;
+    private int health;
+    private int power;
+    private Position position;
+    private boolean ready;
+    private List<BattleAbility> abilities = new ArrayList<BattleAbility>();
 
-    @Unindexed
-    private Key<CardImpl> card;
+    private long abilitySequence;
 
-    public BattleCreatureImpl() {
+    public Long getId() {
+        return id;
     }
 
-    public BattleCreatureImpl(final BattleHero owner, final Card card) {
-        this.owner = Keys.getKey(owner);
-        this.card = Keys.getKey(card);
+    public String getCode() {
+        return code;
     }
 
-    public BattleHero getOwner() {
-        return Keys.getInstance(owner);
+    public void setCode(final String code) {
+        this.code = code;
     }
 
-    public Card getCard() {
-        return Keys.getInstance(card);
+    public int getHealth() {
+        return health;
     }
 
-    @Override
-    public Key<?> getParentKey() {
-        return owner;
+    public void setHealth(final int health) {
+        this.health = health;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(final int power) {
+        this.power = power;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(final Position position) {
+        this.position = position;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(final boolean ready) {
+        this.ready = ready;
+    }
+
+    public List<BattleAbility> getAbilities() {
+        return abilities;
+    }
+
+
+    public void assignId(final long id) {
+        this.id = id;
+    }
+
+    public long nextAbilityId() {
+        return abilitySequence++;
     }
 }

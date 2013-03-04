@@ -1,70 +1,68 @@
 package com.mutabra.domain.battle;
 
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.annotation.Parent;
-import com.googlecode.objectify.annotation.Unindexed;
-import com.mutabra.db.Tables;
-import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.Keys;
-import com.mutabra.domain.common.Effect;
-import com.mutabra.domain.common.EffectImpl;
+import com.mutabra.domain.common.Ability;
+import com.mutabra.domain.common.EffectType;
+import com.mutabra.domain.common.TargetType;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity(name = Tables.BATTLE_ACTION)
-public class BattleEffectImpl extends BaseEntityImpl implements BattleEffect {
+@Embeddable
+public class BattleEffectImpl implements BattleEffect {
 
-    @Parent
-    private Key<BattleImpl> battle;
-
-    @Unindexed
-    private Key<EffectImpl> effect;
-
-    @Unindexed
-    private Key<BattleUnitImpl> caster;
-
-    @Unindexed
-    @Embedded
-    private Position target;
-
-    @Unindexed
+    private BattleTarget caster = new BattleTargetImpl();
+    private BattleTarget target = new BattleTargetImpl();
+    private String code;
+    private EffectType type;
+    private TargetType targetType;
+    private int power;
     private int duration;
+    private int health;
+    private List<Ability> abilities = new ArrayList<Ability>();
 
-    public BattleEffectImpl() {
+    public BattleTarget getCaster() {
+        return caster;
     }
 
-    public BattleEffectImpl(final Battle battle, final Effect effect) {
-        this.battle = Keys.getKey(battle);
-        this.effect = Keys.getKey(effect);
-    }
-
-    public Battle getBattle() {
-        return Keys.getInstance(battle);
-    }
-
-    public Effect getEffect() {
-        return Keys.getInstance(effect);
-    }
-
-    public BattleUnit getCaster() {
-        return Keys.getInstance(caster);
-    }
-
-    public void setCaster(final BattleUnit caster) {
-        this.caster = Keys.getKey(caster);
-    }
-
-    public Position getTarget() {
+    public BattleTarget getTarget() {
         return target;
     }
 
-    public void setTarget(final Position target) {
-        this.target = target;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(final String code) {
+        this.code = code;
+    }
+
+    public EffectType getType() {
+        return type;
+    }
+
+    public void setType(final EffectType type) {
+        this.type = type;
+    }
+
+    public TargetType getTargetType() {
+        return targetType;
+    }
+
+    public void setTargetType(final TargetType targetType) {
+        this.targetType = targetType;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(final int power) {
+        this.power = power;
     }
 
     public int getDuration() {
@@ -75,8 +73,15 @@ public class BattleEffectImpl extends BaseEntityImpl implements BattleEffect {
         this.duration = duration;
     }
 
-    @Override
-    public Key<?> getParentKey() {
-        return battle;
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(final int health) {
+        this.health = health;
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
     }
 }

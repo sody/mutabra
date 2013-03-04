@@ -3,20 +3,12 @@ package com.mutabra.domain.game;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Parent;
-import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
 import com.mutabra.domain.Keys;
-import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleImpl;
-import com.mutabra.domain.common.Face;
-import com.mutabra.domain.common.FaceImpl;
-import com.mutabra.domain.common.Level;
-import com.mutabra.domain.common.LevelImpl;
-import com.mutabra.domain.common.Race;
-import com.mutabra.domain.common.RaceImpl;
 
 import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,75 +22,38 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
     @Parent
     private Key<AccountImpl> account;
 
-    private String name;
-
-    private Key<RaceImpl> race;
-
-    private Key<FaceImpl> face;
-
-    private Key<LevelImpl> level;
-
-    private long rating;
-
+    private boolean active;
+    private HeroLevel level = new HeroLevelImpl();
+    private HeroAppearance appearance = new HeroAppearanceImpl();
     private int health;
-
-    private Key<BattleImpl> battle;
+    private int mentalPower;
+    private List<String> cards =  new ArrayList<String>();
 
     @Indexed
     private Date lastActive;
-
-    @Unindexed
-    private boolean ready;
-
-    public HeroImpl() {
-    }
-
-    public HeroImpl(final Account account) {
-        this.account = Keys.getKey(account);
-    }
 
     public Account getAccount() {
         return Keys.getInstance(account);
     }
 
-    public String getName() {
-        return name;
+    public void setAccount(final Account account) {
+        this.account = Keys.getKey(account);
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public boolean isActive() {
+        return active;
     }
 
-    public long getRating() {
-        return rating;
+    public void setActive(final boolean active) {
+        this.active = active;
     }
 
-    public void setRating(final long rating) {
-        this.rating = rating;
+    public HeroLevel getLevel() {
+        return level;
     }
 
-    public Face getFace() {
-        return Keys.getInstance(face);
-    }
-
-    public void setFace(final Face face) {
-        this.face = Keys.getKey(face);
-    }
-
-    public Race getRace() {
-        return Keys.getInstance(race);
-    }
-
-    public void setRace(final Race race) {
-        this.race = Keys.getKey(race);
-    }
-
-    public Level getLevel() {
-        return Keys.getInstance(level);
-    }
-
-    public void setLevel(final Level level) {
-        this.level = Keys.getKey(level);
+    public HeroAppearance getAppearance() {
+        return appearance;
     }
 
     public int getHealth() {
@@ -109,16 +64,16 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
         this.health = health;
     }
 
-    public List<HeroCard> getCards() {
-        return Keys.getChildren(HeroCard.class, HeroCardImpl.class, this);
+    public int getMentalPower() {
+        return mentalPower;
     }
 
-    public Battle getBattle() {
-        return Keys.getInstance(battle);
+    public void setMentalPower(final int mentalPower) {
+        this.mentalPower = mentalPower;
     }
 
-    public void setBattle(final Battle battle) {
-        this.battle = Keys.getKey(battle);
+    public List<String> getCards() {
+        return cards;
     }
 
     public Date getLastActive() {
@@ -127,14 +82,6 @@ public class HeroImpl extends BaseEntityImpl implements Hero {
 
     public void setLastActive(final Date lastActive) {
         this.lastActive = lastActive;
-    }
-
-    public boolean isReady() {
-        return ready;
-    }
-
-    public void setReady(final boolean ready) {
-        this.ready = ready;
     }
 
     @Override

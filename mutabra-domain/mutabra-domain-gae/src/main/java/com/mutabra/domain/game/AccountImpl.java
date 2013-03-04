@@ -1,6 +1,5 @@
 package com.mutabra.domain.game;
 
-import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Unindexed;
 import com.mutabra.db.Tables;
@@ -76,9 +75,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
     @Transient
     private TimeZone timeZone;
-
-    private Key<HeroImpl> hero;
-
 
     public String getEmail() {
         return email;
@@ -244,14 +240,6 @@ public class AccountImpl extends BaseEntityImpl implements Account {
 
     public void setTimeZone(final TimeZone timeZone) {
         this.timeZone = timeZone;
-    }
-
-    public Hero getHero() {
-        return Keys.getInstance(hero);
-    }
-
-    public void setHero(final Hero hero) {
-        this.hero = Keys.getKey(hero);
     }
 
     public List<Hero> getHeroes() {

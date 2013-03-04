@@ -10,9 +10,9 @@ public interface Level extends BaseEntity {
 
     String getCode();
 
-    LevelType getLevelType();
+    LevelType getType();
 
-    void setLevelType(LevelType levelType);
+    void setType(LevelType levelType);
 
     long getRating();
 

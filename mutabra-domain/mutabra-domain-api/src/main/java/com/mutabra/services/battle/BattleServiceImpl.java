@@ -134,8 +134,8 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
             final BattleEffect battleEffect = battle.createEffect();
             fillEffect(battleEffect, effect);
 
-            battleEffect.getTarget().getPosition().setX(target.getX());
-            battleEffect.getTarget().getPosition().setY(target.getY());
+            battleEffect.setCode(card.getCode());
+            battleEffect.getTarget().setPosition(target);
             battleEffect.getCaster().setHero(hero);
 
             battle.getEffects().add(battleEffect);
@@ -161,8 +161,8 @@ public class BattleServiceImpl extends BaseEntityServiceImpl<Battle> implements 
             final BattleEffect battleEffect = battle.createEffect();
             fillEffect(battleEffect, effect);
 
-            battleEffect.getTarget().getPosition().setX(target.getX());
-            battleEffect.getTarget().getPosition().setY(target.getY());
+            battleEffect.setCode(ability.getCode());
+            battleEffect.getTarget().setPosition(target);
             battleEffect.getCaster().setCreature(creature);
 
             battle.getEffects().add(battleEffect);

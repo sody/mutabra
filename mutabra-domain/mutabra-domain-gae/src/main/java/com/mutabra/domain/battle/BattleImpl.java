@@ -1,16 +1,19 @@
 package com.mutabra.domain.battle;
 
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.mutabra.db.Tables;
 import com.mutabra.domain.BaseEntityImpl;
+import com.mutabra.domain.game.HeroImpl;
 
 import javax.persistence.Entity;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -18,22 +21,19 @@ import java.util.List;
  */
 @Entity(name = Tables.BATTLE)
 public class BattleImpl extends BaseEntityImpl implements Battle {
+
+    private boolean active;
     private int round;
     private Date startedAt;
-    private BattleState state;
+    private List<BattleHero> heroes = new ArrayList<BattleHero>();
+    private List<BattleEffect> effects = new ArrayList<BattleEffect>();
 
-    @Transient
-    private List<BattleHero> heroesValueHolder = new ArrayList<BattleHero>();
-
-    @Transient
-    private List<BattleEffect> effectsValueHolder = new ArrayList<BattleEffect>();
-
-    public BattleState getState() {
-        return state;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setState(final BattleState state) {
-        this.state = state;
+    public void setActive(final boolean active) {
+        this.active = active;
     }
 
     public int getRound() {
@@ -53,37 +53,104 @@ public class BattleImpl extends BaseEntityImpl implements Battle {
     }
 
     public List<BattleHero> getHeroes() {
-        return heroesValueHolder;
+        return heroes;
     }
 
     public List<BattleEffect> getEffects() {
-        return effectsValueHolder;
+        return effects;
     }
 
-    public boolean isReady() {
-        for (BattleHero hero : getHeroes()) {
-            if (!hero.isExhausted()) {
+
+    public boolean isAllReady() {
+        for (BattleHero battleHero : heroes) {
+            if (!battleHero.isAllReady()) {
                 return false;
             }
-            for (BattleCreature creature : hero.getCreatures()) {
-                if (!creature.isExhausted()) {
-                    return false;
-                }
-            }
         }
-
         return true;
     }
 
+    public BattleHero createHero() {
+        return new BattleHeroImpl();
+    }
+
+    public BattleCard createCard() {
+        return new BattleCardImpl();
+    }
+
+    public BattleCreature createCreature() {
+        return new BattleCreatureImpl();
+    }
+
+    public BattleAbility createAbility() {
+        return new BattleAbilityImpl();
+    }
+
+    public BattleEffect createEffect() {
+        return new BattleEffectImpl();
+    }
+
     @PostLoad
-    void loadRelations(final Objectify session) {
-        heroesValueHolder = new ArrayList<BattleHero>(session.query(BattleHeroImpl.class).ancestor(this).list());
-        effectsValueHolder = new ArrayList<BattleEffect>(session.query(BattleEffectImpl.class).ancestor(this).list());
+    void loadLinks() {
+        final Map<Key<HeroImpl>, BattleHero> heroByKey = new HashMap<Key<HeroImpl>, BattleHero>();
+        final Map<Long, BattleCreature> creatureById = new HashMap<Long, BattleCreature>();
+        final Map<Long, BattleHero> heroByCreatureId = new HashMap<Long, BattleHero>();
+        for (BattleHero battleHero : heroes) {
+            heroByKey.put(((BattleHeroImpl) battleHero).getHeroKey(), battleHero);
+            for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                creatureById.put(battleCreature.getId(), battleCreature);
+                heroByCreatureId.put(battleCreature.getId(), battleHero);
+            }
+        }
+
+        for (BattleEffect battleEffect : effects) {
+            final BattleTargetImpl caster = (BattleTargetImpl) battleEffect.getCaster();
+            if (caster.getCreatureId() != null) {
+                caster.setCreature(creatureById.get(caster.getCreatureId()));
+                caster.setHero(heroByCreatureId.get(caster.getCreatureId()));
+            } else if (caster.getHeroKey() != null) {
+                caster.setHero(heroByKey.get(caster.getHeroKey()));
+            }
+
+            final BattleTargetImpl target = (BattleTargetImpl) battleEffect.getTarget();
+            if (target.getCreatureId() != null) {
+                target.setCreature(creatureById.get(target.getCreatureId()));
+                target.setHero(heroByCreatureId.get(target.getCreatureId()));
+            } else if (target.getHeroKey() != null) {
+                target.setHero(heroByKey.get(target.getHeroKey()));
+            }
+        }
     }
 
     @PrePersist
-    void saveRelations(final Objectify session) {
-        session.put(heroesValueHolder);
-        session.put(effectsValueHolder);
+    void generateIds(final Objectify session) {
+        for (BattleHero battleHero : heroes) {
+            // assign creature identifiers
+            // they should be unique within hero
+            for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                if (battleCreature.getId() == null) {
+                    final long id = ((BattleHeroImpl) battleHero).nextCreatureId();
+                    ((BattleCreatureImpl) battleCreature).assignId(id);
+                }
+
+                // assign ability identifiers
+                // they should be unique within creature
+                for (BattleAbility battleAbility : battleCreature.getAbilities()) {
+                    if (battleAbility.getId() == null) {
+                        final long id = ((BattleCreatureImpl) battleCreature).nextAbilityId();
+                        ((BattleAbilityImpl) battleAbility).assignId(id);
+                    }
+                }
+            }
+
+            // assign card identifiers
+            // they should be unique within hero
+            for (BattleCard battleCard : battleHero.getCards()) {
+                if (battleCard.getId() == null) {
+                    final long id = ((BattleHeroImpl) battleHero).nextCardId();
+                    ((BattleCardImpl) battleCard).assignId(id);
+                }
+            }
+        }
     }
 }

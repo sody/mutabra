@@ -1,8 +1,8 @@
 package com.mutabra.domain.common;
 
+import com.googlecode.objectify.annotation.Indexed;
 import com.mutabra.db.Tables;
-import com.mutabra.domain.CodedEntityImpl;
-import com.mutabra.domain.TranslationType;
+import com.mutabra.domain.BaseEntityImpl;
 
 import javax.persistence.Entity;
 
@@ -11,16 +11,24 @@ import javax.persistence.Entity;
  * @since 1.0
  */
 @Entity(name = Tables.LEVEL)
-public class LevelImpl extends CodedEntityImpl implements Level {
+public class LevelImpl extends BaseEntityImpl implements Level {
 
+    @Indexed
+    private String code;
+
+    private LevelType type;
     private long rating;
 
-    public LevelImpl() {
-        this(null);
+    public String getCode() {
+        return code;
     }
 
-    public LevelImpl(final String code) {
-        super(Tables.LEVEL, code, TranslationType.NAME);
+    public LevelType getType() {
+        return type;
+    }
+
+    public void setType(final LevelType type) {
+        this.type = type;
     }
 
     public long getRating() {

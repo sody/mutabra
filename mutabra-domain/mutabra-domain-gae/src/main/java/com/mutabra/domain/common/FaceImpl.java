@@ -1,8 +1,8 @@
 package com.mutabra.domain.common;
 
+import com.googlecode.objectify.annotation.Indexed;
 import com.mutabra.db.Tables;
-import com.mutabra.domain.CodedEntityImpl;
-import com.mutabra.domain.TranslationType;
+import com.mutabra.domain.BaseEntityImpl;
 
 import javax.persistence.Entity;
 
@@ -11,13 +11,12 @@ import javax.persistence.Entity;
  * @since 1.0
  */
 @Entity(name = Tables.FACE)
-public class FaceImpl extends CodedEntityImpl implements Face {
+public class FaceImpl extends BaseEntityImpl implements Face {
 
-    public FaceImpl() {
-        this(null);
-    }
+    @Indexed
+    private String code;
 
-    public FaceImpl(final String code) {
-        super(Tables.FACE, code, TranslationType.NAME);
+    public String getCode() {
+        return code;
     }
 }

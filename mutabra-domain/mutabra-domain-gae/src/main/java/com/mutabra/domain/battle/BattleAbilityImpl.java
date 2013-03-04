@@ -1,11 +1,9 @@
-package com.mutabra.domain.common;
+package com.mutabra.domain.battle;
 
-import com.mutabra.db.Tables;
-import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.Keys;
-import com.mutabra.domain.TranslationType;
+import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.TargetType;
 
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +11,25 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity(name = Tables.CARD)
-public class CardImpl extends BaseEntityImpl implements Card {
+@Embeddable
+public class BattleAbilityImpl implements BattleAbility {
 
+    private Long id;
     private String code;
     private TargetType targetType;
     private int bloodCost;
     private List<Effect> effects = new ArrayList<Effect>();
 
+    public Long getId() {
+        return id;
+    }
+
     public String getCode() {
         return code;
+    }
+
+    public void setCode(final String code) {
+        this.code = code;
     }
 
     public TargetType getTargetType() {
@@ -43,5 +50,9 @@ public class CardImpl extends BaseEntityImpl implements Card {
 
     public List<Effect> getEffects() {
         return effects;
+    }
+
+    public void assignId(final long id) {
+        this.id = id;
     }
 }

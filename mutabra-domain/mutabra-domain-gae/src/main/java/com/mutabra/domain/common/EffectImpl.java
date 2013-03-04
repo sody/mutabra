@@ -1,55 +1,29 @@
 package com.mutabra.domain.common;
 
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.annotation.Parent;
-import com.mutabra.db.Tables;
-import com.mutabra.domain.BaseEntityImpl;
-import com.mutabra.domain.Keys;
-
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity(name = Tables.EFFECT)
-public class EffectImpl extends BaseEntityImpl implements Effect {
+@Embeddable
+public class EffectImpl implements Effect {
 
-    @Parent
-    private Key<CastableImpl> castable;
-
-    private String scriptClass;
-    private EffectType effectType;
+    private EffectType type;
     private TargetType targetType;
     private int power;
     private int duration;
     private int health;
+    private List<Ability> abilities = new ArrayList<Ability>();
 
-    public EffectImpl() {
+    public EffectType getType() {
+        return type;
     }
 
-    public EffectImpl(final Castable castable) {
-        this.castable = Keys.getKey(castable);
-    }
-
-    public Castable getCastable() {
-        return Keys.getInstance(castable);
-    }
-
-    public String getScriptClass() {
-        return scriptClass;
-    }
-
-    public void setScriptClass(final String scriptClass) {
-        this.scriptClass = scriptClass;
-    }
-
-    public EffectType getEffectType() {
-        return effectType;
-    }
-
-    public void setEffectType(final EffectType effectType) {
-        this.effectType = effectType;
+    public void setType(final EffectType type) {
+        this.type = type;
     }
 
     public TargetType getTargetType() {
@@ -84,8 +58,7 @@ public class EffectImpl extends BaseEntityImpl implements Effect {
         this.health = health;
     }
 
-    @Override
-    public Key<?> getParentKey() {
-        return castable;
+    public List<Ability> getAbilities() {
+        return abilities;
     }
 }

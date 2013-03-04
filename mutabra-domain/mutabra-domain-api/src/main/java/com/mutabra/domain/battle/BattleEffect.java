@@ -16,6 +16,10 @@ public interface BattleEffect {
 
     BattleTarget getTarget();
 
+    String getCode();
+
+    void setCode(String code);
+
     EffectType getType();
 
     void setType(EffectType type);
