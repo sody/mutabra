@@ -1,0 +1,176 @@
+[
+  {
+    "_id": 2,
+    "active": true,
+    "round": 3,
+    "startedAt": "2013-01-13",
+    "heroes": [
+      {
+        "account_id": 1,
+        "hero_id": 13,
+        "name": "Vinni the Puh",
+        "face": {
+          "code": "trollface"
+        },
+        "race": {
+          "code": "plunger"
+        },
+        "level": {
+          "code": "newbie",
+          "rating": 1010
+        },
+        "health": 50,
+        "mental_power": 10,
+        "position": [1, 1],
+        "ready": true,
+        "cards": [
+          {
+            "card": 1,
+            "code": "firewall",
+            "type": "deck",
+            "rating": 12,
+            "target_type": "single_friend_empty",
+            "blood_cost": 2,
+            "effects": [
+              {
+                "type": "summon",
+                "target_type": "single_friend_empty",
+                "power": 0,
+                "health": 15,
+                "duration": 0,
+                "abilities": [
+                  {
+                    "code": "fireball",
+                    "target_type": "all",
+                    "blood_cost": 2,
+                    "effects": [
+                      {
+                        "type": "magic_attack",
+                        "target_type": "all",
+                        "power": 1,
+                        "duration": 3,
+                        "health": 0
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "magic_attack",
+                "target_type": "all",
+                "power": 1,
+                "duration": 3,
+                "health": 0
+              }
+            ]
+          },
+          {
+            "card": 2,
+            "code": "attack",
+            "type": "hand",
+            "rating": 1111,
+            "target_type": "single_enemy_unit",
+            "blood_cost": 0,
+            "effects": [
+              {
+                "type": "melee_attack",
+                "target_type": "single_enemy_unit",
+                "power": 10,
+                "duration": 0
+              }
+            ]
+          }
+        ],
+        "units": [
+          {
+            "unit": 1,
+            "code": "firewall",
+            "health": 10,
+            "power": 0,
+            "position": [1, 2],
+            "ready": false,
+            "abilities": [
+              {
+                "ability": 1,
+                "code": "fireball",
+                "target_type": "all",
+                "blood_cost": 2,
+                "effects": [
+                  {
+                    "type": "magic_attack",
+                    "target_type": "all",
+                    "power": 1,
+                    "duration": 3,
+                    "health": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "account_id": 18,
+        "hero_id": 14
+      }
+    ],
+    "effects": [
+      {
+        "type": "magic_attack",
+        "target_type": "all",
+        "power": 1,
+        "duration": 2,
+        "target": {
+          "position": [1, 3],
+          "hero_id": 13,
+          "unit": 2
+        },
+        "caster": {
+          "hero_id": 1,
+          "unit": 1
+        }
+      }
+    ],
+    "log": [
+      {
+        "key": "firewall.summon",
+        "parameters": [
+          {
+            "hero_id": 12,
+            "unit": 2
+          },
+          {
+            "hero_id": 12,
+            "card": 1
+          },
+          {
+            "raw": "[0/15]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": 13,
+    "active": false,
+    "heroes": [
+      {
+        "account_id": 1,
+        "hero_id": 12,
+        "ready": false
+      },
+      {
+        "account_id": 2,
+        "hero_id": 13,
+        "ready": true
+      }
+    ]
+  },
+  {
+    "indexes": [
+      {
+        "heroes.hero_id": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "_id": 1,
+    "type": "hero",
+    "code": "newbie",
+    "rating": 0
+  },
+  {
+    "_id": 2,
+    "type": "hero",
+    "code": "master",
+    "rating": 10000
+  },
+  {
+    "_id": 3,
+    "type": "card",
+    "code": "newbie",
+    "rating": 0
+  }
+]

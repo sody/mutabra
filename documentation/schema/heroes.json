@@ -1,0 +1,40 @@
+[
+  {
+    "_id": 12,
+    "account_id": 10,
+    "active": true,
+    "appearance": {
+      "name": "sody",
+      "face": "trollface",
+      "race": "plunger"
+    },
+    "level": {
+      "code": "newbie",
+      "rating": 1010,
+      "next": 10000
+    },
+    "health": 50,
+    "mental_power": 10,
+    "cards": [
+      {
+        "card_id": 13,
+        "rating": 15
+      },
+      {
+        "card_id": 18,
+        "rating": 88
+      },
+      {
+        "card_id": 42,
+        "rating": 0
+      }
+    ]
+  },
+  {
+    "indexes": [
+      {
+        "heroes.hero_id": 1
+      }
+    ]
+  }
+]

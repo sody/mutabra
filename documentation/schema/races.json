@@ -1,0 +1,16 @@
+[
+  {
+    "_id": 13,
+    "code": "plunger",
+    "starter": {
+      "health": 30,
+      "mental_power": 10,
+      "cards": [
+        "storm",
+        "mermaid",
+        "seahorse",
+        "wave"
+      ]
+    }
+  }
+]
