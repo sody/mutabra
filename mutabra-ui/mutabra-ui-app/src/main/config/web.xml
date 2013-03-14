@@ -25,16 +25,6 @@
     <param-value>${project.token-expiration-time}</param-value>
   </context-param>
 
-  <context-param>
-    <param-name>security.admin-email</param-name>
-    <param-value>${project.admin-email}</param-value>
-  </context-param>
-
-  <context-param>
-    <param-name>security.admin-password</param-name>
-    <param-value>${project.admin-password}</param-value>
-  </context-param>
-
   <filter>
     <filter-name>mutabra</filter-name>
     <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>

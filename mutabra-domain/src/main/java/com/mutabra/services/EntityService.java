@@ -1,5 +1,6 @@
 package com.mutabra.services;
 
+import com.google.code.morphia.query.Query;
 import com.mutabra.domain.Entity;
 
 import java.io.Serializable;
@@ -38,4 +39,6 @@ public interface EntityService<E extends Entity<PK>, PK extends Serializable> {
      * @param entity detailed entity
      */
     void delete(E entity);
+
+    Query<E> query();
 }

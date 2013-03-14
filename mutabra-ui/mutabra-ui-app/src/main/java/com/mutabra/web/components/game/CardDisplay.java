@@ -28,7 +28,7 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
     }
 
     public String getContainerClass() {
-        return hero.isExhausted() ?
+        return hero.isReady() ?
                 "card disabled" :
                 "card";
     }

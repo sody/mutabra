@@ -14,14 +14,9 @@ import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.greatage.domain.Repository;
-import org.greatage.util.LocaleUtils;
-import org.greatage.util.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
-
-import static com.mutabra.services.Mappers.account$;
 
 /**
  * @author Ivan Khalopik
@@ -54,7 +49,7 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
             }
 
             final String profileId = String.valueOf(profile.get(OAuth.Session.ID));
-            if (StringUtils.isEmpty(profileId)) {
+            if (profileId == null || profileId.isEmpty()) {
                 throw new AccountException("Invalid facebook identifier");
             }
             Account account = getAccountByProfileId(profileId);
@@ -63,7 +58,7 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
             }
 
             final String email = (String) profile.get(OAuth.Session.EMAIL);
-            if (!StringUtils.isEmpty(email)) {
+            if (email != null && !email.isEmpty()) {
                 account = getAccountByEmail(email);
                 if (account != null) {
                     return attachAccount(account, profileId);
@@ -85,11 +80,11 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
     protected abstract void setAccountProfileId(Account account, String profileId);
 
     protected Account getAccountByEmail(final String email) {
-        return findAccount(account$.email$.eq(email));
+        return findAccount("email =", email);
     }
 
-    protected Account findAccount(final Repository.Criteria<Long, Account> criteria) {
-        return accountService.query().filter(criteria).unique();
+    protected Account findAccount(final String condition, final Object value) {
+        return accountService.query().filter(condition, value).get();
     }
 
     protected AuthenticationInfo fillAccount(final Account account) {
@@ -103,11 +98,11 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
     }
 
     protected AuthenticationInfo createAccount(final Map<String, Object> profile) {
-        final Account account = accountService.create();
+        final Account account = new Account();
         account.setEmail((String) profile.get(OAuth.Session.EMAIL));
         account.setRegistered(new Date());
         account.setName((String) profile.get(OAuth.Session.NAME));
-        account.setLocale(LocaleUtils.parseLocale((String) profile.get(OAuth.Session.LOCALE)));
+        //todo: account.setLocale(LocaleUtils.parseLocale((String) profile.get(OAuth.Session.LOCALE)));
         //todo: account.setTimeZone(...);
         //todo: account.setGender(...);
         account.setRole(Role.USER);

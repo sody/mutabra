@@ -27,6 +27,6 @@ public class FaceSelect {
 
     @Cached
     public List<Face> getSource() {
-        return faceService.query().list();
+        return faceService.query().asList();
     }
 }

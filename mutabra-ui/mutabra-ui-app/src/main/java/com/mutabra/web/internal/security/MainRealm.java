@@ -17,8 +17,7 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-
-import static com.mutabra.services.Mappers.account$;
+import org.bson.types.ObjectId;
 
 /**
  * @author Ivan Khalopik
@@ -38,7 +37,7 @@ public class MainRealm extends AuthorizingRealm {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
         }
 
-        final Long userId = (Long) getAvailablePrincipal(principals);
+        final ObjectId userId = (ObjectId) getAvailablePrincipal(principals);
 
         if (userId == null) {
             throw new AccountException("Null user identifiers are not allowed by this realm.");
@@ -53,7 +52,7 @@ public class MainRealm extends AuthorizingRealm {
 
             final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             final Role role = account.getRole();
-            info.addRole(role.getTranslationCode());
+            info.addRole(role.name());
             info.addStringPermissions(role.getPermissions());
 
             return info;
@@ -72,8 +71,8 @@ public class MainRealm extends AuthorizingRealm {
 
         try {
             final Account account = accountService.query()
-                    .filter(account$.email$.eq(username))
-                    .unique();
+                    .filter("email =", username)
+                    .get();
 
             if (account == null) {
                 return null;

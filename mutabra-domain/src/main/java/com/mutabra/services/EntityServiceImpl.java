@@ -2,6 +2,7 @@ package com.mutabra.services;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.dao.BasicDAO;
+import com.google.code.morphia.query.Query;
 import com.mutabra.domain.Entity;
 
 import java.io.Serializable;
@@ -32,6 +33,10 @@ public class EntityServiceImpl<E extends Entity<PK>, PK extends Serializable> im
 
     public E get(final PK pk) {
         return dao.get(pk);
+    }
+
+    public Query<E> query() {
+        return dao.createQuery();
     }
 
     protected BasicDAO<E, PK> dao() {

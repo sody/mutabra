@@ -11,8 +11,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.realm.AuthenticatingRealm;
-
-import static com.mutabra.services.Mappers.account$;
+import org.bson.types.ObjectId;
 
 /**
  * @author Ivan Khalopik
@@ -72,8 +71,9 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
                 // apply all pending changes
                 if (account.getPendingEmail() != null) {
                     final long count = accountService.query()
-                            .filter(account$.email$.eq(account.getPendingEmail()))
-                            .count();
+                            .filter("email =", account.getPendingEmail())
+                            .countAll();
+
                     if (count == 0) {
                         account.setEmail(account.getPendingEmail());
                     }
@@ -110,20 +110,20 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
     }
 
     private Account getAccount(final AuthenticationToken token) {
-        final Long userId = ((Token) token).getUserId();
+        final ObjectId userId = ((Token) token).getUserId();
         return userId != null ? accountService.get(userId) : null;
     }
 
     public static class Token implements AuthenticationToken {
-        private final Long userId;
+        private final ObjectId userId;
         private final String token;
 
-        public Token(final Long userId, final String token) {
+        public Token(final ObjectId userId, final String token) {
             this.userId = userId;
             this.token = token;
         }
 
-        public Long getUserId() {
+        public ObjectId getUserId() {
             return userId;
         }
 

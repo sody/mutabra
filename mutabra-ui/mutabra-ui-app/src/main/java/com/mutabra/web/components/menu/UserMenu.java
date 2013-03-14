@@ -27,7 +27,7 @@ public class UserMenu extends AbstractComponent {
     public String getUserName() {
         final Hero hero = getHero();
         if (hero != null) {
-            return hero.getName();
+            return hero.getAppearance().getName();
         }
 
         final Account account = getAccount();

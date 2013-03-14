@@ -11,7 +11,7 @@ import com.mutabra.security.OAuth2;
 import com.mutabra.security.Twitter;
 import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
-import com.mutabra.services.game.HeroService;
+import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.SecurityConstants;
 import com.mutabra.web.internal.security.ConfirmationRealm;
 import com.mutabra.web.internal.security.FacebookRealm;
@@ -68,13 +68,12 @@ import org.apache.tapestry5.services.meta.FixedExtractor;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
+import org.bson.types.ObjectId;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import static com.mutabra.services.Mappers.account$;
 
 /**
  * @author Ivan Khalopik
@@ -87,7 +86,7 @@ public class SecurityModule {
     public void setupDefaultValues(final MappedConfiguration<String, String> configuration) {
         // we can override all this values with system properties and servlet context parameters
 
-        configuration.add(SecurityConstants.ROBOT_EMAIL, "${evn.robot_email}");
+        configuration.add(ApplicationConstants.ROBOT_EMAIL, "${evn.robot_email}");
 
         // hash service constants should be retrieved from environment values by default
         configuration.add(SecurityConstants.HASH_ALGORITHM, "${evn.hash_algorithm}");
@@ -255,20 +254,15 @@ public class SecurityModule {
     }
 
     @Scope(ScopeConstants.PERTHREAD)
-    public AccountContext buildAccountContext(@InjectService("accountService") final BaseEntityService<Account> accountService,
-                                              final HeroService heroService) {
+    public AccountContext buildAccountContext(@InjectService("accountService")
+                                              final BaseEntityService<Account> accountService) {
         final Subject user = SecurityUtils.getSubject();
-        final Long userId = user != null ? (Long) user.getPrincipal() : null;
-        final Account account = accountService.query()
-                .filter(account$.id$.eq(userId))
-                .unique();
-        final Hero hero = account != null ? account.getHero() : null;
-        final Battle battle = hero != null ? hero.getBattle() : null;
+        final ObjectId userId = user != null ? (ObjectId) user.getPrincipal() : null;
+        final Account account = accountService.get(userId);
 
-        if (hero != null) {
-            hero.setLastActive(new Date());
-            heroService.update(hero);
-        }
+        //TODO: implement this
+        final Hero hero = null;
+        final Battle battle = null;
 
         return new AccountContext() {
             public Account getAccount() {
@@ -287,22 +281,18 @@ public class SecurityModule {
 
     @Startup
     public void createAdminAccount(@InjectService("accountService") final BaseEntityService<Account> accountService,
-                                   final HashedPasswordMatcher generator,
-                                   @Symbol(SecurityConstants.ADMIN_EMAIL) final String adminEmail,
-                                   @Symbol(SecurityConstants.ADMIN_PASSWORD) final String adminPassword) {
+                                   final HashedPasswordMatcher generator) {
 
-        if (adminEmail != null && accountService.query().count() <= 0) {
-            final Account account = accountService.create();
-            account.setEmail(adminEmail);
+        if (accountService.query().countAll() <= 0) {
+            final Account account = new Account();
+            account.setEmail("admin");
             account.setName("admin");
             account.setRole(Role.ADMIN);
             account.setRegistered(new Date());
 
-            if (adminPassword != null) {
-                final Hash hash = generator.generateHash(adminPassword);
-                account.setPassword(hash.toBase64());
-                account.setSalt(hash.getSalt().toBase64());
-            }
+            final Hash hash = generator.generateHash("admin");
+            account.setPassword(hash.toBase64());
+            account.setSalt(hash.getSalt().toBase64());
 
             accountService.save(account);
         }

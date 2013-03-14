@@ -6,8 +6,6 @@ import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.services.PasswordGenerator;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
-import static com.mutabra.services.Mappers.account$;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -20,7 +18,7 @@ public class GoogleRealm extends OAuthRealm<GoogleRealm.Token> {
 
     @Override
     protected Account getAccountByProfileId(final String profileId) {
-        return findAccount(account$.googleUser$.eq(profileId));
+        return findAccount("googleUser =", profileId);
     }
 
     @Override

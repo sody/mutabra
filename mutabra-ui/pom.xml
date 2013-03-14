@@ -16,6 +16,6 @@
 
   <modules>
     <module>mutabra-ui-app</module>
-    <module>mutabra-ui-gae</module>
+    <!--<module>mutabra-ui-gae</module>-->
   </modules>
 </project>

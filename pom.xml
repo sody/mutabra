@@ -32,8 +32,8 @@
       </snapshots>
     </repository>
     <repository>
-      <id>objectify-appengine</id>
-      <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+      <id>morphia-repository</id>
+      <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
     </repository>
   </repositories>
 
@@ -48,13 +48,7 @@
       <!-- Module versions -->
       <dependency>
         <groupId>com.mutabra</groupId>
-        <artifactId>mutabra-domain-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.mutabra</groupId>
-        <artifactId>mutabra-domain-gae</artifactId>
+        <artifactId>mutabra-domain</artifactId>
         <version>${project.version}</version>
       </dependency>
 

@@ -30,7 +30,7 @@ public class AbilityDisplay extends AbstractComponent implements ClientElement {
     }
 
     public String getContainerClass() {
-        return creature.isExhausted() ?
+        return creature.isReady() ?
                 "card disabled" :
                 "card";
     }

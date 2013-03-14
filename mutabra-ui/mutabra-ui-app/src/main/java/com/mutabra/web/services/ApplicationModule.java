@@ -1,19 +1,18 @@
 package com.mutabra.web.services;
 
-import com.mutabra.web.internal.I18nPropertyConduitSource;
+import com.google.code.morphia.Datastore;
+import com.mutabra.domain.BaseEntity;
+import com.mutabra.domain.CodedEntity;
 import com.mutabra.web.internal.ImageSourceImpl;
-import com.mutabra.web.internal.TranslatorImpl;
-import com.mutabra.web.internal.UpdateCheckerFilter;
+import com.mutabra.web.internal.MorphiaEncoderFactory;
 import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.internal.services.StringInterner;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
-import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
@@ -21,20 +20,15 @@ import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
-import org.apache.tapestry5.services.PropertyConduitSource;
-import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.RequestFilter;
-import org.apache.tapestry5.services.RequestHandler;
-import org.apache.tapestry5.services.Response;
+import org.apache.tapestry5.services.ValueEncoderFactory;
+import org.apache.tapestry5.services.ValueEncoderSource;
 import org.apache.tapestry5.services.javascript.ExtensibleJavaScriptStack;
 import org.apache.tapestry5.services.javascript.JavaScriptStack;
 import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.apache.tapestry5.services.messages.ComponentMessagesSource;
-import org.greatage.domain.internal.SessionManager;
-
-import java.io.IOException;
+import org.bson.types.ObjectId;
 
 /**
  * @author Ivan Khalopik
@@ -55,31 +49,7 @@ public class ApplicationModule {
 
     public static void bind(final ServiceBinder binder) {
         binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
-//		binder.bind(ValidationDecoratorFactory.class, CustomValidationDecoratorFactory.class).withSimpleId();
-        binder.bind(Translator.class, TranslatorImpl.class);
         binder.bind(ImageSource.class, ImageSourceImpl.class);
-    }
-
-/*
-	@Contribute(ServiceOverride.class)
-	public static void contributeServiceOverrides(final MappedConfiguration<Class, Object> configuration,
-												  final @Local ValidationDecoratorFactory decoratorFactory) {
-		configuration.add(ValidationDecoratorFactory.class, decoratorFactory);
-	}
-
-	@Contribute(ValueEncoderSource.class)
-	public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
-											 final TypeCoercer typeCoercer,
-											 final EntityRepository repository) {
-		configuration.add(BaseEntity.class, new EntityEncoderFactory<Long>(typeCoercer, repository, Long.class));
-	}
-*/
-
-    @Decorate(serviceInterface = PropertyConduitSource.class)
-    public PropertyConduitSource decoratePropertyConduitSource(final PropertyConduitSource conduitSource,
-                                                               final Translator translator,
-                                                               final StringInterner interner) {
-        return new I18nPropertyConduitSource(conduitSource, translator, interner);
     }
 
     @Contribute(TypeCoercer.class)
@@ -89,6 +59,24 @@ public class ApplicationModule {
                 return input != null && !input.isEmpty() ? input.split(",") : null;
             }
         }));
+        configuration.add(CoercionTuple.create(String.class, ObjectId.class, new Coercion<String, ObjectId>() {
+            public ObjectId coerce(final String input) {
+                return new ObjectId(input);
+            }
+        }));
+        configuration.add(CoercionTuple.create(ObjectId.class, String.class, new Coercion<ObjectId, String>() {
+            public String coerce(final ObjectId input) {
+                return input.toString();
+            }
+        }));
+    }
+
+    @Contribute(ValueEncoderSource.class)
+    public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
+                                             final TypeCoercer typeCoercer,
+                                             final Datastore datastore) {
+        configuration.add(BaseEntity.class, new MorphiaEncoderFactory<ObjectId>(typeCoercer, datastore, ObjectId.class));
+        configuration.add(CodedEntity.class, new MorphiaEncoderFactory<String>(typeCoercer, datastore, String.class));
     }
 
     @Contribute(ComponentMessagesSource.class)
@@ -125,20 +113,4 @@ public class ApplicationModule {
                                                 final @Local JavaScriptStack stack) {
         configuration.add("mutabra", stack);
     }
-
-    @Contribute(RequestHandler.class)
-    public void contributeRequestHandler(final OrderedConfiguration<RequestFilter> configuration,
-                                         final SessionManager<Object> executor) {
-        configuration.add("RepositorySessionFilter", new RequestFilter() {
-            public boolean service(final Request request, final Response response, final RequestHandler requestHandler) throws IOException {
-                return executor.execute(new SessionManager.Callback<Boolean, Object>() {
-                    public Boolean doInSession(final Object session) throws Exception {
-                        return requestHandler.service(request, response);
-                    }
-                });
-            }
-        });
-        configuration.addInstance("UpdateCheckerFilter", UpdateCheckerFilter.class, "after:RepositorySessionFilter");
-    }
-
 }

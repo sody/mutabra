@@ -10,10 +10,6 @@ public class SecurityConstants {
     public static final String HASH_PRIVATE_SALT = "security.hash-private-salt";
     public static final String TOKEN_EXPIRATION_TIME = "security.token-expiration-time";
 
-    public static final String ADMIN_EMAIL = "security.admin-email";
-    public static final String ADMIN_PASSWORD = "security.admin-password";
-    public static final String ROBOT_EMAIL = "security.robot-email";
-
     public static final String FACEBOOK_KEY = "security.facebook-key";
     public static final String FACEBOOK_SECRET = "security.facebook-secret";
 

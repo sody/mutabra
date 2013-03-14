@@ -16,32 +16,30 @@
 
 package com.mutabra.web.internal;
 
+import com.google.code.morphia.Datastore;
+import com.mutabra.domain.Entity;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.ValueEncoderFactory;
-import org.greatage.domain.Entity;
-import org.greatage.domain.Repository;
 
 import java.io.Serializable;
 
 /**
- * Needs ga:ga-core dependency.
- *
  * @author Ivan Khalopik
  */
-public class EntityEncoderFactory<PK extends Serializable> implements ValueEncoderFactory<Entity<PK>> {
+public class MorphiaEncoderFactory<PK extends Serializable> implements ValueEncoderFactory<Entity<PK>> {
     private static final String NEW_ENTITY_VALUE = "new";
 
     private final TypeCoercer typeCoercer;
-    private final Repository repository;
+    private final Datastore datastore;
     private final Class<PK> pkClass;
 
-    public EntityEncoderFactory(final TypeCoercer typeCoercer, final Repository repository, final Class<PK> pkClass) {
+    public MorphiaEncoderFactory(final TypeCoercer typeCoercer, final Datastore datastore, final Class<PK> pkClass) {
         assert typeCoercer != null;
-        assert repository != null;
+        assert datastore != null;
         assert pkClass != null;
 
-        this.repository = repository;
+        this.datastore = datastore;
         this.typeCoercer = typeCoercer;
         this.pkClass = pkClass;
     }
@@ -54,10 +52,17 @@ public class EntityEncoderFactory<PK extends Serializable> implements ValueEncod
 
             public Entity<PK> toValue(final String clientValue) {
                 if (NEW_ENTITY_VALUE.equals(clientValue)) {
-                    return repository.create(type);
+                    try {
+                        return type.newInstance();
+                    } catch (InstantiationException e) {
+                        throw new NotFoundException();
+                    } catch (IllegalAccessException e) {
+                        throw new NotFoundException();
+                    }
                 }
+
                 final PK pk = typeCoercer.coerce(clientValue, pkClass);
-                final Entity<PK> entity = pk != null ? repository.get(type, pk) : null;
+                final Entity<PK> entity = pk != null ? datastore.get(type, pk) : null;
                 if (entity == null) {
                     throw new NotFoundException();
                 }
@@ -66,19 +71,13 @@ public class EntityEncoderFactory<PK extends Serializable> implements ValueEncod
 
             @Override
             public String toString() {
-                final StringBuilder sb = new StringBuilder("EntityEncoder(");
-                sb.append("class=").append(type);
-                sb.append(")");
-                return sb.toString();
+                return String.format("MorphiaEncoder[%s]", type);
             }
         };
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("EntityEncoderFactory(");
-        sb.append("pkClass=").append(pkClass);
-        sb.append(")");
-        return sb.toString();
+        return String.format("MorphiaEncoderFactory[%s]", pkClass);
     }
 }

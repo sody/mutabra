@@ -6,8 +6,6 @@ import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.services.PasswordGenerator;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
-import static com.mutabra.services.Mappers.account$;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -20,7 +18,7 @@ public class TwitterRealm extends OAuthRealm<TwitterRealm.Token> {
 
     @Override
     protected Account getAccountByProfileId(final String profileId) {
-        return findAccount(account$.twitterUser$.eq(profileId));
+        return findAccount("twitterUser =", profileId);
     }
 
     @Override

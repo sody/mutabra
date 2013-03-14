@@ -19,7 +19,4 @@
     <p:cardsMenuItem>
         <t:pagelink page="admin/cards" class="btn">${message:page.admin-cards.title}</t:pagelink>
     </p:cardsMenuItem>
-    <p:testMenuItem>
-        <t:pagelink page="admin/test" class="btn">${message:page.admin-test.title}</t:pagelink>
-    </p:testMenuItem>
 </t:menu>

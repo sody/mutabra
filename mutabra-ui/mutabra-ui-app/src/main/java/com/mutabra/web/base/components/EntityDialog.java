@@ -1,6 +1,5 @@
 package com.mutabra.web.base.components;
 
-import com.mutabra.domain.BaseEntity;
 import com.mutabra.web.components.Modal;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
@@ -18,7 +17,7 @@ import static org.apache.tapestry5.EventConstants.FAILURE;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class EntityDialog<E extends BaseEntity> extends AbstractComponent implements ClientElement {
+public class EntityDialog<V> extends AbstractComponent implements ClientElement {
 
     @Parameter(name = "id", value = "prop:componentResources.id", defaultPrefix = BindingConstants.LITERAL)
     private String clientId;
@@ -35,7 +34,7 @@ public class EntityDialog<E extends BaseEntity> extends AbstractComponent implem
     @Inject
     private Block modalBlock;
 
-    private E value;
+    private V value;
 
     public String getClientId() {
         return clientId;
@@ -50,21 +49,21 @@ public class EntityDialog<E extends BaseEntity> extends AbstractComponent implem
     }
 
     public String getTitle() {
-        return getMessages().get(value.isNew() ? "add.title" : "edit.title");
+        return message("title");
     }
 
-    public E getValue() {
+    public V getValue() {
         return value;
     }
 
-    public Object show(final E entity) {
-        init(entity);
+    public Object show(final V value) {
+        init(value);
         form.clearErrors();
         return modalBlock;
     }
 
-    protected void init(final E entity) {
-        value = entity;
+    protected void init(final V value) {
+        this.value = value;
     }
 
     @OnEvent(value = FAILURE)

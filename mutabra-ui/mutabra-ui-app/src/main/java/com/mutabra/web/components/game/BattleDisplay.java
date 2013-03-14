@@ -1,7 +1,7 @@
 package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleField;
+import com.mutabra.services.battle.BattleField;
 import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;

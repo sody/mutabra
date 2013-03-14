@@ -13,6 +13,5 @@
                 <t:textfield t:id="rating" value="value.rating" validate="required" label="message:label.rating"/>
             </div>
         </div>
-        <t:admin.translationEditor t:id="translationEditor" value="value"/>
     </t:replace>
 </t:extend>

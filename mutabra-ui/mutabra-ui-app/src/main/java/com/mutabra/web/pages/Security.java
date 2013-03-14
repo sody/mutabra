@@ -29,10 +29,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
+import org.bson.types.ObjectId;
 
 import java.io.IOException;
-
-import static com.mutabra.services.Mappers.account$;
 
 /**
  * @author Ivan Khalopik
@@ -78,7 +77,7 @@ public class Security extends AbstractPage {
     @Inject
     private RequestGlobals globals;
 
-    public Link createApplyChangesLink(final Long userId, final String token) {
+    public Link createApplyChangesLink(final ObjectId userId, final String token) {
         return getResources().createEventLink(APPLY_EVENT, userId, token);
     }
 
@@ -162,8 +161,8 @@ public class Security extends AbstractPage {
     @OnEvent(value = EventConstants.VALIDATE, component = "signUpForm")
     void validateSignUpForm() {
         account = accountService.query()
-                .filter(account$.email$.eq(email))
-                .unique();
+                .filter("email =", email)
+                .get();
         if (account != null) {
             // user with specified email doesn't exist
             signUpForm.recordError(message("error.sign-up"));
@@ -172,7 +171,7 @@ public class Security extends AbstractPage {
 
     @OnEvent(value = EventConstants.SUCCESS, component = "signUpForm")
     Object signUp() {
-        account = accountService.create();
+        account = new Account();
         // we should generate new password
         // and create auth token to confirm password changes
         // when user will confirm this from his email new password will be applied
@@ -190,7 +189,7 @@ public class Security extends AbstractPage {
 
         account.setToken(token);
         account.setTokenExpired(expired);
-        accountService.saveOrUpdate(account);
+        accountService.save(account);
 
         final Link link = createApplyChangesLink(account.getId(), token);
         mailService.send(
@@ -210,8 +209,8 @@ public class Security extends AbstractPage {
     @OnEvent(value = EventConstants.VALIDATE, component = "restoreForm")
     void validateRestoreForm() {
         account = accountService.query()
-                .filter(account$.email$.eq(email))
-                .unique();
+                .filter("email =", email)
+                .get();
         if (account == null) {
             // user with specified email doesn't exist
             restoreForm.recordError(message("error.restore-password"));
@@ -239,7 +238,7 @@ public class Security extends AbstractPage {
 
         account.setToken(token);
         account.setTokenExpired(expired);
-        accountService.saveOrUpdate(account);
+        accountService.save(account);
 
         final Link link = createApplyChangesLink(account.getId(), token);
         mailService.send(
@@ -251,7 +250,7 @@ public class Security extends AbstractPage {
     }
 
     @OnEvent(APPLY_EVENT)
-    Object applyPendingChanges(final Long userId, final String token) {
+    Object applyPendingChanges(final ObjectId userId, final String token) {
         getSubject().login(new ConfirmationRealm.Token(userId, token));
         //todo: add notification when pending changes was confirmed
         return GameHome.class;

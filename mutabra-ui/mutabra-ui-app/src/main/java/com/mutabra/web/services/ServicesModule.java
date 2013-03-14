@@ -1,120 +1,122 @@
 package com.mutabra.web.services;
 
-import com.mutabra.annotations.Transactional;
+import com.google.code.morphia.Datastore;
+import com.google.code.morphia.Morphia;
+import com.mongodb.Mongo;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleAbility;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.BattleTarget;
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
-import com.mutabra.domain.security.ChangeSet;
-import com.mutabra.scripts.AttackScript;
-import com.mutabra.scripts.EffectScript;
-import com.mutabra.scripts.FakeScript;
-import com.mutabra.scripts.ScriptExecutor;
-import com.mutabra.scripts.ScriptExecutorImpl;
-import com.mutabra.scripts.SummonScript;
+import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.HeroAppearance;
+import com.mutabra.domain.game.HeroLevel;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
 import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.CodedEntityServiceImpl;
-import com.mutabra.services.TransactionExecutor;
-import com.mutabra.services.TranslationService;
-import com.mutabra.services.TranslationServiceImpl;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.battle.BattleServiceImpl;
+import com.mutabra.services.battle.ScriptEngine;
+import com.mutabra.services.battle.ScriptEngineImpl;
+import com.mutabra.services.battle.scripts.AttackScript;
+import com.mutabra.services.battle.scripts.EffectScript;
+import com.mutabra.services.battle.scripts.SummonScript;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
-import com.mutabra.web.SecurityConstants;
+import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.internal.MailServiceImpl;
 import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.MethodAdviceReceiver;
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.annotations.Advise;
 import org.apache.tapestry5.ioc.annotations.Contribute;
-import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.plastic.MethodAdvice;
-import org.apache.tapestry5.plastic.MethodInvocation;
-import org.greatage.domain.Repository;
 
-import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
+import java.net.UnknownHostException;
+import java.util.Set;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class ServicesModule {
-    private final Repository repository;
 
     public static void bind(final ServiceBinder binder) {
-        binder.bind(TranslationService.class, TranslationServiceImpl.class);
+        binder.bind(HeroService.class, HeroServiceImpl.class);
         binder.bind(BattleService.class, BattleServiceImpl.class);
-        binder.bind(ScriptExecutor.class, ScriptExecutorImpl.class);
+        binder.bind(ScriptEngine.class, ScriptEngineImpl.class);
     }
 
-    public ServicesModule(final Repository repository) {
-        this.repository = repository;
+    public Datastore buildDatastore(final Set<Class> mappedClasses) throws UnknownHostException {
+        final Mongo mongo = new Mongo();
+        final Morphia morphia = new Morphia();
+        for (Class mappedClass : mappedClasses) {
+            morphia.map(mappedClass);
+        }
+
+        return morphia.createDatastore(mongo, "mutabra");
     }
 
-    public MailService buildMailService(final @Symbol(SecurityConstants.ROBOT_EMAIL) String robotEmail) {
+    public MailService buildMailService(final @Symbol(ApplicationConstants.ROBOT_EMAIL) String robotEmail) {
         return new MailServiceImpl(robotEmail);
     }
 
-    public BaseEntityService<ChangeSet> buildChangeSetService() {
-        return new BaseEntityServiceImpl<ChangeSet>(repository, ChangeSet.class);
+    public CodedEntityService<Level> buildLevelService(final Datastore datastore) {
+        return new CodedEntityServiceImpl<Level>(datastore, Level.class);
     }
 
-    public CodedEntityService<Level> buildLevelService() {
-        return new CodedEntityServiceImpl<Level>(repository, Level.class);
+    public CodedEntityService<Face> buildFaceService(final Datastore datastore) {
+        return new CodedEntityServiceImpl<Face>(datastore, Face.class);
     }
 
-    public CodedEntityService<Face> buildFaceService() {
-        return new CodedEntityServiceImpl<Face>(repository, Face.class);
+    public CodedEntityService<Race> buildRaceService(final Datastore datastore) {
+        return new CodedEntityServiceImpl<Race>(datastore, Race.class);
     }
 
-    public CodedEntityService<Race> buildRaceService() {
-        return new CodedEntityServiceImpl<Race>(repository, Race.class);
+    public CodedEntityService<Card> buildCardService(final Datastore datastore) {
+        return new CodedEntityServiceImpl<Card>(datastore, Card.class);
     }
 
-    public CodedEntityService<Card> buildCardService() {
-        return new CodedEntityServiceImpl<Card>(repository, Card.class);
+    public BaseEntityService<Account> buildAccountService(final Datastore datastore) {
+        return new BaseEntityServiceImpl<Account>(datastore, Account.class);
     }
 
-    public BaseEntityService<Account> buildAccountService() {
-        return new BaseEntityServiceImpl<Account>(repository, Account.class);
+    @Contribute(Datastore.class)
+    public void contributeDatastore(final Configuration<Class> configuration) {
+        configuration.add(Ability.class);
+        configuration.add(Card.class);
+        configuration.add(Effect.class);
+        configuration.add(Face.class);
+        configuration.add(Level.class);
+        configuration.add(Race.class);
+        configuration.add(Account.class);
+        configuration.add(Hero.class);
+        configuration.add(HeroAppearance.class);
+        configuration.add(HeroLevel.class);
+        configuration.add(Battle.class);
+        configuration.add(BattleAbility.class);
+        configuration.add(BattleCard.class);
+        configuration.add(BattleCreature.class);
+        configuration.add(BattleEffect.class);
+        configuration.add(BattleHero.class);
+        configuration.add(BattleTarget.class);
     }
 
-    public HeroService buildHeroService(final @InjectService("levelService") CodedEntityService<Level> levelService,
-                                        final @InjectService("cardService") CodedEntityService<Card> cardService) {
-        return new HeroServiceImpl(repository, levelService, cardService);
-    }
-
-    @Advise(serviceInterface = BaseEntityService.class)
-    public void adviseTransactionalServices(final MethodAdviceReceiver receiver,
-                                            final TransactionExecutor transactionExecutor) {
-        final MethodAdvice advice = new MethodAdvice() {
-            public void advise(final MethodInvocation invocation) {
-                transactionExecutor.doInTransaction(new Callable<Object>() {
-                    public Object call() throws Exception {
-                        invocation.proceed();
-                        return invocation.getReturnValue();
-                    }
-                });
-            }
-        };
-
-        for (Method method : receiver.getInterface().getMethods()) {
-            if (receiver.getMethodAnnotation(method, Transactional.class) != null) {
-                receiver.adviseMethod(method, advice);
-            }
-        }
-    }
-
-    @Contribute(ScriptExecutor.class)
-    public void contributeScriptExecutor(final Configuration<EffectScript> configuration) {
-        configuration.addInstance(FakeScript.class);
-        configuration.addInstance(AttackScript.class);
-        configuration.addInstance(SummonScript.class);
+    @Contribute(ScriptEngine.class)
+    public void contributeScriptExecutor(final MappedConfiguration<EffectType, EffectScript> configuration) {
+        configuration.addInstance(EffectType.MAGIC_ATTACK, AttackScript.class);
+        configuration.addInstance(EffectType.MELEE_ATTACK, AttackScript.class);
+        configuration.addInstance(EffectType.RANGED_ATTACK, AttackScript.class);
+        configuration.addInstance(EffectType.SUMMON, SummonScript.class);
     }
 }
