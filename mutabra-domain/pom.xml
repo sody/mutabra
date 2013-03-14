@@ -12,10 +12,17 @@
   <version>1.0-pre-alpha-12-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Mutabra Domain Aggregator</name>
+  <name>Mutabra Domain Module</name>
 
-  <modules>
-    <module>mutabra-domain-api</module>
-    <module>mutabra-domain-gae</module>
-  </modules>
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.morphia</groupId>
+      <artifactId>morphia</artifactId>
+      <version>0.99</version>
+    </dependency>
+  </dependencies>
 </project>
