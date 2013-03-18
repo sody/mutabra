@@ -1,17 +1,17 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-    <div id="${clientId}" class="${containerClass}"
-         data-description-target="${descriptionSelector}"
-         data-card-target="${fieldSelector}"
-         data-card-url="${actionLink}">
+  <div id="${clientId}" class="${containerClass}"
+       data-description-target="#${descriptionId}"
+       data-card-target="${targetSelector}"
+       data-card-url="${castLink}">
 
-        <div class="card-ne"><i class="icon-blood"/></div>
-        <div class="card-nw">${value.bloodCost}</div>
-        <div class="card-se">${value.power}</div>
-        <div class="card-sw">${value.health}</div>
-        <div class="card-body">
-            <t:svg type="abilities" image="value.code" width="100" height="100"/>
-        </div>
+    <div class="card-ne"><i class="icon-blood"/></div>
+    <div class="card-nw">${ability.bloodCost}</div>
+    <div class="card-se">${effect.power}</div>
+    <div class="card-sw">${effect.health}</div>
+    <div class="card-body">
+      <t:svg type="abilities" image="ability.code" width="100" height="100"/>
     </div>
+  </div>
 
 </t:container>

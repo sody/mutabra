@@ -1,6 +1,5 @@
 package com.mutabra.web.base.components;
 
-import com.mutabra.web.internal.MessageUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.ComponentResources;
@@ -49,6 +48,19 @@ public class AbstractComponent {
     }
 
     protected String label(final String key) {
-        return messages.get(MessageUtils.label(key));
+        return messages.get(i18n("label", key));
+    }
+
+
+    protected static String i18n(final String group, final String key) {
+        return group + "." + normalize(key);
+    }
+
+    protected static String i18n(final String group, final String key, final String variant) {
+        return group + "." + normalize(key) + "." + variant;
+    }
+
+    protected static String normalize(final String key) {
+        return key.replaceAll("([A-Z])", "-$1").toLowerCase();
     }
 }

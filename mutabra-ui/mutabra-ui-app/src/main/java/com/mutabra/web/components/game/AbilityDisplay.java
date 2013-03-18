@@ -1,13 +1,15 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.battle.BattleAbility;
 import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.common.Ability;
+import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.IdUtils;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SetupRender;
 
 /**
  * @author Ivan Khalopik
@@ -15,18 +17,28 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class AbilityDisplay extends AbstractComponent implements ClientElement {
 
-    @Property
-    @Parameter
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String id;
+
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String descriptionId;
+
+    @Parameter(required = true, allowNull = false)
     private BattleCreature creature;
 
     @Property
-    @Parameter
-    private Ability value;
+    @Parameter(required = true, allowNull = false)
+    private BattleAbility ability;
 
-    private String clientId;
+    @Property
+    private Effect effect;
 
     public String getClientId() {
-        return IdUtils.generateId(value);
+        return id;
+    }
+
+    public String getDescriptionId() {
+        return descriptionId;
     }
 
     public String getContainerClass() {
@@ -35,12 +47,12 @@ public class AbilityDisplay extends AbstractComponent implements ClientElement {
                 "card";
     }
 
-    public String getDescriptionSelector() {
-        return "#" + IdUtils.generateDescriptionId(value);
+    public String getCastLink() {
+        return getResources().createEventLink("cast", creature, ability).toURI();
     }
 
-    public String getFieldSelector() {
-        final TargetType targetType = value.getTargetType();
+    public String getTargetSelector() {
+        final TargetType targetType = ability.getTargetType();
 
         final StringBuilder sideSelector = new StringBuilder("path");
         if (targetType.supportsEnemy() && !targetType.supportsFriend()) {
@@ -72,7 +84,8 @@ public class AbilityDisplay extends AbstractComponent implements ClientElement {
         return selector.toString();
     }
 
-    public String getActionLink() {
-        return getResources().createEventLink("registerCreatureAction", creature, value).toAbsoluteURI();
+    @SetupRender
+    void setup() {
+        effect = ability.getEffects().get(0);
     }
 }

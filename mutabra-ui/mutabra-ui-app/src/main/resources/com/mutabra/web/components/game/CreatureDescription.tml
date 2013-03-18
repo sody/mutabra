@@ -1,19 +1,19 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-    <div id="${clientId}" class="description">
-        <h3 class="description-title">${value.card:name}</h3>
+  <div id="${clientId}" class="description">
+    <h3 class="description-title">${name}</h3>
 
-        <t:svg type="cards" image="value.card.code" width="140" height="140" class="description-picture"/>
+    <t:svg type="creatures" image="creature.code" width="140" height="140" class="description-picture"/>
 
-        <dl class="description-attrs">
-            <dt><i class="icon-heart large"/></dt>
-            <dd>${value.health}</dd>
+    <dl class="description-attrs">
+      <dt><i class="icon-heart large"/></dt>
+      <dd>${creature.health}</dd>
 
-            <dt><i class="icon-skull large"/></dt>
-            <dd>${value.card.power}</dd>
-        </dl>
+      <dt><i class="icon-skull large"/></dt>
+      <dd>${creature.power}</dd>
+    </dl>
 
-        <p class="description-text">${value.card:description}</p>
-    </div>
+    <p class="description-text">${description}</p>
+  </div>
 
 </t:container>

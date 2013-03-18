@@ -15,7 +15,7 @@ import org.apache.tapestry5.dom.Element;
  * @since 1.0
  */
 @SupportsInformalParameters
-public class FieldDisplay extends AbstractComponent implements ClientElement {
+public class FieldPointDisplay extends AbstractComponent implements ClientElement {
     private static final int CELL_SIZE = 45;
     private static final int CELL_OUTER_SIZE = 50;
     private static final int[][] CELL_PATH = {
@@ -28,7 +28,7 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
     };
 
     @Parameter(required = true, allowNull = false)
-    private BattleField field;
+    private BattleField.Point point;
 
     private String clientId;
 
@@ -38,24 +38,24 @@ public class FieldDisplay extends AbstractComponent implements ClientElement {
 
     @BeginRender
     void begin(final MarkupWriter writer) {
-        clientId = "f_" + field.getPosition().getId();
-        final int startX = CELL_OUTER_SIZE * (3 * field.getPosition().getX());
-        final int startY = CELL_OUTER_SIZE * (2 * field.getPosition().getY() + (field.getPosition().getX() + 1) % 2);
+        clientId = "f_" + point.getPosition().getId();
+        final int startX = CELL_OUTER_SIZE * (3 * point.getPosition().getX());
+        final int startY = CELL_OUTER_SIZE * (2 * point.getPosition().getY() + (point.getPosition().getX() + 1) % 2);
 
         final Element element = writer.element("g",
                 "id", clientId,
                 "transform", String.format("translate(%d, %d)", startX, startY),
-                "data-position-x", String.valueOf(field.getPosition().getX()),
-                "data-position-y", String.valueOf(field.getPosition().getY()))
-                .addClassName(field.hasHero() ? "hero" : field.hasCreature() ? "creature" : "empty")
-                .addClassName(field.isEnemySide() ? "enemy" : "friend");
+                "data-position-x", String.valueOf(point.getPosition().getX()),
+                "data-position-y", String.valueOf(point.getPosition().getY()))
+                .addClassName(point.hasHero() ? "hero" : point.hasCreature() ? "creature" : "empty")
+                .addClassName(point.isEnemySide() ? "enemy" : "friend");
 
-        if (field.hasUnit()) {
+        if (point.hasUnit()) {
             element.attributes(
-                    "data-description-target", "#description_" + field.getPosition().getId(),
-                    "data-field-target", "#actions_" + field.getPosition().getId());
+                    "data-description-target", "#description_" + point.getPosition().getId(),
+                    "data-field-target", "#actions_" + point.getPosition().getId());
         }
-        if (field.hasHero() && !field.isEnemySide()) {
+        if (point.hasHero() && !point.isEnemySide()) {
             element.addClassName("active");
         }
 

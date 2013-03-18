@@ -62,14 +62,30 @@ public class BattleField {
         return self;
     }
 
-    public Point get(final Position position, final Side side) {
+    public Point get(final Side side, final Position position) {
         return points.get(side).get(position);
+    }
+
+    public List<Point> get(final Side side) {
+        return new ArrayList<Point>(points.get(side).values());
+    }
+
+    public List<Point> get(final TargetType targetType) {
+        final List<Point> points = new ArrayList<Point>();
+        for (Map<Position, Point> sidePoints : this.points.values()) {
+            for (Point point : sidePoints.values()) {
+                if (point.supports(targetType)) {
+                    points.add(point);
+                }
+            }
+        }
+        return points;
     }
 
     public List<Point> get(final Position position, final TargetType targetType) {
         final List<Point> points = new ArrayList<Point>();
         if (targetType.isMassive()) {
-            for (Map<Position, Point> sidePoints: this.points.values()) {
+            for (Map<Position, Point> sidePoints : this.points.values()) {
                 for (Point point : sidePoints.values()) {
                     if (point.supports(targetType)) {
                         points.add(point);
@@ -77,7 +93,7 @@ public class BattleField {
                 }
             }
         } else {
-            for (Map<Position, Point> sidePoints: this.points.values()) {
+            for (Map<Position, Point> sidePoints : this.points.values()) {
                 for (Point point : sidePoints.values()) {
                     if (point.supports(targetType) && point.getPosition().equals(position)) {
                         points.add(point);

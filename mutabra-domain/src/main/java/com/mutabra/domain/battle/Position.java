@@ -56,5 +56,4 @@ public class Position {
         }
         return super.equals(obj);
     }
-
 }

@@ -1,13 +1,15 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.IdUtils;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SetupRender;
 
 /**
  * @author Ivan Khalopik
@@ -15,16 +17,29 @@ import org.apache.tapestry5.annotations.Property;
  */
 public class CardDisplay extends AbstractComponent implements ClientElement {
 
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String id;
+
+    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+    private String descriptionId;
+
     @Property
     @Parameter
     private BattleHero hero;
 
     @Property
     @Parameter
-    private Card value;
+    private BattleCard card;
+
+    @Property
+    private Effect effect;
 
     public String getClientId() {
-        return IdUtils.generateId(value);
+        return id;
+    }
+
+    public String getDescriptionId() {
+        return descriptionId;
     }
 
     public String getContainerClass() {
@@ -33,12 +48,12 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
                 "card";
     }
 
-    public String getDescriptionSelector() {
-        return "#" + IdUtils.generateDescriptionId(value);
+    public String getCastLink() {
+        return getResources().createEventLink("cast", hero, card).toAbsoluteURI();
     }
 
-    public String getFieldSelector() {
-        final TargetType targetType = value.getTargetType();
+    public String getTargetSelector() {
+        final TargetType targetType = card.getTargetType();
 
         final StringBuilder sideSelector = new StringBuilder();
         if (targetType.supportsEnemy() && !targetType.supportsFriend()) {
@@ -70,7 +85,8 @@ public class CardDisplay extends AbstractComponent implements ClientElement {
         return selector.toString();
     }
 
-    public String getActionLink() {
-        return getResources().createEventLink("registerHeroAction", hero, value).toAbsoluteURI();
+    @SetupRender
+    void setup() {
+        effect = card.getEffects().get(0);
     }
 }
