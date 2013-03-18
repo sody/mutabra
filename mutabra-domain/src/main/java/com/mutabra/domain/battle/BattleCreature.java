@@ -16,7 +16,7 @@ public class BattleCreature {
     private String code;
     private int health;
     private int power;
-    private Position position;
+    private BattlePosition position;
     private boolean ready;
 
     private List<BattleAbility> abilities = new ArrayList<BattleAbility>();
@@ -52,11 +52,11 @@ public class BattleCreature {
         this.power = power;
     }
 
-    public Position getPosition() {
+    public BattlePosition getPosition() {
         return position;
     }
 
-    public void setPosition(final Position position) {
+    public void setPosition(final BattlePosition position) {
         this.position = position;
     }
 

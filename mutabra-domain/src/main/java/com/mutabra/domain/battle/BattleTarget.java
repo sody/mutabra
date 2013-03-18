@@ -10,7 +10,8 @@ import org.bson.types.ObjectId;
  */
 @Embedded
 public class BattleTarget {
-    private Position position;
+    private BattlePosition position;
+    private BattleSide side;
 
     private ObjectId hero;
     private Long creature;
@@ -21,12 +22,20 @@ public class BattleTarget {
     @Transient
     private BattleHero heroInstance;
 
-    public Position getPosition() {
+    public BattlePosition getPosition() {
         return position;
     }
 
-    public void setPosition(final Position position) {
+    public void setPosition(final BattlePosition position) {
         this.position = position;
+    }
+
+    public BattleSide getSide() {
+        return side;
+    }
+
+    public void setSide(final BattleSide side) {
+        this.side = side;
     }
 
     public BattleHero getHero() {

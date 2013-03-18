@@ -4,14 +4,14 @@ package com.mutabra.domain.battle;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class Position {
+public class BattlePosition {
     private int x;
     private int y;
 
-    public Position() {
+    public BattlePosition() {
     }
 
-    public Position(final int x, final int y) {
+    public BattlePosition(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
@@ -50,8 +50,8 @@ public class Position {
 
     @Override
     public boolean equals(final Object obj) {
-        if (obj instanceof Position) {
-            final Position p = (Position) obj;
+        if (obj instanceof BattlePosition) {
+            final BattlePosition p = (BattlePosition) obj;
             return (getX() == p.getX()) && (getY() == p.getY());
         }
         return super.equals(obj);

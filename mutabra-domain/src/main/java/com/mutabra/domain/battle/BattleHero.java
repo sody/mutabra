@@ -23,7 +23,7 @@ public class BattleHero {
     private HeroLevel level = new HeroLevel();
     private int health;
     private int mentalPower;
-    private Position position;
+    private BattlePosition position;
     private boolean ready;
     private List<BattleCard> cards = new ArrayList<BattleCard>();
     private List<BattleCreature> creatures = new ArrayList<BattleCreature>();
@@ -67,11 +67,11 @@ public class BattleHero {
         this.mentalPower = mentalPower;
     }
 
-    public Position getPosition() {
+    public BattlePosition getPosition() {
         return position;
     }
 
-    public void setPosition(final Position position) {
+    public void setPosition(final BattlePosition position) {
         this.position = position;
     }
 

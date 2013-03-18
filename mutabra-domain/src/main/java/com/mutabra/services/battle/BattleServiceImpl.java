@@ -8,7 +8,8 @@ import com.mutabra.domain.battle.BattleCardType;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleEffect;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.Position;
+import com.mutabra.domain.battle.BattlePosition;
+import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.game.Hero;
@@ -63,7 +64,7 @@ public class BattleServiceImpl
             fillHero(battleHero, hero);
 
             // the initial hero position is center
-            battleHero.setPosition(new Position(1, 0));
+            battleHero.setPosition(new BattlePosition(1, 0));
             battleHero.setReady(false);
 
             // init hero cards
@@ -137,13 +138,15 @@ public class BattleServiceImpl
     public void cast(final Battle battle,
                      final BattleHero hero,
                      final BattleCard card,
-                     final Position target) {
+                     final BattlePosition target,
+                     final BattleSide side) {
         for (Effect effect : card.getEffects()) {
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
             battleEffect.setCode(card.getCode());
             battleEffect.getTarget().setPosition(target);
+            battleEffect.getTarget().setSide(side);
             battleEffect.getCaster().setHero(hero);
 
             battle.getEffects().add(battleEffect);
@@ -164,13 +167,15 @@ public class BattleServiceImpl
     public void cast(final Battle battle,
                      final BattleCreature creature,
                      final BattleAbility ability,
-                     final Position target) {
+                     final BattlePosition target,
+                     final BattleSide side) {
         for (Effect effect : ability.getEffects()) {
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
             battleEffect.setCode(ability.getCode());
             battleEffect.getTarget().setPosition(target);
+            battleEffect.getTarget().setSide(side);
             battleEffect.getCaster().setCreature(creature);
 
             battle.getEffects().add(battleEffect);

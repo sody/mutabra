@@ -5,7 +5,8 @@ import com.mutabra.domain.battle.BattleAbility;
 import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.Position;
+import com.mutabra.domain.battle.BattlePosition;
+import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityService;
 
@@ -23,9 +24,9 @@ public interface BattleService extends BaseEntityService<Battle> {
 
     void endRound(Battle battle);
 
-    void cast(Battle battle, BattleHero hero, BattleCard card, Position target);
+    void cast(Battle battle, BattleHero hero, BattleCard card, BattlePosition target, BattleSide side);
 
-    void cast(Battle battle, BattleCreature creature, BattleAbility ability, Position target);
+    void cast(Battle battle, BattleCreature creature, BattleAbility ability, BattlePosition target, BattleSide side);
 
     void skip(Battle battle, BattleHero hero);
 }
