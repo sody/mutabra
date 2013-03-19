@@ -63,6 +63,14 @@ public class BattleField {
         return self;
     }
 
+    public List<Point> get() {
+        final List<Point> all = new ArrayList<Point>();
+        for (BattleSide side : BattleSide.values()) {
+            all.addAll(points.get(side).values());
+        }
+        return all;
+    }
+
     public Point get(final BattleSide side, final BattlePosition position) {
         return points.get(side).get(position);
     }

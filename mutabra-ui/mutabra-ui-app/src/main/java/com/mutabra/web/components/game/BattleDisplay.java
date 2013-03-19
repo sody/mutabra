@@ -1,13 +1,13 @@
 package com.mutabra.web.components.game;
 
-import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.*;
 import com.mutabra.services.battle.BattleField;
-import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.services.AccountContext;
+import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -20,53 +20,31 @@ import java.util.List;
  */
 public class BattleDisplay {
 
-    @Inject
-    private AccountContext accountContext;
-
-    @Inject
-    private BattleService battleService;
-
     @Property
-    private Battle battle;
-
-    @Property
-    private BattleHero you;
-
-    @Property
-    private BattleHero opponent;
-
-    @Property
+    @Parameter
     private BattleField field;
 
     @Property
-    private List<BattleField> fields;
+    private BattleField.Point point;
 
     @Property
-    private Card card;
+    private BattleHero hero;
 
     @Property
-    private Ability ability;
+    private BattleCard card;
 
-    public String getActionsClass() {
-        return field.hasHero() && !field.isEnemySide() ?
-                "row actions active" :
-                "row actions";
+    @Property
+    private BattleCreature creature;
+
+    @Property
+    private BattleAbility ability;
+
+    public boolean isEnemy() {
+        return !field.getSelf().equals(hero);
     }
 
-    @SetupRender
-    void setupBattleField() {
-        final Hero hero = accountContext.getHero();
-        battle = accountContext.getBattle();
-
-        fields = battleService.getBattleField(hero, battle);
-        for (BattleField battleField : fields) {
-            if (battleField.hasHero()) {
-                if (battleField.isEnemySide()) {
-                    opponent = battleField.getHero();
-                } else {
-                    you = battleField.getHero();
-                }
-            }
-        }
+    public String getActiveClass() {
+        return isEnemy() ? "" : " active";
     }
+
 }

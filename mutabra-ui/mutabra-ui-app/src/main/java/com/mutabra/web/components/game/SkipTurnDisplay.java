@@ -12,21 +12,14 @@ import org.apache.tapestry5.annotations.Property;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class SkipTurnDisplay extends AbstractComponent implements ClientElement {
+public class SkipTurnDisplay extends AbstractComponent {
 
     @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String id;
-
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String descriptionId;
+    private String description;
 
     @Property
     @Parameter
     private BattleHero hero;
-
-    public String getClientId() {
-        return id;
-    }
 
     public String getContainerClass() {
         return hero.isReady() ?
@@ -34,11 +27,11 @@ public class SkipTurnDisplay extends AbstractComponent implements ClientElement 
                 "card";
     }
 
-    public String getDescriptionId() {
-        return descriptionId;
-    }
-
     public String getCastLink() {
         return getResources().createEventLink("skipTurn", hero).toAbsoluteURI();
+    }
+
+    public String getDescriptionSelector() {
+        return "#" + description;
     }
 }

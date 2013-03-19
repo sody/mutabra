@@ -1,8 +1,9 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.ClientElement;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -15,7 +16,7 @@ import org.apache.tapestry5.dom.Element;
  * @since 1.0
  */
 @SupportsInformalParameters
-public class FieldPointDisplay extends AbstractComponent implements ClientElement {
+public class FieldPointDisplay extends AbstractComponent {
     private static final int CELL_SIZE = 45;
     private static final int CELL_OUTER_SIZE = 50;
     private static final int[][] CELL_PATH = {
@@ -27,33 +28,35 @@ public class FieldPointDisplay extends AbstractComponent implements ClientElemen
             {1, -1},
     };
 
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String description;
+
+    @Parameter(defaultPrefix = BindingConstants.LITERAL)
+    private String hand;
+
     @Parameter(required = true, allowNull = false)
     private BattleField.Point point;
 
-    private String clientId;
-
-    public String getClientId() {
-        return clientId;
-    }
-
     @BeginRender
     void begin(final MarkupWriter writer) {
-        clientId = "f_" + point.getPosition().getId();
-        final int startX = CELL_OUTER_SIZE * (3 * point.getPosition().getX());
-        final int startY = CELL_OUTER_SIZE * (2 * point.getPosition().getY() + (point.getPosition().getX() + 1) % 2);
+        final int x = point.getPosition().getX();
+        final int y = point.getPosition().getY() + (point.getSide() == BattleSide.YOUR ? 1 + ((x + 1) % 2) : 0);
+        final int startX = CELL_OUTER_SIZE * (3 * x);
+        final int startY = CELL_OUTER_SIZE * (2 * y + (x + 1) % 2);
 
         final Element element = writer.element("g",
-                "id", clientId,
                 "transform", String.format("translate(%d, %d)", startX, startY),
                 "data-position-x", String.valueOf(point.getPosition().getX()),
-                "data-position-y", String.valueOf(point.getPosition().getY()))
+                "data-position-y", String.valueOf(point.getPosition().getY()),
+                "data-side", String.valueOf(point.getSide()))
                 .addClassName(point.hasHero() ? "hero" : point.hasCreature() ? "creature" : "empty")
                 .addClassName(point.isEnemySide() ? "enemy" : "friend");
 
-        if (point.hasUnit()) {
-            element.attributes(
-                    "data-description-target", "#description_" + point.getPosition().getId(),
-                    "data-field-target", "#actions_" + point.getPosition().getId());
+        if (description != null) {
+            element.attribute("data-description-target", "#" + description);
+        }
+        if (hand != null) {
+            element.attribute("data-field-target", "#" + hand);
         }
         if (point.hasHero() && !point.isEnemySide()) {
             element.addClassName("active");

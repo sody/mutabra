@@ -3,15 +3,17 @@
     <div class="row">
         <div class="field">
             <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="300" width="500" version="1.1">
-                <t:loop source="fields" value="field">
-                    <t:game.fielddisplay field="field">
-                        <t:if test="field.hasHero()">
-                            <t:svg type="faces" image="field.hero.hero.face.code" inline="true" width="90" height="90" x="50" y="5"/>
+                <t:loop source="field.get()" value="point">
+                    <t:game.fieldpointdisplay point="point">
+                        <t:if test="point.hasHero()">
+                            <t:svg type="faces" image="point.hero.appearance.face" inline="true"
+                                   width="90" height="90" x="50" y="5"/>
                         </t:if>
-                        <t:if test="field.hasCreature()">
-                            <t:svg type="faces" image="field.creature.card.code" inline="true" width="90" height="90" x="50" y="5"/>
+                        <t:if test="point.hasCreature()">
+                            <t:svg type="creatures" image="point.creature.code" inline="true"
+                                   width="90" height="90" x="50" y="5"/>
                         </t:if>
-                    </t:game.fielddisplay>
+                    </t:game.fieldpointdisplay>
                 </t:loop>
             </svg>
         </div>
@@ -21,47 +23,54 @@
     <div class="row">
         <div class="span4">
             <div class="row">
-                <t:loop source="fields" value="field">
-                    <t:if test="field.hasHero()">
-                        <t:game.herodescription value="field.hero" active="!field.enemySide"/>
-                        <t:if test="!field.enemySide">
-                            <t:loop source="field.hero.hand" value="card">
-                                <t:game.carddescription value="card"/>
+                <t:loop source="field.battle.heroes" value="hero">
+                    <t:game.herodescription id="d_hero_${hero.id}"
+                                            hero="hero" active="!enemy"/>
+                    <t:if test="!enemy">
+                        <t:loop source="hero.hand" value="card">
+                            <t:game.carddescription id="d_card_${hero.id}_${card.id}"
+                                                    card="card"/>
+                        </t:loop>
+                    </t:if>
+                    <t:loop source="hero.creatures" value="creature">
+                        <t:game.creaturedescription id="d_creature_${hero.id}_${creature.id}"
+                                                    creature="creature"/>
+                        <t:if test="!enemy">
+                            <t:loop source="creature.abilities" value="ability">
+                                <t:game.abilitydescription id="d_ability_${hero.id}_${creature.id}_${ability.id}"
+                                                           ability="ability"/>
                             </t:loop>
                         </t:if>
-                    </t:if>
-                    <t:if test="field.hasCreature()">
-                        <t:game.creaturedescription value="field.creature"/>
-                        <t:if test="!field.enemySide">
-                            <t:loop source="field.creature.card.abilities" value="ability">
-                                <t:game.abilitydescription value="ability"/>
-                            </t:loop>
-                        </t:if>
-                    </t:if>
+                    </t:loop>
                 </t:loop>
-                <t:game.skipturndescription/>
+                <t:game.skipturndescription id="d_skip_turn"/>
             </div>
         </div>
 
         <div class="span8">
-            <t:loop source="fields" value="field">
-                <t:if test="field.hasUnit()">
-                    <div id="actions_${field.position.id}" class="${actionsClass}">
-                        <t:if test="!field.enemySide">
-                            <t:if test="field.hasHero()">
-                                <t:loop source="field.hero.hand" value="card">
-                                    <t:game.carddisplay value="card" hero="field.hero"/>
-                                </t:loop>
-                            </t:if>
-                            <t:if test="field.hasCreature()">
-                                <t:loop source="field.creature.card.abilities" value="ability">
-                                    <t:game.abilitydisplay value="ability" creature="field.creature"/>
-                                </t:loop>
-                            </t:if>
-                            <t:game.skipturndisplay hero="you"/>
+            <t:loop source="field.battle.heroes" value="hero">
+                <div id="hand_${hero.id}" class="row actions${activeClass}">
+                    <t:if test="!enemy">
+                        <t:loop source="hero.hand" value="card">
+                            <t:game.carddisplay description="d_card_${hero.id}_${card.id}"
+                                                hero="hero" card="card"/>
+                        </t:loop>
+                        <t:game.skipturndisplay description="d_skip_turn"
+                                                hero="field.self"/>
+                    </t:if>
+                </div>
+                <t:loop source="hero.creatures" value="creature">
+                    <div id="hand_${hero.id}_${creature.id}" class="row actions">
+                        <t:if test="!enemy">
+                            <t:loop source="creature.abilities" value="ability">
+                                <t:game.abilitydisplay description="d_ability_${hero.id}_${creature.id}_${ability.id}"
+                                                       creature="creature" ability="ability"/>
+                            </t:loop>
+                            <t:game.skipturndisplay description="d_skip_turn"
+                                                    hero="field.self"/>
                         </t:if>
                     </div>
-                </t:if>
+                </t:loop>
             </t:loop>
         </div>
     </div>

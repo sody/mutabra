@@ -15,13 +15,10 @@ import org.apache.tapestry5.annotations.SetupRender;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class AbilityDisplay extends AbstractComponent implements ClientElement {
+public class AbilityDisplay extends AbstractComponent {
 
     @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String id;
-
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String descriptionId;
+    private String description;
 
     @Parameter(required = true, allowNull = false)
     private BattleCreature creature;
@@ -33,14 +30,6 @@ public class AbilityDisplay extends AbstractComponent implements ClientElement {
     @Property
     private Effect effect;
 
-    public String getClientId() {
-        return id;
-    }
-
-    public String getDescriptionId() {
-        return descriptionId;
-    }
-
     public String getContainerClass() {
         return creature.isReady() ?
                 "card disabled" :
@@ -49,6 +38,10 @@ public class AbilityDisplay extends AbstractComponent implements ClientElement {
 
     public String getCastLink() {
         return getResources().createEventLink("cast", creature, ability).toURI();
+    }
+
+    public String getDescriptionSelector() {
+        return "#" + description;
     }
 
     public String getTargetSelector() {
