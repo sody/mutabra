@@ -83,29 +83,6 @@ public class BattleField {
         return points;
     }
 
-    public List<Point> get(final BattlePosition position, final TargetType targetType) {
-        final List<Point> points = new ArrayList<Point>();
-        if (targetType.isMassive()) {
-            for (Map<BattlePosition, Point> sidePoints : this.points.values()) {
-                for (Point point : sidePoints.values()) {
-                    if (point.supports(targetType)) {
-                        points.add(point);
-                    }
-                }
-            }
-        } else {
-            for (Map<BattlePosition, Point> sidePoints : this.points.values()) {
-                for (Point point : sidePoints.values()) {
-                    if (point.supports(targetType) && point.getPosition().equals(position)) {
-                        points.add(point);
-                        return points;
-                    }
-                }
-            }
-        }
-        return points;
-    }
-
     public static BattleField create(final Battle battle, final BattleHero self) {
         return new BattleField(battle, self);
     }

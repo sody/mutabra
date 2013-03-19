@@ -24,23 +24,26 @@ public abstract class AbstractScript implements EffectScript {
             final List<BattleField.Point> targets = battleField.get(targetType);
             if (!targets.isEmpty()) {
                 for (BattleField.Point target : targets) {
-                    apply(battleEffect, battleField, target);
+                    apply(battleField, battleEffect, target);
                 }
             } else {
-                //TODO: log fail
+                // missed target
+                apply(battleField, battleEffect, null);
             }
         } else {
             final BattlePosition position = battleEffect.getTarget().getPosition(); // can be null
             final BattleSide side = battleEffect.getTarget().getSide(); // can be null
             final BattleField.Point target = battleField.get(side, position);
             if (target.supports(targetType)) {
-                apply(battleEffect, battleField, target);
+                apply(battleField, battleEffect, target);
             } else {
-                //TODO: log fail
+                // missed target
+                apply(battleField, battleEffect, null);
             }
         }
     }
 
-    protected abstract void apply(final BattleEffect battleEffect, final BattleField battleField,
+    protected abstract void apply(final BattleField battleField,
+                                  final BattleEffect battleEffect,
                                   final BattleField.Point target);
 }

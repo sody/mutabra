@@ -12,8 +12,8 @@ import com.mutabra.services.battle.BattleField;
 public class AttackScript extends AbstractScript {
 
     @Override
-    protected void apply(final BattleEffect battleEffect,
-                         final BattleField battleField,
+    protected void apply(final BattleField battleField,
+                         final BattleEffect battleEffect,
                          final BattleField.Point target) {
         if (target.hasHero()) {
             final BattleHero targetHero = target.getHero();
