@@ -1,6 +1,7 @@
 package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Transient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,15 @@ public class BattleCreature {
     // internal id sequence
     private long abilitySequence;
 
+    @Transient
+    private BattleHero hero;
+
     public Long getId() {
         return id;
+    }
+
+    public BattleHero getHero() {
+        return hero;
     }
 
     public String getCode() {
@@ -72,6 +80,10 @@ public class BattleCreature {
         return abilities;
     }
 
+    /* HELPER METHODS */
+    void assignHero(final BattleHero hero) {
+        this.hero = hero;
+    }
 
     void assignId(final long id) {
         this.id = id;

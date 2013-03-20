@@ -1,6 +1,7 @@
 package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Transient;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 
@@ -21,8 +22,15 @@ public class BattleAbility {
 
     private List<Effect> effects = new ArrayList<Effect>();
 
+    @Transient
+    private BattleCreature creature;
+
     public Long getId() {
         return id;
+    }
+
+    public BattleCreature getCreature() {
+        return creature;
     }
 
     public String getCode() {
@@ -51,6 +59,11 @@ public class BattleAbility {
 
     public List<Effect> getEffects() {
         return effects;
+    }
+
+    /* HELPER METHODS */
+    void assignCreature(final BattleCreature creature) {
+        this.creature = creature;
     }
 
     void assignId(final long id) {

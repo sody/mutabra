@@ -78,6 +78,18 @@ public class Battle extends BaseEntity {
             for (BattleCreature battleCreature : battleHero.getCreatures()) {
                 creatureById.put(battleCreature.getId(), battleCreature);
                 heroByCreatureId.put(battleCreature.getId(), battleHero);
+
+                // assign parents
+                battleCreature.assignHero(battleHero);
+                for (BattleAbility battleAbility : battleCreature.getAbilities()) {
+                    battleAbility.assignCreature(battleCreature);
+                }
+            }
+
+            // assign parents
+            battleHero.assignBattle(this);
+            for (BattleCard battleCard : battleHero.getCards()) {
+                battleCard.assignHero(battleHero);
             }
         }
 

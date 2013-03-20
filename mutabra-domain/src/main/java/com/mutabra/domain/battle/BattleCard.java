@@ -1,6 +1,7 @@
 package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
+import com.google.code.morphia.annotations.Transient;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 
@@ -22,8 +23,15 @@ public class BattleCard {
 
     private List<Effect> effects = new ArrayList<Effect>();
 
+    @Transient
+    private BattleHero hero;
+
     public Long getId() {
         return id;
+    }
+
+    public BattleHero getHero() {
+        return hero;
     }
 
     public BattleCardType getType() {
@@ -60,6 +68,11 @@ public class BattleCard {
 
     public List<Effect> getEffects() {
         return effects;
+    }
+
+    /* HELPER METHODS */
+    void assignHero(final BattleHero hero) {
+        this.hero = hero;
     }
 
     void assignId(final long id) {

@@ -2,6 +2,7 @@ package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.annotations.Transient;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroLevel;
 import org.bson.types.ObjectId;
@@ -32,6 +33,9 @@ public class BattleHero {
     private long cardSequence;
     private long creatureSequence;
 
+    @Transient
+    private Battle battle;
+
     public BattleHero() {
     }
 
@@ -41,6 +45,10 @@ public class BattleHero {
 
     public ObjectId getId() {
         return id;
+    }
+
+    public Battle getBattle() {
+        return battle;
     }
 
     public HeroAppearance getAppearance() {
@@ -130,6 +138,10 @@ public class BattleHero {
         return graveyard;
     }
 
+    /* HELPER METHODS */
+    void assignBattle(final Battle battle) {
+        this.battle = battle;
+    }
 
     long nextCardId() {
         return cardSequence++;
