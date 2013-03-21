@@ -128,9 +128,9 @@ public class BattleServiceImpl
     }
 
     public void cast(final Battle battle,
-                     final BattleHero hero,
                      final BattleCard card,
                      final BattleTarget target) {
+        final BattleHero hero = card.getHero();
         for (Effect effect : card.getEffects()) {
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
@@ -156,9 +156,9 @@ public class BattleServiceImpl
     }
 
     public void cast(final Battle battle,
-                     final BattleCreature creature,
                      final BattleAbility ability,
                      final BattleTarget target) {
+        final BattleCreature creature = ability.getCreature();
         for (Effect effect : ability.getEffects()) {
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);

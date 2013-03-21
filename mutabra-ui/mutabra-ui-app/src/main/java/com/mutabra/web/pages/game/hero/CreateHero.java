@@ -1,5 +1,6 @@
 package com.mutabra.web.pages.game.hero;
 
+import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
@@ -38,34 +39,31 @@ public class CreateHero extends AbstractPage {
     private HeroService heroService;
 
     @Property
-    private Hero value;
+    private Hero hero;
 
     @Property
-    private Race row;
+    private Race race;
 
     @Property
-    private int index;
+    private Face face;
 
     @Inject
     private AccountContext accountContext;
 
-    @Cached
-    public List<Race> getRaces() {
-        return raceService.query().list();
-    }
-
     @OnEvent(EventConstants.ACTIVATE)
     void activate() {
-        value = heroService.create(accountContext.getAccount());
+        hero = new Hero();
     }
 
     @OnEvent(value = EventConstants.SUCCESS)
     Object createHero() {
-        heroService.saveOrUpdate(value);
+        final Account account = accountContext.getAccount();
+
+        hero.getAppearance().setFace(face.getCode());
+        heroService.save(hero, account, race);
 
         // enter the game with just created character
-        final Account account = accountContext.getAccount();
-        account.setHero(value);
+        account.setHero(hero);
         accountService.save(account);
 
         return back();

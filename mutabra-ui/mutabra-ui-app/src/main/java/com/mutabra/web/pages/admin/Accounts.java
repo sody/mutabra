@@ -37,7 +37,7 @@ public class Accounts extends AbstractPage {
 
     @OnEvent(value = "add")
     Object addAccount() {
-        return entityDialog.show(accountService.create());
+        return entityDialog.show(new Account());
     }
 
     @OnEvent(value = "edit")
@@ -54,7 +54,7 @@ public class Accounts extends AbstractPage {
     @OnEvent(value = EventConstants.SUCCESS)
     @RequiresPermissions("account:edit")
     Object saveAccount() {
-        accountService.saveOrUpdate(entityDialog.getValue());
+        accountService.save(entityDialog.getValue());
         return this;
     }
 }

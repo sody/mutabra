@@ -2,6 +2,7 @@ package com.mutabra.domain.game;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.annotations.Reference;
 import com.google.code.morphia.annotations.Transient;
 import com.mutabra.domain.BaseEntity;
 
@@ -55,6 +56,8 @@ public class Account extends BaseEntity {
 
     private String pendingSalt;
 
+    @Reference
+    private Hero hero;
 
     private String name;
 
@@ -193,6 +196,14 @@ public class Account extends BaseEntity {
 
     public void setPendingSalt(final String pendingSalt) {
         this.pendingSalt = pendingSalt;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
     }
 
     public String getName() {

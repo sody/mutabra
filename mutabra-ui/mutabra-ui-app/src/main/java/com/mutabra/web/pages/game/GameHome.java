@@ -1,7 +1,6 @@
 package com.mutabra.web.pages.game;
 
 import com.mutabra.domain.game.Hero;
-import com.mutabra.services.Mappers;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
@@ -14,6 +13,7 @@ import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -42,9 +42,9 @@ public class GameHome extends AbstractPage {
     public List<Hero> getPlayers() {
         final Date timeout = new Date(System.currentTimeMillis() - 50000);
         return heroService.query()
-                .filter(Mappers.hero$.lastActive$.gt(timeout))
-                .paginate(0, 20)
-                .list();
+                .filter("lastActive >", timeout)
+                .limit(20)
+                .asList();
     }
 
     public boolean isCanCreateBattle() {
@@ -66,9 +66,8 @@ public class GameHome extends AbstractPage {
 
     @OnEvent("createBattle")
     Object createBattle(final Hero target) {
-        if (target.getBattle() == null && hero.getBattle() == null && !target.equals(hero)) {
-            battleService.startBattle(hero, target);
-            return GameBattle.class;
+        if (battleService.query().filter("heroes.id in", Arrays.asList(hero.getId(), target.getId())).countAll() == 0) {
+            battleService.create(hero, target);
         }
         return null;
     }

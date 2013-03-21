@@ -1,11 +1,6 @@
 package com.mutabra.web.pages.game;
 
-import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.Position;
-import com.mutabra.domain.common.Ability;
-import com.mutabra.domain.common.Card;
+import com.mutabra.domain.battle.*;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.services.AccountContext;
@@ -50,28 +45,34 @@ public class GameBattle extends AbstractPage {
 
     @OnEvent("skipTurn")
     Object skipTurn(final BattleHero hero) {
-        battleService.skipTurn(battle, hero);
+        battleService.skip(battle, hero);
         return null;
     }
 
-    @OnEvent("registerHeroAction")
-    Object registerHeroAction(final BattleHero hero,
-                              final Card card,
-                              final @RequestParameter(value = "x") int x,
-                              final @RequestParameter(value = "y") int y) {
-        if (!hero.isExhausted()) {
-            battleService.registerAction(battle, hero, card, new Position(x, y));
+    @OnEvent("cast")
+    Object cast(final BattleCard card,
+                final @RequestParameter(value = "x") int x,
+                final @RequestParameter(value = "y") int y,
+                final @RequestParameter(value = "side") BattleSide side) {
+        if (!card.getHero().isReady()) {
+            final BattleTarget target = new BattleTarget();
+            target.setPosition(new BattlePosition(x, y));
+            target.setSide(side);
+            battleService.cast(battle, card, target);
         }
         return null;
     }
 
-    @OnEvent("registerCreatureAction")
-    Object registerCreatureAction(final BattleCreature creature,
-                                  final Ability ability,
-                                  final @RequestParameter(value = "x") int x,
-                                  final @RequestParameter(value = "y") int y) {
-        if (!creature.isExhausted()) {
-            battleService.registerAction(battle, creature, ability, new Position(x, y));
+    @OnEvent("cast")
+    Object cast(final BattleAbility ability,
+                final @RequestParameter(value = "x") int x,
+                final @RequestParameter(value = "y") int y,
+                final @RequestParameter(value = "side") BattleSide side) {
+        if (!ability.getCreature().isReady()) {
+            final BattleTarget target = new BattleTarget();
+            target.setPosition(new BattlePosition(x, y));
+            target.setSide(side);
+            battleService.cast(battle, ability, target);
         }
         return null;
     }

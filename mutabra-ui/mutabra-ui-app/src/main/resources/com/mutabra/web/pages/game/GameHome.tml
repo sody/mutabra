@@ -1,13 +1,12 @@
 <html t:type="layout/default"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-        >
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <t:loop source="players" value="row">
     <t:eventlink event="createBattle" context="row" disabled="canCreateBattle">
         <div>
             ${message:label.name}: ${row.name}
             <br/>
-            <t:svg type="faces" image="row.face.code" width="100" height="100"/>
+            <t:svg type="faces" image="row.appearance.face" width="100" height="100"/>
         </div>
     </t:eventlink>
 </t:loop>

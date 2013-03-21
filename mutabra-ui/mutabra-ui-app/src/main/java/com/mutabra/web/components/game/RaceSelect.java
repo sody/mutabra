@@ -32,6 +32,6 @@ public class RaceSelect {
 
     @Cached
     public List<Race> getSource() {
-        return raceService.query().list();
+        return raceService.query().asList();
     }
 }

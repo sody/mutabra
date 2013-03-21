@@ -4,16 +4,25 @@
         <div class="field">
             <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="300" width="500" version="1.1">
                 <t:loop source="field.get()" value="point">
-                    <t:game.fieldpointdisplay point="point">
-                        <t:if test="point.hasHero()">
+                    <t:if test="point.hasHero()">
+                        <t:game.fieldpointdisplay point="point"
+                                                  description="d_hero_${point.hero.id}"
+                                                  hand="hand_${point.hero.id}">
                             <t:svg type="faces" image="point.hero.appearance.face" inline="true"
                                    width="90" height="90" x="50" y="5"/>
-                        </t:if>
-                        <t:if test="point.hasCreature()">
+                        </t:game.fieldpointdisplay>
+                    </t:if>
+                    <t:if test="point.hasCreature()">
+                        <t:game.fieldpointdisplay point="point"
+                                                  description="d_creature_${point.hero.id}_${point.creature.id}"
+                                                  hand="hand_${point.hero.id}_${point.creature.id}">
                             <t:svg type="creatures" image="point.creature.code" inline="true"
                                    width="90" height="90" x="50" y="5"/>
-                        </t:if>
-                    </t:game.fieldpointdisplay>
+                        </t:game.fieldpointdisplay>
+                    </t:if>
+                    <t:if test="!point.hasUnit()">
+                        <t:game.fieldpointdisplay point="point"/>
+                    </t:if>
                 </t:loop>
             </svg>
         </div>

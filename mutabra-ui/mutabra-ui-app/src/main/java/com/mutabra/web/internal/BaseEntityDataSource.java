@@ -1,7 +1,6 @@
 package com.mutabra.web.internal;
 
 import com.google.code.morphia.query.Query;
-import com.mutabra.domain.BaseEntity;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.grid.SortConstraint;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class BaseEntityDataSource<E extends BaseEntity> implements GridDataSource {
+public class BaseEntityDataSource<E> implements GridDataSource {
     private final Query<E> query;
     private final Class<E> rowType;
 

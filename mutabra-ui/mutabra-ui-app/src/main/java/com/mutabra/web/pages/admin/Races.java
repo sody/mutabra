@@ -2,11 +2,9 @@ package com.mutabra.web.pages.admin;
 
 import com.mutabra.domain.common.Race;
 import com.mutabra.services.CodedEntityService;
-import com.mutabra.services.TranslationService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.components.admin.RaceDialog;
 import com.mutabra.web.internal.BaseEntityDataSource;
-import com.mutabra.web.services.Translator;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.tapestry5.EventConstants;
@@ -14,7 +12,6 @@ import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
-import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
 /**
@@ -27,12 +24,6 @@ public class Races extends AbstractPage {
 
     @InjectService("raceService")
     private CodedEntityService<Race> raceService;
-
-    @Inject
-    private TranslationService translationService;
-
-    @Inject
-    private Translator translator;
 
     @InjectComponent
     private RaceDialog entityDialog;
@@ -52,10 +43,7 @@ public class Races extends AbstractPage {
     @OnEvent(value = EventConstants.SUCCESS)
     @RequiresPermissions("race:edit")
     Object saveRace() {
-        raceService.saveOrUpdate(entityDialog.getValue());
-        translationService.saveTranslations(entityDialog.getTranslations());
-        //todo: should be automatic
-        translator.invalidateCache(entityDialog.getValue());
+        raceService.save(entityDialog.getValue());
         return this;
     }
 }

@@ -38,7 +38,7 @@ public class SwitchHero extends AbstractPage {
     private List<Hero> source;
 
     @Property
-    private Hero value;
+    private Hero hero;
 
     @Property
     private Hero row;
@@ -48,8 +48,9 @@ public class SwitchHero extends AbstractPage {
 
     @OnEvent(EventConstants.ACTIVATE)
     Object activate() {
-        value = accountContext.getHero();
-        source = accountContext.getAccount().getHeroes();
+        final Account account = accountContext.getAccount();
+        hero = accountContext.getHero();
+        source = heroService.query().filter("account =", account).asList();
         if (source.isEmpty()) {
             return CreateHero.class;
         }
@@ -60,14 +61,14 @@ public class SwitchHero extends AbstractPage {
     Object enter() {
         // enter the game with just created character
         final Account account = accountContext.getAccount();
-        account.setHero(value);
-        accountService.saveOrUpdate(account);
+        account.setHero(hero);
+        accountService.save(account);
 
         return back();
     }
 
     @OnEvent
-    Object cancel(final String source) {
+    Object cancel() {
         return back();
     }
 

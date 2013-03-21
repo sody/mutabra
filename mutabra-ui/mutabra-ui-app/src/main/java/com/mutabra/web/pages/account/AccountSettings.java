@@ -19,8 +19,6 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
-import static com.mutabra.services.Mappers.account$;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -61,7 +59,7 @@ public class AccountSettings extends AbstractPage {
 
     @OnEvent(value = EventConstants.SUCCESS, component = "accountForm")
     void save() {
-        accountService.saveOrUpdate(getValue());
+        accountService.save(getValue());
         //todo: add success notification
     }
 
@@ -77,8 +75,8 @@ public class AccountSettings extends AbstractPage {
             changeEmailForm.recordError(message("error.change-email.try-again-later"));
         } else {
             final long count = accountService.query()
-                    .filter(account$.email$.eq(email))
-                    .count();
+                    .filter("email =", email)
+                    .countAll();
             if (count > 0) {
                 // user with specified email is already exist
                 changeEmailForm.recordError(message("error.change-email.unknown"));
@@ -146,7 +144,7 @@ public class AccountSettings extends AbstractPage {
                             pendingLink.toAbsoluteURI()));
         }
 
-        accountService.saveOrUpdate(account);
+        accountService.save(account);
         //todo: add mail sent notification
     }
 
@@ -188,7 +186,7 @@ public class AccountSettings extends AbstractPage {
                 account.getEmail(),
                 message("mail.change-password.title"),
                 format("mail.change-password.body", link.toAbsoluteURI()));
-        accountService.saveOrUpdate(account);
+        accountService.save(account);
         //todo: add mail sent notification
     }
 }

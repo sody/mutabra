@@ -18,9 +18,9 @@ public interface BattleService extends BaseEntityService<Battle> {
 
     void endRound(Battle battle);
 
-    void cast(Battle battle, BattleHero hero, BattleCard card, BattleTarget target);
+    void cast(Battle battle, BattleCard card, BattleTarget target);
 
-    void cast(Battle battle, BattleCreature creature, BattleAbility ability, BattleTarget target);
+    void cast(Battle battle, BattleAbility ability, BattleTarget target);
 
     void skip(Battle battle, BattleHero hero);
 }

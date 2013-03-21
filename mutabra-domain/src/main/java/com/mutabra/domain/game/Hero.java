@@ -19,7 +19,6 @@ public class Hero extends BaseEntity {
     @Reference
     private Account account;
 
-    private boolean active;
     private HeroLevel level = new HeroLevel();
     private HeroAppearance appearance = new HeroAppearance();
     private int health;
@@ -36,14 +35,6 @@ public class Hero extends BaseEntity {
 
     public void setAccount(final Account account) {
         this.account = account;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(final boolean active) {
-        this.active = active;
     }
 
     public HeroLevel getLevel() {

@@ -4,13 +4,12 @@
 
 <t:grid source="source" row="row"
         include="code"
-        add="picture,name,actions"
-        reorder="picture,code,name,actions"
+        add="picture,actions"
+        reorder="picture,code,actions"
         class="table">
     <p:pictureCell>
         <t:svg type="faces" image="row.code"/>
     </p:pictureCell>
-    <p:nameCell>${row:name}</p:nameCell>
     <p:actionsCell>
         <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
     </p:actionsCell>

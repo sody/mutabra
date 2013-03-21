@@ -57,6 +57,27 @@ public class ServicesModule {
         binder.bind(ScriptEngine.class, ScriptEngineImpl.class);
     }
 
+    @Contribute(Datastore.class)
+    public void contributeDatastore(final Configuration<Class> configuration) {
+        configuration.add(Ability.class);
+        configuration.add(Card.class);
+        configuration.add(Effect.class);
+        configuration.add(Face.class);
+        configuration.add(Level.class);
+        configuration.add(Race.class);
+        configuration.add(Account.class);
+        configuration.add(Hero.class);
+        configuration.add(HeroAppearance.class);
+        configuration.add(HeroLevel.class);
+        configuration.add(Battle.class);
+        configuration.add(BattleAbility.class);
+        configuration.add(BattleCard.class);
+        configuration.add(BattleCreature.class);
+        configuration.add(BattleEffect.class);
+        configuration.add(BattleHero.class);
+        configuration.add(BattleTarget.class);
+    }
+
     public Datastore buildDatastore(final Set<Class> mappedClasses) throws UnknownHostException {
         final Mongo mongo = new Mongo();
         final Morphia morphia = new Morphia();
@@ -91,29 +112,8 @@ public class ServicesModule {
         return new BaseEntityServiceImpl<Account>(datastore, Account.class);
     }
 
-    @Contribute(Datastore.class)
-    public void contributeDatastore(final Configuration<Class> configuration) {
-        configuration.add(Ability.class);
-        configuration.add(Card.class);
-        configuration.add(Effect.class);
-        configuration.add(Face.class);
-        configuration.add(Level.class);
-        configuration.add(Race.class);
-        configuration.add(Account.class);
-        configuration.add(Hero.class);
-        configuration.add(HeroAppearance.class);
-        configuration.add(HeroLevel.class);
-        configuration.add(Battle.class);
-        configuration.add(BattleAbility.class);
-        configuration.add(BattleCard.class);
-        configuration.add(BattleCreature.class);
-        configuration.add(BattleEffect.class);
-        configuration.add(BattleHero.class);
-        configuration.add(BattleTarget.class);
-    }
-
     @Contribute(ScriptEngine.class)
-    public void contributeScriptExecutor(final MappedConfiguration<EffectType, EffectScript> configuration) {
+    public void contributeScriptEngine(final MappedConfiguration<EffectType, EffectScript> configuration) {
         configuration.addInstance(EffectType.MAGIC_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.MELEE_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.RANGED_ATTACK, AttackScript.class);
