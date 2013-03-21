@@ -1,6 +1,7 @@
 package com.mutabra.web.services;
 
 import com.google.code.morphia.Datastore;
+import com.google.code.morphia.DatastoreImpl;
 import com.google.code.morphia.Morphia;
 import com.mongodb.Mongo;
 import com.mutabra.domain.battle.Battle;
@@ -43,6 +44,7 @@ import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
 import java.net.UnknownHostException;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -57,7 +59,7 @@ public class ServicesModule {
         binder.bind(ScriptEngine.class, ScriptEngineImpl.class);
     }
 
-    @Contribute(Datastore.class)
+    @Contribute(DatastoreImpl.class)
     public void contributeDatastore(final Configuration<Class> configuration) {
         configuration.add(Ability.class);
         configuration.add(Card.class);
@@ -78,14 +80,14 @@ public class ServicesModule {
         configuration.add(BattleTarget.class);
     }
 
-    public Datastore buildDatastore(final Set<Class> mappedClasses) throws UnknownHostException {
+    public DatastoreImpl buildDatastore(final Collection<Class> mappedClasses) throws UnknownHostException {
         final Mongo mongo = new Mongo();
         final Morphia morphia = new Morphia();
         for (Class mappedClass : mappedClasses) {
             morphia.map(mappedClass);
         }
 
-        return morphia.createDatastore(mongo, "mutabra");
+        return (DatastoreImpl) morphia.createDatastore(mongo, "mutabra");
     }
 
     public MailService buildMailService(final @Symbol(ApplicationConstants.ROBOT_EMAIL) String robotEmail) {

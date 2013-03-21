@@ -46,46 +46,14 @@
     <dependencyManagement>
         <dependencies>
 
-            <!-- Module versions -->
+            <!-- module versions -->
             <dependency>
                 <groupId>com.mutabra</groupId>
                 <artifactId>mutabra-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.mutabra</groupId>
-                <artifactId>mutabra-ui-app</artifactId>
-                <version>${project.version}</version>
-                <type>war</type>
-            </dependency>
-
-            <dependency>
-                <groupId>com.mutabra</groupId>
-                <artifactId>mutabra-ui-app</artifactId>
-                <version>${project.version}</version>
-                <classifier>classes</classifier>
-            </dependency>
-
-            <!-- Common dependencies -->
-            <dependency>
-                <groupId>org.greatage</groupId>
-                <artifactId>greatage-common</artifactId>
-                <version>${ga.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.greatage</groupId>
-                <artifactId>greatage-db</artifactId>
-                <version>${ga.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.greatage</groupId>
-                <artifactId>greatage-domain</artifactId>
-                <version>${ga.version}</version>
-            </dependency>
-
+            <!-- common dependencies -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -110,44 +78,14 @@
                 <version>${javassist.version}</version>
             </dependency>
 
-            <!-- GAE module dependencies -->
+            <!-- domain module dependencies -->
             <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-api-1.0-sdk</artifactId>
-                <version>${appengine.version}</version>
+                <groupId>com.google.code.morphia</groupId>
+                <artifactId>morphia</artifactId>
+                <version>${morphia.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-api-labs</artifactId>
-                <version>${appengine.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-api-stubs</artifactId>
-                <version>${appengine.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-testing</artifactId>
-                <version>${appengine.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.googlecode.objectify</groupId>
-                <artifactId>objectify</artifactId>
-                <version>${objectify.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${jpa.version}</version>
-            </dependency>
-
-            <!-- UI module dependencies -->
+            <!-- ui module dependencies -->
             <dependency>
                 <groupId>org.apache.tapestry</groupId>
                 <artifactId>tapestry-ioc</artifactId>
@@ -295,14 +233,11 @@
         <jetty-plugin.version>8.1.4.v20120524</jetty-plugin.version>
         <release-plugin.version>2.3.2</release-plugin.version>
 
-        <ga.version>1.0-SNAPSHOT</ga.version>
         <slf4j.version>1.6.4</slf4j.version>
         <logback.version>1.0.0</logback.version>
         <javassist.version>3.12.1.GA</javassist.version>
 
-        <appengine.version>1.6.0</appengine.version>
-        <objectify.version>3.0</objectify.version>
-        <jpa.version>1.0</jpa.version>
+        <morphia.version>0.99</morphia.version>
 
         <tapestry.version>5.3.6</tapestry.version>
         <shiro.version>1.2.0</shiro.version>

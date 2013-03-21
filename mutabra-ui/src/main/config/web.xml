@@ -5,42 +5,93 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-  <context-param>
-    <param-name>tapestry.app-package</param-name>
-    <param-value>com.mutabra.web</param-value>
-  </context-param>
+    <context-param>
+        <param-name>tapestry.app-package</param-name>
+        <param-value>com.mutabra.web</param-value>
+    </context-param>
 
-  <context-param>
-    <param-name>tapestry.application-version</param-name>
-    <param-value>${project.version}</param-value>
-  </context-param>
+    <context-param>
+        <param-name>tapestry.application-version</param-name>
+        <param-value>${project.version}</param-value>
+    </context-param>
 
-  <context-param>
-    <param-name>tapestry.production-mode</param-name>
-    <param-value>${project.production-mode}</param-value>
-  </context-param>
+    <context-param>
+        <param-name>tapestry.production-mode</param-name>
+        <param-value>${project.production-mode}</param-value>
+    </context-param>
 
-  <context-param>
-    <param-name>security.token-expiration-time</param-name>
-    <param-value>${project.token-expiration-time}</param-value>
-  </context-param>
+    <context-param>
+        <param-name>security.token-expiration-time</param-name>
+        <param-value>${project.token-expiration-time}</param-value>
+    </context-param>
 
-  <filter>
-    <filter-name>mutabra</filter-name>
-    <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
-  </filter>
 
-  <filter-mapping>
-    <filter-name>mutabra</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-  </filter-mapping>
+    <!-- TODO: DELETE -->
+    <context-param>
+        <param-name>security.hash-algorithm</param-name>
+        <param-value>${project.hash-algorithm}</param-value>
+    </context-param>
 
-  <resource-ref>
-    <res-ref-name>jdbc/mutabra</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-  </resource-ref>
+    <context-param>
+        <param-name>security.hash-iterations</param-name>
+        <param-value>${project.hash-iterations}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.hash-private-salt</param-name>
+        <param-value>${project.hash-private-salt}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.twitter-key</param-name>
+        <param-value>${project.twitter-key}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.twitter-secret</param-name>
+        <param-value>${project.twitter-secret}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.facebook-key</param-name>
+        <param-value>${project.facebook-key}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.facebook-secret</param-name>
+        <param-value>${project.facebook-secret}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.google-key</param-name>
+        <param-value>${project.google-key}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.google-secret</param-name>
+        <param-value>${project.google-secret}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.vk-key</param-name>
+        <param-value>${project.vk-key}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.vk-secret</param-name>
+        <param-value>${project.vk-secret}</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>ui</filter-name>
+        <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ui</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>
