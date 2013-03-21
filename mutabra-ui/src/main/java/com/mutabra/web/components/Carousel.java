@@ -103,7 +103,7 @@ public class Carousel<T> extends AbstractComponent implements ClientElement {
     @SetupRender
     void setupClientId() {
         assignedClientId = support.allocateClientId(clientId);
-        if (value == null) {
+        if (value == null && source.iterator().hasNext()) {
             value = source.iterator().next();
         }
     }
