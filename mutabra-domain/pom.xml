@@ -1,28 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
+    <parent>
+        <groupId>com.mutabra</groupId>
+        <artifactId>mutabra-parent</artifactId>
+        <version>1.0-pre-alpha-12-SNAPSHOT</version>
+    </parent>
+
     <groupId>com.mutabra</groupId>
-    <artifactId>mutabra-parent</artifactId>
+    <artifactId>mutabra-domain</artifactId>
     <version>1.0-pre-alpha-12-SNAPSHOT</version>
-  </parent>
+    <packaging>jar</packaging>
 
-  <groupId>com.mutabra</groupId>
-  <artifactId>mutabra-domain</artifactId>
-  <version>1.0-pre-alpha-12-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <name>Mutabra Domain Module</name>
 
-  <name>Mutabra Domain Module</name>
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+    </build>
 
-  <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
-  </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.google.code.morphia</groupId>
-      <artifactId>morphia</artifactId>
-      <version>0.99</version>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.morphia</groupId>
+            <artifactId>morphia</artifactId>
+            <version>0.99</version>
+        </dependency>
+    </dependencies>
 </project>

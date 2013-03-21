@@ -6,13 +6,10 @@ import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.battle.BattleService;
-import com.mutabra.web.services.AccountContext;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
-
-import java.util.List;
 
 /**
  * @author Ivan Khalopik

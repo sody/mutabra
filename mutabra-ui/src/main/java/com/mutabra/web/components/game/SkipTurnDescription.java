@@ -1,7 +1,6 @@
 package com.mutabra.web.components.game;
 
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.internal.IdUtils;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;

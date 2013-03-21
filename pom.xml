@@ -1,312 +1,313 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.mutabra</groupId>
-  <artifactId>mutabra-parent</artifactId>
-  <version>1.0-pre-alpha-12-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>com.mutabra</groupId>
+    <artifactId>mutabra-parent</artifactId>
+    <version>1.0-pre-alpha-12-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>Mutabra Project</name>
-  <scm>
-    <url>https://bitbucket.org/mutabra/mutabra</url>
-    <developerConnection>scm:git:https://bitbucket.org/mutabra/mutabra.git</developerConnection>
-    <connection>scm:git:git@bitbucket.org:mutabra/mutabra.git</connection>
-    <tag>HEAD</tag>
-  </scm>
-  <distributionManagement>
-    <repository>
-      <id>distribution</id>
-      <url>file://${user.home}/distribute/mutabra</url>
-    </repository>
-  </distributionManagement>
+    <name>Mutabra Project</name>
+    <scm>
+        <url>https://bitbucket.org/mutabra/mutabra</url>
+        <developerConnection>scm:git:https://bitbucket.org/mutabra/mutabra.git</developerConnection>
+        <connection>scm:git:git@bitbucket.org:mutabra/mutabra.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+    <distributionManagement>
+        <repository>
+            <id>distribution</id>
+            <url>file://${user.home}/distribute/mutabra</url>
+        </repository>
+    </distributionManagement>
 
-  <repositories>
-    <repository>
-      <id>sonatype-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>morphia-repository</id>
-      <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
-    </repository>
-  </repositories>
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>morphia-repository</id>
+            <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
+        </repository>
+    </repositories>
 
-  <modules>
-    <module>mutabra-domain</module>
-    <module>mutabra-ui</module>
-  </modules>
+    <modules>
+        <module>mutabra-domain</module>
+        <module>mutabra-ui</module>
+    </modules>
 
-  <dependencyManagement>
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
 
-      <!-- Module versions -->
-      <dependency>
-        <groupId>com.mutabra</groupId>
-        <artifactId>mutabra-domain</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.mutabra</groupId>
-        <artifactId>mutabra-ui-app</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-
-      <dependency>
-        <groupId>com.mutabra</groupId>
-        <artifactId>mutabra-ui-app</artifactId>
-        <version>${project.version}</version>
-        <classifier>classes</classifier>
-      </dependency>
-
-      <!-- Common dependencies -->
-      <dependency>
-        <groupId>org.greatage</groupId>
-        <artifactId>greatage-common</artifactId>
-        <version>${ga.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.greatage</groupId>
-        <artifactId>greatage-db</artifactId>
-        <version>${ga.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.greatage</groupId>
-        <artifactId>greatage-domain</artifactId>
-        <version>${ga.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>javassist</groupId>
-        <artifactId>javassist</artifactId>
-        <version>${javassist.version}</version>
-      </dependency>
-
-      <!-- GAE module dependencies -->
-      <dependency>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-api-1.0-sdk</artifactId>
-        <version>${appengine.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-api-labs</artifactId>
-        <version>${appengine.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-api-stubs</artifactId>
-        <version>${appengine.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-testing</artifactId>
-        <version>${appengine.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.googlecode.objectify</groupId>
-        <artifactId>objectify</artifactId>
-        <version>${objectify.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>javax.persistence</groupId>
-        <artifactId>persistence-api</artifactId>
-        <version>${jpa.version}</version>
-      </dependency>
-
-      <!-- UI module dependencies -->
-      <dependency>
-        <groupId>org.apache.tapestry</groupId>
-        <artifactId>tapestry-ioc</artifactId>
-        <version>${tapestry.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.tapestry</groupId>
-        <artifactId>tapestry-core</artifactId>
-        <version>${tapestry.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.tapestry</groupId>
-        <artifactId>tapestry-func</artifactId>
-        <version>${tapestry.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.tapestry</groupId>
-        <artifactId>tapestry-json</artifactId>
-        <version>${tapestry.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.shiro</groupId>
-        <artifactId>shiro-core</artifactId>
-        <version>${shiro.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.shiro</groupId>
-        <artifactId>shiro-web</artifactId>
-        <version>${shiro.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.scribe</groupId>
-        <artifactId>scribe</artifactId>
-        <version>${scribe.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>${servlet.api.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>javax.mail</groupId>
-        <artifactId>mail</artifactId>
-        <version>${mail-api.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${compiler-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>${war-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.lesscss</groupId>
-          <artifactId>lesscss-maven-plugin</artifactId>
-          <version>${lesscss-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${surefire-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.mortbay.jetty</groupId>
-          <artifactId>jetty-maven-plugin</artifactId>
-          <version>${jetty-plugin.version}</version>
-          <dependencies>
+            <!-- Module versions -->
             <dependency>
-              <groupId>javax.mail</groupId>
-              <artifactId>mail</artifactId>
-              <version>${mail-api.version}</version>
+                <groupId>com.mutabra</groupId>
+                <artifactId>mutabra-domain</artifactId>
+                <version>${project.version}</version>
             </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>${release-plugin.version}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>6</source>
-          <target>6</target>
-          <optimize>true</optimize>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <pushChanges>false</pushChanges>
-          <localCheckout>true</localCheckout>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-          <tagNameFormat>mutabra-@{project.version}</tagNameFormat>
-          <arguments>-Pmutabra-release</arguments>
-          <goals>deploy</goals>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
-  <properties>
-    <maven.javadoc.skip>true</maven.javadoc.skip>
-    <maven.source.skip>true</maven.source.skip>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+            <dependency>
+                <groupId>com.mutabra</groupId>
+                <artifactId>mutabra-ui-app</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
 
-    <surefire-plugin.version>2.6</surefire-plugin.version>
-    <compiler-plugin.version>2.3.2</compiler-plugin.version>
-    <war-plugin.version>2.1.1</war-plugin.version>
-    <lesscss-plugin.version>1.3.0</lesscss-plugin.version>
-    <jetty-plugin.version>8.1.4.v20120524</jetty-plugin.version>
-    <release-plugin.version>2.3.2</release-plugin.version>
+            <dependency>
+                <groupId>com.mutabra</groupId>
+                <artifactId>mutabra-ui-app</artifactId>
+                <version>${project.version}</version>
+                <classifier>classes</classifier>
+            </dependency>
 
-    <ga.version>1.0-SNAPSHOT</ga.version>
-    <slf4j.version>1.6.4</slf4j.version>
-    <logback.version>1.0.0</logback.version>
-    <javassist.version>3.12.1.GA</javassist.version>
+            <!-- Common dependencies -->
+            <dependency>
+                <groupId>org.greatage</groupId>
+                <artifactId>greatage-common</artifactId>
+                <version>${ga.version}</version>
+            </dependency>
 
-    <appengine.version>1.6.0</appengine.version>
-    <objectify.version>3.0</objectify.version>
-    <jpa.version>1.0</jpa.version>
+            <dependency>
+                <groupId>org.greatage</groupId>
+                <artifactId>greatage-db</artifactId>
+                <version>${ga.version}</version>
+            </dependency>
 
-    <tapestry.version>5.3.6</tapestry.version>
-    <shiro.version>1.2.0</shiro.version>
-    <scribe.version>1.3.2</scribe.version>
-    <servlet.api.version>2.5</servlet.api.version>
-    <mail-api.version>1.4.4</mail-api.version>
-  </properties>
+            <dependency>
+                <groupId>org.greatage</groupId>
+                <artifactId>greatage-domain</artifactId>
+                <version>${ga.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+
+            <!-- GAE module dependencies -->
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-1.0-sdk</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-labs</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-api-stubs</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-testing</artifactId>
+                <version>${appengine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.googlecode.objectify</groupId>
+                <artifactId>objectify</artifactId>
+                <version>${objectify.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${jpa.version}</version>
+            </dependency>
+
+            <!-- UI module dependencies -->
+            <dependency>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-ioc</artifactId>
+                <version>${tapestry.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-core</artifactId>
+                <version>${tapestry.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-func</artifactId>
+                <version>${tapestry.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-json</artifactId>
+                <version>${tapestry.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scribe</groupId>
+                <artifactId>scribe</artifactId>
+                <version>${scribe.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail-api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${war-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.lesscss</groupId>
+                    <artifactId>lesscss-maven-plugin</artifactId>
+                    <version>${lesscss-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${jetty-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>javax.mail</groupId>
+                            <artifactId>mail</artifactId>
+                            <version>${mail-api.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${release-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <pushChanges>false</pushChanges>
+                    <localCheckout>true</localCheckout>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+                    <tagNameFormat>mutabra-@{project.version}</tagNameFormat>
+                    <arguments>-Pmutabra-release</arguments>
+                    <goals>deploy</goals>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.source.skip>true</maven.source.skip>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <surefire-plugin.version>2.6</surefire-plugin.version>
+        <compiler-plugin.version>2.3.2</compiler-plugin.version>
+        <war-plugin.version>2.1.1</war-plugin.version>
+        <lesscss-plugin.version>1.3.0</lesscss-plugin.version>
+        <jetty-plugin.version>8.1.4.v20120524</jetty-plugin.version>
+        <release-plugin.version>2.3.2</release-plugin.version>
+
+        <ga.version>1.0-SNAPSHOT</ga.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <logback.version>1.0.0</logback.version>
+        <javassist.version>3.12.1.GA</javassist.version>
+
+        <appengine.version>1.6.0</appengine.version>
+        <objectify.version>3.0</objectify.version>
+        <jpa.version>1.0</jpa.version>
+
+        <tapestry.version>5.3.6</tapestry.version>
+        <shiro.version>1.2.0</shiro.version>
+        <scribe.version>1.3.2</scribe.version>
+        <servlet.api.version>2.5</servlet.api.version>
+        <mail-api.version>1.4.4</mail-api.version>
+    </properties>
 </project>

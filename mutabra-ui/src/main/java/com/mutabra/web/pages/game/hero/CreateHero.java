@@ -19,8 +19,6 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
-import java.util.List;
-
 /**
  * @author Ivan Khalopik
  * @since 1.0
