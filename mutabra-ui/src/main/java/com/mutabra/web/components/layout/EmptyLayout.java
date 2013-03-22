@@ -4,6 +4,7 @@
 
 package com.mutabra.web.components.layout;
 
+import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.Binding;
 import org.apache.tapestry5.BindingConstants;
@@ -43,6 +44,11 @@ public class EmptyLayout extends AbstractComponent {
     @Inject
     @Symbol(SymbolConstants.TAPESTRY_VERSION)
     private String tapestryVersion;
+
+    @Property
+    @Inject
+    @Symbol(ApplicationConstants.ROBOT_EMAIL)
+    private String robotEmail;
 
     @Inject
     private BindingSource bindingSource;

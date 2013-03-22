@@ -3,6 +3,7 @@ package com.mutabra.web.pages.game.hero;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.CodedEntityService;
@@ -13,7 +14,6 @@ import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -55,13 +55,13 @@ public class CreateHero extends AbstractPage {
 
     @OnEvent(value = EventConstants.SUCCESS)
     Object createHero() {
-        final Account account = accountContext.getAccount();
-
         hero.getAppearance().setFace(face.getCode());
-        heroService.save(hero, account, race);
+        hero.getAppearance().setRace(race.getCode());
+        heroService.create(hero, race);
 
         // enter the game with just created character
-        account.setHero(hero);
+        final Account account = accountContext.getAccount();
+        account.setHero(new AccountHero(hero));
         accountService.save(account);
 
         return back();

@@ -2,7 +2,7 @@
     <div class="span4 offset5">
         <t:form t:id="signIn" class="form-inline">
             <div class="control-group">
-                <t:textfield t:id="email" value="email" validate="required,email" class="span2"
+                <t:textfield t:id="email" value="email" validate="required" class="span2"
                              placeholder="message:label.email" label="message:label.email"/>
                 <t:passwordfield t:id="password" value="password" validate="required" class="span2"
                                  placeholder="message:label.password" label="message:label.password"/>

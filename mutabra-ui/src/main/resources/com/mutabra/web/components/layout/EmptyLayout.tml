@@ -49,7 +49,7 @@
     <t:extension-point id="footer-area">
         ${message:message.copyright} <br/>
         App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>
-        <a href="mailto:support@mutabra.com">Contact Us</a>
+        <a href="mailto:${robotEmail}">Contact Us</a>
     </t:extension-point>
 </footer>
 

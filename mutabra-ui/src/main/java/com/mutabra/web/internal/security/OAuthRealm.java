@@ -1,6 +1,8 @@
 package com.mutabra.web.internal.security;
 
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountCredential;
+import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.Role;
 import com.mutabra.security.OAuth;
 import com.mutabra.services.BaseEntityService;
@@ -22,17 +24,16 @@ import java.util.Map;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public abstract class OAuthRealm<T extends OAuthRealm.Token> extends AuthenticatingRealm {
+public class OAuthRealm extends AuthenticatingRealm {
     private final BaseEntityService<Account> accountService;
     private final PasswordGenerator generator;
 
     public OAuthRealm(final @InjectService("accountService") BaseEntityService<Account> accountService,
-                      final PasswordGenerator generator,
-                      final Class<T> authenticationTokenClass) {
+                      final PasswordGenerator generator) {
         this.accountService = accountService;
         this.generator = generator;
 
-        setAuthenticationTokenClass(authenticationTokenClass);
+        setAuthenticationTokenClass(Token.class);
         setCredentialsMatcher(new AllowAllCredentialsMatcher());
     }
 
@@ -41,31 +42,84 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
             throws AuthenticationException {
         try {
             @SuppressWarnings("unchecked")
-            final OAuth.Session session = ((T) token).getSession();
+            final OAuth.Session session = ((Token) token).getSession();
 
+            // retrieve oauth profile
             final Map<String, Object> profile = session != null ? session.getProfile() : null;
+            // deny empty oauth profiles
             if (profile == null) {
-                throw new AccountException("Null profiles are not allowed by this realm.");
+                throw new AccountException("Empty profiles are not allowed by this realm.");
             }
 
+            // retrieve oauth provider type and profileId
+            final AccountCredentialType type = ((Token) token).getType();
             final String profileId = String.valueOf(profile.get(OAuth.Session.ID));
+            // deny empty oauth profileId
             if (profileId == null || profileId.isEmpty()) {
-                throw new AccountException("Invalid facebook identifier");
-            }
-            Account account = getAccountByProfileId(profileId);
-            if (account != null) {
-                return fillAccount(account);
+                throw new AccountException("Invalid oauth identifier");
             }
 
+            // retrieve existent account by oauth provider type and profileId
+            Account account = getAccount(type, profileId);
+            if (account != null) {
+                account.setLastLogin(new Date());
+                accountService.save(account);
+                return new SimpleAuthenticationInfo(account.getId(), null, getName());
+            }
+
+            // retrieve existent account by email
             final String email = (String) profile.get(OAuth.Session.EMAIL);
             if (email != null && !email.isEmpty()) {
-                account = getAccountByEmail(email);
+                account = getAccount(AccountCredentialType.EMAIL, email);
+
+                // attach oauth credential to existent account
                 if (account != null) {
-                    return attachAccount(account, profileId);
+                    final AccountCredential oauthCredential = new AccountCredential();
+                    oauthCredential.setType(type);
+                    oauthCredential.setKey(profileId);
+                    account.getCredentials().add(oauthCredential);
+
+                    account.setLastLogin(new Date());
+                    accountService.save(account);
+                    return new SimpleAuthenticationInfo(account.getId(), null, getName());
                 }
             }
 
-            return createAccount(profile);
+            // create new account from oauth profile
+            account = new Account();
+            // attach email credential with random secret
+            if (email != null && !email.isEmpty()) {
+                final AccountCredential emailCredential = new AccountCredential();
+                emailCredential.setType(AccountCredentialType.EMAIL);
+                emailCredential.setKey(email);
+
+                // generate random secret
+                final Hash hash = generator.generateHash();
+                emailCredential.setSecret(hash.toBase64());
+                if (hash.getSalt() != null) {
+                    emailCredential.setSalt(hash.getSalt().toBase64());
+                }
+
+                account.getCredentials().add(emailCredential);
+            }
+            // fill account common properties
+            account.setRegistered(new Date());
+            account.setName((String) profile.get(OAuth.Session.NAME));
+            //todo: account.setLocale(LocaleUtils.parseLocale((String) profile.get(OAuth.Session.LOCALE)));
+            //todo: account.setTimeZone(...);
+            //todo: account.setGender(...);
+            // newly created account should be of role USER
+            account.setRole(Role.USER);
+
+            // attach oauth credential
+            final AccountCredential oauthCredential = new AccountCredential();
+            oauthCredential.setType(type);
+            oauthCredential.setKey(profileId);
+            account.getCredentials().add(oauthCredential);
+
+            account.setLastLogin(new Date());
+            accountService.save(account);
+            return new SimpleAuthenticationInfo(account.getId(), null, getName());
         } catch (AuthenticationException ex) {
             // rethrow exception
             throw ex;
@@ -75,46 +129,11 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
         }
     }
 
-    protected abstract Account getAccountByProfileId(String profileId);
-
-    protected abstract void setAccountProfileId(Account account, String profileId);
-
-    protected Account getAccountByEmail(final String email) {
-        return findAccount("email =", email);
-    }
-
-    protected Account findAccount(final String condition, final Object value) {
-        return accountService.query().filter(condition, value).get();
-    }
-
-    protected AuthenticationInfo fillAccount(final Account account) {
-        return new SimpleAuthenticationInfo(account.getId(), null, getName());
-    }
-
-    protected AuthenticationInfo attachAccount(final Account account, final String profileId) {
-        setAccountProfileId(account, profileId);
-        accountService.save(account);
-        return fillAccount(account);
-    }
-
-    protected AuthenticationInfo createAccount(final Map<String, Object> profile) {
-        final Account account = new Account();
-        account.setEmail((String) profile.get(OAuth.Session.EMAIL));
-        account.setRegistered(new Date());
-        account.setName((String) profile.get(OAuth.Session.NAME));
-        //todo: account.setLocale(LocaleUtils.parseLocale((String) profile.get(OAuth.Session.LOCALE)));
-        //todo: account.setTimeZone(...);
-        //todo: account.setGender(...);
-        account.setRole(Role.USER);
-
-        // generate random password
-        final Hash hash = generator.generateHash();
-        account.setPassword(hash.toBase64());
-        if (hash.getSalt() != null) {
-            account.setSalt(hash.getSalt().toBase64());
-        }
-
-        return attachAccount(account, String.valueOf(profile.get(OAuth.Session.ID)));
+    private Account getAccount(final AccountCredentialType type, final String key) {
+        return accountService.query()
+                .filter("credentials.type =", type)
+                .filter("credentials.key =", key)
+                .get();
     }
 
     /**
@@ -123,9 +142,15 @@ public abstract class OAuthRealm<T extends OAuthRealm.Token> extends Authenticat
      */
     public static class Token implements AuthenticationToken {
         private final OAuth.Session session;
+        private final AccountCredentialType type;
 
-        public Token(final OAuth.Session session) {
+        public Token(final AccountCredentialType type, final OAuth.Session session) {
             this.session = session;
+            this.type = type;
+        }
+
+        public AccountCredentialType getType() {
+            return type;
         }
 
         public OAuth.Session getSession() {

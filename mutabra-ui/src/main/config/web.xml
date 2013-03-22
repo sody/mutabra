@@ -21,6 +21,11 @@
     </context-param>
 
     <context-param>
+        <param-name>security.robot-email</param-name>
+        <param-value>${project.robot-email}</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>security.token-expiration-time</param-name>
         <param-value>${project.token-expiration-time}</param-value>
     </context-param>

@@ -1,10 +1,10 @@
 package com.mutabra.web.components.menu;
 
 import com.mutabra.domain.game.Account;
-import com.mutabra.domain.game.Hero;
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.pages.Index;
 import com.mutabra.web.services.AccountContext;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
@@ -16,31 +16,15 @@ public class UserMenu extends AbstractComponent {
     @Inject
     private AccountContext accountContext;
 
-    public Account getAccount() {
-        return accountContext.getAccount();
-    }
-
-    public Hero getHero() {
-        return accountContext.getHero();
-    }
-
     public String getUserName() {
-        final Hero hero = getHero();
-        if (hero != null) {
-            return hero.getAppearance().getName();
-        }
-
-        final Account account = getAccount();
-        if (account.getName() != null) {
-            return account.getName();
-        }
-        if (account.getEmail() != null) {
-            return account.getEmail().replaceFirst("@.*$", "");
-        }
-        return "<unknown>";
+        final Account account = accountContext.getAccount();
+        return account.getHero() != null ?
+                account.getHero().getAppearance().getName() :
+                account.getName();
     }
 
-    Object onSignOut() {
+    @OnEvent("signOut")
+    Object signOut() {
         getSubject().logout();
         return Index.class;
     }

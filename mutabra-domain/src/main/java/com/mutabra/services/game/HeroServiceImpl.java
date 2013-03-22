@@ -3,6 +3,7 @@ package com.mutabra.services.game;
 import com.google.code.morphia.Datastore;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityServiceImpl;
 
@@ -18,9 +19,7 @@ public class HeroServiceImpl
         super(datastore, Hero.class);
     }
 
-    public void save(final Hero hero, final Account account, final Race race) {
-        hero.setAccount(account);
-
+    public void create(final Hero hero, final Race race) {
         //TODO: should be retrieved from level
         hero.getLevel().setCode("newbie");
         hero.getLevel().setRating(0);

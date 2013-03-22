@@ -1,14 +1,13 @@
 package com.mutabra.web.pages;
 
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountCredential;
+import com.mutabra.domain.game.AccountCredentialType;
+import com.mutabra.domain.game.AccountPendingToken;
 import com.mutabra.security.OAuth;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.internal.security.ConfirmationRealm;
-import com.mutabra.web.internal.security.FacebookRealm;
-import com.mutabra.web.internal.security.GoogleRealm;
-import com.mutabra.web.internal.security.TwitterRealm;
-import com.mutabra.web.internal.security.VKRealm;
+import com.mutabra.web.internal.security.*;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.MailService;
 import com.mutabra.web.services.PasswordGenerator;
@@ -130,25 +129,25 @@ public class Security extends AbstractPage {
 
     @OnEvent(value = EventConstants.SUCCESS, component = "facebook")
     Object facebookConnected(final OAuth.Session session) {
-        getSubject().login(new FacebookRealm.Token(session));
+        getSubject().login(new OAuthRealm.Token(AccountCredentialType.FACEBOOK, session));
         return GameHome.class;
     }
 
     @OnEvent(value = EventConstants.SUCCESS, component = "twitter")
     Object twitterConnected(final OAuth.Session session) {
-        getSubject().login(new TwitterRealm.Token(session));
+        getSubject().login(new OAuthRealm.Token(AccountCredentialType.TWITTER, session));
         return GameHome.class;
     }
 
     @OnEvent(value = EventConstants.SUCCESS, component = "google")
     Object googleConnected(final OAuth.Session session) {
-        getSubject().login(new GoogleRealm.Token(session));
+        getSubject().login(new OAuthRealm.Token(AccountCredentialType.GOOGLE, session));
         return GameHome.class;
     }
 
     @OnEvent(value = EventConstants.SUCCESS, component = "vk")
     Object vkConnected(final OAuth.Session session) {
-        getSubject().login(new VKRealm.Token(session));
+        getSubject().login(new OAuthRealm.Token(AccountCredentialType.VK, session));
         return GameHome.class;
     }
 
@@ -161,7 +160,8 @@ public class Security extends AbstractPage {
     @OnEvent(value = EventConstants.VALIDATE, component = "signUpForm")
     void validateSignUpForm() {
         account = accountService.query()
-                .filter("email =", email)
+                .filter("credentials.type =", AccountCredentialType.EMAIL)
+                .filter("credentials.key =", email)
                 .get();
         if (account != null) {
             // user with specified email doesn't exist
@@ -182,20 +182,29 @@ public class Security extends AbstractPage {
         final String token = generator.generateSecret();
         final long expired = generator.generateExpirationTime();
 
-        account.setEmail(email);
+        // add email credential
+        final AccountCredential credential = new AccountCredential();
+        credential.setType(AccountCredentialType.EMAIL);
+        credential.setKey(email);
+        account.getCredentials().add(credential);
 
-        account.setPendingPassword(hash.toBase64());
-        account.setPendingSalt(hash.getSalt().toBase64());
+        // generate pending token
+        final AccountPendingToken pendingChange = new AccountPendingToken();
+        pendingChange.setToken(token);
+        pendingChange.setExpiredAt(expired);
+        pendingChange.setSecret(hash.toBase64());
+        pendingChange.setSalt(hash.getSalt().toBase64());
+        account.setPendingToken(pendingChange);
 
-        account.setToken(token);
-        account.setTokenExpired(expired);
+        // save account
         accountService.save(account);
 
+        // send mail with confirmation link
         final Link link = createApplyChangesLink(account.getId(), token);
         mailService.send(
-                account.getEmail(),
+                email,
                 message("mail.sign-up.title"),
-                format("mail.sign-up.body", account.getEmail(), password, link.toAbsoluteURI()));
+                format("mail.sign-up.body", email, password, link.toAbsoluteURI()));
         //todo: add mail sent notification
         return Index.class;
     }
@@ -209,13 +218,13 @@ public class Security extends AbstractPage {
     @OnEvent(value = EventConstants.VALIDATE, component = "restoreForm")
     void validateRestoreForm() {
         account = accountService.query()
-                .filter("email =", email)
+                .filter("credentials.type =", AccountCredentialType.EMAIL)
+                .filter("credentials.key =", email)
                 .get();
         if (account == null) {
             // user with specified email doesn't exist
             restoreForm.recordError(message("error.restore-password"));
-        } else if (account.getTokenExpired() != null &&
-                account.getTokenExpired() > System.currentTimeMillis()) {
+        } else if (account.getPendingToken() != null && !account.getPendingToken().isExpired()) {
             // user already has pending changes
             restoreForm.recordError(message("error.restore-password"));
         }
@@ -233,18 +242,23 @@ public class Security extends AbstractPage {
         final String token = generator.generateSecret();
         final long expired = generator.generateExpirationTime();
 
-        account.setPendingPassword(hash.toBase64());
-        account.setPendingSalt(hash.getSalt().toBase64());
+        // generate pending token
+        final AccountPendingToken pendingToken = new AccountPendingToken();
+        pendingToken.setToken(token);
+        pendingToken.setExpiredAt(expired);
+        pendingToken.setSecret(hash.toBase64());
+        pendingToken.setSalt(hash.getSalt().toBase64());
+        account.setPendingToken(pendingToken);
 
-        account.setToken(token);
-        account.setTokenExpired(expired);
+        // save account
         accountService.save(account);
 
+        // send mail with confirmation link
         final Link link = createApplyChangesLink(account.getId(), token);
         mailService.send(
-                account.getEmail(),
+                email,
                 message("mail.restore-password.title"),
-                format("mail.restore-password.body", account.getEmail(), password, link.toAbsoluteURI()));
+                format("mail.restore-password.body", email, password, link.toAbsoluteURI()));
         //todo: add mail sent notification
         return Index.class;
     }

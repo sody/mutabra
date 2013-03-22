@@ -1,6 +1,8 @@
 package com.mutabra.web.internal.security;
 
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountCredential;
+import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.Role;
 import com.mutabra.services.BaseEntityService;
 import org.apache.shiro.authc.AccountException;
@@ -71,16 +73,19 @@ public class MainRealm extends AuthorizingRealm {
 
         try {
             final Account account = accountService.query()
-                    .filter("email =", username)
+                    .filter("credentials.type =", AccountCredentialType.EMAIL)
+                    .filter("credentials.key =", username)
                     .get();
 
             if (account == null) {
                 return null;
             }
+            final AccountCredential emailCredential = account.getCredentials(AccountCredentialType.EMAIL);
 
-            final SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account.getId(), account.getPassword(), getName());
-            if (account.getSalt() != null) {
-                final ByteSource salt = ByteSource.Util.bytes(Base64.decode(account.getSalt()));
+            final SimpleAuthenticationInfo info =
+                    new SimpleAuthenticationInfo(account.getId(), emailCredential.getSecret(), getName());
+            if (emailCredential.getSalt() != null) {
+                final ByteSource salt = ByteSource.Util.bytes(Base64.decode(emailCredential.getSalt()));
                 info.setCredentialsSalt(salt);
             }
 

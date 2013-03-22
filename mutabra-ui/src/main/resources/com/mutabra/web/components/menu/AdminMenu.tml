@@ -1,9 +1,6 @@
 <t:menu class="sidebar" items="changeSets,accounts,levels,races,faces,cards,test" selected="test"
         xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
         xmlns:p="tapestry:parameter">
-    <p:changeSetsMenuItem>
-        <t:pagelink page="admin/changesets" class="btn">${message:page.admin-changesets.title}</t:pagelink>
-    </p:changeSetsMenuItem>
     <p:accountsMenuItem>
         <t:pagelink page="admin/accounts" class="btn">${message:page.admin-accounts.title}</t:pagelink>
     </p:accountsMenuItem>

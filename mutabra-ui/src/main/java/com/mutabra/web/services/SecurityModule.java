@@ -2,6 +2,8 @@ package com.mutabra.web.services;
 
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountCredential;
+import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.Role;
 import com.mutabra.security.Facebook;
@@ -14,16 +16,13 @@ import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.SecurityConstants;
 import com.mutabra.web.internal.security.ConfirmationRealm;
-import com.mutabra.web.internal.security.FacebookRealm;
-import com.mutabra.web.internal.security.GoogleRealm;
 import com.mutabra.web.internal.security.HashedPasswordMatcher;
 import com.mutabra.web.internal.security.MainRealm;
+import com.mutabra.web.internal.security.OAuthRealm;
 import com.mutabra.web.internal.security.SecurityExceptionHandler;
 import com.mutabra.web.internal.security.SecurityFilter;
 import com.mutabra.web.internal.security.SecurityRequestFilter;
 import com.mutabra.web.internal.security.SecurityWorker;
-import com.mutabra.web.internal.security.TwitterRealm;
-import com.mutabra.web.internal.security.VKRealm;
 import com.mutabra.web.pages.Security;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
@@ -127,10 +126,7 @@ public class SecurityModule {
                                              @InjectService("accountService") final BaseEntityService<Account> accountService,
                                              final HashedPasswordMatcher generator) {
         configuration.add("main", new MainRealm(accountService, generator));
-        configuration.add("facebook", new FacebookRealm(accountService, generator));
-        configuration.add("twitter", new TwitterRealm(accountService, generator));
-        configuration.add("google", new GoogleRealm(accountService, generator));
-        configuration.add("vk", new VKRealm(accountService, generator));
+        configuration.add("oauth", new OAuthRealm(accountService, generator));
         configuration.add("confirmation", new ConfirmationRealm(accountService));
     }
 
@@ -285,14 +281,17 @@ public class SecurityModule {
 
         if (accountService.query().countAll() <= 0) {
             final Account account = new Account();
-            account.setEmail("admin");
             account.setName("admin");
             account.setRole(Role.ADMIN);
             account.setRegistered(new Date());
 
+            final AccountCredential emailCredential = new AccountCredential();
+            emailCredential.setType(AccountCredentialType.EMAIL);
+            emailCredential.setKey("admin");
             final Hash hash = generator.generateHash("admin");
-            account.setPassword(hash.toBase64());
-            account.setSalt(hash.getSalt().toBase64());
+            emailCredential.setSecret(hash.toBase64());
+            emailCredential.setSalt(hash.getSalt().toBase64());
+            account.getCredentials().add(emailCredential);
 
             accountService.save(account);
         }

@@ -13,9 +13,9 @@
             </div>
         </div>
         <div class="control-group">
-            <t:label for="place" class="control-label"/>
+            <t:label for="location" class="control-label"/>
             <div class="controls">
-                <t:textfield t:id="place" value="value.place" label="message:label.place"/>
+                <t:textfield t:id="location" value="value.location" label="message:label.location"/>
             </div>
         </div>
     </t:replace>
