@@ -1,6 +1,62 @@
 [
   {
     "_id": 10,
-    "email": "sody@example.com"
+
+    "name": "John Snow",
+    "locale": "ru_RU",
+    "time_zone": "UTC+3",
+    "location": "Minsk, Belarus",
+
+    "hero": {
+      "id": 13,
+      "appearance": {
+        "name": "Tyrion Lannister",
+        "face": "trollface",
+        "race": "halfling"
+      }
+    },
+
+    "role": "user",
+    "registered": "2012-01-01",
+    "last_login": "2013-01-01",
+    "credentials": [
+      {
+        "type": "email",
+        "key": "j.s@example.com",
+        "secret": "HASH",
+        "salt": "HASH"
+      },
+      {
+        "type": "twitter",
+        "key": "j_snow",
+        "secret": "HASH"
+      },
+      {
+        "type": "facebook",
+        "key": "john.snow",
+        "secret": "HASH"
+      },
+      {
+        "type": "google",
+        "key": "10217818238199832199",
+        "secret": "HASH"
+      },
+      {
+        "type": "vk",
+        "key": "j_snow",
+        "secret": "HASH"
+      }
+    ]
+  },
+  {
+    "indexes": [
+      {
+        "credentials.type": 1,
+        "credentials.key": 1,
+        "options": {
+          "unique": true
+        }
+      }
+    ]
   }
 ]
