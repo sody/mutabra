@@ -15,7 +15,7 @@ import java.util.Map;
  * @since 1.0
  */
 public class Twitter extends AbstractOAuth implements OAuth {
-    private static final String API_URL = "https://api.twitter.com/";
+    private static final String API_URL = "https://api.twitter.com/1.1/";
 
     public Twitter(final String consumerKey,
                    final String consumerSecret,
