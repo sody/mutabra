@@ -10,7 +10,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity("cards")
+@Entity(value = "cards", noClassnameStored = true)
 public class Card extends CodedEntity {
 
     private TargetType targetType;

@@ -13,7 +13,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity("heroes")
+@Entity(value = "heroes", noClassnameStored = true)
 public class Hero extends BaseEntity {
 
     @Reference

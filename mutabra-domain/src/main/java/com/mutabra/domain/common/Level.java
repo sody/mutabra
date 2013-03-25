@@ -7,7 +7,7 @@ import com.mutabra.domain.CodedEntity;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity("levels")
+@Entity(value = "levels", noClassnameStored = true)
 public class Level extends CodedEntity {
 
     private LevelType type;

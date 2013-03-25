@@ -10,7 +10,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity("races")
+@Entity(value = "races", noClassnameStored = true)
 public class Race extends CodedEntity {
 
     private int health;

@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity("battles")
+@Entity(value = "battles", noClassnameStored = true)
 public class Battle extends BaseEntity {
 
     private boolean active;

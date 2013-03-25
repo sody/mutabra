@@ -7,6 +7,6 @@ import com.mutabra.domain.CodedEntity;
  * @author Ivan Khalopik
  * @since 1.0
  */
-@Entity("faces")
+@Entity(value = "faces", noClassnameStored = true)
 public class Face extends CodedEntity {
 }
