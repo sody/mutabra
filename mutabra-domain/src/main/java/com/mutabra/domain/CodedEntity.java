@@ -20,7 +20,7 @@ public class CodedEntity implements Entity<String> {
     }
 
     public boolean isNew() {
-        return code != null;
+        return code == null;
     }
 
     @Override
