@@ -1,8 +1,11 @@
 package com.mutabra.services.battle;
 
 import com.mutabra.domain.battle.*;
+import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityService;
+
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -10,13 +13,13 @@ import com.mutabra.services.BaseEntityService;
  */
 public interface BattleService extends BaseEntityService<Battle> {
 
-    void create(Hero hero1, Hero hero2);
+    Battle get(Account account);
 
-    void start(Battle battle);
+    void create(Hero hero);
 
-    void end(Battle battle);
+    void apply(Battle battle, Hero hero);
 
-    void endRound(Battle battle);
+    List<Battle> findBattles();
 
     void cast(Battle battle, BattleCard card, BattleTarget target);
 

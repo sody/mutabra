@@ -1,15 +1,17 @@
 <html t:type="layout/default"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-<t:loop source="players" value="row">
-    <t:eventlink event="createBattle" context="row" disabled="canCreateBattle">
+<t:loop source="battles" value="battle">
+    <t:eventlink event="apply" context="battle" disabled="!canApplyBattle">
         <div>
-            ${message:label.name}: ${row.appearance.name}
+            ${message:label.name}: ${battle.heroes.get(0).appearance.name}
             <br/>
-            <t:svg type="faces" image="row.appearance.face" width="100" height="100"/>
+            <t:svg type="faces" image="battle.heroes.get(0).appearance.face" width="100" height="100"/>
         </div>
     </t:eventlink>
 </t:loop>
+
+<t:eventlink event="create" disabled="!canApplyBattle" class="btn">${message:label.create}</t:eventlink>
 
 <t:game.updatechecker/>
 

@@ -17,7 +17,7 @@
     <div class="control-group">
         <t:label for="name" class="control-label"/>
         <div class="controls">
-            <t:textfield t:id="name" value="hero.appearance.name" validate="required" label="message:label.name"/>
+            <t:textfield t:id="name" value="name" validate="required" label="message:label.name"/>
         </div>
     </div>
 

@@ -4,10 +4,11 @@ import com.google.code.morphia.Datastore;
 import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityServiceImpl;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -28,25 +29,47 @@ public class BattleServiceImpl
         this.scriptEngine = scriptEngine;
     }
 
-    public void create(final Hero hero1, final Hero hero2) {
+    public Battle get(final Account account) {
+        final AccountHero accountHero = account.getHero();
+        return accountHero != null ?
+                query().filter("heroes.id =", accountHero.getId()).get() :
+                null;
+    }
+
+    public void create(final Hero hero) {
         final Battle battle = new Battle();
+        battle.setStartedAt(new Date());
         battle.setActive(false);
 
-        // init heroes
-        for (Hero hero : Arrays.asList(hero1, hero2)) {
-            final BattleHero battleHero = new BattleHero(hero1.getId());
-            fillHero(battleHero, hero);
-
-            battleHero.setReady(false);
-            battle.getHeroes().add(battleHero);
-        }
-        // set first hero ready for battle
-        battle.getHeroes().get(0).setReady(true);
+        // init hero
+        final BattleHero battleHero = new BattleHero(hero.getId());
+        fillHero(battleHero, hero);
+        battleHero.setReady(true);
+        battle.getHeroes().add(battleHero);
 
         save(battle);
     }
 
-    public void start(final Battle battle) {
+    public void apply(final Battle battle, final Hero hero) {
+        // init hero
+        final BattleHero battleHero = new BattleHero(hero.getId());
+        fillHero(battleHero, hero);
+        battleHero.setReady(true);
+        battle.getHeroes().add(battleHero);
+
+        start(battle);
+    }
+
+    public List<Battle> findBattles() {
+        return query()
+                .filter("active =", false)
+                .filter("startedAt <", new Date(System.currentTimeMillis() + 60000))
+                .order("-startedAt")
+                .limit(20)
+                .asList();
+    }
+
+    private void start(final Battle battle) {
         battle.setActive(true);
         battle.setStartedAt(new Date());
         battle.setRound(1);
@@ -80,7 +103,7 @@ public class BattleServiceImpl
         save(battle);
     }
 
-    public void end(final Battle battle) {
+    private void end(final Battle battle) {
         for (BattleHero battleHero : battle.getHeroes()) {
             final Hero hero = dao().getDatastore().get(Hero.class, battleHero.getId());
             // update hero rating
@@ -92,7 +115,7 @@ public class BattleServiceImpl
         delete(battle);
     }
 
-    public void endRound(final Battle battle) {
+    private void endRound(final Battle battle) {
         // process effects
         scriptEngine.executeScripts(battle);
 
