@@ -30,63 +30,6 @@
         <param-value>${project.token-expiration-time}</param-value>
     </context-param>
 
-
-    <!-- TODO: DELETE -->
-    <context-param>
-        <param-name>security.hash-algorithm</param-name>
-        <param-value>${project.hash-algorithm}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.hash-iterations</param-name>
-        <param-value>${project.hash-iterations}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.hash-private-salt</param-name>
-        <param-value>${project.hash-private-salt}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.twitter-key</param-name>
-        <param-value>${project.twitter-key}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.twitter-secret</param-name>
-        <param-value>${project.twitter-secret}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.facebook-key</param-name>
-        <param-value>${project.facebook-key}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.facebook-secret</param-name>
-        <param-value>${project.facebook-secret}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.google-key</param-name>
-        <param-value>${project.google-key}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.google-secret</param-name>
-        <param-value>${project.google-secret}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.vk-key</param-name>
-        <param-value>${project.vk-key}</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>security.vk-secret</param-name>
-        <param-value>${project.vk-secret}</param-value>
-    </context-param>
-
     <filter>
         <filter-name>ui</filter-name>
         <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>

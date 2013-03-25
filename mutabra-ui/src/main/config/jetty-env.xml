@@ -5,8 +5,8 @@
         <Arg>mail/session</Arg>
         <Arg>
             <New class="org.eclipse.jetty.jndi.factories.MailSessionReference">
-                <Set name="user">${project.mail.admin-address}</Set>
-                <Set name="password">${project.mail.admin-password}</Set>
+                <Set name="user">${project.robot-email}</Set>
+                <Set name="password">${project.robot-email-secret}</Set>
                 <Set name="properties">
                     <New class="java.util.Properties">
                         <Put name="mail.smtp.host">smtp.gmail.com</Put>

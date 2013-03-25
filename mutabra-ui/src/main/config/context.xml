@@ -2,8 +2,8 @@
 <Context path="">
     <Resource name="mail/session" auth="Container" type="javax.mail.Session"
               mail.smtp.host="smtp.gmail.com"
-              mail.smtp.user="${project.mail.admin-address}"
-              password="${project.mail.admin-password}"
+              mail.smtp.user="${project.robot-email}"
+              password="${project.robot-email-secret}"
               mail.smtp.auth="true"
               mail.smtp.starttls.enable="true"
             />
