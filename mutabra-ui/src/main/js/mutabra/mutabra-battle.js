@@ -119,8 +119,9 @@
           .on('click.card.data-api', function () {
             var $this = $(this),
                 x = $this.data('position-x'),
-                y = $this.data('position-y');
-            self.apply(x, y);
+                y = $this.data('position-y'),
+                side = $this.data('side');
+            self.apply(x, y, side);
           });
       $(document)
           .on('keydown.card.data-api', function (event) {
@@ -139,12 +140,13 @@
           .off('keydown.card.data-api');
     },
 
-    apply:function (x, y) {
+    apply:function (x, y, side) {
       $.ajax({
         url:this.url,
         data:{
           x:x,
-          y:y
+          y:y,
+          side: side
         }
       });
       this.cancel();

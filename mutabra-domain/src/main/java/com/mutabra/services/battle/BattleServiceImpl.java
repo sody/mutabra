@@ -57,16 +57,109 @@ public class BattleServiceImpl
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
 
+        // start battle
         start(battle);
+
+        save(battle);
     }
 
-    public List<Battle> findBattles() {
+    public List<Battle> findBattles(final long expirationTime) {
         return query()
                 .filter("active =", false)
-                .filter("startedAt <", new Date(System.currentTimeMillis() + 60000))
+                .filter("startedAt <", new Date(System.currentTimeMillis() + expirationTime))
                 .order("-startedAt")
                 .limit(20)
                 .asList();
+    }
+
+    public void cast(final Battle battle,
+                     final BattleCard card,
+                     final BattleTarget target) {
+        final BattleHero hero = card.getHero();
+        for (Effect effect : card.getEffects()) {
+            final BattleEffect battleEffect = new BattleEffect();
+            fillEffect(battleEffect, effect);
+
+            battleEffect.setCode(card.getCode());
+            battleEffect.getTarget().setPosition(target.getPosition());
+            battleEffect.getTarget().setSide(target.getSide());
+            battleEffect.getCaster().setHero(hero);
+
+            battle.getEffects().add(battleEffect);
+        }
+
+        hero.setReady(true);
+        //TODO: replace with some battle effect that takes place after round ends
+        hero.setHealth(hero.getHealth() - card.getBloodCost());
+        card.setType(BattleCardType.GRAVEYARD);
+
+        // end round if ready
+        if (battle.isAllReady()) {
+            endRound(battle);
+        }
+
+        // check whether battle is over
+        if (!battle.isActive()) {
+            end(battle);
+            delete(battle);
+        } else {
+            save(battle);
+        }
+    }
+
+    public void cast(final Battle battle,
+                     final BattleAbility ability,
+                     final BattleTarget target) {
+        final BattleCreature creature = ability.getCreature();
+        for (Effect effect : ability.getEffects()) {
+            final BattleEffect battleEffect = new BattleEffect();
+            fillEffect(battleEffect, effect);
+
+            battleEffect.setCode(ability.getCode());
+            battleEffect.getTarget().setPosition(target.getPosition());
+            battleEffect.getTarget().setSide(target.getSide());
+            battleEffect.getCaster().setCreature(creature);
+
+            battle.getEffects().add(battleEffect);
+        }
+
+        creature.setReady(true);
+        //TODO: replace with some battle effect that takes place after round ends
+        creature.setHealth(creature.getHealth() - ability.getBloodCost());
+
+        // end round if ready
+        if (battle.isAllReady()) {
+            endRound(battle);
+        }
+
+        // check whether battle is over
+        if (!battle.isActive()) {
+            end(battle);
+            delete(battle);
+        } else {
+            save(battle);
+        }
+    }
+
+    public void skip(final Battle battle, final BattleHero hero) {
+        hero.setReady(true);
+
+        for (BattleCreature battleCreature : hero.getCreatures()) {
+            battleCreature.setReady(true);
+        }
+
+        // end round if ready
+        if (battle.isAllReady()) {
+            endRound(battle);
+        }
+
+        // check whether battle is over
+        if (!battle.isActive()) {
+            end(battle);
+            delete(battle);
+        } else {
+            save(battle);
+        }
     }
 
     private void start(final Battle battle) {
@@ -99,8 +192,6 @@ public class BattleServiceImpl
                 battleHero.getCards().get(i).setType(BattleCardType.HAND);
             }
         }
-
-        save(battle);
     }
 
     private void end(final Battle battle) {
@@ -121,7 +212,7 @@ public class BattleServiceImpl
 
         for (BattleHero battleHero : battle.getHeroes()) {
             if (battleHero.getHealth() <= 0 || battleHero.getMentalPower() <= 0) {
-                end(battle);
+                battle.setActive(false);
                 return;
             }
         }
@@ -145,77 +236,6 @@ public class BattleServiceImpl
                 // except the situation when there are no abilities
                 battleCreature.setReady(battleCreature.getAbilities().isEmpty());
             }
-        }
-
-        save(battle);
-    }
-
-    public void cast(final Battle battle,
-                     final BattleCard card,
-                     final BattleTarget target) {
-        final BattleHero hero = card.getHero();
-        for (Effect effect : card.getEffects()) {
-            final BattleEffect battleEffect = new BattleEffect();
-            fillEffect(battleEffect, effect);
-
-            battleEffect.setCode(card.getCode());
-            battleEffect.getTarget().setPosition(target.getPosition());
-            battleEffect.getTarget().setSide(target.getSide());
-            battleEffect.getCaster().setHero(hero);
-
-            battle.getEffects().add(battleEffect);
-        }
-
-        hero.setReady(true);
-        //TODO: replace with some battle effect that takes place after round ends
-        hero.setHealth(hero.getHealth() - card.getBloodCost());
-        card.setType(BattleCardType.GRAVEYARD);
-
-        if (battle.isAllReady()) {
-            endRound(battle);
-        } else {
-            save(battle);
-        }
-    }
-
-    public void cast(final Battle battle,
-                     final BattleAbility ability,
-                     final BattleTarget target) {
-        final BattleCreature creature = ability.getCreature();
-        for (Effect effect : ability.getEffects()) {
-            final BattleEffect battleEffect = new BattleEffect();
-            fillEffect(battleEffect, effect);
-
-            battleEffect.setCode(ability.getCode());
-            battleEffect.getTarget().setPosition(target.getPosition());
-            battleEffect.getTarget().setSide(target.getSide());
-            battleEffect.getCaster().setCreature(creature);
-
-            battle.getEffects().add(battleEffect);
-        }
-
-        creature.setReady(true);
-        //TODO: replace with some battle effect that takes place after round ends
-        creature.setHealth(creature.getHealth() - ability.getBloodCost());
-
-        if (battle.isAllReady()) {
-            endRound(battle);
-        } else {
-            save(battle);
-        }
-    }
-
-    public void skip(final Battle battle, final BattleHero hero) {
-        hero.setReady(true);
-
-        for (BattleCreature battleCreature : hero.getCreatures()) {
-            battleCreature.setReady(true);
-        }
-
-        if (battle.isAllReady()) {
-            endRound(battle);
-        } else {
-            save(battle);
         }
     }
 

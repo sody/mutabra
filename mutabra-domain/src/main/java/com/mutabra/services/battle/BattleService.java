@@ -19,7 +19,7 @@ public interface BattleService extends BaseEntityService<Battle> {
 
     void apply(Battle battle, Hero hero);
 
-    List<Battle> findBattles();
+    List<Battle> findBattles(long expirationTime);
 
     void cast(Battle battle, BattleCard card, BattleTarget target);
 

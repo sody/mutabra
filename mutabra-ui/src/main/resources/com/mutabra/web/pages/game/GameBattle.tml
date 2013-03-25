@@ -1,7 +1,7 @@
 <html t:type="layout/default"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-<t:game.battledisplay/>
+<t:game.battledisplay field="field"/>
 
 <t:game.updatechecker/>
 

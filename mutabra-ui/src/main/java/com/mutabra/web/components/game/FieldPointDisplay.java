@@ -40,7 +40,7 @@ public class FieldPointDisplay extends AbstractComponent {
     @BeginRender
     void begin(final MarkupWriter writer) {
         final int x = point.getPosition().getX();
-        final int y = point.getPosition().getY() + (point.getSide() == BattleSide.YOUR ? 1 + ((x + 1) % 2) : 0);
+        final int y = point.getPosition().getY() + (point.getSide() == BattleSide.YOUR ? 1 + x % 2: 0);
         final int startX = CELL_OUTER_SIZE * (3 * x);
         final int startY = CELL_OUTER_SIZE * (2 * y + (x + 1) % 2);
 

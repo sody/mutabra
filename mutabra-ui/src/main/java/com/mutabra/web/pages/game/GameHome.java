@@ -3,7 +3,7 @@ package com.mutabra.web.pages.game;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.pages.game.hero.CreateHero;
+import com.mutabra.web.pages.game.hero.SwitchHero;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
@@ -21,6 +21,7 @@ import java.util.List;
 @RequiresUser
 @RequiresPermissions("game:play")
 public class GameHome extends AbstractPage {
+    private static final int EXPIRATION_TIME = 60000;
 
     @Inject
     private BattleService battleService;
@@ -31,23 +32,34 @@ public class GameHome extends AbstractPage {
     @Property
     private Battle battle;
 
-    public List<Battle> getBattles() {
-        return battleService.findBattles();
-    }
+    @Property
+    private boolean canApplyBattle;
 
-    public boolean isCanApplyBattle() {
-        return accountContext.getBattle() == null;
+    public List<Battle> getBattles() {
+        return battleService.findBattles(EXPIRATION_TIME);
     }
 
     @OnEvent(EventConstants.ACTIVATE)
     Object activate() {
         if (accountContext.getAccount().getHero() == null) {
             //todo: add more complex rules
-            return CreateHero.class;
+            // not entered the game
+            return SwitchHero.class;
         }
-        if (accountContext.getBattle() != null && accountContext.getBattle().isActive()) {
+
+        final Battle battle = accountContext.getBattle();
+        if (battle != null && battle.isActive()) {
+            // already in battle
             return GameBattle.class;
         }
+
+        canApplyBattle = battle == null;
+        if (battle != null && battle.isExpired(EXPIRATION_TIME)) {
+            // remove expired battle
+            battleService.delete(battle);
+            canApplyBattle = true;
+        }
+
         return null;
     }
 
@@ -59,7 +71,7 @@ public class GameHome extends AbstractPage {
 
     @OnEvent("apply")
     Object apply(final Battle battle) {
-        if (!battle.isActive()) {
+        if (canApplyBattle && !battle.isActive()) {
             battleService.apply(battle, accountContext.getHero());
         }
         return null;

@@ -59,6 +59,10 @@ public class Battle extends BaseEntity {
     }
 
 
+    public boolean isExpired(final long expirationTime) {
+        return startedAt.getTime() + expirationTime < System.currentTimeMillis();
+    }
+
     public boolean isAllReady() {
         for (BattleHero battleHero : heroes) {
             if (!battleHero.isAllReady()) {

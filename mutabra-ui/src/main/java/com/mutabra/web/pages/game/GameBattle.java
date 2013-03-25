@@ -1,6 +1,7 @@
 package com.mutabra.web.pages.game;
 
 import com.mutabra.domain.battle.*;
+import com.mutabra.services.battle.BattleField;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.services.AccountContext;
@@ -29,6 +30,9 @@ public class GameBattle extends AbstractPage {
     @Property
     private Battle battle;
 
+    @Property
+    private BattleField field;
+
     @Override
     public String getSubtitle() {
         return format("subtitle", label("round"), battle.getRound());
@@ -37,14 +41,20 @@ public class GameBattle extends AbstractPage {
     @OnEvent(EventConstants.ACTIVATE)
     Object activate() {
         battle = accountContext.getBattle();
-        if (battle == null) {
+        if (battle == null || !battle.isActive()) {
             return GameHome.class;
+        }
+
+        for (BattleHero battleHero : battle.getHeroes()) {
+            if (battleHero.getId().equals(accountContext.getAccount().getHero().getId())) {
+                field = BattleField.create(battle, battleHero);
+            }
         }
         return null;
     }
 
-    @OnEvent("skipTurn")
-    Object skipTurn(final BattleHero hero) {
+    @OnEvent("skip")
+    Object skip(final BattleHero hero) {
         battleService.skip(battle, hero);
         return null;
     }
