@@ -65,7 +65,9 @@ public class GameHome extends AbstractPage {
 
     @OnEvent("create")
     Object create() {
-        battleService.create(accountContext.getHero());
+        if (canApplyBattle) {
+            battleService.create(accountContext.getHero());
+        }
         return null;
     }
 
