@@ -29,10 +29,6 @@ public class BattleHero {
     private List<BattleCard> cards = new ArrayList<BattleCard>();
     private List<BattleCreature> creatures = new ArrayList<BattleCreature>();
 
-    // internal id sequences
-    private long cardSequence;
-    private long creatureSequence;
-
     @Transient
     private Battle battle;
 
@@ -141,13 +137,5 @@ public class BattleHero {
     /* HELPER METHODS */
     void assignBattle(final Battle battle) {
         this.battle = battle;
-    }
-
-    long nextCardId() {
-        return cardSequence++;
-    }
-
-    long nextCreatureId() {
-        return creatureSequence++;
     }
 }

@@ -15,8 +15,6 @@ import java.util.Map;
  * @since 1.0
  */
 public class BattleEncoderFactory implements ValueEncoderFactory {
-    private static final char SEPARATOR = '-';
-
     private final AccountContext accountContext;
     private final TypeCoercer typeCoercer;
 
@@ -73,18 +71,9 @@ public class BattleEncoderFactory implements ValueEncoderFactory {
     }
 
     private BattleHero decodeHero(final String clientValue) {
-        final Battle battle = accountContext.getBattle();
-        if (battle == null) {
-            throw new NotFoundException("Battle is not found.");
-        }
-
-        final ObjectId heroId;
-        try {
-            heroId = typeCoercer.coerce(clientValue, ObjectId.class);
-        } catch (RuntimeException e) {
-            throw new NotFoundException("Couldn't parse hero primary key", e);
-        }
+        final ObjectId heroId = decodeId(ObjectId.class, clientValue);
         if (heroId != null) {
+            final Battle battle = battle();
             for (BattleHero battleHero : battle.getHeroes()) {
                 if (battleHero.getId().equals(heroId)) {
                     return battleHero;
@@ -96,28 +85,18 @@ public class BattleEncoderFactory implements ValueEncoderFactory {
     }
 
     private String encodeCard(final BattleCard battleCard) {
-        return encodeHero(battleCard.getHero()) + SEPARATOR + typeCoercer.coerce(battleCard.getId(), String.class);
+        return typeCoercer.coerce(battleCard.getId(), String.class);
     }
 
     private BattleCard decodeCard(final String clientValue) {
-        if (clientValue == null) {
-            throw new NotFoundException("Empty value.");
-        }
-        final int index = clientValue.lastIndexOf(SEPARATOR);
-        final String heroClientValue = index > 0 ? clientValue.substring(0, index) : null;
-        final String cardClientValue = index > 0 ? clientValue.substring(index + 1) : null;
-        final BattleHero battleHero = decodeHero(heroClientValue);
-
-        final Long cardId;
-        try {
-            cardId = typeCoercer.coerce(cardClientValue, Long.class);
-        } catch (RuntimeException e) {
-            throw new NotFoundException("Couldn't parse card primary key", e);
-        }
+        final Long cardId = decodeId(Long.class, clientValue);
         if (cardId != null) {
-            for (BattleCard battleCard : battleHero.getCards()) {
-                if (battleCard.getId().equals(cardId)) {
-                    return battleCard;
+            final Battle battle = battle();
+            for (BattleHero battleHero : battle.getHeroes()) {
+                for (BattleCard battleCard : battleHero.getCards()) {
+                    if (battleCard.getId().equals(cardId)) {
+                        return battleCard;
+                    }
                 }
             }
         }
@@ -126,28 +105,18 @@ public class BattleEncoderFactory implements ValueEncoderFactory {
     }
 
     private String encodeCreature(final BattleCreature battleCreature) {
-        return encodeHero(battleCreature.getHero()) + SEPARATOR + typeCoercer.coerce(battleCreature.getId(), String.class);
+        return typeCoercer.coerce(battleCreature.getId(), String.class);
     }
 
     private BattleCreature decodeCreature(final String clientValue) {
-        if (clientValue == null) {
-            throw new NotFoundException("Empty value.");
-        }
-        final int index = clientValue.lastIndexOf(SEPARATOR);
-        final String heroClientValue = index > 0 ? clientValue.substring(0, index) : null;
-        final String creatureClientValue = index > 0 ? clientValue.substring(index + 1) : null;
-        final BattleHero battleHero = decodeHero(heroClientValue);
-
-        final Long creatureId;
-        try {
-            creatureId = typeCoercer.coerce(creatureClientValue, Long.class);
-        } catch (RuntimeException e) {
-            throw new NotFoundException("Couldn't parse creature primary key", e);
-        }
+        final Long creatureId = decodeId(Long.class, clientValue);
         if (creatureId != null) {
-            for (BattleCreature battleCreature : battleHero.getCreatures()) {
-                if (battleCreature.getId().equals(creatureId)) {
-                    return battleCreature;
+            final Battle battle = battle();
+            for (BattleHero battleHero : battle.getHeroes()) {
+                for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                    if (battleCreature.getId().equals(creatureId)) {
+                        return battleCreature;
+                    }
                 }
             }
         }
@@ -156,32 +125,40 @@ public class BattleEncoderFactory implements ValueEncoderFactory {
     }
 
     private String encodeAbility(final BattleAbility battleAbility) {
-        return encodeCreature(battleAbility.getCreature()) + SEPARATOR + typeCoercer.coerce(battleAbility.getId(), String.class);
+        return typeCoercer.coerce(battleAbility.getId(), String.class);
     }
 
     private BattleAbility decodeAbility(final String clientValue) {
-        if (clientValue == null) {
-            throw new NotFoundException("Empty value.");
-        }
-        final int index = clientValue.lastIndexOf(SEPARATOR);
-        final String creatureClientValue = index > 0 ? clientValue.substring(0, index) : null;
-        final String abilityClientValue = index > 0 ? clientValue.substring(index + 1) : null;
-        final BattleCreature battleCreature = decodeCreature(creatureClientValue);
-
-        final Long abilityId;
-        try {
-            abilityId = typeCoercer.coerce(abilityClientValue, Long.class);
-        } catch (RuntimeException e) {
-            throw new NotFoundException("Couldn't parse ability primary key", e);
-        }
+        final Long abilityId = decodeId(Long.class, clientValue);
         if (abilityId != null) {
-            for (BattleAbility battleAbility : battleCreature.getAbilities()) {
-                if (battleAbility.getId().equals(abilityId)) {
-                    return battleAbility;
+            final Battle battle = battle();
+            for (BattleHero battleHero : battle.getHeroes()) {
+                for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                    for (BattleAbility battleAbility : battleCreature.getAbilities()) {
+                        if (battleAbility.getId().equals(abilityId)) {
+                            return battleAbility;
+                        }
+                    }
                 }
             }
         }
 
         throw new NotFoundException("BattleAbility is not found.");
+    }
+
+    private <T> T decodeId(final Class<T> idClass, final String clientValue) {
+        try {
+            return typeCoercer.coerce(clientValue, idClass);
+        } catch (RuntimeException e) {
+            throw new NotFoundException("Couldn't parse card primary key", e);
+        }
+    }
+
+    private Battle battle() {
+        final Battle battle = accountContext.getBattle();
+        if (battle == null) {
+            throw new NotFoundException("Battle is not found.");
+        }
+        return battle;
     }
 }

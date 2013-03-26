@@ -22,9 +22,6 @@ public class BattleCreature {
 
     private List<BattleAbility> abilities = new ArrayList<BattleAbility>();
 
-    // internal id sequence
-    private long abilitySequence;
-
     @Transient
     private BattleHero hero;
 
@@ -87,9 +84,5 @@ public class BattleCreature {
 
     void assignId(final long id) {
         this.id = id;
-    }
-
-    long nextAbilityId() {
-        return abilitySequence++;
     }
 }
