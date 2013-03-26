@@ -15,14 +15,14 @@ public class AttackScript extends AbstractScript {
     protected void apply(final BattleField battleField,
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
-        if (target.hasHero()) {
+        if (target == null || !target.hasUnit()) {
+            //TODO: log miss
+        } else if (target.hasHero()) {
             final BattleHero targetHero = target.getHero();
             targetHero.setHealth(targetHero.getHealth() - battleEffect.getPower());
         } else if (target.hasCreature()) {
             final BattleCreature targetCreature = target.getCreature();
             targetCreature.setHealth(targetCreature.getHealth() - battleEffect.getPower());
-        } else {
-            //TODO: log miss
         }
     }
 }

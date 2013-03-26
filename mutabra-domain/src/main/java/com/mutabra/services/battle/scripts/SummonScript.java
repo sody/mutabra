@@ -17,7 +17,9 @@ public class SummonScript extends AbstractScript {
     protected void apply(final BattleField battleField,
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
-        if (!target.hasUnit()) {
+        if (target == null || target.hasUnit()) {
+            //TODO: log fail
+        } else if (!target.hasUnit()) {
             final BattleCreature battleCreature = new BattleCreature();
             battleCreature.setCode(battleEffect.getCode());
             battleCreature.setHealth(battleEffect.getHealth());
@@ -36,8 +38,6 @@ public class SummonScript extends AbstractScript {
 
             final BattleHero battleHero = battleEffect.getCaster().getHero(); // not null
             battleHero.getCreatures().add(battleCreature);
-        } else {
-            //TODO: log fail
         }
     }
 }
