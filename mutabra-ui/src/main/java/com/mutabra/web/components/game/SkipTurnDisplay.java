@@ -2,7 +2,6 @@ package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 
@@ -11,9 +10,6 @@ import org.apache.tapestry5.annotations.Property;
  * @since 1.0
  */
 public class SkipTurnDisplay extends AbstractComponent {
-
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String description;
 
     @Property
     @Parameter
@@ -30,6 +26,6 @@ public class SkipTurnDisplay extends AbstractComponent {
     }
 
     public String getDescriptionSelector() {
-        return "#" + description;
+        return "#" + SkipTurnDescription.ID;
     }
 }

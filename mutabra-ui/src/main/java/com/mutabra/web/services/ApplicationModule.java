@@ -3,30 +3,23 @@ package com.mutabra.web.services;
 import com.google.code.morphia.Datastore;
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.domain.CodedEntity;
+import com.mutabra.domain.battle.BattleAbility;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
 import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.OrderedConfiguration;
-import org.apache.tapestry5.ioc.Resource;
-import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Value;
-import org.apache.tapestry5.ioc.services.ApplicationDefaults;
-import org.apache.tapestry5.ioc.services.Coercion;
-import org.apache.tapestry5.ioc.services.CoercionTuple;
-import org.apache.tapestry5.ioc.services.SymbolProvider;
-import org.apache.tapestry5.ioc.services.TypeCoercer;
+import org.apache.tapestry5.ioc.services.*;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.services.ValueEncoderSource;
-import org.apache.tapestry5.services.javascript.ExtensibleJavaScriptStack;
-import org.apache.tapestry5.services.javascript.JavaScriptStack;
-import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
-import org.apache.tapestry5.services.javascript.StackExtension;
-import org.apache.tapestry5.services.javascript.StackExtensionType;
+import org.apache.tapestry5.services.javascript.*;
 import org.apache.tapestry5.services.messages.ComponentMessagesSource;
 import org.bson.types.ObjectId;
 
@@ -74,9 +67,18 @@ public class ApplicationModule {
     @Contribute(ValueEncoderSource.class)
     public void contributeValueEncoderSource(final MappedConfiguration<Class, ValueEncoderFactory> configuration,
                                              final TypeCoercer typeCoercer,
-                                             final Datastore datastore) {
+                                             final Datastore datastore,
+                                             final AccountContext accountContext) {
         configuration.add(BaseEntity.class, new MorphiaEncoderFactory<ObjectId>(typeCoercer, datastore, ObjectId.class));
         configuration.add(CodedEntity.class, new MorphiaEncoderFactory<String>(typeCoercer, datastore, String.class));
+
+        // configure value encoders for battle embedded objects
+        final BattleEncoderFactory battleEncoderFactory = new BattleEncoderFactory(accountContext, typeCoercer);
+        configuration.add(BattleHero.class, battleEncoderFactory);
+        configuration.add(BattleCard.class, battleEncoderFactory);
+        configuration.add(BattleCreature.class, battleEncoderFactory);
+        configuration.add(BattleAbility.class, battleEncoderFactory);
+
     }
 
     @Contribute(ComponentMessagesSource.class)

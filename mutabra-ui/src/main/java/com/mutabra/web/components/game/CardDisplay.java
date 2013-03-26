@@ -1,12 +1,9 @@
 package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.BattleCard;
-import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
@@ -17,13 +14,6 @@ import org.apache.tapestry5.annotations.SetupRender;
  */
 public class CardDisplay extends AbstractComponent {
 
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String description;
-
-    @Property
-    @Parameter
-    private BattleHero hero;
-
     @Property
     @Parameter
     private BattleCard card;
@@ -32,17 +22,17 @@ public class CardDisplay extends AbstractComponent {
     private Effect effect;
 
     public String getContainerClass() {
-        return hero.isReady() ?
+        return card.getHero().isReady() ?
                 "card disabled" :
                 "card";
     }
 
     public String getCastLink() {
-        return getResources().createEventLink("cast", hero, card).toAbsoluteURI();
+        return getResources().createEventLink("cast", card).toAbsoluteURI();
     }
 
     public String getDescriptionSelector() {
-        return "#" + description;
+        return "#" + CardDescription.ID_PREFIX + encode(BattleCard.class, card);
     }
 
     public String getTargetSelector() {

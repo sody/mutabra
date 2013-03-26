@@ -5,6 +5,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.ValueEncoderSource;
 
 import java.util.Locale;
 
@@ -19,6 +20,9 @@ public class AbstractComponent {
 
     @Inject
     private Messages messages;
+
+    @Inject
+    private ValueEncoderSource encoderSource;
 
     @Inject
     private Locale locale;
@@ -62,5 +66,13 @@ public class AbstractComponent {
 
     protected static String normalize(final String key) {
         return key.replaceAll("([A-Z])", "-$1").toLowerCase();
+    }
+
+    protected <T> String encode(final Class<T> type, final T value) {
+        return encoderSource.getValueEncoder(type).toClient(value);
+    }
+
+    protected <T> T decode(final Class<T> type, final String value) {
+        return encoderSource.getValueEncoder(type).toValue(value);
     }
 }

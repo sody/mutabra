@@ -3,7 +3,6 @@ package com.mutabra.web.components.game;
 import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
@@ -14,9 +13,7 @@ import org.apache.tapestry5.annotations.SetupRender;
  * @since 1.0
  */
 public class CardDescription extends AbstractComponent implements ClientElement {
-
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String id;
+    public static final String ID_PREFIX = "d_card_";
 
     @Property
     @Parameter(required = true, allowNull = false)
@@ -26,7 +23,7 @@ public class CardDescription extends AbstractComponent implements ClientElement 
     private Effect effect;
 
     public String getClientId() {
-        return id;
+        return ID_PREFIX + encode(BattleCard.class, card);
     }
 
     public String getName() {

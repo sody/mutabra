@@ -33,9 +33,28 @@ public class GameBattle extends AbstractPage {
     @Property
     private BattleField field;
 
+    @Property
+    private BattleField.Point point;
+
+    @Property
+    private BattleHero hero;
+
+    @Property
+    private BattleCard card;
+
+    @Property
+    private BattleCreature creature;
+
+    @Property
+    private BattleAbility ability;
+
     @Override
     public String getSubtitle() {
         return format("subtitle", label("round"), battle.getRound());
+    }
+
+    public boolean isEnemy() {
+        return !field.getSelf().equals(hero);
     }
 
     @OnEvent(EventConstants.ACTIVATE)
@@ -59,7 +78,7 @@ public class GameBattle extends AbstractPage {
         return null;
     }
 
-    @OnEvent("cast")
+    @OnEvent(value = "cast", component = "heroHand")
     Object cast(final BattleCard card,
                 final @RequestParameter(value = "x") int x,
                 final @RequestParameter(value = "y") int y,
@@ -73,7 +92,7 @@ public class GameBattle extends AbstractPage {
         return null;
     }
 
-    @OnEvent("cast")
+    @OnEvent(value = "cast", component = "creatureHand")
     Object cast(final BattleAbility ability,
                 final @RequestParameter(value = "x") int x,
                 final @RequestParameter(value = "y") int y,

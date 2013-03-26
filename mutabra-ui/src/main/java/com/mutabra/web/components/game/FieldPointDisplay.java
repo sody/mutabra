@@ -1,9 +1,10 @@
 package com.mutabra.web.components.game;
 
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -28,19 +29,13 @@ public class FieldPointDisplay extends AbstractComponent {
             {1, -1},
     };
 
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private String description;
-
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private String hand;
-
     @Parameter(required = true, allowNull = false)
     private BattleField.Point point;
 
     @BeginRender
     void begin(final MarkupWriter writer) {
         final int x = point.getPosition().getX();
-        final int y = point.getPosition().getY() + (point.getSide() == BattleSide.YOUR ? 1 + x % 2: 0);
+        final int y = point.getPosition().getY() + (point.getSide() == BattleSide.YOUR ? 1 + x % 2 : 0);
         final int startX = CELL_OUTER_SIZE * (3 * x);
         final int startY = CELL_OUTER_SIZE * (2 * y + (x + 1) % 2);
 
@@ -52,11 +47,19 @@ public class FieldPointDisplay extends AbstractComponent {
                 .addClassName(point.hasHero() ? "hero" : point.hasCreature() ? "creature" : "empty")
                 .addClassName(point.isEnemySide() ? "enemy" : "friend");
 
-        if (description != null) {
-            element.attribute("data-description-target", "#" + description);
-        }
-        if (hand != null) {
-            element.attribute("data-field-target", "#" + hand);
+        if (point.hasUnit()) {
+            final String unitValue = point.hasHero() ?
+                    encode(BattleHero.class, point.getHero()) :
+                    encode(BattleCreature.class, point.getCreature());
+            final String descriptionSelector = point.hasHero() ?
+                    "#" + HeroDescription.ID_PREFIX + unitValue :
+                    "#" + CreatureDescription.ID_PREFIX + unitValue;
+            final String handSelector = point.hasHero() ?
+                    "#" + HeroHandDisplay.ID_PREFIX + unitValue :
+                    "#" + CreatureHandDisplay.ID_PREFIX + unitValue;
+
+            element.attribute("data-description-target", descriptionSelector);
+            element.attribute("data-field-target", handSelector);
         }
         if (point.hasHero() && !point.isEnemySide()) {
             element.addClassName("active");

@@ -55,16 +55,21 @@ public class MorphiaEncoderFactory<PK extends Serializable> implements ValueEnco
                     try {
                         return type.newInstance();
                     } catch (InstantiationException e) {
-                        throw new NotFoundException();
+                        throw new NotFoundException("Couldn't create new entity.", e);
                     } catch (IllegalAccessException e) {
-                        throw new NotFoundException();
+                        throw new NotFoundException("Couldn't create new entity.", e);
                     }
                 }
 
-                final PK pk = typeCoercer.coerce(clientValue, pkClass);
+                final PK pk;
+                try {
+                    pk = typeCoercer.coerce(clientValue, pkClass);
+                } catch (RuntimeException e) {
+                    throw new NotFoundException("Couldn't parse entity primary key", e);
+                }
                 final Entity<PK> entity = pk != null ? datastore.get(type, pk) : null;
                 if (entity == null) {
-                    throw new NotFoundException();
+                    throw new NotFoundException("Entity is not found.");
                 }
                 return entity;
             }

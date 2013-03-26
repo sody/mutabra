@@ -1,12 +1,9 @@
 package com.mutabra.web.components.game;
 
 import com.mutabra.domain.battle.BattleAbility;
-import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.web.base.components.AbstractComponent;
-import org.apache.tapestry5.BindingConstants;
-import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
@@ -17,12 +14,6 @@ import org.apache.tapestry5.annotations.SetupRender;
  */
 public class AbilityDisplay extends AbstractComponent {
 
-    @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String description;
-
-    @Parameter(required = true, allowNull = false)
-    private BattleCreature creature;
-
     @Property
     @Parameter(required = true, allowNull = false)
     private BattleAbility ability;
@@ -31,23 +22,23 @@ public class AbilityDisplay extends AbstractComponent {
     private Effect effect;
 
     public String getContainerClass() {
-        return creature.isReady() ?
+        return ability.getCreature().isReady() ?
                 "card disabled" :
                 "card";
     }
 
     public String getCastLink() {
-        return getResources().createEventLink("cast", creature, ability).toURI();
+        return getResources().createEventLink("cast", ability).toURI();
     }
 
     public String getDescriptionSelector() {
-        return "#" + description;
+        return "#" + AbilityDescription.ID_PREFIX + encode(BattleAbility.class, ability);
     }
 
     public String getTargetSelector() {
         final TargetType targetType = ability.getTargetType();
 
-        final StringBuilder sideSelector = new StringBuilder("path");
+        final StringBuilder sideSelector = new StringBuilder();
         if (targetType.supportsEnemy() && !targetType.supportsFriend()) {
             sideSelector.append(".enemy");
         } else if (targetType.supportsFriend() && !targetType.supportsEnemy()) {
