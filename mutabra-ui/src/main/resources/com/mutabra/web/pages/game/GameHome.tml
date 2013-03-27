@@ -1,5 +1,6 @@
 <html t:type="layout/default"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 
 <t:loop source="battles" value="battle">
     <t:eventlink event="apply" context="battle" disabled="!canApplyBattle">
@@ -11,7 +12,12 @@
     </t:eventlink>
 </t:loop>
 
-<t:eventlink event="create" disabled="!canApplyBattle" class="btn">${message:label.create}</t:eventlink>
+<t:if test="canApplyBattle">
+    <t:eventlink event="create" class="btn">${message:label.create}</t:eventlink>
+    <p:else>
+        <t:eventlink event="cancel" class="btn">${message:label.cancel}</t:eventlink>
+    </p:else>
+</t:if>
 
 <t:game.updatechecker/>
 

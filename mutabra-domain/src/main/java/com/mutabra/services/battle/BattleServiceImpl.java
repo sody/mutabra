@@ -66,7 +66,7 @@ public class BattleServiceImpl
     public List<Battle> findBattles(final long expirationTime) {
         return query()
                 .filter("active =", false)
-                .filter("startedAt <", new Date(System.currentTimeMillis() + expirationTime))
+                .filter("startedAt >", new Date(System.currentTimeMillis() - expirationTime))
                 .order("-startedAt")
                 .limit(20)
                 .asList();

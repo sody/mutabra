@@ -64,18 +64,23 @@ public class GameHome extends AbstractPage {
     }
 
     @OnEvent("create")
-    Object create() {
+    void create() {
         if (canApplyBattle) {
             battleService.create(accountContext.getHero());
         }
-        return null;
+    }
+
+    @OnEvent("cancel")
+    void cancel() {
+        if (!canApplyBattle) {
+            battleService.delete(accountContext.getBattle());
+        }
     }
 
     @OnEvent("apply")
-    Object apply(final Battle battle) {
+    void apply(final Battle battle) {
         if (canApplyBattle && !battle.isActive()) {
             battleService.apply(battle, accountContext.getHero());
         }
-        return null;
     }
 }
