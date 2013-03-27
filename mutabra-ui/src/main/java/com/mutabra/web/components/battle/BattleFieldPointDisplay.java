@@ -5,10 +5,6 @@ import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
-import com.mutabra.web.components.battle.CreatureDescription;
-import com.mutabra.web.components.battle.CreatureHandDisplay;
-import com.mutabra.web.components.battle.HeroDescription;
-import com.mutabra.web.components.battle.HeroHandDisplay;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
@@ -21,7 +17,7 @@ import org.apache.tapestry5.dom.Element;
  * @since 1.0
  */
 @SupportsInformalParameters
-public class FieldPointDisplay extends AbstractComponent {
+public class BattleFieldPointDisplay extends AbstractComponent {
     private static final int CELL_SIZE = 45;
     private static final int CELL_OUTER_SIZE = 50;
     private static final int[][] CELL_PATH = {
@@ -56,11 +52,11 @@ public class FieldPointDisplay extends AbstractComponent {
                     encode(BattleHero.class, point.getHero()) :
                     encode(BattleCreature.class, point.getCreature());
             final String descriptionSelector = point.hasHero() ?
-                    "#" + HeroDescription.ID_PREFIX + unitValue :
-                    "#" + CreatureDescription.ID_PREFIX + unitValue;
+                    "#" + BattleHeroDescription.ID_PREFIX + unitValue :
+                    "#" + BattleCreatureDescription.ID_PREFIX + unitValue;
             final String handSelector = point.hasHero() ?
-                    "#" + HeroHandDisplay.ID_PREFIX + unitValue :
-                    "#" + CreatureHandDisplay.ID_PREFIX + unitValue;
+                    "#" + BattleHeroHandDisplay.ID_PREFIX + unitValue :
+                    "#" + BattleCreatureHandDisplay.ID_PREFIX + unitValue;
 
             element.attribute("data-description-target", descriptionSelector);
             element.attribute("data-field-target", handSelector);

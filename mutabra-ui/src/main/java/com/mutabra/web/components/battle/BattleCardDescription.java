@@ -12,7 +12,7 @@ import org.apache.tapestry5.annotations.SetupRender;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class CardDescription extends AbstractComponent implements ClientElement {
+public class BattleCardDescription extends AbstractComponent implements ClientElement {
     public static final String ID_PREFIX = "d_card_";
 
     @Property

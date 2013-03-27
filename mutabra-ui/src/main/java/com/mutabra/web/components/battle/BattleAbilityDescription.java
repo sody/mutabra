@@ -12,7 +12,7 @@ import org.apache.tapestry5.annotations.SetupRender;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class AbilityDescription extends AbstractComponent implements ClientElement {
+public class BattleAbilityDescription extends AbstractComponent implements ClientElement {
     public static final String ID_PREFIX = "d_ability_";
 
     @Property

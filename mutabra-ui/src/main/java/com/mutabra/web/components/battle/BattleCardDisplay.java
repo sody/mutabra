@@ -12,7 +12,7 @@ import org.apache.tapestry5.annotations.SetupRender;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class CardDisplay extends AbstractComponent {
+public class BattleCardDisplay extends AbstractComponent {
 
     @Property
     @Parameter
@@ -32,7 +32,7 @@ public class CardDisplay extends AbstractComponent {
     }
 
     public String getDescriptionSelector() {
-        return "#" + CardDescription.ID_PREFIX + encode(BattleCard.class, card);
+        return "#" + BattleCardDescription.ID_PREFIX + encode(BattleCard.class, card);
     }
 
     public String getTargetSelector() {

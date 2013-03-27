@@ -9,7 +9,7 @@ import org.apache.tapestry5.annotations.Property;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class SkipTurnDisplay extends AbstractComponent {
+public class BattleSkipTurnDisplay extends AbstractComponent {
 
     @Property
     @Parameter
@@ -26,6 +26,6 @@ public class SkipTurnDisplay extends AbstractComponent {
     }
 
     public String getDescriptionSelector() {
-        return "#" + SkipTurnDescription.ID;
+        return "#" + BattleSkipTurnDescription.ID;
     }
 }
