@@ -2,10 +2,10 @@
 
     <div id="${clientId}" class="${containerClass}">
         <t:loop source="hero.hand" value="card">
-            <t:game.carddisplay card="card"/>
+            <t:battle.carddisplay card="card"/>
         </t:loop>
 
-        <t:game.skipturndisplay hero="hero"/>
+        <t:battle.skipturndisplay hero="hero"/>
     </div>
 
 </t:container>

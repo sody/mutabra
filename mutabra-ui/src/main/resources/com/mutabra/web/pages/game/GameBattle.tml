@@ -7,7 +7,7 @@
     <div class="field">
         <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="300" width="500" version="1.1">
             <t:loop source="field.get()" value="point">
-                <t:game.fieldpointdisplay point="point">
+                <t:battle.fieldpointdisplay point="point">
                     <t:if test="point.hasHero()">
                         <t:svg type="faces" image="point.hero.appearance.face" inline="true"
                                width="90" height="90" x="50" y="5"/>
@@ -16,7 +16,7 @@
                         <t:svg type="creatures" image="point.creature.code" inline="true"
                                width="90" height="90" x="50" y="5"/>
                     </t:if>
-                </t:game.fieldpointdisplay>
+                </t:battle.fieldpointdisplay>
             </t:loop>
         </svg>
     </div>
@@ -27,31 +27,31 @@
     <div class="span4">
         <div class="row">
             <t:loop source="field.battle.heroes" value="hero">
-                <t:game.herodescription hero="hero" active="!enemy"/>
+                <t:battle.herodescription hero="hero" active="!enemy"/>
                 <t:if test="!enemy">
                     <t:loop source="hero.hand" value="card">
-                        <t:game.carddescription card="card"/>
+                        <t:battle.carddescription card="card"/>
                     </t:loop>
                 </t:if>
                 <t:loop source="hero.creatures" value="creature">
-                    <t:game.creaturedescription creature="creature"/>
+                    <t:battle.creaturedescription creature="creature"/>
                     <t:if test="!enemy">
                         <t:loop source="creature.abilities" value="ability">
-                            <t:game.abilitydescription ability="ability"/>
+                            <t:battle.abilitydescription ability="ability"/>
                         </t:loop>
                     </t:if>
                 </t:loop>
             </t:loop>
-            <t:game.skipturndescription/>
+            <t:battle.skipturndescription/>
         </div>
     </div>
 
     <div class="span8">
         <t:loop source="field.battle.heroes" value="hero">
             <t:if test="!enemy">
-                <t:game.herohanddisplay hero="hero" t:id="heroHand"/>
+                <t:battle.herohanddisplay hero="hero" t:id="heroHand"/>
                 <t:loop source="hero.creatures" value="creature">
-                    <t:game.creaturehanddisplay creature="creature" t:id="creatureHand"/>
+                    <t:battle.creaturehanddisplay creature="creature" t:id="creatureHand"/>
                 </t:loop>
             </t:if>
         </t:loop>

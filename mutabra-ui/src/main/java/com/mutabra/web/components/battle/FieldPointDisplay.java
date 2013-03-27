@@ -1,10 +1,14 @@
-package com.mutabra.web.components.game;
+package com.mutabra.web.components.battle;
 
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.components.battle.CreatureDescription;
+import com.mutabra.web.components.battle.CreatureHandDisplay;
+import com.mutabra.web.components.battle.HeroDescription;
+import com.mutabra.web.components.battle.HeroHandDisplay;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;

@@ -1,4 +1,4 @@
-package com.mutabra.web.components.game;
+package com.mutabra.web.components.battle;
 
 import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.common.Effect;
