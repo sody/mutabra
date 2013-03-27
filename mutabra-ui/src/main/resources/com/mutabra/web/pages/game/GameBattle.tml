@@ -1,8 +1,6 @@
 <html t:type="layout/default"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-<t:game.updatechecker/>
-
 <div class="row">
     <div class="field">
         <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="300" width="500" version="1.1">
@@ -57,5 +55,7 @@
         </t:loop>
     </div>
 </div>
+
+<t:game.updatechecker/>
 
 </html>

@@ -16,9 +16,8 @@
     <t:eventlink event="create" class="btn">${message:label.create}</t:eventlink>
     <p:else>
         <t:eventlink event="cancel" class="btn">${message:label.cancel}</t:eventlink>
+        <t:game.updatechecker/>
     </p:else>
 </t:if>
-
-<t:game.updatechecker/>
 
 </html>
