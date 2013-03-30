@@ -2,7 +2,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
-<t:grid source="source" row="row" include="name,email,lastLogin,registered" add="actions" class="table">
+<t:grid source="source" row="row" include="name,lastLogin,registered" add="actions" class="table">
     <p:actionsCell>
         <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink> |
         <t:eventlink event="delete" context="row">${message:label.delete}</t:eventlink>
