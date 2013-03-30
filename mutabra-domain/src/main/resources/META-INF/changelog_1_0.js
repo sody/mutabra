@@ -33,6 +33,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: "electric-ray",
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -40,11 +41,12 @@ db.cards.insert({
       health: 5,
       abilities: [
         {
-          code: 'attack',
+          code: 'electric-ray.attack',
           targetType: 'SINGLE_ENEMY_UNIT',
           bloodCost: 0,
           effects: [
             {
+              code: 'electric-ray.attack',
               type: 'MAGIC_ATTACK',
               targetType: 'SINGLE_ENEMY_UNIT',
               duration: 1,
@@ -64,6 +66,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: "seahorse",
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -79,6 +82,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'mermaid',
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -94,6 +98,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'calm',
       type: 'UNKNOWN',
       targetType: 'ALL_FRIEND_UNIT',
       duration: 3,
@@ -109,6 +114,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'wave',
       type: 'MAGIC_ATTACK',
       targetType: 'SINGLE_ENEMY_UNIT',
       duration: 1,
@@ -124,6 +130,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'whirlpool',
       type: 'UNKNOWN',
       targetType: 'SINGLE_ENEMY_EMPTY',
       duration: 1,
@@ -139,6 +146,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'trident-blow',
       type: 'MELEE_ATTACK',
       targetType: 'SINGLE_ENEMY_UNIT',
       duration: 1,
@@ -154,6 +162,7 @@ db.cards.insert({
   bloodCost: 0,
   effects: [
     {
+      code: 'swim-away',
       type: 'UNKNOWN',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -169,6 +178,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'storm',
       type: 'UNKNOWN',
       targetType: 'ALL_FRIEND_UNIT',
       duration: 1,
@@ -184,6 +194,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'drop-of-the-ocean',
       type: 'UNKNOWN',
       targetType: 'SINGLE_ENEMY_UNIT',
       duration: 2,
@@ -201,6 +212,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'chamois',
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -208,11 +220,12 @@ db.cards.insert({
       health: 6,
       abilities: [
         {
-          code: 'attack',
+          code: 'chamois.attack',
           targetType: 'SINGLE_ENEMY_UNIT',
           bloodCost: 0,
           effects: [
             {
+              code: 'chamois.attack',
               type: 'MELEE_ATTACK',
               targetType: 'SINGLE_ENEMY_UNIT',
               duration: 1,
@@ -232,6 +245,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'carrion_vulture',
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -239,11 +253,12 @@ db.cards.insert({
       health: 5,
       abilities: [
         {
-          code: 'attack',
+          code: 'carrion_vulture.attack',
           targetType: 'SINGLE_ENEMY_UNIT',
           bloodCost: 0,
           effects: [
             {
+              code: 'carrion_vulture.attack',
               type: 'RANGED_ATTACK',
               targetType: 'SINGLE_ENEMY_UNIT',
               duration: 1,
@@ -263,6 +278,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'chives',
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -278,6 +294,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'scramble',
       type: 'UNKNOWN',
       targetType: 'SINGLE_FRIEND_HERO',
       duration: 1,
@@ -293,6 +310,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'scratch',
       type: 'MELEE_ATTACK',
       targetType: 'SINGLE_ENEMY_HERO',
       duration: 1,
@@ -308,6 +326,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'snowball',
       type: 'MAGIC_ATTACK',
       targetType: 'ALL_ENEMY_UNIT',
       duration: 1,
@@ -323,6 +342,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'throw',
       type: 'RANGED_ATTACK',
       targetType: 'SINGLE_ENEMY_UNIT',
       duration: 1,
@@ -338,6 +358,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'falling-boulder',
       type: 'RANGED_ATTACK',
       targetType: 'SINGLE_ENEMY_UNIT',
       duration: 1,
@@ -353,6 +374,7 @@ db.cards.insert({
   bloodCost: 2,
   effects: [
     {
+      code: 'echo-mountain',
       type: 'UNKNOWN',
       targetType: 'ALL_UNIT',
       duration: 1,
@@ -368,6 +390,7 @@ db.cards.insert({
   bloodCost: 1,
   effects: [
     {
+      code: 'decompression',
       type: 'UNKNOWN',
       targetType: 'ALL_UNIT',
       duration: 2,
