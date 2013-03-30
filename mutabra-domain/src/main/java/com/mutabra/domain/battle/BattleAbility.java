@@ -2,6 +2,8 @@ package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Transient;
+import com.mutabra.domain.Translatable;
+import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleAbility {
+public class BattleAbility implements Translatable {
 
     private Long id;
     private String code;
@@ -31,6 +33,10 @@ public class BattleAbility {
 
     public BattleCreature getCreature() {
         return creature;
+    }
+
+    public String getBasename() {
+        return Ability.BASENAME;
     }
 
     public String getCode() {

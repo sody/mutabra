@@ -27,19 +27,15 @@ public class BattleCardDescription extends AbstractComponent implements ClientEl
     }
 
     public String getName() {
-        return property("name");
+        return label(card, "name");
     }
 
     public String getDescription() {
-        return property("description");
+        return label(card, "description");
     }
 
     @SetupRender
     void setup() {
         effect = card.getEffects().get(0);
-    }
-
-    private String property(final String property) {
-        return message(i18n("card", card.getCode(), property));
     }
 }

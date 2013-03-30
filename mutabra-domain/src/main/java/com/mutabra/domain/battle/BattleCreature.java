@@ -2,6 +2,7 @@ package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Transient;
+import com.mutabra.domain.Translatable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleCreature {
+public class BattleCreature implements Translatable {
+    public static final String BASENAME = "creature";
 
     private Long id;
     private String code;
@@ -31,6 +33,10 @@ public class BattleCreature {
 
     public BattleHero getHero() {
         return hero;
+    }
+
+    public String getBasename() {
+        return BASENAME;
     }
 
     public String getCode() {

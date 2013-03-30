@@ -12,11 +12,17 @@ import java.util.List;
  */
 @Entity(value = "races", noClassnameStored = true)
 public class Race extends CodedEntity {
+    public static final String BASENAME = "race";
 
     private int health;
     private int mentalPower;
 
     private List<String> cards = new ArrayList<String>();
+
+    @Override
+    public String getBasename() {
+        return BASENAME;
+    }
 
     public int getHealth() {
         return health;

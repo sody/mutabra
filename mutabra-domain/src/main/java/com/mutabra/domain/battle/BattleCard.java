@@ -2,6 +2,8 @@ package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Transient;
+import com.mutabra.domain.Translatable;
+import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleCard {
+public class BattleCard implements Translatable {
 
     private Long id;
     private String code;
@@ -40,6 +42,10 @@ public class BattleCard {
 
     public void setType(final BattleCardType type) {
         this.type = type;
+    }
+
+    public String getBasename() {
+        return Card.BASENAME;
     }
 
     public String getCode() {

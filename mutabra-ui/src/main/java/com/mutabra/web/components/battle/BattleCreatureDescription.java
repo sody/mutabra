@@ -22,14 +22,10 @@ public class BattleCreatureDescription extends AbstractComponent implements Clie
     }
 
     public String getName() {
-        return property("name");
+        return label(creature, "name");
     }
 
     public String getDescription() {
-        return property("description");
-    }
-
-    private String property(final String property) {
-        return message(i18n("creature", creature.getCode(), property));
+        return label(creature, "description");
     }
 }

@@ -1,6 +1,7 @@
 package com.mutabra.domain.common;
 
 import com.google.code.morphia.annotations.Embedded;
+import com.mutabra.domain.Translatable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class Effect {
+public class Effect implements Translatable {
+    public static final String BASENAME = "effect";
 
+    private String code;
     private EffectType type;
     private TargetType targetType;
     private int power;
@@ -19,6 +22,14 @@ public class Effect {
     private int health;
 
     private List<Ability> abilities = new ArrayList<Ability>();
+
+    public String getBasename() {
+        return BASENAME;
+    }
+
+    public String getCode() {
+        return code;
+    }
 
     public EffectType getType() {
         return type;

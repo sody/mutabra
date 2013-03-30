@@ -9,9 +9,15 @@ import com.mutabra.domain.CodedEntity;
  */
 @Entity(value = "levels", noClassnameStored = true)
 public class Level extends CodedEntity {
+    public static final String BASENAME = "level";
 
     private LevelType type;
     private long rating;
+
+    @Override
+    public String getBasename() {
+        return BASENAME;
+    }
 
     public LevelType getType() {
         return type;

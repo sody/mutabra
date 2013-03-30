@@ -6,13 +6,18 @@ import com.google.code.morphia.annotations.Id;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class CodedEntity implements Entity<String> {
+public class CodedEntity implements Entity<String>, Translatable {
+    private static final String DEFAULT_BASENAME = "translatable";
 
     @Id
     private String code;
 
     public String getId() {
         return code;
+    }
+
+    public String getBasename() {
+        return DEFAULT_BASENAME;
     }
 
     public String getCode() {

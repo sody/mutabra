@@ -1,7 +1,9 @@
 package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Embedded;
+import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Ability;
+import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.TargetType;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleEffect {
+public class BattleEffect implements Translatable {
 
     private BattleTarget caster = new BattleTarget();
     private BattleTarget target = new BattleTarget();
@@ -32,6 +34,10 @@ public class BattleEffect {
 
     public BattleTarget getTarget() {
         return target;
+    }
+
+    public String getBasename() {
+        return Effect.BASENAME;
     }
 
     public String getCode() {

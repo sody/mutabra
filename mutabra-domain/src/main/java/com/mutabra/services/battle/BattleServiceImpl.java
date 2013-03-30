@@ -81,7 +81,6 @@ public class BattleServiceImpl
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
-            battleEffect.setCode(card.getCode());
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
             battleEffect.getCaster().setHero(hero);
@@ -116,7 +115,6 @@ public class BattleServiceImpl
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
-            battleEffect.setCode(ability.getCode());
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
             battleEffect.getCaster().setCreature(creature);
@@ -211,6 +209,7 @@ public class BattleServiceImpl
 
         for (BattleHero battleHero : battle.getHeroes()) {
             if (battleHero.getHealth() <= 0 || battleHero.getMentalPower() <= 0) {
+                // someone dead
                 battle.setActive(false);
                 return;
             }
@@ -232,6 +231,11 @@ public class BattleServiceImpl
                 // except the situation when there are no abilities
                 battleCreature.setReady(battleCreature.getAbilities().isEmpty());
             }
+        }
+
+        // there are no more cards
+        if (battle.isAllReady()) {
+            battle.setActive(false);
         }
     }
 
@@ -265,6 +269,7 @@ public class BattleServiceImpl
     }
 
     private void fillEffect(final BattleEffect battleEffect, final Effect effect) {
+        battleEffect.setCode(effect.getCode());
         battleEffect.setDuration(effect.getDuration());
         battleEffect.setHealth(effect.getHealth());
         battleEffect.setPower(effect.getPower());

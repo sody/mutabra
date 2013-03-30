@@ -12,11 +12,17 @@ import java.util.List;
  */
 @Entity(value = "cards", noClassnameStored = true)
 public class Card extends CodedEntity {
+    public static final String BASENAME = "card";
 
     private TargetType targetType;
     private int bloodCost;
 
     private List<Effect> effects = new ArrayList<Effect>();
+
+    @Override
+    public String getBasename() {
+        return BASENAME;
+    }
 
     public TargetType getTargetType() {
         return targetType;

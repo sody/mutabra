@@ -1,5 +1,6 @@
 package com.mutabra.web.base.components;
 
+import com.mutabra.domain.Translatable;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.ComponentResources;
@@ -43,6 +44,14 @@ public class AbstractComponent {
         return SecurityUtils.getSubject();
     }
 
+    protected <T> String encode(final Class<T> type, final T value) {
+        return encoderSource.getValueEncoder(type).toClient(value);
+    }
+
+    protected <T> T decode(final Class<T> type, final String value) {
+        return encoderSource.getValueEncoder(type).toValue(value);
+    }
+
     protected String format(final String key, final Object... parameters) {
         return messages.format(key, parameters);
     }
@@ -55,24 +64,24 @@ public class AbstractComponent {
         return messages.get(i18n("label", key));
     }
 
+    protected String label(final Translatable translatable) {
+        return messages.get(i18n(translatable.getBasename(), translatable.getCode()));
+    }
 
-    protected static String i18n(final String group, final String key) {
+    protected String label(final Translatable translatable, final String variant) {
+        return messages.get(i18n(translatable.getBasename(), translatable.getCode(), variant));
+    }
+
+
+    private static String i18n(final String group, final String key) {
         return group + "." + normalize(key);
     }
 
-    protected static String i18n(final String group, final String key, final String variant) {
+    private static String i18n(final String group, final String key, final String variant) {
         return group + "." + normalize(key) + "." + variant;
     }
 
-    protected static String normalize(final String key) {
+    private static String normalize(final String key) {
         return key.replaceAll("([A-Z])", "-$1").toLowerCase();
-    }
-
-    protected <T> String encode(final Class<T> type, final T value) {
-        return encoderSource.getValueEncoder(type).toClient(value);
-    }
-
-    protected <T> T decode(final Class<T> type, final String value) {
-        return encoderSource.getValueEncoder(type).toValue(value);
     }
 }

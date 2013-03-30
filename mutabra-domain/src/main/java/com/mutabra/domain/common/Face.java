@@ -9,4 +9,10 @@ import com.mutabra.domain.CodedEntity;
  */
 @Entity(value = "faces", noClassnameStored = true)
 public class Face extends CodedEntity {
+    public static final String BASENAME = "face";
+
+    @Override
+    public String getBasename() {
+        return BASENAME;
+    }
 }
