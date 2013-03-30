@@ -11,6 +11,7 @@ import com.mutabra.services.BaseEntityServiceImpl;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -188,9 +189,7 @@ public class BattleServiceImpl
                 battleHero.getCards().add(battleCard);
             }
             // get 3 first cards from deck to hand
-            for (int i = 0; i < 3; i++) {
-                battleHero.getCards().get(i).setType(BattleCardType.HAND);
-            }
+            dealCards(battleHero, 3);
         }
     }
 
@@ -223,10 +222,7 @@ public class BattleServiceImpl
             // increase mental power each round
             battleHero.setMentalPower(battleHero.getMentalPower() + 1);
             // move one card from deck to hand
-            final List<BattleCard> deck = battleHero.getDeck();
-            if (deck.size() > 0) {
-                deck.get(0).setType(BattleCardType.HAND);
-            }
+            dealCards(battleHero, 1);
             // each hero should be able to cast cards in the beginning of the round
             // except the situation when there are no cards in the hand
             battleHero.setReady(battleHero.getHand().isEmpty());
@@ -236,6 +232,15 @@ public class BattleServiceImpl
                 // except the situation when there are no abilities
                 battleCreature.setReady(battleCreature.getAbilities().isEmpty());
             }
+        }
+    }
+
+    private void dealCards(final BattleHero battleHero, final int count) {
+        int i = 0;
+        final Iterator<BattleCard> iterator = battleHero.getDeck().iterator();
+        while (iterator.hasNext() && i < count) {
+            iterator.next().setType(BattleCardType.HAND);
+            i++;
         }
     }
 
