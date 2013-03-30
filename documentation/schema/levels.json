@@ -1,20 +1,17 @@
 [
   {
-    "_id": 1,
+    "_id": "newbie",
     "type": "hero",
-    "code": "newbie",
     "rating": 0
   },
   {
-    "_id": 2,
+    "_id": "master",
     "type": "hero",
-    "code": "master",
     "rating": 10000
   },
   {
-    "_id": 3,
+    "_id": "light",
     "type": "card",
-    "code": "newbie",
     "rating": 0
   }
 ]

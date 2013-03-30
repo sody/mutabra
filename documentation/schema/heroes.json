@@ -2,9 +2,8 @@
   {
     "_id": 12,
     "account_id": 10,
-    "active": true,
     "appearance": {
-      "name": "sody",
+      "name": "John Snow",
       "face": "trollface",
       "race": "plunger"
     },
@@ -16,25 +15,11 @@
     "health": 50,
     "mental_power": 10,
     "cards": [
-      {
-        "card_id": 13,
-        "rating": 15
-      },
-      {
-        "card_id": 18,
-        "rating": 88
-      },
-      {
-        "card_id": 42,
-        "rating": 0
-      }
-    ]
-  },
-  {
-    "indexes": [
-      {
-        "heroes.hero_id": 1
-      }
+        "wave",
+        "storm",
+        "drop-of-the-ocean",
+        "mermaid",
+        "seahorse"
     ]
   }
 ]

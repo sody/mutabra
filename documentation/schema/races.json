@@ -1,7 +1,6 @@
 [
   {
-    "_id": 13,
-    "code": "plunger",
+    "_id": "plunger",
     "starter": {
       "health": 30,
       "mental_power": 10,

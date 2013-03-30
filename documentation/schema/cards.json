@@ -1,11 +1,11 @@
 [
   {
-    "_id": 13,
-    "code": "firewall",
+    "_id": "firewall",
     "target_type": "single",
     "blood_cost": 2,
     "effects": [
       {
+        "code": "firewall",
         "type": "summon",
         "target_type": "empty_friend",
         "power": 0,
@@ -13,11 +13,12 @@
         "duration": 0,
         "abilities": [
           {
-            "code": "fireball",
+            "code": "firewall.fireball",
             "target_type": "single_enemy",
             "blood_cost": 2,
             "effects": [
               {
+                "code": "firewall.fireball",
                 "type": "magic_attack",
                 "target_type": "all",
                 "power": 1,
@@ -29,6 +30,7 @@
         ]
       },
       {
+        "code": "firewall.burn",
         "type": "magic_attack",
         "target_type": "all",
         "power": 1,

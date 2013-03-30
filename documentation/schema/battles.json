@@ -6,18 +6,16 @@
     "startedAt": "2013-01-13",
     "heroes": [
       {
-        "account_id": 1,
         "hero_id": 13,
-        "name": "Vinni the Puh",
-        "face": {
-          "code": "trollface"
-        },
-        "race": {
-          "code": "plunger"
+        "appearance": {
+          "name": "Vinni the Puh",
+          "face": "trollface",
+          "race": "plunger"
         },
         "level": {
           "code": "newbie",
-          "rating": 1010
+          "rating": 1010,
+          "next": 10000
         },
         "health": 50,
         "mental_power": 10,
@@ -25,7 +23,7 @@
         "ready": true,
         "cards": [
           {
-            "card": 1,
+            "id": 1,
             "code": "firewall",
             "type": "deck",
             "rating": 12,
@@ -33,6 +31,7 @@
             "blood_cost": 2,
             "effects": [
               {
+                "code": "firewall",
                 "type": "summon",
                 "target_type": "single_friend_empty",
                 "power": 0,
@@ -40,11 +39,12 @@
                 "duration": 0,
                 "abilities": [
                   {
-                    "code": "fireball",
+                    "code": "firewall.fireball",
                     "target_type": "all",
                     "blood_cost": 2,
                     "effects": [
                       {
+                        "code": "firewall.fireball",
                         "type": "magic_attack",
                         "target_type": "all",
                         "power": 1,
@@ -56,6 +56,7 @@
                 ]
               },
               {
+                "code": "firewall.burn",
                 "type": "magic_attack",
                 "target_type": "all",
                 "power": 1,
@@ -65,14 +66,15 @@
             ]
           },
           {
-            "card": 2,
-            "code": "attack",
+            "id": 2,
+            "code": "cool-strike",
             "type": "hand",
             "rating": 1111,
             "target_type": "single_enemy_unit",
             "blood_cost": 0,
             "effects": [
               {
+                "code": "cool-strike",
                 "type": "melee_attack",
                 "target_type": "single_enemy_unit",
                 "power": 10,
@@ -83,7 +85,7 @@
         ],
         "units": [
           {
-            "unit": 1,
+            "id": 1,
             "code": "firewall",
             "health": 10,
             "power": 0,
@@ -92,11 +94,12 @@
             "abilities": [
               {
                 "ability": 1,
-                "code": "fireball",
+                "code": "firewall.fireball",
                 "target_type": "all",
                 "blood_cost": 2,
                 "effects": [
                   {
+                    "code": "firewall.fireball",
                     "type": "magic_attack",
                     "target_type": "all",
                     "power": 1,
@@ -116,14 +119,14 @@
     ],
     "effects": [
       {
+        "code": "firewall.burn",
         "type": "magic_attack",
         "target_type": "all",
         "power": 1,
         "duration": 2,
         "target": {
           "position": [1, 3],
-          "hero_id": 13,
-          "unit": 2
+          "side": "enemy"
         },
         "caster": {
           "hero_id": 1,
@@ -133,7 +136,7 @@
     ],
     "log": [
       {
-        "key": "firewall.summon",
+        "key": "firewall.success",
         "parameters": [
           {
             "hero_id": 12,
@@ -153,15 +156,22 @@
   {
     "_id": 13,
     "active": false,
+    "round": 0,
+    "startedAt": "2013-01-13",
     "heroes": [
       {
-        "account_id": 1,
-        "hero_id": 12,
-        "ready": false
-      },
-      {
-        "account_id": 2,
-        "hero_id": 13,
+        "appearance": {
+          "name": "Vinni the Puh",
+          "face": "trollface",
+          "race": "plunger"
+        },
+        "level": {
+          "code": "newbie",
+          "rating": 1010,
+          "next": 10000
+        },
+        "health": 50,
+        "mental_power": 10,
         "ready": true
       }
     ]
@@ -169,7 +179,10 @@
   {
     "indexes": [
       {
-        "heroes.hero_id": 1
+        "heroes.hero_id": 1,
+        "options": {
+          "unique": true
+        }
       }
     ]
   }

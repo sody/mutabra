@@ -1,12 +1,10 @@
 package com.mutabra.domain.game;
 
 import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Indexed;
 import com.google.code.morphia.annotations.Reference;
 import com.mutabra.domain.BaseEntity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,9 +23,6 @@ public class Hero extends BaseEntity {
     private int mentalPower;
 
     private List<String> cards = new ArrayList<String>();
-
-    @Indexed
-    private Date lastActive;
 
     public Account getAccount() {
         return account;
@@ -63,13 +58,5 @@ public class Hero extends BaseEntity {
 
     public List<String> getCards() {
         return cards;
-    }
-
-    public Date getLastActive() {
-        return lastActive;
-    }
-
-    public void setLastActive(final Date lastActive) {
-        this.lastActive = lastActive;
     }
 }
