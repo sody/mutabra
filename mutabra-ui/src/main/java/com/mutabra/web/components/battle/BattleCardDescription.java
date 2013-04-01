@@ -27,11 +27,11 @@ public class BattleCardDescription extends AbstractComponent implements ClientEl
     }
 
     public String getName() {
-        return label(card, "name");
+        return label(card, BattleCard.NAME);
     }
 
     public String getDescription() {
-        return label(card, "description");
+        return label(card, BattleCard.DESCRIPTION);
     }
 
     @SetupRender

@@ -5,6 +5,8 @@ package com.mutabra.domain;
  * @since 1.0
  */
 public interface Translatable {
+    String NAME = "name";
+    String DESCRIPTION = "description";
 
     String getBasename();
 

@@ -240,12 +240,12 @@ db.cards.insert({
 });
 
 db.cards.insert({
-  _id: 'carrion_vulture',
+  _id: 'carrion-vulture',
   targetType: 'SINGLE_FRIEND_EMPTY',
   bloodCost: 2,
   effects: [
     {
-      code: 'carrion_vulture',
+      code: 'carrion-vulture',
       type: 'SUMMON',
       targetType: 'SINGLE_FRIEND_EMPTY',
       duration: 1,
@@ -253,12 +253,12 @@ db.cards.insert({
       health: 5,
       abilities: [
         {
-          code: 'carrion_vulture.attack',
+          code: 'carrion-vulture.attack',
           targetType: 'SINGLE_ENEMY_UNIT',
           bloodCost: 0,
           effects: [
             {
-              code: 'carrion_vulture.attack',
+              code: 'carrion-vulture.attack',
               type: 'RANGED_ATTACK',
               targetType: 'SINGLE_ENEMY_UNIT',
               duration: 1,

@@ -82,9 +82,11 @@ public class ApplicationModule {
     }
 
     @Contribute(ComponentMessagesSource.class)
-    public void contributeComponentMessagesSource(@Value("context:WEB-INF/mail") final Resource mailMessages,
-                                                  final OrderedConfiguration<Resource> configuration) {
+    public void contributeComponentMessagesSource(final OrderedConfiguration<Resource> configuration,
+                                                  @Value("context:WEB-INF/mail") final Resource mailMessages,
+                                                  @Value("context:WEB-INF/domain") final Resource domainMessages) {
         configuration.add("mail", mailMessages);
+        configuration.add("domain", domainMessages);
     }
 
     @Local
