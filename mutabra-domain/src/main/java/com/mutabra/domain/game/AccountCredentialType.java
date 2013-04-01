@@ -9,5 +9,20 @@ public enum AccountCredentialType {
     TWITTER,
     FACEBOOK,
     GOOGLE,
-    VK
+    VK;
+
+    private static final String BASENAME = "credential-type";
+    private final String code;
+
+    private AccountCredentialType() {
+        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+    }
+
+    public String getBasename() {
+        return BASENAME;
+    }
+
+    public String getCode() {
+        return code;
+    }
 }

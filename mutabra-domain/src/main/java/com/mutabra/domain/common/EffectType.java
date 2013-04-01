@@ -1,10 +1,12 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.domain.Translatable;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public enum EffectType {
+public enum EffectType implements Translatable {
     UNKNOWN,
 
     /* abilities */
@@ -49,5 +51,20 @@ public enum EffectType {
     ABILITY_PUNISHMENT,
     SUMMON_PUNISHMENT,
     HEAL_PUNISHMENT,
-    MOVE_PUNISHMENT
+    MOVE_PUNISHMENT;
+
+    private static final String BASENAME = "effect-type";
+    private final String code;
+
+    private EffectType() {
+        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+    }
+
+    public String getBasename() {
+        return BASENAME;
+    }
+
+    public String getCode() {
+        return code;
+    }
 }

@@ -1,10 +1,12 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.domain.Translatable;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public enum TargetType {
+public enum TargetType implements Translatable {
 
     /**
      * Has no target.
@@ -162,6 +164,10 @@ public enum TargetType {
      */
     ALL_FRIEND_CREATURE(true, false, true, false, false, true);
 
+    private static final String BASENAME = "target-type";
+
+    private final String code;
+
     private final int order;
 
     private final boolean massive;
@@ -173,7 +179,7 @@ public enum TargetType {
     private final boolean supportsHero;
     private final boolean supportsCreature;
 
-    TargetType(final boolean massive,
+    private TargetType(final boolean massive,
                final boolean supportsEnemy,
                final boolean supportsFriend,
                final boolean supportsEmpty,
@@ -186,12 +192,22 @@ public enum TargetType {
         this.supportsHero = supportsHero;
         this.supportsCreature = supportsCreature;
 
+        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+
         order = (massive ? 32 : 0) +
                 (supportsEnemy ? 16 : 0) +
                 (supportsFriend ? 8 : 0) +
                 (supportsEmpty ? 4 : 0) +
                 (supportsHero ? 2 : 0) +
                 (supportsCreature ? 1 : 0);
+    }
+
+    public String getBasename() {
+        return BASENAME;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public int getOrder() {
