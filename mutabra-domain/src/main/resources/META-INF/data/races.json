@@ -1,0 +1,2 @@
+{ "_id" : "flyer", "health" : 27, "mentalPower" : 12, "cards" : [ "chamois", "carrion-vulture", "chives", "scramble", "scratch", "snowball", "throw", "falling-boulder", "echo-mountain", "decompression" ] }
+{ "_id" : "plunger", "health" : 30, "mentalPower" : 10, "cards" : [ "electric-ray", "seahorse", "mermaid", "calm", "wave", "whirlpool", "trident-blow", "swim-away", "storm", "drop-of-the-ocean" ] }
