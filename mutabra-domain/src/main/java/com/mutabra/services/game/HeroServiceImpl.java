@@ -55,6 +55,6 @@ public class HeroServiceImpl
 
     public void enter(final Account account, final Hero hero) {
         account.setHero(new AccountHero(hero));
-        dao().getDatastore().save(account);
+        datastore().save(account);
     }
 }

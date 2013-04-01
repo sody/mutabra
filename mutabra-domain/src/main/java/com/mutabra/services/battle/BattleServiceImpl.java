@@ -167,7 +167,7 @@ public class BattleServiceImpl
         battle.setRound(1);
 
         for (BattleHero battleHero : battle.getHeroes()) {
-            final Hero hero = dao().getDatastore().get(Hero.class, battleHero.getId());
+            final Hero hero = datastore().get(Hero.class, battleHero.getId());
             fillHero(battleHero, hero);
 
             // the initial hero position is center
@@ -175,7 +175,7 @@ public class BattleServiceImpl
             battleHero.setReady(false);
 
             // init hero cards
-            final List<Card> cards = dao().getDatastore().get(Card.class, hero.getCards()).asList();
+            final List<Card> cards = datastore().get(Card.class, hero.getCards()).asList();
             // shuffle deck
             Collections.shuffle(cards);
             // init card copies for battle
@@ -193,11 +193,11 @@ public class BattleServiceImpl
 
     private void end(final Battle battle) {
         for (BattleHero battleHero : battle.getHeroes()) {
-            final Hero hero = dao().getDatastore().get(Hero.class, battleHero.getId());
+            final Hero hero = datastore().get(Hero.class, battleHero.getId());
             // update hero rating
             hero.getLevel().setRating(battleHero.getLevel().getRating());
             // TODO: add level-up logic
-            dao().getDatastore().save(hero);
+            datastore().save(hero);
         }
 
         delete(battle);

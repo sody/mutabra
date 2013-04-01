@@ -1,7 +1,6 @@
 package com.mutabra.services;
 
 import com.google.code.morphia.Datastore;
-import com.google.code.morphia.dao.BasicDAO;
 import com.google.code.morphia.query.Query;
 import com.mutabra.domain.Entity;
 
@@ -13,38 +12,40 @@ import java.io.Serializable;
  */
 public class EntityServiceImpl<E extends Entity<PK>, PK extends Serializable> implements EntityService<E, PK> {
 
-    private final BasicDAO<E, PK> dao;
+    private final Datastore datastore;
+    private final Class<E> entityClass;
 
     public EntityServiceImpl(final Datastore datastore, final Class<E> entityClass) {
-        dao = new BasicDAO<E, PK>(entityClass, datastore);
+        this.datastore = datastore;
+        this.entityClass = entityClass;
     }
 
     public void save(final E entity) {
-        dao.save(entity);
+        datastore.save(entity);
     }
 
     public void delete(final E entity) {
-        dao.delete(entity);
+        datastore.delete(entity);
     }
 
     public Class<E> getEntityClass() {
-        return dao.getEntityClass();
+        return entityClass;
     }
 
     public E get(final PK pk) {
-        return dao.get(pk);
+        return datastore.get(entityClass, pk);
     }
 
     public Query<E> query() {
-        return dao.createQuery();
+        return datastore.createQuery(entityClass);
     }
 
-    protected BasicDAO<E, PK> dao() {
-        return dao;
+    protected Datastore datastore() {
+        return datastore;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "[name=" + dao.getEntityClass() + "]";
+        return getClass().getSimpleName() + "[name=" + entityClass + "]";
     }
 }
