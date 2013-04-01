@@ -47,8 +47,8 @@ public class EmptyLayout extends AbstractComponent {
 
     @Property
     @Inject
-    @Symbol(ApplicationConstants.ROBOT_EMAIL)
-    private String robotEmail;
+    @Symbol(ApplicationConstants.SUPPORT_EMAIL)
+    private String supportEmail;
 
     @Inject
     private BindingSource bindingSource;

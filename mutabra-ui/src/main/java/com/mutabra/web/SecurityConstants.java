@@ -5,10 +5,11 @@ package com.mutabra.web;
  * @since 1.0
  */
 public class SecurityConstants {
+    public static final String TOKEN_EXPIRATION_TIME = "security.token-expiration-time";
+
     public static final String HASH_ALGORITHM = "security.hash-algorithm";
     public static final String HASH_ITERATIONS = "security.hash-iterations";
     public static final String HASH_PRIVATE_SALT = "security.hash-private-salt";
-    public static final String TOKEN_EXPIRATION_TIME = "security.token-expiration-time";
 
     public static final String FACEBOOK_KEY = "security.facebook-key";
     public static final String FACEBOOK_SECRET = "security.facebook-secret";

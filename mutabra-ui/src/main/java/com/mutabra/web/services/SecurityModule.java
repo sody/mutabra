@@ -52,15 +52,13 @@ public class SecurityModule {
     public void setupDefaultValues(final MappedConfiguration<String, String> configuration) {
         // we can override all this values with system properties and servlet context parameters
 
-        configuration.add(ApplicationConstants.ROBOT_EMAIL, "${evn.robot_email}");
-
         // hash service constants should be retrieved from environment values by default
         configuration.add(SecurityConstants.HASH_ALGORITHM, "${evn.hash_algorithm}");
         configuration.add(SecurityConstants.HASH_ITERATIONS, "${evn.hash_iterations}");
         configuration.add(SecurityConstants.HASH_PRIVATE_SALT, "${evn.hash_private_salt}");
 
         // add default value for token expiration time
-        configuration.add(SecurityConstants.TOKEN_EXPIRATION_TIME, "60000");
+        configuration.add(SecurityConstants.TOKEN_EXPIRATION_TIME, "86400000");
 
         // created here https://developers.facebook.com/apps
         configuration.add(SecurityConstants.FACEBOOK_KEY, "${env.facebook_id}");
