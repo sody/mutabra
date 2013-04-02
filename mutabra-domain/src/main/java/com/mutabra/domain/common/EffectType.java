@@ -9,6 +9,9 @@ import com.mutabra.domain.Translatable;
 public enum EffectType implements Translatable {
     UNKNOWN,
 
+    /* internal cast type */
+    CAST,
+
     /* abilities */
     SUMMON,
     HEAL,

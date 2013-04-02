@@ -4,6 +4,8 @@ import com.google.code.morphia.Datastore;
 import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.EffectType;
+import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
@@ -77,6 +79,20 @@ public class BattleServiceImpl
                      final BattleCard card,
                      final BattleTarget target) {
         final BattleHero hero = card.getHero();
+
+        // add cast effect
+        // it will subtract blood cost from hero health
+        final BattleEffect castEffect = new BattleEffect();
+        castEffect.setCode(card.getCode());
+        castEffect.setDuration(1);
+        castEffect.setPower(card.getBloodCost());
+        castEffect.setType(EffectType.CAST);
+        castEffect.setTargetType(TargetType.NOBODY);
+        castEffect.getCaster().setHero(hero);
+        castEffect.getTarget().setCard(card);
+        battle.getEffects().add(castEffect);
+
+        // add remaining card effects
         for (Effect effect : card.getEffects()) {
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
@@ -88,10 +104,8 @@ public class BattleServiceImpl
             battle.getEffects().add(battleEffect);
         }
 
+        // set hero exhausted
         hero.setReady(true);
-        //TODO: replace with some battle effect that takes place after round ends
-        hero.setHealth(hero.getHealth() - card.getBloodCost());
-        card.setType(BattleCardType.GRAVEYARD);
 
         // end round if ready
         if (battle.isAllReady()) {
@@ -111,20 +125,32 @@ public class BattleServiceImpl
                      final BattleAbility ability,
                      final BattleTarget target) {
         final BattleCreature creature = ability.getCreature();
+
+        // add cast effect
+        // it will subtract blood cost from creature health
+        final BattleEffect castEffect = new BattleEffect();
+        castEffect.setCode(ability.getCode());
+        castEffect.setDuration(1);
+        castEffect.setPower(ability.getBloodCost());
+        castEffect.setType(EffectType.CAST);
+        castEffect.setTargetType(TargetType.NOBODY);
+        castEffect.getCaster().setCreature(creature);
+        castEffect.getTarget().setAbility(ability);
+        battle.getEffects().add(castEffect);
+
+        // add remaining ability effects
         for (Effect effect : ability.getEffects()) {
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
+            battleEffect.getCaster().setCreature(creature);
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
-            battleEffect.getCaster().setCreature(creature);
 
             battle.getEffects().add(battleEffect);
         }
-
+        // set creature exhausted
         creature.setReady(true);
-        //TODO: replace with some battle effect that takes place after round ends
-        creature.setHealth(creature.getHealth() - ability.getBloodCost());
 
         // end round if ready
         if (battle.isAllReady()) {
@@ -207,35 +233,30 @@ public class BattleServiceImpl
         // process effects
         scriptEngine.executeScripts(battle);
 
-        for (BattleHero battleHero : battle.getHeroes()) {
-            if (battleHero.getHealth() <= 0 || battleHero.getMentalPower() <= 0) {
-                // someone dead
+        // continue only if battle is still active
+        if (battle.isActive()) {
+            //start new round
+            battle.setRound(battle.getRound() + 1);
+            for (BattleHero battleHero : battle.getHeroes()) {
+                // increase mental power each round
+                battleHero.setMentalPower(battleHero.getMentalPower() + 1);
+                // move one card from deck to hand
+                dealCards(battleHero, 1);
+                // each hero should be able to cast cards in the beginning of the round
+                // except the situation when there are no cards in the hand
+                battleHero.setReady(battleHero.getHand().isEmpty());
+
+                for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                    // each creature should be able to use abilities in the beginning of the round
+                    // except the situation when there are no abilities
+                    battleCreature.setReady(battleCreature.getAbilities().isEmpty());
+                }
+            }
+
+            // there are no more cards
+            if (battle.isAllReady()) {
                 battle.setActive(false);
-                return;
             }
-        }
-
-        //start new round
-        battle.setRound(battle.getRound() + 1);
-        for (BattleHero battleHero : battle.getHeroes()) {
-            // increase mental power each round
-            battleHero.setMentalPower(battleHero.getMentalPower() + 1);
-            // move one card from deck to hand
-            dealCards(battleHero, 1);
-            // each hero should be able to cast cards in the beginning of the round
-            // except the situation when there are no cards in the hand
-            battleHero.setReady(battleHero.getHand().isEmpty());
-
-            for (BattleCreature battleCreature : battleHero.getCreatures()) {
-                // each creature should be able to use abilities in the beginning of the round
-                // except the situation when there are no abilities
-                battleCreature.setReady(battleCreature.getAbilities().isEmpty());
-            }
-        }
-
-        // there are no more cards
-        if (battle.isAllReady()) {
-            battle.setActive(false);
         }
     }
 

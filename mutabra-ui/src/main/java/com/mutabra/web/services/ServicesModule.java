@@ -12,6 +12,7 @@ import com.mutabra.services.battle.BattleServiceImpl;
 import com.mutabra.services.battle.ScriptEngine;
 import com.mutabra.services.battle.ScriptEngineImpl;
 import com.mutabra.services.battle.scripts.AttackScript;
+import com.mutabra.services.battle.scripts.CastScript;
 import com.mutabra.services.battle.scripts.EffectScript;
 import com.mutabra.services.battle.scripts.SummonScript;
 import com.mutabra.services.game.HeroService;
@@ -61,6 +62,7 @@ public class ServicesModule {
 
     @Contribute(ScriptEngine.class)
     public void contributeScriptEngine(final MappedConfiguration<EffectType, EffectScript> configuration) {
+        configuration.addInstance(EffectType.CAST, CastScript.class);
         configuration.addInstance(EffectType.MAGIC_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.MELEE_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.RANGED_ATTACK, AttackScript.class);

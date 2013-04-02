@@ -14,13 +14,21 @@ public class BattleTarget {
     private BattleSide side;
 
     private ObjectId hero;
+    private Long card;
     private Long creature;
+    private Long ability;
 
     @Transient
     private BattleCreature creatureInstance;
 
     @Transient
     private BattleHero heroInstance;
+
+    @Transient
+    private BattleCard cardInstance;
+
+    @Transient
+    private BattleAbility abilityInstance;
 
     public BattlePosition getPosition() {
         return position;
@@ -47,6 +55,15 @@ public class BattleTarget {
         this.hero = hero.getId();
     }
 
+    public BattleCard getCard() {
+        return cardInstance;
+    }
+
+    public void setCard(final BattleCard card) {
+        this.cardInstance = card;
+        this.card = card.getId();
+    }
+
     public BattleCreature getCreature() {
         return creatureInstance;
     }
@@ -56,12 +73,28 @@ public class BattleTarget {
         this.creature = creature.getId();
     }
 
+    public BattleAbility getAbility() {
+        return abilityInstance;
+    }
 
-    public ObjectId getHeroId() {
+    public void setAbility(final BattleAbility ability) {
+        this.abilityInstance = ability;
+        this.ability = ability.getId();
+    }
+
+    ObjectId getHeroId() {
         return hero;
     }
 
-    public Long getCreatureId() {
+    Long getCardId() {
+        return card;
+    }
+
+    Long getCreatureId() {
         return creature;
+    }
+
+    Long getAbilityId() {
+        return ability;
     }
 }

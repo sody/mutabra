@@ -6,11 +6,7 @@ import com.google.code.morphia.annotations.PrePersist;
 import com.mutabra.domain.BaseEntity;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik
@@ -79,8 +75,14 @@ public class Battle extends BaseEntity {
     void loadLinks() {
         final Map<ObjectId, BattleHero> heroByKey = new HashMap<ObjectId, BattleHero>();
         final Map<Long, BattleCreature> creatureById = new HashMap<Long, BattleCreature>();
+        final Map<Long, BattleCard> cardById = new HashMap<Long, BattleCard>();
+        final Map<Long, BattleAbility> abilityById = new HashMap<Long, BattleAbility>();
+
         for (BattleHero battleHero : heroes) {
             heroByKey.put(battleHero.getId(), battleHero);
+            // assign parents
+            battleHero.assignBattle(this);
+
             for (BattleCreature battleCreature : battleHero.getCreatures()) {
                 creatureById.put(battleCreature.getId(), battleCreature);
 
@@ -88,12 +90,16 @@ public class Battle extends BaseEntity {
                 battleCreature.assignHero(battleHero);
                 for (BattleAbility battleAbility : battleCreature.getAbilities()) {
                     battleAbility.assignCreature(battleCreature);
+
+                    // assign parents
+                    abilityById.put(battleAbility.getId(), battleAbility);
                 }
             }
 
-            // assign parents
-            battleHero.assignBattle(this);
             for (BattleCard battleCard : battleHero.getCards()) {
+                cardById.put(battleCard.getId(), battleCard);
+
+                // assign parents
                 battleCard.assignHero(battleHero);
             }
         }
@@ -104,6 +110,10 @@ public class Battle extends BaseEntity {
                 caster.setCreature(creatureById.get(caster.getCreatureId()));
             } else if (caster.getHeroId() != null) {
                 caster.setHero(heroByKey.get(caster.getHeroId()));
+            } else if (caster.getCardId() != null) {
+                caster.setCard(cardById.get(caster.getCardId()));
+            } else if (caster.getAbilityId() != null) {
+                caster.setAbility(abilityById.get(caster.getAbilityId()));
             }
 
             final BattleTarget target = battleEffect.getTarget();
@@ -111,6 +121,10 @@ public class Battle extends BaseEntity {
                 target.setCreature(creatureById.get(target.getCreatureId()));
             } else if (target.getHeroId() != null) {
                 target.setHero(heroByKey.get(target.getHeroId()));
+            } else if (target.getCardId() != null) {
+                target.setCard(cardById.get(target.getCardId()));
+            } else if (target.getAbilityId() != null) {
+                target.setAbility(abilityById.get(target.getAbilityId()));
             }
         }
     }
