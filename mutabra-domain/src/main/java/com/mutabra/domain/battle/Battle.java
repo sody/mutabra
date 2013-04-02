@@ -21,6 +21,8 @@ public class Battle extends BaseEntity {
 
     private List<BattleHero> heroes = new ArrayList<BattleHero>();
     private List<BattleEffect> effects = new ArrayList<BattleEffect>();
+    //TODO: move to separate entity?
+    private List<BattleLogEntry> log = new ArrayList<BattleLogEntry>();
 
     // internal id sequences
     private long creatureSequence;
@@ -55,6 +57,10 @@ public class Battle extends BaseEntity {
 
     public List<BattleEffect> getEffects() {
         return effects;
+    }
+
+    public List<BattleLogEntry> getLog() {
+        return log;
     }
 
     /* HELPER METHODS */
@@ -105,26 +111,13 @@ public class Battle extends BaseEntity {
         }
 
         for (BattleEffect battleEffect : effects) {
-            final BattleTarget caster = battleEffect.getCaster();
-            if (caster.getCreatureId() != null) {
-                caster.setCreature(creatureById.get(caster.getCreatureId()));
-            } else if (caster.getHeroId() != null) {
-                caster.setHero(heroByKey.get(caster.getHeroId()));
-            } else if (caster.getCardId() != null) {
-                caster.setCard(cardById.get(caster.getCardId()));
-            } else if (caster.getAbilityId() != null) {
-                caster.setAbility(abilityById.get(caster.getAbilityId()));
-            }
+            updateTarget(battleEffect.getCaster(), heroByKey, cardById, creatureById, abilityById);
+            updateTarget(battleEffect.getTarget(), heroByKey, cardById, creatureById, abilityById);
+        }
 
-            final BattleTarget target = battleEffect.getTarget();
-            if (target.getCreatureId() != null) {
-                target.setCreature(creatureById.get(target.getCreatureId()));
-            } else if (target.getHeroId() != null) {
-                target.setHero(heroByKey.get(target.getHeroId()));
-            } else if (target.getCardId() != null) {
-                target.setCard(cardById.get(target.getCardId()));
-            } else if (target.getAbilityId() != null) {
-                target.setAbility(abilityById.get(target.getAbilityId()));
+        for (BattleLogEntry logEntry : log) {
+            for (BattleTarget battleTarget : logEntry.getParameters()) {
+                updateTarget(battleTarget, heroByKey, cardById, creatureById, abilityById);
             }
         }
     }
@@ -155,6 +148,22 @@ public class Battle extends BaseEntity {
                     battleCard.assignId(nextId());
                 }
             }
+        }
+    }
+
+    private void updateTarget(final BattleTarget target,
+                              final Map<ObjectId, BattleHero> heroByKey,
+                              final Map<Long, BattleCard> cardById,
+                              final Map<Long, BattleCreature> creatureById,
+                              final Map<Long, BattleAbility> abilityById) {
+        if (target.getCreatureId() != null) {
+            target.setCreature(creatureById.get(target.getCreatureId()));
+        } else if (target.getHeroId() != null) {
+            target.setHero(heroByKey.get(target.getHeroId()));
+        } else if (target.getCardId() != null) {
+            target.setCard(cardById.get(target.getCardId()));
+        } else if (target.getAbilityId() != null) {
+            target.setAbility(abilityById.get(target.getAbilityId()));
         }
     }
 
