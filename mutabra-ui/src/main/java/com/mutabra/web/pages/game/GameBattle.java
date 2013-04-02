@@ -37,6 +37,9 @@ public class GameBattle extends AbstractPage {
     private BattleField.Point point;
 
     @Property
+    private BattleLogEntry logEntry;
+
+    @Property
     private BattleHero hero;
 
     @Property
