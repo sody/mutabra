@@ -44,9 +44,9 @@ public class ApplicationModule {
     @FactoryDefaults
     @Contribute(SymbolProvider.class)
     public void contributeFactoryDefaults(final MappedConfiguration<String, String> configuration) {
-        configuration.add(ApplicationConstants.ROBOT_EMAIL, "${evn.robot_email}");
-        configuration.add(ApplicationConstants.SUPPORT_EMAIL, "${evn.support_email}");
-        configuration.add(ApplicationConstants.MONGO_URI, "${evn.mongohq_url}");
+        configuration.add(ApplicationConstants.ROBOT_EMAIL, "${env.robot_email}");
+        configuration.add(ApplicationConstants.SUPPORT_EMAIL, "${env.support_email}");
+        configuration.add(ApplicationConstants.MONGO_URI, "${env.mongohq_url}");
     }
 
     public static void bind(final ServiceBinder binder) {
