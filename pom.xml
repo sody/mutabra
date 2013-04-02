@@ -3,7 +3,7 @@
 
     <groupId>com.mutabra</groupId>
     <artifactId>mutabra-parent</artifactId>
-    <version>1.0-pre-alpha-12</version>
+    <version>1.0-pre-alpha-13-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Mutabra Project</name>
@@ -11,7 +11,7 @@
         <url>https://bitbucket.org/mutabra/mutabra</url>
         <developerConnection>scm:git:https://bitbucket.org/mutabra/mutabra.git</developerConnection>
         <connection>scm:git:git@bitbucket.org:mutabra/mutabra.git</connection>
-        <tag>mutabra-1.0-pre-alpha-12</tag>
+        <tag>HEAD</tag>
     </scm>
     <distributionManagement>
         <repository>
