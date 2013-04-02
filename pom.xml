@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mutabra</groupId>
     <artifactId>mutabra-parent</artifactId>
-    <version>1.0-pre-alpha-12-SNAPSHOT</version>
+    <version>1.0-pre-alpha-12</version>
     <packaging>pom</packaging>
 
     <name>Mutabra Project</name>
@@ -12,7 +11,7 @@
         <url>https://bitbucket.org/mutabra/mutabra</url>
         <developerConnection>scm:git:https://bitbucket.org/mutabra/mutabra.git</developerConnection>
         <connection>scm:git:git@bitbucket.org:mutabra/mutabra.git</connection>
-        <tag>HEAD</tag>
+        <tag>mutabra-1.0-pre-alpha-12</tag>
     </scm>
     <distributionManagement>
         <repository>
