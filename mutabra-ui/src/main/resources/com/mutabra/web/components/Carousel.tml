@@ -1,0 +1,18 @@
+<div t:id="container" class="prop:containerClass" id="prop:clientId"
+     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:if test="insideForm">
+        <t:hidden t:id="hiddenValue" value="value" encoder="encoder"/>
+    </t:if>
+
+    <div class="carousel-inner">
+        <t:loop source="source" value="row" encoder="encoder" index="index">
+            <div class="${itemClass}" data-hidden="${itemId}">
+                <t:body/>
+            </div>
+        </t:loop>
+    </div>
+
+    <a class="carousel-control left" href="#${clientId}" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#${clientId}" data-slide="next">&rsaquo;</a>
+</div>

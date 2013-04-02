@@ -1,0 +1,61 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<div class="row">
+    <div class="field">
+        <svg id="battle-field" xmlns="http://www.w3.org/2000/svg" height="300" width="500" version="1.1">
+            <t:loop source="field.get()" value="point">
+                <t:battle.fieldpointdisplay point="point">
+                    <t:if test="point.hasHero()">
+                        <t:svg type="faces" image="point.hero.appearance.face" inline="true"
+                               width="90" height="90" x="50" y="5"/>
+                    </t:if>
+                    <t:if test="point.hasCreature()">
+                        <t:svg type="creatures" image="point.creature.code" inline="true"
+                               width="90" height="90" x="50" y="5"/>
+                    </t:if>
+                </t:battle.fieldpointdisplay>
+            </t:loop>
+        </svg>
+    </div>
+    <div class="log">Log</div>
+</div>
+
+<div class="row">
+    <div class="span4">
+        <div class="row">
+            <t:loop source="field.battle.heroes" value="hero">
+                <t:battle.herodescription hero="hero" active="!enemy"/>
+                <t:if test="!enemy">
+                    <t:loop source="hero.hand" value="card">
+                        <t:battle.carddescription card="card"/>
+                    </t:loop>
+                </t:if>
+                <t:loop source="hero.creatures" value="creature">
+                    <t:battle.creaturedescription creature="creature"/>
+                    <t:if test="!enemy">
+                        <t:loop source="creature.abilities" value="ability">
+                            <t:battle.abilitydescription ability="ability"/>
+                        </t:loop>
+                    </t:if>
+                </t:loop>
+            </t:loop>
+            <t:battle.skipturndescription/>
+        </div>
+    </div>
+
+    <div class="span8">
+        <t:loop source="field.battle.heroes" value="hero">
+            <t:if test="!enemy">
+                <t:battle.herohanddisplay hero="hero" t:id="heroHand"/>
+                <t:loop source="hero.creatures" value="creature">
+                    <t:battle.creaturehanddisplay creature="creature" t:id="creatureHand"/>
+                </t:loop>
+            </t:if>
+        </t:loop>
+    </div>
+</div>
+
+<t:game.updatechecker/>
+
+</html>

@@ -1,0 +1,13 @@
+<ul class="prop:menuClass" t:id="list"
+    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:block id="defaultItemBody">
+        <t:actionlink context="item">${itemTitle}</t:actionlink>
+    </t:block>
+
+    <t:loop source="items" value="item">
+        <li t:type="any" class="prop:itemClass">
+            <t:delegate to="itemBody"/>
+        </li>
+    </t:loop>
+</ul>

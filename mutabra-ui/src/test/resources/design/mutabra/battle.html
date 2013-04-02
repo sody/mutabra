@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mutabra Layout Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="../css/mutabra.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="page">
+    <header class="header container" id="header">
+        <div class="row">
+            <div class="span3">
+                <a class="logo" href="/">UTABRA</a>
+            </div>
+
+            <div class="span1 offset5">
+                <a href="#">
+                    <svg height="64" width="64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <title>Unknown Image</title>
+                        <desc>Unknown Image</desc>
+                        <g transform="scale(0.640,0.640)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="span3">
+                <div class="control-group">
+                    <div id="dropdown" class="btn-group dropdown">
+                        <a href="#" data-toggle="dropdown" class="btn dropdown-toggle">
+                            Vasya Pupkin <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/settings.html">Settings</a></li>
+                            <li><a href="/switch.html">Switch</a></li>
+                            <li><a href="/signout.html">Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <ul class="horizontal-menu" id="locale">
+                        <li><a title="ru" class="icon-flag-ru interactive" href="/ru">ru</a></li>
+                        <li><a title="en" class="icon-flag-us interactive active" href="/en">en</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="wrapper container" id="content">
+        <div class="page-header">
+            <h1>Battle
+                <small>(Round: 1)</small>
+            </h1>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <svg version="1.1" width="490" height="300" id="battle-field" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(0,50)" class="empty enemy"
+                       data-position-y="0" data-position-x="0" id="f_0_0">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                    </g>
+                    <g transform="translate(150,200)" class="hero friend active"
+                       data-position-y="2" data-position-x="1" data-field-target="#actions_1_2"
+                       data-description-target="#description_1_2" id="f_1_2">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                        <g transform="translate(50,5) scale(0.9,0.9)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </g>
+                    <g transform="translate(300,150)" class="empty friend"
+                       data-position-y="1" data-position-x="2" id="f_2_1">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                    </g>
+                    <g transform="translate(300,50)" class="creature enemy"
+                       data-position-y="0" data-position-x="2" data-field-target="#actions_2_0"
+                       data-description-target="#description_2_0"  id="f_2_0">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+
+                        <g transform="translate(50,5) scale(0.9,0.9)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </g>
+                    <g transform="translate(150,0)" class="hero enemy"
+                       data-position-y="0" data-position-x="1" data-field-target="#actions_1_0"
+                       data-description-target="#description_1_0" id="f_1_0">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                        <g transform="translate(50,5) scale(0.9,0.9)">
+                            <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                  fill="#333"></path>
+                        </g>
+                    </g>
+                    <g transform="translate(0,150)" class="empty friend"
+                       data-position-y="1" data-position-x="0" id="f_0_1">
+                        <path d="m50,5,90,0,45,45,-45,45,-90,0,-45,-45,45,-45z"></path>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="log">
+                <h4>Round 12:</h4>
+                <p><a href="#" class="friend">[sody]</a> summoned a <a href="#" class="detail">[huge hydra]</a>...</p>
+                <p><a href="#" class="enemy">[hermes]</a> attacked <a href="#" class="friend">[sody]</a> with a <a href="#" class="detail">[wood sword]</a>...</p>
+
+                <h4>Round 11:</h4>
+                <p><a href="#" class="enemy">[hermes]</a> skips...</p>
+                <p><a href="#" class="friend">[sody]</a> attacks <a href="#" class="enemy">[hermes]</a> with a <a href="#" class="detail">[chain lighting]</a>...</p>
+
+                <p><a href="#" class="detail">[...]</a></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span4">
+                <div class="row">
+                    <div class="description active" id="description_1_2">
+                        <h3 class="description-title">Vasya Pupkin</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+                        <dl class="description-attrs">
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>30</dd>
+
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>10</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            Don't be an idiot. This is you, asshole!
+                        </p>
+                    </div>
+                    <div class="description" id="description_swim-away">
+                        <h3 class="description-title">Swim Away</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>0</dd>
+
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>0</dd>
+
+                            <dt><i class="icon-blood large"></i></dt>
+                            <dd>0</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            Swim away from your current position.
+                        </p>
+                    </div>
+                    <div class="description" id="description_trident-blow">
+                        <h3 class="description-title">Trident Blow</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt> <i class="icon-skull large"></i></dt>
+                            <dd>6</dd>
+
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>0</dd>
+
+                            <dt><i class="icon-blood large"></i></dt>
+                            <dd>2</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            Magical attack with trident.
+                        </p>
+                    </div>
+                    <div class="description" id="description_storm">
+                        <h3 class="description-title">Storm</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>0</dd>
+
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>0</dd>
+
+                            <dt><i class="icon-blood large"></i></dt>
+                            <dd>2</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            Creates a storm.
+                        </p>
+                    </div>
+                    <div class="description" id="description_seahorse">
+                        <h3 class="description-title">Seahorse</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>1</dd>
+
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>3<dd>
+
+                            <dt><i class="icon-blood large"></i></dt>
+                            <dd>2</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            Summons a seahorse that will fight for you.
+                        </p>
+                    </div>
+                    <div class="description" id="description_mermaid">
+                        <h3 class="description-title">Mermaid</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>0</dd>
+
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>4</dd>
+
+                            <dt><i class="icon-blood large"></i></dt>
+                            <dd>2</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            Summons a mermaid that will fight for you.
+                        </p>
+                    </div>
+                    <div class="description" id="description_1_0">
+                        <h3 class="description-title">Vinni The Puh</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>30</dd>
+
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>10</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            This is your enemy, asshole!
+                        </p>
+                    </div>
+
+                    <div class="description" id="description_2_0">
+                        <h3 class="description-title">Shadow</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Unknown Image</title>
+                            <desc>Unknown Image</desc>
+
+                            <g transform="scale(1.400,1.400)">
+                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                      fill="#333"></path>
+                            </g>
+                        </svg>
+
+                        <dl class="description-attrs">
+                            <dt><i class="icon-heart large"></i></dt>
+                            <dd>5</dd>
+
+                            <dt><i class="icon-skull large"></i></dt>
+                            <dd>1</dd>
+                        </dl>
+
+                        <p class="description-text">
+                            This is your enemy creature, asshole!
+                        </p>
+                    </div>
+
+                    <div class="description" id="description_skip">
+                        <h3 class="description-title">Skip Turn</h3>
+
+                        <svg height="140" width="140" class="description-picture" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>Skip Turn Card</title>
+                            <desc>Skip Turn Card</desc>
+                            <g transform="scale(1.400,1.400)">
+                                <!-- Top part -->
+                                <path d="m12,43c18,-13,18,-13,31,-31,0,6,3,5,5,5l-31,31c0,-2,1,-5,-5,-5z" fill="#333" stroke="none"></path>
+                                <!-- Bottom Part -->
+                                <path d="m57,88c0,-6,-3,-5,-5,-5l31,-31c0,2,-1,5,5,5,-18,13,-18,13,-31,31z" fill="#333" stroke="none"></path>
+                                <!-- Center part -->
+                                <path d="m20,45c5,5,15,5,24,5,3,0,6,3,6,6,0,9,0,19,5,24l25,-25c-5,-5,-15,-5,-24,-5,-3,0,-6,-3,-6,-6,0,-9,0,-19,-5,-24z" fill="none" stroke-width="3" stroke="#333"></path>
+                            </g>
+                        </svg>
+                        <p class="description-text">
+                            Skips your turn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span8">
+                <div class="row actions active" id="actions_1_2">
+                    <div class="card" id="card_swim-away"
+                         data-card-url="/apply"
+                         data-card-target=".friend.empty"
+                         data-description-target="#description_swim-away">
+
+                        <div class="card-ne"><i class="icon-heart"></i></div>
+                        <div class="card-nw">0</div>
+                        <div class="card-se">0</div>
+                        <div class="card-sw">0</div>
+
+                        <div class="card-body">
+                            <svg height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <title>Swim Away</title>
+                                <desc>Swim Away</desc>
+                                <g>
+                                    <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                          fill="#333"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card" id="card_trident-blow"
+                         data-card-url="/apply"
+                         data-card-target=".enemy.hero,.enemy.creature"
+                         data-description-target="#description_trident-blow">
+
+                        <div class="card-ne"><i class="icon-skull"></i></div>
+                        <div class="card-nw">2</div>
+                        <div class="card-se">6</div>
+                        <div class="card-sw">0</div>
+
+                        <div class="card-body">
+                            <svg height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <title>Trident Blow</title>
+                                <desc>Trident Blow</desc>
+                                <g>
+                                    <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                          fill="#333"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card disabled" id="card_storm"
+                         data-card-url="/apply"
+                         data-card-target=".friend.hero,.friend.creature"
+                         data-description-target="#description_storm">
+
+                        <div class="card-ne"><i class="icon-skull"></i></div>
+                        <div class="card-nw">2</div>
+                        <div class="card-se">0</div>
+                        <div class="card-sw">0</div>
+
+                        <div class="card-body">
+                            <svg height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <title>Storm</title>
+                                <desc>Storm</desc>
+                                <g>
+                                    <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                          fill="#333"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card" id="card_seahorse"
+                         data-card-url="/apply"
+                         data-card-target=".friend.empty"
+                         data-description-target="#description_seahorse">
+
+                        <div class="card-ne"><i class="icon-blood"></i></div>
+                        <div class="card-nw">2</div>
+                        <div class="card-se">1</div>
+                        <div class="card-sw">3</div>
+
+                        <div class="card-body">
+                            <svg height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <title>Seahorse</title>
+                                <desc>Seahorse</desc>
+                                <g>
+                                    <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                          fill="#333"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card" id="card_mermaid"
+                         data-card-url="/apply"
+                         data-card-target=".friend.empty"
+                         data-description-target="#description_mermaid">
+
+                        <div class="card-ne"><i class="icon-blood"></i></div>
+                        <div class="card-nw">2</div>
+                        <div class="card-se">0</div>
+                        <div class="card-sw">4</div>
+
+                        <div class="card-body">
+                            <svg height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <title>Mermaid</title>
+                                <desc>Mermaid</desc>
+                                <g>
+                                    <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
+                                          fill="#333"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card" id="card_skip"
+                         data-skip-url="/apply"
+                         data-description-target="#description_skip">
+
+                        <div class="card-body">
+                            <svg height="100" width="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <title>Skip Turn Card</title>
+                                <desc>Skip Turn Card</desc>
+                                <g>
+                                    <!-- Top part -->
+                                    <path d="m12,43c18,-13,18,-13,31,-31,0,6,3,5,5,5l-31,31c0,-2,1,-5,-5,-5z" fill="#333" stroke="none"></path>
+                                    <!-- Bottom Part -->
+                                    <path d="m57,88c0,-6,-3,-5,-5,-5l31,-31c0,2,-1,5,5,5,-18,13,-18,13,-31,31z" fill="#333" stroke="none"></path>
+                                    <!-- Center part -->
+                                    <path d="m20,45c5,5,15,5,24,5,3,0,6,3,6,6,0,9,0,19,5,24l25,-25c-5,-5,-15,-5,-24,-5,-3,0,-6,-3,-6,-6,0,-9,0,-19,-5,-24z" fill="none" stroke-width="3" stroke="#333"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row actions" id="actions_1_0">
+                </div>
+
+                <div class="row actions" id="actions_2_0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="buffer"></div>
+</div>
+
+<footer class="footer container" id="footer">
+    Copyright © 2010-2012 Mutabra Team. All rights reserved. <br/>
+    App Version: 1.0-pre-alpha-10, Tapestry Version: 5.3.5 <br/><a href="mailto:support@mutabra.com">Contact Us</a>
+</footer>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/jquery/jquery.js"></script>
+<script src="../js/bootstrap/bootstrap-transition.js"></script>
+<script src="../js/bootstrap/bootstrap-alert.js"></script>
+<script src="../js/bootstrap/bootstrap-modal.js"></script>
+<script src="../js/bootstrap/bootstrap-dropdown.js"></script>
+<script src="../js/bootstrap/bootstrap-scrollspy.js"></script>
+<script src="../js/bootstrap/bootstrap-tab.js"></script>
+<script src="../js/bootstrap/bootstrap-tooltip.js"></script>
+<script src="../js/bootstrap/bootstrap-popover.js"></script>
+<script src="../js/bootstrap/bootstrap-button.js"></script>
+<script src="../js/bootstrap/bootstrap-collapse.js"></script>
+<script src="../js/bootstrap/bootstrap-carousel.js"></script>
+<script src="../js/bootstrap/bootstrap-typeahead.js"></script>
+<script src="../js/mutabra/mutabra-battle.js"></script>
+
+</body>
+
+</html>

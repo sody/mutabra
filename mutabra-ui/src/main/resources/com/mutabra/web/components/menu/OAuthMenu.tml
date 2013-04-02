@@ -1,0 +1,19 @@
+<div class="btn-group" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:body/>
+
+    <t:social.facebookconnect t:id="facebook" scope="email" class="btn" title="message:label.facebook">
+        <i class="icon-facebook small"/>
+    </t:social.facebookconnect>
+    <t:social.twitterconnect t:id="twitter" class="btn" title="message:label.twitter">
+        <i class="icon-twitter small"/>
+    </t:social.twitterconnect>
+    <t:social.googleconnect t:id="google" class="btn" title="message:label.google"
+                            scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email">
+        <i class="icon-google small"/>
+    </t:social.googleconnect>
+    <t:social.vkontakteconnect t:id="vk" class="btn" title="message:label.vk">
+        <i class="icon-vk small"/>
+    </t:social.vkontakteconnect>
+
+</div>

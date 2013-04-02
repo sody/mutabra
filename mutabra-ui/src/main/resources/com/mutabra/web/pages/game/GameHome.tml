@@ -1,0 +1,23 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+<t:loop source="battles" value="battle">
+    <t:eventlink event="apply" context="battle" disabled="!canApplyBattle">
+        <div>
+            ${message:label.name}: ${battle.heroes.get(0).appearance.name}
+            <br/>
+            <t:svg type="faces" image="battle.heroes.get(0).appearance.face" width="100" height="100"/>
+        </div>
+    </t:eventlink>
+</t:loop>
+
+<t:if test="canApplyBattle">
+    <t:eventlink event="create" class="btn">${message:label.create}</t:eventlink>
+    <p:else>
+        <t:eventlink event="cancel" class="btn">${message:label.cancel}</t:eventlink>
+        <t:game.updatechecker/>
+    </p:else>
+</t:if>
+
+</html>

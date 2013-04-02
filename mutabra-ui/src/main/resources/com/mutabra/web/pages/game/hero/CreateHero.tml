@@ -1,0 +1,30 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+        >
+
+<t:form class="form-horizontal">
+    <div class="control-group">
+        <div class="controls">
+            <t:game.raceselect value="race"/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <t:game.faceselect value="face"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <t:label for="name" class="control-label"/>
+        <div class="controls">
+            <t:textfield t:id="name" value="name" validate="required" label="message:label.name"/>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <t:submit value="message:label.create" class="btn"/>
+        <t:actionlink context="literal:cancel" class="btn">${message:label.cancel}</t:actionlink>
+    </div>
+</t:form>
+
+</html>

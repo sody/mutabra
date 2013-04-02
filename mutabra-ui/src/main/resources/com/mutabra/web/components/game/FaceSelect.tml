@@ -1,0 +1,7 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:carousel source="source" row="row" value="value" class="span4">
+        <t:svg type="faces" image="row.code" height="100" width="100" style="margin:auto; display:block;"/>
+    </t:carousel>
+
+</t:container>

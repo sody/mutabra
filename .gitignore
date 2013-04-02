@@ -1,6 +1,5 @@
-.hg
 .git
-.svn
 .idea
 *.iml
 target
+atlassian-ide-plugin.xml

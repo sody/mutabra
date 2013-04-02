@@ -1,0 +1,189 @@
+[
+  {
+    "_id": 2,
+    "active": true,
+    "round": 3,
+    "startedAt": "2013-01-13",
+    "heroes": [
+      {
+        "hero_id": 13,
+        "appearance": {
+          "name": "Vinni the Puh",
+          "face": "trollface",
+          "race": "plunger"
+        },
+        "level": {
+          "code": "newbie",
+          "rating": 1010,
+          "next": 10000
+        },
+        "health": 50,
+        "mental_power": 10,
+        "position": [1, 1],
+        "ready": true,
+        "cards": [
+          {
+            "id": 1,
+            "code": "firewall",
+            "type": "deck",
+            "rating": 12,
+            "target_type": "single_friend_empty",
+            "blood_cost": 2,
+            "effects": [
+              {
+                "code": "firewall",
+                "type": "summon",
+                "target_type": "single_friend_empty",
+                "power": 0,
+                "health": 15,
+                "duration": 0,
+                "abilities": [
+                  {
+                    "code": "firewall.fireball",
+                    "target_type": "all",
+                    "blood_cost": 2,
+                    "effects": [
+                      {
+                        "code": "firewall.fireball",
+                        "type": "magic_attack",
+                        "target_type": "all",
+                        "power": 1,
+                        "duration": 3,
+                        "health": 0
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "code": "firewall.burn",
+                "type": "magic_attack",
+                "target_type": "all",
+                "power": 1,
+                "duration": 3,
+                "health": 0
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "code": "cool-strike",
+            "type": "hand",
+            "rating": 1111,
+            "target_type": "single_enemy_unit",
+            "blood_cost": 0,
+            "effects": [
+              {
+                "code": "cool-strike",
+                "type": "melee_attack",
+                "target_type": "single_enemy_unit",
+                "power": 10,
+                "duration": 0
+              }
+            ]
+          }
+        ],
+        "units": [
+          {
+            "id": 1,
+            "code": "firewall",
+            "health": 10,
+            "power": 0,
+            "position": [1, 2],
+            "ready": false,
+            "abilities": [
+              {
+                "ability": 1,
+                "code": "firewall.fireball",
+                "target_type": "all",
+                "blood_cost": 2,
+                "effects": [
+                  {
+                    "code": "firewall.fireball",
+                    "type": "magic_attack",
+                    "target_type": "all",
+                    "power": 1,
+                    "duration": 3,
+                    "health": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "account_id": 18,
+        "hero_id": 14
+      }
+    ],
+    "effects": [
+      {
+        "code": "firewall.burn",
+        "type": "magic_attack",
+        "target_type": "all",
+        "power": 1,
+        "duration": 2,
+        "target": {
+          "position": [1, 3],
+          "side": "enemy"
+        },
+        "caster": {
+          "hero_id": 1,
+          "unit": 1
+        }
+      }
+    ],
+    "log": [
+      {
+        "key": "firewall.success",
+        "parameters": [
+          {
+            "hero_id": 12,
+            "unit": 2
+          },
+          {
+            "hero_id": 12,
+            "card": 1
+          },
+          {
+            "raw": "[0/15]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": 13,
+    "active": false,
+    "round": 0,
+    "startedAt": "2013-01-13",
+    "heroes": [
+      {
+        "appearance": {
+          "name": "Vinni the Puh",
+          "face": "trollface",
+          "race": "plunger"
+        },
+        "level": {
+          "code": "newbie",
+          "rating": 1010,
+          "next": 10000
+        },
+        "health": 50,
+        "mental_power": 10,
+        "ready": true
+      }
+    ]
+  },
+  {
+    "indexes": [
+      {
+        "heroes.hero_id": 1,
+        "options": {
+          "unique": true
+        }
+      }
+    ]
+  }
+]

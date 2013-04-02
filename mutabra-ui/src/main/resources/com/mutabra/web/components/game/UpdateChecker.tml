@@ -1,0 +1,6 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:zone t:id="updater" id="updater" visible="false" t:mixins='ZoneRefresh'
+            period="15" context="battle.round"/>
+
+</t:container>

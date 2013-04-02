@@ -1,0 +1,23 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+             xmlns:p="tapestry:parameter">
+    <div class="span1 offset5">
+        <t:if test="account.hero">
+            <t:pagelink page="game/home">
+                <t:svg type="faces" image="account.hero.appearance.face" width="64" height="64"/>
+            </t:pagelink>
+            <p:else>
+                <t:pagelink page="account/settings">
+                    <t:svg image="literal:unknown" width="64" height="64"/>
+                </t:pagelink>
+            </p:else>
+        </t:if>
+    </div>
+    <div class="span3">
+        <div class="control-group">
+            <t:menu.user/>
+        </div>
+        <div class="control-group">
+            <t:menu.locale/>
+        </div>
+    </div>
+</t:container>

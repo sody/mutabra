@@ -1,0 +1,25 @@
+[
+  {
+    "_id": 12,
+    "account_id": 10,
+    "appearance": {
+      "name": "John Snow",
+      "face": "trollface",
+      "race": "plunger"
+    },
+    "level": {
+      "code": "newbie",
+      "rating": 1010,
+      "next": 10000
+    },
+    "health": 50,
+    "mental_power": 10,
+    "cards": [
+        "wave",
+        "storm",
+        "drop-of-the-ocean",
+        "mermaid",
+        "seahorse"
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "firewall",
+    "target_type": "single",
+    "blood_cost": 2,
+    "effects": [
+      {
+        "code": "firewall",
+        "type": "summon",
+        "target_type": "empty_friend",
+        "power": 0,
+        "health": 15,
+        "duration": 0,
+        "abilities": [
+          {
+            "code": "firewall.fireball",
+            "target_type": "single_enemy",
+            "blood_cost": 2,
+            "effects": [
+              {
+                "code": "firewall.fireball",
+                "type": "magic_attack",
+                "target_type": "all",
+                "power": 1,
+                "duration": 3,
+                "health": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "firewall.burn",
+        "type": "magic_attack",
+        "target_type": "all",
+        "power": 1,
+        "duration": 3,
+        "health": 0
+      }
+    ]
+  }
+]
