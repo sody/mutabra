@@ -11,6 +11,7 @@ import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
+import com.mutabra.web.internal.NamingObjectProvider;
 import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.*;
@@ -44,14 +45,18 @@ public class ApplicationModule {
     @FactoryDefaults
     @Contribute(SymbolProvider.class)
     public void contributeFactoryDefaults(final MappedConfiguration<String, String> configuration) {
-        configuration.add(ApplicationConstants.ROBOT_EMAIL, "${env.robot_email}");
-        configuration.add(ApplicationConstants.SUPPORT_EMAIL, "${env.support_email}");
         configuration.add(ApplicationConstants.MONGO_URI, "${env.mongohq_url}");
+        configuration.add(ApplicationConstants.SUPPORT_EMAIL, "${env.support_email}");
     }
 
     public static void bind(final ServiceBinder binder) {
         binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
         binder.bind(ImageSource.class, ImageSourceImpl.class);
+    }
+
+    @Contribute(MasterObjectProvider.class)
+    public void contributeMasterObjectProvider(final OrderedConfiguration<ObjectProvider> configuration) {
+        configuration.add("NamingObjectProvider", new NamingObjectProvider());
     }
 
     @Contribute(TypeCoercer.class)

@@ -137,10 +137,6 @@
                             <value>${project.mongo-uri}</value>
                         </systemProperty>
                         <systemProperty>
-                            <name>application.robot-email</name>
-                            <value>${project.robot-email}</value>
-                        </systemProperty>
-                        <systemProperty>
                             <name>application.support-email</name>
                             <value>${project.support-email}</value>
                         </systemProperty>
