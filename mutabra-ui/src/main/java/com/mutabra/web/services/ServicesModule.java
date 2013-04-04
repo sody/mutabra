@@ -11,10 +11,7 @@ import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.battle.BattleServiceImpl;
 import com.mutabra.services.battle.ScriptEngine;
 import com.mutabra.services.battle.ScriptEngineImpl;
-import com.mutabra.services.battle.scripts.AttackScript;
-import com.mutabra.services.battle.scripts.CastScript;
-import com.mutabra.services.battle.scripts.EffectScript;
-import com.mutabra.services.battle.scripts.SummonScript;
+import com.mutabra.services.battle.scripts.*;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
 import com.mutabra.web.ApplicationConstants;
@@ -67,5 +64,6 @@ public class ServicesModule {
         configuration.addInstance(EffectType.MELEE_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.RANGED_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.SUMMON, SummonScript.class);
+        configuration.addInstance(EffectType.HEAL, HealScript.class);
     }
 }
