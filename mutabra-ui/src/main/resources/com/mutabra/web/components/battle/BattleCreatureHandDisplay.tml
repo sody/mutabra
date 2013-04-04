@@ -5,7 +5,7 @@
             <t:battle.abilitydisplay ability="ability"/>
         </t:loop>
 
-        <t:battle.skipturndisplay hero="creature.hero"/>
+        <t:battle.skipturndisplay hero="creature.getHero()"/>
     </div>
 
 </t:container>

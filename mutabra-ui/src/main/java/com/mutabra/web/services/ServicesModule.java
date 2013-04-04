@@ -65,5 +65,6 @@ public class ServicesModule {
         configuration.addInstance(EffectType.RANGED_ATTACK, AttackScript.class);
         configuration.addInstance(EffectType.SUMMON, SummonScript.class);
         configuration.addInstance(EffectType.HEAL, HealScript.class);
+        configuration.addInstance(EffectType.MOVE, MoveScript.class);
     }
 }
