@@ -11,10 +11,7 @@ import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityServiceImpl;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik
@@ -201,16 +198,24 @@ public class BattleServiceImpl
             battleHero.setReady(false);
 
             // init hero cards
-            final List<Card> cards = datastore().get(Card.class, hero.getCards()).asList();
-            // shuffle deck
-            Collections.shuffle(cards);
-            // init card copies for battle
-            for (Card card : cards) {
-                final BattleCard battleCard = new BattleCard();
-                fillCard(battleCard, card);
+            final Map<String, Card> cards = new HashMap<String, Card>();
+            for (final Card card : datastore().get(Card.class, hero.getCards())) {
+                cards.put(card.getCode(), card);
+            }
 
-                battleCard.setType(BattleCardType.DECK);
-                battleHero.getCards().add(battleCard);
+            final List<String> heroCards = hero.getCards();
+            // shuffle deck
+            Collections.shuffle(heroCards);
+            // init card copies for battle
+            for (String heroCard : heroCards) {
+                final Card card = cards.get(heroCard);
+                if (card != null) {
+                    final BattleCard battleCard = new BattleCard();
+                    fillCard(battleCard, card);
+
+                    battleCard.setType(BattleCardType.DECK);
+                    battleHero.getCards().add(battleCard);
+                }
             }
             // get 3 first cards from deck to hand
             dealCards(battleHero, 3);
