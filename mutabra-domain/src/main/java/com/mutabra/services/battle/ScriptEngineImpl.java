@@ -14,12 +14,6 @@ import java.util.*;
  * @since 1.0
  */
 public class ScriptEngineImpl implements ScriptEngine {
-    private static final Comparator<BattleEffect> EFFECT_COMPARATOR = new Comparator<BattleEffect>() {
-        public int compare(final BattleEffect o1, final BattleEffect o2) {
-            return o1.getType().compareTo(o2.getType());
-        }
-    };
-
     private final Map<EffectType, EffectScript> scripts;
 
     public ScriptEngineImpl(final Map<EffectType, EffectScript> scripts) {
@@ -29,8 +23,8 @@ public class ScriptEngineImpl implements ScriptEngine {
     public void executeScripts(final Battle battle) {
         // process effects
         final List<BattleEffect> deadEffects = new ArrayList<BattleEffect>();
-        // sort effects by their type
-        Collections.sort(battle.getEffects(), EFFECT_COMPARATOR);
+        // sort effects
+        Collections.sort(battle.getEffects());
 
         for (BattleEffect battleEffect : battle.getEffects()) {
             final EffectScript script = scripts.get(battleEffect.getType());
