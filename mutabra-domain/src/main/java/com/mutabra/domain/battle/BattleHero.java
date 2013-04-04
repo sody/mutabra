@@ -15,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleHero {
+public class BattleHero implements BattleUnit {
 
     @Indexed
     private ObjectId id;
@@ -93,6 +93,10 @@ public class BattleHero {
 
     public List<BattleCreature> getCreatures() {
         return creatures;
+    }
+
+    public boolean isHero() {
+        return true;
     }
 
     public boolean isAllReady() {

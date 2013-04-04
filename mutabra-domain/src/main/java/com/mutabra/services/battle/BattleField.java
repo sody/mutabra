@@ -1,10 +1,6 @@
 package com.mutabra.services.battle;
 
-import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.BattlePosition;
-import com.mutabra.domain.battle.BattleSide;
+import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.TargetType;
 
 import java.util.ArrayList;
@@ -132,6 +128,10 @@ public class BattleField {
 
         public BattlePosition getPosition() {
             return position;
+        }
+
+        public BattleUnit getUnit() {
+            return hasHero() ? hero : creature;
         }
 
         public BattleCreature getCreature() {

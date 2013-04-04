@@ -16,9 +16,10 @@ public abstract class AbstractScript implements EffectScript {
 
     public void execute(final Battle battle, final BattleEffect battleEffect) {
         // get caster hero
-        final BattleHero battleHero = battleEffect.getCaster().getHero() != null ?
-                battleEffect.getCaster().getHero() :
-                battleEffect.getCaster().getCreature().getHero(); // not null
+        final BattleUnit battleUnit = battleEffect.getCaster().getUnit(); // not null
+        final BattleHero battleHero = battleUnit.isHero() ?
+                (BattleHero) battleUnit :
+                ((BattleCreature) battleUnit).getHero();
         // create battle field
         final BattleField battleField = BattleField.create(battle, battleHero);
 

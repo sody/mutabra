@@ -1,9 +1,6 @@
 package com.mutabra.services.battle.scripts;
 
-import com.mutabra.domain.battle.BattleAbility;
-import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleEffect;
-import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.services.battle.BattleField;
 
@@ -17,9 +14,7 @@ public class SummonScript extends AbstractScript {
     protected void apply(final BattleField battleField,
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
-        if (target == null || target.hasUnit()) {
-            //TODO: log fail
-        } else if (!target.hasUnit()) {
+        if (target != null && !target.hasUnit()) {
             final BattleCreature battleCreature = new BattleCreature();
             battleCreature.setCode(battleEffect.getCode());
             battleCreature.setHealth(battleEffect.getHealth());
@@ -36,8 +31,13 @@ public class SummonScript extends AbstractScript {
                 battleCreature.getAbilities().add(battleAbility);
             }
 
-            final BattleHero battleHero = battleEffect.getCaster().getHero(); // not null
+            final BattleUnit battleUnit = battleEffect.getCaster().getUnit();// not null
+            final BattleHero battleHero = battleUnit.isHero() ?
+                    (BattleHero) battleUnit :
+                    ((BattleCreature) battleUnit).getHero();
             battleHero.getCreatures().add(battleCreature);
+        } else {
+            //TODO: log fail
         }
     }
 }

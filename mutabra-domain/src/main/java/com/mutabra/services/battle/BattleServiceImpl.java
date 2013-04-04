@@ -85,8 +85,8 @@ public class BattleServiceImpl
         castEffect.setPower(card.getBloodCost());
         castEffect.setType(EffectType.CAST);
         castEffect.setTargetType(TargetType.NOBODY);
-        castEffect.getCaster().setHero(hero);
-        castEffect.getTarget().setCard(card);
+        castEffect.getCaster().setUnit(hero);
+        castEffect.getTarget().setSpell(card);
         battle.getEffects().add(castEffect);
 
         // add remaining card effects
@@ -96,7 +96,7 @@ public class BattleServiceImpl
 
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
-            battleEffect.getCaster().setHero(hero);
+            battleEffect.getCaster().setUnit(hero);
 
             battle.getEffects().add(battleEffect);
         }
@@ -131,8 +131,8 @@ public class BattleServiceImpl
         castEffect.setPower(ability.getBloodCost());
         castEffect.setType(EffectType.CAST);
         castEffect.setTargetType(TargetType.NOBODY);
-        castEffect.getCaster().setCreature(creature);
-        castEffect.getTarget().setAbility(ability);
+        castEffect.getCaster().setUnit(creature);
+        castEffect.getTarget().setSpell(ability);
         battle.getEffects().add(castEffect);
 
         // add remaining ability effects
@@ -140,7 +140,7 @@ public class BattleServiceImpl
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
-            battleEffect.getCaster().setCreature(creature);
+            battleEffect.getCaster().setUnit(creature);
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
 

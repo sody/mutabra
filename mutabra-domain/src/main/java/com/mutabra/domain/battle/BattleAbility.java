@@ -15,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleAbility implements Translatable {
+public class BattleAbility implements BattleSpell, Translatable {
 
     private Long id;
     private String code;
@@ -29,6 +29,10 @@ public class BattleAbility implements Translatable {
 
     public Long getId() {
         return id;
+    }
+
+    public BattleUnit getUnit() {
+        return creature;
     }
 
     public BattleCreature getCreature() {
@@ -65,6 +69,10 @@ public class BattleAbility implements Translatable {
 
     public List<Effect> getEffects() {
         return effects;
+    }
+
+    public boolean isCard() {
+        return false;
     }
 
     /* HELPER METHODS */

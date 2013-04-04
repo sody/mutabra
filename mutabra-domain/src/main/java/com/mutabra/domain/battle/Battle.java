@@ -157,13 +157,13 @@ public class Battle extends BaseEntity {
                               final Map<Long, BattleCreature> creatureById,
                               final Map<Long, BattleAbility> abilityById) {
         if (target.getCreatureId() != null) {
-            target.setCreature(creatureById.get(target.getCreatureId()));
+            target.setUnit(creatureById.get(target.getCreatureId()));
         } else if (target.getHeroId() != null) {
-            target.setHero(heroByKey.get(target.getHeroId()));
+            target.setUnit(heroByKey.get(target.getHeroId()));
         } else if (target.getCardId() != null) {
-            target.setCard(cardById.get(target.getCardId()));
+            target.setSpell(cardById.get(target.getCardId()));
         } else if (target.getAbilityId() != null) {
-            target.setAbility(abilityById.get(target.getAbilityId()));
+            target.setSpell(abilityById.get(target.getAbilityId()));
         }
     }
 

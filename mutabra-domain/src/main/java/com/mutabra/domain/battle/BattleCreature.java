@@ -12,7 +12,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleCreature implements Translatable {
+public class BattleCreature implements BattleUnit, Translatable {
     public static final String BASENAME = "creature";
 
     private Long id;
@@ -81,6 +81,10 @@ public class BattleCreature implements Translatable {
 
     public List<BattleAbility> getAbilities() {
         return abilities;
+    }
+
+    public boolean isHero() {
+        return false;
     }
 
     /* HELPER METHODS */

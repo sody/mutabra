@@ -19,16 +19,10 @@ public class BattleTarget {
     private Long ability;
 
     @Transient
-    private BattleCreature creatureInstance;
+    private BattleUnit unit;
 
     @Transient
-    private BattleHero heroInstance;
-
-    @Transient
-    private BattleCard cardInstance;
-
-    @Transient
-    private BattleAbility abilityInstance;
+    private BattleSpell spell;
 
     public BattlePosition getPosition() {
         return position;
@@ -46,42 +40,45 @@ public class BattleTarget {
         this.side = side;
     }
 
-    public BattleHero getHero() {
-        return heroInstance;
+    public BattleUnit getUnit() {
+        return unit;
     }
 
-    public void setHero(final BattleHero hero) {
-        this.heroInstance = hero;
-        this.hero = hero.getId();
+    public void setUnit(final BattleUnit unit) {
+        this.unit = unit;
+
+        if (unit == null) {
+            hero = null;
+            creature = null;
+        } else if (unit.isHero()) {
+            hero = ((BattleHero) unit).getId();
+            creature = null;
+        } else {
+            hero = null;
+            creature = ((BattleCreature) unit).getId();
+        }
     }
 
-    public BattleCard getCard() {
-        return cardInstance;
+    public BattleSpell getSpell() {
+        return spell;
     }
 
-    public void setCard(final BattleCard card) {
-        this.cardInstance = card;
-        this.card = card.getId();
+    public void setSpell(final BattleSpell spell) {
+        this.spell = spell;
+
+        if (spell == null) {
+            card = null;
+            ability = null;
+        } else if (spell.isCard()) {
+            card = ((BattleCard) spell).getId();
+            ability = null;
+        } else {
+            card = null;
+            ability = ((BattleAbility) spell).getId();
+        }
     }
 
-    public BattleCreature getCreature() {
-        return creatureInstance;
-    }
-
-    public void setCreature(final BattleCreature creature) {
-        this.creatureInstance = creature;
-        this.creature = creature.getId();
-    }
-
-    public BattleAbility getAbility() {
-        return abilityInstance;
-    }
-
-    public void setAbility(final BattleAbility ability) {
-        this.abilityInstance = ability;
-        this.ability = ability.getId();
-    }
-
+    /* HELPER METHODS */
     ObjectId getHeroId() {
         return hero;
     }

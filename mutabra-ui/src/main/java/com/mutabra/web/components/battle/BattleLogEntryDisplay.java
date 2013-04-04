@@ -58,14 +58,18 @@ public class BattleLogEntryDisplay extends AbstractComponent {
     }
 
     private void writeParameter(final MarkupWriter writer, final BattleTarget battleTarget) {
-        if (battleTarget.getHero() != null) {
-            writeHero(writer, battleTarget.getHero());
-        } else if (battleTarget.getCreature() != null) {
-            writeCreature(writer, battleTarget.getCreature());
-        } else if (battleTarget.getCard() != null) {
-            writeCard(writer, battleTarget.getCard());
-        } else if (battleTarget.getAbility() != null) {
-            writeAbility(writer, battleTarget.getAbility());
+        if (battleTarget.getUnit() != null) {
+            if (battleTarget.getUnit().isHero()) {
+                writeHero(writer, (BattleHero) battleTarget.getUnit());
+            } else {
+                writeCreature(writer, (BattleCreature) battleTarget.getUnit());
+            }
+        } else if (battleTarget.getSpell() != null) {
+            if (battleTarget.getSpell().isCard()) {
+                writeCard(writer, (BattleCard) battleTarget.getSpell());
+            } else {
+                writeAbility(writer, (BattleAbility) battleTarget.getSpell());
+            }
         } else if (battleTarget.getPosition() != null && battleTarget.getSide() != null) {
             writePosition(writer, battleTarget.getPosition(), battleTarget.getSide());
         } else {
