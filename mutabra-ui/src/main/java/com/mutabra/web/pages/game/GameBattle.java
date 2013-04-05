@@ -13,6 +13,10 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.RequestParameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -60,6 +64,17 @@ public class GameBattle extends AbstractPage {
         return !field.getSelf().equals(hero);
     }
 
+    public List<BattleLogEntry> getLog() {
+        final List<BattleLogEntry> log = new ArrayList<BattleLogEntry>();
+
+        final List<BattleLogEntry> fullLog = battle.getLog();
+        final ListIterator<BattleLogEntry> iterator = fullLog.listIterator(fullLog.size());
+        while (iterator.hasPrevious() && log.size() < 10) {
+            log.add(iterator.previous());
+        }
+        return log;
+    }
+
     @OnEvent(EventConstants.ACTIVATE)
     Object activate() {
         battle = accountContext.getBattle();
@@ -86,7 +101,7 @@ public class GameBattle extends AbstractPage {
                 final @RequestParameter(value = "x") int x,
                 final @RequestParameter(value = "y") int y,
                 final @RequestParameter(value = "side") BattleSide side) {
-        if (!card.getHero().isReady()) {
+        if (!card.getUnit().isReady()) {
             final BattleTarget target = new BattleTarget();
             target.setPosition(new BattlePosition(x, y));
             target.setSide(side);
@@ -100,7 +115,7 @@ public class GameBattle extends AbstractPage {
                 final @RequestParameter(value = "x") int x,
                 final @RequestParameter(value = "y") int y,
                 final @RequestParameter(value = "side") BattleSide side) {
-        if (!ability.getCreature().isReady()) {
+        if (!ability.getUnit().isReady()) {
             final BattleTarget target = new BattleTarget();
             target.setPosition(new BattlePosition(x, y));
             target.setSide(side);

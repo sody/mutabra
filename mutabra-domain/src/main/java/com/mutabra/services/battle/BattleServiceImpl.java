@@ -75,7 +75,7 @@ public class BattleServiceImpl
     public void cast(final Battle battle,
                      final BattleCard card,
                      final BattleTarget target) {
-        final BattleHero hero = card.getHero();
+        final BattleHero hero = card.getUnit();
 
         // add cast effect
         // it will subtract blood cost from hero health
@@ -121,7 +121,7 @@ public class BattleServiceImpl
     public void cast(final Battle battle,
                      final BattleAbility ability,
                      final BattleTarget target) {
-        final BattleCreature creature = ability.getCreature();
+        final BattleCreature creature = ability.getUnit();
 
         // add cast effect
         // it will subtract blood cost from creature health
@@ -220,6 +220,11 @@ public class BattleServiceImpl
             // get 3 first cards from deck to hand
             dealCards(battleHero, 3);
         }
+
+        // add battle started message to log
+        final BattleLogEntry startEntry = new BattleLogEntry();
+        startEntry.setCode("battle.start");
+        battle.getLog().add(startEntry);
     }
 
     private void end(final Battle battle) {
@@ -243,8 +248,6 @@ public class BattleServiceImpl
             //start new round
             battle.setRound(battle.getRound() + 1);
             for (BattleHero battleHero : battle.getHeroes()) {
-                // increase mental power each round
-                battleHero.setMentalPower(battleHero.getMentalPower() + 1);
                 // move one card from deck to hand
                 dealCards(battleHero, 1);
                 // each hero should be able to cast cards in the beginning of the round

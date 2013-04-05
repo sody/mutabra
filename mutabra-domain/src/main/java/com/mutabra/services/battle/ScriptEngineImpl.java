@@ -1,9 +1,6 @@
 package com.mutabra.services.battle;
 
-import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleEffect;
-import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.EffectType;
 import com.mutabra.services.battle.scripts.EffectScript;
 
@@ -21,6 +18,12 @@ public class ScriptEngineImpl implements ScriptEngine {
     }
 
     public void executeScripts(final Battle battle) {
+        // add round started message to log
+        final BattleLogEntry startEntry = new BattleLogEntry();
+        startEntry.setCode("round.start");
+        startEntry.getParameters().add(new BattleLogParameter(String.valueOf(battle.getRound())));
+        battle.getLog().add(startEntry);
+
         // process effects
         final List<BattleEffect> deadEffects = new ArrayList<BattleEffect>();
         // sort effects
@@ -58,5 +61,11 @@ public class ScriptEngineImpl implements ScriptEngine {
             //TODO: log dead creatures
             battleHero.getCreatures().removeAll(deadCreatures);
         }
+
+        // add round ended message to log
+        final BattleLogEntry endEntry = new BattleLogEntry();
+        endEntry.setCode("round.end");
+        endEntry.getParameters().add(new BattleLogParameter(String.valueOf(battle.getRound())));
+        battle.getLog().add(endEntry);
     }
 }

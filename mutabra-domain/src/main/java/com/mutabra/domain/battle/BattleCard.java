@@ -32,11 +32,7 @@ public class BattleCard implements BattleSpell, Translatable {
         return id;
     }
 
-    public BattleUnit getUnit() {
-        return hero;
-    }
-
-    public BattleHero getHero() {
+    public BattleHero getUnit() {
         return hero;
     }
 

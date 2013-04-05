@@ -15,7 +15,7 @@ import java.util.List;
 public class BattleLogEntry implements Translatable {
     private String code;
 
-    private List<BattleTarget> parameters = new ArrayList<BattleTarget>();
+    private List<BattleLogParameter> parameters = new ArrayList<BattleLogParameter>();
 
     public String getBasename() {
         return Effect.BASENAME;
@@ -29,7 +29,7 @@ public class BattleLogEntry implements Translatable {
         this.code = code;
     }
 
-    public List<BattleTarget> getParameters() {
+    public List<BattleLogParameter> getParameters() {
         return parameters;
     }
 }

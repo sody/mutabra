@@ -19,7 +19,7 @@
         </svg>
     </div>
     <div class="log">
-        <t:loop source="battle.log" value="logEntry">
+        <t:loop source="log" value="logEntry">
             <t:battle.logentrydisplay value="logEntry" hero="field.self"/>
         </t:loop>
     </div>

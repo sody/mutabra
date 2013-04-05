@@ -15,8 +15,8 @@ public class AttackScript extends AbstractScript {
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
         if (target != null && target.hasUnit()) {
-            final BattleUnit battleUnit = target.getUnit();
-            battleUnit.setHealth(battleUnit.getHealth() - battleEffect.getPower());
+            final BattleUnit targetUnit = target.getUnit();
+            targetUnit.setHealth(targetUnit.getHealth() - battleEffect.getPower());
         } else {
             //TODO: log miss
         }

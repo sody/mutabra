@@ -13,10 +13,10 @@ public class BattleTarget {
     private BattlePosition position;
     private BattleSide side;
 
-    private ObjectId hero;
-    private Long card;
-    private Long creature;
-    private Long ability;
+    private ObjectId heroId;
+    private Long cardId;
+    private Long creatureId;
+    private Long abilityId;
 
     @Transient
     private BattleUnit unit;
@@ -48,14 +48,14 @@ public class BattleTarget {
         this.unit = unit;
 
         if (unit == null) {
-            hero = null;
-            creature = null;
+            heroId = null;
+            creatureId = null;
         } else if (unit.isHero()) {
-            hero = ((BattleHero) unit).getId();
-            creature = null;
+            heroId = ((BattleHero) unit).getId();
+            creatureId = null;
         } else {
-            hero = null;
-            creature = ((BattleCreature) unit).getId();
+            heroId = null;
+            creatureId = ((BattleCreature) unit).getId();
         }
     }
 
@@ -67,31 +67,31 @@ public class BattleTarget {
         this.spell = spell;
 
         if (spell == null) {
-            card = null;
-            ability = null;
+            cardId = null;
+            abilityId = null;
         } else if (spell.isCard()) {
-            card = ((BattleCard) spell).getId();
-            ability = null;
+            cardId = ((BattleCard) spell).getId();
+            abilityId = null;
         } else {
-            card = null;
-            ability = ((BattleAbility) spell).getId();
+            cardId = null;
+            abilityId = ((BattleAbility) spell).getId();
         }
     }
 
     /* HELPER METHODS */
     ObjectId getHeroId() {
-        return hero;
+        return heroId;
     }
 
     Long getCardId() {
-        return card;
+        return cardId;
     }
 
     Long getCreatureId() {
-        return creature;
+        return creatureId;
     }
 
     Long getAbilityId() {
-        return ability;
+        return abilityId;
     }
 }

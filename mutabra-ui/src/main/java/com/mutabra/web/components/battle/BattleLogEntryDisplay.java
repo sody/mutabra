@@ -1,5 +1,6 @@
 package com.mutabra.web.components.battle;
 
+import com.mutabra.domain.Translatable;
 import com.mutabra.domain.battle.*;
 import com.mutabra.web.base.components.AbstractComponent;
 import org.apache.tapestry5.MarkupWriter;
@@ -7,6 +8,7 @@ import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.Mixin;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.corelib.mixins.DiscardBody;
+import org.bson.types.ObjectId;
 
 import java.util.Iterator;
 
@@ -30,8 +32,8 @@ public class BattleLogEntryDisplay extends AbstractComponent {
     void begin(final MarkupWriter writer) {
         writer.element("p");
 
-        final String message = message(value.getBasename() + "." + value.getCode());
-        final Iterator<BattleTarget> iterator = value.getParameters().iterator();
+        final String message = label(value);
+        final Iterator<BattleLogParameter> iterator = value.getParameters().iterator();
 
         int start = 0;
         int index = message.indexOf(PARAMETER_PLACEHOLDER, start);
@@ -57,64 +59,59 @@ public class BattleLogEntryDisplay extends AbstractComponent {
         writer.end();
     }
 
-    private void writeParameter(final MarkupWriter writer, final BattleTarget battleTarget) {
-        if (battleTarget.getUnit() != null) {
-            if (battleTarget.getUnit().isHero()) {
-                writeHero(writer, (BattleHero) battleTarget.getUnit());
-            } else {
-                writeCreature(writer, (BattleCreature) battleTarget.getUnit());
-            }
-        } else if (battleTarget.getSpell() != null) {
-            if (battleTarget.getSpell().isCard()) {
-                writeCard(writer, (BattleCard) battleTarget.getSpell());
-            } else {
-                writeAbility(writer, (BattleAbility) battleTarget.getSpell());
-            }
-        } else if (battleTarget.getPosition() != null && battleTarget.getSide() != null) {
-            writePosition(writer, battleTarget.getPosition(), battleTarget.getSide());
+    private void writeParameter(final MarkupWriter writer, final BattleLogParameter parameter) {
+        if (parameter.getCreatureId() != null) {
+            writeCreature(writer, parameter.getHeroId(), parameter.getCreatureId(), label(parameter, Translatable.NAME));
+        } else if (parameter.getCardId() != null) {
+            writeCard(writer, parameter.getCardId(), label(parameter, Translatable.NAME));
+        } else if (parameter.getAbilityId() != null) {
+            writeAbility(writer, parameter.getAbilityId(), label(parameter, Translatable.NAME));
+        } else if (parameter.getHeroId() != null) {
+            writeHero(writer, parameter.getHeroId(), parameter.getValue());
+        } else if (parameter.getPosition() != null && parameter.getSide() != null) {
+            writePosition(writer, parameter.getPosition(), parameter.getSide());
         } else {
-            // error
-            writer.write("_null_");
+            writeRaw(writer, parameter.getValue());
         }
     }
 
-    private void writeHero(final MarkupWriter writer, final BattleHero battleHero) {
-        final String description = "#" + BattleHeroDescription.ID_PREFIX + encode(BattleHero.class, battleHero);
+    private void writeHero(final MarkupWriter writer, final ObjectId heroId, final String label) {
+        final String description = "#" + BattleHeroDescription.ID_PREFIX + encode(ObjectId.class, heroId);
         writer.element("a",
                 "href", description,
                 "data-description-target", description,
-                "class", hero.equals(battleHero) ? "friend" : "enemy");
-        writer.write("[" + battleHero.getAppearance().getName() + "]");
+                "class", hero.getId().equals(heroId) ? "friend" : "enemy");
+        writer.write("[" + label + "]");
         writer.end();
     }
 
-    private void writeCard(final MarkupWriter writer, final BattleCard battleCard) {
-        final String description = "#" + BattleCardDescription.ID_PREFIX + encode(BattleCard.class, battleCard);
+    private void writeCreature(final MarkupWriter writer, final ObjectId heroId, final Long creatureId, final String label) {
+        final String description = "#" + BattleCreatureDescription.ID_PREFIX + encode(Long.class, creatureId);
+        writer.element("a",
+                "href", description,
+                "data-description-target", description,
+                "class", hero.getId().equals(heroId) ? "friend" : "enemy");
+        writer.write("[" + label + "]");
+        writer.end();
+    }
+
+    private void writeCard(final MarkupWriter writer, final Long cardId, final String label) {
+        final String description = "#" + BattleCardDescription.ID_PREFIX + encode(Long.class, cardId);
         writer.element("a",
                 "href", description,
                 "data-description-target", description,
                 "class", "detail");
-        writer.write("[" + label(battleCard, BattleCard.NAME) + "]");
+        writer.write("[" + label + "]");
         writer.end();
     }
 
-    private void writeCreature(final MarkupWriter writer, final BattleCreature battleCreature) {
-        final String description = "#" + BattleCreatureDescription.ID_PREFIX + encode(BattleCreature.class, battleCreature);
-        writer.element("a",
-                "href", description,
-                "data-description-target", description,
-                "class", hero.equals(battleCreature.getHero()) ? "friend" : "enemy");
-        writer.write("[" + label(battleCreature, BattleCreature.NAME) + "]");
-        writer.end();
-    }
-
-    private void writeAbility(final MarkupWriter writer, final BattleAbility battleAbility) {
-        final String description = "#" + BattleAbilityDescription.ID_PREFIX + encode(BattleAbility.class, battleAbility);
+    private void writeAbility(final MarkupWriter writer, final Long abilityId, final String label) {
+        final String description = "#" + BattleAbilityDescription.ID_PREFIX + encode(Long.class, abilityId);
         writer.element("a",
                 "href", description,
                 "data-description-target", description,
                 "class", "detail");
-        writer.write("[" + label(battleAbility, BattleAbility.NAME) + "]");
+        writer.write("[" + label + "]");
         writer.end();
     }
 
@@ -122,6 +119,13 @@ public class BattleLogEntryDisplay extends AbstractComponent {
         writer.element("span",
                 "class", "detail");
         writer.write("[" + position.getX() + "," + position.getY() + "]");
+        writer.end();
+    }
+
+    private void writeRaw(final MarkupWriter writer, final String label) {
+        writer.element("span",
+                "class", "detail");
+        writer.write("[" + label + "]");
         writer.end();
     }
 }

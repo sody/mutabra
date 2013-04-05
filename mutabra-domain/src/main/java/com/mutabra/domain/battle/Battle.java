@@ -114,12 +114,6 @@ public class Battle extends BaseEntity {
             updateTarget(battleEffect.getCaster(), heroByKey, cardById, creatureById, abilityById);
             updateTarget(battleEffect.getTarget(), heroByKey, cardById, creatureById, abilityById);
         }
-
-        for (BattleLogEntry logEntry : log) {
-            for (BattleTarget battleTarget : logEntry.getParameters()) {
-                updateTarget(battleTarget, heroByKey, cardById, creatureById, abilityById);
-            }
-        }
     }
 
     @PrePersist

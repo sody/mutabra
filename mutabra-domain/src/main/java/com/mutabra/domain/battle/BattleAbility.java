@@ -31,11 +31,7 @@ public class BattleAbility implements BattleSpell, Translatable {
         return id;
     }
 
-    public BattleUnit getUnit() {
-        return creature;
-    }
-
-    public BattleCreature getCreature() {
+    public BattleCreature getUnit() {
         return creature;
     }
 
