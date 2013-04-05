@@ -1,5 +1,6 @@
 package com.mutabra.domain.battle;
 
+import com.mutabra.domain.CodeUtils;
 import com.mutabra.domain.Translatable;
 
 /**
@@ -15,7 +16,7 @@ public enum BattleCardType implements Translatable {
     private final String code;
 
     private BattleCardType() {
-        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+        code = CodeUtils.generateCode(this);
     }
 
     public String getBasename() {
