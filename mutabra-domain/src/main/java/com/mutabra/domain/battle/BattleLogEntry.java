@@ -4,8 +4,8 @@ import com.google.code.morphia.annotations.Embedded;
 import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Effect;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -15,7 +15,14 @@ import java.util.List;
 public class BattleLogEntry implements Translatable {
     private String code;
 
-    private List<BattleLogParameter> parameters = new ArrayList<BattleLogParameter>();
+    private Map<String, BattleLogParameter> parameters = new HashMap<String, BattleLogParameter>();
+
+    public BattleLogEntry() {
+    }
+
+    public BattleLogEntry(final String code) {
+        this.code = code;
+    }
 
     public String getBasename() {
         return Effect.BASENAME;
@@ -29,7 +36,12 @@ public class BattleLogEntry implements Translatable {
         this.code = code;
     }
 
-    public List<BattleLogParameter> getParameters() {
+    public Map<String, BattleLogParameter> getParameters() {
         return parameters;
+    }
+
+    public BattleLogEntry append(final String key, final BattleLogParameter value) {
+        parameters.put(key, value);
+        return this;
     }
 }

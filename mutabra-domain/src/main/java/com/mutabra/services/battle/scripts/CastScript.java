@@ -1,9 +1,13 @@
 package com.mutabra.services.battle.scripts;
 
-import com.mutabra.domain.battle.*;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCardType;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleLogEntry;
+import com.mutabra.domain.battle.BattleLogParameter;
+import com.mutabra.domain.battle.BattleSpell;
+import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.services.battle.BattleField;
-
-import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -26,13 +30,11 @@ public class CastScript extends AbstractScript {
                 ((BattleCard) battleSpell).setType(BattleCardType.GRAVEYARD);
             }
 
-            final BattleLogEntry logEntry = new BattleLogEntry();
-            logEntry.setCode(battleEffect.getCode() + ".cast");
-            final List<BattleLogParameter> parameters = logEntry.getParameters();
-            parameters.add(new BattleLogParameter(casterUnit));
-            parameters.add(new BattleLogParameter(battleSpell));
-            parameters.add(new BattleLogParameter("-" + battleEffect.getPower()+ "/" + casterUnit.getHealth()));
-            battleField.getBattle().getLog().add(logEntry);
+            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".cast")
+                    .append("caster", new BattleLogParameter(casterUnit))
+                    .append("spell", new BattleLogParameter(battleSpell))
+                    .append("spell.cost", new BattleLogParameter(battleSpell.getBloodCost()))
+                    .append("caster.health", new BattleLogParameter(casterUnit.getHealth())));
         }
     }
 }

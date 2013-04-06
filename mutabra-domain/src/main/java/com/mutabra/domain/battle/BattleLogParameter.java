@@ -57,8 +57,8 @@ public class BattleLogParameter implements Translatable {
         }
     }
 
-    public BattleLogParameter(final String value) {
-        this.value = value;
+    public BattleLogParameter(final Object value) {
+        this.value = String.valueOf(value);
     }
 
     public BattlePosition getPosition() {

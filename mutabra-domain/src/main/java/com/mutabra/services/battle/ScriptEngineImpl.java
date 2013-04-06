@@ -1,10 +1,18 @@
 package com.mutabra.services.battle;
 
-import com.mutabra.domain.battle.*;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.BattleLogEntry;
+import com.mutabra.domain.battle.BattleLogParameter;
 import com.mutabra.domain.common.EffectType;
 import com.mutabra.services.battle.scripts.EffectScript;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -19,10 +27,8 @@ public class ScriptEngineImpl implements ScriptEngine {
 
     public void executeScripts(final Battle battle) {
         // add round started message to log
-        final BattleLogEntry startEntry = new BattleLogEntry();
-        startEntry.setCode("round.start");
-        startEntry.getParameters().add(new BattleLogParameter(String.valueOf(battle.getRound())));
-        battle.getLog().add(startEntry);
+        battle.getLog().add(new BattleLogEntry("round.start")
+                .append("round", new BattleLogParameter(battle.getRound())));
 
         // process effects
         final List<BattleEffect> deadEffects = new ArrayList<BattleEffect>();
@@ -63,9 +69,7 @@ public class ScriptEngineImpl implements ScriptEngine {
         }
 
         // add round ended message to log
-        final BattleLogEntry endEntry = new BattleLogEntry();
-        endEntry.setCode("round.end");
-        endEntry.getParameters().add(new BattleLogParameter(String.valueOf(battle.getRound())));
-        battle.getLog().add(endEntry);
+        battle.getLog().add(new BattleLogEntry("round.end")
+                .append("round", new BattleLogParameter(battle.getRound())));
     }
 }
