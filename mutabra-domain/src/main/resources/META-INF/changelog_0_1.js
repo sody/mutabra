@@ -174,21 +174,6 @@ db.cards.insert({
   ]
 });
 
-db.cards.insert({
-  _id: 'fly-away',
-  targetType: 'SINGLE_FRIEND_EMPTY',
-  bloodCost: 0,
-  effects: [
-    {
-      code: 'fly-away',
-      type: 'MOVE',
-      targetType: 'SINGLE_FRIEND_EMPTY',
-      duration: 1,
-      power: 2,
-      health: 0
-    }
-  ]
-});
 // races
 
 db.races.insert({
@@ -219,14 +204,14 @@ db.races.insert({
     'carrion-vulture',
     'carrion-vulture',
     'carrion-vulture',
+    'carrion-vulture',
+    'snowball',
     'snowball',
     'snowball',
     'snowball',
     'throw',
     'throw',
     'throw',
-    'fly-away',
-    'fly-away',
-    'fly-away'
+    'throw'
   ]
 });

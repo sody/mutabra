@@ -30,11 +30,11 @@ public class CastScript extends AbstractScript {
                 ((BattleCard) battleSpell).setType(BattleCardType.GRAVEYARD);
             }
 
-            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".cast")
-                    .append("caster", new BattleLogParameter(casterUnit))
-                    .append("spell", new BattleLogParameter(battleSpell))
-                    .append("spell.cost", new BattleLogParameter(battleSpell.getBloodCost()))
-                    .append("caster.health", new BattleLogParameter(casterUnit.getHealth())));
+//            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".cast")
+//                    .append("caster", new BattleLogParameter(casterUnit))
+//                    .append("spell", new BattleLogParameter(battleSpell))
+//                    .append("spell.cost", new BattleLogParameter(battleSpell.getBloodCost()))
+//                    .append("caster.health", new BattleLogParameter(casterUnit.getHealth())));
         }
     }
 }

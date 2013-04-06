@@ -83,6 +83,11 @@ public class BattleLogEntryDisplay extends AbstractComponent {
             writeAbility(writer, parameter.getAbilityId(), label(parameter, Translatable.NAME));
         } else if (parameter.getHeroId() != null) {
             writeHero(writer, parameter.getHeroId(), parameter.getValue());
+        } else if (parameter.getCode() != null) {
+            //TODO: do something with this
+            writer.element("span", "class", "detail");
+            writer.write("[" + label(parameter) + "]");
+            writer.end();
         } else if (parameter.getPosition() != null) {
             writePosition(writer, parameter.getPosition());
         } else {

@@ -21,6 +21,7 @@ public class BattleLogParameter implements Translatable {
     private Long creatureId;
     private Long abilityId;
 
+    private String code;
     private String value;
 
     public BattleLogParameter() {
@@ -41,7 +42,7 @@ public class BattleLogParameter implements Translatable {
             final BattleCreature battleCreature = (BattleCreature) battleUnit;
             heroId = battleCreature.getHero().getId();
             creatureId = battleCreature.getId();
-            value = battleCreature.getCode();
+            code = battleCreature.getCode();
         }
     }
 
@@ -49,12 +50,16 @@ public class BattleLogParameter implements Translatable {
         if (battleSpell.isCard()) {
             final BattleCard battleCard = (BattleCard) battleSpell;
             cardId = battleCard.getId();
-            value = battleCard.getCode();
+            code = battleCard.getCode();
         } else {
             final BattleAbility battleAbility = (BattleAbility) battleSpell;
             abilityId = battleAbility.getId();
-            value = battleAbility.getCode();
+            code = battleAbility.getCode();
         }
+    }
+
+    public BattleLogParameter(final BattleEffect battleEffect) {
+        code = battleEffect.getCode() + ".name";
     }
 
     public BattleLogParameter(final Object value) {
@@ -101,6 +106,6 @@ public class BattleLogParameter implements Translatable {
     }
 
     public String getCode() {
-        return value;
+        return code;
     }
 }
