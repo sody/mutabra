@@ -1,6 +1,12 @@
 package com.mutabra.services.battle.scripts;
 
-import com.mutabra.domain.battle.*;
+import com.mutabra.domain.battle.BattleAbility;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.BattleLogEntry;
+import com.mutabra.domain.battle.BattleLogParameter;
+import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.services.battle.BattleField;
 
@@ -14,6 +20,11 @@ public class SummonScript extends AbstractScript {
     protected void apply(final BattleField battleField,
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
+        final BattleUnit casterUnit = battleEffect.getCaster().getUnit();// not null
+        final BattleHero casterHero = casterUnit.isHero() ?
+                (BattleHero) casterUnit :
+                ((BattleCreature) casterUnit).getHero();
+
         if (target != null && !target.hasUnit()) {
             final BattleCreature battleCreature = new BattleCreature();
             battleCreature.setCode(battleEffect.getCode());
@@ -31,13 +42,17 @@ public class SummonScript extends AbstractScript {
                 battleCreature.getAbilities().add(battleAbility);
             }
 
-            final BattleUnit battleUnit = battleEffect.getCaster().getUnit();// not null
-            final BattleHero battleHero = battleUnit.isHero() ?
-                    (BattleHero) battleUnit :
-                    ((BattleCreature) battleUnit).getHero();
-            battleHero.getCreatures().add(battleCreature);
+            casterHero.getCreatures().add(battleCreature);
+
+            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".success")
+                    .append("caster", new BattleLogParameter(casterUnit))
+                    .append("target", new BattleLogParameter(battleCreature))
+                    .append("target.health", new BattleLogParameter(battleCreature.getHealth()))
+                    .append("target.power", new BattleLogParameter(battleCreature.getPower())));
         } else {
-            //TODO: log fail
+            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".failure")
+                    .append("caster", new BattleLogParameter(casterUnit))
+                    .append("spell", new BattleLogParameter(battleEffect)));
         }
     }
 }
