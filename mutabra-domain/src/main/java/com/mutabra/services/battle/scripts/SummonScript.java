@@ -26,7 +26,7 @@ public class SummonScript extends AbstractScript {
                 ((BattleCreature) casterUnit).getHero();
 
         if (target != null && !target.hasUnit()) {
-            final BattleCreature battleCreature = new BattleCreature();
+            final BattleCreature battleCreature = new BattleCreature(casterHero);
             battleCreature.setCode(battleEffect.getCode());
             battleCreature.setHealth(battleEffect.getHealth());
             battleCreature.setPower(battleEffect.getPower());
@@ -34,7 +34,7 @@ public class SummonScript extends AbstractScript {
             battleCreature.setReady(true);
 
             for (Ability ability : battleEffect.getAbilities()) {
-                final BattleAbility battleAbility = new BattleAbility();
+                final BattleAbility battleAbility = new BattleAbility(battleCreature);
                 battleAbility.setCode(ability.getCode());
                 battleAbility.setTargetType(ability.getTargetType());
                 battleAbility.setBloodCost(ability.getBloodCost());

@@ -2,7 +2,6 @@ package com.mutabra.domain.battle;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.PostLoad;
-import com.google.code.morphia.annotations.PrePersist;
 import com.mutabra.domain.BaseEntity;
 import org.bson.types.ObjectId;
 
@@ -116,33 +115,8 @@ public class Battle extends BaseEntity {
         }
     }
 
-    @PrePersist
-    void generateIds() {
-        for (BattleHero battleHero : heroes) {
-            // assign creature identifiers
-            // they should be unique within battle
-            for (BattleCreature battleCreature : battleHero.getCreatures()) {
-                if (battleCreature.getId() == null) {
-                    battleCreature.assignId(nextId());
-                }
-
-                // assign ability identifiers
-                // they should be unique within battle
-                for (BattleAbility battleAbility : battleCreature.getAbilities()) {
-                    if (battleAbility.getId() == null) {
-                        battleAbility.assignId(nextId());
-                    }
-                }
-            }
-
-            // assign card identifiers
-            // they should be unique within battle
-            for (BattleCard battleCard : battleHero.getCards()) {
-                if (battleCard.getId() == null) {
-                    battleCard.assignId(nextId());
-                }
-            }
-        }
+    long nextId() {
+        return creatureSequence++;
     }
 
     private void updateTarget(final BattleTarget target,
@@ -159,9 +133,5 @@ public class Battle extends BaseEntity {
         } else if (target.getAbilityId() != null) {
             target.setSpell(abilityById.get(target.getAbilityId()));
         }
-    }
-
-    private long nextId() {
-        return creatureSequence++;
     }
 }

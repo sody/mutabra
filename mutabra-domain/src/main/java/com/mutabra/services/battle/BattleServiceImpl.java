@@ -42,7 +42,7 @@ public class BattleServiceImpl
         battle.setActive(false);
 
         // init hero
-        final BattleHero battleHero = new BattleHero(hero.getId());
+        final BattleHero battleHero = new BattleHero(battle, hero.getId());
         fillHero(battleHero, hero);
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
@@ -52,7 +52,7 @@ public class BattleServiceImpl
 
     public void apply(final Battle battle, final Hero hero) {
         // init hero
-        final BattleHero battleHero = new BattleHero(hero.getId());
+        final BattleHero battleHero = new BattleHero(battle, hero.getId());
         fillHero(battleHero, hero);
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
@@ -210,7 +210,7 @@ public class BattleServiceImpl
             for (String heroCard : heroCards) {
                 final Card card = cards.get(heroCard);
                 if (card != null) {
-                    final BattleCard battleCard = new BattleCard();
+                    final BattleCard battleCard = new BattleCard(battleHero);
                     fillCard(battleCard, card);
 
                     battleCard.setType(BattleCardType.DECK);

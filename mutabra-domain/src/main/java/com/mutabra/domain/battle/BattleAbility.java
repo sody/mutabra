@@ -27,6 +27,14 @@ public class BattleAbility implements BattleSpell, Translatable {
     @Transient
     private BattleCreature creature;
 
+    protected BattleAbility() {
+    }
+
+    public BattleAbility(final BattleCreature creature) {
+        this.creature = creature;
+        this.id = creature.getHero().getBattle().nextId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -74,9 +82,5 @@ public class BattleAbility implements BattleSpell, Translatable {
     /* HELPER METHODS */
     void assignCreature(final BattleCreature creature) {
         this.creature = creature;
-    }
-
-    void assignId(final long id) {
-        this.id = id;
     }
 }

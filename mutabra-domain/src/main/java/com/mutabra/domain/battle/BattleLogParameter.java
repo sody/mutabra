@@ -95,9 +95,7 @@ public class BattleLogParameter implements Translatable {
     }
 
     public String getBasename() {
-        if (creatureId != null) {
-            return BattleCreature.BASENAME;
-        } else if (cardId != null) {
+        if (cardId != null) {
             return Card.BASENAME;
         } else if (abilityId != null) {
             return Ability.BASENAME;

@@ -28,6 +28,14 @@ public class BattleCard implements BattleSpell, Translatable {
     @Transient
     private BattleHero hero;
 
+    protected BattleCard() {
+    }
+
+    public BattleCard(final BattleHero hero) {
+        this.hero = hero;
+        this.id = hero.getBattle().nextId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -83,9 +91,5 @@ public class BattleCard implements BattleSpell, Translatable {
     /* HELPER METHODS */
     void assignHero(final BattleHero hero) {
         this.hero = hero;
-    }
-
-    void assignId(final long id) {
-        this.id = id;
     }
 }

@@ -32,10 +32,11 @@ public class BattleHero implements BattleUnit {
     @Transient
     private Battle battle;
 
-    public BattleHero() {
+    protected BattleHero() {
     }
 
-    public BattleHero(final ObjectId id) {
+    public BattleHero(final Battle battle, final ObjectId id) {
+        this.battle = battle;
         this.id = id;
     }
 

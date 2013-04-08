@@ -3,6 +3,7 @@ package com.mutabra.domain.battle;
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Transient;
 import com.mutabra.domain.Translatable;
+import com.mutabra.domain.common.Effect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,6 @@ import java.util.List;
  */
 @Embedded
 public class BattleCreature implements BattleUnit, Translatable {
-    public static final String BASENAME = "creature";
-
     private Long id;
     private String code;
     private int health;
@@ -27,6 +26,14 @@ public class BattleCreature implements BattleUnit, Translatable {
     @Transient
     private BattleHero hero;
 
+    protected BattleCreature() {
+    }
+
+    public BattleCreature(final BattleHero hero) {
+        this.hero = hero;
+        this.id = hero.getBattle().nextId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -36,7 +43,7 @@ public class BattleCreature implements BattleUnit, Translatable {
     }
 
     public String getBasename() {
-        return BASENAME;
+        return Effect.BASENAME;
     }
 
     public String getCode() {
@@ -90,9 +97,5 @@ public class BattleCreature implements BattleUnit, Translatable {
     /* HELPER METHODS */
     void assignHero(final BattleHero hero) {
         this.hero = hero;
-    }
-
-    void assignId(final long id) {
-        this.id = id;
     }
 }
