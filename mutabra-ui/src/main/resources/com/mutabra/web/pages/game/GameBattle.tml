@@ -18,11 +18,8 @@
             </t:loop>
         </svg>
     </div>
-    <div class="log">
-        <t:loop source="log" value="logEntry">
-            <t:battle.logentrydisplay value="logEntry" hero="field.self"/>
-        </t:loop>
-    </div>
+
+    <t:battle.battlelogdisplay t:id="battleLog" hero="field.self" log="battle.log" size="10" zone="battle-log"/>
 </div>
 
 <div class="row">
@@ -60,6 +57,7 @@
     </div>
 </div>
 
+<t:battle.battlelogdialog t:id="battleLogDialog" id="battle-log"/>
 <t:game.updatechecker/>
 
 </html>

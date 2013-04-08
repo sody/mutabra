@@ -4,18 +4,16 @@ import com.mutabra.domain.battle.*;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.components.battle.BattleLogDialog;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.RequestParameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
  * @author Ivan Khalopik
@@ -41,9 +39,6 @@ public class GameBattle extends AbstractPage {
     private BattleField.Point point;
 
     @Property
-    private BattleLogEntry logEntry;
-
-    @Property
     private BattleHero hero;
 
     @Property
@@ -55,6 +50,9 @@ public class GameBattle extends AbstractPage {
     @Property
     private BattleAbility ability;
 
+    @InjectComponent
+    private BattleLogDialog battleLogDialog;
+
     @Override
     public String getSubtitle() {
         return format("subtitle", label("round"), battle.getRound());
@@ -62,17 +60,6 @@ public class GameBattle extends AbstractPage {
 
     public boolean isEnemy() {
         return !field.getSelf().equals(hero);
-    }
-
-    public List<BattleLogEntry> getLog() {
-        final List<BattleLogEntry> log = new ArrayList<BattleLogEntry>();
-
-        final List<BattleLogEntry> fullLog = battle.getLog();
-        final ListIterator<BattleLogEntry> iterator = fullLog.listIterator(fullLog.size());
-        while (iterator.hasPrevious() && log.size() < 10) {
-            log.add(iterator.previous());
-        }
-        return log;
     }
 
     @OnEvent(EventConstants.ACTIVATE)
@@ -88,6 +75,11 @@ public class GameBattle extends AbstractPage {
             }
         }
         return null;
+    }
+
+    @OnEvent(value = EventConstants.ACTION, component = "battleLog")
+    Object log() {
+        return battleLogDialog.show(field);
     }
 
     @OnEvent("skip")
