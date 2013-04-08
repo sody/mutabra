@@ -153,7 +153,10 @@
 }
 
 .log {
-  .grid-cell(4, 5);
+  &.log-brief {
+    overflow: hidden;
+    .grid-cell(4, 5);
+  }
 
   a {
     text-decoration: none;

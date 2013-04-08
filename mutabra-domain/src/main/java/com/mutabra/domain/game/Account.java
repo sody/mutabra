@@ -1,6 +1,5 @@
 package com.mutabra.domain.game;
 
-import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Transient;
 import com.mutabra.domain.BaseEntity;
@@ -27,7 +26,6 @@ public class Account extends BaseEntity {
     private Date registered;
     private Date lastLogin;
 
-    @Embedded
     private Set<AccountCredential> credentials = new HashSet<AccountCredential>();
 
     private AccountPendingToken pendingToken;

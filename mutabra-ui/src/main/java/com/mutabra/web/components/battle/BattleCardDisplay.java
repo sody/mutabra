@@ -22,7 +22,7 @@ public class BattleCardDisplay extends AbstractComponent {
     private Effect effect;
 
     public String getContainerClass() {
-        return card.getHero().isReady() ?
+        return card.getUnit().isReady() ?
                 "card disabled" :
                 "card";
     }

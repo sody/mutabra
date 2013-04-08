@@ -1,5 +1,6 @@
 package com.mutabra.domain.common;
 
+import com.mutabra.domain.CodeUtils;
 import com.mutabra.domain.Translatable;
 
 /**
@@ -180,11 +181,11 @@ public enum TargetType implements Translatable {
     private final boolean supportsCreature;
 
     private TargetType(final boolean massive,
-               final boolean supportsEnemy,
-               final boolean supportsFriend,
-               final boolean supportsEmpty,
-               final boolean supportsHero,
-               final boolean supportsCreature) {
+                       final boolean supportsEnemy,
+                       final boolean supportsFriend,
+                       final boolean supportsEmpty,
+                       final boolean supportsHero,
+                       final boolean supportsCreature) {
         this.massive = massive;
         this.supportsEnemy = supportsEnemy;
         this.supportsFriend = supportsFriend;
@@ -192,7 +193,7 @@ public enum TargetType implements Translatable {
         this.supportsHero = supportsHero;
         this.supportsCreature = supportsCreature;
 
-        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+        code = CodeUtils.generateCode(this);
 
         order = (massive ? 32 : 0) +
                 (supportsEnemy ? 16 : 0) +

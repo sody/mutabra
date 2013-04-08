@@ -11,10 +11,7 @@ import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityServiceImpl;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Ivan Khalopik
@@ -45,7 +42,7 @@ public class BattleServiceImpl
         battle.setActive(false);
 
         // init hero
-        final BattleHero battleHero = new BattleHero(hero.getId());
+        final BattleHero battleHero = new BattleHero(battle, hero.getId());
         fillHero(battleHero, hero);
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
@@ -55,7 +52,7 @@ public class BattleServiceImpl
 
     public void apply(final Battle battle, final Hero hero) {
         // init hero
-        final BattleHero battleHero = new BattleHero(hero.getId());
+        final BattleHero battleHero = new BattleHero(battle, hero.getId());
         fillHero(battleHero, hero);
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
@@ -78,7 +75,7 @@ public class BattleServiceImpl
     public void cast(final Battle battle,
                      final BattleCard card,
                      final BattleTarget target) {
-        final BattleHero hero = card.getHero();
+        final BattleHero hero = card.getUnit();
 
         // add cast effect
         // it will subtract blood cost from hero health
@@ -88,8 +85,8 @@ public class BattleServiceImpl
         castEffect.setPower(card.getBloodCost());
         castEffect.setType(EffectType.CAST);
         castEffect.setTargetType(TargetType.NOBODY);
-        castEffect.getCaster().setHero(hero);
-        castEffect.getTarget().setCard(card);
+        castEffect.getCaster().setUnit(hero);
+        castEffect.getTarget().setSpell(card);
         battle.getEffects().add(castEffect);
 
         // add remaining card effects
@@ -99,7 +96,7 @@ public class BattleServiceImpl
 
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
-            battleEffect.getCaster().setHero(hero);
+            battleEffect.getCaster().setUnit(hero);
 
             battle.getEffects().add(battleEffect);
         }
@@ -124,7 +121,7 @@ public class BattleServiceImpl
     public void cast(final Battle battle,
                      final BattleAbility ability,
                      final BattleTarget target) {
-        final BattleCreature creature = ability.getCreature();
+        final BattleCreature creature = ability.getUnit();
 
         // add cast effect
         // it will subtract blood cost from creature health
@@ -134,8 +131,8 @@ public class BattleServiceImpl
         castEffect.setPower(ability.getBloodCost());
         castEffect.setType(EffectType.CAST);
         castEffect.setTargetType(TargetType.NOBODY);
-        castEffect.getCaster().setCreature(creature);
-        castEffect.getTarget().setAbility(ability);
+        castEffect.getCaster().setUnit(creature);
+        castEffect.getTarget().setSpell(ability);
         battle.getEffects().add(castEffect);
 
         // add remaining ability effects
@@ -143,7 +140,7 @@ public class BattleServiceImpl
             final BattleEffect battleEffect = new BattleEffect();
             fillEffect(battleEffect, effect);
 
-            battleEffect.getCaster().setCreature(creature);
+            battleEffect.getCaster().setUnit(creature);
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
 
@@ -201,20 +198,33 @@ public class BattleServiceImpl
             battleHero.setReady(false);
 
             // init hero cards
-            final List<Card> cards = datastore().get(Card.class, hero.getCards()).asList();
-            // shuffle deck
-            Collections.shuffle(cards);
-            // init card copies for battle
-            for (Card card : cards) {
-                final BattleCard battleCard = new BattleCard();
-                fillCard(battleCard, card);
+            final Map<String, Card> cards = new HashMap<String, Card>();
+            for (final Card card : datastore().get(Card.class, hero.getCards())) {
+                cards.put(card.getCode(), card);
+            }
 
-                battleCard.setType(BattleCardType.DECK);
-                battleHero.getCards().add(battleCard);
+            final List<String> heroCards = hero.getCards();
+            // shuffle deck
+            Collections.shuffle(heroCards);
+            // init card copies for battle
+            for (String heroCard : heroCards) {
+                final Card card = cards.get(heroCard);
+                if (card != null) {
+                    final BattleCard battleCard = new BattleCard(battleHero);
+                    fillCard(battleCard, card);
+
+                    battleCard.setType(BattleCardType.DECK);
+                    battleHero.getCards().add(battleCard);
+                }
             }
             // get 3 first cards from deck to hand
             dealCards(battleHero, 3);
         }
+
+        // add battle started message to log
+        final BattleLogEntry startEntry = new BattleLogEntry();
+        startEntry.setCode("battle.start");
+        battle.getLog().add(startEntry);
     }
 
     private void end(final Battle battle) {
@@ -238,8 +248,6 @@ public class BattleServiceImpl
             //start new round
             battle.setRound(battle.getRound() + 1);
             for (BattleHero battleHero : battle.getHeroes()) {
-                // increase mental power each round
-                battleHero.setMentalPower(battleHero.getMentalPower() + 1);
                 // move one card from deck to hand
                 dealCards(battleHero, 1);
                 // each hero should be able to cast cards in the beginning of the round

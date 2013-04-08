@@ -15,7 +15,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleHero {
+public class BattleHero implements BattleUnit {
 
     @Indexed
     private ObjectId id;
@@ -32,10 +32,11 @@ public class BattleHero {
     @Transient
     private Battle battle;
 
-    public BattleHero() {
+    protected BattleHero() {
     }
 
-    public BattleHero(final ObjectId id) {
+    public BattleHero(final Battle battle, final ObjectId id) {
+        this.battle = battle;
         this.id = id;
     }
 
@@ -93,6 +94,10 @@ public class BattleHero {
 
     public List<BattleCreature> getCreatures() {
         return creatures;
+    }
+
+    public boolean isHero() {
+        return true;
     }
 
     public boolean isAllReady() {

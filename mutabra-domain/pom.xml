@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.mutabra</groupId>
         <artifactId>mutabra-parent</artifactId>
-        <version>1.0-pre-alpha-12</version>
+        <version>1.0-pre-alpha-13</version>
     </parent>
 
     <groupId>com.mutabra</groupId>
     <artifactId>mutabra-domain</artifactId>
-    <version>1.0-pre-alpha-12</version>
+    <version>1.0-pre-alpha-13</version>
     <packaging>jar</packaging>
 
     <name>Mutabra Domain Module</name>

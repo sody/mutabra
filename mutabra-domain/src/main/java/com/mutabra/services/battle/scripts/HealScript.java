@@ -8,7 +8,7 @@ import com.mutabra.services.battle.BattleField;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class AttackScript extends AbstractScript {
+public class HealScript extends AbstractScript {
 
     @Override
     protected void apply(final BattleField battleField,
@@ -18,7 +18,7 @@ public class AttackScript extends AbstractScript {
 
         if (target != null && target.hasUnit()) {
             final BattleUnit targetUnit = target.getUnit();
-            targetUnit.setHealth(targetUnit.getHealth() - battleEffect.getPower());
+            targetUnit.setHealth(targetUnit.getHealth() + battleEffect.getPower());
 
             success(battleEffect)
                     .parameter("caster", casterUnit)
