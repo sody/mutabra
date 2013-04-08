@@ -30,13 +30,21 @@
         <Arg>mail/session</Arg>
         <Arg>
             <New class="org.eclipse.jetty.jndi.factories.MailSessionReference">
-                <Set name="user">${project.robot-email}</Set>
-                <Set name="password">${project.robot-email-secret}</Set>
+                <Set name="user">
+                    <Call name="getenv" class="java.lang.System" id="robotId">
+                        <Arg>ROBOT_ID</Arg>
+                    </Call>
+                </Set>
+                <Set name="password">
+                    <Call name="getenv" class="java.lang.System" id="robotSecret">
+                        <Arg>ROBOT_SECRET</Arg>
+                    </Call>
+                </Set>
                 <Set name="properties">
                     <New class="java.util.Properties">
-                        <Put name="mail.user">${project.robot-email}</Put>
-                        <Put name="mail.password">${project.robot-email-secret}</Put>
-                        <Put name="mail.from">${project.robot-email}</Put>
+                        <Put name="mail.user"><Ref id="robotId"/></Put>
+                        <Put name="mail.password"><Ref id="robotSecret"/></Put>
+                        <Put name="mail.from"><Ref id="robotId"/></Put>
                         <Put name="mail.transport.protocol">smtp</Put>
 
                         <Put name="mail.smtp.host">smtp.gmail.com</Put>

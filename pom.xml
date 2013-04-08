@@ -257,6 +257,7 @@
         <maven.source.skip>true</maven.source.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <project.production-mode>true</project.production-mode>
 
         <surefire-plugin.version>2.6</surefire-plugin.version>
