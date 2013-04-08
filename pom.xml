@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mutabra</groupId>
     <artifactId>mutabra-parent</artifactId>
-    <version>1.0-pre-alpha-12-SNAPSHOT</version>
+    <version>1.0-pre-alpha-13-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Mutabra Project</name>
@@ -83,6 +82,12 @@
                 <groupId>com.google.code.morphia</groupId>
                 <artifactId>morphia</artifactId>
                 <version>${morphia.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>${mongo.version}</version>
             </dependency>
 
             <!-- ui module dependencies -->
@@ -252,6 +257,7 @@
         <maven.source.skip>true</maven.source.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.production-mode>true</project.production-mode>
 
         <surefire-plugin.version>2.6</surefire-plugin.version>
         <compiler-plugin.version>2.3.2</compiler-plugin.version>
@@ -266,6 +272,7 @@
         <javassist.version>3.12.1.GA</javassist.version>
 
         <morphia.version>0.99</morphia.version>
+        <mongo.version>2.10.1</mongo.version>
 
         <tapestry.version>5.3.6</tapestry.version>
         <shiro.version>1.2.0</shiro.version>

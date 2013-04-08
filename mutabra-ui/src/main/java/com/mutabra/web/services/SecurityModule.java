@@ -53,9 +53,9 @@ public class SecurityModule {
         // we can override all this values with system properties and servlet context parameters
 
         // hash service constants should be retrieved from environment values by default
-        configuration.add(SecurityConstants.HASH_ALGORITHM, "${evn.hash_algorithm}");
-        configuration.add(SecurityConstants.HASH_ITERATIONS, "${evn.hash_iterations}");
-        configuration.add(SecurityConstants.HASH_PRIVATE_SALT, "${evn.hash_private_salt}");
+        configuration.add(SecurityConstants.HASH_ALGORITHM, "${env.hash_algorithm}");
+        configuration.add(SecurityConstants.HASH_ITERATIONS, "${env.hash_iterations}");
+        configuration.add(SecurityConstants.HASH_PRIVATE_SALT, "${env.hash_private_salt}");
 
         // add default value for token expiration time
         configuration.add(SecurityConstants.TOKEN_EXPIRATION_TIME, "86400000");
