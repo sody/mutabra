@@ -1,8 +1,6 @@
 package com.mutabra.services.battle.scripts;
 
 import com.mutabra.domain.battle.BattleEffect;
-import com.mutabra.domain.battle.BattleLogEntry;
-import com.mutabra.domain.battle.BattleLogParameter;
 import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.services.battle.BattleField;
 
@@ -22,16 +20,18 @@ public class AttackScript extends AbstractScript {
             final BattleUnit targetUnit = target.getUnit();
             targetUnit.setHealth(targetUnit.getHealth() - battleEffect.getPower());
 
-            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".success")
-                    .append("caster", new BattleLogParameter(casterUnit))
-                    .append("target", new BattleLogParameter(targetUnit))
-                    .append("spell", new BattleLogParameter(battleEffect))
-                    .append("spell.power", new BattleLogParameter(battleEffect.getPower()))
-                    .append("target.health", new BattleLogParameter(targetUnit.getHealth())));
+            success(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("target", targetUnit)
+                    .parameter("spell", battleEffect)
+                    .parameter("spell.power", battleEffect.getPower())
+                    .parameter("target.health", targetUnit.getHealth())
+                    .build(battleField.getBattle());
         } else {
-            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".failure")
-                    .append("caster", new BattleLogParameter(casterUnit))
-                    .append("spell", new BattleLogParameter(battleEffect)));
+            failure(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("spell", battleEffect)
+                    .build(battleField.getBattle());
         }
     }
 }

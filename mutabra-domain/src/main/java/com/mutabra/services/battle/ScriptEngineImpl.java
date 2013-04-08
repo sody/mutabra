@@ -4,10 +4,9 @@ import com.mutabra.domain.battle.Battle;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleEffect;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.BattleLogEntry;
-import com.mutabra.domain.battle.BattleLogParameter;
 import com.mutabra.domain.common.EffectType;
 import com.mutabra.services.battle.scripts.EffectScript;
+import com.mutabra.services.battle.scripts.LogBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,8 +26,9 @@ public class ScriptEngineImpl implements ScriptEngine {
 
     public void executeScripts(final Battle battle) {
         // add round started message to log
-        battle.getLog().add(new BattleLogEntry("round.start")
-                .append("round", new BattleLogParameter(battle.getRound())));
+        new LogBuilder("round.start")
+                .parameter("round", battle.getRound())
+                .build(battle);
 
         // process effects
         final List<BattleEffect> deadEffects = new ArrayList<BattleEffect>();
@@ -53,23 +53,30 @@ public class ScriptEngineImpl implements ScriptEngine {
         for (BattleHero battleHero : battle.getHeroes()) {
             // someone dead
             if (battleHero.getHealth() <= 0 || battleHero.getMentalPower() <= 0) {
-                //TODO: log dead hero
+                new LogBuilder("round.death")
+                        .parameter("target", battleHero)
+                        .build(battle);
+
                 battle.setActive(false);
             }
 
             final List<BattleCreature> deadCreatures = new ArrayList<BattleCreature>();
-            for (BattleCreature creature : battleHero.getCreatures()) {
-                // creature is dead
-                if (creature.getHealth() <= 0) {
-                    deadCreatures.add(creature);
+            for (BattleCreature battleCreature : battleHero.getCreatures()) {
+                // battleCreature is dead
+                if (battleCreature.getHealth() <= 0) {
+                    new LogBuilder("round.death")
+                            .parameter("target", battleCreature)
+                            .build(battle);
+
+                    deadCreatures.add(battleCreature);
                 }
             }
-            //TODO: log dead creatures
             battleHero.getCreatures().removeAll(deadCreatures);
         }
 
         // add round ended message to log
-        battle.getLog().add(new BattleLogEntry("round.end")
-                .append("round", new BattleLogParameter(battle.getRound())));
+        new LogBuilder("round.end")
+                .parameter("round", battle.getRound())
+                .build(battle);
     }
 }

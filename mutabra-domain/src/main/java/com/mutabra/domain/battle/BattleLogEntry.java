@@ -39,9 +39,4 @@ public class BattleLogEntry implements Translatable {
     public Map<String, BattleLogParameter> getParameters() {
         return parameters;
     }
-
-    public BattleLogEntry append(final String key, final BattleLogParameter value) {
-        parameters.put(key, value);
-        return this;
-    }
 }

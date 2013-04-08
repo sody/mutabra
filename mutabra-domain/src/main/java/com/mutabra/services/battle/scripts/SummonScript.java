@@ -1,12 +1,6 @@
 package com.mutabra.services.battle.scripts;
 
-import com.mutabra.domain.battle.BattleAbility;
-import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleEffect;
-import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.domain.battle.BattleLogEntry;
-import com.mutabra.domain.battle.BattleLogParameter;
-import com.mutabra.domain.battle.BattleUnit;
+import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.services.battle.BattleField;
 
@@ -44,15 +38,17 @@ public class SummonScript extends AbstractScript {
 
             casterHero.getCreatures().add(battleCreature);
 
-            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".success")
-                    .append("caster", new BattleLogParameter(casterUnit))
-                    .append("target", new BattleLogParameter(battleCreature))
-                    .append("target.health", new BattleLogParameter(battleCreature.getHealth()))
-                    .append("target.power", new BattleLogParameter(battleCreature.getPower())));
+            success(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("target", battleCreature)
+                    .parameter("target.health", battleCreature.getHealth())
+                    .parameter("target.power", battleCreature.getPower())
+                    .build(battleField.getBattle());
         } else {
-            battleField.getBattle().getLog().add(new BattleLogEntry(battleEffect.getCode() + ".failure")
-                    .append("caster", new BattleLogParameter(casterUnit))
-                    .append("spell", new BattleLogParameter(battleEffect)));
+            failure(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("spell", battleEffect)
+                    .build(battleField.getBattle());
         }
     }
 }

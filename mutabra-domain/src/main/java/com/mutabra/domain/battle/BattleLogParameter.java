@@ -24,7 +24,7 @@ public class BattleLogParameter implements Translatable {
     private String code;
     private String value;
 
-    public BattleLogParameter() {
+    protected BattleLogParameter() {
     }
 
     public BattleLogParameter(final BattleSide side, final BattlePosition position) {
@@ -59,7 +59,7 @@ public class BattleLogParameter implements Translatable {
     }
 
     public BattleLogParameter(final BattleEffect battleEffect) {
-        code = battleEffect.getCode() + ".name";
+        code = battleEffect.getCode() + "." + Translatable.NAME;
     }
 
     public BattleLogParameter(final Object value) {

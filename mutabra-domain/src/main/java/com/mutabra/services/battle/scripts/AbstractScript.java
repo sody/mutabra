@@ -1,5 +1,6 @@
 package com.mutabra.services.battle.scripts;
 
+import com.mutabra.domain.Translatable;
 import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.services.battle.BattleField;
@@ -70,4 +71,16 @@ public abstract class AbstractScript implements EffectScript {
     protected abstract void apply(final BattleField battleField,
                                   final BattleEffect battleEffect,
                                   final BattleField.Point target);
+
+    protected LogBuilder success(final BattleEffect battleEffect) {
+        return log(battleEffect.getCode(), Translatable.SUCCESS);
+    }
+
+    protected LogBuilder failure(final BattleEffect battleEffect) {
+        return log(battleEffect.getCode(), Translatable.FAILURE);
+    }
+
+    protected LogBuilder log(final String code, final String variant) {
+        return new LogBuilder(code, variant);
+    }
 }
