@@ -4,6 +4,7 @@ import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.AccountCredential;
 import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.AccountPendingToken;
+import com.mutabra.domain.game.Role;
 import com.mutabra.security.OAuth;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
@@ -172,6 +173,10 @@ public class Security extends AbstractPage {
     @OnEvent(value = EventConstants.SUCCESS, component = "signUpForm")
     Object signUp() {
         account = new Account();
+        account.setName(email.substring(0, email.indexOf('@')));
+        // newly created user should be of role USER
+        account.setRole(Role.USER);
+
         // we should generate new password
         // and create auth token to confirm password changes
         // when user will confirm this from his email new password will be applied
