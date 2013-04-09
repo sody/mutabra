@@ -105,6 +105,10 @@ public class OAuthRealm extends AuthenticatingRealm {
             // fill account common properties
             account.setRegistered(new Date());
             account.setName((String) profile.get(OAuth.Session.NAME));
+            // account name is required
+            if (account.getName() == null || account.getName().isEmpty()) {
+                account.setName("<unknown>");
+            }
             //todo: account.setLocale(LocaleUtils.parseLocale((String) profile.get(OAuth.Session.LOCALE)));
             //todo: account.setTimeZone(...);
             //todo: account.setGender(...);
