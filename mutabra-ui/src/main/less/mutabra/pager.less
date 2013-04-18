@@ -22,7 +22,8 @@
   border: 1px solid @pagerBorder;
   .border-radius(15px);
 }
-.pager li > a:hover {
+.pager li > a:hover,
+.pager li > a:focus {
   text-decoration: none;
   //CHANGED: added pager active background color setting
   background-color: @pagerBackgroundActive;
@@ -37,6 +38,7 @@
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,
+.pager .disabled > a:focus,
 .pager .disabled > span {
   color: @grayLight;
   //CHANGED: added pager background color setting
