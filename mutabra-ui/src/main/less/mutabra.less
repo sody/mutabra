@@ -3,58 +3,56 @@
  */
 
 // Core variables and mixins
-@import "mutabra/variables"; // Modify this for custom colors, font-sizes, etc
-@import "mutabra/mixins";
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
 
-// CSS Reset
-@import "bootstrap/reset";
+  // Reset
+@import "bootstrap/normalize.less";
+@import "bootstrap/print.less";
 
-// Grid system and page structure
-@import "mutabra/scaffolding";
-@import "bootstrap/grid";
-@import "bootstrap/layouts";
+  // Core CSS
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+@import "bootstrap/grid.less";
 
-// Base CSS
-@import "mutabra/type";
-@import "bootstrap/code";
-@import "mutabra/forms";
-@import "bootstrap/tables";
+@import "bootstrap/tables.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/buttons.less";
 
-// Components: common
-@import "mutabra/sprites";
-@import "mutabra/dropdowns";
-@import "mutabra/wells";
-@import "bootstrap/component-animations";
-@import "bootstrap/close";
+  // Components: common
+@import "bootstrap/component-animations.less";
+@import "bootstrap/input-groups.less";
+@import "bootstrap/dropdowns.less";
+@import "bootstrap/list-group.less";
+@import "bootstrap/panels.less";
+@import "bootstrap/wells.less";
+@import "bootstrap/close.less";
 
-// Components: Buttons & Alerts
-@import "mutabra/buttons";
-@import "mutabra/button-groups";
-@import "bootstrap/alerts"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+  // Components: Nav
+@import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+@import "bootstrap/button-groups.less";
+@import "bootstrap/breadcrumbs.less";
+@import "bootstrap/pagination.less";
+@import "bootstrap/pager.less";
 
-// Components: Nav
-@import "mutabra/navs";
-@import "mutabra/navbar";
-@import "mutabra/breadcrumbs";
-@import "bootstrap/pagination";
-@import "mutabra/pager";
+  // Components: Popovers
+@import "bootstrap/modals.less";
+@import "bootstrap/tooltip.less";
+@import "bootstrap/popovers.less";
 
-// Components: Popovers
-@import "mutabra/modals";
-@import "bootstrap/tooltip";
-@import "mutabra/popovers";
+  // Components: Misc
+@import "bootstrap/alerts.less";
+@import "bootstrap/thumbnails.less";
+@import "bootstrap/media.less";
+@import "bootstrap/labels.less";
+@import "bootstrap/badges.less";
+@import "bootstrap/progress-bars.less";
+@import "bootstrap/accordion.less";
+@import "bootstrap/carousel.less";
+@import "bootstrap/jumbotron.less";
 
-// Components: Misc
-@import "mutabra/thumbnails";
-@import "bootstrap/media";
-@import "bootstrap/labels-badges";
-@import "mutabra/progress-bars";
-@import "mutabra/accordion";
-@import "bootstrap/carousel";
-@import "bootstrap/hero-unit";
-
-// Utility classes
-@import "bootstrap/utilities"; // Has to be last to override when necessary
-
-// Mutabra classes
-@import "mutabra/battle";
+  // Utility classes
+@import "bootstrap/utilities.less"; // Has to be last to override when necessary
+@import "bootstrap/responsive-utilities.less";
