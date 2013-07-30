@@ -15,10 +15,18 @@
 @gray-light:             lighten(#000, 60%);   // #999
 @gray-lighter:           lighten(#000, 93.5%); // #eee
 
+// Mutabra colors
+// -------------------------
+@mutabra-light:          #fee8ae;
+@mutabra-lighter:        #e6d29d;
+@mutabra-default:        #c7a663;
+@mutabra-darker:         #836030;
+@mutabra-dark:           #6d440c;
+
 // Brand colors
 // -------------------------
 
-@brand-primary:         #428bca;
+@brand-primary:         @mutabra-dark;
 @brand-success:         #5cb85c;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
@@ -27,7 +35,7 @@
 // Scaffolding
 // -------------------------
 
-@body-bg:               #fff;
+@body-bg:               @mutabra-lighter;
 @text-color:            @gray-dark;
 
 // Links
@@ -83,11 +91,11 @@
 @table-condensed-cell-padding:       5px;
 
 @table-bg:                           transparent; // overall background-color
-@table-bg-accent:                    #f9f9f9; // for striping
-@table-bg-hover:                     #f5f5f5;
+@table-bg-accent:                    @mutabra-lighter; // for striping
+@table-bg-hover:                     @mutabra-lighter;
 @table-bg-active:                    @table-bg-hover;
 
-@table-border-color:                 #ddd; // table and cell border
+@table-border-color:                 @mutabra-default; // table and cell border
 
 
 // Buttons
@@ -126,7 +134,7 @@
 @input-bg:                       #fff;
 @input-bg-disabled:              @gray-lighter;
 
-@input-border:                   #ccc;
+@input-border:                   @mutabra-default;
 @input-border-radius:            @border-radius-base;
 
 @input-color-placeholder:        @gray-light;
@@ -135,9 +143,11 @@
 @input-height-large:             (ceil(@font-size-large * @line-height-base) + (@padding-large-vertical * 2) + 2);
 @input-height-small:             (ceil(@font-size-small * @line-height-base) + (@padding-small-vertical * 2) + 2);
 
-@legend-border-color:            #e5e5e5;
+@legend-border-color:            @mutabra-default;
 
 @input-group-addon-border-color: @input-border;
+//CHANGED: added input fucus border color setting
+@input-focus-border:             @mutabra-dark;
 
 
 // Dropdowns
@@ -285,7 +295,7 @@
 // Jumbotron
 // -------------------------
 
-@jumbotron-bg:                   @gray-lighter;
+@jumbotron-bg:                   @mutabra-lighter;
 @jumbotron-heading-color:        inherit;
 @jumbotron-lead-color:           inherit;
 
@@ -444,7 +454,7 @@
 // -------------------------
 @thumbnail-caption-color:     @text-color;
 @thumbnail-bg:                @body-bg;
-@thumbnail-border:            #ddd;
+@thumbnail-border:            @mutabra-default;
 @thumbnail-border-radius:     @border-radius-base;
 
 
@@ -507,14 +517,14 @@
 @abbr-border-color:           @gray-light;
 @headings-small-color:        @gray-light;
 @blockquote-small-color:      @gray-light;
-@blockquote-border-color:     @gray-lighter;
-@page-header-border-color:    @gray-lighter;
+@blockquote-border-color:     @mutabra-default;
+@page-header-border-color:    @mutabra-default;
 
 // Miscellaneous
 // -------------------------
 
 // Hr border color
-@hr-border:                   @gray-lighter;
+@hr-border:                   @mutabra-default;
 
 // Horizontal forms & lists
 @component-offset-horizontal: 180px;
