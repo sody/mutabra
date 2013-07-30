@@ -1,0 +1,87 @@
+//
+// Layout
+// --------------------------------------------------
+
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  min-width: @page-min-width + 2 * @grid-gutter-width;
+}
+
+// Page layout
+.page {
+  // for static bottom footer
+  min-height: 100%;
+  margin-bottom: -@page-footer-height;
+
+  .header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 70px;
+
+    .logo {
+      background: url("../img/logo80x60.png") no-repeat;
+      padding-top: 40px;
+      padding-left: 80px;
+      color: @text-color;
+      font-size: 20px;
+      font-weight: bold;
+      display: block;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    form {
+      margin: 0;
+    }
+  }
+  .wrapper {
+    min-height: @page-min-height;
+    padding: @grid-gutter-width - 1;
+    background-color: @mutabra-light;
+    border: 1px solid @mutabra-default;
+    .border-radius(@grid-gutter-width);
+  }
+  // for static bottom footer
+  .buffer {
+    height: @page-footer-height;
+  }
+}
+.footer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+// Horizontal menu
+ul.horizontal-menu,
+ol.horizontal-menu {
+  list-style: none;
+  margin: 0;
+  .clearfix();
+
+  li {
+    float: left;
+  }
+}
+
+// Pretty tabs wrapper
+.tabs-wrapper {
+  margin: 30% -@grid-gutter-width 0;
+
+  .tab-content {
+    padding: @grid-gutter-width - 1;
+    background: @mutabra-light;
+    border: 1px solid @mutabra-default;
+  }
+
+  &.tabs-below .tab-content {
+    border-bottom: 0;
+    .border-radius(@grid-gutter-width @grid-gutter-width 0 0);
+  }
+}
