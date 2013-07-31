@@ -12,9 +12,9 @@
     <![endif]-->
 </head>
 
-<body style="background:#fee8ae;">
+<body>
 
-<div class="container">
+<div class="container" style="background:#fee8ae;">
 
 <!-- Typography
  ================================================== -->
@@ -533,7 +533,7 @@
                         <label class="control-label col-lg-2" for="appendedInputButton">Appended button</label>
                         <div class="input-group col-lg-6">
                             <div class="input-group-btn">
-                                <button class="btn" type="button">Go!</button>
+                                <button class="btn btn-default" type="button">Go!</button>
                             </div>
                             <input class="form-control" id="appendedInputButton" size="16" type="text"/>
                         </div>
@@ -543,8 +543,8 @@
                         <div class="input-group col-lg-6">
                             <input class="form-control" id="appendedInputButtons" size="16" type="text"/>
                             <div class="input-group-btn">
-                                <button class="btn" type="button">Search</button>
-                                <button class="btn" type="button">Options</button>
+                                <button class="btn btn-default" type="button">Search</button>
+                                <button class="btn btn-default" type="button">Options</button>
                             </div>
                         </div>
                     </div>
@@ -567,10 +567,12 @@
                     <div class="form-group">
                         <label class="control-label col-lg-2" for="optionsCheckbox2">Disabled checkbox</label>
                         <div class="col-lg-6">
-                            <label class="checkbox">
-                                <input type="checkbox" id="optionsCheckbox2" value="option1" disabled/>
-                                This is a disabled checkbox
-                            </label>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="optionsCheckbox2" value="option1" disabled/>
+                                    This is a disabled checkbox
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group has-warning">
@@ -661,7 +663,7 @@
                     <div class="form-group">
                         <div class="col-lg-6 col-offset-2">
                             <button type="submit" class="btn btn-primary">Save changes</button>
-                            <button class="btn">Cancel</button>
+                            <button class="btn btn-default">Cancel</button>
                         </div>
                     </div>
                 </fieldset>
