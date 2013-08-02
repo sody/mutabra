@@ -252,7 +252,7 @@
 // Navs
 // -------------------------
 
-@nav-link-hover-bg:                         @gray-lighter;
+@nav-link-hover-bg:                         @mutabra-background;
 
 @nav-disabled-link-color:                   @gray-light;
 @nav-disabled-link-hover-color:             @gray-light;
@@ -261,21 +261,23 @@
 @nav-open-caret-border-color:               #fff;
 
 // Tabs
-@nav-tabs-border-color:                     #ddd;
+@nav-tabs-border-color:                     @mutabra-border;
 
-@nav-tabs-link-hover-border-color:          @gray-lighter;
+@nav-tabs-link-hover-border-color:          transparent transparent @mutabra-border transparent;
 
-@nav-tabs-active-link-hover-bg:             @body-bg;
+@nav-tabs-active-link-hover-bg:             @mutabra-foreground;
 @nav-tabs-active-link-hover-color:          @gray;
-@nav-tabs-active-link-hover-border-color:   #ddd;
+@nav-tabs-active-link-hover-border-color:   @mutabra-border;
 
-@nav-tabs-justified-link-border-color:            #ddd;
-@nav-tabs-justified-active-link-border-color:     @body-bg;
+@nav-tabs-justified-link-border-color:            @mutabra-border;
+@nav-tabs-justified-active-link-border-color:     transparent;
 
 // Pills
 @nav-pills-active-link-hover-bg:            @component-active-bg;
 @nav-pills-active-link-hover-color:         #fff;
 
+//CHANGED: added nav divider border color setting
+@nav-divider-border:                        @mutabra-border;
 
 // Pagination
 // -------------------------
