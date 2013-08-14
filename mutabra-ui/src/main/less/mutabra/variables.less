@@ -267,6 +267,9 @@
 @navbar-toggle-icon-bar-bg:        @navbar-link-hover-color;
 @navbar-toggle-border-color:       @mutabra-border;
 
+//CHANGED: added navbar divider color setting
+@navbar-divider-color:             @navbar-border;
+
 
 // Inverted navbar
 //
@@ -297,9 +300,12 @@
 @navbar-inverse-search-placeholder-color:   #ccc;
 
 // Inverted navbar toggle
-@navbar-inverse-toggle-hover-bg:            #333;
+@navbar-inverse-toggle-hover-bg:            @navbar-inverse-link-active-bg;
 @navbar-inverse-toggle-icon-bar-bg:         #fff;
-@navbar-inverse-toggle-border-color:        #333;
+@navbar-inverse-toggle-border-color:        @navbar-inverse-link-active-bg;
+
+//CHANGED: added navbar divider color setting
+@navbar-inverse-divider-color:              @navbar-inverse-border;
 
 
 // Navs
