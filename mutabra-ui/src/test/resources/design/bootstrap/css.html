@@ -280,6 +280,16 @@
             </dl>
         </div>
 
+        <h1 id="code">Code</h1>
+        <h2 id="code-inline">Inline</h2>
+        <div class="example">
+            For example, <code>&lt;section&gt;</code> should be wrapped as inline.
+        </div>
+
+        <h2 id="code-block">Basic block</h2>
+        <div class="example">
+            <pre>&lt;p&gt;Sample text here...&lt;/p&gt;</pre>
+        </div>
 
         <h1 id="tables">Tables</h1>
 
@@ -412,6 +422,26 @@
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </fieldset>
+            </form>
+        </div>
+
+        <h2 id="forms-inline">Inline form</h2>
+        <div class="example">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Enter email"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputPassword2">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"/>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"/> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">Sign in</button>
             </form>
         </div>
 
@@ -709,20 +739,24 @@
         <h2 id="buttons-sizes">Button sizes</h2>
         <div class="example">
             <p>
-                <button type="button" class="btn btn-primary btn-large">Large button</button>
-                <button type="button" class="btn btn-default btn-large">Large button</button>
+                <button type="button" class="btn btn-primary btn-lg">Large button</button>
+                <button type="button" class="btn btn-default btn-lg">Large button</button>
             </p>
             <p>
                 <button type="button" class="btn btn-primary">Default button</button>
                 <button type="button" class="btn btn-default">Default button</button>
             </p>
             <p>
-                <button type="button" class="btn btn-primary btn-small">Small button</button>
-                <button type="button" class="btn btn-default btn-small">Small button</button>
+                <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                <button type="button" class="btn btn-default btn-sm">Small button</button>
+            </p>
+            <p>
+                <button type="button" class="btn btn-primary btn-xs">Extra small button</button>
+                <button type="button" class="btn btn-default btn-xs">Extra small button</button>
             </p>
 
-            <button type="button" class="btn btn-primary btn-large btn-block">Block level button</button>
-            <button type="button" class="btn btn-default btn-large btn-block">Block level button</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+            <button type="button" class="btn btn-default btn-lg btn-block">Block level button</button>
         </div>
 
         <h2 id="buttons-disabled">Button disabled</h2>
