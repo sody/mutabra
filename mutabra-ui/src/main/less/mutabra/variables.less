@@ -192,7 +192,9 @@
 // Basics of a navbar
 @navbar-height:                    50px;
 @navbar-color:                     #777;
-@navbar-bg:                        #eee;
+@navbar-bg:                        @mutabra-foreground;
+//CHANGED: added navbar border color setting
+@navbar-border-color:              @mutabra-border;
 @navbar-padding-horizontal:        floor(@grid-gutter-width / 2);  // ~15px
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 
@@ -200,30 +202,30 @@
 @navbar-link-color:                #777;
 @navbar-link-hover-color:          #333;
 @navbar-link-hover-bg:             transparent;
-@navbar-link-active-color:         #555;
-@navbar-link-active-bg:            darken(@navbar-bg, 10%);
+@navbar-link-active-color:         @navbar-link-hover-color;
+@navbar-link-active-bg:            @mutabra-background;
 @navbar-link-disabled-color:       #ccc;
 @navbar-link-disabled-bg:          transparent;
 
 // Navbar brand label
 @navbar-brand-color:               @navbar-link-color;
-@navbar-brand-hover-color:         darken(@navbar-link-color, 10%);
-@navbar-brand-hover-bg:            transparent;
+@navbar-brand-hover-color:         @navbar-link-hover-color;
+@navbar-brand-hover-bg:            @navbar-link-hover-bg;
 
 // Navbar toggle
-@navbar-toggle-hover-bg:           #ddd;
-@navbar-toggle-icon-bar-bg:        #ccc;
-@navbar-toggle-border-color:       #ddd;
+@navbar-toggle-hover-bg:           @mutabra-background;
+@navbar-toggle-icon-bar-bg:        @navbar-link-hover-color;
+@navbar-toggle-border-color:       @mutabra-border;
 
 
 // Inverted navbar
 //
 // Reset inverted navbar basics
-@navbar-inverse-color:                      @gray-light;
-@navbar-inverse-bg:                         #222;
+@navbar-inverse-color:                      #ddd;
+@navbar-inverse-bg:                         @mutabra-primary;
 
 // Inverted navbar links
-@navbar-inverse-link-color:                 @gray-light;
+@navbar-inverse-link-color:                 #ddd;
 @navbar-inverse-link-hover-color:           #fff;
 @navbar-inverse-link-hover-bg:              transparent;
 @navbar-inverse-link-active-color:          @navbar-inverse-link-hover-color;
@@ -233,8 +235,8 @@
 
 // Inverted navbar brand label
 @navbar-inverse-brand-color:                @navbar-inverse-link-color;
-@navbar-inverse-brand-hover-color:          #fff;
-@navbar-inverse-brand-hover-bg:             transparent;
+@navbar-inverse-brand-hover-color:          @navbar-inverse-link-hover-color;
+@navbar-inverse-brand-hover-bg:             @navbar-inverse-link-hover-bg;
 
 // Inverted navbar search
 // Normal navbar needs no special styles or vars
