@@ -107,7 +107,7 @@
 // Buttons
 // -------------------------
 
-@btn-font-weight:                bold;
+@btn-font-weight:                normal;
 
 @btn-default-color:              @white;
 @btn-default-bg:                 @mutabra-default;
@@ -386,7 +386,7 @@
 // -------------------------
 @tooltip-max-width:           200px;
 @tooltip-color:               #fff;
-@tooltip-bg:                  #000;
+@tooltip-bg:                  @mutabra-primary;
 
 @tooltip-arrow-width:         5px;
 @tooltip-arrow-color:         @tooltip-bg;
@@ -394,24 +394,23 @@
 
 // Popovers
 // -------------------------
-@popover-bg:                          #fff;
+@popover-bg:                          @mutabra-foreground;
 @popover-max-width:                   276px;
-@popover-border-color:                rgba(0,0,0,.2);
-@popover-fallback-border-color:       #ccc;
+@popover-border-color:                @mutabra-border;
+@popover-fallback-border-color:       @mutabra-border;
 
-@popover-title-bg:                    darken(@popover-bg, 3%);
+@popover-title-bg:                    @mutabra-background;
 
 @popover-arrow-width:                 10px;
-@popover-arrow-color:                 #fff;
+@popover-arrow-color:                 @mutabra-foreground;
 
 @popover-arrow-outer-width:           (@popover-arrow-width + 1);
-@popover-arrow-outer-color:           rgba(0,0,0,.25);
-@popover-arrow-outer-fallback-color:  #999;
+@popover-arrow-outer-color:           @mutabra-border;
+@popover-arrow-outer-fallback-color:  @mutabra-border;
 
 
 // Labels
 // -------------------------
-//CHANGED: added default label bg color setting
 @label-default-bg:            @mutabra-default;
 @label-success-bg:            @brand-success;
 @label-info-bg:               @brand-info;
@@ -429,12 +428,12 @@
 @modal-title-padding:         15px;
 @modal-title-line-height:     @line-height-base;
 
-@modal-content-bg:                             #fff;
-@modal-content-border-color:                   rgba(0,0,0,.2);
-@modal-content-fallback-border-color:          #999;
+@modal-content-bg:                             @mutabra-foreground;
+@modal-content-border-color:                   @mutabra-border;
+@modal-content-fallback-border-color:          @mutabra-border;
 
 @modal-backdrop-bg:           #000;
-@modal-header-border-color:   #e5e5e5;
+@modal-header-border-color:   @mutabra-border;
 @modal-footer-border-color:   @modal-header-border-color;
 
 
