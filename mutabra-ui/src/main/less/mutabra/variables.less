@@ -242,8 +242,8 @@
 @navbar-height:                    50px;
 @navbar-margin-bottom:             @line-height-computed;
 @navbar-color:                     #777;
-@navbar-bg:                        @mutabra-foreground;
-@navbar-border:                    @mutabra-border;
+@navbar-bg:                        @mutabra-background;
+@navbar-border:                    @mutabra-background;
 @navbar-border-radius:             @border-radius-base;
 @navbar-padding-horizontal:        floor(@grid-gutter-width / 2);
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
@@ -252,8 +252,8 @@
 @navbar-link-color:                #777;
 @navbar-link-hover-color:          #333;
 @navbar-link-hover-bg:             transparent;
-@navbar-link-active-color:         @navbar-link-hover-color;
-@navbar-link-active-bg:            @mutabra-background;
+@navbar-link-active-color:         @white;
+@navbar-link-active-bg:            @mutabra-default;
 @navbar-link-disabled-color:       #ccc;
 @navbar-link-disabled-bg:          transparent;
 
@@ -263,12 +263,12 @@
 @navbar-brand-hover-bg:            @navbar-link-hover-bg;
 
 // Navbar toggle
-@navbar-toggle-hover-bg:           @mutabra-background;
+@navbar-toggle-hover-bg:           @mutabra-default;
 @navbar-toggle-icon-bar-bg:        @navbar-link-hover-color;
-@navbar-toggle-border-color:       @mutabra-border;
+@navbar-toggle-border-color:       @mutabra-default;
 
 //CHANGED: added navbar divider color setting
-@navbar-divider-color:             @navbar-border;
+@navbar-divider-color:             @mutabra-default;
 
 
 // Inverted navbar
