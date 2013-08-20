@@ -63,4 +63,34 @@ body {
       .input-sm();
     }
   }
+
+  .user-details {
+    @media (min-width: @grid-float-breakpoint) {
+      margin-top: -@input-height-base;
+    }
+
+    .user-details-cell {
+      margin-right: @navbar-padding-horizontal;
+      display: inline-block;
+      vertical-align: top;
+
+      svg {
+        vertical-align: top;
+      }
+
+      .locale-menu {
+        .list-inline();
+        .navbar-vertical-align(@flag-height);
+
+        > li {
+          padding: 0;
+          opacity: 0.5;
+
+          &:hover, &:active, &.active, &:focus {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
 }

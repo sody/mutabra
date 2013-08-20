@@ -16,50 +16,69 @@
 
 <body>
 
-<div class="page">
-    <header class="header container" id="header">
-        <div class="row">
-            <div class="span3">
-                <a class="logo" href="/">UTABRA</a>
-            </div>
+<div  id="page" class="page container">
+    <header id="header" class="navbar navbar-static-top" role="banner">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">UTABRA</a>
+        </div>
 
-            <div class="span1 offset5">
-                <a href="#">
-                    <svg height="64" width="64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <nav id="nav" class="collapse navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="user-details navbar-right">
+                <a href="#" class="user-details-cell">
+                    <svg height="80" width="80" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <title>Unknown Image</title>
                         <desc>Unknown Image</desc>
-                        <g transform="scale(0.640,0.640)">
+                        <g transform="scale(0.800,0.800)">
                             <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
                                   fill="#333"></path>
                         </g>
                     </svg>
                 </a>
-            </div>
 
-            <div class="span3">
-                <div class="control-group">
+                <div class="user-details-cell">
                     <div id="dropdown" class="btn-group dropdown">
-                        <a href="#" data-toggle="dropdown" class="btn dropdown-toggle">
+                        <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
                             Vasya Pupkin <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/settings.html">Settings</a></li>
-                            <li><a href="/switch.html">Switch</a></li>
-                            <li><a href="/signout.html">Sign Out</a></li>
+                            <li><a href="settings.html">Settings</a></li>
+                            <li><a href="switch.html">Switch</a></li>
+                            <li><a href="layout.html">Sign Out</a></li>
                         </ul>
                     </div>
-                </div>
-                <div class="control-group">
-                    <ul class="horizontal-menu" id="locale">
-                        <li><a title="ru" class="icon-flag-ru interactive" href="/ru">ru</a></li>
-                        <li><a title="en" class="icon-flag-us interactive active" href="/en">en</a></li>
+                    <ul class="locale-menu list-inline" id="locale">
+                        <li><a title="Russian" class="flag-ru" href="#">ru</a></li>
+                        <li class="active"><a title="English" class="flag-us" href="#">en</a></li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <section class="wrapper container" id="content">
+    <section id="content" class="wrapper" role="main">
         <div class="page-header">
             <h1>Battle
                 <small>(Round: 1)</small>
@@ -506,27 +525,28 @@
     <div class="buffer"></div>
 </div>
 
-<footer class="footer container" id="footer">
+<footer id="footer" class="container">
     Copyright © 2010-2012 Mutabra Team. All rights reserved. <br/>
-    App Version: 1.0-pre-alpha-10, Tapestry Version: 5.3.5 <br/><a href="mailto:support@mutabra.com">Contact Us</a>
+    App Version: 1.0-pre-alpha-10, Tapestry Version: 5.3.5 <br/>
+    <a href="mailto:support@mutabra.com">Contact Us</a>
 </footer>
 
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../js/jquery/jquery.js"></script>
-<script src="../js/bootstrap/bootstrap-transition.js"></script>
-<script src="../js/bootstrap/bootstrap-alert.js"></script>
-<script src="../js/bootstrap/bootstrap-modal.js"></script>
-<script src="../js/bootstrap/bootstrap-dropdown.js"></script>
-<script src="../js/bootstrap/bootstrap-scrollspy.js"></script>
-<script src="../js/bootstrap/bootstrap-tab.js"></script>
-<script src="../js/bootstrap/bootstrap-tooltip.js"></script>
-<script src="../js/bootstrap/bootstrap-popover.js"></script>
-<script src="../js/bootstrap/bootstrap-button.js"></script>
-<script src="../js/bootstrap/bootstrap-collapse.js"></script>
-<script src="../js/bootstrap/bootstrap-carousel.js"></script>
-<script src="../js/bootstrap/bootstrap-typeahead.js"></script>
+<script src="../js/bootstrap/transition.js"></script>
+<script src="../js/bootstrap/alert.js"></script>
+<script src="../js/bootstrap/modal.js"></script>
+<script src="../js/bootstrap/dropdown.js"></script>
+<script src="../js/bootstrap/scrollspy.js"></script>
+<script src="../js/bootstrap/tab.js"></script>
+<script src="../js/bootstrap/tooltip.js"></script>
+<script src="../js/bootstrap/popover.js"></script>
+<script src="../js/bootstrap/button.js"></script>
+<script src="../js/bootstrap/collapse.js"></script>
+<script src="../js/bootstrap/carousel.js"></script>
+<script src="../js/bootstrap/affix.js"></script>
 <script src="../js/mutabra/mutabra-battle.js"></script>
 
 </body>
