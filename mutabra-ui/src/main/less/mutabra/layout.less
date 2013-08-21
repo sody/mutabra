@@ -53,36 +53,14 @@ body {
   }
 
   .sign-form {
-    @media (min-width: @grid-float-breakpoint) {
-      margin-top: -@input-height-small;
-      margin-bottom: 0;
-    }
-
     // all inputs should be small
     .form-control {
       .input-sm();
     }
   }
 
-  .user-details {
-    @media (min-width: @grid-float-breakpoint) {
-      margin-top: -@input-height-base;
-    }
-
-    .user-details-cell {
-      margin-right: @navbar-padding-horizontal;
-      display: inline-block;
-      vertical-align: top;
-
-      svg {
-        vertical-align: top;
-      }
-    }
-  }
-
   .locale-menu {
     .list-inline();
-    .navbar-vertical-align(@flag-height);
 
     > li {
       padding: 0;
@@ -93,4 +71,92 @@ body {
       }
     }
   }
+
+  .user-details {
+    list-style: none;
+    padding: 0;
+
+    svg {
+      vertical-align: top;
+    }
+  }
+
+  // for desktops
+  @media (min-width: @grid-float-breakpoint) {
+    .sign-form {
+      margin-top: -@input-height-small;
+      margin-bottom: 0;
+    }
+
+    .locale-menu {
+      .navbar-vertical-align(@flag-height);
+    }
+
+    .user-details {
+      margin-top: -@input-height-base;
+
+      > li {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  // for mobile platforms
+  @media (max-width: @screen-xs-max) {
+    .user-details {
+      > li > a,
+      > li > ul {
+        padding: @nav-link-padding;
+      }
+
+      .dropdown-toggle {
+        display: block;
+        border: 0;
+        border-radius: 0;
+        text-align: left;
+        padding: @nav-link-padding;
+        background: inherit;
+
+        &:active {
+          .box-shadow(none);
+        }
+      }
+    }
+
+    &.navbar-default .user-details {
+      border-top: 1px solid @navbar-default-divider-color;
+
+      .dropdown-toggle {
+        color: @navbar-default-link-color;
+        .caret {
+          border-top-color: @navbar-default-link-color;
+          border-bottom-color: @navbar-default-link-color;
+        }
+
+        &:hover,
+        &:focus {
+          color: @navbar-default-link-hover-color;
+          background-color: @navbar-default-link-hover-bg;
+          .caret {
+            border-top-color: @navbar-default-link-hover-color;
+            border-bottom-color: @navbar-default-link-hover-color;
+          }
+        }
+      }
+
+      .open > .dropdown-toggle {
+        &,
+        &:hover,
+        &:focus {
+          background-color: @navbar-default-link-active-bg;
+          color: @navbar-default-link-active-color;
+          .caret {
+            border-top-color: @navbar-default-link-active-color;
+            border-bottom-color: @navbar-default-link-active-color;
+          }
+        }
+      }
+    }
+  }
+
 }
