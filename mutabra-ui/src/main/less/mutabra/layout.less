@@ -2,7 +2,6 @@
 // Layout
 // --------------------------------------------------
 
-
 // Static bottom footer
 html {
   height: 100%;
@@ -56,6 +55,7 @@ body {
   .sign-form {
     @media (min-width: @grid-float-breakpoint) {
       margin-top: -@input-height-small;
+      margin-bottom: 0;
     }
 
     // all inputs should be small
@@ -77,19 +77,19 @@ body {
       svg {
         vertical-align: top;
       }
+    }
+  }
 
-      .locale-menu {
-        .list-inline();
-        .navbar-vertical-align(@flag-height);
+  .locale-menu {
+    .list-inline();
+    .navbar-vertical-align(@flag-height);
 
-        > li {
-          padding: 0;
-          opacity: 0.5;
+    > li {
+      padding: 0;
+      opacity: 0.5;
 
-          &:hover, &:active, &.active, &:focus {
-            opacity: 1;
-          }
-        }
+      &:hover, &:active, &.active, &:focus {
+        opacity: 1;
       }
     }
   }

@@ -64,6 +64,12 @@
 @headings-font-weight:    500;
 @headings-line-height:    1.1;
 
+// Iconography
+// -------------------------
+
+@icon-font-path:          "../fonts/";
+@icon-font-name:          "glyphicons-halflings-regular";
+
 
 // Components
 // -------------------------
@@ -191,6 +197,7 @@
 // Used for a bird's eye view of components dependent on the z-axis
 // Try to avoid customizing these :)
 
+@zindex-navbar:            1000;
 @zindex-dropdown:          1000;
 @zindex-popover:           1010;
 @zindex-tooltip:           1030;
@@ -202,26 +209,25 @@
 // --------------------------------------------------
 
 // Extra small screen / phone
-@screen-xsmall:              480px;
-@screen-phone:               @screen-xsmall;
+@screen-xs:                  480px;
+@screen-phone:               @screen-xs;
 
 // Small screen / tablet
-@screen-small:               768px;
-@screen-tablet:              @screen-small;
+@screen-sm:                  768px;
+@screen-tablet:              @screen-sm;
 
 // Medium screen / desktop
-@screen-medium:              992px;
-@screen-desktop:             @screen-medium;
+@screen-md:                  992px;
+@screen-desktop:             @screen-md;
 
 // Large screen / wide desktop
-@screen-large:               1200px;
-@screen-large-desktop:       @screen-large;
+@screen-lg:                  1200px;
+@screen-lg-desktop:          @screen-lg;
 
 // So media queries don't overlap when required, provide a maximum
-@screen-phone-max:           (@screen-small - 1);
-@screen-small-max:           (@screen-medium - 1);
-@screen-tablet-max:          (@screen-desktop - 1);
-@screen-desktop-max:         (@screen-large-desktop - 1);
+@screen-xs-max:              (@screen-sm - 1);
+@screen-sm-max:              (@screen-md - 1);
+@screen-md-max:              (@screen-lg - 1);
 
 
 // Grid system
@@ -241,35 +247,34 @@
 // Basics of a navbar
 @navbar-height:                    50px;
 @navbar-margin-bottom:             @line-height-computed;
-@navbar-color:                     #777;
-@navbar-bg:                        @mutabra-background;
-@navbar-border:                    @mutabra-background;
+@navbar-default-color:             #777;
+@navbar-default-bg:                @mutabra-background;
+@navbar-default-border:            @mutabra-background;
 @navbar-border-radius:             @border-radius-base;
 @navbar-padding-horizontal:        floor(@grid-gutter-width / 2);
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 
 // Navbar links
-@navbar-link-color:                #777;
-@navbar-link-hover-color:          #333;
-@navbar-link-hover-bg:             transparent;
-@navbar-link-active-color:         @white;
-@navbar-link-active-bg:            @mutabra-default;
-@navbar-link-disabled-color:       #ccc;
-@navbar-link-disabled-bg:          transparent;
+@navbar-default-link-color:                #777;
+@navbar-default-link-hover-color:          #333;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         @white;
+@navbar-default-link-active-bg:            @mutabra-default;
+@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
-@navbar-brand-color:               @navbar-link-color;
-@navbar-brand-hover-color:         @navbar-link-hover-color;
-@navbar-brand-hover-bg:            @navbar-link-hover-bg;
+@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-hover-color:         @navbar-default-link-hover-color;
+@navbar-default-brand-hover-bg:            @navbar-default-link-hover-bg;
 
 // Navbar toggle
-@navbar-toggle-hover-bg:           @mutabra-default;
-@navbar-toggle-icon-bar-bg:        @navbar-link-hover-color;
-@navbar-toggle-border-color:       @mutabra-default;
+@navbar-default-toggle-hover-bg:           @mutabra-default;
+@navbar-default-toggle-icon-bar-bg:        @navbar-default-link-hover-color;
+@navbar-default-toggle-border-color:       @mutabra-default;
 
 //CHANGED: added navbar divider color setting
-@navbar-divider-color:             @mutabra-default;
-
+@navbar-default-divider-color:             @mutabra-default;
 
 // Inverted navbar
 //
@@ -307,11 +312,13 @@
 //CHANGED: added navbar divider color setting
 @navbar-inverse-divider-color:              @navbar-inverse-border;
 
-
 // Navs
 // -------------------------
 
+@nav-link-padding:                          10px 15px;
 @nav-link-hover-bg:                         @mutabra-background;
+//CHANGED: added nav link open border color setting
+@nav-link-open-border-color:                @mutabra-border;
 
 @nav-disabled-link-color:                   @gray-light;
 @nav-disabled-link-hover-color:             @gray-light;
@@ -322,7 +329,7 @@
 // Tabs
 @nav-tabs-border-color:                     @mutabra-border;
 
-@nav-tabs-link-hover-border-color:          transparent transparent @mutabra-border transparent;
+@nav-tabs-link-hover-border-color:          transparent;
 
 @nav-tabs-active-link-hover-bg:             @mutabra-foreground;
 @nav-tabs-active-link-hover-color:          @gray;
@@ -343,9 +350,14 @@
 
 @pagination-bg:                        @mutabra-foreground;
 @pagination-border:                    @mutabra-border;
-@pagination-active-bg:                 @mutabra-background;
-@pagination-active-color:              @gray-light;
+
+@pagination-hover-bg:                  @mutabra-background;
+
+@pagination-active-bg:                 @mutabra-default;
+@pagination-active-color:              @white;
+
 @pagination-disabled-color:            @gray-light;
+
 
 // Pager
 // -------------------------
@@ -357,9 +369,11 @@
 // Jumbotron
 // -------------------------
 
+@jumbotron-padding:              30px;
+@jumbotron-color:                inherit;
 @jumbotron-bg:                   @mutabra-background;
+
 @jumbotron-heading-color:        inherit;
-@jumbotron-lead-color:           inherit;
 
 
 // Form states and alerts
@@ -411,7 +425,9 @@
 
 // Labels
 // -------------------------
+
 @label-default-bg:            @mutabra-default;
+@label-primary-bg:            @brand-primary;
 @label-success-bg:            @brand-success;
 @label-info-bg:               @brand-info;
 @label-warning-bg:            @brand-warning;
@@ -443,21 +459,21 @@
 @alert-border-radius:         @border-radius-base;
 @alert-link-font-weight:      bold;
 
-@alert-bg:                    @state-warning-bg;
-@alert-text:                  @state-warning-text;
-@alert-border:                @state-warning-border;
-
 @alert-success-bg:            @state-success-bg;
 @alert-success-text:          @state-success-text;
 @alert-success-border:        @state-success-border;
 
-@alert-danger-bg:             @state-danger-bg;
-@alert-danger-text:           @state-danger-text;
-@alert-danger-border:         @state-danger-border;
-
 @alert-info-bg:               @state-info-bg;
 @alert-info-text:             @state-info-text;
 @alert-info-border:           @state-info-border;
+
+@alert-warning-bg:            @state-warning-bg;
+@alert-warning-text:          @state-warning-text;
+@alert-warning-border:        @state-warning-border;
+
+@alert-danger-bg:             @state-danger-bg;
+@alert-danger-text:           @state-danger-text;
+@alert-danger-border:         @state-danger-border;
 
 
 // Progress bars
@@ -490,10 +506,13 @@
 // Panels
 // -------------------------
 @panel-bg:                    @mutabra-foreground;
-@panel-border:                @mutabra-border;
+@panel-inner-border:          @mutabra-border;
 @panel-border-radius:         @border-radius-base;
-@panel-heading-bg:            @mutabra-background;
 @panel-footer-bg:             @mutabra-background;
+
+@panel-default-text:          @gray-dark;
+@panel-default-border:        @mutabra-border;
+@panel-default-heading-bg:    @mutabra-background;
 
 @panel-primary-text:          @white;
 @panel-primary-border:        @brand-primary;
@@ -532,11 +551,6 @@
 @well-bg:                     @mutabra-background;
 //CHANGED: added well border color setting
 @well-border:                 @mutabra-border;
-
-
-// Accordion
-// -------------------------
-@accordion-border-color:      #e5e5e5;
 
 
 // Badges
@@ -616,10 +630,10 @@
 // --------------------------------------------------
 
 // Small screen / tablet
-@container-tablet:          720px;
+@container-tablet:            ((720px + @grid-gutter-width));
 
 // Medium screen / desktop
-@container-desktop:         940px;
+@container-desktop:           ((940px + @grid-gutter-width));
 
 // Large screen / wide desktop
-@container-large-desktop:   1140px;
+@container-lg-desktop:        ((1140px + @grid-gutter-width));
