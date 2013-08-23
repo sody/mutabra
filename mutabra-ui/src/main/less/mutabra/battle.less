@@ -58,40 +58,45 @@
 .description {
   .vertical-margin();
   border: 1px solid @description-border;
-  border-radius: @grid-gutter-width;
-  padding: @grid-gutter-width;
+  border-radius: @description-border-radius;
+  padding: @description-padding;
   display: none;
 
   .description-title {
+    @heading-line-height-computed: ceil(ceil(@font-size-base * 1.25) * @headings-line-height);
+    margin-bottom: floor(@line-height-computed / 2);
     border-bottom: 1px solid @description-border;
-  }
-  .description-picture {
-    float: left;
-//    width: (@gridColumnWidth * 2) + (@gridGutterWidth);
-//    height: (@gridColumnWidth * 2) + (@gridGutterWidth);
-  }
-/*
-  dl.description-attrs {
-    float: left;
-    .clearfix(); // Ensure dl clears floats if empty dd elements present
+    height: @heading-line-height-computed * 2 + @line-height-computed - @description-padding;
+    position: relative;
 
-    dt {
-      float: left;
-      width: @gridColumnWidth - @gridGutterWidth;
-      clear: left;
-      text-align: right;
-      .text-overflow();
-    }
-    dd {
-      margin-left: @gridColumnWidth - (@gridGutterWidth / 2);
-      line-height: @largeIconSize;
+    h4 {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
     }
   }
-*/
-  .description-text {
-    padding-top: floor(@grid-gutter-width / 2);
-    display: inline-block;
-    width: 100%;
+  .description-body {
+    margin-bottom: floor(@line-height-computed / 2);
+
+    svg,
+    dl {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    dl {
+      dt {
+        float: left;
+        width: @line-height-computed;
+        clear: left;
+        text-align: right;
+      }
+      dd {
+        margin-left: @line-height-computed * 2;
+        .clearfix(); // Clear the floated `dt` if an empty `dd` is present
+      }
+    }
   }
 
   &.active {
