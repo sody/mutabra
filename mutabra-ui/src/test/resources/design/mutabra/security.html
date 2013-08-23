@@ -17,93 +17,91 @@
 
 <body>
 
-<div class="page">
-    <header class="header container" id="header">
-        <div class="row">
-            <div class="span3">
-                <a class="logo" href="/">UTABRA</a>
+<div id="page" class="page container">
+    <section id="content" class="wrapper-sm col-sm-9 col-md-7 col-lg-6" rel="main">
+        <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#pills_signIn">Sign In</a></li>
+            <li><a data-toggle="pill" href="#pills_signUp">Sign Up</a></li>
+            <li><a data-toggle="pill" href="#pills_restore">Restore</a></li>
+        </ul>
+        <hr/>
+
+        <div class="pill-content">
+            <div id="pills_signIn" class="pill-pane active">
+                <form class="form-horizontal" action="#" method="post" id="signInForm">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="email" class="control-label col-sm-4">Email</label>
+
+                            <div class="col-sm-6">
+                                <input class="form-control" placeholder="Email" id="email" name="email" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label col-sm-4">Password</label>
+
+                            <div class="col-sm-6">
+                                <input class="form-control" placeholder="Password" value="" id="password"
+                                       name="password" type="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-4">
+                                <div class="btn-group">
+                                    <input type="submit" class="btn btn-default" value="Sign In"/>
+                                    <a title="Facebook" class="btn btn-default" href="#"><i class="glyphicon glyphicon-home"></i></a>
+                                    <a title="Twitter" class="btn btn-default" href="#"><i class="glyphicon glyphicon-map-marker"></i></a>
+                                    <a title="Google" class="btn btn-default" href="#"><i class="glyphicon glyphicon-certificate"></i></a>
+                                    <a title="VKontakte" class="btn btn-default" href="#"><i class="glyphicon glyphicon-globe"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-        </div>
-    </header>
+            <div id="pills_signUp" class="pill-pane">
+                <form class="form-horizontal" action="#" method="post" id="signUpForm">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="signUpEmail" class="control-label col-sm-4">Email</label>
 
-    <section class="container" id="content">
-        <div class="span6 offset3">
-            <div id="tabs" class="tabbable tabs-below tabs-wrapper">
-                <div class="tab-content">
-                    <div id="tabs_signIn" class="tab-pane active">
-                        <form class="form-horizontal" action="#" method="post" id="signInForm">
-                            <fieldset>
-                                <legend>Sign In</legend>
-                                <div class="control-group">
-                                    <label for="email" class="control-label">Email</label>
-                                    <div class="controls">
-                                        <input placeholder="Email" id="email" name="email" type="text"/>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label for="password" class="control-label">Password</label>
-                                    <div class="controls">
-                                        <input placeholder="Password" value="" id="password" name="password" type="password"/>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="form-actions">
+                            <div class="col-sm-6">
+                                <input class="form-control" placeholder="Email" id="signUpEmail" name="signUpEmail"
+                                       type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-4">
                                 <div class="btn-group">
-                                    <a class="btn" id="linksubmit" href="#">Sign In</a>
-                                    <a title="Facebook" class="btn" href="#"><i class="icon-facebook small"></i></a>
-                                    <a title="Twitter" class="btn" href="#"><i class="icon-twitter small"></i></a>
-                                    <a title="Google" class="btn" href="#"><i class="icon-google small"></i></a>
-                                    <a title="VKontakte" class="btn" href="#"><i class="icon-vk small"></i></a>
+                                    <input type="submit" class="btn btn-default" value="Sign Up"/>
+                                    <a title="Facebook" class="btn btn-default" href="#"><i class="glyphicon glyphicon-home"></i></a>
+                                    <a title="Twitter" class="btn btn-default" href="#"><i class="glyphicon glyphicon-map-marker"></i></a>
+                                    <a title="Google" class="btn btn-default" href="#"><i class="glyphicon glyphicon-certificate"></i></a>
+                                    <a title="VKontakte" class="btn btn-default" href="#"><i class="glyphicon glyphicon-globe"></i></a>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div id="tabs_signUp" class="tab-pane">
-                        <form class="form-horizontal" action="#" method="post" id="signUpForm">
-                            <fieldset>
-                                <legend>Sign Up</legend>
-                                <div class="control-group">
-                                    <label for="signUpEmail" class="control-label">Email</label>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="pills_restore" class="pill-pane">
+                <form class="form-horizontal" action="#" method="post" id="restoreForm">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="restoreEmail" class="control-label col-sm-4">Email</label>
 
-                                    <div class="controls">
-                                        <input placeholder="Email" id="signUpEmail" name="signUpEmail" type="text"/>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="form-actions">
-                                <div class="btn-group">
-                                    <a class="btn" id="linksubmit_0" href="#">Sign Up</a>
-                                    <a title="Facebook" class="btn" href="#"><i class="icon-facebook small"></i></a>
-                                    <a title="Twitter" class="btn" href="#"><i class="icon-twitter small"></i></a>
-                                    <a title="Google" class="btn" href="#"><i class="icon-google small"></i></a>
-                                    <a title="VKontakte" class="btn" href="#"><i class="icon-vk small"></i></a>
-                                </div>
+                            <div class="col-sm-6">
+                                <input class="form-control" placeholder="Email" id="restoreEmail" name="restoreEmail"
+                                       type="text">
                             </div>
-                        </form>
-                    </div>
-                    <div id="tabs_restore" class="tab-pane">
-                        <form class="form-horizontal" action="#" method="post" id="restoreForm">
-                            <fieldset>
-                                <legend>Forgot Password?</legend>
-                                <div class="control-group">
-                                    <label for="restoreEmail" class="control-label">Email</label>
-
-                                    <div class="controls">
-                                        <input placeholder="Email" id="restoreEmail" name="restoreEmail" type="text">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="form-actions">
-                                <a class="btn" id="linksubmit_1" href="#">Restore</a>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-4">
+                                <input type="submit" class="btn btn-default" value="Restore"/>
                             </div>
-                        </form>
-                    </div>
-                </div>
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#tabs_signIn">Sign In</a></li>
-                    <li><a data-toggle="tab" href="#tabs_signUp">Sign Up</a></li>
-                    <li><a data-toggle="tab" href="#tabs_restore">Restore</a></li>
-                </ul>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </section>
@@ -111,7 +109,7 @@
     <div class="buffer"></div>
 </div>
 
-<footer class="footer container" id="footer">
+<footer id="footer" class="container">
     Copyright © 2010-2012 Mutabra Team. All rights reserved. <br>
     App Version: 1.0-SNAPSHOT, Tapestry Version: 5.3.5 <br>
     <a href="mailto:support@mutabra.com">Contact Us</a>
@@ -121,18 +119,18 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../js/jquery/jquery.js"></script>
-<script src="../js/bootstrap/bootstrap-transition.js"></script>
-<script src="../js/bootstrap/bootstrap-alert.js"></script>
-<script src="../js/bootstrap/bootstrap-modal.js"></script>
-<script src="../js/bootstrap/bootstrap-dropdown.js"></script>
-<script src="../js/bootstrap/bootstrap-scrollspy.js"></script>
-<script src="../js/bootstrap/bootstrap-tab.js"></script>
-<script src="../js/bootstrap/bootstrap-tooltip.js"></script>
-<script src="../js/bootstrap/bootstrap-popover.js"></script>
-<script src="../js/bootstrap/bootstrap-button.js"></script>
-<script src="../js/bootstrap/bootstrap-collapse.js"></script>
-<script src="../js/bootstrap/bootstrap-carousel.js"></script>
-<script src="../js/bootstrap/bootstrap-typeahead.js"></script>
+<script src="../js/bootstrap/transition.js"></script>
+<script src="../js/bootstrap/alert.js"></script>
+<script src="../js/bootstrap/modal.js"></script>
+<script src="../js/bootstrap/dropdown.js"></script>
+<script src="../js/bootstrap/scrollspy.js"></script>
+<script src="../js/bootstrap/tab.js"></script>
+<script src="../js/bootstrap/tooltip.js"></script>
+<script src="../js/bootstrap/popover.js"></script>
+<script src="../js/bootstrap/button.js"></script>
+<script src="../js/bootstrap/collapse.js"></script>
+<script src="../js/bootstrap/carousel.js"></script>
+<script src="../js/bootstrap/affix.js"></script>
 
 </body>
 
