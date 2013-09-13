@@ -1,0 +1,11 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <ul class="nav navbar-nav">
+        <li class="active">
+            <t:pagelink page="game/home">${message:page.game-home.title}</t:pagelink>
+        </li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+    </ul>
+
+</t:container>

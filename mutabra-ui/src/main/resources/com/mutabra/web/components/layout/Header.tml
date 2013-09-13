@@ -1,0 +1,69 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+             xmlns:p="tapestry:parameter">
+
+    <header id="header" class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+                <span class="icon-bar"/>
+                <span class="icon-bar"/>
+                <span class="icon-bar"/>
+            </button>
+            <a class="navbar-brand" href="/">UTABRA</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <nav id="nav" class="collapse navbar-collapse">
+            <t:menu.mainmenu/>
+
+            <t:security.usersecurity>
+                <ul class="user-details navbar-nav navbar-right">
+                    <li>
+                        <t:if test="account.hero">
+                            <t:pagelink page="game/gamehome">
+                                <t:svg type="faces" image="account.hero.appearance.face" width="80" height="80"/>
+                            </t:pagelink>
+                            <p:else>
+                                <t:pagelink page="account/accountsettings">
+                                    <t:svg image="literal:unknown" width="80" height="80"/>
+                                </t:pagelink>
+                            </p:else>
+                        </t:if>
+                    </li>
+                    <li>
+                        <t:menu.usermenu/>
+                        <t:menu.localemenu/>
+                    </li>
+                </ul>
+
+                <p:else>
+                    <t:form t:id="signIn" class="sign-form navbar-form navbar-right">
+                        <div class="form-group">
+                            <t:textfield t:id="email" class="form-control input-sm"
+                                         label="message:label.email"
+                                         value="email"
+                                         validate="required"
+                                         placeholder="message:label.email"
+                                    />
+                        </div>
+
+                        <div class="form-group">
+                            <t:passwordfield t:id="password" class="form-control input-sm"
+                                             label="message:label.password"
+                                             value="password"
+                                             validate="required"
+                                             placeholder="message:label.password"
+                                    />
+                        </div>
+
+                        <div class="navbar-btn">
+                            <t:menu.oauthmenu>
+                                <t:linksubmit class="btn btn-default">${message:label.sign-in}</t:linksubmit>
+                            </t:menu.oauthmenu>
+                        </div>
+                    </t:form>
+                </p:else>
+            </t:security.usersecurity>
+        </nav>
+    </header>
+
+</t:container>

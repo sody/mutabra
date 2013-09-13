@@ -23,29 +23,14 @@
 </head>
 <body>
 
-<div class="page">
-    <header id="header" class="header container">
-        <div class="row">
-            <div class="span3">
-                <a href="/" class="logo">UTABRA</a>
-            </div>
-            <t:extension-point id="header-area"/>
-        </div>
-    </header>
+<div id="page" class="page container">
+    <t:extension-point id="header-area"/>
 
-    <nav id="navigation">
-        <t:extension-point id="navigation-area"/>
-    </nav>
-
-    <t:extension-point id="content-area">
-        <section id="content" class="container">
-            <t:body/>
-        </section>
-    </t:extension-point>
+    <t:extension-point id="content-area"/>
 
     <div class="buffer"></div>
 </div>
-<footer id="footer" class="footer container">
+<footer id="footer" class="container">
     <t:extension-point id="footer-area">
         ${message:message.copyright} <br/>
         App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>

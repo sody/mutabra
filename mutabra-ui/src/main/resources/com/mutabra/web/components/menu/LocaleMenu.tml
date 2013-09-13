@@ -1,8 +1,11 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-    <t:menu id="locale" class="horizontal-menu" items="prop:locales" item="prop:locale">
-        <t:eventlink event="changeLocale" context="locale"
-                     class="prop:menuItemClass" title="prop:locale">${locale}</t:eventlink>
-    </t:menu>
+    <ul class="locale-menu list-inline">
+        <li t:type="loop" source="locales" value="locale" formState="none" class="prop:menuItemClass">
+            <t:eventlink event="changeLocale" context="locale" class="prop:flagIconClass" title="prop:locale">
+                ${locale}
+            </t:eventlink>
+        </li>
+    </ul>
 
 </t:container>

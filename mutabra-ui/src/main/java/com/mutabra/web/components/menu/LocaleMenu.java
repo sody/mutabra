@@ -38,19 +38,18 @@ public class LocaleMenu {
     @Property
     private String locale;
 
+    public String getFlagIconClass() {
+        return "flag-" + COUNTRY_CODES.get(locale);
+    }
+
     public String getMenuItemClass() {
-        final String cssClass = getFlagIconClass(locale);
         return currentLocale.toString().equals(locale) ?
-                cssClass + " " + CSSConstants.ACTIVE :
-                cssClass;
+                CSSConstants.ACTIVE :
+                null;
     }
 
     @OnEvent("changeLocale")
     void changeLocale(final String newLocale) {
         localizationSetter.setLocaleFromLocaleName(newLocale);
-    }
-
-    private String getFlagIconClass(final String locale) {
-        return CSSConstants.ICON_FLAG + COUNTRY_CODES.get(locale) + " " + CSSConstants.INTERACTIVE;
     }
 }

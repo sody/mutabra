@@ -113,6 +113,7 @@ public class ApplicationModule {
 
         // bootstrap plugins
         configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/transition.js"));
+        configuration.add("bootstrap-collapse", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/collapse.js"));
         configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/dropdown.js"));
         configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/tab.js"));
         configuration.add("bootstrap-alert", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/alert.js"));
