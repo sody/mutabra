@@ -6,10 +6,10 @@ import com.mutabra.security.*;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.game.HeroService;
-import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.SecurityConstants;
 import com.mutabra.web.internal.security.*;
 import com.mutabra.web.pages.Security;
+import com.mutabra.web.pages.auth.OAuth;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.*;
 import org.apache.shiro.codec.Base64;
@@ -25,6 +25,7 @@ import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
+import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.*;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
@@ -43,9 +44,12 @@ import java.util.List;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class SecurityModule {
+
+    public static void bind(final ServiceBinder binder) {
+        binder.bind(OAuthSource.class, OAuthSourceImpl.class);
+    }
 
     @FactoryDefaults
     @Contribute(SymbolProvider.class)
@@ -89,9 +93,10 @@ public class SecurityModule {
     @Contribute(WebSecurityManager.class)
     public void contributeWebSecurityManager(final OrderedConfiguration<Realm> configuration,
                                              @InjectService("accountService") final BaseEntityService<Account> accountService,
+                                             final OAuthSource oauthSource,
                                              final HashedPasswordMatcher generator) {
         configuration.add("main", new MainRealm(accountService, generator));
-        configuration.add("oauth", new OAuthRealm(accountService, generator));
+        configuration.add("oauth", new OAuthRealm(accountService, oauthSource, generator));
         configuration.add("confirmation", new ConfirmationRealm(accountService));
     }
 
@@ -109,32 +114,29 @@ public class SecurityModule {
         return new HashedPasswordMatcher(hashService, tokenExpirationTime);
     }
 
-    public OAuth2 buildFacebookService(@Symbol(SecurityConstants.FACEBOOK_KEY) final String clientId,
-                                       @Symbol(SecurityConstants.FACEBOOK_SECRET) final String clientSecret,
-                                       final PageRenderLinkSource linkSource) {
-        final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".facebook:connected";
-        return new Facebook(clientId, clientSecret, redirectUri);
-    }
+    @Contribute(OAuthSource.class)
+    public void contributeOAuthSource(final MappedConfiguration<AccountCredentialType, OAuthProvider> configuration,
+                                      final PageRenderLinkSource linkSource,
+                                      @Symbol(SecurityConstants.TWITTER_KEY) final String twitterConsumerKey,
+                                      @Symbol(SecurityConstants.TWITTER_SECRET) final String twitterConsumerSecret,
+                                      @Symbol(SecurityConstants.FACEBOOK_KEY) final String facebookClientId,
+                                      @Symbol(SecurityConstants.FACEBOOK_SECRET) final String facebookClientSecret,
+                                      @Symbol(SecurityConstants.GOOGLE_KEY) final String googleConsumerKey,
+                                      @Symbol(SecurityConstants.GOOGLE_SECRET) final String googleConsumerSecret,
+                                      @Symbol(SecurityConstants.VK_KEY) final String vkConsumerKey,
+                                      @Symbol(SecurityConstants.VK_SECRET) final String vkConsumerSecret) {
 
-    public OAuth buildTwitterService(@Symbol(SecurityConstants.TWITTER_KEY) final String consumerKey,
-                                     @Symbol(SecurityConstants.TWITTER_SECRET) final String consumerSecret,
-                                     final PageRenderLinkSource linkSource) {
-        final String callbackUrl = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".twitter:connected";
-        return new Twitter(consumerKey, consumerSecret, callbackUrl);
-    }
+        configuration.add(AccountCredentialType.TWITTER, new Twitter(twitterConsumerKey, twitterConsumerSecret,
+                linkSource.createPageRenderLinkWithContext(OAuth.class, AccountCredentialType.TWITTER).toAbsoluteURI()));
 
-    public OAuth2 buildGoogleService(@Symbol(SecurityConstants.GOOGLE_KEY) final String consumerKey,
-                                     @Symbol(SecurityConstants.GOOGLE_SECRET) final String consumerSecret,
-                                     final PageRenderLinkSource linkSource) {
-        final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".google:connected";
-        return new Google(consumerKey, consumerSecret, redirectUri);
-    }
+        configuration.add(AccountCredentialType.FACEBOOK, new Facebook(facebookClientId, facebookClientSecret,
+                linkSource.createPageRenderLinkWithContext(OAuth.class, AccountCredentialType.FACEBOOK).toAbsoluteURI()));
 
-    public OAuth2 buildVkService(@Symbol(SecurityConstants.VK_KEY) final String consumerKey,
-                                 @Symbol(SecurityConstants.VK_SECRET) final String consumerSecret,
-                                 final PageRenderLinkSource linkSource) {
-        final String redirectUri = linkSource.createPageRenderLink(Security.class).toAbsoluteURI() + ".vk:connected";
-        return new VKontakte(consumerKey, consumerSecret, redirectUri);
+        configuration.add(AccountCredentialType.GOOGLE, new Google(googleConsumerKey, googleConsumerSecret,
+                linkSource.createPageRenderLinkWithContext(OAuth.class, AccountCredentialType.GOOGLE).toAbsoluteURI()));
+
+        configuration.add(AccountCredentialType.VK, new VKontakte(vkConsumerKey, vkConsumerSecret,
+                linkSource.createPageRenderLinkWithContext(OAuth.class, AccountCredentialType.VK).toAbsoluteURI()));
     }
 
     @Contribute(HttpServletRequestHandler.class)

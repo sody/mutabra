@@ -12,32 +12,31 @@ import org.bson.types.ObjectId;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class ConfirmationRealm extends AuthenticatingRealm implements CredentialsMatcher {
     private final BaseEntityService<Account> accountService;
 
     public ConfirmationRealm(final BaseEntityService<Account> accountService) {
         this.accountService = accountService;
-        setCredentialsMatcher(this);
+
         setAuthenticationTokenClass(Token.class);
+        setCredentialsMatcher(this);
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(final AuthenticationToken token) throws AuthenticationException {
         final Account account = getAccount(token);
         if (account == null) {
-            throw new UnknownAccountException("Account not found");
+            throw new UnknownAccountException("Account not found.");
         }
 
         final AccountPendingToken pendingToken = account.getPendingToken();
         if (pendingToken == null || pendingToken.getToken() == null) {
-            throw new AccountException("Account has no pending changes");
+            throw new AccountException("Account has no pending changes.");
         }
 
         if (pendingToken.isExpired()) {
-            throw new ExpiredCredentialsException(String.format(
-                    "Submitted credentials for token [%s] has been expired.", token));
+            throw new ExpiredCredentialsException(String.format("Submitted credentials for token [%s] has been expired.", token));
         }
 
         final String[] credentials = {pendingToken.getToken(), pendingToken.getSecondaryToken()};
@@ -115,7 +114,7 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
     }
 
     private Account getAccount(final AuthenticationToken token) {
-        final ObjectId userId = ((Token) token).getUserId();
+        final ObjectId userId = ((Token) token).getPrincipal();
         return userId != null ? accountService.get(userId) : null;
     }
 
@@ -128,15 +127,11 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
             this.token = token;
         }
 
-        public ObjectId getUserId() {
+        public ObjectId getPrincipal() {
             return userId;
         }
 
-        public Object getPrincipal() {
-            return userId;
-        }
-
-        public Object getCredentials() {
+        public String getCredentials() {
             return token;
         }
     }

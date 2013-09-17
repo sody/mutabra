@@ -12,9 +12,8 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
-public class Twitter extends AbstractOAuth implements OAuth {
+public class Twitter extends AbstractOAuthProvider {
     private static final String API_URL = "https://api.twitter.com/1.1/";
 
     public Twitter(final String consumerKey,
@@ -24,7 +23,7 @@ public class Twitter extends AbstractOAuth implements OAuth {
     }
 
     @Override
-    protected OAuth.Session createSession(final OAuthService service, final Token accessToken) {
+    protected OAuthProvider.Session createSession(final OAuthService service, final Token accessToken) {
         return new Session(service, accessToken);
     }
 

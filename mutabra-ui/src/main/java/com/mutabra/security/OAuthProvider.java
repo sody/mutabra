@@ -4,11 +4,10 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
-public interface OAuth {
+public interface OAuthProvider {
 
-    String getAuthorizationUrl(String state, String scope);
+    String getAuthorizationUrl(String scope);
 
     Session connect(String requestToken, String requestTokenSecret);
 

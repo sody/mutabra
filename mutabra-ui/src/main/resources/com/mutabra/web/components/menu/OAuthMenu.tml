@@ -3,19 +3,19 @@
     <div class="btn-group">
         <t:body/>
 
-        <t:social.facebookconnect t:id="facebook" scope="email" class="btn btn-default" title="message:label.facebook">
+        <t:security.oauthconnect t:id="facebook" credentialType="literal:facebook" scope="email" class="btn btn-default" title="message:label.facebook">
             <i class="glyphicon glyphicon-home"/>
-        </t:social.facebookconnect>
-        <t:social.twitterconnect t:id="twitter" class="btn btn-default" title="message:label.twitter">
+        </t:security.oauthconnect>
+        <t:security.oauthconnect t:id="twitter" credentialType="literal:twitter" class="btn btn-default" title="message:label.twitter">
             <i class="glyphicon glyphicon-map-marker"/>
-        </t:social.twitterconnect>
-        <t:social.googleconnect t:id="google" class="btn btn-default" title="message:label.google"
+        </t:security.oauthconnect>
+        <t:security.oauthconnect t:id="google" credentialType="literal:google" class="btn btn-default" title="message:label.google"
                                 scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email">
             <i class="glyphicon glyphicon-certificate"/>
-        </t:social.googleconnect>
-        <t:social.vkontakteconnect t:id="vk" class="btn btn-default" title="message:label.vk">
+        </t:security.oauthconnect>
+        <t:security.oauthconnect t:id="vk" credentialType="literal:vk" class="btn btn-default" title="message:label.vk">
             <i class="glyphicon glyphicon-globe"/>
-        </t:social.vkontakteconnect>
+        </t:security.oauthconnect>
     </div>
 
 </t:container>

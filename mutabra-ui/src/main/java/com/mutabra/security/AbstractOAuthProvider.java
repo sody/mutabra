@@ -8,26 +8,25 @@ import org.scribe.oauth.OAuthService;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
-public abstract class AbstractOAuth implements OAuth {
+public abstract class AbstractOAuthProvider implements OAuthProvider {
     private final Class<? extends Api> apiClass;
     private final String consumerKey;
     private final String consumerSecret;
     private final String callbackUrl;
 
-    public AbstractOAuth(final Class<? extends Api> apiClass,
-                         final String consumerKey,
-                         final String consumerSecret,
-                         final String callbackUrl) {
+    public AbstractOAuthProvider(final Class<? extends Api> apiClass,
+                                 final String consumerKey,
+                                 final String consumerSecret,
+                                 final String callbackUrl) {
         this.apiClass = apiClass;
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
         this.callbackUrl = callbackUrl;
     }
 
-    public String getAuthorizationUrl(final String state, final String scope) {
-        final OAuthService service = service(state, scope);
+    public String getAuthorizationUrl(final String scope) {
+        final OAuthService service = service(scope);
         return service.getAuthorizationUrl(getRequestToken(service));
     }
 
@@ -54,10 +53,10 @@ public abstract class AbstractOAuth implements OAuth {
     protected abstract Session createSession(OAuthService service, Token accessToken);
 
     protected OAuthService service() {
-        return service(null, null);
+        return service(null);
     }
 
-    protected OAuthService service(final String state, final String scope) {
+    protected OAuthService service(final String scope) {
         final ServiceBuilder builder = new ServiceBuilder()
                 .provider(apiClass)
                 .apiKey(consumerKey)
@@ -66,7 +65,6 @@ public abstract class AbstractOAuth implements OAuth {
         if (scope != null) {
             builder.scope(scope);
         }
-        //todo: add state
         return builder.build();
     }
 }

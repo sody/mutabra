@@ -5,7 +5,7 @@ import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.AccountPendingToken;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.pages.Security;
+import com.mutabra.web.pages.auth.TokenAuth;
 import com.mutabra.web.services.AccountContext;
 import com.mutabra.web.services.MailService;
 import com.mutabra.web.services.PasswordGenerator;
@@ -14,16 +14,15 @@ import org.apache.shiro.crypto.hash.Hash;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 @RequiresAuthentication
 public class AccountSettings extends AbstractPage {
@@ -40,9 +39,6 @@ public class AccountSettings extends AbstractPage {
     @InjectComponent
     private Form changeEmailForm;
 
-    @InjectPage
-    private Security security;
-
     @Inject
     private AccountContext accountContext;
 
@@ -54,6 +50,9 @@ public class AccountSettings extends AbstractPage {
 
     @Inject
     private MailService mailService;
+
+    @Inject
+    private PageRenderLinkSource linkSource;
 
     public Account getValue() {
         return accountContext.getAccount();
@@ -111,7 +110,7 @@ public class AccountSettings extends AbstractPage {
             account.setPendingToken(pendingToken);
 
             // send mail with confirmation link
-            final Link link = security.createApplyChangesLink(account.getId(), token);
+            final Link link = linkSource.createPageRenderLinkWithContext(TokenAuth.class, account.getId(), token);
             mailService.send(
                     email,
                     message("mail.change-email.title"),
@@ -138,7 +137,7 @@ public class AccountSettings extends AbstractPage {
 
             final String accountEmail = account.getCredentials(AccountCredentialType.EMAIL).getKey();
             // send mail with confirmation link to old email
-            final Link link = security.createApplyChangesLink(account.getId(), token);
+            final Link link = linkSource.createPageRenderLinkWithContext(TokenAuth.class, account.getId(), token);
             mailService.send(
                     accountEmail,
                     message("mail.change-email.title"),
@@ -148,7 +147,7 @@ public class AccountSettings extends AbstractPage {
                             link.toAbsoluteURI()));
 
             // send mail with confirmation link to new email
-            final Link pendingLink = security.createApplyChangesLink(account.getId(), secondaryToken);
+            final Link pendingLink = linkSource.createPageRenderLinkWithContext(TokenAuth.class, account.getId(), token);
             mailService.send(
                     email,
                     message("mail.change-email.title"),
@@ -198,7 +197,7 @@ public class AccountSettings extends AbstractPage {
 
         final String accountEmail = account.getCredentials(AccountCredentialType.EMAIL).getKey();
         // send mail with confirmation link
-        final Link link = security.createApplyChangesLink(account.getId(), token);
+        final Link link = linkSource.createPageRenderLinkWithContext(TokenAuth.class, account.getId(), token);
         mailService.send(
                 accountEmail,
                 message("mail.change-password.title"),

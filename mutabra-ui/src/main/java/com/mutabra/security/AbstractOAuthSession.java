@@ -8,9 +8,8 @@ import org.scribe.oauth.OAuthService;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
-public abstract class AbstractOAuthSession implements OAuth.Session {
+public abstract class AbstractOAuthSession implements OAuthProvider.Session {
     private final OAuthService service;
     private final Token accessToken;
     private final String apiUri;

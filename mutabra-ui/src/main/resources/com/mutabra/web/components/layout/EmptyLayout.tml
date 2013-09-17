@@ -26,7 +26,9 @@
 <div id="page" class="page container">
     <t:extension-point id="header-area"/>
 
-    <t:extension-point id="content-area"/>
+    <t:extension-point id="content-area">
+        <t:body/>
+    </t:extension-point>
 
     <div class="buffer"></div>
 </div>

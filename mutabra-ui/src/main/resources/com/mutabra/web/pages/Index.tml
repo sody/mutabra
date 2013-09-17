@@ -2,11 +2,11 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <div class="row">
-    <div class="span6">
+    <div class="col-sm-6">
         <img align="middle" src="${logo}" alt="logo"/>
     </div>
 
-    <div class="span6">
+    <div class="col-sm-6">
         ${message:content-text}
     </div>
 </div>

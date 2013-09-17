@@ -12,9 +12,8 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
-public class VKontakte extends AbstractOAuth2 implements OAuth2 {
+public class VKontakte extends AbstractOAuthProvider2 {
     private static final String API_URL = "https://api.vk.com/method/";
 
     public VKontakte(final String consumerKey,
@@ -24,7 +23,7 @@ public class VKontakte extends AbstractOAuth2 implements OAuth2 {
     }
 
     @Override
-    protected OAuth.Session createSession(final OAuthService service, final Token accessToken) {
+    protected OAuthProvider.Session createSession(final OAuthService service, final Token accessToken) {
         return new Session(service, accessToken);
     }
 

@@ -1,7 +1,7 @@
 package com.mutabra.web.internal.security;
 
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.web.util.WebUtils;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.services.PageRenderLinkSource;
@@ -12,7 +12,6 @@ import java.io.IOException;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class SecurityExceptionHandler implements RequestExceptionHandler {
     private final RequestExceptionHandler delegate;
@@ -33,13 +32,12 @@ public class SecurityExceptionHandler implements RequestExceptionHandler {
     @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
     public void handleRequestException(final Throwable exception) throws IOException {
         final Throwable rootException = getRootCause(exception);
-        if (rootException instanceof AuthenticationException || rootException instanceof UnauthenticatedException) {
-            //todo: log it
-            // save current request for later use after successful authentication
-            WebUtils.saveRequest(globals.getHTTPServletRequest());
-
+        if (rootException instanceof AuthenticationException || rootException instanceof AuthorizationException) {
             final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
-            if (rootException instanceof UnauthenticatedException) {
+            if (rootException instanceof AuthorizationException) {
+                // save current request for later use after successful authentication
+                WebUtils.saveRequest(globals.getHTTPServletRequest());
+
                 loginPageLink.addParameter("not_authenticated", "y");
             } else {
                 loginPageLink.addParameter("error", "y");
