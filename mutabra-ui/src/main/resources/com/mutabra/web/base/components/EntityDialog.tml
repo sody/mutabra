@@ -13,8 +13,8 @@
                     </t:extension-point>
                     <p:footer>
                         <t:extension-point id="footer">
-                            <t:linksubmit class="btn">${message:label.save}</t:linksubmit>
-                            <a href="#" class="btn" data-dismiss="modal">${message:label.cancel}</a>
+                            <t:linksubmit class="btn btn-default">${message:label.save}</t:linksubmit>
+                            <a href="#" class="btn btn-default" data-dismiss="modal">${message:label.cancel}</a>
                         </t:extension-point>
                     </p:footer>
                 </t:modal>

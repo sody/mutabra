@@ -4,16 +4,16 @@
 
 <t:grid source="source" row="row"
         include="code"
-        add="picture,actions"
-        reorder="picture,code,actions"
+        add="picture,links"
+        reorder="picture,code,links"
         class="table">
 
     <p:pictureCell>
         <t:svg type="races" image="row.code"/>
     </p:pictureCell>
-    <p:actionsCell>
+    <p:linksCell>
         <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
-    </p:actionsCell>
+    </p:linksCell>
 </t:grid>
 
 <t:admin.racedialog t:id="entityDialog"/>

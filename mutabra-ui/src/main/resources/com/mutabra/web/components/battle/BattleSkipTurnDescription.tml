@@ -1,11 +1,15 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
     <div id="${clientId}" class="description">
-        <h3 class="description-title">${message:label.skip-turn}</h3>
+        <div class="description-title">
+            <h4>${message:label.skip-turn}</h4>
+        </div>
 
-        <t:svg type="cards" image="literal:skip-turn" width="140" height="140" class="description-picture"/>
+        <div class="description-body">
+            <t:svg type="cards" image="literal:skip-turn" width="140" height="140"/>
+        </div>
 
-        <p class="description-text">${message:message.skip-turn}</p>
+        <p>${message:message.skip-turn}</p>
     </div>
 
 </t:container>

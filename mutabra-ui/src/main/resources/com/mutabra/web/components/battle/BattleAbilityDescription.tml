@@ -1,22 +1,26 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
     <div id="${clientId}" class="description">
-        <h3 class="description-title">${name}</h3>
+        <div class="description-title">
+            <h4>${name}</h4>
+        </div>
 
-        <t:svg type="abilities" image="ability.code" width="140" height="140" class="description-picture"/>
+        <div class="description-body">
+            <t:svg type="abilities" image="ability.code" width="140" height="140"/>
 
-        <dl class="description-attrs">
-            <dt><i class="icon-skull large"/></dt>
-            <dd>${effect.power}</dd>
+            <dl>
+                <dt><i class="glyphicon glyphicon-flash" title="message:label.power"/></dt>
+                <dd>${effect.power}</dd>
 
-            <dt><i class="icon-heart large"/></dt>
-            <dd>${effect.health}</dd>
+                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dd>${effect.health}</dd>
 
-            <dt><i class="icon-blood large"/></dt>
-            <dd>${ability.bloodCost}</dd>
-        </dl>
+                <dt><i class="glyphicon glyphicon-tint" title="message:label.blood-cost"/></dt>
+                <dd>${ability.bloodCost}</dd>
+            </dl>
+        </div>
 
-        <p class="description-text">${description}</p>
+        <p>${description}</p>
     </div>
 
 </t:container>

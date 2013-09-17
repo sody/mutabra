@@ -2,10 +2,14 @@
 
     <div id="${clientId}" class="${containerClass}">
         <t:loop source="hero.hand" value="card">
-            <t:battle.carddisplay card="card"/>
+            <div class="col-sm-6 col-md-3">
+                <t:battle.battlecarddisplay card="card"/>
+            </div>
         </t:loop>
 
-        <t:battle.skipturndisplay hero="hero"/>
+        <div class="col-sm-6 col-md-3">
+            <t:battle.battleskipturndisplay hero="hero"/>
+        </div>
     </div>
 
 </t:container>

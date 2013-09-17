@@ -7,15 +7,21 @@
 
     <t:customerrors/>
 
-    <div class="control-group">
-        <t:label for="email" class="control-label"/>
-        <div class="controls">
-            <t:textfield t:id="email" value="email" validate="required" label="message:label.email"/>
+    <div class="form-group">
+        <t:label for="email" class="control-label col-sm-4"/>
+        <div class="col-sm-6">
+            <t:textfield t:id="email" class="form-control"
+                         label="message:label.email"
+                         value="email"
+                         validate="required"
+                    />
         </div>
     </div>
 
-    <div class="form-actions">
-        <t:linksubmit class="btn">${message:label.change}</t:linksubmit>
+    <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-4">
+            <t:linksubmit class="btn btn-default">${message:label.change}</t:linksubmit>
+        </div>
     </div>
 </t:form>
 
@@ -25,15 +31,21 @@
 
         <t:customerrors/>
 
-        <div class="control-group">
-            <t:label for="password" class="control-label"/>
-            <div class="controls">
-                <t:textfield t:id="password" value="password" validate="required" label="message:label.password"/>
+        <div class="form-group">
+            <t:label for="password" class="control-label col-sm-4"/>
+            <div class="col-sm-6">
+                <t:textfield t:id="password" class='form-control'
+                             label="message:label.password"
+                             value="password"
+                             validate="required"
+                        />
             </div>
         </div>
 
-        <div class="form-actions">
-            <t:linksubmit class="btn">${message:label.change}</t:linksubmit>
+        <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-4">
+                <t:linksubmit class="btn btn-default">${message:label.change}</t:linksubmit>
+            </div>
         </div>
     </t:form>
 </t:if>
@@ -41,21 +53,29 @@
 <t:form t:id="accountForm" class="form-horizontal">
     <legend>${message:label.change-profile}</legend>
 
-    <div class="control-group">
-        <t:label for="name" class="control-label"/>
-        <div class="controls">
-            <t:textfield t:id="name" value="value.name" label="message:label.name"/>
+    <div class="form-group">
+        <t:label for="name" class="control-label col-sm-4"/>
+        <div class="col-sm-6">
+            <t:textfield t:id="name" class="form-control"
+                         label="message:label.name"
+                         value="value.name"
+                    />
         </div>
     </div>
-    <div class="control-group">
-        <t:label for="location" class="control-label"/>
-        <div class="controls">
-            <t:textfield t:id="location" value="value.location" label="message:label.location"/>
+    <div class="form-group">
+        <t:label for="location" class="control-label col-sm-4"/>
+        <div class="col-sm-6">
+            <t:textfield t:id="location" class="form-control"
+                         label="message:label.location"
+                         value="value.location"
+                    />
         </div>
     </div>
 
-    <div class="form-actions">
-        <t:linksubmit class="btn">${message:label.save}</t:linksubmit>
+    <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-4">
+            <t:linksubmit class="btn btn-default">${message:label.save}</t:linksubmit>
+        </div>
     </div>
 </t:form>
 

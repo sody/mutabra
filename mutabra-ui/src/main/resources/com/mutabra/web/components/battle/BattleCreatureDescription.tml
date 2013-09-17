@@ -1,19 +1,23 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
     <div id="${clientId}" class="description">
-        <h3 class="description-title">${name}</h3>
+        <div class="description-title">
+            <h4>${name}</h4>
+        </div>
 
-        <t:svg type="creatures" image="creature.code" width="140" height="140" class="description-picture"/>
+        <div class="description-body">
+            <t:svg type="creatures" image="creature.code" width="140" height="140"/>
 
-        <dl class="description-attrs">
-            <dt><i class="icon-heart large"/></dt>
-            <dd>${creature.health}</dd>
+            <dl>
+                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dd>${creature.health}</dd>
 
-            <dt><i class="icon-skull large"/></dt>
-            <dd>${creature.power}</dd>
-        </dl>
+                <dt><i class="glyphicon glyphicon-flash" title="message:label.power"/></dt>
+                <dd>${creature.power}</dd>
+            </dl>
+        </div>
 
-        <p class="description-text">${description}</p>
+        <p>${description}</p>
     </div>
 
 </t:container>

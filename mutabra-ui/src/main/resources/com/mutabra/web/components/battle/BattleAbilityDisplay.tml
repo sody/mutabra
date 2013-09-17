@@ -5,7 +5,7 @@
          data-card-target="${targetSelector}"
          data-card-url="${castLink}">
 
-        <div class="card-ne"><i class="icon-blood"/></div>
+        <div class="card-ne"><i class="glyphicon glyphicon-tree-conifer"/></div>
         <div class="card-nw">${ability.bloodCost}</div>
         <div class="card-se">${effect.power}</div>
         <div class="card-sw">${effect.health}</div>
