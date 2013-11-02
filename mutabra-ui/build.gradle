@@ -1,5 +1,3 @@
-import org.apache.tools.ant.filters.*
-
 apply plugin: 'war'
 apply plugin: 'jetty'
 
@@ -20,17 +18,24 @@ dependencies {
 
 task generateConfig(type: Copy) {
     from 'src/main/config'
-    into temporaryDir
-    filter(ReplaceTokens, tokens: [
-            'project.version': version,
-            'project.production-mode': 'true'
-    ])
+    into "${buildDir}/config"
+    include '*.xml'
+    expand(project: project)
+
+    if (isSnapshot) {
+        from 'src/main/config/development'
+    } else {
+        from 'src/main/config/production'
+    }
 }
 
 war {
     dependsOn generateConfig
 
-    webXml = file("${generateConfig.temporaryDir}/web.xml")
+    webXml file("${generateConfig.destinationDir}/web.xml")
+    webInf {
+        from("${generateConfig.destinationDir}/jetty-env.xml")
+    }
 }
 
 jettyRun {
@@ -38,4 +43,5 @@ jettyRun {
 
     scanIntervalSeconds 2
     contextPath '/'
+    jettyEnvXml file("${generateConfig.destinationDir}/jetty-env.xml")
 }

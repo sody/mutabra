@@ -1,5 +1,13 @@
+# git 
 .git
+
+# IntelliJ IDEA
 .idea
 *.iml
+
+# Maven
 target
-atlassian-ide-plugin.xml
+
+# Gradle
+.gradle
+build
