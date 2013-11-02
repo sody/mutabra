@@ -1,0 +1,41 @@
+import org.apache.tools.ant.filters.*
+
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+description = 'Mutabra UI Module'
+
+dependencies {
+    compile project(':mutabra-domain')
+
+    compile "ch.qos.logback:logback-classic:${versions.logback}"
+    compile "org.apache.shiro:shiro-core:${versions.shiro}"
+    compile "org.apache.shiro:shiro-web:${versions.shiro}"
+    compile "org.apache.tapestry:tapestry-core:${versions.tapestry}"
+    compile "org.scribe:scribe:${versions.scribe}"
+
+    provided "javax.servlet:servlet-api:${versions.servletApi}"
+    provided "javax.mail:mail:${versions.mailApi}"
+}
+
+task generateConfig(type: Copy) {
+    from 'src/main/config'
+    into temporaryDir
+    filter(ReplaceTokens, tokens: [
+            'project.version': version,
+            'project.production-mode': 'true'
+    ])
+}
+
+war {
+    dependsOn generateConfig
+
+    webXml = file("${generateConfig.temporaryDir}/web.xml")
+}
+
+jettyRun {
+    dependsOn generateConfig
+
+    scanIntervalSeconds 2
+    contextPath '/'
+}

@@ -1,0 +1,5 @@
+description = 'Mutabra Domain Module'
+
+dependencies {
+    compile "com.google.code.morphia:morphia:${versions.morphia}"
+}
