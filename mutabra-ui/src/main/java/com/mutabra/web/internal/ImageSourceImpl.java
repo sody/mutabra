@@ -1,6 +1,7 @@
 package com.mutabra.web.internal;
 
 import com.mutabra.web.services.ImageSource;
+import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.internal.parser.ComponentTemplate;
 import org.apache.tapestry5.internal.services.TemplateParser;
 import org.apache.tapestry5.ioc.Resource;
@@ -8,7 +9,6 @@ import org.apache.tapestry5.ioc.annotations.PostInjection;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.ioc.internal.util.URLChangeTracker;
 import org.apache.tapestry5.ioc.services.ClasspathURLConverter;
-import org.apache.tapestry5.services.AssetSource;
 import org.apache.tapestry5.services.UpdateListener;
 import org.apache.tapestry5.services.UpdateListenerHub;
 
@@ -16,26 +16,26 @@ import java.util.Map;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class ImageSourceImpl implements ImageSource, UpdateListener {
     private final Map<String, ComponentTemplate> templates = CollectionFactory.newConcurrentMap();
 
-    private final AssetSource assetSource;
     private final TemplateParser parser;
     private final URLChangeTracker tracker;
-
     private final Resource unknown;
 
-    public ImageSourceImpl(final AssetSource assetSource,
-                           final TemplateParser parser,
-                           final ClasspathURLConverter classpathURLConverter) {
-        this.assetSource = assetSource;
+    public ImageSourceImpl(final TemplateParser parser,
+                           final ClasspathURLConverter classpathURLConverter,
+                           @Path("${mutabra.asset.root}/svg/unknown.svg")
+                           final Resource unknown) {
+        // validate
+        if (!unknown.exists()) {
+            throw new IllegalStateException("Unknown SVG placeholder should exist.");
+        }
+
         this.parser = parser;
         this.tracker = new URLChangeTracker(classpathURLConverter);
-
-        //todo: inject default image using configured symbols
-        unknown = assetSource.resourceForPath("unknown.svg");
+        this.unknown = unknown;
     }
 
     @PostInjection
@@ -60,7 +60,7 @@ public class ImageSourceImpl implements ImageSource, UpdateListener {
             return template;
         }
 
-        final Resource resource = assetSource.resourceForPath(path).withExtension("svg");
+        final Resource resource = unknown.forFile(path).withExtension("svg");
         final ComponentTemplate parsedTemplate = parseTemplate(resource);
         templates.put(path, parsedTemplate);
         return parsedTemplate;

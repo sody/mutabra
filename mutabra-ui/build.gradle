@@ -32,15 +32,23 @@ task processConfig(type: Copy) {
     include 'mail.properties', 'logback.xml'
 }
 
+task compileLess << {
+    def compiler = new org.lesscss.LessCompiler()
+    compiler.compile(file('src/main/less/mutabra.less'), file("src/main/webapp/mutabra/css/mutabra.css"))
+}
+
 classes {
     dependsOn processConfig
 }
 
 war {
+    dependsOn compileLess
     webXml file("${generateConfig.destinationDir}/web.xml")
 }
 
 jettyRun {
+    dependsOn compileLess
+
     scanIntervalSeconds 2
     contextPath '/'
 }

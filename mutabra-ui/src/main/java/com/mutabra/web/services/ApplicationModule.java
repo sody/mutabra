@@ -1,5 +1,6 @@
 package com.mutabra.web.services;
 
+import org.apache.tapestry5.ComponentParameterConstants;
 import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.BaseEntity;
 import com.mutabra.domain.CodedEntity;
@@ -11,13 +12,14 @@ import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
 import com.mutabra.web.internal.NamingObjectProvider;
-import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.ioc.services.*;
+import org.apache.tapestry5.services.Core;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.services.ValueEncoderSource;
 import org.apache.tapestry5.services.javascript.*;
@@ -39,10 +41,12 @@ public class ApplicationModule {
         configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
         configuration.add(ComponentParameterConstants.ZONE_UPDATE_METHOD, "none");
         configuration.add(ComponentParameterConstants.ZONE_SHOW_METHOD, "none");
+
+        configuration.add("mutabra.asset.root", "context:mutabra");
     }
 
     public static void bind(final ServiceBinder binder) {
-        binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withSimpleId();
+        binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withId("MutabraJavaScriptStack");
         binder.bind(ImageSource.class, ImageSourceImpl.class);
     }
 
@@ -97,26 +101,25 @@ public class ApplicationModule {
 
     @Local
     @Contribute(JavaScriptStack.class)
-    public void contributeJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
-        configuration.add("mutabra-css", new StackExtension(StackExtensionType.STYLESHEET, "context:css/mutabra.css"));
+    public void setupMutabraJavaScriptStack(final OrderedConfiguration<StackExtension> configuration) {
+	    configuration.add("mutabra.css", new StackExtension(StackExtensionType.STYLESHEET, "${mutabra.asset.root}/css/mutabra.css"));
 
-        // jquery library
-        configuration.add("jquery", new StackExtension(StackExtensionType.LIBRARY, "context:js/jquery/jquery.js"));
+	    // project library for tapestry
+	    configuration.add("mutabra-init.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/mutabra-init.js"));
 
-        // bootstrap plugins
-        configuration.add("bootstrap-transition", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/transition.js"));
-        configuration.add("bootstrap-collapse", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/collapse.js"));
-        configuration.add("bootstrap-dropdown", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/dropdown.js"));
-        configuration.add("bootstrap-tab", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/tab.js"));
-        configuration.add("bootstrap-alert", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/alert.js"));
-        configuration.add("bootstrap-modal", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/modal.js"));
-        configuration.add("bootstrap-carousel", new StackExtension(StackExtensionType.LIBRARY, "context:js/bootstrap/carousel.js"));
+	    // jquery library
+	    configuration.add("jquery.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/jquery/jquery.js"));
+	    // bootstrap plugins
+	    configuration.add("bootstrap-transition.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/transition.js"));
+	    configuration.add("bootstrap-collapse.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/collapse.js"));
+	    configuration.add("bootstrap-dropdown.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/dropdown.js"));
+	    configuration.add("bootstrap-tab.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/tab.js"));
+	    configuration.add("bootstrap-alert.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/alert.js"));
+	    configuration.add("bootstrap-modal.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/modal.js"));
+	    configuration.add("bootstrap-carousel.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/carousel.js"));
 
-        // project plugins
-        configuration.add("mutabra-battle", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra/mutabra-battle.js"));
-
-        // project library for tapestry
-        configuration.add("mutabra", new StackExtension(StackExtensionType.LIBRARY, "context:js/mutabra-init.js"));
+	    // project plugins
+        configuration.add("mutabra-battle.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/mutabra-battle.js"));
     }
 
     @Contribute(JavaScriptStackSource.class)
