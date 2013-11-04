@@ -29,10 +29,6 @@ ext {
 
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = versions.gradle
-}
-
 allprojects {
     apply plugin: 'idea'
 
@@ -93,4 +89,8 @@ subprojects {
     idea.module {
         scopes.PROVIDED.plus += configurations.provided
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = versions.gradle
 }

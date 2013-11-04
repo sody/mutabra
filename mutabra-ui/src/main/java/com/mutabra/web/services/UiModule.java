@@ -9,6 +9,7 @@ import org.apache.tapestry5.ioc.annotations.SubModule;
         DomainModule.class,
         ServicesModule.class,
         SecurityModule.class,
+        MailModule.class,
         ApplicationModule.class})
 public class UiModule {
 }

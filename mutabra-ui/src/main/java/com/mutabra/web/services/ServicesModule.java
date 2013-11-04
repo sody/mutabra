@@ -17,13 +17,9 @@ import com.mutabra.services.battle.scripts.EffectScript;
 import com.mutabra.services.battle.scripts.SummonScript;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
-import com.mutabra.web.internal.MailServiceImpl;
-import com.mutabra.web.internal.annotations.Naming;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
-
-import javax.mail.Session;
 
 /**
  * @author Ivan Khalopik
@@ -35,10 +31,6 @@ public class ServicesModule {
         binder.bind(HeroService.class, HeroServiceImpl.class);
         binder.bind(BattleService.class, BattleServiceImpl.class);
         binder.bind(ScriptEngine.class, ScriptEngineImpl.class);
-    }
-
-    public MailService buildMailService(@Naming("mail/session") final Session session) {
-        return new MailServiceImpl(session);
     }
 
     public CodedEntityService<Level> buildLevelService(final Datastore datastore) {

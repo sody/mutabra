@@ -12,36 +12,35 @@ dependencies {
     compile "org.apache.tapestry:tapestry-core:${versions.tapestry}"
     compile "org.scribe:scribe:${versions.scribe}"
 
+    compile "javax.mail:mail:${versions.mailApi}"
+
     provided "javax.servlet:servlet-api:${versions.servletApi}"
-    provided "javax.mail:mail:${versions.mailApi}"
 }
 
 task generateConfig(type: Copy) {
-    from 'src/main/config'
+    from 'src/main/config', isSnapshot ? 'src/main/config/development' : 'src/main/config/production'
     into "${buildDir}/config"
-    include '*.xml'
+    include '*.xml', '*.properties'
     expand(project: project)
+}
 
-    if (isSnapshot) {
-        from 'src/main/config/development'
-    } else {
-        from 'src/main/config/production'
-    }
+task processConfig(type: Copy) {
+    dependsOn processResources, generateConfig
+
+    from "${generateConfig.destinationDir}"
+    into "${processResources.destinationDir}"
+    include 'mail.properties', 'logback.xml'
+}
+
+classes {
+    dependsOn processConfig
 }
 
 war {
-    dependsOn generateConfig
-
     webXml file("${generateConfig.destinationDir}/web.xml")
-    webInf {
-        from("${generateConfig.destinationDir}/jetty-env.xml")
-    }
 }
 
 jettyRun {
-    dependsOn generateConfig
-
     scanIntervalSeconds 2
     contextPath '/'
-    jettyEnvXml file("${generateConfig.destinationDir}/jetty-env.xml")
 }

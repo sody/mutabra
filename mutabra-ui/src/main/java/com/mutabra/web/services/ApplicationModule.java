@@ -7,7 +7,6 @@ import com.mutabra.domain.battle.BattleAbility;
 import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleHero;
-import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
@@ -40,13 +39,6 @@ public class ApplicationModule {
         configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
         configuration.add(ComponentParameterConstants.ZONE_UPDATE_METHOD, "none");
         configuration.add(ComponentParameterConstants.ZONE_SHOW_METHOD, "none");
-    }
-
-    @FactoryDefaults
-    @Contribute(SymbolProvider.class)
-    public void contributeFactoryDefaults(final MappedConfiguration<String, String> configuration) {
-        configuration.add(ApplicationConstants.MONGO_URI, "${env.mongohq_url}");
-        configuration.add(ApplicationConstants.SUPPORT_EMAIL, "${env.support_email}");
     }
 
     public static void bind(final ServiceBinder binder) {
@@ -97,9 +89,9 @@ public class ApplicationModule {
 
     @Contribute(ComponentMessagesSource.class)
     public void contributeComponentMessagesSource(final OrderedConfiguration<Resource> configuration,
-                                                  @Value("context:WEB-INF/mail") final Resource mailMessages,
-                                                  @Value("context:WEB-INF/domain") final Resource domainMessages) {
-        configuration.add("mail", mailMessages);
+
+                                                  @Value("context:WEB-INF/domain")
+                                                  final Resource domainMessages) {
         configuration.add("domain", domainMessages);
     }
 
