@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <context-param>
+        <param-name>tapestry.app-package</param-name>
+        <param-value>com.mutabra.web</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>tapestry.application-version</param-name>
+        <param-value>${project.version}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>tapestry.production-mode</param-name>
+        <param-value>${!project.isSnapshot}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>application.support-email</param-name>
+        <param-value>${project.supportEmail}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>application.robot-email</param-name>
+        <param-value>${project.robotEmail}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>application.robot-email-secret</param-name>
+        <param-value>${project.robotEmailSecret}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>application.mongo-uri</param-name>
+        <param-value>${project.mongoUri}</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>security.hash-algorithm</param-name>
+        <param-value>${project.hashAlgorithm}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>security.hash-iterations</param-name>
+        <param-value>${project.hashIterations}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>security.hash-private-salt</param-name>
+        <param-value>${project.hashPrivateSalt}</param-value>
+    </context-param>
+
+    <!-- two minutes -->
+    <context-param>
+        <param-name>security.token-expiration-time</param-name>
+        <param-value>${project.tokenExpirationTime}</param-value>
+    </context-param>
+
+    <!-- https://dev.twitter.com/apps/3364152 -->
+    <context-param>
+        <param-name>security.twitter-key</param-name>
+        <param-value>${project.twitterKey}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>security.twitter-secret</param-name>
+        <param-value>${project.twitterSecret}</param-value>
+    </context-param>
+
+    <!-- https://developers.facebook.com/apps/408319405890121/ -->
+    <context-param>
+        <param-name>security.facebook-key</param-name>
+        <param-value>${project.facebookKey}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>security.facebook-secret</param-name>
+        <param-value>${project.twitterSecret}</param-value>
+    </context-param>
+
+    <!-- https://code.google.com/apis/console/?pli=1#project:23722111965 -->
+    <context-param>
+        <param-name>security.google-key</param-name>
+        <param-value>${project.googleKey}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>security.google-secret</param-name>
+        <param-value>${project.googleSecret}</param-value>
+    </context-param>
+
+    <!-- https://vk.com/editapp?id=3134647 -->
+    <context-param>
+        <param-name>security.vk-key</param-name>
+        <param-value>${project.vkKey}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>security.vk-secret</param-name>
+        <param-value>${project.vkSecret}</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>ui</filter-name>
+        <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ui</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+</web-app>
