@@ -1,6 +1,6 @@
 package com.mutabra.services;
 
-import com.google.code.morphia.query.Query;
+import org.mongodb.morphia.query.Query;
 import com.mutabra.domain.Entity;
 
 import java.io.Serializable;

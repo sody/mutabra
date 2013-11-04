@@ -16,7 +16,8 @@ ext {
             spock: '0.7-groovy-2.0',
 
             // domain
-            morphia: '0.99',
+            mongo: '2.10.1',
+            morphia: '0.105',
 
             // ui
             shiro: '1.2.0',

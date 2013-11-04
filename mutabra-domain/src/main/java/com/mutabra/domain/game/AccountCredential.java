@@ -1,6 +1,6 @@
 package com.mutabra.domain.game;
 
-import com.google.code.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Embedded;
 
 /**
  * @author Ivan Khalopik

@@ -1,6 +1,6 @@
 package com.mutabra.web.services;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.common.*;
 import com.mutabra.domain.game.Account;
 import com.mutabra.services.BaseEntityService;

@@ -1,6 +1,6 @@
 package com.mutabra.services;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.BaseEntity;
 import org.bson.types.ObjectId;
 

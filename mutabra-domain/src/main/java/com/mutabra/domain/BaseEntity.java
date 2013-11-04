@@ -1,6 +1,6 @@
 package com.mutabra.domain;
 
-import com.google.code.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Id;
 import org.bson.types.ObjectId;
 
 /**

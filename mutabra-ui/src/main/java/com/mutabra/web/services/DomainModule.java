@@ -1,7 +1,7 @@
 package com.mutabra.web.services;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoURI;
 import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.*;

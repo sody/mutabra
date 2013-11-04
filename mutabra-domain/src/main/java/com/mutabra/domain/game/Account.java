@@ -1,8 +1,8 @@
 package com.mutabra.domain.game;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Transient;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Transient;
 import com.mutabra.domain.BaseEntity;
 
 import java.util.*;

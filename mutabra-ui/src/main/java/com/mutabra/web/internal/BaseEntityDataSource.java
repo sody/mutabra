@@ -1,6 +1,6 @@
 package com.mutabra.web.internal;
 
-import com.google.code.morphia.query.Query;
+import org.mongodb.morphia.query.Query;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.grid.SortConstraint;
 

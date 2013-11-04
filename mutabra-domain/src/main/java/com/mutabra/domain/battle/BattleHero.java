@@ -1,8 +1,8 @@
 package com.mutabra.domain.battle;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Indexed;
-import com.google.code.morphia.annotations.Transient;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.Transient;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroLevel;
 import org.bson.types.ObjectId;

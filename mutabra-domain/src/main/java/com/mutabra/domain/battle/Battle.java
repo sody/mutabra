@@ -1,8 +1,8 @@
 package com.mutabra.domain.battle;
 
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.PostLoad;
-import com.google.code.morphia.annotations.PrePersist;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.PostLoad;
+import org.mongodb.morphia.annotations.PrePersist;
 import com.mutabra.domain.BaseEntity;
 import org.bson.types.ObjectId;
 

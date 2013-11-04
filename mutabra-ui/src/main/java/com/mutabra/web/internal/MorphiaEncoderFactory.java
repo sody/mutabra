@@ -16,7 +16,7 @@
 
 package com.mutabra.web.internal;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.Entity;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.ioc.services.TypeCoercer;

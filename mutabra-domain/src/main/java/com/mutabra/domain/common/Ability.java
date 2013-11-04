@@ -1,6 +1,6 @@
 package com.mutabra.domain.common;
 
-import com.google.code.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Embedded;
 import com.mutabra.domain.Translatable;
 
 import java.util.ArrayList;

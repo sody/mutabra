@@ -1,7 +1,7 @@
 package com.mutabra.domain.battle;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Transient;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Transient;
 import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;

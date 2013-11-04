@@ -1,6 +1,6 @@
 package com.mutabra.services.game;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;

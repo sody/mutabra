@@ -1,6 +1,6 @@
 package com.mutabra.services.battle;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;

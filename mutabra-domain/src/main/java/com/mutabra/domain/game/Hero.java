@@ -1,7 +1,7 @@
 package com.mutabra.domain.game;
 
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 import com.mutabra.domain.BaseEntity;
 
 import java.util.ArrayList;
