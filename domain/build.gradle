@@ -1,6 +1,7 @@
 description = 'Mutabra Domain Module'
 
 dependencies {
+    compile "org.slf4j:slf4j-api:${versions.slf4j}"
     compile "org.mongodb.morphia:morphia:${versions.morphia}"
     compile "org.mongodb.morphia:morphia-logging-slf4j:${versions.morphia}"
     compile "org.mongodb:mongo-java-driver:${versions.mongo}"
