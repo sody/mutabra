@@ -58,6 +58,7 @@ subprojects {
 
     group = rootProject.group
     version = rootProject.version
+    archivesBaseName = "${rootProject.name}-${name}"
 
     sourceCompatibility = versions.java
     targetCompatibility = versions.java

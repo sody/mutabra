@@ -1,1 +1,1 @@
-include 'mutabra-domain', 'mutabra-ui'
+include 'domain', 'ui'

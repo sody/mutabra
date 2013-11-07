@@ -4,7 +4,7 @@ apply plugin: 'jetty'
 description = 'Mutabra UI Module'
 
 dependencies {
-    compile project(':mutabra-domain')
+    compile project(':domain')
 
     compile "ch.qos.logback:logback-classic:${versions.logback}"
     compile "org.apache.shiro:shiro-core:${versions.shiro}"
