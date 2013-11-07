@@ -10,7 +10,7 @@ dependencies {
     compile "ch.qos.logback:logback-classic:${versions.logback}"
     compile "org.apache.shiro:shiro-core:${versions.shiro}"
     compile "org.apache.shiro:shiro-web:${versions.shiro}"
-    compile ("org.apache.tapestry:tapestry-core:${versions.tapestry}") {
+    compile("org.apache.tapestry:tapestry-core:${versions.tapestry}") {
         exclude group: 'org.slf4j', module: 'slf4j-log4j12'
         exclude group: 'log4j', module: 'log4j'
     }
@@ -47,6 +47,7 @@ classes {
 
 war {
     dependsOn compileLess
+
     webXml file("${generateConfig.destinationDir}/web.xml")
 }
 
