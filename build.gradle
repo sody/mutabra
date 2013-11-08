@@ -75,7 +75,6 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'groovy'
-    apply plugin: 'maven-publish'
 
     group = rootProject.group
     version = rootProject.version
@@ -111,15 +110,6 @@ subprojects {
 
         maxHeapSize '512m'
     }
-
-    jar {
-        from(rootProject.projectDir) {
-            include '*.md'
-            into 'META-INF'
-        }
-    }
-
-    idea.module {
-        scopes.PROVIDED.plus += configurations.provided
-    }
 }
+
+apply from: 'gradle/ide-settings.gradle'
