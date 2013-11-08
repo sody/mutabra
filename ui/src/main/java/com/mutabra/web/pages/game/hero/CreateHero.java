@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2008-2013 Ivan Khalopik.
+ * All rights reserved.
+ */
+
 package com.mutabra.web.pages.game.hero;
 
 import com.mutabra.domain.common.Face;

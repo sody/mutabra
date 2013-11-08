@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2008-2013 Ivan Khalopik.
+ * All rights reserved.
+ */
+
 T5.extendInitializers({
 
   modal: function (spec) {

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2008-2013 Ivan Khalopik.
+ * All rights reserved.
+ */
+
 !function ($) {
 
   /* DESCRIPTION CLASS DEFINITION
