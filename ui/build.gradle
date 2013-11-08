@@ -23,7 +23,7 @@ dependencies {
 
     compile "javax.mail:mail:${versions.mailApi}"
 
-    provided "javax.servlet:servlet-api:${versions.servletApi}"
+    providedCompile "javax.servlet:servlet-api:${versions.servletApi}"
 }
 
 task generateConfig(type: Copy) {

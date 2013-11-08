@@ -88,20 +88,6 @@ subprojects {
     sourceCompatibility = versions.java
     targetCompatibility = versions.java
 
-    configurations {
-        provided
-    }
-
-    sourceSets {
-        main {
-            compileClasspath += configurations.provided
-        }
-        test {
-            compileClasspath += configurations.provided
-            runtimeClasspath += configurations.provided
-        }
-    }
-
     dependencies {
         testCompile "org.slf4j:slf4j-api:${versions.slf4j}"
         testCompile "org.codehaus.groovy:groovy-all:${versions.groovy}"
@@ -115,6 +101,8 @@ subprojects {
 
         maxHeapSize '512m'
     }
+
+    rootProject.evaluationDependsOn(name)
 }
 
 apply from: 'gradle/ide-settings.gradle'

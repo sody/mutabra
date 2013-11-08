@@ -14,7 +14,14 @@ subprojects {
             outputDir sourceSets.main.output.classesDir
             testOutputDir sourceSets.test.output.classesDir
 
-            scopes.PROVIDED.plus += configurations.provided
+            if (configurations.find { it.name == 'providedCompile' }) {
+                scopes.COMPILE.plus -= configurations.providedCompile
+                scopes.PROVIDED.plus += configurations.providedCompile
+            }
+            if (configurations.find { it.name == 'providedRuntime' }) {
+                scopes.RUNTIME.plus -= configurations.providedRuntime
+                scopes.PROVIDED.plus += configurations.providedRuntime
+            }
         }
     }
 }
