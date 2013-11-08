@@ -18,23 +18,29 @@ idea {
     project {
         ipr {
             withXml { provider ->
-                //noinspection GroovyAssignabilityCheck
-                def replaceComponent = { String name, Closure content ->
-                    def node = provider.node.component.find { it.@name == name } ?: provider.node.appendNode('component')
+                def replaceComponent = { Map attr, Closure content ->
+                    def node = provider.node.component.find { it.@name == attr.name } ?: provider.node.appendNode('component')
                     node.replaceNode {
-                        component(name: name, content)
+                        component(attr, content)
                     }
                 };
 
-                replaceComponent('VcsDirectoryMappings') {
+                replaceComponent(name: 'VcsDirectoryMappings') {
                     mapping(vcs: 'Git', directory: '$PROJECT_DIR$')
                 }
 
-                replaceComponent('CodeStyleSettingsManager') {
+                replaceComponent(name: 'CodeStyleSettingsManager') {
                     option(name: 'PER_PROJECT_SETTINGS') {
-                        value new XmlParser().parse("${rootProject.projectDir}/gradle/config/code-style.xml").children()
+                        value new XmlParser().parse("${rootProject.projectDir}/gradle/config/idea-code-style.xml").children()
                     }
                     option(name: 'USE_PER_PROJECT_SETTINGS', value: true)
+                }
+
+                replaceComponent(name: 'CopyrightManager', default: 'mutabra') {
+                    copyright new XmlParser().parse("${rootProject.projectDir}/gradle/config/idea-copyright.xml").copyright.get(0).children()
+                    module2copyright {
+                        element(module: 'Project Files', copyright: 'mutabra')
+                    }
                 }
             }
         }
