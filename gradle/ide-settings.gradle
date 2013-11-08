@@ -3,28 +3,7 @@
  * All rights reserved.
  */
 
-allprojects {
-    apply plugin: 'idea'
-}
-
-subprojects {
-    idea {
-        module {
-            inheritOutputDirs false
-            outputDir sourceSets.main.output.classesDir
-            testOutputDir sourceSets.test.output.classesDir
-
-            if (configurations.find { it.name == 'providedCompile' }) {
-                scopes.COMPILE.plus -= configurations.providedCompile
-                scopes.PROVIDED.plus += configurations.providedCompile
-            }
-            if (configurations.find { it.name == 'providedRuntime' }) {
-                scopes.RUNTIME.plus -= configurations.providedRuntime
-                scopes.PROVIDED.plus += configurations.providedRuntime
-            }
-        }
-    }
-}
+apply plugin: 'idea'
 
 idea {
     project {
@@ -58,6 +37,29 @@ idea {
                         option(name: 'block', value: false)
                         option(name: 'prefixLines', value: false)
                     }
+                }
+            }
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'idea'
+
+    afterEvaluate {
+        idea {
+            module {
+                inheritOutputDirs false
+                outputDir sourceSets.main.output.classesDir
+                testOutputDir sourceSets.test.output.classesDir
+
+                if (configurations.find { it.name == 'providedCompile' }) {
+                    scopes.COMPILE.plus -= configurations.providedCompile
+                    scopes.PROVIDED.plus += configurations.providedCompile
+                }
+                if (configurations.find { it.name == 'providedRuntime' }) {
+                    scopes.RUNTIME.plus -= configurations.providedRuntime
+                    scopes.PROVIDED.plus += configurations.providedRuntime
                 }
             }
         }

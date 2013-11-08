@@ -4,6 +4,7 @@
  */
 
 apply plugin: 'base'
+apply from: 'gradle/ide-settings.gradle'
 
 group = 'com.mutabra'
 version = '1.0-pre-alpha-13-SNAPSHOT'
@@ -66,8 +67,6 @@ buildscript {
 }
 
 allprojects {
-    apply plugin: 'idea'
-
     repositories {
         mavenCentral()
         mavenLocal()
@@ -101,8 +100,4 @@ subprojects {
 
         maxHeapSize '512m'
     }
-
-    rootProject.evaluationDependsOn(name)
 }
-
-apply from: 'gradle/ide-settings.gradle'
