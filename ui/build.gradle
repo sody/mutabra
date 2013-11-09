@@ -42,8 +42,13 @@ task processConfig(type: Copy) {
 }
 
 task compileLess << {
-    def compiler = new org.lesscss.LessCompiler()
-    compiler.compile(file('src/main/less/mutabra.less'), file("src/main/webapp/mutabra/css/mutabra.css"))
+    def sources = fileTree('src/main/less') { include '*.less' }
+    def destination = file('src/main/webapp/mutabra/css')
+
+    def compiler = new org.lesscss.LessCompiler(compress: !isSnapshot)
+    sources.each { source ->
+        compiler.compile(source, file("${destination}/${source.name}".replace('.less', '.css')), false)
+    }
 }
 
 classes {
