@@ -3,6 +3,7 @@
  * All rights reserved.
  */
 
+apply plugin: 'less'
 apply plugin: 'war'
 apply plugin: 'jetty'
 
@@ -41,14 +42,9 @@ task processConfig(type: Copy) {
     include 'mail.properties', 'logback.xml'
 }
 
-task compileLess << {
-    def sources = fileTree('src/main/less') { include '*.less' }
-    def destination = file('src/main/webapp/mutabra/css')
-
-    def compiler = new org.lesscss.LessCompiler(compress: !isSnapshot)
-    sources.each { source ->
-        compiler.compile(source, file("${destination}/${source.name}".replace('.less', '.css')), false)
-    }
+compileLess {
+    compress !isSnapshot
+    destinationDir file('src/main/webapp/mutabra/css')
 }
 
 classes {
