@@ -44,7 +44,7 @@ task processConfig(type: Copy) {
 
 compileLess {
     compress !isSnapshot
-    destinationDir file('src/main/webapp/mutabra/css')
+    destination 'src/main/webapp/mutabra/css'
 }
 
 classes {
