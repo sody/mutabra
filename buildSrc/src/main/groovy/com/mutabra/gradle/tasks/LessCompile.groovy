@@ -23,14 +23,30 @@ public class LessCompile extends SourceTask {
     private static Logger logger = LoggerFactory.getLogger(LessCompile.class);
 
     private boolean compress;
-    private Object destination;
+    private Object destinationDir;
+    private String destination;
+
+    public File getDestinationDir() {
+        return getProject().file(destinationDir);
+    }
 
     @OutputDirectory
     public File getDestination() {
-        return getProject().file(destination);
+        return destination != null ? new File(getDestinationDir(), destination) : getDestinationDir();
     }
 
-    public LessCompile destination(final Object destination) {
+    public LessCompile destinationDir(final Object destinationDir) {
+        this.destinationDir = destinationDir;
+        return this;
+    }
+
+    public LessCompile destination(final Object destinationDir, final String destination) {
+        this.destinationDir = destinationDir;
+        this.destination = destination;
+        return this;
+    }
+
+    public LessCompile destination(final String destination) {
         this.destination = destination;
         return this;
     }
@@ -50,8 +66,8 @@ public class LessCompile extends SourceTask {
         // create less compiler instance
         final LessCompiler compiler = new LessCompiler(compress: compress);
 
-        logger.info("Compiling LESS files to ${destination}...");
         final File destination = getDestination();
+        logger.info("Compiling LESS files to ${destination}...");
         getSource().visit { source ->
             if (!source.directory) {
                 try {

@@ -10,6 +10,9 @@ import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.BasePlugin
+import org.gradle.api.plugins.jetty.JettyPlugin
+import org.gradle.api.plugins.jetty.JettyRun
+import org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext
 
 /**
  * @author Ivan Khalopik
@@ -18,29 +21,81 @@ import org.gradle.api.plugins.BasePlugin
 public class LessPlugin implements Plugin<Project> {
     public static final String COMPILE_LESS_TASK_NAME = "compileLess";
 
+    private static final JETTY_HACK =
+        '''
+import org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext;
+import org.mortbay.resource.ResourceCollection;
+
+class JettyPluginWebAppContextExt extends JettyPluginWebAppContext {
+    private final String[] resources;
+
+    public JettyPluginWebAppContextExt(final String[] resources) {
+        this.resources = resources;
+    }
+
+    void configure() {
+        super.configure();
+
+        // setup additional resource folders
+        setBaseResource(new ResourceCollection(resources));
+    }
+}
+
+return new JettyPluginWebAppContextExt(resources);
+'''
+
     public void apply(Project project) {
-        LessPluginConvention convention = new LessPluginConvention(project);
+        final LessPluginConvention convention = new LessPluginConvention(project);
         project.getConvention().getPlugins().put("less", convention);
 
         // configure all existent less tasks
         configureLessDefaults(project, convention);
+        // configure all existent jetty tasks
+        configureJettyDefaults(project);
 
-        // add compile less task
+        // add compileLess task
         addCompileLess(project);
-    }
-
-    private void addCompileLess(Project project) {
-        final LessCompile lessCompile = project.getTasks().create(COMPILE_LESS_TASK_NAME, LessCompile.class);
-        lessCompile.setDescription("Compile LESS files into CSS files.");
-        lessCompile.setGroup(BasePlugin.BUILD_GROUP);
     }
 
     private void configureLessDefaults(final Project project, final LessPluginConvention pluginConvention) {
         project.getTasks().withType(LessCompile.class, new Action<LessCompile>() {
             public void execute(LessCompile task) {
-                task.destination(pluginConvention.getDestinationDir());
+                task.destinationDir(pluginConvention.getDestination());
+                task.destination(pluginConvention.getDestination());
                 task.source(pluginConvention.getSourceDir().files as File[]);
             }
         });
+    }
+
+    private void configureJettyDefaults(final Project project) {
+        project.getTasks().withType(JettyRun.class, new Action<JettyRun>() {
+            public void execute(JettyRun task) {
+                // apply only for automatic jettyRun task
+                if (task.getName().equals(JettyPlugin.JETTY_RUN)) {
+                    final LessCompile lessCompile = project.getTasks().getByName(COMPILE_LESS_TASK_NAME) as LessCompile;
+
+                    // jettyRun should now depend on compileLess
+                    task.dependsOn(lessCompile);
+
+                    // multiple webapp folders hack
+                    task.doFirst {
+                        final JettyPluginWebAppContext context = new GroovyShell(JettyPluginWebAppContext.class.classLoader, new Binding([
+                                'resources': [
+                                        "${task.webAppSourceDirectory.canonicalPath}",
+                                        "${lessCompile.destinationDir.canonicalPath}"
+                                ] as String[]
+                        ])).evaluate(JETTY_HACK) as JettyPluginWebAppContext;
+
+                        task.setWebAppConfig(context);
+                    }
+                }
+            }
+        });
+    }
+
+    private void addCompileLess(final Project project) {
+        final LessCompile lessCompile = project.getTasks().create(COMPILE_LESS_TASK_NAME, LessCompile.class);
+        lessCompile.setDescription("Compile LESS files into CSS files.");
+        lessCompile.setGroup(BasePlugin.BUILD_GROUP);
     }
 }

@@ -12,11 +12,13 @@ public class LessPluginConvention {
     ProjectInternal project
 
     String destinationDirName
+    String destinationName
     String sourceDirName
 
     LessPluginConvention(Project project) {
         this.project = project
-        destinationDirName = 'resources/generatedCss'
+        destinationDirName = 'generatedWebapp'
+        destinationName = 'css'
         sourceDirName = 'src/main/less'
     }
 
@@ -27,6 +29,10 @@ public class LessPluginConvention {
      */
     File getDestinationDir() {
         project.fileResolver.withBaseDir(project.buildDir).resolve(destinationDirName)
+    }
+
+    String getDestination() {
+        return destinationName;
     }
 
     /**

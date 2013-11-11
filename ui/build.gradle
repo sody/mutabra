@@ -43,8 +43,8 @@ task processConfig(type: Copy) {
 }
 
 compileLess {
+    destination 'mutabra/css'
     compress !isSnapshot
-    destination 'src/main/webapp/mutabra/css'
 }
 
 classes {
@@ -58,8 +58,6 @@ war {
 }
 
 jettyRun {
-    dependsOn compileLess
-
     scanIntervalSeconds 2
     contextPath '/'
 }
