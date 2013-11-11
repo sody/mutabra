@@ -20,3 +20,4 @@ gradle.properties
 # Project Modules
 /ui/
 /domain/
+/buildSrc/
