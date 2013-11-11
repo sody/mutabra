@@ -10,9 +10,11 @@ import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.BasePlugin
+import org.gradle.api.plugins.WarPlugin
 import org.gradle.api.plugins.jetty.JettyPlugin
 import org.gradle.api.plugins.jetty.JettyRun
 import org.gradle.api.plugins.jetty.internal.JettyPluginWebAppContext
+import org.gradle.api.tasks.bundling.War
 
 /**
  * @author Ivan Khalopik
@@ -52,6 +54,8 @@ return new JettyPluginWebAppContextExt(resources);
         configureLessDefaults(project, convention);
         // configure all existent jetty tasks
         configureJettyDefaults(project);
+        // configure all existent war tasks
+        configureWarDefaults(project);
 
         // add compileLess task
         addCompileLess(project);
@@ -59,8 +63,8 @@ return new JettyPluginWebAppContextExt(resources);
 
     private void configureLessDefaults(final Project project, final LessPluginConvention pluginConvention) {
         project.getTasks().withType(LessCompile.class, new Action<LessCompile>() {
-            public void execute(LessCompile task) {
-                task.destinationDir(pluginConvention.getDestination());
+            public void execute(final LessCompile task) {
+                task.destinationDir(pluginConvention.getDestinationDir());
                 task.destination(pluginConvention.getDestination());
                 task.source(pluginConvention.getSourceDir().files as File[]);
             }
@@ -69,7 +73,7 @@ return new JettyPluginWebAppContextExt(resources);
 
     private void configureJettyDefaults(final Project project) {
         project.getTasks().withType(JettyRun.class, new Action<JettyRun>() {
-            public void execute(JettyRun task) {
+            public void execute(final JettyRun task) {
                 // apply only for automatic jettyRun task
                 if (task.getName().equals(JettyPlugin.JETTY_RUN)) {
                     final LessCompile lessCompile = project.getTasks().getByName(COMPILE_LESS_TASK_NAME) as LessCompile;
@@ -88,6 +92,23 @@ return new JettyPluginWebAppContextExt(resources);
 
                         task.setWebAppConfig(context);
                     }
+                }
+            }
+        });
+    }
+
+    private void configureWarDefaults(final Project project) {
+        project.getTasks().withType(War.class, new Action<War>() {
+            public void execute(final War task) {
+                // apply only for automatic jettyRun task
+                if (task.getName().equals(WarPlugin.WAR_TASK_NAME)) {
+                    final LessCompile lessCompile = project.getTasks().getByName(COMPILE_LESS_TASK_NAME) as LessCompile;
+
+                    // jettyRun should now depend on compileLess
+                    task.dependsOn(lessCompile);
+
+                    // multiple webapp folders
+                    task.from(lessCompile.getDestinationDir());
                 }
             }
         });

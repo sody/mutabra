@@ -42,18 +42,16 @@ task processConfig(type: Copy) {
     include 'mail.properties', 'logback.xml'
 }
 
+classes {
+    dependsOn processConfig
+}
+
 compileLess {
     destination 'mutabra/css'
     compress !isSnapshot
 }
 
-classes {
-    dependsOn processConfig
-}
-
 war {
-    dependsOn compileLess
-
     webXml file("${generateConfig.destinationDir}/web.xml")
 }
 
