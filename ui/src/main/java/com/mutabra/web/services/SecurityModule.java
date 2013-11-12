@@ -6,17 +6,38 @@
 package com.mutabra.web.services;
 
 import com.mutabra.domain.battle.Battle;
-import com.mutabra.domain.game.*;
-import com.mutabra.security.*;
+import com.mutabra.domain.game.Account;
+import com.mutabra.domain.game.AccountCredential;
+import com.mutabra.domain.game.AccountCredentialType;
+import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.Role;
+import com.mutabra.security.Facebook;
+import com.mutabra.security.Google;
+import com.mutabra.security.OAuthProvider;
+import com.mutabra.security.Twitter;
+import com.mutabra.security.VKontakte;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.SecurityConstants;
-import com.mutabra.web.internal.security.*;
-import com.mutabra.web.pages.Security;
+import com.mutabra.web.internal.security.ConfirmationRealm;
+import com.mutabra.web.internal.security.HashedPasswordMatcher;
+import com.mutabra.web.internal.security.MainRealm;
+import com.mutabra.web.internal.security.OAuthRealm;
+import com.mutabra.web.internal.security.OAuthSourceImpl;
+import com.mutabra.web.internal.security.SecurityExceptionHandler;
+import com.mutabra.web.internal.security.SecurityFilter;
+import com.mutabra.web.internal.security.SecurityRequestFilter;
+import com.mutabra.web.internal.security.SecurityWorker;
 import com.mutabra.web.pages.auth.OAuth;
+import com.mutabra.web.pages.auth.SignInAuth;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.*;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.crypto.hash.Hash;
@@ -31,11 +52,25 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.annotations.*;
+import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Decorate;
+import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.apache.tapestry5.ioc.annotations.Scope;
+import org.apache.tapestry5.ioc.annotations.Startup;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.model.MutableComponentModel;
-import org.apache.tapestry5.services.*;
+import org.apache.tapestry5.services.ApplicationGlobals;
+import org.apache.tapestry5.services.ComponentClassResolver;
+import org.apache.tapestry5.services.ComponentRequestFilter;
+import org.apache.tapestry5.services.ComponentRequestHandler;
+import org.apache.tapestry5.services.HttpServletRequestFilter;
+import org.apache.tapestry5.services.HttpServletRequestHandler;
+import org.apache.tapestry5.services.MetaDataLocator;
+import org.apache.tapestry5.services.PageRenderLinkSource;
+import org.apache.tapestry5.services.RequestExceptionHandler;
+import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.meta.FixedExtractor;
 import org.apache.tapestry5.services.meta.MetaDataExtractor;
 import org.apache.tapestry5.services.meta.MetaWorker;
@@ -217,7 +252,7 @@ public class SecurityModule {
                                                                    final PageRenderLinkSource linkSource,
                                                                    final ComponentClassResolver resolver) {
 
-        final String loginPage = resolver.resolvePageClassNameToPageName(Security.class.getName());
+        final String loginPage = resolver.resolvePageClassNameToPageName(SignInAuth.class.getName());
         return new SecurityExceptionHandler(handler, globals, linkSource, loginPage);
     }
 

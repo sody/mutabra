@@ -25,7 +25,7 @@ public class CSSConstants {
     public static final String ALERT = "alert";
     public static final String ALERT_BLOCK = "alert-block";
     public static final String ALERT_SUCCESS = "alert-success";
-    public static final String ALERT_ERROR = "alert-error";
+    public static final String ALERT_ERROR = "alert-danger";
     public static final String ALERT_INFO = "alert-info";
 
     public static final String MODAL = "modal";
