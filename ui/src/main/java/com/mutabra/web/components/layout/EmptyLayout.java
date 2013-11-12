@@ -20,21 +20,14 @@ import org.apache.tapestry5.services.BindingSource;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 @Import(stack = "mutabra")
 @SupportsInformalParameters
 public class EmptyLayout extends AbstractComponent {
-    private static final String PAGE_TITLE_PROPERTY = "title";
-    private static final String PAGE_SUBTITLE_PROPERTY = "subtitle";
 
     @Property
     @Parameter(defaultPrefix = BindingConstants.LITERAL)
     private String title;
-
-    @Property
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private String subtitle;
 
     @Property
     @Inject
@@ -55,10 +48,10 @@ public class EmptyLayout extends AbstractComponent {
     private BindingSource bindingSource;
 
     Binding defaultTitle() {
-        return bindingSource.newBinding("Page title", getResources().getContainerResources(), BindingConstants.PROP, PAGE_TITLE_PROPERTY);
+        return pageProperty("title");
     }
 
-    Binding defaultSubtitle() {
-        return bindingSource.newBinding("Page subtitle", getResources().getContainerResources(), BindingConstants.PROP, PAGE_SUBTITLE_PROPERTY);
+    protected Binding pageProperty(final String property) {
+        return bindingSource.newBinding("Page " + property, getResources().getPage().getComponentResources(), BindingConstants.PROP, property);
     }
 }

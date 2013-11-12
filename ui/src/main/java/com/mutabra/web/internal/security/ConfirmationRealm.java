@@ -10,7 +10,14 @@ import com.mutabra.domain.game.AccountCredential;
 import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.AccountPendingToken;
 import com.mutabra.services.BaseEntityService;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AccountException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.ExpiredCredentialsException;
+import org.apache.shiro.authc.HostAuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.bson.types.ObjectId;
@@ -123,13 +130,15 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
         return userId != null ? accountService.get(userId) : null;
     }
 
-    public static class Token implements AuthenticationToken {
+    public static class Token implements HostAuthenticationToken {
         private final ObjectId userId;
         private final String token;
+        private final String host;
 
-        public Token(final ObjectId userId, final String token) {
+        public Token(final ObjectId userId, final String token, final String host) {
             this.userId = userId;
             this.token = token;
+            this.host = host;
         }
 
         public ObjectId getPrincipal() {
@@ -138,6 +147,11 @@ public class ConfirmationRealm extends AuthenticatingRealm implements Credential
 
         public String getCredentials() {
             return token;
+        }
+
+        @Override
+        public String getHost() {
+            return host;
         }
     }
 }

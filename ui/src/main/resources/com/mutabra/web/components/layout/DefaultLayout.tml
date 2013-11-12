@@ -7,7 +7,7 @@
     <t:replace id="content-area">
         <section id="content" class="wrapper">
             <div class="page-header">
-                <h1>${title} <t:if test="subtitle"><small>${subtitle}</small></t:if></h1>
+                <h1>${header}<t:if test="headerNote"> <small>${headerNote}</small></t:if></h1>
             </div>
             <t:body/>
         </section>

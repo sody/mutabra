@@ -54,7 +54,7 @@ public class GameBattle extends AbstractPage {
     private BattleAbility ability;
 
     @Override
-    public String getSubtitle() {
+    public String getHeaderNote() {
         return format("subtitle", label("round"), battle.getRound());
     }
 
