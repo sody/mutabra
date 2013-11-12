@@ -13,7 +13,12 @@ import com.mutabra.security.OAuthProvider;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.services.OAuthSource;
 import com.mutabra.web.services.PasswordGenerator;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AccountException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.HostAuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.realm.AuthenticatingRealm;
@@ -161,20 +166,23 @@ public class OAuthRealm extends AuthenticatingRealm {
     /**
      * @author Ivan Khalopik
      */
-    public static class Token implements AuthenticationToken {
+    public static class Token implements HostAuthenticationToken {
         private final AccountCredentialType type;
         private final String token;
         private final String secret;
         private final String error;
+        private final String host;
 
         public Token(final AccountCredentialType type,
                      final String token,
                      final String secret,
-                     final String error) {
+                     final String error,
+                     final String host) {
             this.type = type;
             this.token = token;
             this.secret = secret;
             this.error = error;
+            this.host = host;
         }
 
         public AccountCredentialType getType() {
@@ -191,6 +199,11 @@ public class OAuthRealm extends AuthenticatingRealm {
 
         public String getError() {
             return error;
+        }
+
+        @Override
+        public String getHost() {
+            return host;
         }
     }
 }

@@ -13,9 +13,7 @@ import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.Response;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -26,18 +24,12 @@ public class OAuth extends AbstractAuthPage {
     @Inject
     private Request request;
 
-    @Inject
-    private Response response;
-
-    @Inject
-    private HttpServletRequest servletRequest;
-
     @OnEvent(value = EventConstants.ACTIVATE)
     Object authenticate(final AccountCredentialType type) throws IOException {
         if (type != null) {
             switch (type) {
                 case TWITTER:
-                    return oauth(type, "oauth_token", "oauth_token", "denied");
+                    return oauth(type, "oauth_token", "oauth_verifier", "denied");
                 case FACEBOOK:
                 case GOOGLE:
                 case VK:
@@ -63,7 +55,8 @@ public class OAuth extends AbstractAuthPage {
         final String token = request.getParameter(tokenParameter);
         final String secret = request.getParameter(secretParameter);
         final String error = request.getParameter(errorParameter);
-        getSubject().login(new OAuthRealm.Token(type, token, secret, error));
+        final String remoteHost = request.getRemoteHost();
+        getSubject().login(new OAuthRealm.Token(type, token, secret, error, remoteHost));
 
         return authenticated();
     }
