@@ -6,6 +6,7 @@
 package com.mutabra.web.pages.auth;
 
 import com.mutabra.web.base.pages.AbstractAuthPage;
+import com.mutabra.web.internal.annotations.AuthMenuItem;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -18,9 +19,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mutabra.web.internal.annotations.AuthMenuItemName.SIGN_IN;
+
 /**
  * @author Ivan Khalopik
  */
+@AuthMenuItem(SIGN_IN)
 public class SignInAuth extends AbstractAuthPage {
 
     @Property

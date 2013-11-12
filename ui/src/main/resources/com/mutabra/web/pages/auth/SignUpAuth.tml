@@ -1,49 +1,30 @@
-<html t:type="layout/empty"
+<html t:type="layout/auth"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-<div class="span6 offset3">
-    <section id="content" class="wrapper-sm col-sm-9 col-md-7 col-lg-6">
-        <ul class="nav nav-pills">
-            <li>
-                <t:pagelink page="auth/signin">${message:tab.sign-in}</t:pagelink>
-            </li>
-            <li class="active">
-                <t:pagelink page="auth/signup">${message:tab.sign-up}</t:pagelink>
-            </li>
-            <li>
-                <t:pagelink page="auth/restore">${message:tab.restore}</t:pagelink>
-            </li>
-        </ul>
-        <hr/>
+<t:form t:id="signUpForm" class="form-horizontal">
+    <fieldset>
+        <t:form.errors/>
 
-        <div class="pill-content">
-            <t:form t:id="signUpForm" class="form-horizontal">
-                <fieldset>
-                    <t:form.errors/>
-
-                    <div class="form-group">
-                        <t:label for="email" class="control-label col-sm-4"/>
-                        <div class="col-sm-6">
-                            <t:textfield t:id="email" class="form-control"
-                                         label="message:label.email"
-                                         placeholder="message:label.email"
-                                         value="email"
-                                         validate="required,email"
-                                    />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-6 col-sm-offset-4">
-                            <t:menu.oauthmenu>
-                                <t:linksubmit class="btn btn-default">${message:button.sign-up}</t:linksubmit>
-                            </t:menu.oauthmenu>
-                        </div>
-                    </div>
-                </fieldset>
-            </t:form>
+        <div class="form-group">
+            <t:label for="email" class="control-label col-sm-4"/>
+            <div class="col-sm-6">
+                <t:textfield t:id="email" class="form-control"
+                             label="message:label.email"
+                             placeholder="message:label.email"
+                             value="email"
+                             validate="required,email"
+                        />
+            </div>
         </div>
-    </section>
-</div>
+
+        <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-4">
+                <t:menu.oauthmenu>
+                    <t:linksubmit class="btn btn-default">${message:button.sign-up}</t:linksubmit>
+                </t:menu.oauthmenu>
+            </div>
+        </div>
+    </fieldset>
+</t:form>
 
 </html>
