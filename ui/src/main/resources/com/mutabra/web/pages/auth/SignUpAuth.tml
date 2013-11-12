@@ -3,27 +3,22 @@
 
 <t:form t:id="signUpForm" class="form-horizontal">
     <fieldset>
-        <t:form.errors/>
+        <t:form.formerrors/>
 
-        <div class="form-group">
-            <t:label for="email" class="control-label col-sm-4"/>
-            <div class="col-sm-6">
-                <t:textfield t:id="email" class="form-control"
-                             label="message:label.email"
-                             placeholder="message:label.email"
-                             value="email"
-                             validate="required,email"
-                        />
-            </div>
-        </div>
+        <t:form.formrow for="email" labelClass="col-sm-4" fieldClass="col-sm-6">
+            <t:textfield t:id="email" class="form-control"
+                         label="message:label.email"
+                         placeholder="message:label.email"
+                         value="email"
+                         validate="required,email"
+                    />
+        </t:form.formrow>
 
-        <div class="form-group">
-            <div class="col-sm-6 col-sm-offset-4">
-                <t:menu.oauthmenu>
-                    <t:linksubmit class="btn btn-default">${message:button.sign-up}</t:linksubmit>
-                </t:menu.oauthmenu>
-            </div>
-        </div>
+        <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+            <t:menu.oauthmenu t:id="oauth">
+                <t:linksubmit class="btn btn-default">${message:button.sign-up}</t:linksubmit>
+            </t:menu.oauthmenu>
+        </t:form.formrow>
     </fieldset>
 </t:form>
 

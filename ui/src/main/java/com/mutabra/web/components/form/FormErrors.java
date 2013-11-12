@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @author Ivan Khalopik
  */
-public class Errors {
+public class FormErrors {
 
     @Parameter
     private List<String> errors;

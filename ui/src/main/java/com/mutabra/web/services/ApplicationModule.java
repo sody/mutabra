@@ -14,13 +14,14 @@ import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
-import com.mutabra.web.internal.NamingObjectProvider;
 import com.mutabra.web.internal.annotations.AuthMenuItem;
+import org.apache.tapestry5.BaseValidationDecorator;
 import org.apache.tapestry5.ComponentParameterConstants;
+import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.ValidationDecorator;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.ObjectProvider;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
@@ -30,11 +31,12 @@ import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.Coercion;
 import org.apache.tapestry5.ioc.services.CoercionTuple;
-import org.apache.tapestry5.ioc.services.MasterObjectProvider;
+import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.model.MutableComponentModel;
 import org.apache.tapestry5.services.MetaDataLocator;
+import org.apache.tapestry5.services.ValidationDecoratorFactory;
 import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.services.ValueEncoderSource;
 import org.apache.tapestry5.services.javascript.ExtensibleJavaScriptStack;
@@ -72,9 +74,15 @@ public class ApplicationModule {
         binder.bind(ImageSource.class, ImageSourceImpl.class);
     }
 
-    @Contribute(MasterObjectProvider.class)
-    public void contributeMasterObjectProvider(final OrderedConfiguration<ObjectProvider> configuration) {
-        configuration.add("NamingObjectProvider", new NamingObjectProvider());
+    @Contribute(ServiceOverride.class)
+    public void contributeServiceOverrides(final MappedConfiguration<Class, Object> configuration) {
+        // disable default validation decorator
+        configuration.add(ValidationDecoratorFactory.class, new ValidationDecoratorFactory() {
+            @Override
+            public ValidationDecorator newInstance(final MarkupWriter writer) {
+                return new BaseValidationDecorator();
+            }
+        });
     }
 
     @Contribute(TypeCoercer.class)
