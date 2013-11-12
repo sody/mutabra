@@ -5,11 +5,21 @@
 
 package com.mutabra.web.services;
 
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
-import com.mongodb.MongoURI;
-import com.mutabra.domain.battle.*;
-import com.mutabra.domain.common.*;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleAbility;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.BattleTarget;
+import com.mutabra.domain.common.Ability;
+import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.Effect;
+import com.mutabra.domain.common.Face;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroAppearance;
@@ -21,6 +31,8 @@ import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 
 import java.net.UnknownHostException;
 import java.util.Collection;
@@ -58,15 +70,20 @@ public class DomainModule {
         configuration.add(BattleTarget.class);
     }
 
-    public Datastore buildDatastore(final Collection<Class> mappedClasses,
-                                    @Symbol(ApplicationConstants.MONGO_URI) final String mongoUri) throws UnknownHostException {
-        final MongoURI uri = new MongoURI(mongoUri);
+    public MongoClient buildMongoClient(@Symbol(ApplicationConstants.MONGO_URI) final String mongoUri) throws UnknownHostException {
+        final MongoClientURI uri = new MongoClientURI(mongoUri);
+        return new MongoClient(uri);
+    }
 
+    public Datastore buildDatastore(final Collection<Class> mappedClasses,
+                                    final MongoClient mongoClient,
+                                    @Symbol(ApplicationConstants.MONGO_URI) final String mongoUri) throws UnknownHostException {
         final Morphia morphia = new Morphia();
         for (Class mappedClass : mappedClasses) {
             morphia.map(mappedClass);
         }
 
-        return morphia.createDatastore(uri.connect(), uri.getDatabase(), uri.getUsername(), uri.getPassword());
+        final MongoClientURI uri = new MongoClientURI(mongoUri);
+        return morphia.createDatastore(mongoClient, uri.getDatabase());
     }
 }
