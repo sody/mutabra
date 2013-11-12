@@ -27,6 +27,7 @@ import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.Coercion;
@@ -58,15 +59,20 @@ public class ApplicationModule {
 
     @ApplicationDefaults
     @Contribute(SymbolProvider.class)
-    public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration) {
+    public void contributeApplicationDefaults(final MappedConfiguration<String, String> configuration,
+                                              @Symbol(SymbolConstants.PRODUCTION_MODE)
+                                              final boolean productionMode) {
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru,en");
         configuration.add(SymbolConstants.START_PAGE_NAME, "/");
-        configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
         configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, "false");
         configuration.add(ComponentParameterConstants.ZONE_UPDATE_METHOD, "none");
         configuration.add(ComponentParameterConstants.ZONE_SHOW_METHOD, "none");
 
         configuration.add("mutabra.asset.root", "context:mutabra");
+
+        if (productionMode) {
+            configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
+        }
     }
 
     public static void bind(final ServiceBinder binder) {
