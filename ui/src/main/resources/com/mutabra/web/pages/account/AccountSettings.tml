@@ -5,7 +5,7 @@
 <t:form t:id="changeEmailForm" class="form-horizontal">
     <legend>${message:label.change-email}</legend>
 
-    <t:customerrors/>
+    <t:form.errors/>
 
     <div class="form-group">
         <t:label for="email" class="control-label col-sm-4"/>
@@ -29,7 +29,7 @@
     <t:form t:id="changePasswordForm" class="form-horizontal">
         <legend>${message:label.change-password}</legend>
 
-        <t:customerrors/>
+        <t:form.errors/>
 
         <div class="form-group">
             <t:label for="password" class="control-label col-sm-4"/>

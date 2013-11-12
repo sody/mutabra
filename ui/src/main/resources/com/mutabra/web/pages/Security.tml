@@ -21,7 +21,7 @@
             <div id="pills_signIn" class="pill-pane active">
                 <t:form t:id="signInForm" class="form-horizontal">
                     <fieldset>
-                        <t:customerrors/>
+                        <t:form.errors/>
                         <div class="form-group">
                             <t:label for="email" class="control-label col-sm-4"/>
 
@@ -60,7 +60,7 @@
             <div id="pills_signUp" class="pill-pane">
                 <t:form t:id="signUpForm" class="form-horizontal">
                     <fieldset>
-                        <t:customerrors/>
+                        <t:form.errors/>
                         <div class="form-group">
                             <t:label for="signUpEmail" class="control-label col-sm-4"/>
                             <div class="col-sm-6">
@@ -86,7 +86,7 @@
             <div id="pills_restore" class="pill-pane">
                 <t:form t:id="restoreForm" class="form-horizontal">
                     <fieldset>
-                        <t:customerrors/>
+                        <t:form.errors/>
                         <div class="form-group">
                             <t:label for="restoreEmail" class="control-label col-sm-4"/>
                             <div class="col-sm-6">
