@@ -73,15 +73,6 @@ public class SwitchHero extends AbstractPage {
         final Account account = accountContext.getAccount();
         heroService.enter(account, hero);
 
-        return back();
-    }
-
-    @OnEvent
-    Object cancel() {
-        return back();
-    }
-
-    private Object back() {
         return GameHome.class;
     }
 }

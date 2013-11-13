@@ -57,7 +57,7 @@
 
                         <div class="navbar-btn">
                             <t:menu.oauthmenu>
-                                <t:linksubmit class="btn btn-default">${message:label.sign-in}</t:linksubmit>
+                                <t:linksubmit class="btn btn-default">${message:button.sign-in}</t:linksubmit>
                             </t:menu.oauthmenu>
                         </div>
                     </t:form>

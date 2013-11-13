@@ -51,15 +51,6 @@ public class CreateHero extends AbstractPage {
         // enter the game with just created character
         heroService.enter(account, hero);
 
-        return back();
-    }
-
-    @OnEvent
-    Object cancel(final String source) {
-        return back();
-    }
-
-    private Object back() {
         return GameHome.class;
     }
 }

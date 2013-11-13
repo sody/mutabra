@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-sm-6">
-        ${message:content-text}
+        ${message:text.content-text}
     </div>
 </div>
 

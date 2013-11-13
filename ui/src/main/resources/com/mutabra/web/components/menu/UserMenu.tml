@@ -6,13 +6,13 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <t:pagelink page="account/settings">${message:label.account-settings}</t:pagelink>
+                <t:pagelink page="account/settings">${message:menu.account-settings}</t:pagelink>
             </li>
             <li>
-                <t:pagelink page="game/hero/switch">${message:label.switch-hero}</t:pagelink>
+                <t:pagelink page="game/hero/switch">${message:menu.switch-hero}</t:pagelink>
             </li>
             <li>
-                <t:eventlink event="signOut">${message:label.sign-out}</t:eventlink>
+                <t:eventlink event="signOut">${message:menu.sign-out}</t:eventlink>
             </li>
         </ul>
     </div>

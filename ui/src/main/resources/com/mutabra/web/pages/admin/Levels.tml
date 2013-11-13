@@ -4,7 +4,7 @@
 
 <t:grid source="source" row="row" include="code,rating" add="links" class="table">
     <p:linksCell>
-        <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
+        <t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink>
     </p:linksCell>
 </t:grid>
 

@@ -13,9 +13,9 @@
 </t:loop>
 
 <t:if test="canApplyBattle">
-    <t:eventlink event="create" class="btn btn-default">${message:label.create}</t:eventlink>
+    <t:eventlink event="create" class="btn btn-default">${message:button.create}</t:eventlink>
     <p:else>
-        <t:eventlink event="cancel" class="btn btn-default">${message:label.cancel}</t:eventlink>
+        <t:eventlink event="cancel" class="btn btn-default">${message:button.cancel}</t:eventlink>
         <t:game.updatechecker/>
     </p:else>
 </t:if>

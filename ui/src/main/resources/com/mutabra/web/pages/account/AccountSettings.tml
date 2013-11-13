@@ -2,7 +2,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <t:form t:id="changeEmailForm" class="form-horizontal">
-    <legend>${message:label.change-email}</legend>
+    <legend>${message:section.change-email}</legend>
 
     <t:form.formerrors/>
 
@@ -15,13 +15,13 @@
     </t:form.formrow>
 
     <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
-        <t:linksubmit class="btn btn-default">${message:label.change}</t:linksubmit>
+        <t:linksubmit class="btn btn-default">${message:button.change}</t:linksubmit>
     </t:form.formrow>
 </t:form>
 
 <t:if test="hasEmail">
     <t:form t:id="changePasswordForm" class="form-horizontal">
-        <legend>${message:label.change-password}</legend>
+        <legend>${message:section.change-password}</legend>
 
         <t:form.formerrors/>
 
@@ -34,13 +34,13 @@
         </t:form.formrow>
 
         <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
-            <t:linksubmit class="btn btn-default">${message:label.change}</t:linksubmit>
+            <t:linksubmit class="btn btn-default">${message:button.change}</t:linksubmit>
         </t:form.formrow>
     </t:form>
 </t:if>
 
 <t:form t:id="accountForm" class="form-horizontal">
-    <legend>${message:label.change-profile}</legend>
+    <legend>${message:section.change-profile}</legend>
 
     <t:form.formerrors/>
 
@@ -59,7 +59,7 @@
     </t:form.formrow>
 
     <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
-        <t:linksubmit class="btn btn-default">${message:label.save}</t:linksubmit>
+        <t:linksubmit class="btn btn-default">${message:button.save}</t:linksubmit>
     </t:form.formrow>
 </t:form>
 

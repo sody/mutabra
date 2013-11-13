@@ -2,20 +2,20 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <t:form class="form-horizontal">
-    <div class="form-group">
-        <div class="col-sm-6 col-sm-offset-4">
-            <t:carousel source="source" row="row" value="hero" class="span4">
-                <t:svg type="faces" image="row.appearance.face" width="100" height="100" style="margin:auto; display:block;"/>
-            </t:carousel>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-6 col-sm-offset-4">
-            <t:submit value="message:label.enter" class="btn btn-default"/>
 
-            <t:pagelink page="game/hero/create" class="btn btn-default">${message:label.create}</t:pagelink>
-        </div>
-    </div>
+    <t:form.formerrors/>
+
+    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+        <t:carousel source="source" row="row" value="hero" class="span4">
+            <t:svg type="faces" image="row.appearance.face" width="100" height="100" style="margin:auto; display:block;"/>
+        </t:carousel>
+    </t:form.formrow>
+
+    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+        <t:submit value="message:button.enter" class="btn btn-default"/>
+
+        <t:pagelink page="game/hero/createhero" class="btn btn-default">${message:button.create}</t:pagelink>
+    </t:form.formrow>
 </t:form>
 
 </html>

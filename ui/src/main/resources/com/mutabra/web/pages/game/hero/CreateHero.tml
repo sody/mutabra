@@ -3,35 +3,31 @@
         >
 
 <t:form class="form-horizontal">
-    <div class="form-group">
-        <div class="col-sm-6 col-sm-offset-4">
-            <t:game.raceselect value="race"/>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-sm-6 col-sm-offset-4">
-            <t:game.faceselect value="face"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <t:label for="name" class="control-label col-sm-4"/>
-        <div class="col-sm-6">
-            <t:textfield t:id="name" class="form-control"
-                         label="message:label.name"
-                         value="name"
-                         validate="required"
-                    />
-        </div>
-    </div>
+    <t:form.formerrors/>
 
-    <div class="form-group">
-        <div class="col-sm-6 col-sm-offset-4">
-            <t:submit value="message:label.create" class="btn btn-default"/>
+    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+        <t:game.raceselect value="race"/>
+    </t:form.formrow>
 
-            <t:actionlink context="literal:cancel" class="btn btn-default">${message:label.cancel}</t:actionlink>
-        </div>
-    </div>
+    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+        <t:game.faceselect value="face"/>
+    </t:form.formrow>
+
+    <t:form.formrow for="name" labelClass="control-label col-sm-4" fieldClass="col-sm-6">
+        <t:textfield t:id="name" class="form-control"
+                     label="message:label.name"
+                     value="name"
+                     validate="required"
+                />
+    </t:form.formrow>
+
+    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+        <t:submit value="message:button.create" class="btn btn-default"/>
+
+        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
+    </t:form.formrow>
+
 </t:form>
 
 </html>

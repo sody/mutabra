@@ -11,7 +11,7 @@
         <t:svg type="faces" image="row.code"/>
     </p:pictureCell>
     <p:linksCell>
-        <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink>
+        <t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink>
     </p:linksCell>
 </t:grid>
 

@@ -3,17 +3,17 @@
     <div class="btn-group">
         <t:body/>
 
-        <t:security.oauthconnect t:id="facebook" credentialType="literal:facebook" scope="email" class="btn btn-default" title="message:label.facebook">
+        <t:security.oauthconnect t:id="facebook" credentialType="literal:facebook" scope="email" class="btn btn-default" title="message:menu.facebook">
             <i class="glyphicon glyphicon-home"/>
         </t:security.oauthconnect>
-        <t:security.oauthconnect t:id="twitter" credentialType="literal:twitter" class="btn btn-default" title="message:label.twitter">
+        <t:security.oauthconnect t:id="twitter" credentialType="literal:twitter" class="btn btn-default" title="message:menu.twitter">
             <i class="glyphicon glyphicon-map-marker"/>
         </t:security.oauthconnect>
-        <t:security.oauthconnect t:id="google" credentialType="literal:google" class="btn btn-default" title="message:label.google"
+        <t:security.oauthconnect t:id="google" credentialType="literal:google" class="btn btn-default" title="message:menu.google"
                                 scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email">
             <i class="glyphicon glyphicon-certificate"/>
         </t:security.oauthconnect>
-        <t:security.oauthconnect t:id="vk" credentialType="literal:vk" class="btn btn-default" title="message:label.vk">
+        <t:security.oauthconnect t:id="vk" credentialType="literal:vk" class="btn btn-default" title="message:menu.vk">
             <i class="glyphicon glyphicon-globe"/>
         </t:security.oauthconnect>
     </div>

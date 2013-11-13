@@ -2,14 +2,14 @@
 
     <div id="${clientId}" class="description">
         <div class="description-title">
-            <h4>${message:label.skip-turn}</h4>
+            <h4>${message:card.skip-turn.name}</h4>
         </div>
 
         <div class="description-body">
             <t:svg type="cards" image="literal:skip-turn" width="140" height="140"/>
         </div>
 
-        <p>${message:message.skip-turn}</p>
+        <p>${message:card.skip-turn.description}</p>
     </div>
 
 </t:container>

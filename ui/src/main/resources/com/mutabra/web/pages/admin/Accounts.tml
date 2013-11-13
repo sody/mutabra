@@ -4,12 +4,12 @@
 
 <t:grid source="source" row="row" include="name,lastLogin,registered" add="links" class="table">
     <p:linksCell>
-        <t:eventlink event="edit" zone="entityDialog" context="row">${message:label.edit}</t:eventlink> |
-        <t:eventlink event="delete" context="row">${message:label.delete}</t:eventlink>
+        <t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink> |
+        <t:eventlink event="delete" context="row">${message:button.delete}</t:eventlink>
     </p:linksCell>
 </t:grid>
 
-<t:eventlink event="add" zone="entityDialog" class="btn btn-default">${message:label.add}</t:eventlink>
+<t:eventlink event="add" zone="entityDialog" class="btn btn-default">${message:button.add}</t:eventlink>
 
 <t:admin.accountDialog t:id="entityDialog"/>
 
