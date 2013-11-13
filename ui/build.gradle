@@ -59,3 +59,12 @@ jettyRun {
     scanIntervalSeconds 2
     contextPath '/'
 }
+
+task generatePrototype(type: Sync) {
+    dependsOn compileLess
+
+    into "${buildDir}/prototype"
+    from 'src/main/webapp'
+    from compileLess.destinationDir
+    from 'src/prototype'
+}
