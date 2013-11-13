@@ -18,10 +18,9 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
-import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.PageRenderLinkSource;
@@ -37,12 +36,6 @@ public class AccountSettings extends AbstractPage {
 
     @Property
     private String password;
-
-    @InjectComponent
-    private Form changePasswordForm;
-
-    @InjectComponent
-    private Form changeEmailForm;
 
     @Inject
     private AccountContext accountContext;
@@ -74,14 +67,14 @@ public class AccountSettings extends AbstractPage {
     }
 
     @OnEvent(value = EventConstants.VALIDATE, component = "changeEmailForm")
-    void validateChangeEmailForm() {
+    void validateChangeEmailForm() throws ValidationException {
         final Account account = getValue();
         if (account == null) {
             // user is not authenticated(impossible)
-            changeEmailForm.recordError(message("error.change-email.unknown"));
+            throw new ValidationException(message("error.change-email.unknown"));
         } else if (account.getPendingToken() != null && !account.getPendingToken().isExpired()) {
             // user already has pending changes
-            changeEmailForm.recordError(message("error.change-email.try-again-later"));
+            throw new ValidationException(message("error.change-email.try-again-later"));
         } else {
             final long count = accountService.query()
                     .filter("credentials.type =", AccountCredentialType.EMAIL)
@@ -89,7 +82,7 @@ public class AccountSettings extends AbstractPage {
                     .countAll();
             if (count > 0) {
                 // user with specified email is already exist
-                changeEmailForm.recordError(message("error.change-email.unknown"));
+                throw new ValidationException(message("error.change-email.unknown"));
             }
         }
     }
@@ -167,17 +160,17 @@ public class AccountSettings extends AbstractPage {
     }
 
     @OnEvent(value = EventConstants.VALIDATE, component = "changePasswordForm")
-    void validateChangePasswordForm() {
+    void validateChangePasswordForm() throws ValidationException {
         final Account account = getValue();
         if (account == null) {
             // user is not authenticated(impossible)
-            changePasswordForm.recordError(message("error.change-password.unknown"));
+            throw new ValidationException(message("error.change-password.unknown"));
         } else if (account.getPendingToken() != null && !account.getPendingToken().isExpired()) {
             // user already has pending changes
-            changePasswordForm.recordError(message("error.change-password.try-again-later"));
+            throw new ValidationException(message("error.change-password.try-again-later"));
         } else if (account.getCredentials(AccountCredentialType.EMAIL) == null) {
             // can not change password when user email is not defined(impossible)
-            changePasswordForm.recordError(message("error.change-password.empty-email"));
+            throw new ValidationException(message("error.change-password.empty-email"));
         }
     }
 
