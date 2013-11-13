@@ -15,11 +15,13 @@ import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
 import com.mutabra.web.internal.annotations.AuthMenuItem;
+import com.mutabra.web.internal.hack.EffectiveDocumentLinker;
 import org.apache.tapestry5.BaseValidationDecorator;
 import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ValidationDecorator;
+import org.apache.tapestry5.internal.services.DocumentLinker;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
@@ -36,6 +38,9 @@ import org.apache.tapestry5.ioc.services.ServiceOverride;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.model.MutableComponentModel;
+import org.apache.tapestry5.services.Environment;
+import org.apache.tapestry5.services.MarkupRenderer;
+import org.apache.tapestry5.services.MarkupRendererFilter;
 import org.apache.tapestry5.services.MetaDataLocator;
 import org.apache.tapestry5.services.ValidationDecoratorFactory;
 import org.apache.tapestry5.services.ValueEncoderFactory;
@@ -177,5 +182,30 @@ public class ApplicationModule {
     @Contribute(MetaDataLocator.class)
     public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
         configuration.add("menu.item", "");
+    }
+
+    @Contribute(MarkupRenderer.class)
+    public void contributeMarkupRenderer(final OrderedConfiguration<MarkupRendererFilter> configuration,
+                                         final Environment environment,
+
+                                         @Symbol(SymbolConstants.OMIT_GENERATOR_META)
+                                         final boolean omitGeneratorMeta,
+
+                                         @Symbol(SymbolConstants.TAPESTRY_VERSION)
+                                         final String tapestryVersion,
+
+                                         @Symbol(SymbolConstants.COMPACT_JSON)
+                                         final boolean compactJSON) {
+        configuration.override("DocumentLinker", new MarkupRendererFilter() {
+            public void renderMarkup(MarkupWriter writer, MarkupRenderer renderer) {
+                final EffectiveDocumentLinker linker = new EffectiveDocumentLinker(omitGeneratorMeta, tapestryVersion, compactJSON);
+
+                environment.push(DocumentLinker.class, linker);
+                renderer.renderMarkup(writer);
+                environment.pop(DocumentLinker.class);
+
+                linker.updateDocument(writer.getDocument());
+            }
+        });
     }
 }
