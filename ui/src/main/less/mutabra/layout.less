@@ -15,6 +15,7 @@ body {
   margin: 0;
 }
 
+// Default page layout
 .page {
   min-height: 100%;
   margin-bottom: -@page-footer-height;
@@ -30,14 +31,26 @@ body {
     border-radius: @grid-gutter-width;
   }
 
-  .wrapper-sm {
-    .wrapper();
-    .center-block();
-    margin-top: 20%;
+  + footer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+}
+
+// Auth page layout
+.page-sm {
+  position: relative;
+  margin-top: -(floor(@page-small-height / 2));
+  top: 50%;
+
+  .wrapper {
+    .page > .wrapper();
+    margin: auto;
     float: none;
   }
 
-  + footer {
+  footer {
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;

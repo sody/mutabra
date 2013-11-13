@@ -28,7 +28,7 @@
                     />
         </t:form.formrow>
 
-        <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+        <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
             <t:menu.oauthmenu t:id="oauth">
                 <t:linksubmit class="btn btn-default">${message:button.sign-in}</t:linksubmit>
             </t:menu.oauthmenu>
