@@ -23,99 +23,100 @@
 <body>
 
 <div id="page" class="page-sm container">
-    <section id="content" class="wrapper col-sm-9 col-md-7 col-lg-6" rel="main">
-        <ul class="nav nav-pills">
-            <li class="active"><a data-toggle="pill" href="#pills_signIn">Sign In</a></li>
-            <li><a data-toggle="pill" href="#pills_signUp">Sign Up</a></li>
-            <li><a data-toggle="pill" href="#pills_restore">Restore</a></li>
-        </ul>
-        <hr/>
+    <div class="viewport col-sm-9 col-md-7 col-lg-6">
+        <section id="content" class="wrapper" rel="main">
+            <ul class="nav nav-pills">
+                <li class="active"><a data-toggle="pill" href="#pills_signIn">Sign In</a></li>
+                <li><a data-toggle="pill" href="#pills_signUp">Sign Up</a></li>
+                <li><a data-toggle="pill" href="#pills_restore">Restore</a></li>
+            </ul>
+            <hr/>
 
-        <div class="pill-content">
-            <div id="pills_signIn" class="pill-pane active">
-                <form class="form-horizontal" action="battle.html" method="post" id="signInForm">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="email" class="control-label col-sm-4">Email</label>
+            <div class="pill-content">
+                <div id="pills_signIn" class="pill-pane active">
+                    <form class="form-horizontal" action="battle.html" method="post" id="signInForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="email" class="control-label col-sm-4 required">Email:</label>
 
-                            <div class="col-sm-6">
-                                <input class="form-control" placeholder="Email" id="email" name="email" type="text"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="control-label col-sm-4">Password</label>
-
-                            <div class="col-sm-6">
-                                <input class="form-control" placeholder="Password" value="" id="password"
-                                       name="password" type="password"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-4">
-                                <div class="btn-group">
-                                    <input type="submit" class="btn btn-default" value="Sign In"/>
-                                    <a title="Facebook" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-home"></i></a>
-                                    <a title="Twitter" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-map-marker"></i></a>
-                                    <a title="Google" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-certificate"></i></a>
-                                    <a title="VKontakte" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-globe"></i></a>
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Email" id="email" name="email" type="text"/>
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div id="pills_signUp" class="pill-pane">
-                <form class="form-horizontal" action="#" method="post" id="signUpForm">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="signUpEmail" class="control-label col-sm-4">Email</label>
+                            <div class="form-group">
+                                <label for="password" class="control-label col-sm-4 required">Password:</label>
 
-                            <div class="col-sm-6">
-                                <input class="form-control" placeholder="Email" id="signUpEmail" name="signUpEmail"
-                                       type="text"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-4">
-                                <div class="btn-group">
-                                    <input type="submit" class="btn btn-default" value="Sign Up"/>
-                                    <a title="Facebook" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-home"></i></a>
-                                    <a title="Twitter" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-map-marker"></i></a>
-                                    <a title="Google" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-certificate"></i></a>
-                                    <a title="VKontakte" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-globe"></i></a>
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Password" value="" id="password"
+                                           name="password" type="password"/>
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div id="pills_restore" class="pill-pane">
-                <form class="form-horizontal" action="#" method="post" id="restoreForm">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="restoreEmail" class="control-label col-sm-4">Email</label>
-
-                            <div class="col-sm-6">
-                                <input class="form-control" placeholder="Email" id="restoreEmail" name="restoreEmail"
-                                       type="text">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <div class="btn-group">
+                                        <input type="submit" class="btn btn-default" value="Sign In"/>
+                                        <a title="Facebook" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-home"></i></a>
+                                        <a title="Twitter" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-map-marker"></i></a>
+                                        <a title="Google" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-certificate"></i></a>
+                                        <a title="VKontakte" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-globe"></i></a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-4">
-                                <input type="submit" class="btn btn-default" value="Restore"/>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="pills_signUp" class="pill-pane">
+                    <form class="form-horizontal" action="#" method="post" id="signUpForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="signUpEmail" class="control-label col-sm-4 required">Email:</label>
 
-    <footer id="footer">
-        Copyright © 2010-2012 Mutabra Team. All rights reserved. <br>
-        App Version: 1.0-SNAPSHOT, Tapestry Version: 5.3.5 <br>
-        <a href="mailto:support@mutabra.com">Contact Us</a>
-    </footer>
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Email" id="signUpEmail" name="signUpEmail"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <div class="btn-group">
+                                        <input type="submit" class="btn btn-default" value="Sign Up"/>
+                                        <a title="Facebook" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-home"></i></a>
+                                        <a title="Twitter" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-map-marker"></i></a>
+                                        <a title="Google" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-certificate"></i></a>
+                                        <a title="VKontakte" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="pills_restore" class="pill-pane">
+                    <form class="form-horizontal" action="#" method="post" id="restoreForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="restoreEmail" class="control-label col-sm-4 required">Email:</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Email" id="restoreEmail" name="restoreEmail"
+                                           type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <input type="submit" class="btn btn-default" value="Restore"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer" class="footer">
+            <div class="col-xs-6 text-left">© 2013 "Mutabra"</div>
+            <div class="col-xs-6 text-right">v1.0-SNAPSHOT</div>
+        </footer>
+    </div>
 </div>
 
 <!-- Le javascript

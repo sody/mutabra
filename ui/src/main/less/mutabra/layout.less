@@ -23,38 +23,37 @@ body {
   .buffer {
     height: @page-footer-height;
   }
-
-  .wrapper {
-    padding: @grid-gutter-width - 1;
-    background-color: @mutabra-foreground;
-    border: 1px solid @mutabra-border;
-    border-radius: @grid-gutter-width;
-  }
-
-  + footer {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
 }
 
 // Auth page layout
 .page-sm {
-  position: relative;
-  margin-top: -(floor(@page-small-height / 2));
-  top: 50%;
+  height: 100%;
+  min-height: @page-height-small;
 
-  .wrapper {
-    .page > .wrapper();
-    margin: auto;
+  .viewport {
+    position: relative;
+    margin-top: -(floor(@page-height-small / 2));
+    top: 50%;
     float: none;
+    .center-block();
   }
+}
 
-  footer {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
+// Page footer
+.footer {
+  padding-top: 2px;
+  padding-bottom: 10px;
+  color: @page-footer-color;
+  text-align: center;
+  .clearfix();
+}
+
+// Content wrapper
+.wrapper {
+  padding: @grid-gutter-width - 1;
+  background-color: @mutabra-foreground;
+  border: 1px solid @mutabra-border;
+  border-radius: @grid-gutter-width;
 }
 
 // Static top navbar styles
