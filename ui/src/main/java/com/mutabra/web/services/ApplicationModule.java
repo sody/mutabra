@@ -79,6 +79,8 @@ public class ApplicationModule {
         if (productionMode) {
             configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
         }
+        configuration.add(ApplicationConstants.GOOGLE_ANALYTICS_DOMAIN, "mutabra.com");
+        configuration.add(ApplicationConstants.GOOGLE_ANALYTICS_ACCOUNT, "UA-23122478-2");
         configuration.add(ApplicationConstants.COPYRIGHT_YEAR, "2013");
     }
 

@@ -41,6 +41,14 @@ public class EmptyLayout extends AbstractComponent {
     private String copyrightYear;
 
     @Inject
+    @Symbol(ApplicationConstants.GOOGLE_ANALYTICS_DOMAIN)
+    private String googleAnalyticsDomain;
+
+    @Inject
+    @Symbol(ApplicationConstants.GOOGLE_ANALYTICS_ACCOUNT)
+    private String googleAnalyticsAccount;
+
+    @Inject
     @Symbol(ApplicationConstants.SUPPORT_EMAIL)
     private String supportEmail;
 
@@ -61,6 +69,14 @@ public class EmptyLayout extends AbstractComponent {
 
     public String getVersionMessage() {
         return format("message.version", applicationVersion, tapestryVersion);
+    }
+
+    public String getGoogleAnalyticsDomain() {
+        return googleAnalyticsDomain;
+    }
+
+    public String getGoogleAnalyticsAccount() {
+        return googleAnalyticsAccount;
     }
 
     public String getSupportEmail() {
