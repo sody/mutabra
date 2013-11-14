@@ -11,6 +11,7 @@ import com.mutabra.domain.battle.BattleAbility;
 import com.mutabra.domain.battle.BattleCard;
 import com.mutabra.domain.battle.BattleCreature;
 import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
@@ -78,6 +79,7 @@ public class ApplicationModule {
         if (productionMode) {
             configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "error");
         }
+        configuration.add(ApplicationConstants.COPYRIGHT_YEAR, "2013");
     }
 
     public static void bind(final ServiceBinder binder) {

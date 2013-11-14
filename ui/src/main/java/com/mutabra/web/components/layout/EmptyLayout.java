@@ -25,21 +25,21 @@ import org.apache.tapestry5.services.BindingSource;
 @SupportsInformalParameters
 public class EmptyLayout extends AbstractComponent {
 
-    @Property
     @Parameter(defaultPrefix = BindingConstants.LITERAL)
     private String title;
 
-    @Property
     @Inject
     @Symbol(SymbolConstants.APPLICATION_VERSION)
     private String applicationVersion;
 
-    @Property
     @Inject
     @Symbol(SymbolConstants.TAPESTRY_VERSION)
     private String tapestryVersion;
 
-    @Property
+    @Inject
+    @Symbol(ApplicationConstants.COPYRIGHT_YEAR)
+    private String copyrightYear;
+
     @Inject
     @Symbol(ApplicationConstants.SUPPORT_EMAIL)
     private String supportEmail;
@@ -49,6 +49,22 @@ public class EmptyLayout extends AbstractComponent {
 
     Binding defaultTitle() {
         return pageProperty("title");
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCopyrightMessage() {
+        return format("message.copyright", copyrightYear);
+    }
+
+    public String getVersionMessage() {
+        return format("message.version", applicationVersion, tapestryVersion);
+    }
+
+    public String getSupportEmail() {
+        return supportEmail;
     }
 
     protected Binding pageProperty(final String property) {

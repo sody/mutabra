@@ -13,8 +13,7 @@
 
         <t:form.formrow for="email" labelClass="col-sm-4" fieldClass="col-sm-6">
             <t:textfield t:id="email" class="form-control"
-                         label="message:label.email"
-                         placeholder="message:label.email"
+                         label="message:label.email" placeholder="message:label.email"
                          value="email"
                          validate="required"
                     />
@@ -22,9 +21,9 @@
 
         <t:form.formrow for="password" labelClass="col-sm-4" fieldClass="col-sm-6">
             <t:passwordfield t:id="password" class="form-control"
-                             label="message:label.password"
-                             placeholder="message:label.password"
+                             label="message:label.password" placeholder="message:label.password"
                              value="password"
+                             validate="required"
                     />
         </t:form.formrow>
 

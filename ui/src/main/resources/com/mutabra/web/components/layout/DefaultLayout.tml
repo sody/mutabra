@@ -1,16 +1,24 @@
 <t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-    <t:replace id="header-area">
-        <t:layout.header/>
-    </t:replace>
-
     <t:replace id="content-area">
-        <section id="content" class="wrapper">
-            <div class="page-header">
-                <h1>${header}<t:if test="headerNote"> <small>${headerNote}</small></t:if></h1>
-            </div>
-            <t:body/>
-        </section>
+        <div id="page" class="page container">
+            <t:layout.header/>
+
+            <section id="content" class="wrapper">
+                <div class="page-header">
+                    <h1>${header}<t:if test="headerNote"> <small>${headerNote}</small></t:if></h1>
+                </div>
+                <t:body/>
+            </section>
+
+            <div class="buffer"></div>
+        </div>
+
+        <footer id="footer" class="footer container">
+            <t:outputraw value="copyrightMessage"/><br/>
+            <t:outputraw value="versionMessage"/><br/>
+            <a href="mailto:${supportEmail}">Contact Us</a>
+        </footer>
     </t:replace>
 
 </t:extend>

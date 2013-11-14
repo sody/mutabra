@@ -16,4 +16,6 @@ public class ApplicationConstants {
 
     public static final String ROBOT_EMAIL = "application.robot-email";
     public static final String ROBOT_PASSWORD = "application.robot-email-secret";
+
+    public static final String COPYRIGHT_YEAR = "application.copyright-year";
 }

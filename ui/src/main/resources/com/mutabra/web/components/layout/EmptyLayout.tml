@@ -3,42 +3,14 @@
 <head>
     <title>${title}</title>
     <meta content="text/html; charset=utf-8;" http-equiv="content-type"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="google-site-verification" content="BDaAf-s_KBDJfS_c4izb6KTU26WHBMo-XlHoIDhnB0E"/>
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-23122478-2']);
-        _gaq.push(['_setDomainName', '.']);
-        _gaq.push(['_trackPageview']);
-        _gaq.push(['_trackPageLoadTime']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
 </head>
 <body>
 
-<div id="page" class="page container">
-    <t:extension-point id="header-area"/>
-
-    <t:extension-point id="content-area">
-        <t:body/>
-    </t:extension-point>
-
-    <div class="buffer"></div>
-</div>
-<footer id="footer" class="container">
-    <t:extension-point id="footer-area">
-        ${message:message.copyright} <br/>
-        App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>
-        <a href="mailto:${supportEmail}">Contact Us</a>
-    </t:extension-point>
-</footer>
+<t:extension-point id="content-area">
+    <t:body/>
+</t:extension-point>
 
 </body>
 </html>

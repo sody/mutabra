@@ -1,34 +1,33 @@
-<!DOCTYPE html>
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-<head>
-    <title>${title}</title>
-    <meta content="text/html; charset=utf-8;" http-equiv="content-type"/>
-    <meta name="google-site-verification" content="BDaAf-s_KBDJfS_c4izb6KTU26WHBMo-XlHoIDhnB0E"/>
-</head>
-<body>
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
-<div id="page" class="page-sm container">
-    <section id="content" class="wrapper col-sm-9 col-md-7 col-lg-6">
-        <ul class="nav nav-pills">
-            <t:loop source="menuItems" value="menuItem" formState="none">
-                <li class="${menuItemCssClass}">
-                    <a href="${menuItemLink}">${menuItemLabel}</a>
-                </li>
-            </t:loop>
-        </ul>
-        <hr/>
+    <t:replace id="content-area">
+        <div id="page" class="page-sm container">
+            <div class="viewport col-sm-9 col-md-7 col-lg-6">
+                <section id="content" class="wrapper">
+                    <ul class="nav nav-pills">
+                        <t:loop source="menuItems" value="menuItem" formState="none">
+                            <li class="${menuItemCssClass}">
+                                <a href="${menuItemLink}">${menuItemLabel}</a>
+                            </li>
+                        </t:loop>
+                    </ul>
+                    <hr/>
 
-        <div class="pill-content">
-            <t:body/>
+                    <div class="pill-content">
+                        <t:body/>
+                    </div>
+                </section>
+
+                <footer id="footer" class="footer">
+                    <div class="col-xs-6 text-left">
+                        <t:outputraw value="copyrightMessage"/><br/>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <t:outputraw value="versionMessage"/><br/>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </section>
+    </t:replace>
 
-    <footer id="footer">
-        ${message:message.copyright} <br/>
-        App Version: ${applicationVersion}, Tapestry Version: ${tapestryVersion} <br/>
-        <a href="mailto:${supportEmail}">Contact Us</a>
-    </footer>
-</div>
-
-</body>
-</html>
+</t:extend>
