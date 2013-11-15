@@ -85,7 +85,7 @@ public class Tabs extends AbstractComponent implements ClientElement {
     }
 
     public String getTabTitle() {
-        return label(tab);
+        return message("label." + tab);
     }
 
     public Block getTabBody() {

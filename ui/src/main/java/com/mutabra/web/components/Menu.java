@@ -52,7 +52,7 @@ public class Menu extends AbstractComponent {
     private Block defaultItemBody;
 
     public String getItemTitle() {
-        return label(item);
+        return message("label." + item);
     }
 
     public Block getItemBody() {

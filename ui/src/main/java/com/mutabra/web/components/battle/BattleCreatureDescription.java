@@ -27,10 +27,10 @@ public class BattleCreatureDescription extends AbstractComponent implements Clie
     }
 
     public String getName() {
-        return label(creature, BattleCreature.NAME);
+        return translate(creature, BattleCreature.NAME);
     }
 
     public String getDescription() {
-        return label(creature, BattleCreature.DESCRIPTION);
+        return translate(creature, BattleCreature.DESCRIPTION);
     }
 }

@@ -49,7 +49,7 @@ public class AuthLayout extends EmptyLayout {
     }
 
     public String getMenuItemLabel() {
-        return label(menuItem);
+        return translate(menuItem);
     }
 
     @SetupRender

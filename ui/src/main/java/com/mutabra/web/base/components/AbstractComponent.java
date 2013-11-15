@@ -65,28 +65,11 @@ public class AbstractComponent {
         return messages.get(key);
     }
 
-    protected String label(final String key) {
-        return messages.get(i18n("label", key));
+    protected String translate(final Translatable translatable) {
+        return messages.get(translatable.getBasename() + '.' + translatable.getCode());
     }
 
-    protected String label(final Translatable translatable) {
-        return messages.get(i18n(translatable.getBasename(), translatable.getCode()));
-    }
-
-    protected String label(final Translatable translatable, final String variant) {
-        return messages.get(i18n(translatable.getBasename(), translatable.getCode(), variant));
-    }
-
-
-    private static String i18n(final String group, final String key) {
-        return group + "." + normalize(key);
-    }
-
-    private static String i18n(final String group, final String key, final String variant) {
-        return group + "." + normalize(key) + "." + variant;
-    }
-
-    private static String normalize(final String key) {
-        return key.replaceAll("([A-Z])", "-$1").toLowerCase();
+    protected String translate(final Translatable translatable, final String variant) {
+        return messages.get(translatable.getBasename() + '.' + translatable.getCode() + '.' + variant);
     }
 }

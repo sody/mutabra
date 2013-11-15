@@ -55,7 +55,7 @@ public class GameBattle extends AbstractPage {
 
     @Override
     public String getHeaderNote() {
-        return format("subtitle", label("round"), battle.getRound());
+        return format("subtitle", message("label.round"), battle.getRound());
     }
 
     public boolean isEnemy() {

@@ -32,11 +32,11 @@ public class BattleAbilityDescription extends AbstractComponent implements Clien
     }
 
     public String getName() {
-        return label(ability, BattleAbility.NAME);
+        return translate(ability, BattleAbility.NAME);
     }
 
     public String getDescription() {
-        return label(ability, BattleAbility.DESCRIPTION);
+        return translate(ability, BattleAbility.DESCRIPTION);
     }
 
     @SetupRender
