@@ -9,6 +9,7 @@ import com.mutabra.domain.Translatable;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.internal.TapestryInternalUtils;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.ValueEncoderSource;
@@ -63,6 +64,10 @@ public class AbstractComponent {
 
     protected String message(final String key) {
         return messages.get(key);
+    }
+
+    protected String message(final Enum<?> value) {
+        return TapestryInternalUtils.getLabelForEnum(messages, value);
     }
 
     protected String translate(final Translatable translatable) {

@@ -9,6 +9,7 @@ import com.mutabra.domain.battle.*;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
@@ -18,12 +19,15 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.RequestParameter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import static com.mutabra.web.internal.annotations.MainMenuItem.HOME;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @RequiresUser
 @RequiresPermissions("game:play")
+@MainMenu(HOME)
 public class GameBattle extends AbstractPage {
 
     @Inject

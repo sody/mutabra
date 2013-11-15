@@ -9,6 +9,7 @@ import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -21,12 +22,15 @@ import org.bson.types.ObjectId;
 
 import java.util.List;
 
+import static com.mutabra.web.internal.annotations.MainMenuItem.HERO;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @RequiresUser
 @RequiresPermissions("game:play")
+@MainMenu(HERO)
 public class SwitchHero extends AbstractPage {
 
     @Inject

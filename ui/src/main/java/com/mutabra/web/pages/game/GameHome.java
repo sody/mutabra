@@ -8,6 +8,7 @@ package com.mutabra.web.pages.game;
 import com.mutabra.domain.battle.Battle;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.pages.game.hero.SwitchHero;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -19,12 +20,15 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 import java.util.List;
 
+import static com.mutabra.web.internal.annotations.MainMenuItem.HOME;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 @RequiresUser
 @RequiresPermissions("game:play")
+@MainMenu(HOME)
 public class GameHome extends AbstractPage {
     private static final int EXPIRATION_TIME = 60000;
 

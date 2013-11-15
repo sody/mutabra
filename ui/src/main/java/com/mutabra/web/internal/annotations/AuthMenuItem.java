@@ -5,19 +5,25 @@
 
 package com.mutabra.web.internal.annotations;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.mutabra.web.pages.auth.RestoreAuth;
+import com.mutabra.web.pages.auth.SignInAuth;
+import com.mutabra.web.pages.auth.SignUpAuth;
 
 /**
  * @author Ivan Khalopik
  */
-@Target(ElementType.TYPE)
-@Inherited
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AuthMenuItem {
+public enum AuthMenuItem implements MenuItem {
+    SIGN_IN(SignInAuth.class),
+    SIGN_UP(SignUpAuth.class),
+    RESTORE(RestoreAuth.class);
 
-    AuthMenuItemName value();
+    private final Class<?> pageClass;
+
+    private AuthMenuItem(final Class<?> pageClass) {
+        this.pageClass = pageClass;
+    }
+
+    public Class<?> getPageClass() {
+        return pageClass;
+    }
 }

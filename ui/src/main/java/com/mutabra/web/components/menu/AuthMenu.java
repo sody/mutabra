@@ -1,18 +1,12 @@
 package com.mutabra.web.components.menu;
 
 import com.mutabra.web.base.components.AbstractMenu;
-import com.mutabra.web.internal.annotations.AuthMenuItemName;
-
-import static com.mutabra.web.internal.annotations.AuthMenuItemName.SIGN_IN;
+import com.mutabra.web.internal.annotations.AuthMenuItem;
 
 /**
  * @author Ivan Khalopik
  */
-public class AuthMenu extends AbstractMenu<AuthMenuItemName> {
-
-    public AuthMenu() {
-        super(AuthMenuItemName.values());
-    }
+public class AuthMenu extends AbstractMenu<AuthMenuItem> {
 
     @Override
     public String getMenuCssClass() {
@@ -20,12 +14,7 @@ public class AuthMenu extends AbstractMenu<AuthMenuItemName> {
     }
 
     @Override
-    protected void setupDefault() {
-        setup(SIGN_IN);
-    }
-
-    @Override
-    protected void setup(final AuthMenuItemName menuItem) {
-        create(translate(menuItem), menuItem.getPageClass());
+    protected Class<AuthMenuItem> getMenuItemClass() {
+        return AuthMenuItem.class;
     }
 }

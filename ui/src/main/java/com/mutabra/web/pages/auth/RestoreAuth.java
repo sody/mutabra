@@ -10,7 +10,7 @@ import com.mutabra.domain.game.AccountCredentialType;
 import com.mutabra.domain.game.AccountPendingToken;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.web.base.pages.AbstractAuthPage;
-import com.mutabra.web.internal.annotations.AuthMenuItem;
+import com.mutabra.web.internal.annotations.AuthMenu;
 import com.mutabra.web.pages.Index;
 import com.mutabra.web.services.MailService;
 import com.mutabra.web.services.PasswordGenerator;
@@ -24,12 +24,12 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 
-import static com.mutabra.web.internal.annotations.AuthMenuItemName.RESTORE;
+import static com.mutabra.web.internal.annotations.AuthMenuItem.RESTORE;
 
 /**
  * @author Ivan Khalopik
  */
-@AuthMenuItem(RESTORE)
+@AuthMenu(RESTORE)
 public class RestoreAuth extends AbstractAuthPage {
 
     @Property

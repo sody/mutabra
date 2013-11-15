@@ -15,7 +15,8 @@ import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
-import com.mutabra.web.internal.annotations.AuthMenuItem;
+import com.mutabra.web.internal.annotations.AuthMenu;
+import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.internal.hack.EffectiveDocumentLinker;
 import org.apache.tapestry5.BaseValidationDecorator;
 import org.apache.tapestry5.ComponentParameterConstants;
@@ -175,9 +176,15 @@ public class ApplicationModule {
 
     @Contribute(MetaWorker.class)
     public void contributeMetaWorker(final MappedConfiguration<Class, MetaDataExtractor> configuration) {
-        configuration.add(AuthMenuItem.class, new MetaDataExtractor<AuthMenuItem>() {
+        configuration.add(AuthMenu.class, new MetaDataExtractor<AuthMenu>() {
             @Override
-            public void extractMetaData(final MutableComponentModel model, final AuthMenuItem annotation) {
+            public void extractMetaData(final MutableComponentModel model, final AuthMenu annotation) {
+                model.setMeta("menu.item", annotation.value().name());
+            }
+        });
+        configuration.add(MainMenu.class, new MetaDataExtractor<MainMenu>() {
+            @Override
+            public void extractMetaData(final MutableComponentModel model, final MainMenu annotation) {
                 model.setMeta("menu.item", annotation.value().name());
             }
         });
