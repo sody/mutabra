@@ -6,10 +6,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <t:pagelink page="account/settings">${message:menu.account-settings}</t:pagelink>
+                <t:pagelink page="account/accountsettings">${message:menu.account-settings}</t:pagelink>
             </li>
             <li>
-                <t:pagelink page="game/hero/switch">${message:menu.switch-hero}</t:pagelink>
+                <t:pagelink page="game/hero/switchhero">${message:menu.switch-hero}</t:pagelink>
             </li>
             <li>
                 <t:eventlink event="signOut">${message:menu.sign-out}</t:eventlink>

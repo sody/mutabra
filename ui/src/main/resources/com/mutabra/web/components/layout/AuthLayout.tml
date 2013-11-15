@@ -4,13 +4,7 @@
         <div id="page" class="page-sm container">
             <div class="viewport col-sm-9 col-md-7 col-lg-6">
                 <section id="content" class="wrapper">
-                    <ul class="nav nav-pills">
-                        <t:loop source="menuItems" value="menuItem" formState="none">
-                            <li class="${menuItemCssClass}">
-                                <a href="${menuItemLink}">${menuItemLabel}</a>
-                            </li>
-                        </t:loop>
-                    </ul>
+                    <t:menu.authmenu/>
                     <hr/>
 
                     <div class="pill-content">

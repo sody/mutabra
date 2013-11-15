@@ -2,7 +2,7 @@
 
     <ul class="nav navbar-nav">
         <li class="active">
-            <t:pagelink page="game/home">${message:page.game-home.title}</t:pagelink>
+            <t:pagelink page="game/gamehome">${message:menu.home}</t:pagelink>
         </li>
         <li><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
