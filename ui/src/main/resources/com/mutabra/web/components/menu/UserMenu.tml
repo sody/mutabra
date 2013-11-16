@@ -1,20 +1,29 @@
-<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+        xmlns:p="tapestry:parameter">
 
-    <div class="dropdown">
-        <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-            ${userName} <span class="caret"/>
-        </a>
-        <ul class="dropdown-menu">
-            <li>
-                <t:pagelink page="account/accountsettings">${message:menu.account-settings}</t:pagelink>
-            </li>
-            <li>
-                <t:pagelink page="game/hero/switchhero">${message:menu.switch-hero}</t:pagelink>
-            </li>
-            <li>
-                <t:eventlink event="signOut">${message:menu.sign-out}</t:eventlink>
-            </li>
-        </ul>
-    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="userpic dropdown-toggle" data-toggle="dropdown">
+                <t:if test="account.hero">
+                    <t:svg type="faces" image="account.hero.appearance.face" width="80" height="80"/>
+                    <p:else>
+                        <t:svg image="literal:unknown" width="80" height="80"/>
+                    </p:else>
+                </t:if>
+            </a>
+
+            <ul class="dropdown-menu">
+                <li>
+                    <t:pagelink page="account/accountsettings">${message:menu.account-settings}</t:pagelink>
+                </li>
+                <li>
+                    <t:pagelink page="game/hero/switchhero">${message:menu.switch-hero}</t:pagelink>
+                </li>
+                <li>
+                    <t:eventlink event="signOut">${message:menu.sign-out}</t:eventlink>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
 </t:container>

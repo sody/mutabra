@@ -94,10 +94,7 @@ body {
     }
   }
 
-  .user-details {
-    list-style: none;
-    padding: 0;
-
+  .userpic {
     svg {
       vertical-align: top;
     }
@@ -105,6 +102,9 @@ body {
 
   // for desktops
   @media (min-width: @grid-float-breakpoint) {
+    margin-left: @navbar-margin-horizontal;
+    margin-right: @navbar-margin-horizontal;
+
     .sign-form {
       margin-top: -@input-height-small;
       margin-bottom: 0;
@@ -114,71 +114,17 @@ body {
       .navbar-vertical-align(@flag-height);
     }
 
-    .user-details {
-      margin-top: -@input-height-base;
-
-      > li {
-        margin-right: 15px;
-      }
+    .userpic {
+      margin-top: @userpic-margin-top;
+      padding: @userpic-padding;
     }
   }
 
   // for mobile platforms
   @media (max-width: @screen-xs-max) {
-    .user-details {
-      > li > a,
-      > li > ul {
-        padding: @nav-link-padding;
-      }
-
-      .dropdown-toggle {
-        display: block;
-        border: 0;
-        border-radius: 0;
-        text-align: left;
-        padding: @nav-link-padding;
-        background: inherit;
-
-        &:active {
-          .box-shadow(none);
-        }
-      }
-    }
-
-    &.navbar-default .user-details {
+    &.navbar-default .navbar-right {
       border-top: 1px solid @navbar-default-divider-color;
-
-      .dropdown-toggle {
-        color: @navbar-default-link-color;
-        .caret {
-          border-top-color: @navbar-default-link-color;
-          border-bottom-color: @navbar-default-link-color;
-        }
-
-        &:hover,
-        &:focus {
-          color: @navbar-default-link-hover-color;
-          background-color: @navbar-default-link-hover-bg;
-          .caret {
-            border-top-color: @navbar-default-link-hover-color;
-            border-bottom-color: @navbar-default-link-hover-color;
-          }
-        }
-      }
-
-      .open > .dropdown-toggle {
-        &,
-        &:hover,
-        &:focus {
-          background-color: @navbar-default-link-active-bg;
-          color: @navbar-default-link-active-color;
-          .caret {
-            border-top-color: @navbar-default-link-active-color;
-            border-bottom-color: @navbar-default-link-active-color;
-          }
-        }
-      }
+      border-bottom: 1px solid @navbar-default-divider-color;
     }
   }
-
 }

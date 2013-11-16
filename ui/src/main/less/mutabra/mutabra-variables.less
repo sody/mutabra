@@ -2,7 +2,6 @@
 // All rights reserved.
 
 // Page layout
-@page-min-height:           600px;
 @page-height-small:         300px;
 @page-footer-height:        100px;
 @page-footer-color:         @gray;
@@ -13,7 +12,12 @@
 @logo-margin-top:           @navbar-height - @navbar-padding-vertical - @logo-height;
 @logo-padding-top:          @navbar-padding-vertical - @logo-margin-top;
 
-@navbar-margin-top:         @line-height-computed - @logo-margin-top;
+@navbar-margin-top:         @navbar-padding-vertical - @logo-margin-top;
+@navbar-margin-horizontal:  5%;
+
+@userpic-height:            80px;
+@userpic-padding:           floor((@navbar-height + @navbar-margin-top - @userpic-height) / 2);
+@userpic-margin-top:        -@navbar-margin-top;
 
 @flag-path:                 "../images/flags.png";
 @flag-width:                32px;

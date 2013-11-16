@@ -5,7 +5,6 @@
 
 package com.mutabra.web.components.layout;
 
-import com.mutabra.domain.game.Account;
 import com.mutabra.web.base.components.AbstractComponent;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
@@ -29,10 +28,6 @@ public class Header extends AbstractComponent {
 
     @Property
     private String password;
-
-    public Account getAccount() {
-        return accountContext.getAccount();
-    }
 
     @OnEvent(value = EventConstants.SUCCESS, component = "signIn")
     Object signIn() {

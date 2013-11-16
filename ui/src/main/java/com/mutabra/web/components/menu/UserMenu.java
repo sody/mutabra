@@ -14,12 +14,15 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class UserMenu extends AbstractComponent {
 
     @Inject
     private AccountContext accountContext;
+
+    public Account getAccount() {
+        return accountContext.getAccount();
+    }
 
     public String getUserName() {
         final Account account = accountContext.getAccount();

@@ -37,51 +37,51 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <nav id="nav" class="collapse navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">User Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Hero</a></li>
+                <li><a href="#">Journal</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Accounts</a></li>
+                        <li><a href="#">Levels</a></li>
+                        <li><a href="#">Races</a></li>
+                        <li><a href="#">Faces</a></li>
+                        <li><a href="#">Cards</a></li>
                     </ul>
                 </li>
             </ul>
 
-            <div class="user-details navbar-nav navbar-right">
-                <li>
-                    <a href="#">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="userpic dropdown-toggle" data-toggle="dropdown">
                         <svg height="80" width="80" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <title>Unknown Image</title>
                             <desc>Unknown Image</desc>
                             <g transform="scale(0.800,0.800)">
-                                <path d="m50,25c1,7,6,13,9,16l-6,-3v12c0,10,10,31,19,28,13,-5,19,-15,19,-28,0,-10,-7,-19,-16,-25l-3,7c2,-6,1,-13,-3,-19,19,10,28,22,28,37,0,20,-16,32,-25,35,-10,3,-22,-10,-22,-35,0,25,-12,38,-22,35,-9,-3,-25,-15,-25,-35,0,-15,9,-27,28,-37,-4,6,-5,13,-3,19l-3,-7c-9,6,-16,15,-16,25,0,13,6,23,19,28,9,3,19,-18,19,-28v-12l-6,3c3,-3,8,-9,9,-16z"
-                                      fill="#333"></path>
+                                <path fill="#333"
+                                      d="m42,5c-17,4,-37,8,-37,34s20,30,37,34c-3,-3,-6,-12,-6,-23h10l-1,45h10l-1,-45h10c0,11,-3,20,-6,23,17,-4 37,-8,37,-34s-20,-30,-37,-34c3,3,6,12,6,23h-10l1,-23h-10l1,23h-10c0,-11,3,-20,6,-23z
+                                      m-13,15c-4,11,-4,27,0,38,-2,0,-14,-4,-14,-19s12,-19,14,-19z
+                                      m42,0c2,0,14,4,14,19s-12,19,-14,19c4,-11,4,-27,0,-38z
+                                      m-34,17,8,0,0,4,-8,0l-2-2z
+                                      m18,0,8,0l2,2,-2,2h-8z" fill="#333"></path>
                             </g>
                         </svg>
                     </a>
-                </li>
-                <li>
-                    <div id="dropdown" class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                            Vasya Pupkin <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="settings.html">Settings</a></li>
-                            <li><a href="switch.html">Switch</a></li>
-                            <li><a href="layout.html">Sign Out</a></li>
-                        </ul>
-                    </div>
-                    <ul class="locale-menu list-inline" id="locale">
-                        <li><a title="Russian" class="flag-ru" href="#">ru</a></li>
-                        <li class="active"><a title="English" class="flag-us" href="#">en</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="switch.html">Switch</a></li>
+                        <li><a href="layout.html">Sign Out</a></li>
                     </ul>
                 </li>
-            </div>
+            </ul>
         </nav>
     </header>
 

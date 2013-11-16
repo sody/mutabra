@@ -16,24 +16,7 @@
             <t:menu.mainmenu/>
 
             <t:security.usersecurity>
-                <ul class="user-details navbar-nav navbar-right">
-                    <li>
-                        <t:if test="account.hero">
-                            <t:pagelink page="game/gamehome">
-                                <t:svg type="faces" image="account.hero.appearance.face" width="80" height="80"/>
-                            </t:pagelink>
-                            <p:else>
-                                <t:pagelink page="account/accountsettings">
-                                    <t:svg image="literal:unknown" width="80" height="80"/>
-                                </t:pagelink>
-                            </p:else>
-                        </t:if>
-                    </li>
-                    <li>
-                        <t:menu.usermenu/>
-                        <t:menu.localemenu/>
-                    </li>
-                </ul>
+                <t:menu.usermenu/>
 
                 <p:else>
                     <t:form t:id="signIn" class="sign-form navbar-form navbar-right">
@@ -41,7 +24,6 @@
                             <t:textfield t:id="email" class="form-control input-sm"
                                          label="message:label.email"
                                          value="email"
-                                         validate="required"
                                          placeholder="message:label.email"
                                     />
                         </div>
@@ -50,7 +32,6 @@
                             <t:passwordfield t:id="password" class="form-control input-sm"
                                              label="message:label.password"
                                              value="password"
-                                             validate="required"
                                              placeholder="message:label.password"
                                     />
                         </div>
