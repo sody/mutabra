@@ -16,7 +16,6 @@ import java.io.IOException;
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class SecurityFilter extends SecurityHelper implements ComponentRequestFilter {
     public static final String SHIRO_REQUIRES_AUTHENTICATION_META = "shiro.requires-authentication";
@@ -35,19 +34,19 @@ public class SecurityFilter extends SecurityHelper implements ComponentRequestFi
 
     public void handleComponentEvent(final ComponentEventRequestParameters parameters,
                                      final ComponentRequestHandler handler) throws IOException {
-        checkPage(parameters.getActivePageName());
+        checkAccess(parameters.getActivePageName());
 
         handler.handleComponentEvent(parameters);
     }
 
     public void handlePageRender(final PageRenderRequestParameters parameters,
                                  final ComponentRequestHandler handler) throws IOException {
-        checkPage(parameters.getLogicalPageName());
+        checkAccess(parameters.getLogicalPageName());
 
         handler.handlePageRender(parameters);
     }
 
-    private void checkPage(final String pageName) {
+    private void checkAccess(final String pageName) {
         final boolean authenticated = locator.findMeta(SHIRO_REQUIRES_AUTHENTICATION_META, pageName, Boolean.class);
         if (authenticated) {
             checkAuthenticated();

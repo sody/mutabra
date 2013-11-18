@@ -6,10 +6,10 @@
 package com.mutabra.web.base.components;
 
 import com.mutabra.domain.Translatable;
+import com.mutabra.web.internal.MutabraInternalUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.ComponentResources;
-import org.apache.tapestry5.internal.TapestryInternalUtils;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.ValueEncoderSource;
@@ -67,14 +67,14 @@ public class AbstractComponent {
     }
 
     protected String message(final Enum<?> value) {
-        return TapestryInternalUtils.getLabelForEnum(messages, value);
+        return MutabraInternalUtils.getLabel(messages, value);
     }
 
     protected String translate(final Translatable translatable) {
-        return messages.get(translatable.getBasename() + '.' + translatable.getCode());
+        return MutabraInternalUtils.getTranslation(messages, translatable);
     }
 
     protected String translate(final Translatable translatable, final String variant) {
-        return messages.get(translatable.getBasename() + '.' + translatable.getCode() + '.' + variant);
+        return MutabraInternalUtils.getTranslation(messages, translatable, variant);
     }
 }

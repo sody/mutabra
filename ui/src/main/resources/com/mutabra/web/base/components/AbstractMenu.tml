@@ -1,9 +1,0 @@
-<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-
-    <ul class="${menuCssClass}">
-        <li t:type="loop" source="menuItems" value="menuItem" formState="none" class="prop:menuItemCssClass">
-            <a href="${menuItemLink}">${menuItemLabel}</a>
-        </li>
-    </ul>
-
-</t:container>

@@ -4,7 +4,7 @@
         <div id="page" class="page-sm container">
             <div class="viewport col-sm-9 col-md-7 col-lg-6">
                 <section id="content" class="wrapper">
-                    <t:menu.authmenu/>
+                    <t:menu model="authMenuModel" class="nav nav-pills"/>
                     <hr/>
 
                     <div class="pill-content">

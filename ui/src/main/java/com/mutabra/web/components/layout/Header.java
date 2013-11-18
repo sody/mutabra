@@ -6,8 +6,11 @@
 package com.mutabra.web.components.layout;
 
 import com.mutabra.web.base.components.AbstractComponent;
+import com.mutabra.web.internal.annotations.MainMenuItem;
+import com.mutabra.web.internal.model.MenuModel;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
+import com.mutabra.web.services.MenuModelSource;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -28,6 +31,13 @@ public class Header extends AbstractComponent {
 
     @Property
     private String password;
+
+    @Inject
+    private MenuModelSource menuModelSource;
+
+    public MenuModel getMainMenuModel() {
+        return menuModelSource.buildForEnum(getMessages(), MainMenuItem.class);
+    }
 
     @OnEvent(value = EventConstants.SUCCESS, component = "signIn")
     Object signIn() {

@@ -13,7 +13,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <nav id="nav" class="collapse navbar-collapse">
-            <t:menu.mainmenu/>
+            <t:menu model="mainMenuModel" class="nav navbar-nav"/>
 
             <t:security.usersecurity>
                 <t:menu.usermenu/>

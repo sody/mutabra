@@ -14,10 +14,12 @@ import com.mutabra.domain.battle.BattleHero;
 import com.mutabra.web.ApplicationConstants;
 import com.mutabra.web.internal.BattleEncoderFactory;
 import com.mutabra.web.internal.ImageSourceImpl;
+import com.mutabra.web.internal.MenuModelSourceImpl;
 import com.mutabra.web.internal.MorphiaEncoderFactory;
 import com.mutabra.web.internal.annotations.AuthMenu;
 import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.internal.hack.EffectiveDocumentLinker;
+import com.mutabra.web.internal.model.MenuModel;
 import org.apache.tapestry5.BaseValidationDecorator;
 import org.apache.tapestry5.ComponentParameterConstants;
 import org.apache.tapestry5.MarkupWriter;
@@ -88,6 +90,7 @@ public class ApplicationModule {
     public static void bind(final ServiceBinder binder) {
         binder.bind(JavaScriptStack.class, ExtensibleJavaScriptStack.class).withId("MutabraJavaScriptStack");
         binder.bind(ImageSource.class, ImageSourceImpl.class);
+        binder.bind(MenuModelSource.class, MenuModelSourceImpl.class);
     }
 
     @Contribute(ServiceOverride.class)
@@ -179,20 +182,20 @@ public class ApplicationModule {
         configuration.add(AuthMenu.class, new MetaDataExtractor<AuthMenu>() {
             @Override
             public void extractMetaData(final MutableComponentModel model, final AuthMenu annotation) {
-                model.setMeta("menu.item", annotation.value().name());
+                model.setMeta(MenuModel.ACTIVE_KEY, annotation.value().name());
             }
         });
         configuration.add(MainMenu.class, new MetaDataExtractor<MainMenu>() {
             @Override
             public void extractMetaData(final MutableComponentModel model, final MainMenu annotation) {
-                model.setMeta("menu.item", annotation.value().name());
+                model.setMeta(MenuModel.ACTIVE_KEY, annotation.value().name());
             }
         });
     }
 
     @Contribute(MetaDataLocator.class)
     public void contributeMetaDataLocator(final MappedConfiguration<String, String> configuration) {
-        configuration.add("menu.item", "");
+        configuration.add(MenuModel.ACTIVE_KEY, "");
     }
 
     @Contribute(MarkupRenderer.class)
