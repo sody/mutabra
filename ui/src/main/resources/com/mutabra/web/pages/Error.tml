@@ -1,0 +1,20 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<t:delegate to="content"/>
+
+<t:block t:id="defaultBlock">
+    <p>${message:error.default}</p>
+</t:block>
+
+<t:block t:id="error403">
+    <p>${message:error.403}</p>
+</t:block>
+<t:block t:id="error404">
+    <p>${message:error.404}</p>
+</t:block>
+<t:block t:id="error500">
+    <p>${message:error.500}</p>
+</t:block>
+
+</html>

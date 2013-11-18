@@ -1,0 +1,50 @@
+// Copyright (c) 2008-2013 Ivan Khalopik.
+// All rights reserved.
+
+// Page layout
+@page-height-small:         300px;
+@page-footer-height:        100px;
+@page-footer-color:         @gray;
+
+@logo-path:                 "../images/logo80x60.png";
+@logo-width:                80px;
+@logo-height:               60px;
+@logo-margin-top:           @navbar-height - @navbar-padding-vertical - @logo-height;
+@logo-padding-top:          @navbar-padding-vertical - @logo-margin-top;
+
+@navbar-margin-top:         @navbar-padding-vertical - @logo-margin-top;
+@navbar-margin-horizontal:  5%;
+
+@userpic-height:            80px;
+@userpic-padding:           floor((@navbar-height + @navbar-margin-top - @userpic-height) / 2);
+@userpic-margin-top:        -@navbar-margin-top;
+
+@flag-path:                 "../images/flags.png";
+@flag-width:                32px;
+@flag-height:               24px;
+
+// Field
+@field-bg:                  @mutabra-foreground;
+@field-border:              @gray-dark;
+@field-active-bg:           @mutabra-default;
+@field-highlight-bg:        @mutabra-background;
+
+// Description
+@description-padding:       @grid-gutter-width;
+@description-border-radius: @grid-gutter-width;
+@description-border:        @mutabra-border;
+
+// Cards
+@card-border-radius:        @line-height-computed;
+@card-padding:              5px;
+
+@card-border:               @mutabra-border;
+@card-bg:                   @mutabra-foreground;
+
+@card-hover-bg:             @mutabra-background;
+
+@card-active-border:        @mutabra-default;
+@card-active-bg:            @mutabra-background;
+
+@card-disabled-bg:          @mutabra-background;
+

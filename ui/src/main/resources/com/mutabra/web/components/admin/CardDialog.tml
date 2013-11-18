@@ -1,0 +1,15 @@
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+    <t:replace id="body">
+        <div class="form-group">
+            <t:label for="code" class="control-label col-sm-4"/>
+            <div class="col-sm-6">
+                <t:textfield t:id="code" class="form-control"
+                             label="message:label.code"
+                             value="value.code"
+                             validate="required"
+                             disabled="true"
+                        />
+            </div>
+        </div>
+    </t:replace>
+</t:extend>

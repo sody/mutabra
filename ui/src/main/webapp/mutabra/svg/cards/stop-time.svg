@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2008-2013 Ivan Khalopik.
+  ~ All rights reserved.
+  -->
+
+<svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+  <title>Stop Time Card</title>
+  <desc>Stop Time Card</desc>
+
+  <g>
+    <!-- Top part -->
+    <path stroke="none" fill="#333"
+          d="m 25,10
+             c 25,3 25,3 50,0
+               -4,5 -3,8 0,10
+             h -50
+             c 3,-2 4,-5 0,-10
+             z"/>
+
+    <!-- Bottom part -->
+    <path stroke="none" fill="#333"
+          d="m 25,90
+             c 4,-5 4,-8 0,-10
+             h 50
+             c -4,2 -4,5 0,10
+               -25,-3 -25,-3 -50,0
+             z"/>
+
+    <!-- Center part -->
+    <path stroke="#333" stroke-width="3" fill="none"
+          d="m 30,20
+             c 0,10 10,20 15,25
+               3,3 3,7 0,10
+               -5,5 -15,15 -15,25
+             h 40
+             c 0,-10 -10,-20 -15,-25
+               -3,-3 -3,-7 0,-10
+               5,-5 15,-15 15,-25
+             h -40"/>
+  </g>
+</svg>
+

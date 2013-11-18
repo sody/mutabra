@@ -1,0 +1,25 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+             xmlns:p="tapestry:parameter">
+
+    <t:zone id="prop:clientId"/>
+
+    <t:block t:id="modalBlock">
+        <t:zone t:id="formZone" id="prop:formZoneId" update="show">
+            <t:form t:id="form" context="value" zone="prop:formZoneId" class="form-horizontal">
+                <t:modal t:id="modal" id="prop:modalId" title="prop:title" active="true">
+                    <t:form.errors/>
+                    <t:extension-point id="body">
+                        <t:beaneditor object="value"/>
+                    </t:extension-point>
+                    <p:footer>
+                        <t:extension-point id="footer">
+                            <t:linksubmit class="btn btn-default">${message:button.save}</t:linksubmit>
+                            <a href="#" class="btn btn-default" data-dismiss="modal">${message:button.cancel}</a>
+                        </t:extension-point>
+                    </p:footer>
+                </t:modal>
+            </t:form>
+        </t:zone>
+    </t:block>
+</t:container>
+

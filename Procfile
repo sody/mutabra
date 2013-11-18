@@ -1,1 +1,1 @@
-web:   java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT mutabra-ui/target/*.war
+web:   java $JAVA_OPTS -jar build/stage/jetty-runner.jar --port $PORT build/stage/*.war

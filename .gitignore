@@ -1,5 +1,17 @@
-.git
-.idea
+# git
+.git/
+
+# IntelliJ IDEA
+.idea/
 *.iml
-target
-atlassian-ide-plugin.xml
+*.ipr
+*.iws
+
+# Maven
+target/
+
+# Gradle
+.gradle/
+build/
+gradle.properties
+

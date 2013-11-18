@@ -1,0 +1,23 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
+gradle/
+*.gradle
+gradlew
+gradlew.bat
+gradle.properties
+
+# Project Modules
+/ui/
+/domain/
+/buildSrc/

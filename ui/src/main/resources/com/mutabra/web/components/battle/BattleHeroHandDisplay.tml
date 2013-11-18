@@ -1,0 +1,15 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <div id="${clientId}" class="${containerClass}">
+        <t:loop source="hero.hand" value="card">
+            <div class="col-sm-6 col-md-3">
+                <t:battle.battlecarddisplay card="card"/>
+            </div>
+        </t:loop>
+
+        <div class="col-sm-6 col-md-3">
+            <t:battle.battleskipturndisplay hero="hero"/>
+        </div>
+    </div>
+
+</t:container>

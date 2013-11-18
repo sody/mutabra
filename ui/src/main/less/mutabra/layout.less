@@ -1,0 +1,130 @@
+// Copyright (c) 2008-2013 Ivan Khalopik.
+// All rights reserved.
+
+//
+// Layout
+// --------------------------------------------------
+
+// Static bottom footer
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+// Default page layout
+.page {
+  min-height: 100%;
+  margin-bottom: -@page-footer-height;
+
+  .buffer {
+    height: @page-footer-height;
+  }
+}
+
+// Auth page layout
+.page-sm {
+  height: 100%;
+  min-height: @page-height-small;
+
+  .viewport {
+    position: relative;
+    margin-top: -(floor(@page-height-small / 2));
+    top: 50%;
+    float: none;
+    .center-block();
+  }
+}
+
+// Page footer
+.footer {
+  padding-top: 2px;
+  padding-bottom: 10px;
+  color: @page-footer-color;
+  text-align: center;
+  .clearfix();
+}
+
+// Content wrapper
+.wrapper {
+  padding: @grid-gutter-width - 1;
+  background-color: @mutabra-foreground;
+  border: 1px solid @mutabra-border;
+  border-radius: @grid-gutter-width;
+}
+
+// Static top navbar styles
+.navbar-static-top {
+  margin-top: @navbar-margin-top;
+  margin-bottom: 0;
+  border: 0;
+
+  .navbar-brand {
+    background: url(@logo-path) no-repeat;
+    margin-top: @logo-margin-top;
+    padding-top: @logo-padding-top;
+    padding-left: @logo-width;
+    color: @text-color;
+    font-weight: bold;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .sign-form {
+    // all inputs should be small
+    .form-control {
+      .input-sm();
+    }
+  }
+
+  .locale-menu {
+    .list-inline();
+
+    > li {
+      padding: 0;
+      opacity: 0.5;
+
+      &:hover, &:active, &.active, &:focus {
+        opacity: 1;
+      }
+    }
+  }
+
+  .userpic {
+    svg {
+      vertical-align: top;
+    }
+  }
+
+  // for desktops
+  @media (min-width: @grid-float-breakpoint) {
+    margin-left: @navbar-margin-horizontal;
+    margin-right: @navbar-margin-horizontal;
+
+    .sign-form {
+      margin-top: -@input-height-small;
+      margin-bottom: 0;
+    }
+
+    .locale-menu {
+      .navbar-vertical-align(@flag-height);
+    }
+
+    .userpic {
+      margin-top: @userpic-margin-top;
+      padding: @userpic-padding;
+    }
+  }
+
+  // for mobile platforms
+  @media (max-width: @screen-xs-max) {
+    &.navbar-default .navbar-right {
+      border-top: 1px solid @navbar-default-divider-color;
+      border-bottom: 1px solid @navbar-default-divider-color;
+    }
+  }
+}

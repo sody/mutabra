@@ -1,0 +1,66 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<t:form t:id="changeEmailForm" class="form-horizontal">
+    <legend>${message:section.change-email}</legend>
+
+    <t:form.formerrors/>
+
+    <t:form.formrow for="email" labelClass="col-sm-4" fieldClass="col-sm-6">
+        <t:textfield t:id="email" class="form-control"
+                     label="message:label.email"
+                     value="email"
+                     validate="required,email"
+                />
+    </t:form.formrow>
+
+    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+        <t:linksubmit class="btn btn-default">${message:button.change}</t:linksubmit>
+    </t:form.formrow>
+</t:form>
+
+<t:if test="hasEmail">
+    <t:form t:id="changePasswordForm" class="form-horizontal">
+        <legend>${message:section.change-password}</legend>
+
+        <t:form.formerrors/>
+
+        <t:form.formrow for="password" labelClass="col-sm-4" fieldClass="col-sm-6">
+            <t:textfield t:id="password" class='form-control'
+                         label="message:label.password"
+                         value="password"
+                         validate="required"
+                    />
+        </t:form.formrow>
+
+        <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+            <t:linksubmit class="btn btn-default">${message:button.change}</t:linksubmit>
+        </t:form.formrow>
+    </t:form>
+</t:if>
+
+<t:form t:id="accountForm" class="form-horizontal">
+    <legend>${message:section.change-profile}</legend>
+
+    <t:form.formerrors/>
+
+    <t:form.formrow for="name" labelClass="col-sm-4" fieldClass="col-sm-6">
+        <t:textfield t:id="name" class="form-control"
+                     label="message:label.name"
+                     value="value.name"
+                />
+    </t:form.formrow>
+
+    <t:form.formrow for="location" labelClass="col-sm-4" fieldClass="col-sm-6">
+        <t:textfield t:id="location" class="form-control"
+                     label="message:label.location"
+                     value="value.location"
+                />
+    </t:form.formrow>
+
+    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+        <t:linksubmit class="btn btn-default">${message:button.save}</t:linksubmit>
+    </t:form.formrow>
+</t:form>
+
+</html>

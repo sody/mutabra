@@ -1,0 +1,23 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <div id="${clientId}" class="description">
+        <div class="description-title">
+            <h4>${name}</h4>
+        </div>
+
+        <div class="description-body">
+            <t:svg type="creatures" image="creature.code" width="140" height="140"/>
+
+            <dl>
+                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dd>${creature.health}</dd>
+
+                <dt><i class="glyphicon glyphicon-flash" title="message:label.power"/></dt>
+                <dd>${creature.power}</dd>
+            </dl>
+        </div>
+
+        <p>${description}</p>
+    </div>
+
+</t:container>

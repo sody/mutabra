@@ -1,0 +1,14 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<div class="row">
+    <div class="col-sm-6">
+        <img align="middle" src="${logo}" alt="logo"/>
+    </div>
+
+    <div class="col-sm-6">
+        ${message:text.content-text}
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,17 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <div class="${containerClass}"
+         data-description-target="${descriptionSelector}"
+         data-card-target="${targetSelector}"
+         data-card-url="${castLink}">
+
+        <div class="card-ne"><i class="glyphicon glyphicon-tree-conifer"/></div>
+        <div class="card-nw">${ability.bloodCost}</div>
+        <div class="card-se">${effect.power}</div>
+        <div class="card-sw">${effect.health}</div>
+        <div class="card-body">
+            <t:svg type="abilities" image="ability.code" width="100" height="100"/>
+        </div>
+    </div>
+
+</t:container>

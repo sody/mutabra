@@ -1,0 +1,33 @@
+<html t:type="layout/default"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+        >
+
+<t:form class="form-horizontal">
+
+    <t:form.formerrors/>
+
+    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+        <t:game.raceselect value="race"/>
+    </t:form.formrow>
+
+    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
+        <t:game.faceselect value="face"/>
+    </t:form.formrow>
+
+    <t:form.formrow for="name" labelClass="control-label col-sm-4" fieldClass="col-sm-6">
+        <t:textfield t:id="name" class="form-control"
+                     label="message:label.name"
+                     value="name"
+                     validate="required"
+                />
+    </t:form.formrow>
+
+    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+        <t:submit value="message:button.create" class="btn btn-default"/>
+
+        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
+    </t:form.formrow>
+
+</t:form>
+
+</html>

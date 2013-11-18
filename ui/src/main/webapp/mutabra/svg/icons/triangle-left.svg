@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2008-2013 Ivan Khalopik.
+  ~ All rights reserved.
+  -->
+
+<svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" version="1.1">
+
+  <title>Triangle Left Icon</title>
+  <desc>Triangle Left Icon</desc>
+
+  <path stroke="#000" fill="none"
+        d="m42,44,0,-24,-21,12z"/>
+
+</svg>

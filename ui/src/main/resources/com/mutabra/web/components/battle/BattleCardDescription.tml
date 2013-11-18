@@ -1,0 +1,26 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <div id="${clientId}" class="description">
+        <div class="description-title">
+            <h4>${name}</h4>
+        </div>
+
+        <div class="description-body">
+            <t:svg type="cards" image="card.code" width="140" height="140"/>
+
+            <dl>
+                <dt><i class="glyphicon glyphicon-flash" title="message:label.power"/></dt>
+                <dd>${effect.power}</dd>
+
+                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dd>${effect.health}</dd>
+
+                <dt><i class="glyphicon glyphicon-tint" title="message:label.blood-cost"/></dt>
+                <dd>${card.bloodCost}</dd>
+            </dl>
+        </div>
+
+        <p>${description}</p>
+    </div>
+
+</t:container>

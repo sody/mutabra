@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2008-2013 Ivan Khalopik.
+ * All rights reserved.
+ */
+
+apply plugin: 'less'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+description = 'Mutabra UI Module'
+
+dependencies {
+    compile project(':domain')
+
+    compile "org.slf4j:slf4j-api:${versions.slf4j}"
+    compile "ch.qos.logback:logback-classic:${versions.logback}"
+    compile "org.apache.shiro:shiro-core:${versions.shiro}"
+    compile "org.apache.shiro:shiro-web:${versions.shiro}"
+    compile("org.apache.tapestry:tapestry-core:${versions.tapestry}") {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude group: 'log4j', module: 'log4j'
+    }
+    compile "org.scribe:scribe:${versions.scribe}"
+
+    compile "javax.mail:mail:${versions.mailApi}"
+
+    providedCompile "javax.servlet:servlet-api:${versions.servletApi}"
+}
+
+task generateConfig(type: Copy) {
+    from 'src/main/config', isSnapshot ? 'src/main/config/development' : 'src/main/config/production'
+    into "${buildDir}/config"
+    include '*.xml', '*.properties'
+    expand(project: project)
+}
+
+task processConfig(type: Copy) {
+    dependsOn processResources, generateConfig
+
+    from "${generateConfig.destinationDir}"
+    into "${processResources.destinationDir}"
+    include 'mail.properties', 'logback.xml'
+}
+
+classes {
+    dependsOn processConfig
+}
+
+compileLess {
+    destination 'mutabra/css'
+    compress !isSnapshot
+}
+
+war {
+    webXml file("${generateConfig.destinationDir}/web.xml")
+}
+
+jettyRun {
+    scanIntervalSeconds 2
+    contextPath '/'
+}
+
+task generatePrototype(type: Sync) {
+    dependsOn compileLess
+
+    into "${buildDir}/prototype"
+    from 'src/main/webapp'
+    from compileLess.destinationDir
+    from 'src/prototype'
+}

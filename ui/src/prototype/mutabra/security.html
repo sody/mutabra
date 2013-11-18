@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2008-2013 Ivan Khalopik.
+  ~ All rights reserved.
+  -->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mutabra Security Layout Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="css/mutabra.css" rel="stylesheet">
+    <link href="css/test.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="page" class="page-sm container">
+    <div class="viewport col-sm-9 col-md-7 col-lg-6">
+        <section id="content" class="wrapper" rel="main">
+            <ul class="nav nav-pills">
+                <li class="active"><a data-toggle="pill" href="#pills_signIn">Sign In</a></li>
+                <li><a data-toggle="pill" href="#pills_signUp">Sign Up</a></li>
+                <li><a data-toggle="pill" href="#pills_restore">Restore</a></li>
+            </ul>
+            <hr/>
+
+            <div class="pill-content">
+                <div id="pills_signIn" class="pill-pane active">
+                    <form class="form-horizontal" action="battle.html" method="post" id="signInForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="email" class="control-label col-sm-4 required">Email:</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Email" id="email" name="email" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label col-sm-4 required">Password:</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Password" value="" id="password"
+                                           name="password" type="password"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <div class="btn-group">
+                                        <input type="submit" class="btn btn-default" value="Sign In"/>
+                                        <a title="Facebook" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-home"></i></a>
+                                        <a title="Twitter" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-map-marker"></i></a>
+                                        <a title="Google" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-certificate"></i></a>
+                                        <a title="VKontakte" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="pills_signUp" class="pill-pane">
+                    <form class="form-horizontal" action="#" method="post" id="signUpForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="signUpEmail" class="control-label col-sm-4 required">Email:</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Email" id="signUpEmail" name="signUpEmail"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <div class="btn-group">
+                                        <input type="submit" class="btn btn-default" value="Sign Up"/>
+                                        <a title="Facebook" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-home"></i></a>
+                                        <a title="Twitter" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-map-marker"></i></a>
+                                        <a title="Google" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-certificate"></i></a>
+                                        <a title="VKontakte" class="btn btn-default" href="battle.html"><i class="glyphicon glyphicon-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="pills_restore" class="pill-pane">
+                    <form class="form-horizontal" action="#" method="post" id="restoreForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="restoreEmail" class="control-label col-sm-4 required">Email:</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" placeholder="Email" id="restoreEmail" name="restoreEmail"
+                                           type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <input type="submit" class="btn btn-default" value="Restore"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer" class="footer">
+            <div class="col-xs-6 text-left">© 2013 "Mutabra"</div>
+            <div class="col-xs-6 text-right">v1.0-SNAPSHOT</div>
+        </footer>
+    </div>
+</div>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery/jquery.js"></script>
+<script src="js/bootstrap/transition.js"></script>
+<script src="js/bootstrap/alert.js"></script>
+<script src="js/bootstrap/modal.js"></script>
+<script src="js/bootstrap/dropdown.js"></script>
+<script src="js/bootstrap/scrollspy.js"></script>
+<script src="js/bootstrap/tab.js"></script>
+<script src="js/bootstrap/tooltip.js"></script>
+<script src="js/bootstrap/popover.js"></script>
+<script src="js/bootstrap/button.js"></script>
+<script src="js/bootstrap/collapse.js"></script>
+<script src="js/bootstrap/carousel.js"></script>
+<script src="js/bootstrap/affix.js"></script>
+
+</body>
+
+</html>

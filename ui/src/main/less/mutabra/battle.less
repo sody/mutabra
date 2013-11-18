@@ -1,0 +1,209 @@
+// Copyright (c) 2008-2013 Ivan Khalopik.
+// All rights reserved.
+
+// Battle page styles
+// -----
+
+.vertical-margin() {
+  @vertical-margin: floor(@grid-gutter-width / 2);
+  margin-top: @vertical-margin;
+  margin-bottom: @vertical-margin;
+}
+
+.log {
+  .vertical-margin();
+
+  a {
+    text-decoration: none;
+  }
+
+  .friend {
+    color: @state-info-text;
+  }
+
+  .enemy {
+    color: @state-danger-text;
+  }
+
+  .detail {
+    color: @state-success-text;
+  }
+}
+
+.field {
+  .vertical-margin();
+  text-align: center;
+
+  .empty {
+    fill: @field-bg;
+    stroke: @field-border;
+    stroke-dasharray: 5,5;
+  }
+  .hero,
+  .creature {
+    fill: @field-bg;
+    stroke: @field-border;
+    stroke-dasharray: none;
+  }
+
+  .active {
+    fill:  @field-active-bg;
+  }
+  .highlight{
+    fill:  @field-highlight-bg;
+  }
+  .disabled {
+    .opacity(.65);
+  }
+}
+
+// Descriptions
+.description {
+  .vertical-margin();
+  border: 1px solid @description-border;
+  border-radius: @description-border-radius;
+  padding: @description-padding;
+  display: none;
+
+  .description-title {
+    @heading-line-height-computed: ceil(ceil(@font-size-base * 1.25) * @headings-line-height);
+    margin-bottom: floor(@line-height-computed / 2);
+    border-bottom: 1px solid @description-border;
+    height: @heading-line-height-computed * 2 + @line-height-computed - @description-padding;
+    position: relative;
+
+    h4 {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  .description-body {
+    margin-bottom: floor(@line-height-computed / 2);
+
+    svg,
+    dl {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    dl {
+      dt {
+        float: left;
+        width: @line-height-computed;
+        clear: left;
+        text-align: right;
+      }
+      dd {
+        margin-left: @line-height-computed * 2;
+        .clearfix(); // Clear the floated `dt` if an empty `dd` is present
+      }
+    }
+  }
+
+  &.active {
+    display: block;
+  }
+
+  &.disabled {
+    .opacity(.65);
+  }
+}
+
+.actions {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Cards
+.card {
+  .vertical-margin();
+  padding: floor(@card-border-radius / 2);
+  position: relative;
+  cursor: pointer;
+
+  .card-body {
+    border: 1px solid @card-border;
+    border-radius: @card-border-radius;
+    background-color: @card-bg;
+    padding: @card-padding;
+    text-align: center;
+
+    svg {
+      vertical-align: top;
+    }
+  }
+  .card-ne,
+  .card-nw,
+  .card-sw,
+  .card-se {
+    border: 1px solid @card-border;
+    border-radius: @card-border-radius;
+    background-color: @card-bg;
+    width: @card-border-radius * 2;
+    height: @card-border-radius * 2;
+    line-height: @card-border-radius * 2;
+    text-align: center;
+    position: absolute;
+    z-index: 1010;
+  }
+  .card-ne {
+    float: left;
+    top: 0;
+    left: 0;
+  }
+  .card-nw {
+    float: right;
+    top: 0;
+    right: 0;
+  }
+  .card-sw {
+    float: right;
+    bottom: 0;
+    right: 0;
+  }
+  .card-se {
+    float: left;
+    bottom: 0;
+    left: 0;
+  }
+
+  &:hover {
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @card-hover-bg;
+    }
+  }
+
+  &.active {
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @card-active-bg;
+      border-color: @card-active-border;
+      .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    .opacity(.65);
+
+    .card-ne,
+    .card-nw,
+    .card-sw,
+    .card-se,
+    .card-body {
+      background-color: @card-disabled-bg;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<t:extend xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:replace id="content-area">
+        <div id="page" class="page-sm container">
+            <div class="viewport col-sm-9 col-md-7 col-lg-6">
+                <section id="content" class="wrapper">
+                    <t:menu model="authMenuModel" class="nav nav-pills"/>
+                    <hr/>
+
+                    <div class="pill-content">
+                        <t:body/>
+                    </div>
+                </section>
+
+                <footer id="footer" class="footer">
+                    <div class="col-xs-6 text-left">
+                        <t:outputraw value="copyrightMessage"/><br/>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <t:outputraw value="versionMessage"/><br/>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t:replace>
+
+</t:extend>

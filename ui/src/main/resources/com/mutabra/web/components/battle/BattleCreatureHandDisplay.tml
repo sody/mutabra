@@ -1,0 +1,15 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <div id="${clientId}" class="${containerClass}">
+        <t:loop source="creature.abilities" value="ability">
+            <div class="col-sm-6 col-md-3">
+                <t:battle.abilitydisplay ability="ability"/>
+            </div>
+        </t:loop>
+
+        <div class="col-sm-6 col-md-3">
+            <t:battle.skipturndisplay hero="creature.hero"/>
+        </div>
+    </div>
+
+</t:container>

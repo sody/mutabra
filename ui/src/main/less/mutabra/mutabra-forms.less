@@ -1,0 +1,11 @@
+// Copyright (c) 2008-2013 Ivan Khalopik.
+// All rights reserved.
+
+// Additional form styles
+.control-label {
+  &.required:after,
+  .required &:after {
+    content: '*';
+    color: @state-danger-text;
+  }
+}

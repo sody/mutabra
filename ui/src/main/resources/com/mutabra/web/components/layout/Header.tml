@@ -1,0 +1,50 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+             xmlns:p="tapestry:parameter">
+
+    <header id="header" class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+                <span class="icon-bar"/>
+                <span class="icon-bar"/>
+                <span class="icon-bar"/>
+            </button>
+            <a class="navbar-brand" href="/">UTABRA</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <nav id="nav" class="collapse navbar-collapse">
+            <t:menu model="mainMenuModel" class="nav navbar-nav"/>
+
+            <t:security.usersecurity>
+                <t:menu.usermenu/>
+
+                <p:else>
+                    <t:form t:id="signIn" class="sign-form navbar-form navbar-right">
+                        <div class="form-group">
+                            <t:textfield t:id="email" class="form-control input-sm"
+                                         label="message:label.email"
+                                         value="email"
+                                         placeholder="message:label.email"
+                                    />
+                        </div>
+
+                        <div class="form-group">
+                            <t:passwordfield t:id="password" class="form-control input-sm"
+                                             label="message:label.password"
+                                             value="password"
+                                             placeholder="message:label.password"
+                                    />
+                        </div>
+
+                        <div class="navbar-btn">
+                            <t:menu.oauthmenu>
+                                <t:linksubmit class="btn btn-default">${message:button.sign-in}</t:linksubmit>
+                            </t:menu.oauthmenu>
+                        </div>
+                    </t:form>
+                </p:else>
+            </t:security.usersecurity>
+        </nav>
+    </header>
+
+</t:container>

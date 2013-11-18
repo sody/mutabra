@@ -1,0 +1,25 @@
+<html t:type="layout/auth"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<t:form t:id="signUpForm" class="form-horizontal">
+    <fieldset>
+        <t:form.formerrors/>
+
+        <t:form.formrow for="email" labelClass="col-sm-4" fieldClass="col-sm-6">
+            <t:textfield t:id="email" class="form-control"
+                         label="message:label.email"
+                         placeholder="message:label.email"
+                         value="email"
+                         validate="required,email"
+                    />
+        </t:form.formrow>
+
+        <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
+            <t:menu.oauthmenu t:id="oauth">
+                <t:linksubmit class="btn btn-default">${message:button.sign-up}</t:linksubmit>
+            </t:menu.oauthmenu>
+        </t:form.formrow>
+    </fieldset>
+</t:form>
+
+</html>
