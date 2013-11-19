@@ -7,6 +7,7 @@ package com.mutabra.web.internal.security;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.web.util.WebUtils;
 import org.apache.tapestry5.Link;
 import org.apache.tapestry5.services.PageRenderLinkSource;
@@ -37,7 +38,7 @@ public class SecurityExceptionHandler implements RequestExceptionHandler {
     @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
     public void handleRequestException(final Throwable exception) throws IOException {
         final Throwable rootException = getRootCause(exception);
-        if (rootException instanceof AuthenticationException || rootException instanceof AuthorizationException) {
+        if (rootException instanceof AuthenticationException || rootException instanceof UnauthenticatedException) {
             final Link loginPageLink = linkSource.createPageRenderLink(loginPage);
             if (rootException instanceof AuthorizationException) {
                 // save current request for later use after successful authentication
