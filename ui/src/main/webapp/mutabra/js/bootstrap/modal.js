@@ -92,7 +92,9 @@
 
     e = $.Event('hide.bs.modal')
 
+/* TODO: quick fix for prototype
     this.$element.trigger(e)
+*/
 
     if (!this.isShown || e.isDefaultPrevented()) return
 

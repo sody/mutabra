@@ -264,7 +264,9 @@
       if (that.hoverState != 'in') $tip.detach()
     }
 
+/* TODO: quick fix for prototype
     this.$element.trigger(e)
+*/
 
     if (e.isDefaultPrevented()) return
 

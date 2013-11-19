@@ -95,8 +95,10 @@
     $(toggle).each(function (e) {
       var $parent = getParent($(this))
       if (!$parent.hasClass('open')) return
+/* TODO: quick fix for prototype
       $parent.trigger(e = $.Event('hide.bs.dropdown'))
       if (e.isDefaultPrevented()) return
+*/
       $parent.removeClass('open').trigger('hidden.bs.dropdown')
     })
   }

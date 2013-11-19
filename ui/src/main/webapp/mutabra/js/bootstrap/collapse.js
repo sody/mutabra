@@ -88,9 +88,11 @@
   Collapse.prototype.hide = function () {
     if (this.transitioning || !this.$element.hasClass('in')) return
 
+/* TODO: quick fix for prototype
     var startEvent = $.Event('hide.bs.collapse')
     this.$element.trigger(startEvent)
     if (startEvent.isDefaultPrevented()) return
+*/
 
     var dimension = this.dimension()
 
