@@ -5,6 +5,7 @@
 
 package com.mutabra.domain.game;
 
+import com.mutabra.domain.CodeUtils;
 import com.mutabra.domain.Translatable;
 
 import java.util.Arrays;
@@ -27,7 +28,7 @@ public enum Role implements Translatable {
     private Role(final String... permissions) {
         this.permissions = new HashSet<String>(Arrays.asList(permissions));
 
-        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+        code = CodeUtils.generateCode(this);
     }
 
     public String getBasename() {

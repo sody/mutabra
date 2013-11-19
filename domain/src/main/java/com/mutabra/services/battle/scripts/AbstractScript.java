@@ -5,6 +5,7 @@
 
 package com.mutabra.services.battle.scripts;
 
+import com.mutabra.domain.Translatable;
 import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.TargetType;
 import com.mutabra.services.battle.BattleField;
@@ -21,9 +22,10 @@ public abstract class AbstractScript implements EffectScript {
 
     public void execute(final Battle battle, final BattleEffect battleEffect) {
         // get caster hero
-        final BattleHero battleHero = battleEffect.getCaster().getHero() != null ?
-                battleEffect.getCaster().getHero() :
-                battleEffect.getCaster().getCreature().getHero(); // not null
+        final BattleUnit battleUnit = battleEffect.getCaster().getUnit(); // not null
+        final BattleHero battleHero = battleUnit.isHero() ?
+                (BattleHero) battleUnit :
+                ((BattleCreature) battleUnit).getHero();
         // create battle field
         final BattleField battleField = BattleField.create(battle, battleHero);
 
@@ -74,4 +76,16 @@ public abstract class AbstractScript implements EffectScript {
     protected abstract void apply(final BattleField battleField,
                                   final BattleEffect battleEffect,
                                   final BattleField.Point target);
+
+    protected LogBuilder success(final BattleEffect battleEffect) {
+        return log(battleEffect.getCode(), Translatable.SUCCESS);
+    }
+
+    protected LogBuilder failure(final BattleEffect battleEffect) {
+        return log(battleEffect.getCode(), Translatable.FAILURE);
+    }
+
+    protected LogBuilder log(final String code, final String variant) {
+        return new LogBuilder(code, variant);
+    }
 }

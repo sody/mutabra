@@ -17,7 +17,6 @@ public class AccountHero {
 
     private ObjectId id;
 
-    @Embedded
     private HeroAppearance appearance = new HeroAppearance();
 
     public AccountHero() {

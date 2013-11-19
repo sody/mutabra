@@ -6,6 +6,8 @@
 package com.mutabra.services.battle.scripts;
 
 import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattlePosition;
+import com.mutabra.domain.battle.BattleSide;
 import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.services.battle.BattleField;
 
@@ -13,28 +15,39 @@ import com.mutabra.services.battle.BattleField;
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class AttackScript extends AbstractScript {
-
+public class MoveScript extends AbstractScript {
     @Override
     protected void apply(final BattleField battleField,
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
         final BattleUnit casterUnit = battleEffect.getCaster().getUnit();
 
-        if (target != null && target.hasUnit()) {
+        if (target == null || target.isEnemySide()) {
+            failure(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("spell", battleEffect)
+                    .build(battleField.getBattle());
+        } else if (target.hasUnit()) {
             final BattleUnit targetUnit = target.getUnit();
-            targetUnit.setHealth(targetUnit.getHealth() - battleEffect.getPower());
+
+            // change their positions
+            final BattlePosition position = casterUnit.getPosition();
+            casterUnit.setPosition(targetUnit.getPosition());
+            targetUnit.setPosition(position);
 
             success(battleEffect)
                     .parameter("caster", casterUnit)
                     .parameter("target", targetUnit)
+                    .parameter("position", BattleSide.YOUR, target.getPosition())
                     .parameter("spell", battleEffect)
-                    .parameter("spell.power", battleEffect.getPower())
-                    .parameter("target.health", targetUnit.getHealth())
                     .build(battleField.getBattle());
         } else {
-            failure(battleEffect)
+            // just move caster to new position
+            casterUnit.setPosition(target.getPosition());
+
+            success(battleEffect)
                     .parameter("caster", casterUnit)
+                    .parameter("position", BattleSide.YOUR, target.getPosition())
                     .parameter("spell", battleEffect)
                     .build(battleField.getBattle());
         }

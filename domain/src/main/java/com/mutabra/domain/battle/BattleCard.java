@@ -20,7 +20,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleCard implements Translatable {
+public class BattleCard implements BattleSpell, Translatable {
 
     private Long id;
     private String code;
@@ -33,11 +33,19 @@ public class BattleCard implements Translatable {
     @Transient
     private BattleHero hero;
 
+    protected BattleCard() {
+    }
+
+    public BattleCard(final BattleHero hero) {
+        this.hero = hero;
+        this.id = hero.getBattle().nextId();
+    }
+
     public Long getId() {
         return id;
     }
 
-    public BattleHero getHero() {
+    public BattleHero getUnit() {
         return hero;
     }
 
@@ -81,12 +89,12 @@ public class BattleCard implements Translatable {
         return effects;
     }
 
+    public boolean isCard() {
+        return true;
+    }
+
     /* HELPER METHODS */
     void assignHero(final BattleHero hero) {
         this.hero = hero;
-    }
-
-    void assignId(final long id) {
-        this.id = id;
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * @since 1.0
  */
 @Embedded
-public class BattleEffect implements Translatable {
+public class BattleEffect implements Translatable, Comparable<BattleEffect> {
 
     private BattleTarget caster = new BattleTarget();
     private BattleTarget target = new BattleTarget();
@@ -95,5 +95,9 @@ public class BattleEffect implements Translatable {
 
     public List<Ability> getAbilities() {
         return abilities;
+    }
+
+    public int compareTo(final BattleEffect o) {
+        return type.compareTo(o.getType());
     }
 }

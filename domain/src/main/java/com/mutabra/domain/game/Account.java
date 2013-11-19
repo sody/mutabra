@@ -5,7 +5,6 @@
 
 package com.mutabra.domain.game;
 
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
 import com.mutabra.domain.BaseEntity;
@@ -32,7 +31,6 @@ public class Account extends BaseEntity {
     private Date registered;
     private Date lastLogin;
 
-    @Embedded
     private Set<AccountCredential> credentials = new HashSet<AccountCredential>();
 
     private AccountPendingToken pendingToken;

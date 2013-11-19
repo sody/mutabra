@@ -5,7 +5,13 @@
 
 package com.mutabra.services.battle.scripts;
 
-import com.mutabra.domain.battle.*;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCardType;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleLogEntry;
+import com.mutabra.domain.battle.BattleLogParameter;
+import com.mutabra.domain.battle.BattleSpell;
+import com.mutabra.domain.battle.BattleUnit;
 import com.mutabra.services.battle.BattleField;
 
 /**
@@ -19,20 +25,14 @@ public class CastScript extends AbstractScript {
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
 
-        final BattleCard battleCard = battleEffect.getTarget().getCard();
-        final BattleHero battleHero = battleEffect.getCaster().getHero();
-        if (battleCard != null && battleHero != null) {
+        final BattleUnit casterUnit = battleEffect.getCaster().getUnit();
+        final BattleSpell battleSpell = battleEffect.getTarget().getSpell();
+        if (casterUnit != null && battleSpell != null) {
             // subtract card blood cost from hero health
-            battleHero.setHealth(battleHero.getHealth() - battleEffect.getPower());
+            casterUnit.setHealth(casterUnit.getHealth() - battleEffect.getPower());
             // move card to graveyard
-            battleCard.setType(BattleCardType.GRAVEYARD);
-        } else {
-            final BattleAbility battleAbility = battleEffect.getTarget().getAbility();
-            final BattleCreature battleCreature = battleEffect.getCaster().getCreature();
-
-            if (battleAbility != null && battleCreature != null) {
-                // subtract card blood cost from hero health
-                battleCreature.setHealth(battleCreature.getHealth() - battleEffect.getPower());
+            if (battleSpell.isCard()) {
+                ((BattleCard) battleSpell).setType(BattleCardType.GRAVEYARD);
             }
         }
     }

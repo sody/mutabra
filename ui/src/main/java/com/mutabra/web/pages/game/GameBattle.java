@@ -9,11 +9,13 @@ import com.mutabra.domain.battle.*;
 import com.mutabra.services.battle.BattleField;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
+import com.mutabra.web.components.battle.BattleLogDialog;
 import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.RequestParameter;
@@ -57,6 +59,9 @@ public class GameBattle extends AbstractPage {
     @Property
     private BattleAbility ability;
 
+    @InjectComponent
+    private BattleLogDialog battleLogDialog;
+
     @Override
     public String getHeaderNote() {
         return format("subtitle", message("label.round"), battle.getRound());
@@ -81,6 +86,11 @@ public class GameBattle extends AbstractPage {
         return null;
     }
 
+    @OnEvent(value = EventConstants.ACTION, component = "battleLog")
+    Object log() {
+        return battleLogDialog.show(field);
+    }
+
     @OnEvent("skip")
     Object skip(final BattleHero hero) {
         battleService.skip(battle, hero);
@@ -92,7 +102,7 @@ public class GameBattle extends AbstractPage {
                 final @RequestParameter(value = "x") int x,
                 final @RequestParameter(value = "y") int y,
                 final @RequestParameter(value = "side") BattleSide side) {
-        if (!card.getHero().isReady()) {
+        if (!card.getUnit().isReady()) {
             final BattleTarget target = new BattleTarget();
             target.setPosition(new BattlePosition(x, y));
             target.setSide(side);
@@ -106,7 +116,7 @@ public class GameBattle extends AbstractPage {
                 final @RequestParameter(value = "x") int x,
                 final @RequestParameter(value = "y") int y,
                 final @RequestParameter(value = "side") BattleSide side) {
-        if (!ability.getCreature().isReady()) {
+        if (!ability.getUnit().isReady()) {
             final BattleTarget target = new BattleTarget();
             target.setPosition(new BattlePosition(x, y));
             target.setSide(side);

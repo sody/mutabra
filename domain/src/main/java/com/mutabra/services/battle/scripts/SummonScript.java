@@ -5,10 +5,7 @@
 
 package com.mutabra.services.battle.scripts;
 
-import com.mutabra.domain.battle.BattleAbility;
-import com.mutabra.domain.battle.BattleCreature;
-import com.mutabra.domain.battle.BattleEffect;
-import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.*;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.services.battle.BattleField;
 
@@ -22,10 +19,13 @@ public class SummonScript extends AbstractScript {
     protected void apply(final BattleField battleField,
                          final BattleEffect battleEffect,
                          final BattleField.Point target) {
-        if (target == null || target.hasUnit()) {
-            //TODO: log fail
-        } else if (!target.hasUnit()) {
-            final BattleCreature battleCreature = new BattleCreature();
+        final BattleUnit casterUnit = battleEffect.getCaster().getUnit();// not null
+        final BattleHero casterHero = casterUnit.isHero() ?
+                (BattleHero) casterUnit :
+                ((BattleCreature) casterUnit).getHero();
+
+        if (target != null && !target.hasUnit()) {
+            final BattleCreature battleCreature = new BattleCreature(casterHero);
             battleCreature.setCode(battleEffect.getCode());
             battleCreature.setHealth(battleEffect.getHealth());
             battleCreature.setPower(battleEffect.getPower());
@@ -33,7 +33,7 @@ public class SummonScript extends AbstractScript {
             battleCreature.setReady(true);
 
             for (Ability ability : battleEffect.getAbilities()) {
-                final BattleAbility battleAbility = new BattleAbility();
+                final BattleAbility battleAbility = new BattleAbility(battleCreature);
                 battleAbility.setCode(ability.getCode());
                 battleAbility.setTargetType(ability.getTargetType());
                 battleAbility.setBloodCost(ability.getBloodCost());
@@ -41,8 +41,19 @@ public class SummonScript extends AbstractScript {
                 battleCreature.getAbilities().add(battleAbility);
             }
 
-            final BattleHero battleHero = battleEffect.getCaster().getHero(); // not null
-            battleHero.getCreatures().add(battleCreature);
+            casterHero.getCreatures().add(battleCreature);
+
+            success(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("target", battleCreature)
+                    .parameter("target.health", battleCreature.getHealth())
+                    .parameter("target.power", battleCreature.getPower())
+                    .build(battleField.getBattle());
+        } else {
+            failure(battleEffect)
+                    .parameter("caster", casterUnit)
+                    .parameter("spell", battleEffect)
+                    .build(battleField.getBattle());
         }
     }
 }

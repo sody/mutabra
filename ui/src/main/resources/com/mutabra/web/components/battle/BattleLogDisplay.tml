@@ -1,0 +1,9 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <div id="${clientId}" class="${containerClass}" data-dismiss="modal">
+        <t:loop source="log" value="logEntry">
+            <t:battle.logentrydisplay value="logEntry" hero="hero"/>
+        </t:loop>
+    </div>
+
+</t:container>

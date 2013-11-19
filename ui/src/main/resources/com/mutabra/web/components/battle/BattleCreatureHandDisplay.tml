@@ -8,7 +8,7 @@
         </t:loop>
 
         <div class="col-sm-6 col-md-3">
-            <t:battle.skipturndisplay hero="creature.hero"/>
+            <t:battle.skipturndisplay hero="creature.getHero()"/>
         </div>
     </div>
 

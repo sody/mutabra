@@ -129,8 +129,7 @@
           "side": "enemy"
         },
         "caster": {
-          "hero_id": 1,
-          "unit": 1
+          "creature": 1
         }
       }
     ],
@@ -139,11 +138,11 @@
         "key": "firewall.success",
         "parameters": [
           {
-            "hero_id": 12,
-            "unit": 2
+            "hero": 12,
+            "creature": 2
           },
           {
-            "hero_id": 12,
+            "hero": 12,
             "card": 1
           },
           {

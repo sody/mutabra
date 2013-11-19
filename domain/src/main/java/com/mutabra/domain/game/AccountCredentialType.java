@@ -5,6 +5,8 @@
 
 package com.mutabra.domain.game;
 
+import com.mutabra.domain.CodeUtils;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
@@ -20,7 +22,7 @@ public enum AccountCredentialType {
     private final String code;
 
     private AccountCredentialType() {
-        code = name().replaceAll("([A-Z])", "-$1").toLowerCase();
+        code = CodeUtils.generateCode(this);
     }
 
     public String getBasename() {
