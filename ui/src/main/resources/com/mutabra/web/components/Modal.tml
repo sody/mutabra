@@ -16,7 +16,7 @@
                 <t:delegate to="footer"/>
 
                 <t:block t:id="defaultFooter">
-                    <a class="btn" data-dismiss="modal">${message:button.cancel}</a>
+                    <a class="btn btn-default" data-dismiss="modal">${message:button.cancel}</a>
                 </t:block>
             </div>
         </div>

@@ -18,6 +18,8 @@ import org.mongodb.morphia.annotations.Embedded;
  */
 @Embedded
 public class BattleLogParameter implements Translatable {
+    private String parameter;
+
     private BattleSide side;
     private BattlePosition position;
 
@@ -32,13 +34,16 @@ public class BattleLogParameter implements Translatable {
     protected BattleLogParameter() {
     }
 
-    public BattleLogParameter(final BattleSide side, final BattlePosition position) {
+    public BattleLogParameter(final String parameter, final BattleSide side, final BattlePosition position) {
+        this.parameter = parameter;
         this.side = side;
         this.position = position;
         //TODO: calculate value?
     }
 
-    public BattleLogParameter(final BattleUnit battleUnit) {
+    public BattleLogParameter(final String parameter, final BattleUnit battleUnit) {
+        this.parameter = parameter;
+
         if (battleUnit.isHero()) {
             final BattleHero battleHero = (BattleHero) battleUnit;
             heroId = battleHero.getId();
@@ -51,7 +56,9 @@ public class BattleLogParameter implements Translatable {
         }
     }
 
-    public BattleLogParameter(final BattleSpell battleSpell) {
+    public BattleLogParameter(final String parameter, final BattleSpell battleSpell) {
+        this.parameter = parameter;
+
         if (battleSpell.isCard()) {
             final BattleCard battleCard = (BattleCard) battleSpell;
             cardId = battleCard.getId();
@@ -63,12 +70,19 @@ public class BattleLogParameter implements Translatable {
         }
     }
 
-    public BattleLogParameter(final BattleEffect battleEffect) {
+    public BattleLogParameter(final String parameter, final BattleEffect battleEffect) {
+        this.parameter = parameter;
+
         code = battleEffect.getCode() + "." + Translatable.NAME;
     }
 
-    public BattleLogParameter(final Object value) {
+    public BattleLogParameter(final String parameter, final Object value) {
+        this.parameter = parameter;
         this.value = String.valueOf(value);
+    }
+
+    public String getParameter() {
+        return parameter;
     }
 
     public BattlePosition getPosition() {

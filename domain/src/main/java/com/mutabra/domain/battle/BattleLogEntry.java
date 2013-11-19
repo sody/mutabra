@@ -9,8 +9,8 @@ import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Effect;
 import org.mongodb.morphia.annotations.Embedded;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ivan Khalopik
@@ -20,7 +20,7 @@ import java.util.Map;
 public class BattleLogEntry implements Translatable {
     private String code;
 
-    private Map<String, BattleLogParameter> parameters = new HashMap<String, BattleLogParameter>();
+    private List<BattleLogParameter> parameters = new ArrayList<BattleLogParameter>();
 
     public BattleLogEntry() {
     }
@@ -41,7 +41,7 @@ public class BattleLogEntry implements Translatable {
         this.code = code;
     }
 
-    public Map<String, BattleLogParameter> getParameters() {
+    public List<BattleLogParameter> getParameters() {
         return parameters;
     }
 }

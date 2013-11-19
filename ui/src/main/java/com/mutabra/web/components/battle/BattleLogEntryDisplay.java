@@ -18,6 +18,8 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.corelib.mixins.DiscardBody;
 import org.bson.types.ObjectId;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +44,11 @@ public class BattleLogEntryDisplay extends AbstractComponent {
         writer.element("p");
 
         final String message = translate(value);
-        final Map<String, BattleLogParameter> parameters = value.getParameters();
+        final Map<String, BattleLogParameter> parameters = new HashMap<String, BattleLogParameter>();
+        for (BattleLogParameter parameter : value.getParameters()) {
+            parameters.put(parameter.getParameter(), parameter);
+        }
+
 
         int index = 0;
         while (true) {

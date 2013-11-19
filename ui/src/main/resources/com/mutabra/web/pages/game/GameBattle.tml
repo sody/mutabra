@@ -19,8 +19,9 @@
         </svg>
     </div>
 
-    <t:battle.battlelogdisplay t:id="battleLog" hero="field.self" log="battle.log" size="10" zone="battle-log"/>
-    <!--<div class="log col-md-5 col-lg-6">Log</div>-->
+    <div class="col-md-5 col-lg-6">
+        <t:battle.battlelogdisplay t:id="battleLog" hero="field.self" log="battle.log" size="10" zone="battle-log"/>
+    </div>
 </div>
 
 <div class="row">

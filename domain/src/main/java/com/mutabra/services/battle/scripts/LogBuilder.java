@@ -37,27 +37,27 @@ public class LogBuilder {
     }
 
     public LogBuilder parameter(final String key, final BattleSide side, final BattlePosition position) {
-        entry.getParameters().put(key, new BattleLogParameter(side, position));
+        entry.getParameters().add(new BattleLogParameter(key, side, position));
         return this;
     }
 
     public LogBuilder parameter(final String key, final BattleUnit battleUnit) {
-        entry.getParameters().put(key, new BattleLogParameter(battleUnit));
+        entry.getParameters().add(new BattleLogParameter(key, battleUnit));
         return this;
     }
 
     public LogBuilder parameter(final String key, final BattleSpell battleSpell) {
-        entry.getParameters().put(key, new BattleLogParameter(battleSpell));
+        entry.getParameters().add(new BattleLogParameter(key, battleSpell));
         return this;
     }
 
     public LogBuilder parameter(final String key, final BattleEffect battleEffect) {
-        entry.getParameters().put(key, new BattleLogParameter(battleEffect));
+        entry.getParameters().add(new BattleLogParameter(key, battleEffect));
         return this;
     }
 
     public LogBuilder parameter(final String key, final Object value) {
-        entry.getParameters().put(key, new BattleLogParameter(value));
+        entry.getParameters().add(new BattleLogParameter(key, value));
         return this;
     }
 
