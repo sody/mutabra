@@ -9,13 +9,13 @@
             <t:svg type="cards" image="card.code" width="140" height="140"/>
 
             <dl>
-                <dt><i class="glyphicon glyphicon-flash" title="message:label.power"/></dt>
+                <dt><i class="glyphicon glyphicon-flash" title="${message:label.power}"/></dt>
                 <dd>${effect.power}</dd>
 
-                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dt><i class="glyphicon glyphicon-heart" title="${message:label.health}"/></dt>
                 <dd>${effect.health}</dd>
 
-                <dt><i class="glyphicon glyphicon-tint" title="message:label.blood-cost"/></dt>
+                <dt><i class="glyphicon glyphicon-tint" title="${message:label.blood-cost}"/></dt>
                 <dd>${card.bloodCost}</dd>
             </dl>
         </div>

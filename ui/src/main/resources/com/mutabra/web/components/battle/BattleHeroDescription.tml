@@ -9,10 +9,10 @@
             <t:svg type="faces" image="hero.appearance.face" width="140" height="140"/>
 
             <dl>
-                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dt><i class="glyphicon glyphicon-heart" title="${message:label.health}"/></dt>
                 <dd>${hero.health}</dd>
 
-                <dt><i class="glyphicon glyphicon-eye-open" title="message:label.mental-power"/></dt>
+                <dt><i class="glyphicon glyphicon-eye-open" title="${message:label.mental-power}"/></dt>
                 <dd>${hero.mentalPower}</dd>
             </dl>
         </div>

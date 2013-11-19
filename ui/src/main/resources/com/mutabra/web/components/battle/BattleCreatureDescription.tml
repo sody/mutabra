@@ -9,10 +9,10 @@
             <t:svg type="creatures" image="creature.code" width="140" height="140"/>
 
             <dl>
-                <dt><i class="glyphicon glyphicon-heart" title="message:label.health"/></dt>
+                <dt><i class="glyphicon glyphicon-heart" title="${message:label.health}"/></dt>
                 <dd>${creature.health}</dd>
 
-                <dt><i class="glyphicon glyphicon-flash" title="message:label.power"/></dt>
+                <dt><i class="glyphicon glyphicon-flash" title="${message:label.power}"/></dt>
                 <dd>${creature.power}</dd>
             </dl>
         </div>
