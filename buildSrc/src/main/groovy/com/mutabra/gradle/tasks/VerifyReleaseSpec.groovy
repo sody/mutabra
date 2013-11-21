@@ -10,29 +10,30 @@ package com.mutabra.gradle.tasks
  */
 class VerifyReleaseSpec {
 
-    String requireBranch = 'master';
-    boolean failOnCommitNeeded = true;
-    boolean failOnUnversionedFiles = true;
-    boolean failOnPublishNeeded = true;
-    boolean failOnUpdateNeeded = true;
+    String requireBranch = 'master'
+    boolean failOnCommitNeeded = true
+    boolean failOnUnversionedFiles = true
+    boolean failOnPublishNeeded = true
+    boolean failOnUpdateNeeded = true
+    boolean failOnSnapshotDependencies = true
 
-    void requireBranch(final String requireBranch) {
+    void requireBranch(String requireBranch) {
         this.requireBranch = requireBranch
     }
 
-    void failOnCommitNeeded(final boolean failOnCommitNeeded) {
+    void failOnCommitNeeded(boolean failOnCommitNeeded) {
         this.failOnCommitNeeded = failOnCommitNeeded
     }
 
-    void failOnUnversionedFiles(final boolean failOnUnversionedFiles) {
+    void failOnUnversionedFiles(boolean failOnUnversionedFiles) {
         this.failOnUnversionedFiles = failOnUnversionedFiles
     }
 
-    void failOnPublishNeeded(final boolean failOnPublishNeeded) {
+    void failOnPublishNeeded(boolean failOnPublishNeeded) {
         this.failOnPublishNeeded = failOnPublishNeeded
     }
 
-    void failOnUpdateNeeded(final boolean failOnUpdateNeeded) {
+    void failOnUpdateNeeded(boolean failOnUpdateNeeded) {
         this.failOnUpdateNeeded = failOnUpdateNeeded
     }
 }

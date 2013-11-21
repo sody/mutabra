@@ -6,39 +6,53 @@
 package com.mutabra.gradle.tasks
 
 import org.gradle.api.GradleException
+import org.gradle.api.Project
+import org.slf4j.Logger
 
 /**
  * @author Ivan Khalopik
  */
-public class GitScm implements Scm {
-    private static final String INFO = 'info'
-    private static final String UNVERSIONED = 'unversioned'
-    private static final String UNCOMMITTED = 'uncommitted'
+class GitScm implements Scm {
+    static final String INFO = 'info'
+    static final String UNVERSIONED = 'unversioned'
+    static final String UNCOMMITTED = 'uncommitted'
 
-    File workTree;
+    Project project
 
-    GitScm(File workTree) {
-        this.workTree = workTree
+    File workTree
+    File gitDir
+    Logger logger
+
+    GitScm(Project project) {
+        this.project = project
+
+        workTree = project.rootDir
+        gitDir = project.rootProject.file('.git')
+        logger = project.logger
     }
 
     @Override
     Scm.Status status() {
-//        exec('remote', 'update')
+        // update remotes
+        //TODO: fix this
+        //exec('remote', 'update')
 
-        final Map<String, List<String>> result = exec('status', '-sb').readLines().groupBy {
+        // get status
+        def result = exec('status', '-sb').readLines().groupBy {
             it ==~ /^\s*#{2}.*/ ?
                 INFO :
                 it ==~ /^\s*\?{2}.*/ ?
                     UNVERSIONED :
                     UNCOMMITTED
         }
-
-        String info = result[INFO][0]
-        String currentBranch = (info =~ /^\s*\#{2}\s*([^\.{3}]*).*/)[0][1]
-        int ahead = info ==~ /.*ahead (\d+).*/ ? Integer.parseInt((info =~ /.*ahead (\d+).*/)[0][1]) : 0
-        int behind = info ==~ /.*behind (\d+).*/ ? Integer.parseInt((info =~ /.*behind (\d+).*/)[0][1]) : 0
-        List<String> uncommitted = result[UNCOMMITTED] ?: []
-        List<String> unversioned = result[UNVERSIONED] ?: []
+        // process info: current branch, ahead and behind statuses
+        def info = result[INFO][0]
+        def currentBranch = (info =~ /^\s*\#{2}\s*([^\.{3}]*).*/)[0][1]
+        def ahead = info ==~ /.*ahead (\d+).*/ ? Integer.parseInt((info =~ /.*ahead (\d+).*/)[0][1]) : 0
+        def behind = info ==~ /.*behind (\d+).*/ ? Integer.parseInt((info =~ /.*behind (\d+).*/)[0][1]) : 0
+        // process files info
+        def uncommitted = result[UNCOMMITTED] ?: []
+        def unversioned = result[UNVERSIONED] ?: []
 
         return new Scm.Status() {
             @Override
@@ -58,7 +72,7 @@ public class GitScm implements Scm {
 
             @Override
             int ahead() {
-                return ahead;
+                return ahead
             }
 
             @Override
@@ -68,34 +82,32 @@ public class GitScm implements Scm {
         }
     }
 
-    String exec(String... commands) {
-        exec(workTree, commands)
-    }
+    String exec(String... commandArgs) {
+        def command = ['git', "--git-dir=${gitDir.canonicalPath}", "--work-tree=${workTree.canonicalPath}"]
+        def out = new ByteArrayOutputStream()
+        def err = new ByteArrayOutputStream()
 
-    String exec(File workDir, String... commands) {
-        def cmdLine = ['git']
-        cmdLine.addAll commands
-        execute(true, ['HOME': System.getProperty("user.home")], workDir, cmdLine as String[])
-    }
-
-    String execute(boolean failOnStderr = true, Map env = [:], File directory = null, String... commands) {
-        def out = new StringBuffer()
-        def err = new StringBuffer()
-        def logMessage = "Running \"${commands.join(' ')}\"${ directory ? ' in [' + directory.canonicalPath + ']' : '' }"
-        def process = (env || directory) ?
-            (commands as List).execute(env.collect { "$it.key=$it.value" } as String[], directory) :
-            (commands as List).execute()
-
-        process.waitForProcessOutput(out, err)
+        logger.info("Running ${ command.join(' ') } ${ commandArgs.join(' ') }")
+        try {
+            project.exec {
+                commandLine command
+                args commandArgs
+                standardOutput = out
+                errorOutput = err
+            }
+        } catch (GradleException e) {
+            logger.debug("Output:\n${out}")
+            fail("Cannot run command: ${ command.join(' ') } ${ commandArgs.join(' ') }\n${err}", e)
+        }
 
         if (err.toString()) {
-            def message = "$logMessage produced an error: [${err.toString().trim()}]"
-            if (failOnStderr) {
-                throw new GradleException(message)
-            } else {
-//                log.warn(message)
-            }
+            logger.warn("Error:\n${err}")
         }
+
         out.toString()
+    }
+
+    void fail(String message, Throwable throwable) {
+        throw new GradleException(message, throwable)
     }
 }

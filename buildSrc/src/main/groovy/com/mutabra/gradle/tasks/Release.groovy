@@ -10,67 +10,80 @@ import org.gradle.api.GradleException
 import org.gradle.api.tasks.GradleBuild
 import org.gradle.initialization.GradleLauncherFactory
 import org.gradle.util.ConfigureUtil
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+
+import javax.inject.Inject
 
 /**
  * @author Ivan Khalopik
  */
 public class Release extends GradleBuild {
-    private static Logger logger = LoggerFactory.getLogger(Release.class);
 
-    private final VerifyReleaseSpec verify = new VerifyReleaseSpec();
+    Scm scm
+    VerifyReleaseSpec verify
+    UpdateReleaseSpec update
 
-    public Release(final StartParameter currentBuild, final GradleLauncherFactory gradleLauncherFactory) {
-        super(currentBuild, gradleLauncherFactory);
+    @Inject
+    Release(StartParameter currentBuild, GradleLauncherFactory gradleLauncherFactory) {
+        super(currentBuild, gradleLauncherFactory)
 
-        final StartParameter startParameter = getProject().getGradle().getStartParameter().newInstance();
-        startParameter.setRecompileScripts(false);
-        startParameter.setRerunTasks(false);
-        setStartParameter(startParameter);
+        startParameter.setRecompileScripts(false)
+        startParameter.setRerunTasks(false)
+
+        scm = findScm()
+        verify = new VerifyReleaseSpec()
+        update = new UpdateReleaseSpec(project)
 
         tasks = [
-                'verifyRelease',
+                'verifyScm',
+                'prepareRelease',
                 'build'
         ]
 
         project.task(
-                'verifyRelease',
+                'verifyScm',
                 group: 'release',
-                description: 'Verifies release.'
-        ) << this.&verifyRelease
+                description: 'Verifies SCM state: current '
+        ) << this.&verifyScm
+
+        project.task(
+                'prepareRelease',
+                group: 'release',
+                description: 'Prepares release: updates version from snapshot to release.'
+        ) << this.&prepareRelease
     }
 
-    public void verify(final Closure closure) {
-        ConfigureUtil.configure(closure, this.verify);
+    void verify(Closure closure) {
+        ConfigureUtil.configure(closure, verify)
     }
 
+    void update(Closure closure) {
+        ConfigureUtil.configure(closure, update)
+    }
 
-    protected void verifyRelease() {
-        final Scm scm = scm();
+    void verifyScm() {
         if (scm == null) {
             fail('Unsupported SCM system.')
         }
 
-        final Scm.Status status = scm.status();
+        def status = scm.status()
         if (verify.requireBranch != null && !verify.requireBranch.equals(status.currentBranch())) {
             fail("Current SCM branch is \"${status.currentBranch()}\" but \"${verify.requireBranch}\" is required.")
         }
-        if (status.uncommitted() != null && !status.uncommitted().isEmpty()) {
-            failOn(verify.failOnCommitNeeded, ([
+        if (status.uncommitted()) {
+            failOn(verify.failOnCommitNeeded, [
                     'You have uncommitted files:',
                     '---------------------------',
                     * status.uncommitted(),
                     '---------------------------'
-            ] as String[]).join('\n'))
+            ].join('\n'))
         }
-        if (status.unversioned() != null && !status.unversioned().isEmpty()) {
-            failOn(verify.failOnUnversionedFiles, ([
+        if (status.unversioned()) {
+            failOn(verify.failOnUnversionedFiles, [
                     'You have unversioned files:',
                     '---------------------------',
                     * status.unversioned(),
                     '---------------------------'
-            ] as String[]).join('\n'))
+            ].join('\n'))
         }
         if (status.ahead() > 0) {
             failOn(verify.failOnPublishNeeded, "You have ${status.ahead()} local change(s) to push.")
@@ -80,19 +93,30 @@ public class Release extends GradleBuild {
         }
     }
 
-    protected Scm scm() {
-        return new GitScm(project.rootProject.projectDir);
+    void prepareRelease() {
+        def oldVersion = project.version
+        def newVersion = project.version -= '-SNAPSHOT'
+        update.source.each {
+            project.ant.replaceregexp(file: it, match: oldVersion, replace: newVersion)
+        }
+        update.projects*.version = newVersion
     }
 
-    protected void failOn(final boolean condition, final String message) {
+    Scm findScm() {
+        return project.rootProject.file('.git').exists() ?
+            new GitScm(project) :
+            null
+    }
+
+    void failOn(boolean condition, String message) {
         if (condition) {
-            fail(message);
+            fail(message)
         } else {
-            logger.warn(message);
+            logger.warn(message)
         }
     }
 
-    protected void fail(final String message) {
-        throw new GradleException(message);
+    void fail(String message) {
+        throw new GradleException(message)
     }
 }
