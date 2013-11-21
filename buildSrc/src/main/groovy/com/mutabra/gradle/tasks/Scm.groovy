@@ -12,18 +12,24 @@ import com.mutabra.gradle.tasks.Scm.Status
  */
 public interface Scm {
 
-    Status status();
+    Status status()
+
+    void add(Object... files)
+
+    void commit(String message)
+
+    void tag(String tag, String message)
 
     interface Status {
 
-        String currentBranch();
+        String currentBranch()
 
-        List<String> uncommitted();
+        List<String> uncommitted()
 
-        List<String> unversioned();
+        List<String> unversioned()
 
-        int ahead();
+        int ahead()
 
-        int behind();
+        int behind()
     }
 }

@@ -36,13 +36,14 @@ public class Release extends GradleBuild {
         tasks = [
                 'verifyScm',
                 'prepareRelease',
-                'build'
+                'build',
+                'performRelease'
         ]
 
         project.task(
                 'verifyScm',
                 group: 'release',
-                description: 'Verifies SCM state: current '
+                description: 'Verifies SCM state.'
         ) << this.&verifyScm
 
         project.task(
@@ -50,6 +51,12 @@ public class Release extends GradleBuild {
                 group: 'release',
                 description: 'Prepares release: updates version from snapshot to release.'
         ) << this.&prepareRelease
+
+        project.task(
+                'performRelease',
+                group: 'release',
+                description: 'Performs release: commits version update to SCM, tags it, updates it to the next snapshot.'
+        ) << this.&performRelease
     }
 
     void verify(Closure closure) {
@@ -95,11 +102,29 @@ public class Release extends GradleBuild {
 
     void prepareRelease() {
         def oldVersion = project.version
-        def newVersion = project.version -= '-SNAPSHOT'
+        def newVersion = update.version
         update.source.each {
             project.ant.replaceregexp(file: it, match: oldVersion, replace: newVersion)
         }
         update.projects*.version = newVersion
+    }
+
+    void performRelease() {
+        def oldVersion = project.version
+        def newVersion = update.nextVersion
+        def tag = update.tag
+
+        scm.add(update.source.files)
+        scm.commit("[RELEASE]: Project version updated to ${oldVersion}")
+        scm.tag("${tag}", "[RELEASE]: Created tag ${tag}")
+
+        update.source.each {
+            project.ant.replaceregexp(file: it, match: oldVersion, replace: newVersion)
+        }
+        update.projects*.version = newVersion
+
+        scm.add(update.source.files)
+        scm.commit("[RELEASE]: Project version updated to ${newVersion}")
     }
 
     Scm findScm() {

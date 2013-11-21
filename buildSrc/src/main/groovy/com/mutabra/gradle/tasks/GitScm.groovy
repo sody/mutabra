@@ -82,8 +82,30 @@ class GitScm implements Scm {
         }
     }
 
+    @Override
+    void add(Object... source) {
+        def files = project.files(source).collect { fixPath(it) }
+
+        if (files) {
+            // add all files to index
+            exec('add', '--', files.join(' '))
+        }
+    }
+
+    @Override
+    void commit(String message) {
+        // commit updated files
+        exec('commit', '-m', message)
+    }
+
+    @Override
+    void tag(String tag, String message) {
+        // tag version
+        exec('tag', '-a', tag, '-m', message)
+    }
+
     String exec(String... commandArgs) {
-        def command = ['git', "--git-dir=${gitDir.canonicalPath}", "--work-tree=${workTree.canonicalPath}"]
+        def command = ['git', "--git-dir=${ fixPath(gitDir) }", "--work-tree=${ fixPath(workTree) }"]
         def out = new ByteArrayOutputStream()
         def err = new ByteArrayOutputStream()
 
@@ -100,6 +122,7 @@ class GitScm implements Scm {
             fail("Cannot run command: ${ command.join(' ') } ${ commandArgs.join(' ') }\n${err}", e)
         }
 
+        logger.debug("Output:\n${out}")
         if (err.toString()) {
             logger.warn("Error:\n${err}")
         }
@@ -109,5 +132,9 @@ class GitScm implements Scm {
 
     void fail(String message, Throwable throwable) {
         throw new GradleException(message, throwable)
+    }
+
+    String fixPath(File file) {
+        return file.canonicalPath.replaceAll('\\\\', '/')
     }
 }
