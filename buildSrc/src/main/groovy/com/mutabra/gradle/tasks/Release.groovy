@@ -5,6 +5,7 @@
 
 package com.mutabra.gradle.tasks
 
+import com.mutabra.gradle.plugins.ReleasePlugin
 import org.gradle.StartParameter
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.GradleBuild
@@ -42,19 +43,19 @@ public class Release extends GradleBuild {
 
         project.task(
                 'verifyScm',
-                group: 'release',
+                group: ReleasePlugin.RELEASE_GROUP,
                 description: 'Verifies SCM state.'
         ) << this.&verifyScm
 
         project.task(
                 'prepareRelease',
-                group: 'release',
+                group: ReleasePlugin.RELEASE_GROUP,
                 description: 'Prepares release: updates version from snapshot to release.'
         ) << this.&prepareRelease
 
         project.task(
                 'performRelease',
-                group: 'release',
+                group: ReleasePlugin.RELEASE_GROUP,
                 description: 'Performs release: commits version update to SCM, tags it, updates it to the next snapshot.'
         ) << this.&performRelease
     }

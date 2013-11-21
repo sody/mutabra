@@ -4,6 +4,7 @@
  */
 
 apply plugin: 'base'
+apply plugin: 'release'
 apply from: 'gradle/ide-settings.gradle'
 
 group = 'com.mutabra'
