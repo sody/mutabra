@@ -143,24 +143,19 @@ public class Release extends GradleBuild {
     }
 
     void prepareRelease() {
-        // resolve versions
+        // resolve release version
         def oldVersion = project.version
-        releaseVersion = update.version
-        nextVersion = update.nextVersion
-        tagName = update.tag
-
-        // confirm versions if not automatic
-        if (!update.automaticVersions) {
-            releaseVersion = readLine("Enter release version", releaseVersion)
-            nextVersion = readLine("Enter next version", nextVersion)
-            tagName = readLine("Enter tag name", tagName)
-        }
+        releaseVersion = readValue("Enter release version", releaseVersion) { update.version }
 
         // update versions
         update.source.each {
             project.ant.replaceregexp(file: it, match: oldVersion, replace: releaseVersion)
         }
         update.projects*.version = releaseVersion
+
+        // resolve next version and tag
+        nextVersion = readValue("Enter next version", nextVersion) { update.nextVersion }
+        tagName = readValue("Enter tag name", tagName) { update.tag }
     }
 
     void commitScm() {
@@ -168,13 +163,9 @@ public class Release extends GradleBuild {
         // for incremental release only
         // for usual release all this values are already assigned
         if (nextVersion == null || tagName == null) {
-            nextVersion = nextVersion ?: update.nextVersion
-            tagName = tagName ?: update.tag
-
-            if (!update.automaticVersions) {
-                nextVersion = readLine("Enter next version", nextVersion)
-                tagName = readLine("Enter tag name", tagName)
-            }
+            // resolve next version and tag
+            nextVersion = readValue("Enter next version", nextVersion) { update.nextVersion }
+            tagName = readValue("Enter tag name", tagName) { update.tag }
         }
 
         def commits = 0
@@ -217,13 +208,25 @@ public class Release extends GradleBuild {
             null
     }
 
-    String readLine(String message, Object defaultValue = null) {
-        String _message = "\n?? ${message}" + (defaultValue ? " [$defaultValue]:" : ":")
-        if (System.console()) {
-            return System.console().readLine(_message) ?: defaultValue
+    String readValue(String message, Object currentValue, Closure defaultValue) {
+        if (currentValue != null) {
+            return currentValue
         }
-        println "${_message} (WAITING FOR INPUT BELOW)"
-        return System.in.newReader().readLine() ?: defaultValue
+
+        def value = defaultValue.call()
+        if (update.automaticVersions) {
+            return value
+        }
+
+        def msg = "\n?? ${message} ${ value ? '[' + value + ']' : ''}:"
+        if (System.console()) {
+            // read from java console if present
+            return System.console().readLine(msg) ?: value
+        }
+
+        // read from system in stream
+        println "${msg} (WAITING FOR INPUT BELOW)"
+        return System.in.newReader().readLine() ?: value
     }
 
     void failOn(boolean condition, String message) {
