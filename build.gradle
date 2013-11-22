@@ -60,6 +60,10 @@ task stage(type: Sync) {
     rename 'jetty-runner(.*)\\.jar', 'jetty-runner.jar'
 }
 
+release {
+    releaseTasks 'build'
+}
+
 allprojects {
     repositories {
         mavenCentral()

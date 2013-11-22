@@ -9,10 +9,14 @@ import org.gradle.api.Project
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.FileTreeElement
 import org.gradle.api.specs.Spec
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.util.PatternFilterable
 import org.gradle.api.tasks.util.PatternSet
+import org.gradle.util.Configurable
+import org.gradle.util.ConfigureUtil
 
-class UpdateReleaseSpec {
+class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
 
     Project project
 
@@ -23,6 +27,8 @@ class UpdateReleaseSpec {
     Object version
     Object nextVersion
 
+    boolean automaticVersions;
+
     UpdateReleaseSpec(Project project) {
         this.project = project
 
@@ -32,7 +38,7 @@ class UpdateReleaseSpec {
             project.version - '-SNAPSHOT'
         }
         tag {
-            "v${project.version}"
+            'v' + project.version  - '-SNAPSHOT'
         }
         nextVersion {
             "${project.version}".replaceFirst(/(\d+)$/) {
@@ -41,10 +47,16 @@ class UpdateReleaseSpec {
         }
     }
 
+    @Override
+    UpdateReleaseSpec configure(Closure cl) {
+        return ConfigureUtil.configure(cl, this, false)
+    }
+
     Set<Project> getProjects() {
         return project.allprojects
     }
 
+    @Input
     Object getTag() {
         return expand(tag)
     }
@@ -59,6 +71,7 @@ class UpdateReleaseSpec {
         return this
     }
 
+    @Input
     Object getVersion() {
         return expand(version)
     }
@@ -73,6 +86,7 @@ class UpdateReleaseSpec {
         return this
     }
 
+    @Input
     Object getNextVersion() {
         return expand(nextVersion)
     }
@@ -87,6 +101,22 @@ class UpdateReleaseSpec {
         return this
     }
 
+    @Input
+    boolean isAutomaticVersions() {
+        return automaticVersions
+    }
+
+    UpdateReleaseSpec setAutomaticVersions(boolean automaticVersions) {
+        this.automaticVersions = automaticVersions
+        return this
+    }
+
+    UpdateReleaseSpec automaticVersions(boolean automaticVersions) {
+        this.automaticVersions = automaticVersions
+        return this
+    }
+
+    @InputFiles
     FileTree getSource() {
         return this.source ? project.files(this.source).asFileTree : project.files().asFileTree
     }

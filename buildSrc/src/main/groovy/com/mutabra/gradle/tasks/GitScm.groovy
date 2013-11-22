@@ -99,9 +99,21 @@ class GitScm implements Scm {
     }
 
     @Override
-    void tag(String tag, String message) {
-        // tag version
-        exec('tag', '-a', tag, '-m', message)
+    void reset(String commit) {
+        // reset changes
+        exec('reset', commit)
+    }
+
+    @Override
+    void tag(String tagName, String message) {
+        // add tag
+        exec('tag', '-a', tagName, '-m', message)
+    }
+
+    @Override
+    void deleteTag(String tagName) {
+        // delete tag
+        exec('tag', '-d', tagName)
     }
 
     String exec(String... commandArgs) {

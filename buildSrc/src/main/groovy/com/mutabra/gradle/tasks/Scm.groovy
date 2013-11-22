@@ -14,11 +14,15 @@ public interface Scm {
 
     Status status()
 
-    void add(Object... files)
+    void add(Object... source)
 
     void commit(String message)
 
-    void tag(String tag, String message)
+    void reset(String commit)
+
+    void tag(String tagName, String message)
+
+    void deleteTag(String tagName)
 
     interface Status {
 

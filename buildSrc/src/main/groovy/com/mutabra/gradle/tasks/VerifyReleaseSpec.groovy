@@ -5,35 +5,48 @@
 
 package com.mutabra.gradle.tasks
 
+import org.gradle.util.Configurable
+import org.gradle.util.ConfigureUtil
+
 /**
  * @author Ivan Khalopik
  */
-class VerifyReleaseSpec {
+class VerifyReleaseSpec implements Configurable<VerifyReleaseSpec> {
 
     String requireBranch = 'master'
     boolean failOnCommitNeeded = true
-    boolean failOnUnversionedFiles = true
-    boolean failOnPublishNeeded = true
+    boolean failOnUnversionedFiles = false
+    boolean failOnPublishNeeded = false
     boolean failOnUpdateNeeded = true
     boolean failOnSnapshotDependencies = true
 
-    void requireBranch(String requireBranch) {
+    @Override
+    VerifyReleaseSpec configure(final Closure cl) {
+        return ConfigureUtil.configure(cl, this, false)
+    }
+
+    VerifyReleaseSpec requireBranch(String requireBranch) {
         this.requireBranch = requireBranch
+        return this
     }
 
-    void failOnCommitNeeded(boolean failOnCommitNeeded) {
+    VerifyReleaseSpec failOnCommitNeeded(boolean failOnCommitNeeded) {
         this.failOnCommitNeeded = failOnCommitNeeded
+        return this
     }
 
-    void failOnUnversionedFiles(boolean failOnUnversionedFiles) {
+    VerifyReleaseSpec failOnUnversionedFiles(boolean failOnUnversionedFiles) {
         this.failOnUnversionedFiles = failOnUnversionedFiles
+        return this
     }
 
-    void failOnPublishNeeded(boolean failOnPublishNeeded) {
+    VerifyReleaseSpec failOnPublishNeeded(boolean failOnPublishNeeded) {
         this.failOnPublishNeeded = failOnPublishNeeded
+        return this
     }
 
-    void failOnUpdateNeeded(boolean failOnUpdateNeeded) {
+    VerifyReleaseSpec failOnUpdateNeeded(boolean failOnUpdateNeeded) {
         this.failOnUpdateNeeded = failOnUpdateNeeded
+        return this
     }
 }
