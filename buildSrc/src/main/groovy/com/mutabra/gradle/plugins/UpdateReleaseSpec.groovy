@@ -3,14 +3,12 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.tasks
+package com.mutabra.gradle.plugins
 
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.FileTreeElement
 import org.gradle.api.specs.Spec
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.util.PatternFilterable
 import org.gradle.api.tasks.util.PatternSet
 import org.gradle.util.Configurable
@@ -20,34 +18,29 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
 
     Project project
 
+    Object tagName
+    Object releaseVersion
+    Object nextVersion
+    boolean automaticVersions;
+
     List<Object> source = new ArrayList<Object>()
     PatternFilterable patternSet = new PatternSet()
-
-    Object tag
-    Object version
-    Object nextVersion
-
-    boolean automaticVersions;
 
     UpdateReleaseSpec(Project project) {
         this.project = project
 
         // default values
-        source(project.buildFile)
-        version {
-            project.version - '-SNAPSHOT'
-        }
-        tag {
-            'v' + project.version  - '-SNAPSHOT'
-        }
-        nextVersion {
+        releaseVersion = { project.version - '-SNAPSHOT' }
+        tagName = { "v${project.version}" }
+        nextVersion = {
             "${project.version}".replaceFirst(/(\d+)$/) {
                 ((it[0] as int) + 1) + '-SNAPSHOT'
             }
         }
+
+        source(project.buildFile)
     }
 
-    @Override
     UpdateReleaseSpec configure(Closure cl) {
         return ConfigureUtil.configure(cl, this, false)
     }
@@ -56,39 +49,36 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
         return project.allprojects
     }
 
-    @Input
-    Object getTag() {
-        return expand(tag)
+    Object getTagName() {
+        return tagName
     }
 
-    UpdateReleaseSpec setTag(Object tag) {
-        this.tag = tag
+    UpdateReleaseSpec setTagName(Object tag) {
+        this.tagName = tag
         return this
     }
 
-    UpdateReleaseSpec tag(Object tag) {
-        this.tag = tag
+    UpdateReleaseSpec tagName(Object tag) {
+        this.tagName = tag
         return this
     }
 
-    @Input
-    Object getVersion() {
-        return expand(version)
+    Object getReleaseVersion() {
+        return releaseVersion
     }
 
-    UpdateReleaseSpec setVersion(Object version) {
-        this.version = version
+    UpdateReleaseSpec setReleaseVersion(Object version) {
+        this.releaseVersion = version
         return this
     }
 
-    UpdateReleaseSpec version(Object version) {
-        this.version = version
+    UpdateReleaseSpec releaseVersion(Object version) {
+        this.releaseVersion = version
         return this
     }
 
-    @Input
     Object getNextVersion() {
-        return expand(nextVersion)
+        return nextVersion
     }
 
     UpdateReleaseSpec setNextVersion(Object nextVersion) {
@@ -101,7 +91,6 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
         return this
     }
 
-    @Input
     boolean isAutomaticVersions() {
         return automaticVersions
     }
@@ -116,7 +105,6 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
         return this
     }
 
-    @InputFiles
     FileTree getSource() {
         return this.source ? project.files(this.source).asFileTree : project.files().asFileTree
     }
@@ -190,9 +178,5 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
     UpdateReleaseSpec setExcludes(Iterable<String> excludes) {
         patternSet.excludes = excludes
         return this
-    }
-
-    Object expand(Object value) {
-        return value instanceof Closure ? value.call() : value
     }
 }

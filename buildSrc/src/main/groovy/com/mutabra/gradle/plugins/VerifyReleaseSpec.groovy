@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.tasks
+package com.mutabra.gradle.plugins
 
 import org.gradle.util.Configurable
 import org.gradle.util.ConfigureUtil
@@ -13,12 +13,22 @@ import org.gradle.util.ConfigureUtil
  */
 class VerifyReleaseSpec implements Configurable<VerifyReleaseSpec> {
 
-    String requireBranch = 'master'
-    boolean failOnCommitNeeded = true
-    boolean failOnUnversionedFiles = false
-    boolean failOnPublishNeeded = false
-    boolean failOnUpdateNeeded = true
-    boolean failOnSnapshotDependencies = true
+    String requireBranch
+    boolean failOnCommitNeeded
+    boolean failOnUnversionedFiles
+    boolean failOnPublishNeeded
+    boolean failOnUpdateNeeded
+    boolean failOnSnapshotDependencies
+
+    VerifyReleaseSpec() {
+        // default values
+        requireBranch = 'master'
+        failOnCommitNeeded = true
+        failOnUnversionedFiles = false
+        failOnPublishNeeded = false
+        failOnUpdateNeeded = true
+        failOnSnapshotDependencies = true
+    }
 
     @Override
     VerifyReleaseSpec configure(final Closure cl) {
