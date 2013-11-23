@@ -8,7 +8,7 @@ package com.mutabra.gradle.plugins
 import com.mutabra.gradle.tasks.ReleaseBuild
 import com.mutabra.gradle.tasks.ReleaseCommitScm
 import com.mutabra.gradle.tasks.ReleasePrepare
-import com.mutabra.gradle.tasks.ReleaseVerifyScm
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.GradleBuild
@@ -19,7 +19,6 @@ import org.gradle.api.tasks.GradleBuild
 class ReleasePlugin implements Plugin<Project> {
     static final String RELEASE_GROUP = 'release'
     static final String RELEASE_TASK_NAME = 'release'
-    static final String VERIFY_SCM_TASK_NAME = 'verifyScm'
     static final String PREPARE_RELEASE_TASK_NAME = 'prepareRelease'
     static final String VERIFY_RELEASE_TASK_NAME = 'verifyRelease'
     static final String PERFORM_RELEASE_TASK_NAME = 'performRelease'
@@ -32,28 +31,24 @@ class ReleasePlugin implements Plugin<Project> {
         def convention = new ReleasePluginConvention(target)
         target.convention.plugins.put('release', convention)
 
-        def verifyScm = target.tasks.create(VERIFY_SCM_TASK_NAME, ReleaseVerifyScm)
-        verifyScm.group = RELEASE_GROUP
-        verifyScm.description = 'Verifies current SCM state.'
-        verifyScm.conventionMapping.map('requireBranch') {
-            convention.release.verify.requireBranch
-        }
-        verifyScm.conventionMapping.map('failOnCommitNeeded') {
-            convention.release.verify.failOnCommitNeeded
-        }
-        verifyScm.conventionMapping.map('failOnUnversionedFiles') {
-            convention.release.verify.failOnUnversionedFiles
-        }
-        verifyScm.conventionMapping.map('failOnUpdateNeeded') {
-            convention.release.verify.failOnUpdateNeeded
-        }
-        verifyScm.conventionMapping.map('failOnPublishNeeded') {
-            convention.release.verify.failOnPublishNeeded
-        }
-
         def prepareRelease = target.tasks.create(PREPARE_RELEASE_TASK_NAME, ReleasePrepare)
         prepareRelease.group = RELEASE_GROUP
-        prepareRelease.description = 'Prepares release: update versions from snapshot to release.'
+        prepareRelease.description = 'Prepares release: verify current SCM state, update versions from snapshot to release.'
+        prepareRelease.conventionMapping.map('requireBranch') {
+            convention.release.verify.requireBranch
+        }
+        prepareRelease.conventionMapping.map('failOnCommitNeeded') {
+            convention.release.verify.failOnCommitNeeded
+        }
+        prepareRelease.conventionMapping.map('failOnUnversionedFiles') {
+            convention.release.verify.failOnUnversionedFiles
+        }
+        prepareRelease.conventionMapping.map('failOnUpdateNeeded') {
+            convention.release.verify.failOnUpdateNeeded
+        }
+        prepareRelease.conventionMapping.map('failOnPublishNeeded') {
+            convention.release.verify.failOnPublishNeeded
+        }
         prepareRelease.conventionMapping.map('source') {
             convention.release.update.source
         }
@@ -98,7 +93,6 @@ class ReleasePlugin implements Plugin<Project> {
         release.group = RELEASE_GROUP
         release.description = 'Releases new version of application.'
         release.tasks = [
-                VERIFY_SCM_TASK_NAME,
                 PREPARE_RELEASE_TASK_NAME,
                 VERIFY_RELEASE_TASK_NAME,
                 PERFORM_RELEASE_TASK_NAME,
