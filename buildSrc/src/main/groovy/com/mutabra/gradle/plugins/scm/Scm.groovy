@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.plugins
+package com.mutabra.gradle.plugins.scm
 
-import com.mutabra.gradle.plugins.Scm.Status
+import com.mutabra.gradle.plugins.scm.Scm.Status
 
 /**
  * @author Ivan Khalopik

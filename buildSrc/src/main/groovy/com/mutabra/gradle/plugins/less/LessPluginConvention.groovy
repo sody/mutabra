@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.plugins
+package com.mutabra.gradle.plugins.less
 
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree

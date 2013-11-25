@@ -5,7 +5,7 @@
 
 
 
-package com.mutabra.gradle.plugins
+package com.mutabra.gradle.plugins.release
 
 import org.gradle.api.Project
 

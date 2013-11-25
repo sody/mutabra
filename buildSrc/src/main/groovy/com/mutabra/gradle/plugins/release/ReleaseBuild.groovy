@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.tasks
+package com.mutabra.gradle.plugins.release
 
 import org.gradle.StartParameter
 import org.gradle.api.tasks.GradleBuild

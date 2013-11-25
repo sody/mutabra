@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.tasks
+package com.mutabra.gradle.plugins.release
 
-import com.mutabra.gradle.plugins.Scm
+import com.mutabra.gradle.plugins.scm.Scm
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.SourceTask

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.tasks
+package com.mutabra.gradle.plugins.less
 
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input

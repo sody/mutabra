@@ -3,12 +3,9 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.plugins
+package com.mutabra.gradle.plugins.release
 
-import com.mutabra.gradle.tasks.ReleaseBuild
-import com.mutabra.gradle.tasks.ReleaseFinish
-import com.mutabra.gradle.tasks.ReleasePrepare
-
+import com.mutabra.gradle.plugins.scm.ScmPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.GradleBuild

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.plugins
+package com.mutabra.gradle.plugins.scm
 
 import org.gradle.api.GradleException
 import org.gradle.api.Project

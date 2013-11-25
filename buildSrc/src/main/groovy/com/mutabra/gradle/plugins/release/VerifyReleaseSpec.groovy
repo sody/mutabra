@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.mutabra.gradle.plugins
+package com.mutabra.gradle.plugins.release
 
 import org.gradle.util.Configurable
 import org.gradle.util.ConfigureUtil
