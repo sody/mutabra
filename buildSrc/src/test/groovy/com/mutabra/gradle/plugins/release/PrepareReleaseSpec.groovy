@@ -27,6 +27,30 @@ class PrepareReleaseSpec extends GitSpecification {
         thrown(GradleException)
     }
 
+    def "prepareRelease should not fail if branch matches defined"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                requireBranch 'master'
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
+
+        cleanup:
+        localGit.exec('reset', '--hard', 'origin/master')
+    }
+
+
     def "prepareRelease should fail if there are uncommitted changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
@@ -56,6 +80,29 @@ class PrepareReleaseSpec extends GitSpecification {
         localGit.exec('reset', '--hard', 'origin/master')
     }
 
+    def "prepareRelease should not fail if there are no uncommitted changes"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                failOnCommitNeeded true
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
+
+        cleanup:
+        localGit.exec('reset', '--hard', 'origin/master')
+    }
+
     def "prepareRelease should fail if there are unversioned changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
@@ -81,6 +128,29 @@ class PrepareReleaseSpec extends GitSpecification {
 
         cleanup:
         rootProject.file('README').delete()
+    }
+
+    def "prepareRelease should not fail if there are no unversioned changes"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                failOnUnversionedFiles true
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
+
+        cleanup:
+        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should fail if there are outcoming changes"() {
@@ -112,6 +182,29 @@ class PrepareReleaseSpec extends GitSpecification {
         localGit.exec('reset', '--hard', 'origin/master')
     }
 
+    def "prepareRelease should not fail if there are no outcoming changes"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                failOnPublishNeeded true
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
+
+        cleanup:
+        localGit.exec('reset', '--hard', 'origin/master')
+    }
+
     def "prepareRelease should fail if there are incoming changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
@@ -132,6 +225,29 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         thrown(GradleException)
+
+        cleanup:
+        localGit.exec('reset', '--hard', 'origin/master')
+    }
+
+    def "prepareRelease should not fail if there are no incoming changes"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                failOnUpdateNeeded true
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
 
         cleanup:
         localGit.exec('reset', '--hard', 'origin/master')
