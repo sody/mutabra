@@ -14,7 +14,7 @@ import org.gradle.api.tasks.TaskAction
 /**
  * @author Ivan Khalopik
  */
-class ReleaseCommitScm extends SourceTask {
+class ReleaseFinish extends SourceTask {
 
     String tagName
     String nextVersion

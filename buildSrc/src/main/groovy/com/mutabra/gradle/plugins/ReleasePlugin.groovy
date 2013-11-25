@@ -6,7 +6,7 @@
 package com.mutabra.gradle.plugins
 
 import com.mutabra.gradle.tasks.ReleaseBuild
-import com.mutabra.gradle.tasks.ReleaseCommitScm
+import com.mutabra.gradle.tasks.ReleaseFinish
 import com.mutabra.gradle.tasks.ReleasePrepare
 
 import org.gradle.api.Plugin
@@ -22,7 +22,7 @@ class ReleasePlugin implements Plugin<Project> {
     static final String PREPARE_RELEASE_TASK_NAME = 'prepareRelease'
     static final String VERIFY_RELEASE_TASK_NAME = 'verifyRelease'
     static final String PERFORM_RELEASE_TASK_NAME = 'performRelease'
-    static final String COMMIT_SCM_TASK_NAME = 'commitScm'
+    static final String FINISH_RELEASE_TASK_NAME = 'finishRelease'
 
     @Override
     void apply(final Project target) {
@@ -53,13 +53,13 @@ class ReleasePlugin implements Plugin<Project> {
             convention.release.update.source
         }
         prepareRelease.conventionMapping.map('releaseVersion') {
-            convention.release.releaseVersion
+            convention.releaseVersion
         }
 
         def verifyRelease = target.tasks.create(VERIFY_RELEASE_TASK_NAME, ReleaseBuild)
         verifyRelease.group = RELEASE_GROUP
         verifyRelease.description = 'Verifies release: build and run unit tests.'
-        verifyRelease.startParameter.gradleUserHomeDir = convention.release.releaseHome
+        verifyRelease.startParameter.gradleUserHomeDir = convention.releaseHome
         verifyRelease.startParameter.recompileScripts = true
         verifyRelease.startParameter.rerunTasks = true
         verifyRelease.conventionMapping.map('tasks') {
@@ -69,24 +69,24 @@ class ReleasePlugin implements Plugin<Project> {
         def performRelease = target.tasks.create(PERFORM_RELEASE_TASK_NAME, ReleaseBuild)
         performRelease.group = RELEASE_GROUP
         performRelease.description = 'Performs release: build and deploy.'
-        performRelease.startParameter.gradleUserHomeDir = convention.release.releaseHome
+        performRelease.startParameter.gradleUserHomeDir = convention.releaseHome
         performRelease.startParameter.recompileScripts = false
         performRelease.startParameter.rerunTasks = false
         performRelease.conventionMapping.map('tasks') {
             convention.release.releaseTasks
         }
 
-        def commitScm = target.tasks.create(COMMIT_SCM_TASK_NAME, ReleaseCommitScm)
+        def commitScm = target.tasks.create(FINISH_RELEASE_TASK_NAME, ReleaseFinish)
         commitScm.group = RELEASE_GROUP
-        commitScm.description = 'Commits changes in SCM: commit and tag release version, update it to the next snapshot.'
+        commitScm.description = 'Finishes release: commit changes in SCM, update version to the next snapshot.'
         commitScm.conventionMapping.map('source') {
             convention.release.update.source
         }
         commitScm.conventionMapping.map('nextVersion') {
-            convention.release.nextVersion
+            convention.nextVersion
         }
         commitScm.conventionMapping.map('tagName') {
-            convention.release.tagName
+            convention.tagName
         }
 
         def release = target.tasks.create(RELEASE_TASK_NAME, GradleBuild.class)
@@ -96,7 +96,7 @@ class ReleasePlugin implements Plugin<Project> {
                 PREPARE_RELEASE_TASK_NAME,
                 VERIFY_RELEASE_TASK_NAME,
                 PERFORM_RELEASE_TASK_NAME,
-                COMMIT_SCM_TASK_NAME
+                FINISH_RELEASE_TASK_NAME
         ]
         release.startParameter.recompileScripts = false
         release.startParameter.rerunTasks = false
