@@ -18,16 +18,16 @@ class GitScm implements Scm {
     private static final String UNCOMMITTED = 'uncommitted'
 
     private final Project project
-    private final File workTree
-    private final File gitDir
     private final Logger logger
+    final File workTree
+    final File gitDir
 
     GitScm(Project project) {
         this.project = project
 
+        logger = project.logger
         workTree = project.rootDir
         gitDir = project.rootProject.file('.git')
-        logger = project.logger
     }
 
     @Override
