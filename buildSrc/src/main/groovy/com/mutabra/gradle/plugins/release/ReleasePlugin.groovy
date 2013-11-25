@@ -14,12 +14,12 @@ import org.gradle.api.tasks.GradleBuild
  * @author Ivan Khalopik
  */
 class ReleasePlugin implements Plugin<Project> {
-    static final String RELEASE_GROUP = 'release'
-    static final String RELEASE_TASK_NAME = 'release'
-    static final String PREPARE_RELEASE_TASK_NAME = 'prepareRelease'
-    static final String VERIFY_RELEASE_TASK_NAME = 'verifyRelease'
-    static final String PERFORM_RELEASE_TASK_NAME = 'performRelease'
-    static final String FINISH_RELEASE_TASK_NAME = 'finishRelease'
+    public static final String RELEASE_GROUP = 'release'
+    public static final String RELEASE_TASK_NAME = 'release'
+    public static final String PREPARE_RELEASE_TASK_NAME = 'prepareRelease'
+    public static final String VERIFY_RELEASE_TASK_NAME = 'verifyRelease'
+    public static final String PERFORM_RELEASE_TASK_NAME = 'performRelease'
+    public static final String FINISH_RELEASE_TASK_NAME = 'finishRelease'
 
     @Override
     void apply(final Project target) {
@@ -28,6 +28,15 @@ class ReleasePlugin implements Plugin<Project> {
         def convention = new ReleasePluginConvention(target)
         target.convention.plugins.put('release', convention)
 
+        addPrepareReleaseTask(target, convention)
+        addVerifyReleaseTask(target, convention)
+        addPerformReleaseTask(target, convention)
+        addFinishReleaseTask(target, convention)
+
+        addReleaseTask(target)
+    }
+
+    void addPrepareReleaseTask(Project target, ReleasePluginConvention convention) {
         def prepareRelease = target.tasks.create(PREPARE_RELEASE_TASK_NAME, ReleasePrepare)
         prepareRelease.group = RELEASE_GROUP
         prepareRelease.description = 'Prepares release: verify current SCM state, update versions from snapshot to release.'
@@ -52,7 +61,9 @@ class ReleasePlugin implements Plugin<Project> {
         prepareRelease.conventionMapping.map('releaseVersion') {
             convention.releaseVersion
         }
+    }
 
+    void addVerifyReleaseTask(Project target, ReleasePluginConvention convention) {
         def verifyRelease = target.tasks.create(VERIFY_RELEASE_TASK_NAME, ReleaseBuild)
         verifyRelease.group = RELEASE_GROUP
         verifyRelease.description = 'Verifies release: build and run unit tests.'
@@ -62,7 +73,9 @@ class ReleasePlugin implements Plugin<Project> {
         verifyRelease.conventionMapping.map('tasks') {
             convention.release.verifyTasks
         }
+    }
 
+    void addPerformReleaseTask(Project target, ReleasePluginConvention convention) {
         def performRelease = target.tasks.create(PERFORM_RELEASE_TASK_NAME, ReleaseBuild)
         performRelease.group = RELEASE_GROUP
         performRelease.description = 'Performs release: build and deploy.'
@@ -72,20 +85,24 @@ class ReleasePlugin implements Plugin<Project> {
         performRelease.conventionMapping.map('tasks') {
             convention.release.releaseTasks
         }
+    }
 
-        def commitScm = target.tasks.create(FINISH_RELEASE_TASK_NAME, ReleaseFinish)
-        commitScm.group = RELEASE_GROUP
-        commitScm.description = 'Finishes release: commit changes in SCM, update version to the next snapshot.'
-        commitScm.conventionMapping.map('source') {
+    void addFinishReleaseTask(Project target, ReleasePluginConvention convention) {
+        def finishRelease = target.tasks.create(FINISH_RELEASE_TASK_NAME, ReleaseFinish)
+        finishRelease.group = RELEASE_GROUP
+        finishRelease.description = 'Finishes release: commit changes in SCM, update version to the next snapshot.'
+        finishRelease.conventionMapping.map('source') {
             convention.release.update.source
         }
-        commitScm.conventionMapping.map('nextVersion') {
+        finishRelease.conventionMapping.map('nextVersion') {
             convention.nextVersion
         }
-        commitScm.conventionMapping.map('tagName') {
+        finishRelease.conventionMapping.map('tagName') {
             convention.tagName
         }
+    }
 
+    void addReleaseTask(Project target) {
         def release = target.tasks.create(RELEASE_TASK_NAME, GradleBuild.class)
         release.group = RELEASE_GROUP
         release.description = 'Releases new version of application.'

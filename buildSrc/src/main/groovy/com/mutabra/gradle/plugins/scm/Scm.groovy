@@ -24,6 +24,8 @@ public interface Scm {
 
     void deleteTag(String tagName)
 
+    String exec(String... command)
+
     interface Status {
 
         String currentBranch()

@@ -59,4 +59,9 @@ class VerifyReleaseSpec implements Configurable<VerifyReleaseSpec> {
         this.failOnUpdateNeeded = failOnUpdateNeeded
         return this
     }
+
+    VerifyReleaseSpec failOnSnapshotDependencies(boolean failOnSnapshotDependencies) {
+        this.failOnSnapshotDependencies = failOnSnapshotDependencies
+        return this
+    }
 }

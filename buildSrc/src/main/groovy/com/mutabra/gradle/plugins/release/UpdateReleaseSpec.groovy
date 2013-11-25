@@ -14,17 +14,20 @@ import org.gradle.api.tasks.util.PatternSet
 import org.gradle.util.Configurable
 import org.gradle.util.ConfigureUtil
 
+/**
+ * @author Ivan Khalopik
+ */
 class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
 
-    Project project
+    private final Project project
+
+    private final List<Object> source = new ArrayList<Object>()
+    private final PatternFilterable patternSet = new PatternSet()
 
     Object tagName
     Object releaseVersion
     Object nextVersion
-    boolean automaticVersions;
-
-    List<Object> source = new ArrayList<Object>()
-    PatternFilterable patternSet = new PatternSet()
+    boolean automaticVersions
 
     UpdateReleaseSpec(Project project) {
         this.project = project
@@ -41,34 +44,13 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
         source(project.buildFile)
     }
 
+    @Override
     UpdateReleaseSpec configure(Closure cl) {
         return ConfigureUtil.configure(cl, this, false)
     }
 
-    Set<Project> getProjects() {
-        return project.allprojects
-    }
-
-    Object getTagName() {
-        return tagName
-    }
-
-    UpdateReleaseSpec setTagName(Object tag) {
-        this.tagName = tag
-        return this
-    }
-
     UpdateReleaseSpec tagName(Object tag) {
         this.tagName = tag
-        return this
-    }
-
-    Object getReleaseVersion() {
-        return releaseVersion
-    }
-
-    UpdateReleaseSpec setReleaseVersion(Object version) {
-        this.releaseVersion = version
         return this
     }
 
@@ -77,26 +59,8 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
         return this
     }
 
-    Object getNextVersion() {
-        return nextVersion
-    }
-
-    UpdateReleaseSpec setNextVersion(Object nextVersion) {
-        this.nextVersion = nextVersion
-        return this
-    }
-
     UpdateReleaseSpec nextVersion(Object nextVersion) {
         this.nextVersion = nextVersion
-        return this
-    }
-
-    boolean isAutomaticVersions() {
-        return automaticVersions
-    }
-
-    UpdateReleaseSpec setAutomaticVersions(boolean automaticVersions) {
-        this.automaticVersions = automaticVersions
         return this
     }
 
@@ -106,13 +70,12 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
     }
 
     FileTree getSource() {
-        return this.source ? project.files(this.source).asFileTree : project.files().asFileTree
+        return source ? project.files(source).asFileTree : project.files().asFileTree
     }
 
-    UpdateReleaseSpec setSource(Object source) {
+    void setSource(Object source) {
         this.source.clear()
         this.source.add(source)
-        return this
     }
 
     UpdateReleaseSpec source(Object... sources) {
@@ -120,6 +83,22 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
             this.source.add(source)
         }
         return this
+    }
+
+    Set<String> getIncludes() {
+        return patternSet.includes
+    }
+
+    void setIncludes(Iterable<String> includes) {
+        patternSet.includes = includes
+    }
+
+    Set<String> getExcludes() {
+        return patternSet.excludes
+    }
+
+    void setExcludes(Iterable<String> excludes) {
+        patternSet.excludes = excludes
     }
 
     UpdateReleaseSpec include(String... includes) {
@@ -159,24 +138,6 @@ class UpdateReleaseSpec implements Configurable<UpdateReleaseSpec> {
 
     UpdateReleaseSpec exclude(Closure excludeSpec) {
         patternSet.exclude(excludeSpec)
-        return this
-    }
-
-    Set<String> getIncludes() {
-        return patternSet.includes
-    }
-
-    UpdateReleaseSpec setIncludes(Iterable<String> includes) {
-        patternSet.includes = includes
-        return this
-    }
-
-    Set<String> getExcludes() {
-        return patternSet.excludes
-    }
-
-    UpdateReleaseSpec setExcludes(Iterable<String> excludes) {
-        patternSet.excludes = excludes
         return this
     }
 }

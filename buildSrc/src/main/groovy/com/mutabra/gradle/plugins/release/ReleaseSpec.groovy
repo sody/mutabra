@@ -17,14 +17,10 @@ import org.gradle.util.ConfigureUtil
  */
 class ReleaseSpec implements Configurable<ReleaseSpec> {
 
-    Project project
+    private final Project project
 
-    @Nested
     VerifyReleaseSpec verify
-
-    @Nested
     UpdateReleaseSpec update
-
     List<String> verifyTasks
     List<String> releaseTasks
 

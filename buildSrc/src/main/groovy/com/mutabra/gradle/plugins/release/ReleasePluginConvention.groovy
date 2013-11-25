@@ -3,26 +3,26 @@
  * All rights reserved.
  */
 
-
-
 package com.mutabra.gradle.plugins.release
 
 import org.gradle.api.Project
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 public class ReleasePluginConvention {
 
-    Project project
+    private final Project project
+    // gradle home for release builds
+    final File releaseHome
 
+    // lazy configurable properties
+    private String releaseVersion
+    private String nextVersion
+    private String tagName
+
+    // release plugin configuration
     ReleaseSpec release
-
-    File releaseHome
-    String releaseVersion
-    String nextVersion
-    String tagName
 
     ReleasePluginConvention(Project project) {
         this.project = project

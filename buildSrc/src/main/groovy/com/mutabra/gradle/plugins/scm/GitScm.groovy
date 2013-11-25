@@ -13,15 +13,14 @@ import org.slf4j.Logger
  * @author Ivan Khalopik
  */
 class GitScm implements Scm {
-    static final String INFO = 'info'
-    static final String UNVERSIONED = 'unversioned'
-    static final String UNCOMMITTED = 'uncommitted'
+    private static final String INFO = 'info'
+    private static final String UNVERSIONED = 'unversioned'
+    private static final String UNCOMMITTED = 'uncommitted'
 
-    Project project
-
-    File workTree
-    File gitDir
-    Logger logger
+    private final Project project
+    private final File workTree
+    private final File gitDir
+    private final Logger logger
 
     GitScm(Project project) {
         this.project = project
@@ -142,11 +141,11 @@ class GitScm implements Scm {
         out.toString()
     }
 
-    void fail(String message, Throwable throwable) {
+    static void fail(String message, Throwable throwable) {
         throw new GradleException(message, throwable)
     }
 
-    String fixPath(File file) {
+    static String fixPath(File file) {
         return file.canonicalPath.replaceAll('\\\\', '/')
     }
 }

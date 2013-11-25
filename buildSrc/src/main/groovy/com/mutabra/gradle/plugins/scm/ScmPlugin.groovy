@@ -10,7 +10,6 @@ import org.gradle.api.Project
 
 /**
  * @author Ivan Khalopik
- * @since 1.0
  */
 class ScmPlugin implements Plugin<Project> {
     public static final String SCM_EXTENSION = 'scm'

@@ -21,7 +21,15 @@ public class ReleasePrepare extends SourceTask {
     boolean failOnUnversionedFiles
     boolean failOnPublishNeeded
     boolean failOnUpdateNeeded
+    boolean failOnSnapshotDependencies
     String releaseVersion
+
+    ReleasePrepare() {
+        // default values
+        failOnCommitNeeded = true
+        failOnUpdateNeeded = true
+        failOnSnapshotDependencies = true
+    }
 
     @Input
     String getRequireBranch() {
