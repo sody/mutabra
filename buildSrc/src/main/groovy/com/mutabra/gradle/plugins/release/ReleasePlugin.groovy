@@ -55,6 +55,9 @@ class ReleasePlugin implements Plugin<Project> {
         prepareRelease.conventionMapping.map('failOnPublishNeeded') {
             convention.release.verify.failOnPublishNeeded
         }
+        prepareRelease.conventionMapping.map('failOnSnapshotDependencies') {
+            convention.release.verify.failOnSnapshotDependencies
+        }
         prepareRelease.conventionMapping.map('source') {
             convention.release.update.source
         }

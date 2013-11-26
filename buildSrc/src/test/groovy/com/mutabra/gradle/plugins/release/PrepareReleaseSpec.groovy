@@ -45,9 +45,6 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         noExceptionThrown()
-
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
 
@@ -77,7 +74,6 @@ class PrepareReleaseSpec extends GitSpecification {
 
         cleanup:
         rootProject.file('README').delete()
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should not fail if there are no uncommitted changes"() {
@@ -98,9 +94,6 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         noExceptionThrown()
-
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should fail if there are unversioned changes"() {
@@ -148,9 +141,6 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         noExceptionThrown()
-
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should fail if there are outcoming changes"() {
@@ -177,9 +167,6 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         thrown(GradleException)
-
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should not fail if there are no outcoming changes"() {
@@ -200,9 +187,6 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         noExceptionThrown()
-
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should fail if there are incoming changes"() {
@@ -225,9 +209,6 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         thrown(GradleException)
-
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
     }
 
     def "prepareRelease should not fail if there are no incoming changes"() {
@@ -248,8 +229,144 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.prepareRelease.execute()
         then:
         noExceptionThrown()
+    }
 
-        cleanup:
-        localGit.exec('reset', '--hard', 'origin/master')
+    def "prepareRelease should fail if there are snapshot dependencies"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                failOnSnapshotDependencies true
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'there are snapshot dependencies'
+        rootProject.configurations.create('snapshots')
+        rootProject.dependencies.add('snapshots', 'com.example:example:1.3-SNAPSHOT')
+        and: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        thrown(GradleException)
+    }
+
+    def "prepareRelease should not fail if there are no snapshot dependencies"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            verify {
+                failOnSnapshotDependencies true
+            }
+            update {
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'there are no snapshot dependencies'
+        rootProject.configurations.create('snapshots')
+        rootProject.dependencies.add('snapshots', 'com.example:example:1.3')
+        and: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
+    }
+
+    def "prepareRelease should update project version to new release"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion '1.0.0'
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        rootProject.version == '1.0.0'
+    }
+
+    def "prepareRelease should update project version to new release in included sources"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion '1.0-beta-1'
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        rootProject.file('build.gradle').text.contains("version = '1.0-beta-1'")
+    }
+
+    def "prepareRelease should not update project version to new release in excluded sources"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion '1.0-beta-1'
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        !rootProject.file('gradle.properties').text.contains("version = '1.0-beta-1'")
+    }
+
+    def "prepareRelease should update project version to release defined by closure against project"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion { project.version - '-SNAPSHOT' + '-alpha-1' }
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        rootProject.version == '1.0-alpha-1'
+        rootProject.file('build.gradle').text.contains("version = '1.0-alpha-1'")
+    }
+
+    def "prepareRelease should determine project release version by closure at the moment of execution"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion { project.version - '-SNAPSHOT' + '-alpha-1' }
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+
+        when: 'project version changes'
+        rootProject.version = '1.1'
+        and: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        rootProject.version == '1.1-alpha-1'
     }
 }

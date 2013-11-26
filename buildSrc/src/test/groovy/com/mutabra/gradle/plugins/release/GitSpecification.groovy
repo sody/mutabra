@@ -36,18 +36,23 @@ abstract class GitSpecification extends Specification {
         remoteGit.exec('init')
         // first commit
         remoteProject.file('build.gradle').withWriter {
-            it << "group = 'com.example'"
-            it << "description = 'Test'"
+            it << "group = 'com.example'\n"
+            it << "description = 'Test'\n"
+            it << "version = '1.0-SNAPSHOT'\n"
         }
         remoteGit.add('build.gradle')
         remoteGit.commit('First commit')
         // second commit
         remoteProject.file('gradle.properties').withWriter {
-            it << "testProp1=Test1"
-            it << "testProp2=Test2"
+            it << "testProp1=1.0-SNAPSHOT\n"
+            it << "testProp2=1.0\n"
+            it << "testProp3=1.1\n"
         }
         remoteGit.add('gradle.properties')
         remoteGit.commit('Second commit')
+
+        // add default state pointer
+        remoteGit.tag('original-version', 'Original version pointer added.')
 
         // clone to local repo
         remoteGit.exec('clone', '-l', '.', '../local')
@@ -70,5 +75,10 @@ abstract class GitSpecification extends Specification {
                 .withName("RootProject")
                 .withProjectDir(localGit.workTree)
                 .build()
+    }
+
+    def cleanup() {
+        remoteGit.exec('reset', '--hard', 'original-version')
+        localGit.exec('reset', '--hard', 'original-version')
     }
 }

@@ -7,6 +7,7 @@ package com.mutabra.gradle.plugins.release
 
 import com.mutabra.gradle.plugins.scm.Scm
 import org.gradle.api.GradleException
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.SourceTask
 import org.gradle.api.tasks.TaskAction
@@ -54,6 +55,11 @@ public class ReleasePrepare extends SourceTask {
     @Input
     boolean isFailOnUpdateNeeded() {
         return failOnUpdateNeeded
+    }
+
+    @Input
+    boolean isFailOnSnapshotDependencies() {
+        return failOnSnapshotDependencies
     }
 
     @Input
@@ -112,6 +118,23 @@ public class ReleasePrepare extends SourceTask {
             project.ant.replaceregexp(file: it, match: oldVersion, replace: releaseVersion)
         }
         project.allprojects*.version = releaseVersion
+
+        // check snapshot dependencies
+        def message = ''
+        project.allprojects.each { project ->
+            def snapshots = [] as Set
+            project.configurations.each { cfg ->
+                snapshots += cfg.dependencies?.matching { Dependency d ->
+                    d.version?.contains('SNAPSHOT')
+                }
+            }
+            if (snapshots) {
+                message += "\n\t${project.name}:\n\t\t${ snapshots.join('\n\t\t') }"
+            }
+        }
+        if (message) {
+            failOn(isFailOnSnapshotDependencies(), "You have snapshot dependencies: ${message}")
+        }
     }
 
     void failOn(boolean condition, String message) {
