@@ -62,20 +62,20 @@ class ReleaseFinish extends SourceTask {
             scm.commit("[RELEASE]: Project version updated to ${nextVersion}")
             commits++
         } catch (Exception e) {
-            // reset SCM changes if failed
-            if (commits > 0) {
-                try {
-                    scm.reset("HEAD~${commits}")
-                } catch (Exception ex) {
-                    logger.error("Cannot reset ${commits} commits.", ex)
-                }
-            }
             // delete tag if failed
             if (tagAdded) {
                 try {
-                    scm.deleteTag(tagName)
+                    scm.removeTag(tagName)
                 } catch (Exception ex) {
                     logger.error("Cannot delete tag ${tagName}.", ex)
+                }
+            }
+            // rollback SCM changes if failed
+            if (commits > 0) {
+                try {
+                    scm.rollback(commits)
+                } catch (Exception ex) {
+                    logger.error("Cannot rollback ${commits} commits.", ex)
                 }
             }
             // rethrow

@@ -19,15 +19,15 @@ class GitScm implements Scm {
 
     private final Project project
     private final Logger logger
-    final File workTree
-    final File gitDir
 
     GitScm(Project project) {
         this.project = project
 
         logger = project.logger
-        workTree = project.rootDir
-        gitDir = project.rootProject.file('.git')
+    }
+
+    File getWorkTree() {
+        return project.rootDir
     }
 
     @Override
@@ -83,24 +83,32 @@ class GitScm implements Scm {
 
     @Override
     void add(Object... source) {
-        def files = project.files(source).collect { fixPath(it) }
-
+        def files = files(source)
         if (files) {
-            // add all files to index
+            // add files to index
             exec('add', '--', files.join(' '))
         }
     }
 
     @Override
+    void reset(Object... source) {
+        def files = files(source)
+        if (files) {
+            // remove files from index
+            exec('reset', '--', files.join(' '))
+        }
+    }
+
+    @Override
     void commit(String message) {
-        // commit updated files
+        // commit changes
         exec('commit', '-m', message)
     }
 
     @Override
-    void reset(String commit) {
-        // reset changes
-        exec('reset', commit)
+    void rollback(int commits) {
+        // rollback changes
+        exec('reset', '--hard', "HEAD~${commits}")
     }
 
     @Override
@@ -110,27 +118,28 @@ class GitScm implements Scm {
     }
 
     @Override
-    void deleteTag(String tagName) {
-        // delete tag
+    void removeTag(String tagName) {
+        // remove tag
         exec('tag', '-d', tagName)
     }
 
     String exec(String... commandArgs) {
-        def command = ['git', "--git-dir=${ fixPath(gitDir) }", "--work-tree=${ fixPath(workTree) }"]
+        logger.info("Running git ${ commandArgs.join(' ') }")
+
         def out = new ByteArrayOutputStream()
         def err = new ByteArrayOutputStream()
 
-        logger.info("Running ${ command.join(' ') } ${ commandArgs.join(' ') }")
         try {
             project.exec {
-                commandLine command
+                workingDir project.rootDir
+                commandLine 'git'
                 args commandArgs
                 standardOutput = out
                 errorOutput = err
             }
         } catch (GradleException e) {
             logger.debug("Output:\n${out}")
-            fail("Cannot run command: ${ command.join(' ') } ${ commandArgs.join(' ') }\n${err}", e)
+            throw new GradleException("Cannot run command: git ${ commandArgs.join(' ') }\n${err}", e)
         }
 
         logger.debug("Output:\n${out}")
@@ -141,11 +150,7 @@ class GitScm implements Scm {
         out.toString()
     }
 
-    static void fail(String message, Throwable throwable) {
-        throw new GradleException(message, throwable)
-    }
-
-    static String fixPath(File file) {
-        return file.canonicalPath.replaceAll('\\\\', '/')
+    private List<String> files(Object... source) {
+        return project.files(source).collect { it.canonicalPath.replaceAll('\\\\', '/') }
     }
 }

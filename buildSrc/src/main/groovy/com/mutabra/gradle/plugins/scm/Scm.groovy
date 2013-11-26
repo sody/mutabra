@@ -16,13 +16,15 @@ public interface Scm {
 
     void add(Object... source)
 
+    void reset(Object... source)
+
     void commit(String message)
 
-    void reset(String commit)
+    void rollback(int commits)
 
     void tag(String tagName, String message)
 
-    void deleteTag(String tagName)
+    void removeTag(String tagName)
 
     String exec(String... command)
 
