@@ -7,7 +7,7 @@ import org.gradle.api.GradleException
  */
 class PrepareReleaseSpec extends GitSpecification {
 
-    def "prepareRelease should fail if branch doesn't match defined"() {
+    def "should fail if branch doesn't match defined"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -27,7 +27,7 @@ class PrepareReleaseSpec extends GitSpecification {
         thrown(GradleException)
     }
 
-    def "prepareRelease should not fail if branch matches defined"() {
+    def "should not fail if branch matches defined"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -48,7 +48,7 @@ class PrepareReleaseSpec extends GitSpecification {
     }
 
 
-    def "prepareRelease should fail if there are uncommitted changes"() {
+    def "should fail if there are uncommitted changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -76,7 +76,7 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.file('README').delete()
     }
 
-    def "prepareRelease should not fail if there are no uncommitted changes"() {
+    def "should not fail if there are no uncommitted changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -96,7 +96,7 @@ class PrepareReleaseSpec extends GitSpecification {
         noExceptionThrown()
     }
 
-    def "prepareRelease should fail if there are unversioned changes"() {
+    def "should fail if there are unversioned changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -123,7 +123,7 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.file('README').delete()
     }
 
-    def "prepareRelease should not fail if there are no unversioned changes"() {
+    def "should not fail if there are no unversioned changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -143,7 +143,7 @@ class PrepareReleaseSpec extends GitSpecification {
         noExceptionThrown()
     }
 
-    def "prepareRelease should fail if there are outcoming changes"() {
+    def "should fail if there are outcoming changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -169,7 +169,7 @@ class PrepareReleaseSpec extends GitSpecification {
         thrown(GradleException)
     }
 
-    def "prepareRelease should not fail if there are no outcoming changes"() {
+    def "should not fail if there are no outcoming changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -189,7 +189,7 @@ class PrepareReleaseSpec extends GitSpecification {
         noExceptionThrown()
     }
 
-    def "prepareRelease should fail if there are incoming changes"() {
+    def "should fail if there are incoming changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -211,7 +211,7 @@ class PrepareReleaseSpec extends GitSpecification {
         thrown(GradleException)
     }
 
-    def "prepareRelease should not fail if there are no incoming changes"() {
+    def "should not fail if there are no incoming changes"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -231,7 +231,7 @@ class PrepareReleaseSpec extends GitSpecification {
         noExceptionThrown()
     }
 
-    def "prepareRelease should fail if there are snapshot dependencies"() {
+    def "should fail if there are snapshot dependencies"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -254,7 +254,7 @@ class PrepareReleaseSpec extends GitSpecification {
         thrown(GradleException)
     }
 
-    def "prepareRelease should not fail if there are no snapshot dependencies"() {
+    def "should not fail if there are no snapshot dependencies"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -277,7 +277,7 @@ class PrepareReleaseSpec extends GitSpecification {
         noExceptionThrown()
     }
 
-    def "prepareRelease should update project version to new release"() {
+    def "should update project version to new release"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -295,7 +295,7 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.version == '1.0.0'
     }
 
-    def "prepareRelease should update project version to new release in included sources"() {
+    def "should update project version to new release in included sources"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -313,7 +313,7 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.file('build.gradle').text.contains("version = '1.0-beta-1'")
     }
 
-    def "prepareRelease should not update project version to new release in excluded sources"() {
+    def "should not update project version to new release in excluded sources"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -331,7 +331,7 @@ class PrepareReleaseSpec extends GitSpecification {
         !rootProject.file('gradle.properties').text.contains("version = '1.0-beta-1'")
     }
 
-    def "prepareRelease should update project version to release defined by closure against project"() {
+    def "should update project version to release defined by closure against project"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
@@ -350,7 +350,7 @@ class PrepareReleaseSpec extends GitSpecification {
         rootProject.file('build.gradle').text.contains("version = '1.0-alpha-1'")
     }
 
-    def "prepareRelease should determine project release version by closure at the moment of execution"() {
+    def "should determine project release version by closure at the moment of execution"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
         rootProject.version = '1.0-SNAPSHOT'
