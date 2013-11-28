@@ -77,45 +77,38 @@
                 <div class="list-group">
                     <a href="#races-select" data-toggle="menu-select" class="list-group-item">Races</a>
                     <a href="#faces-select" data-toggle="menu-select" class="list-group-item active">Faces</a>
-                    <a href="#eyes-select" data-toggle="menu-select" class="list-group-item">Eyes</a>
+                    <a href="#eye-select" data-toggle="menu-select" class="list-group-item">Eyes</a>
                 </div>
             </div>
 
             <div class="col-md-5">
                 <svg version="1.1" width="400" height="400" id="hero-face" xmlns="http://www.w3.org/2000/svg">
                     <g id="face" transform="scale(4.000,4.000)">
-                        <path stroke="#000000" fill="none"
-                              d="m82,40c0,10-2,25-7,35-2,8-18,15-25,15s-23-7-25-15c-5-10-7-25-7-35,5-40,59-40,64,0z"/>
+                        <path stroke="#000" stroke-width="2px" fill="none"
+                              d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
                     </g>
-                    <g id="eyes" transform="scale(4.000,4.000)">
-                        <path fill-rule="evenodd" stroke="#000" fill="#F00"
-                              d="m45,40a5,5,0,1,1,-10,0,5,5,0,1,1,10,0z"/>
-                        <path fill-rule="evenodd" stroke="#000" fill="#F00"
-                              d="m65,40a5,5,0,1,1,-10,0,5,5,0,1,1,10,0z"/>
+                    <g id="eye" transform="scale(4.000,4.000)">
+                        <path fill="#FFF"
+                              d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
+                        <path stroke="#000" fill="#000"
+                              d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                        <path stroke="#000" fill="none"
+                              d="m38,58-9,0"/>
+                        <path stroke="#000" fill="none"
+                              d="m27,51,1-1,11,0,1,1"/>
+                        <path fill="#FFF"
+                              d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
+                        <path stroke="#000" fill="none"
+                              d="m59,58,9,0"/>
+                        <path stroke="#000" fill="none"
+                              d="m57,51,1-1,11,0,1,1"/>
+                        <path stroke="#000" fill="#000"
+                              d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
                     </g>
 
-                    <g id="race" transform="translate(350,350) scale(0.500,0.500)">
+                    <g id="race" transform="translate(330,330) scale(0.700,0.700)">
                         <path fill="#333"
-                              d="m 53,5
-               0,49
-             c 0,5 14,8 14,3
-             v -14
-             c 0,-3 -3,-1 -5,1
-             l 10,-19
-             v 35
-             c 0,5 -19,3 -19,8
-             v 27
-             h -6
-             v -13
-             c 0,-5 -19,-2 -19,-7
-             v -37
-             l 10,21
-             c -2,-2 -5,-5 -5,-2
-             v 15
-             c 0,5 14,2 14-3
-             v -44
-             c 0,-3 -3,0 -5,2
-             z"/>
+                              d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
                     </g>
                 </svg>
             </div>
@@ -127,48 +120,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
                                     <path fill="#333"
-                                          d="m 42,5
-             c -17,4 -37,8 -37,34
-             s 20,30 37,34
-             c -3,-3 -6,-12 -6,-23
-             h 10
-             l -1,45
-             h 10
-             l -1,-45
-             h 10
-             c 0,11 -3,20 -6,23
-               17,-4 37,-8 37,-34
-             s -20,-30 -37,-34
-             c 3,3 6,12 6,23
-             h -10
-             l 1,-23
-             h -10
-             l 1,23
-             h -10
-             c 0,-11 3,-20 6,-23
-             z
-             m -13,15
-             c -4,11 -4,27 0,38
-               -2,0 -14,-4 -14,-19
-             s 12,-19 14,-19
-             z
-             m 42,0
-             c 2,0 14,4 14,19
-             s -12,19 -14,19
-             c 4,-11 4,-27 0,-38
-             z
-             m -34,17
-               8,0
-               0,4
-               -8,0
-             l -2-2
-             z
-             m 18,0
-               8,0
-             l 2,2
-               -2,2
-             h -8
-             z"/>
+                                          d="m 42,5c -17,4 -37,8 -37,34s 20,30 37,34c -3,-3 -6,-12 -6,-23h 10l -1,45h 10l -1,-45h 10c 0,11 -3,20 -6,23 17,-4 37,-8 37,-34s -20,-30 -37,-34c 3,3 6,12 6,23h -10l 1,-23h -10l 1,23h -10c 0,-11 3,-20 6,-23z
+             m -13,15c -4,11 -4,27 0,38 -2,0 -14,-4 -14,-19s 12,-19 14,-19z
+             m 42,0c 2,0 14,4 14,19s -12,19 -14,19c 4,-11 4,-27 0,-38z
+             m -34,17 8,0 0,4 -8,0l -2-2z
+             m 18,0 8,0 l 2,2 -2,2h -8z"/>
                                 </g>
                             </svg>
                         </div>
@@ -182,26 +138,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
                                     <path fill="#333"
-                                          d="m 53,5
-               0,49
-             c 0,5 14,8 14,3
-             v -14
-             c 0,-3 -3,-1 -5,1
-             l 10,-19
-             v 35
-             c 0,5 -19,3 -19,8
-             v 27
-             h -6
-             v -13
-             c 0,-5 -19,-2 -19,-7
-             v -37
-             l 10,21
-             c -2,-2 -5,-5 -5,-2
-             v 15
-             c 0,5 14,2 14-3
-             v -44
-             c 0,-3 -3,0 -5,2
-             z"/>
+                                          d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
                                 </g>
                             </svg>
                         </div>
@@ -215,8 +152,8 @@
                         <div class="card-body">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
-                                    <path stroke="#000000" fill="none"
-                                          d="m82,40c0,10-2,25-7,35-2,8-18,15-25,15s-23-7-25-15c-5-10-7-25-7-35,5-40,59-40,64,0z"/>
+                                    <path stroke="#000" stroke-width="2px" fill="none"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
                                 </g>
                             </svg>
                         </div>
@@ -228,8 +165,8 @@
                         <div class="card-body">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
-                                    <path stroke="#000000" fill="none"
-                                          d="m82,40c0,10-2,25-7,35-2,5-13,15-18,15h-14c-5,0-16-10-18-15-5-10-7-25-7-35,5-40,59-40,64,0z"/>
+                                    <path stroke="#000" stroke-width="2px" fill="none"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-2,15-5,23,0,5-18,17-27,17s-26-12-26-17c-2-8-4-23-4-23z"/>
                                 </g>
                             </svg>
                         </div>
@@ -241,8 +178,23 @@
                         <div class="card-body">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
-                                    <path stroke="#000000" fill="none"
-                                          d="m82,40c0,10-2,15-2,35-1,5-15,8-22,12-4,3-7,2-8,0-1,2-5,3-8,0-7-4-21-7-22-12,0-20-2-25-2-35,5-40,59-40,64,0z"/>
+                                    <path stroke="#000" stroke-width="2px" fill="none"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29-1,5-4,0-16,12-3,3-11,4-10-1,1,5-8,4-11,1-8-11-13-8-14-13-2-8-5-28-5-28z"/>
+                                    <path stroke="#000" stroke-width="1px" fill="none"
+                                          d="m44,90c3-1,4,0,7,0"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="card" data-toggle="face-select">
+                        <div class="card-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g>
+                                    <path stroke="#000" stroke-width="2px" fill="none"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-4,18-4,25,0,21-54,21-54,0,0-7-4-25-4-25z"/>
                                 </g>
                             </svg>
                         </div>
@@ -250,16 +202,28 @@
                 </div>
             </div>
 
-            <div id="eyes-select" class="collapse">
+            <div id="eye-select" class="collapse">
                 <div class="col-md-2">
-                    <div class="card active" data-toggle="eyes-select">
+                    <div class="card active" data-toggle="eye-select">
                         <div class="card-body">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
-                                    <path fill-rule="evenodd" stroke="#000" fill="#F00"
-                                          d="m45,40a5,5,0,1,1,-10,0,5,5,0,1,1,10,0z"/>
-                                    <path fill-rule="evenodd" stroke="#000" fill="#F00"
-                                          d="m65,40a5,5,0,1,1,-10,0,5,5,0,1,1,10,0z"/>
+                                    <path fill="#FFF"
+                                          d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
+                                    <path stroke="#000" fill="#000"
+                                          d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                                    <path stroke="#000" fill="none"
+                                          d="m38,58-9,0"/>
+                                    <path stroke="#000" fill="none"
+                                          d="m27,51,1-1,11,0,1,1"/>
+                                    <path fill="#FFF"
+                                          d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
+                                    <path stroke="#000" fill="none"
+                                          d="m59,58,9,0"/>
+                                    <path stroke="#000" fill="none"
+                                          d="m57,51,1-1,11,0,1,1"/>
+                                    <path stroke="#000" fill="#000"
+                                          d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
                                 </g>
                             </svg>
                         </div>
@@ -267,14 +231,14 @@
                 </div>
 
                 <div class="col-md-2">
-                    <div class="card" data-toggle="eyes-select">
+                    <div class="card" data-toggle="eye-select">
                         <div class="card-body">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
                                     <path stroke="#000" fill="none"
-                                          d="m40,40c0.25069,0.25069-0.21424,0.46161-0.41667,0.41667-0.548-0.122-0.636-0.825-0.416-1.25,0.393-0.762,1.416-0.851,2.083-0.417,0.97955,0.63659,1.0705,2.0153,0.41667,2.9167-0.87145,1.2014-2.6176,1.2932-3.75,0.41667-1.425-1.1031-1.5174-3.2213-0.41666-4.5833,1.3331-1.6496,3.8257-1.7423,5.4167-0.41666,1.8749,1.5623,1.9678,4.4306,0.41666,6.25-1.7908,2.1005-5.0359,2.1936-7.0833,0.41666-2.3264-2.0191-2.4196-5.6413-0.41666-7.9167,2.247-2.5526,6.2469-2.6458,8.75-0.41666,2.7789,2.4748,2.8722,6.8527,0.41666,9.5833"/>
+                                          d="m34,53c0.3733-0.56671,0.89522,0.53835,0.3392,0.79444-0.56225,0.54759-1.5271,0.12847-1.7629-0.55271-0.42466-0.98816,0.41572-2.1139,1.4237-2.2417,1.3678-0.24181,2.6215,1.0834,2.5181,2.4208-0.04706,1.5397-1.5909,2.7602-3.0953,2.5848-1.7382-0.13285-3.0974-1.8629-2.928-3.5769,0.12046-1.9571,2.0018-3.5396,3.9386-3.4395,2.1225,0.03586,3.9508,1.9167,4.0665,4.0109,0.18917,2.2029-1.4501,4.3091-3.5621,4.8452-2.0208,0.56914-4.2887-0.35377-5.4596-2.0702-1.2437-1.6956-1.3022-4.1131-0.211-5.8964,0.977-1.661,2.804-2.786,4.733-2.878"/>
                                     <path stroke="#000" fill="none"
-                                          d="m60,40c-0.25069-0.25069,0.21425-0.46161,0.41667-0.41667,0.54855,0.1218,0.63673,0.82442,0.41667,1.25-0.39365,0.76126-1.4159,0.85045-2.0833,0.41666-0.97954-0.63659-1.0705-2.0153-0.41666-2.9167,0.87145-1.2013,2.6176-1.2932,3.75-0.41666,1.425,1.1031,1.5174,3.2213,0.41666,4.5833-1.3331,1.6496-3.8257,1.7423-5.4167,0.41666-1.8749-1.5623-1.9678-4.4306-0.41666-6.25,1.7909-2.1005,5.0359-2.1936,7.0833-0.41666,2.3264,2.0191,2.4196,5.6413,0.41666,7.9167-2.247,2.5526-6.2469,2.6458-8.75,0.41666-2.7789-2.4748-2.8722-6.8527-0.41666-9.5833"/>
+                                          d="m63,53c-0.3733,0.56671-0.89522-0.53835-0.3392-0.79444,0.56225-0.54759,1.5271-0.12847,1.7629,0.55271,0.42466,0.98816-0.41572,2.1139-1.4237,2.2417-1.3678,0.24181-2.6215-1.0834-2.5181-2.4208,0.04706-1.5397,1.591-2.7602,3.0953-2.5848,1.7382,0.13285,3.0974,1.8629,2.928,3.5769-0.12046,1.9571-2.0018,3.5396-3.9386,3.4395-2.1225-0.03586-3.9508-1.9167-4.0665-4.0109-0.18917-2.2029,1.4501-4.3091,3.5621-4.8452,2.0208-0.56914,4.2887,0.35377,5.4596,2.0703,1.2437,1.6956,1.3022,4.1131,0.21099,5.8964-0.977,1.661-2.804,2.786-4.733,2.878"/>
                                 </g>
                             </svg>
                         </div>
@@ -316,7 +280,7 @@
             var $heroFace = $('#hero-face');
             var $race = $heroFace.find('#race');
             var $face = $heroFace.find('#face');
-            var $eyes = $heroFace.find('#eyes');
+            var $eye = $heroFace.find('#eye');
 
             $(document).on('click', '[data-toggle=menu-select]', function(e) {
                 e.preventDefault();
@@ -328,7 +292,7 @@
                 $('.active[data-toggle=menu-select]').removeClass('active');
                 $selected.addClass('active');
 
-                $('#races-select,#faces-select,#eyes-select').addClass('collapse');
+                $('#races-select,#faces-select,#eye-select').addClass('collapse');
                 $menu.removeClass('collapse');
             });
 
@@ -350,13 +314,13 @@
                 $face.empty().append($picture.children().clone());
             });
 
-            $(document).on('click', '[data-toggle=eyes-select]', function(e) {
-                var $selected = $(e.target).closest('[data-toggle=eyes-select]');
+            $(document).on('click', '[data-toggle=eye-select]', function(e) {
+                var $selected = $(e.target).closest('[data-toggle=eye-select]');
                 var $picture = $selected.find('svg > g');
 
-                $('.active[data-toggle=eyes-select]').removeClass('active');
+                $('.active[data-toggle=eye-select]').removeClass('active');
                 $selected.addClass('active');
-                $eyes.empty().append($picture.children().clone());
+                $eye.empty().append($picture.children().clone());
             });
         });
     })(window.jQuery);

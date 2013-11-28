@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+    <g>
+        <path stroke="#000" fill="none"
+              d="m50,40a10,10,0,1,1,-20,0,10,10,0,1,1,20,0z"/>
+        <path fill="#000"
+              d="m42,40a2,2,0,1,1,-4,0,2,2,0,1,1,4,0z"/>
+        <path stroke="#000" fill="none"
+              d="m65,40a5,5,0,1,1,-10,0,5,5,0,1,1,10,0z"/>
+        <path stroke="#000" fill="#000"
+              d="m61,40a1,1,0,1,1,-2,0,1,1,0,1,1,2,0z"/>
+    </g>
+</svg>
