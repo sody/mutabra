@@ -75,9 +75,10 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
-                    <a class="list-group-item" href="#races-tab" data-toggle="tab">Races</a>
-                    <a class="list-group-item active" href="#faces-tab" data-toggle="tab">Faces</a>
+                    <a class="list-group-item" href="#races-tab" data-toggle="tab">Race</a>
+                    <a class="list-group-item active" href="#faces-tab" data-toggle="tab">Face</a>
                     <a class="list-group-item" href="#eyes-tab" data-toggle="tab">Eyes</a>
+                    <a class="list-group-item" href="#mouth-tab" data-toggle="tab">Mouth</a>
                 </div>
             </div>
 
@@ -152,139 +153,170 @@
 
             <div class="tab-content">
 
-            <div id="races-tab" class="tab-pane">
-                <div class="col-md-2">
-                    <div class="card" data-toggle="face" data-target="#race" data-parent="#races-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g>
-                                    <path fill="#333"
-                                          d="m 42,5c -17,4 -37,8 -37,34s 20,30 37,34c -3,-3 -6,-12 -6,-23h 10l -1,45h 10l -1,-45h 10c 0,11 -3,20 -6,23 17,-4 37,-8 37,-34s -20,-30 -37,-34c 3,3 6,12 6,23h -10l 1,-23h -10l 1,23h -10c 0,-11 3,-20 6,-23z
-             m -13,15c -4,11 -4,27 0,38 -2,0 -14,-4 -14,-19s 12,-19 14,-19z
-             m 42,0c 2,0 14,4 14,19s -12,19 -14,19c 4,-11 4,-27 0,-38z
-             m -34,17 8,0 0,4 -8,0l -2-2z
-             m 18,0 8,0 l 2,2 -2,2h -8z"/>
-                                </g>
-                            </svg>
+                <div id="races-tab" class="tab-pane">
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#race" data-parent="#races-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path fill="#333"
+                                              d="m 42,5c -17,4 -37,8 -37,34s 20,30 37,34c -3,-3 -6,-12 -6,-23h 10l -1,45h 10l -1,-45h 10c 0,11 -3,20 -6,23 17,-4 37,-8 37,-34s -20,-30 -37,-34c 3,3 6,12 6,23h -10l 1,-23h -10l 1,23h -10c 0,-11 3,-20 6,-23z
+                 m -13,15c -4,11 -4,27 0,38 -2,0 -14,-4 -14,-19s 12,-19 14,-19z
+                 m 42,0c 2,0 14,4 14,19s -12,19 -14,19c 4,-11 4,-27 0,-38z
+                 m -34,17 8,0 0,4 -8,0l -2-2z
+                 m 18,0 8,0 l 2,2 -2,2h -8z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="card active" data-toggle="face" data-target="#race" data-parent="#races-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path fill="#333"
+                                              d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-
-                <div class="col-md-2">
-                    <div class="card active" data-toggle="face" data-target="#race" data-parent="#races-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g>
-                                    <path fill="#333"
-                                          d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
-                                </g>
-                            </svg>
+                <div id="faces-tab" class="tab-pane active">
+                    <div class="col-md-2">
+                        <div class="card active" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g fill="none">
+                                        <path stroke="#000" stroke-width="2px"
+                                              d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div id="faces-tab" class="tab-pane active">
-                <div class="col-md-2">
-                    <div class="card active" data-toggle="face" data-target="#face" data-parent="#faces-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g fill="none">
-                                    <path stroke="#000" stroke-width="2px"
-                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
-                                </g>
-                            </svg>
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g fill="none">
+                                        <path stroke="#000" stroke-width="2px"
+                                              d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-2,15-5,23,0,5-18,17-27,17s-26-12-26-17c-2-8-4-23-4-23z"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-2">
-                    <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g fill="none">
-                                    <path stroke="#000" stroke-width="2px"
-                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-2,15-5,23,0,5-18,17-27,17s-26-12-26-17c-2-8-4-23-4-23z"/>
-                                </g>
-                            </svg>
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g fill="none">
+                                        <path stroke="#000" stroke-width="2px"
+                                              d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29-1,5-4,0-16,12-3,3-11,4-10-1,1,5-8,4-11,1-8-11-13-8-14-13-2-8-5-28-5-28z"/>
+                                        <path stroke="#000" stroke-width="1px" fill="none"
+                                              d="m44,90c3-1,4,0,7,0"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-2">
-                    <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g fill="none">
-                                    <path stroke="#000" stroke-width="2px"
-                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29-1,5-4,0-16,12-3,3-11,4-10-1,1,5-8,4-11,1-8-11-13-8-14-13-2-8-5-28-5-28z"/>
-                                    <path stroke="#000" stroke-width="1px" fill="none"
-                                          d="m44,90c3-1,4,0,7,0"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g fill="none">
-                                    <path stroke="#000" stroke-width="2px"
-                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-4,18-4,25,0,21-54,21-54,0,0-7-4-25-4-25z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="eyes-tab" class="tab-pane">
-                <div class="col-md-2">
-                    <div class="card active" data-toggle="face" data-target="#eyes" data-parent="#eyes-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g>
-                                    <path fill="#FFF"
-                                          d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
-                                    <path stroke="#000" fill="#000"
-                                          d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
-                                    <path stroke="#000" fill="none"
-                                          d="m38,58-9,0"/>
-                                    <path stroke="#000" fill="none"
-                                          d="m27,51,1-1,11,0,1,1"/>
-                                    <path fill="#FFF"
-                                          d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
-                                    <path stroke="#000" fill="none"
-                                          d="m59,58,9,0"/>
-                                    <path stroke="#000" fill="none"
-                                          d="m57,51,1-1,11,0,1,1"/>
-                                    <path stroke="#000" fill="#000"
-                                          d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
-                                </g>
-                            </svg>
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g fill="none">
+                                        <path stroke="#000" stroke-width="2px"
+                                              d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-4,18-4,25,0,21-54,21-54,0,0-7-4-25-4-25z"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-2">
-                    <div class="card" data-toggle="face" data-target="#eyes" data-parent="#eyes-tab">
-                        <div class="card-body">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-                                <g>
-                                    <path stroke="#000" fill="none"
-                                          d="m34,53c0.3733-0.56671,0.89522,0.53835,0.3392,0.79444-0.56225,0.54759-1.5271,0.12847-1.7629-0.55271-0.42466-0.98816,0.41572-2.1139,1.4237-2.2417,1.3678-0.24181,2.6215,1.0834,2.5181,2.4208-0.04706,1.5397-1.5909,2.7602-3.0953,2.5848-1.7382-0.13285-3.0974-1.8629-2.928-3.5769,0.12046-1.9571,2.0018-3.5396,3.9386-3.4395,2.1225,0.03586,3.9508,1.9167,4.0665,4.0109,0.18917,2.2029-1.4501,4.3091-3.5621,4.8452-2.0208,0.56914-4.2887-0.35377-5.4596-2.0702-1.2437-1.6956-1.3022-4.1131-0.211-5.8964,0.977-1.661,2.804-2.786,4.733-2.878"/>
-                                    <path stroke="#000" fill="none"
-                                          d="m63,53c-0.3733,0.56671-0.89522-0.53835-0.3392-0.79444,0.56225-0.54759,1.5271-0.12847,1.7629,0.55271,0.42466,0.98816-0.41572,2.1139-1.4237,2.2417-1.3678,0.24181-2.6215-1.0834-2.5181-2.4208,0.04706-1.5397,1.591-2.7602,3.0953-2.5848,1.7382,0.13285,3.0974,1.8629,2.928,3.5769-0.12046,1.9571-2.0018,3.5396-3.9386,3.4395-2.1225-0.03586-3.9508-1.9167-4.0665-4.0109-0.18917-2.2029,1.4501-4.3091,3.5621-4.8452,2.0208-0.56914,4.2887,0.35377,5.4596,2.0703,1.2437,1.6956,1.3022,4.1131,0.21099,5.8964-0.977,1.661-2.804,2.786-4.733,2.878"/>
-                                </g>
-                            </svg>
+                <div id="eyes-tab" class="tab-pane">
+                    <div class="col-md-2">
+                        <div class="card active" data-toggle="face" data-target="#eyes" data-parent="#eyes-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path fill="#FFF"
+                                              d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
+                                        <path stroke="#000" fill="#000"
+                                              d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m38,58-9,0"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m27,51,1-1,11,0,1,1"/>
+                                        <path fill="#FFF"
+                                              d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m59,58,9,0"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m57,51,1-1,11,0,1,1"/>
+                                        <path stroke="#000" fill="#000"
+                                              d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#eyes" data-parent="#eyes-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path stroke="#000" fill="none"
+                                              d="m34,53c0.3733-0.56671,0.89522,0.53835,0.3392,0.79444-0.56225,0.54759-1.5271,0.12847-1.7629-0.55271-0.42466-0.98816,0.41572-2.1139,1.4237-2.2417,1.3678-0.24181,2.6215,1.0834,2.5181,2.4208-0.04706,1.5397-1.5909,2.7602-3.0953,2.5848-1.7382-0.13285-3.0974-1.8629-2.928-3.5769,0.12046-1.9571,2.0018-3.5396,3.9386-3.4395,2.1225,0.03586,3.9508,1.9167,4.0665,4.0109,0.18917,2.2029-1.4501,4.3091-3.5621,4.8452-2.0208,0.56914-4.2887-0.35377-5.4596-2.0702-1.2437-1.6956-1.3022-4.1131-0.211-5.8964,0.977-1.661,2.804-2.786,4.733-2.878"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m63,53c-0.3733,0.56671-0.89522-0.53835-0.3392-0.79444,0.56225-0.54759,1.5271-0.12847,1.7629,0.55271,0.42466,0.98816-0.41572,2.1139-1.4237,2.2417-1.3678,0.24181-2.6215-1.0834-2.5181-2.4208,0.04706-1.5397,1.591-2.7602,3.0953-2.5848,1.7382,0.13285,3.0974,1.8629,2.928,3.5769-0.12046,1.9571-2.0018,3.5396-3.9386,3.4395-2.1225-0.03586-3.9508-1.9167-4.0665-4.0109-0.18917-2.2029,1.4501-4.3091,3.5621-4.8452,2.0208-0.56914,4.2887,0.35377,5.4596,2.0703,1.2437,1.6956,1.3022,4.1131,0.21099,5.8964-0.977,1.661-2.804,2.786-4.733,2.878"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div id="mouth-tab" class="tab-pane">
+                    <div class="col-md-2">
+                        <div class="card active" data-toggle="face" data-target="#mouth" data-parent="#mouth-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path stroke="#000" fill="none"
+                                              d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m44,83c3-1,6.7841-2.0095,7,1"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#mouth" data-parent="#mouth-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path stroke="#000" fill="none"
+                                              d="m44,83c3-1,6.7841-2.0095,7,1"/>
+                                        <path stroke="#000" fill="none"
+                                              d="m35,75c8,3,18,3,26,0"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -317,10 +349,10 @@
 <script src="js/bootstrap/affix.js"></script>
 
 <script type="text/javascript">
-    (function($) {
-        $(function() {
+    (function ($) {
+        $(function () {
             // hack for list-group to work as tabs
-            $(document).on('click', '.list-group-item[data-toggle=tab]', function(e) {
+            $(document).on('click', '.list-group-item[data-toggle=tab]', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -332,7 +364,7 @@
                 $selected.addClass('active');
             });
 
-            $(document).on('click', '[data-toggle=face]', function(e) {
+            $(document).on('click', '[data-toggle=face]', function (e) {
                 var $selected = $(e.target).closest('[data-toggle=face]');
                 var $target = $($selected.data('target'));
                 var $parent = $($selected.data('parent'));
