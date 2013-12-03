@@ -1,0 +1,42 @@
+// Copyright (c) 2008-2013 Ivan Khalopik.
+// All rights reserved.
+
+// Chooser styles
+// -----
+
+.vertical-margin() {
+  @vertical-margin: floor(@grid-gutter-width / 2);
+  margin-top: @vertical-margin;
+  margin-bottom: @vertical-margin;
+}
+
+// Chooser
+.face {
+  display: inline-block;
+  border: 1px solid @face-border;
+  border-radius: @face-border-radius;
+  background-color: @face-bg;
+  margin: @face-margin;
+  padding: @face-padding;
+  text-align: center;
+  cursor: pointer;
+
+  svg {
+    vertical-align: top;
+  }
+
+  &:hover {
+    background-color: @face-hover-bg;
+  }
+
+  &.active {
+    background-color: @face-active-bg;
+    border-color: @face-active-border;
+  }
+
+  &.disabled {
+    background-color: @face-disabled-bg;
+    cursor: default;
+    .opacity(.65);
+  }
+}
