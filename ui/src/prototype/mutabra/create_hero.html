@@ -75,8 +75,9 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
-                    <a class="list-group-item" href="#races-tab" data-toggle="tab">Race</a>
-                    <a class="list-group-item active" href="#faces-tab" data-toggle="tab">Face</a>
+                    <a class="list-group-item" href="#race-tab" data-toggle="tab">Race</a>
+                    <a class="list-group-item" href="#sex-tab" data-toggle="tab">Sex</a>
+                    <a class="list-group-item active" href="#face-tab" data-toggle="tab">Face</a>
                     <a class="list-group-item" href="#eyes-tab" data-toggle="tab">Eyes</a>
                     <a class="list-group-item" href="#mouth-tab" data-toggle="tab">Mouth</a>
                 </div>
@@ -144,6 +145,14 @@
                         <path stroke="#000" fill="none" d="m44,83c3-1,6.7841-2.0095,7,1"/>
                     </g>
 
+                    <g id="sex" transform="translate(0,330) scale(0.700,0.700)">
+                        <path stroke="#333" stroke-width="5px" fill="none"
+                              d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
+                        <path stroke="#333" stroke-width="5px" fill="none"
+                              d="m80,20,-17,17"/>
+                        <path stroke="#333" stroke-width="5px" fill="none"
+                              d="m65,20,15,0,0,15"/>
+                    </g>
                     <g id="race" transform="translate(330,330) scale(0.700,0.700)">
                         <path fill="#333"
                               d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
@@ -153,9 +162,46 @@
 
             <div class="tab-content">
 
-                <div id="races-tab" class="tab-pane">
+                <div id="sex-tab" class="tab-pane">
                     <div class="col-md-2">
-                        <div class="card" data-toggle="face" data-target="#race" data-parent="#races-tab">
+                        <div class="card" data-toggle="face" data-target="#sex" data-parent="#sex-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path stroke="#333" stroke-width="5px" fill="none"
+                                              d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
+                                        <path stroke="#333" stroke-width="5px" fill="none"
+                                              d="m80,20,-17,17"/>
+                                        <path stroke="#333" stroke-width="5px" fill="none"
+                                              d="m65,20,15,0,0,15"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="card active" data-toggle="face" data-target="#sex" data-parent="#sex-tab">
+                            <div class="card-body">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                    <g>
+                                        <path stroke="#333" stroke-width="5px" fill="none"
+                                              d="m25,40a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
+                                        <path stroke="#333" stroke-width="5px" fill="none"
+                                              d="m50,65,0,20"/>
+                                        <path stroke="#333" stroke-width="5px" fill="none"
+                                              d="m40,75,20,0"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="race-tab" class="tab-pane">
+                    <div class="col-md-2">
+                        <div class="card" data-toggle="face" data-target="#race" data-parent="#race-tab">
                             <div class="card-body">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                     <g>
@@ -173,7 +219,7 @@
 
 
                     <div class="col-md-2">
-                        <div class="card active" data-toggle="face" data-target="#race" data-parent="#races-tab">
+                        <div class="card active" data-toggle="face" data-target="#race" data-parent="#race-tab">
                             <div class="card-body">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                     <g>
@@ -186,9 +232,9 @@
                     </div>
                 </div>
 
-                <div id="faces-tab" class="tab-pane active">
+                <div id="face-tab" class="tab-pane active">
                     <div class="col-md-2">
-                        <div class="card active" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                        <div class="card active" data-toggle="face" data-target="#face" data-parent="#face-tab">
                             <div class="card-body">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                     <g fill="none">
@@ -201,7 +247,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                        <div class="card" data-toggle="face" data-target="#face" data-parent="#face-tab">
                             <div class="card-body">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                     <g fill="none">
@@ -214,7 +260,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                        <div class="card" data-toggle="face" data-target="#face" data-parent="#face-tab">
                             <div class="card-body">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                     <g fill="none">
@@ -229,7 +275,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <div class="card" data-toggle="face" data-target="#face" data-parent="#faces-tab">
+                        <div class="card" data-toggle="face" data-target="#face" data-parent="#face-tab">
                             <div class="card-body">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                     <g fill="none">
