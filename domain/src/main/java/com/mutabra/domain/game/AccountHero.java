@@ -24,9 +24,7 @@ public class AccountHero {
 
     public AccountHero(final Hero hero) {
         id = hero.getId();
-        appearance.setName(hero.getAppearance().getName());
-        appearance.setFace(hero.getAppearance().getFace());
-        appearance.setRace(hero.getAppearance().getRace());
+        appearance.fill(hero.getAppearance());
     }
 
     public ObjectId getId() {

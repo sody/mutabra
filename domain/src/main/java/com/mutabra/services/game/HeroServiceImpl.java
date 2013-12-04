@@ -5,13 +5,12 @@
 
 package com.mutabra.services.game;
 
-import org.mongodb.morphia.Datastore;
-import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityServiceImpl;
+import org.mongodb.morphia.Datastore;
 
 import java.util.List;
 
@@ -38,12 +37,10 @@ public class HeroServiceImpl
                 .asList();
     }
 
-    public Hero create(final Account account, final Race race, final Face face, final String name) {
-        final Hero hero = new Hero();
+    @Override
+    public void create(final Account account, final Hero hero, final Race race) {
         hero.setAccount(account);
         hero.getAppearance().setRace(race.getCode());
-        hero.getAppearance().setFace(face.getCode());
-        hero.getAppearance().setName(name);
 
         //TODO: should be retrieved from level
         hero.getLevel().setCode("newbie");
@@ -54,8 +51,6 @@ public class HeroServiceImpl
         hero.getCards().addAll(race.getCards());
 
         save(hero);
-
-        return hero;
     }
 
     public void enter(final Account account, final Hero hero) {

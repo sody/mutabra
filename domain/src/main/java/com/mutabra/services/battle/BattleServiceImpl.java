@@ -5,18 +5,30 @@
 
 package com.mutabra.services.battle;
 
-import org.mongodb.morphia.Datastore;
-import com.mutabra.domain.battle.*;
+import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleAbility;
+import com.mutabra.domain.battle.BattleCard;
+import com.mutabra.domain.battle.BattleCardType;
+import com.mutabra.domain.battle.BattleCreature;
+import com.mutabra.domain.battle.BattleEffect;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.battle.BattleLogEntry;
+import com.mutabra.domain.battle.BattlePosition;
+import com.mutabra.domain.battle.BattleTarget;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
-import com.mutabra.domain.common.EffectType;
-import com.mutabra.domain.common.TargetType;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.services.BaseEntityServiceImpl;
+import org.mongodb.morphia.Datastore;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ivan Khalopik
@@ -47,8 +59,7 @@ public class BattleServiceImpl
         battle.setActive(false);
 
         // init hero
-        final BattleHero battleHero = new BattleHero(battle, hero.getId());
-        fillHero(battleHero, hero);
+        final BattleHero battleHero = new BattleHero(battle, hero);
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
 
@@ -57,8 +68,7 @@ public class BattleServiceImpl
 
     public void apply(final Battle battle, final Hero hero) {
         // init hero
-        final BattleHero battleHero = new BattleHero(battle, hero.getId());
-        fillHero(battleHero, hero);
+        final BattleHero battleHero = new BattleHero(battle, hero);
         battleHero.setReady(true);
         battle.getHeroes().add(battleHero);
 
@@ -84,20 +94,12 @@ public class BattleServiceImpl
 
         // add cast effect
         // it will subtract blood cost from hero health
-        final BattleEffect castEffect = new BattleEffect();
-        castEffect.setCode(card.getCode());
-        castEffect.setDuration(1);
-        castEffect.setPower(card.getBloodCost());
-        castEffect.setType(EffectType.CAST);
-        castEffect.setTargetType(TargetType.NOBODY);
-        castEffect.getCaster().setUnit(hero);
-        castEffect.getTarget().setSpell(card);
+        final BattleEffect castEffect = new BattleEffect(card);
         battle.getEffects().add(castEffect);
 
         // add remaining card effects
         for (Effect effect : card.getEffects()) {
-            final BattleEffect battleEffect = new BattleEffect();
-            fillEffect(battleEffect, effect);
+            final BattleEffect battleEffect = new BattleEffect(effect);
 
             battleEffect.getTarget().setPosition(target.getPosition());
             battleEffect.getTarget().setSide(target.getSide());
@@ -130,20 +132,12 @@ public class BattleServiceImpl
 
         // add cast effect
         // it will subtract blood cost from creature health
-        final BattleEffect castEffect = new BattleEffect();
-        castEffect.setCode(ability.getCode());
-        castEffect.setDuration(1);
-        castEffect.setPower(ability.getBloodCost());
-        castEffect.setType(EffectType.CAST);
-        castEffect.setTargetType(TargetType.NOBODY);
-        castEffect.getCaster().setUnit(creature);
-        castEffect.getTarget().setSpell(ability);
+        final BattleEffect castEffect = new BattleEffect(ability);
         battle.getEffects().add(castEffect);
 
         // add remaining ability effects
         for (Effect effect : ability.getEffects()) {
-            final BattleEffect battleEffect = new BattleEffect();
-            fillEffect(battleEffect, effect);
+            final BattleEffect battleEffect = new BattleEffect(effect);
 
             battleEffect.getCaster().setUnit(creature);
             battleEffect.getTarget().setPosition(target.getPosition());
@@ -196,7 +190,7 @@ public class BattleServiceImpl
 
         for (BattleHero battleHero : battle.getHeroes()) {
             final Hero hero = datastore().get(Hero.class, battleHero.getId());
-            fillHero(battleHero, hero);
+            battleHero.fill(hero);
 
             // the initial hero position is center
             battleHero.setPosition(new BattlePosition(1, 0));
@@ -215,8 +209,7 @@ public class BattleServiceImpl
             for (String heroCard : heroCards) {
                 final Card card = cards.get(heroCard);
                 if (card != null) {
-                    final BattleCard battleCard = new BattleCard(battleHero);
-                    fillCard(battleCard, card);
+                    final BattleCard battleCard = new BattleCard(battleHero, card);
 
                     battleCard.setType(BattleCardType.DECK);
                     battleHero.getCards().add(battleCard);
@@ -280,35 +273,5 @@ public class BattleServiceImpl
             iterator.next().setType(BattleCardType.HAND);
             i++;
         }
-    }
-
-    private void fillHero(final BattleHero battleHero, final Hero hero) {
-        battleHero.setHealth(hero.getHealth());
-        battleHero.setMentalPower(hero.getMentalPower());
-
-        battleHero.getLevel().setCode(hero.getLevel().getCode());
-        battleHero.getLevel().setRating(hero.getLevel().getRating());
-        battleHero.getLevel().setNextLevelRating(hero.getLevel().getNextLevelRating());
-
-        battleHero.getAppearance().setName(hero.getAppearance().getName());
-        battleHero.getAppearance().setRace(hero.getAppearance().getRace());
-        battleHero.getAppearance().setFace(hero.getAppearance().getFace());
-    }
-
-    private void fillCard(final BattleCard battleCard, final Card card) {
-        battleCard.setCode(card.getCode());
-        battleCard.setTargetType(card.getTargetType());
-        battleCard.setBloodCost(card.getBloodCost());
-        battleCard.getEffects().addAll(card.getEffects());
-    }
-
-    private void fillEffect(final BattleEffect battleEffect, final Effect effect) {
-        battleEffect.setCode(effect.getCode());
-        battleEffect.setDuration(effect.getDuration());
-        battleEffect.setHealth(effect.getHealth());
-        battleEffect.setPower(effect.getPower());
-        battleEffect.setType(effect.getType());
-        battleEffect.setTargetType(effect.getTargetType());
-        battleEffect.getAbilities().addAll(effect.getAbilities());
     }
 }

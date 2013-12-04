@@ -5,7 +5,6 @@
 
 package com.mutabra.services.game;
 
-import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
@@ -23,7 +22,7 @@ public interface HeroService extends BaseEntityService<Hero> {
 
     List<Hero> getAll(Account account);
 
-    Hero create(Account account, Race race, Face face, String name);
+    void create(Account account, Hero hero, Race race);
 
     void enter(Account account, Hero hero);
 }

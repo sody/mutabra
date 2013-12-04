@@ -1,7 +1,4 @@
 var db = db || {
-  faces: {
-    insert: function(value) {}
-  },
   levels: {
     insert: function(value) {}
   },
@@ -12,11 +9,6 @@ var db = db || {
     insert: function(value) {}
   }
 };
-
-// faces
-db.faces.insert({_id: 'f1'});
-db.faces.insert({_id: 'f2'});
-
 
 // levels
 db.levels.insert({

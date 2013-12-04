@@ -5,12 +5,12 @@
 
 package com.mutabra.domain.battle;
 
-import org.mongodb.morphia.annotations.Embedded;
 import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.EffectType;
 import com.mutabra.domain.common.TargetType;
+import org.mongodb.morphia.annotations.Embedded;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,29 @@ public class BattleEffect implements Translatable, Comparable<BattleEffect> {
     private int health;
 
     private List<Ability> abilities = new ArrayList<Ability>();
+
+    protected BattleEffect() {
+    }
+
+    public BattleEffect(final BattleSpell spell) {
+        code = ((Translatable) spell).getCode();
+        duration = 1;
+        power = spell.getBloodCost();
+        type = EffectType.CAST;
+        targetType = TargetType.NOBODY;
+        caster.setUnit(spell.getUnit());
+        target.setSpell(spell);
+    }
+
+    public BattleEffect(final Effect effect) {
+        code = effect.getCode();
+        duration = effect.getDuration();
+        health = effect.getHealth();
+        power = effect.getPower();
+        type = effect.getType();
+        targetType = effect.getTargetType();
+        abilities.addAll(effect.getAbilities());
+    }
 
     public BattleTarget getCaster() {
         return caster;
