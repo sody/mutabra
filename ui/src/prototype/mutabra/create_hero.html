@@ -85,83 +85,95 @@
             </div>
 
             <div class="col-md-5">
-                <svg version="1.1" width="350" height="350" id="hero-face" xmlns="http://www.w3.org/2000/svg">
-                    <g id="ears" transform="scale(3.500,3.500)" fill="#c3996b">
-                        <path stroke="#000" stroke-width="2px"
-                              d="m80,50c1-1.1954,2-2.0753,4-2,2,0,3,7,3,12,0,4-5,12-8,12-2,0-3,0-3-2z"/>
-                        <path stroke="#000" fill="none"
-                              d="m84,55c0-5-2-3-4,2-1,3,2,6-1,8-1,1-2,4,1,2"/>
-                        <path stroke="#000" fill="none"
-                              d="m82,59c0-2,0-4-1-4"/>
+                <div class="face-display">
+                    <input id="ears-input" name="ears" value="1" type="hidden"/>
+                    <input id="face-input" name="face" value="1" type="hidden"/>
+                    <input id="eyes-input" name="eyes" value="1" type="hidden"/>
+                    <input id="eyebrows-input" name="eyebrows" value="1" type="hidden"/>
+                    <input id="nose-input" name="nose" value="1" type="hidden"/>
+                    <input id="mouth-input" name="mouth" value="1" type="hidden"/>
+                    <input id="name-input" name="name" value="Hermes" type="hidden"/>
+                    <input id="sex-input" name="sex" value="male" type="hidden"/>
+                    <input id="race-input" name="race" value="plunger" type="hidden"/>
 
-                        <path stroke="#000" stroke-width="2px"
-                              d="m17,50c-1-1-2-2-4-2s-3,7-3,12c0,4,5,12,7,12s4,0,4-2z"/>
-                        <path stroke="#000" fill="none"
-                              d="m13,55c0-5,2-3,4,2,1,3-2,6,1,8,2,1,2,4-1,2"/>
-                        <path stroke="#000" fill="none"
-                              d="m15,59c0-2,0-4,1-4"/>
-                    </g>
-                    <g id="face" transform="scale(3.500,3.500)" fill="#c3996b">
-                        <path stroke="#000" stroke-width="2px"
-                              d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
-                    </g>
-                    <g id="eyes" transform="scale(3.500,3.500)">
-                        <path fill="#FFF"
-                              d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
-                        <path stroke="#000" fill="#000"
-                              d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
-                        <path stroke="#000" fill="none"
-                              d="m38,58-9,0"/>
-                        <path stroke="#000" fill="none"
-                              d="m27,51,1-1,11,0,1,1"/>
-                        <path fill="#FFF"
-                              d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
-                        <path stroke="#000" fill="none"
-                              d="m59,58,9,0"/>
-                        <path stroke="#000" fill="none"
-                              d="m57,51,1-1,11,0,1,1"/>
-                        <path stroke="#000" fill="#000"
-                              d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
-                    </g>
-                    <g id="eyebrows" transform="scale(3.500,3.500)">
-                        <path fill="#000"
-                              d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"/>
-                        <path stroke="#000" fill="none"
-                              d="m43,42,0,7"/>
-                        <path stroke="#000" fill="none"
-                              d="m25,42-1,4"/>
+                    <svg version="1.1" width="350" height="350" id="hero-face" xmlns="http://www.w3.org/2000/svg">
+                        <g id="ears" transform="scale(3.500,3.500)" fill="#c3996b">
+                            <path stroke="#000" stroke-width="2px"
+                                  d="m80,50c1-1.1954,2-2.0753,4-2,2,0,3,7,3,12,0,4-5,12-8,12-2,0-3,0-3-2z"/>
+                            <path stroke="#000" fill="none"
+                                  d="m84,55c0-5-2-3-4,2-1,3,2,6-1,8-1,1-2,4,1,2"/>
+                            <path stroke="#000" fill="none"
+                                  d="m82,59c0-2,0-4-1-4"/>
 
-                        <path fill="#000" d="m52,49c7,0,7-4,19-4l-1-4c-11,0-12,4-18,4v4z"/>
-                        <path stroke="#000" fill="none"
-                              d="m52,42,0,7"/>
-                        <path stroke="#000" fill="none"
-                              d="m72,41,1,4"/>
-                    </g>
-                    <g id="nose" transform="scale(3.500,3.500)">
-                        <path fill="#000"
-                              d="m47,62-5,5,5,4-2-4z"/>
-                    </g>
-                    <g id="mouth" transform="scale(3.500,3.500)">
-                        <path stroke="#000" fill="none" d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"/>
-                        <path stroke="#000" fill="none" d="m44,83c3-1,6.7841-2.0095,7,1"/>
-                    </g>
+                            <path stroke="#000" stroke-width="2px"
+                                  d="m17,50c-1-1-2-2-4-2s-3,7-3,12c0,4,5,12,7,12s4,0,4-2z"/>
+                            <path stroke="#000" fill="none"
+                                  d="m13,55c0-5,2-3,4,2,1,3-2,6,1,8,2,1,2,4-1,2"/>
+                            <path stroke="#000" fill="none"
+                                  d="m15,59c0-2,0-4,1-4"/>
+                        </g>
+                        <g id="face" transform="scale(3.500,3.500)" fill="#c3996b">
+                            <path stroke="#000" stroke-width="2px"
+                                  d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
+                        </g>
+                        <g id="eyes" transform="scale(3.500,3.500)">
+                            <path fill="#FFF"
+                                  d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
+                            <path stroke="#000" fill="#000"
+                                  d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                            <path stroke="#000" fill="none"
+                                  d="m38,58-9,0"/>
+                            <path stroke="#000" fill="none"
+                                  d="m27,51,1-1,11,0,1,1"/>
+                            <path fill="#FFF"
+                                  d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
+                            <path stroke="#000" fill="none"
+                                  d="m59,58,9,0"/>
+                            <path stroke="#000" fill="none"
+                                  d="m57,51,1-1,11,0,1,1"/>
+                            <path stroke="#000" fill="#000"
+                                  d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                        </g>
+                        <g id="eyebrows" transform="scale(3.500,3.500)">
+                            <path fill="#000"
+                                  d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"/>
+                            <path stroke="#000" fill="none"
+                                  d="m43,42,0,7"/>
+                            <path stroke="#000" fill="none"
+                                  d="m25,42-1,4"/>
 
-                    <g id="name" transform="scale(3.500,3.500)">
-                        <text x="0" y="0" dx="2" dy="6" font-size="6px" fill="#333">Hermes</text>
-                    </g>
-                    <g id="sex" transform="translate(0,280) scale(0.700,0.700)">
-                        <path stroke="#333" stroke-width="5px" fill="none"
-                              d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
-                        <path stroke="#333" stroke-width="5px" fill="none"
-                              d="m80,20,-17,17"/>
-                        <path stroke="#333" stroke-width="5px" fill="none"
-                              d="m65,20,15,0,0,15"/>
-                    </g>
-                    <g id="race" transform="translate(280,280) scale(0.700,0.700)">
-                        <path fill="#333"
-                              d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
-                    </g>
-                </svg>
+                            <path fill="#000" d="m52,49c7,0,7-4,19-4l-1-4c-11,0-12,4-18,4v4z"/>
+                            <path stroke="#000" fill="none"
+                                  d="m52,42,0,7"/>
+                            <path stroke="#000" fill="none"
+                                  d="m72,41,1,4"/>
+                        </g>
+                        <g id="nose" transform="scale(3.500,3.500)">
+                            <path fill="#000"
+                                  d="m47,62-5,5,5,4-2-4z"/>
+                        </g>
+                        <g id="mouth" transform="scale(3.500,3.500)">
+                            <path stroke="#000" fill="none" d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"/>
+                            <path stroke="#000" fill="none" d="m44,83c3-1,6.7841-2.0095,7,1"/>
+                        </g>
+
+                        <g id="name" transform="scale(3.500,3.500)">
+                            <text x="0" y="0" dx="2" dy="6" font-size="6px" fill="#333">Hermes</text>
+                        </g>
+                        <g id="sex" transform="translate(0,280) scale(0.700,0.700)">
+                            <path stroke="#333" stroke-width="5px" fill="none"
+                                  d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
+                            <path stroke="#333" stroke-width="5px" fill="none"
+                                  d="m80,20,-17,17"/>
+                            <path stroke="#333" stroke-width="5px" fill="none"
+                                  d="m65,20,15,0,0,15"/>
+                        </g>
+                        <g id="race" transform="translate(280,280) scale(0.700,0.700)">
+                            <path fill="#333"
+                                  d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
+                        </g>
+                    </svg>
+                </div>
 
                 <span class="help-block">
                     Double click to generate random character.
@@ -171,7 +183,7 @@
             <div class="col-md-4 tab-content">
 
                 <div id="race-tab" class="tab-pane">
-                    <div class="face" data-toggle="face" data-target="#race" data-parent="#race-tab">
+                    <div class="face" data-toggle="face" data-target="#race" data-input="#race-input" data-value="orc">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path fill="#333"
@@ -184,7 +196,7 @@
                         </svg>
                     </div>
 
-                    <div class="face active" data-toggle="face" data-target="#race" data-parent="#race-tab">
+                    <div class="face active" data-toggle="face" data-target="#race" data-input="#race-input" data-value="plunger">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path fill="#333"
@@ -195,7 +207,7 @@
                 </div>
 
                 <div id="sex-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#sex" data-parent="#sex-tab">
+                    <div class="face active" data-toggle="face" data-target="#sex" data-input="#sex-input" data-value="male">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#333" stroke-width="5px" fill="none"
@@ -208,7 +220,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#sex" data-parent="#sex-tab">
+                    <div class="face" data-toggle="face" data-target="#sex" data-input="#sex-input" data-value="female">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#333" stroke-width="5px" fill="none"
@@ -223,7 +235,7 @@
                 </div>
 
                 <div id="face-tab" class="tab-pane active">
-                    <div class="face active" data-toggle="face" data-target="#face" data-parent="#face-tab">
+                    <div class="face active" data-toggle="face" data-target="#face" data-input="#face-input" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -232,7 +244,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-parent="#face-tab">
+                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -241,7 +253,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-parent="#face-tab">
+                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="3">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -252,7 +264,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-parent="#face-tab">
+                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="4">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -261,7 +273,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-parent="#face-tab">
+                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="5">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -270,7 +282,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-parent="#face-tab">
+                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="6">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -289,7 +301,7 @@
                 </div>
 
                 <div id="eyes-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#eyes" data-parent="#eyes-tab">
+                    <div class="face active" data-toggle="face" data-target="#eyes" data-input="#eyes-input" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path fill="#FFF"
@@ -312,7 +324,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#eyes" data-parent="#eyes-tab">
+                    <div class="face" data-toggle="face" data-target="#eyes" data-input="#eyes-input" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#000" fill="none"
@@ -325,7 +337,7 @@
                 </div>
 
                 <div id="mouth-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#mouth" data-parent="#mouth-tab">
+                    <div class="face active" data-toggle="face" data-target="#mouth" data-input="#mouth-input" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#000" fill="none"
@@ -336,7 +348,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#mouth" data-parent="#mouth-tab">
+                    <div class="face" data-toggle="face" data-target="#mouth" data-input="#mouth-input" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#000" fill="none"
@@ -349,7 +361,7 @@
                 </div>
 
                 <div id="name-tab" class="tab-pane">
-                    <input type="text" value="Hermes" class="form-control" data-toggle="name" data-target="#name"/>
+                    <input type="text" value="Hermes" class="form-control" data-toggle="face-title" data-target="#name" data-input="#name-input"/>
                 </div>
             </div>
 
@@ -385,6 +397,7 @@
 <script src="js/bootstrap/collapse.js"></script>
 <script src="js/bootstrap/carousel.js"></script>
 <script src="js/bootstrap/affix.js"></script>
+<script src="js/face-generator.js"></script>
 
 <script type="text/javascript">
     (function ($) {
@@ -402,22 +415,135 @@
                 $selected.addClass('active');
             });
 
-            $(document).on('click', '[data-toggle=face]', function (e) {
-                var $selected = $(e.target).closest('[data-toggle=face]');
-                var $target = $($selected.data('target'));
-                var $parent = $($selected.data('parent'));
-                var $picture = $selected.find('svg > g');
+            var names = {
+                male: [
+                    'Fidel Kenison',
+                    'Clifton Bias',
+                    'Judson Kellog',
+                    'Domenic Henton',
+                    'Isaiah Beckmann',
+                    'Chuck Horsman',
+                    'Delmer Bald',
+                    'Charley Wafer',
+                    'Abel Toussaint',
+                    'Louie Dalke',
+                    'Sal Malmberg',
+                    'Peter Byfield',
+                    'Sergio Clausen',
+                    'Dwain Mattern',
+                    'Aurelio Berryman',
+                    'Curt Streetman',
+                    'Jerald Abadie',
+                    'Jessie Straughan',
+                    'Lorenzo Glassman',
+                    'Mohamed Rupe',
+                    'Michale Winward',
+                    'Major Silveria',
+                    'Ulysses Angelos',
+                    'Edmond Dinges',
+                    'Norris Fiske',
+                    'Doyle Salmon',
+                    'Jacques Brendle',
+                    'Kirby Coulter',
+                    'Eloy Kruse',
+                    'Asa Herrington',
+                    'Elliot Tilson',
+                    'Colton March',
+                    'Blaine Smolka',
+                    'Rod Calvo',
+                    'Allen Castor',
+                    'Alan Lonergan',
+                    'Marty Rahn',
+                    'Lyle Pai',
+                    'Keven Gallaher',
+                    'Demetrius Ernest',
+                    'Caleb Neuman',
+                    'Kenneth Schimpf',
+                    'Lucio Kleven',
+                    'Cedric Pomerantz',
+                    'Hugh Cerniglia',
+                    'Leo Arledge',
+                    'Sang Matsunaga',
+                    'Tobias Munroe',
+                    'Benito Dillahunty',
+                    'Emilio Mcwaters'
+                ],
+                female: [
+                    'Lawanda Yokoyama',
+                    'Sharilyn Wasden',
+                    'Krissy Minnifield',
+                    'Emelda Noland',
+                    'Chantelle Jett',
+                    'Junie Nathanson',
+                    'Britney Najarro',
+                    'Lelah Stang',
+                    'Manda Stringfield',
+                    'Cyrstal Vallarta',
+                    'Rosalva Smelser',
+                    'Irina Borgen',
+                    'Antonina Lanz',
+                    'Yuki Parrinello',
+                    'Yoko Banner',
+                    'Jodee Sidhu',
+                    'Leatha Gwinn',
+                    'Joellen Koening',
+                    'Shoshana Keenum',
+                    'Tonie Bettencourt',
+                    'Lakiesha Herzig',
+                    'Piper Sumners',
+                    'Ruthann Woolwine',
+                    'Waltraud Stricklin',
+                    'Oralia Kesner',
+                    'Alysia Gunnell',
+                    'Louanne Aponte',
+                    'Jeannette Hannan',
+                    'Adrien Buchheit',
+                    'Domitila Pohl',
+                    'Elke Bottoms',
+                    'Roberta Yong',
+                    'Lia Keown',
+                    'Brittanie Ballance',
+                    'Latasha Wischmeier',
+                    'Violeta Woods',
+                    'Shanda Schuler',
+                    'Lorrine Loth',
+                    'Socorro Kindel',
+                    'Brigida Morfin',
+                    'Julie Tocci',
+                    'Cecila Pyatt',
+                    'Pearlie Engh',
+                    'Polly Sciacca',
+                    'Denisse Rosebrook',
+                    'Dell Collington',
+                    'Marianna Diller',
+                    'Barb Bran',
+                    'Cheryll Dafoe',
+                    'Jacquiline Nakasone'
+                ]
+            };
 
-                $parent.find('.active[data-toggle=face]').removeClass('active');
-                $selected.addClass('active');
-                $target.empty().append($picture.children().clone());
-            });
+            // random face generation
+            $(document).on('dblclick', '.face-display', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
 
-            $(document).on('change', '[data-toggle=name]', function (e) {
-                var $selected = $(e.target);
-                var $target = $($selected.data('target')).find('text');
+                // generate face
+                $('.tab-pane').each(function() {
+                    var $choices = $(this).find('.face');
 
-                $target.text($selected.val());
+                    if ($choices.length) {
+                        var randomChoice = Math.floor(Math.random() * $choices.length);
+                        $choices.eq(randomChoice).click();
+                    }
+                });
+
+                // generate name
+                var choices = names[$('#sex-input').val()];
+                if (choices) {
+                    var randomChoice = Math.floor(Math.random() * choices.length);
+                    var name = choices[randomChoice];
+                    $('[data-toggle=face-title]').val(name).change();
+                }
             });
         });
     })(window.jQuery);
