@@ -1,32 +1,54 @@
 <html t:type="layout/default"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-        >
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
 <t:form class="form-horizontal">
-
     <t:form.formerrors/>
 
-    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
-        <t:game.raceselect value="race"/>
-    </t:form.formrow>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a class="list-group-item" href="#">Race</a>
+                <a class="list-group-item" href="#">Sex</a>
+                <a class="list-group-item active" href="#">Face</a>
+                <a class="list-group-item" href="#">Eyes</a>
+                <a class="list-group-item" href="#">Mouth</a>
+                <a class="list-group-item" href="#">Name</a>
+            </div>
+        </div>
 
-    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
-        <t:game.faceselect value="face"/>
-    </t:form.formrow>
+        <div class="col-md-5">
+            <t:hero.heroface id="heroFace" appearance="hero.appearance" editable="true"/>
 
-    <t:form.formrow for="name" labelClass="control-label col-sm-4" fieldClass="col-sm-6">
-        <t:textfield t:id="name" class="form-control"
-                     label="message:label.name"
-                     value="name"
-                     validate="required"
-                />
-    </t:form.formrow>
+            <span class="help-block">
+                Double click to generate random character.
+            </span>
+        </div>
 
-    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
-        <t:submit value="message:button.create" class="btn btn-default"/>
+        <div class="col-md-4">
+            <div class="face active" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="1">
+                <t:svg type="faces/face" image="literal:face_1" width="100" height="100"/>
+            </div>
+            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="2">
+                <t:svg type="faces/face" image="literal:face_2" width="100" height="100"/>
+            </div>
+            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="3">
+                <t:svg type="faces/face" image="literal:face_3" width="100" height="100"/>
+            </div>
+            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="4">
+                <t:svg type="faces/face" image="literal:face_4" width="100" height="100"/>
+            </div>
+            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="5">
+                <t:svg type="faces/face" image="literal:face_5" width="100" height="100"/>
+            </div>
+            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="6">
+                <t:svg type="faces/face" image="literal:face_6" width="100" height="100"/>
+            </div>
+        </div>
+    </div>
 
-        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
-    </t:form.formrow>
+    <hr/>
+    <t:submit value="message:button.create" class="btn btn-primary"/>
+    <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
 
 </t:form>
 
