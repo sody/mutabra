@@ -85,20 +85,22 @@
             </div>
 
             <div class="col-md-5">
-                <div class="face-display">
-                    <input id="ears-input" name="ears" value="1" type="hidden"/>
-                    <input id="face-input" name="face" value="1" type="hidden"/>
-                    <input id="eyes-input" name="eyes" value="1" type="hidden"/>
-                    <input id="eyebrows-input" name="eyebrows" value="1" type="hidden"/>
-                    <input id="nose-input" name="nose" value="1" type="hidden"/>
-                    <input id="mouth-input" name="mouth" value="1" type="hidden"/>
-                    <input id="name-input" name="name" value="Hermes" type="hidden"/>
-                    <input id="sex-input" name="sex" value="male" type="hidden"/>
-                    <input id="race-input" name="race" value="plunger" type="hidden"/>
+                <div class="face-display" id="hero-face">
+                    <input id="ears-input" name="ears" value="1" type="hidden" data-part="ears"/>
+                    <input id="face-input" name="face" value="1" type="hidden" data-part="face"/>
+                    <input id="eyes-input" name="eyes" value="1" type="hidden" data-part="eyes"/>
+                    <input id="eyebrows-input" name="eyebrows" value="1" type="hidden" data-part="eyebrows"/>
+                    <input id="nose-input" name="nose" value="1" type="hidden" data-part="nose"/>
+                    <input id="mouth-input" name="mouth" value="1" type="hidden" data-part="mouth"/>
+                    <input id="hair-input" name="hair" value="1" type="hidden" data-part="hair"/>
+                    <input id="facial-hair-input" name="facial-hair" value="1" type="hidden" data-part="facial-hair"/>
+                    <input id="name-input" name="name" value="Hermes" type="hidden" data-part="name"/>
+                    <input id="sex-input" name="sex" value="male" type="hidden" data-part="sex"/>
+                    <input id="race-input" name="race" value="plunger" type="hidden" data-part="race"/>
 
-                    <svg version="1.1" width="350" height="350" id="hero-face" xmlns="http://www.w3.org/2000/svg">
+                    <svg version="1.1" width="350" height="350" xmlns="http://www.w3.org/2000/svg">
                         <g transform="scale(3.500,3.500)">
-                            <g id="ears" fill="#c3996b">
+                            <g data-part="ears" fill="#c3996b">
                                 <path stroke="#000" stroke-width="2px"
                                       d="m80,50c1-1.1954,2-2.0753,4-2,2,0,3,7,3,12,0,4-5,12-8,12-2,0-3,0-3-2z"/>
                                 <path stroke="#000" fill="none"
@@ -113,11 +115,11 @@
                                 <path stroke="#000" fill="none"
                                       d="m15,59c0-2,0-4,1-4"/>
                             </g>
-                            <g id="face" fill="#c3996b">
+                            <g data-part="face" fill="#c3996b">
                                 <path stroke="#000" stroke-width="2px"
                                       d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
                             </g>
-                            <g id="eyes">
+                            <g data-part="eyes">
                                 <path fill="#FFF"
                                       d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
                                 <path stroke="#000" fill="#000"
@@ -135,7 +137,7 @@
                                 <path stroke="#000" fill="#000"
                                       d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
                             </g>
-                            <g id="eyebrows">
+                            <g data-part="eyebrows">
                                 <path fill="#000"
                                       d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"/>
                                 <path stroke="#000" fill="none"
@@ -149,19 +151,19 @@
                                 <path stroke="#000" fill="none"
                                       d="m72,41,1,4"/>
                             </g>
-                            <g id="nose">
+                            <g data-part="nose">
                                 <path fill="#000"
                                       d="m47,62-5,5,5,4-2-4z"/>
                             </g>
-                            <g id="mouth">
+                            <g data-part="mouth">
                                 <path stroke="#000" fill="none" d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"/>
                                 <path stroke="#000" fill="none" d="m44,83c3-1,6.7841-2.0095,7,1"/>
                             </g>
 
-                            <g id="name">
+                            <g data-part="name">
                                 <text x="0" y="0" dx="2" dy="6" font-size="6px" fill="#333">Hermes</text>
                             </g>
-                            <g id="sex" transform="translate(0,80) scale(0.200,0.200)">
+                            <g data-part="sex" transform="translate(0,80) scale(0.200,0.200)">
                                 <path stroke="#333" stroke-width="5px" fill="none"
                                       d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
                                 <path stroke="#333" stroke-width="5px" fill="none"
@@ -169,7 +171,7 @@
                                 <path stroke="#333" stroke-width="5px" fill="none"
                                       d="m65,20,15,0,0,15"/>
                             </g>
-                            <g id="race" transform="translate(80,80) scale(0.200,0.200)">
+                            <g data-part="race" transform="translate(80,80) scale(0.200,0.200)">
                                 <path fill="#333"
                                       d="m 53,5 0,49c 0,5 14,8 14,3v -14c 0,-3 -3,-1 -5,1l 10,-19v 35c 0,5 -19,3 -19,8v 27h -6v -13c 0,-5 -19,-2 -19,-7v -37l 10,21c -2,-2 -5,-5 -5,-2v 15c 0,5 14,2 14-3v -44c 0,-3 -3,0 -5,2z"/>
                             </g>
@@ -185,7 +187,7 @@
             <div class="col-md-4 tab-content">
 
                 <div id="race-tab" class="tab-pane">
-                    <div class="face" data-toggle="face" data-target="#race" data-input="#race-input" data-value="orc">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="race" data-value="orc">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path fill="#333"
@@ -198,7 +200,7 @@
                         </svg>
                     </div>
 
-                    <div class="face active" data-toggle="face" data-target="#race" data-input="#race-input" data-value="plunger">
+                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="race" data-value="plunger">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path fill="#333"
@@ -209,7 +211,7 @@
                 </div>
 
                 <div id="sex-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#sex" data-input="#sex-input" data-value="male">
+                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="sex" data-value="male">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#333" stroke-width="5px" fill="none"
@@ -222,7 +224,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#sex" data-input="#sex-input" data-value="female">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="sex" data-value="female">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#333" stroke-width="5px" fill="none"
@@ -237,7 +239,7 @@
                 </div>
 
                 <div id="face-tab" class="tab-pane active">
-                    <div class="face active" data-toggle="face" data-target="#face" data-input="#face-input" data-value="1">
+                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="face" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -246,7 +248,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="2">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -255,7 +257,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="3">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="3">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -266,7 +268,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="4">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="4">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -275,7 +277,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="5">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="5">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -284,7 +286,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#face" data-input="#face-input" data-value="6">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="6">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g fill="none">
                                 <path stroke="#000" stroke-width="2px"
@@ -303,7 +305,7 @@
                 </div>
 
                 <div id="eyes-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#eyes" data-input="#eyes-input" data-value="1">
+                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="eyes" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path fill="#FFF"
@@ -326,7 +328,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#eyes" data-input="#eyes-input" data-value="2">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="eyes" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#000" fill="none"
@@ -339,7 +341,7 @@
                 </div>
 
                 <div id="mouth-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#mouth" data-input="#mouth-input" data-value="1">
+                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="mouth" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#000" fill="none"
@@ -350,7 +352,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#mouth" data-input="#mouth-input" data-value="2">
+                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="mouth" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g>
                                 <path stroke="#000" fill="none"
@@ -363,7 +365,7 @@
                 </div>
 
                 <div id="name-tab" class="tab-pane">
-                    <input type="text" value="Hermes" class="form-control" data-toggle="face-title" data-target="#name" data-input="#name-input"/>
+                    <input type="text" value="Hermes" class="form-control" data-toggle="face-title" data-target="#hero-face" data-part="name"/>
                 </div>
             </div>
 

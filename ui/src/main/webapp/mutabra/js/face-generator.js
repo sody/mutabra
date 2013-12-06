@@ -13,10 +13,10 @@
         this.value = this.$element.data('value');
         this.$picture = this.$element.find('svg > g');
 
-        var targetSelector = this.$element.data('target');
-        var inputSelector = this.$element.data('input');
-        this.$target = targetSelector && $(targetSelector);
-        this.$input = inputSelector && $(inputSelector);
+        var part = this.$element.data('part');
+        var selector = this.$element.data('target');
+        this.$target = selector && $(selector).find('g[data-part=' + part + ']');
+        this.$input = selector && $(selector).find('input[data-part=' + part + ']');
     };
 
     FaceGenerator.prototype = {
@@ -53,10 +53,10 @@
     var FaceTitle = function (element) {
         this.$element = $(element);
 
-        var targetSelector = this.$element.data('target');
-        var inputSelector = this.$element.data('input');
-        this.$target = targetSelector && $(targetSelector);
-        this.$input = inputSelector && $(inputSelector);
+        var selector = this.$element.data('target');
+        var part = this.$element.data('part');
+        this.$target = selector && $(selector).find('g[data-part=' + part + ']');
+        this.$input = selector && $(selector).find('input[data-part=' + part + ']');
     };
 
     FaceTitle.prototype = {
