@@ -1,84 +1,68 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 
     <t:block t:id="ears">
-        <t:svg type="faces/ears"
-               image="ears_${appearance.ears}"
-               width="100"
-               height="100"
+        <t:svg type="faces/ears" image="ears_${appearance.ears}"
+               width="100" height="100"
                inline="true"
-               fill="#c3996b" class="ears"
+               fill="#c3996b"
+               data-part="ears"
                 />
     </t:block>
 
     <t:block t:id="face">
-        <t:svg type="faces/face"
-               image="face_${appearance.face}"
-               width="100"
-               height="100"
+        <t:svg type="faces/face" image="face_${appearance.face}"
+               width="100" height="100"
                inline="true"
-               fill="#c3996b" class="face"
+               fill="#c3996b"
+               data-part="face"
                 />
     </t:block>
 
     <t:block t:id="eyes">
-        <t:svg type="faces/eyes"
-               image="eyes_${appearance.eyes}"
-               width="100"
-               height="100"
+        <t:svg type="faces/eyes" image="eyes_${appearance.eyes}"
+               width="100" height="100"
                inline="true"
-               class="eyes"
+               data-part="eyes"
                 />
     </t:block>
 
     <t:block t:id="eyebrows">
-        <t:svg type="faces/eyebrows"
-               image="eyebrows_${appearance.eyebrows}"
-               width="100"
-               height="100"
+        <t:svg type="faces/eyebrows" image="eyebrows_${appearance.eyebrows}"
+               width="100" height="100"
                inline="true"
-               class="eyebrows"
+               data-part="eyebrows"
                 />
     </t:block>
 
     <t:block t:id="nose">
-        <t:svg type="faces/nose"
-               image="nose_${appearance.nose}"
-               width="100"
-               height="100"
+        <t:svg type="faces/nose" image="nose_${appearance.nose}"
+               width="100" height="100"
                inline="true"
-               class="nose"
+               data-part="nose"
                 />
     </t:block>
 
     <t:block t:id="mouth">
-        <t:svg type="faces/mouth"
-               image="mouth_${appearance.mouth}"
-               width="100"
-               height="100"
+        <t:svg type="faces/mouth" image="mouth_${appearance.mouth}"
+               width="100" height="100"
                inline="true"
-               class="mouth"
+               data-part="mouth"
                 />
     </t:block>
 
     <t:block t:id="sex">
-        <t:svg type="faces/sex"
-               image="${appearance.sex.code}"
-               width="20"
-               height="20"
-               x="0" y="80"
+        <t:svg type="faces/sex" image="${appearance.sex.code}"
+               x="0" y="80" width="20" height="20"
                inline="true"
-               class="sex"
+               data-part="sex"
                 />
     </t:block>
 
     <t:block t:id="race">
-        <t:svg type="races"
-               image="${appearance.race}"
-               width="20"
-               height="20"
-               x="80" y="80"
+        <t:svg type="races" image="${appearance.race}"
+               x="80" y="80" width="20" height="20"
                inline="true"
-               class="race"
+               data-part="race"
                 />
     </t:block>
 

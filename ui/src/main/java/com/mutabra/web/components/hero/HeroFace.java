@@ -8,12 +8,10 @@ package com.mutabra.web.components.hero;
 import com.mutabra.domain.common.Sex;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
-import com.mutabra.web.base.components.AbstractClientElement;
-import org.apache.tapestry5.BindingConstants;
+import com.mutabra.web.base.components.AbstractField;
 import org.apache.tapestry5.Block;
-import org.apache.tapestry5.ComponentAction;
-import org.apache.tapestry5.Field;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.ValidationTracker;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeginRender;
 import org.apache.tapestry5.annotations.CleanupRender;
@@ -21,36 +19,38 @@ import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.util.InternalUtils;
+import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.ComponentDefaultProvider;
-import org.apache.tapestry5.services.FormSupport;
 import org.apache.tapestry5.services.Request;
 
-import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public class HeroFace extends AbstractClientElement implements Field {
-    private static final ComponentAction<HeroFace> PROCESS_SUBMISSION_ACTION = new ProcessSubmission();
-
-    @Parameter(defaultPrefix = BindingConstants.LITERAL)
-    private String label;
+public class HeroFace extends AbstractField {
 
     @Parameter(required = true, allowNull = false)
     private HeroAppearance appearance;
 
+    @Parameter(value = "100")
+    private int width;
+
+    @Parameter(value = "100")
+    private int height;
+
     @Parameter
     private boolean editable;
 
-    private String controlName;
     private Iterator<HeroAppearancePart> iterator;
 
     @Environmental(false)
-    private FormSupport formSupport;
+    private ValidationTracker tracker;
 
     @Inject
     private ComponentDefaultProvider defaultProvider;
@@ -62,28 +62,13 @@ public class HeroFace extends AbstractClientElement implements Field {
         return defaultProvider.defaultLabel(getResources());
     }
 
-    @Override
-    public String getControlName() {
-        return controlName;
-    }
-
-    @Override
-    public String getLabel() {
-        return label;
-    }
-
-    @Override
-    public boolean isDisabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isRequired() {
-        return false;
-    }
-
     public HeroAppearance getAppearance() {
         return appearance;
+    }
+
+    @Override
+    protected boolean editable() {
+        return editable;
     }
 
     @SetupRender
@@ -96,77 +81,35 @@ public class HeroFace extends AbstractClientElement implements Field {
                 "class", "face-display");
 
         // assign control name
-        if (editable) {
-            // should be inside form
-            if (formSupport == null) {
-                throw new RuntimeException(String.format("Component %s must be enclosed by a Form component.",
-                        getResources().getCompleteId()));
-            }
-
-            controlName = getResources().isBound("id") ?
-                    getClientId() :
-                    formSupport.allocateControlName(getResources().getId());
-
-            formSupport.storeAndExecute(this, new Setup(controlName));
-            formSupport.store(this, PROCESS_SUBMISSION_ACTION);
+        if (editable()) {
+            final String submitted = tracker.getInput(this);
+            final JSONObject submittedValue = InternalUtils.isNonBlank(submitted) ? new JSONObject(submitted) : null;
 
             // write hidden inputs
             for (HeroAppearancePart facePart : faceParts) {
-                final String facePartValue;
-                switch (facePart) {
-                    case NAME:
-                        facePartValue = appearance.getName();
-                        break;
-                    case RACE:
-                        facePartValue = appearance.getRace();
-                        break;
-                    case SEX:
-                        facePartValue = encode(Sex.class, appearance.getSex());
-                        break;
-                    case EARS:
-                        facePartValue = String.valueOf(appearance.getEars());
-                        break;
-                    case FACE:
-                        facePartValue = String.valueOf(appearance.getFace());
-                        break;
-                    case EYES:
-                        facePartValue = String.valueOf(appearance.getEyes());
-                        break;
-                    case EYEBROWS:
-                        facePartValue = String.valueOf(appearance.getEyebrows());
-                        break;
-                    case NOSE:
-                        facePartValue = String.valueOf(appearance.getNose());
-                        break;
-                    case MOUTH:
-                        facePartValue = String.valueOf(appearance.getMouth());
-                        break;
-                    case HAIR:
-                        facePartValue = String.valueOf(appearance.getHair());
-                        break;
-                    case FACIAL_HAIR:
-                        facePartValue = String.valueOf(appearance.getFacialHair());
-                        break;
-                    default:
-                        facePartValue = null;
-                }
-                final String facePartSufix = "_" + facePart.name().toLowerCase();
+                final String value = submittedValue != null ?
+                        submittedValue.getString(facePart.getCode()) :
+                        getValue(facePart);
+
                 writer.element("input",
                         "type", "hidden",
-                        "id", getClientId() + facePartSufix,
-                        "name", getControlName() + facePartSufix,
-                        "value", facePartValue);
+                        "id", getClientId() + "_" + facePart.getCode(),
+                        "name", getControlName() + "_" + facePart.getCode(),
+                        "data-part", facePart.getCode(),
+                        "value", value);
                 writer.end();
             }
         }
 
         writer.elementNS("http://www.w3.org/2000/svg", "svg").attributes(
-                "width", "350",
-                "height", "350",
+                "width", String.valueOf(width),
+                "height", String.valueOf(height),
                 "version", "1.1");
 
+        final double scaleX = (double) width / 100;
+        final double scaleY = (double) height / 100;
         writer.element("g",
-                "transform", "scale(3.500,3.500)");
+                "transform", String.format(Locale.US, "scale(%.3f,%.3f)", scaleX, scaleY));
 
         iterator = faceParts.iterator();
     }
@@ -190,82 +133,93 @@ public class HeroFace extends AbstractClientElement implements Field {
         writer.end(); // div container
     }
 
-    private void setupControlName(final String controlName) {
-        this.controlName = controlName;
-    }
-
-    private void processSubmission() {
+    @Override
+    protected void processSubmission(final String controlName) {
+        final JSONObject submittedValue = new JSONObject();
         for (HeroAppearancePart facePart : HeroAppearancePart.values()) {
-            final String submitted = request.getParameter(getControlName() + "_" + facePart.name().toLowerCase());
+            final String submitted = request.getParameter(controlName + "_" + facePart.getCode());
+            submittedValue.put(facePart.getCode(), submitted);
+
             if (submitted != null) {
-                switch (facePart) {
-                    case NAME:
-                        appearance.setName(submitted);
-                        break;
-                    case RACE:
-                        appearance.setRace(submitted);
-                        break;
-                    case SEX:
-                        appearance.setSex(decode(Sex.class, submitted));
-                        break;
-                    case EARS:
-                        appearance.setEars(decode(Integer.class, submitted));
-                        break;
-                    case FACE:
-                        appearance.setFace(decode(Integer.class, submitted));
-                        break;
-                    case EYES:
-                        appearance.setEyes(decode(Integer.class, submitted));
-                        break;
-                    case EYEBROWS:
-                        appearance.setEyebrows(decode(Integer.class, submitted));
-                        break;
-                    case NOSE:
-                        appearance.setNose(decode(Integer.class, submitted));
-                        break;
-                    case MOUTH:
-                        appearance.setMouth(decode(Integer.class, submitted));
-                        break;
-                    case HAIR:
-                        appearance.setHair(decode(Integer.class, submitted));
-                        break;
-                    case FACIAL_HAIR:
-                        appearance.setFacialHair(decode(Integer.class, submitted));
-                        break;
-                }
+                setValue(facePart, submitted);
+            }
+        }
+        tracker.recordInput(this, submittedValue.toCompactString());
+
+        // assign values
+        for (HeroAppearancePart facePart : HeroAppearancePart.values()) {
+            final String submitted = submittedValue.getString(facePart.getCode());
+
+            if (submitted != null) {
+                setValue(facePart, submitted);
             }
         }
     }
 
-    static class Setup implements ComponentAction<HeroFace>, Serializable {
-        private static final long serialVersionUID = 2690270608212092340L;
-
-        private final String controlName;
-
-        public Setup(final String controlName) {
-            this.controlName = controlName;
-        }
-
-        public void execute(final HeroFace component) {
-            component.setupControlName(controlName);
-        }
-
-        @Override
-        public String toString() {
-            return String.format("AbstractField.Setup[%s]", controlName);
+    private void setValue(final HeroAppearancePart facePart, final String value) {
+        switch (facePart) {
+            case NAME:
+                appearance.setName(value);
+                break;
+            case RACE:
+                appearance.setRace(value);
+                break;
+            case SEX:
+                appearance.setSex(decode(Sex.class, value));
+                break;
+            case EARS:
+                appearance.setEars(decode(Integer.class, value));
+                break;
+            case FACE:
+                appearance.setFace(decode(Integer.class, value));
+                break;
+            case EYES:
+                appearance.setEyes(decode(Integer.class, value));
+                break;
+            case EYEBROWS:
+                appearance.setEyebrows(decode(Integer.class, value));
+                break;
+            case NOSE:
+                appearance.setNose(decode(Integer.class, value));
+                break;
+            case MOUTH:
+                appearance.setMouth(decode(Integer.class, value));
+                break;
+            case HAIR:
+                appearance.setHair(decode(Integer.class, value));
+                break;
+            case FACIAL_HAIR:
+                appearance.setFacialHair(decode(Integer.class, value));
+                break;
         }
     }
 
-    static class ProcessSubmission implements ComponentAction<HeroFace>, Serializable {
-        private static final long serialVersionUID = -4346676414137434418L;
-
-        public void execute(final HeroFace component) {
-            component.processSubmission();
-        }
-
-        @Override
-        public String toString() {
-            return "AbstractField.ProcessSubmission";
+    private String getValue(final HeroAppearancePart facePart) {
+        switch (facePart) {
+            case NAME:
+                return appearance.getName();
+            case RACE:
+                return appearance.getRace();
+            case SEX:
+                return encode(Sex.class, appearance.getSex());
+            case EARS:
+                return String.valueOf(appearance.getEars());
+            case FACE:
+                return String.valueOf(appearance.getFace());
+            case EYES:
+                return String.valueOf(appearance.getEyes());
+            case EYEBROWS:
+                return String.valueOf(appearance.getEyebrows());
+            case NOSE:
+                return String.valueOf(appearance.getNose());
+            case MOUTH:
+                return String.valueOf(appearance.getMouth());
+            case HAIR:
+                return String.valueOf(appearance.getHair());
+            case FACIAL_HAIR:
+                return String.valueOf(appearance.getFacialHair());
+            default:
+                return null;
         }
     }
 }

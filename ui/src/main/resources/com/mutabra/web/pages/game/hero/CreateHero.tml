@@ -17,7 +17,12 @@
         </div>
 
         <div class="col-md-5">
-            <t:hero.heroface id="heroFace" appearance="hero.appearance" editable="true"/>
+            <t:hero.heroface id="heroFace"
+                             appearance="hero.appearance"
+                             editable="true"
+                             width="350"
+                             height="350"
+                    />
 
             <span class="help-block">
                 Double click to generate random character.
@@ -25,22 +30,22 @@
         </div>
 
         <div class="col-md-4">
-            <div class="face active" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="1">
+            <div class="face active" data-toggle="face" data-target="#heroFace" data-part="face" data-value="1">
                 <t:svg type="faces/face" image="literal:face_1" width="100" height="100"/>
             </div>
-            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="2">
+            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="2">
                 <t:svg type="faces/face" image="literal:face_2" width="100" height="100"/>
             </div>
-            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="3">
+            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="3">
                 <t:svg type="faces/face" image="literal:face_3" width="100" height="100"/>
             </div>
-            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="4">
+            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="4">
                 <t:svg type="faces/face" image="literal:face_4" width="100" height="100"/>
             </div>
-            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="5">
+            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="5">
                 <t:svg type="faces/face" image="literal:face_5" width="100" height="100"/>
             </div>
-            <div class="face" data-toggle="face" data-target="#heroFace .face" data-input="#heroFace_face" data-value="6">
+            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="6">
                 <t:svg type="faces/face" image="literal:face_6" width="100" height="100"/>
             </div>
         </div>

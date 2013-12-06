@@ -28,16 +28,14 @@ public abstract class AbstractClientElement extends AbstractComponent implements
 
     @Override
     public String getClientId() {
+        if (clientId == null) {
+            // calculate client id
+            clientId = getResources().isBound("id") ? idParameter : jsSupport.allocateClientId(getResources());
+        }
         return clientId;
     }
 
     public JavaScriptSupport getJavaScriptSupport() {
         return jsSupport;
-    }
-
-    @SetupRender
-    protected void setup() {
-        // assign client id and control name
-        clientId = getResources().isBound("id") ? idParameter : jsSupport.allocateClientId(getResources());
     }
 }

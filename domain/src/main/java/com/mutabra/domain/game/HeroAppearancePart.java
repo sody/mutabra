@@ -5,11 +5,14 @@
 
 package com.mutabra.domain.game;
 
+import com.mutabra.domain.CodeUtils;
+import com.mutabra.domain.Translatable;
+
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
-public enum HeroAppearancePart {
+public enum HeroAppearancePart implements Translatable {
     NAME,
     RACE,
     SEX,
@@ -20,5 +23,23 @@ public enum HeroAppearancePart {
     NOSE,
     MOUTH,
     HAIR,
-    FACIAL_HAIR
+    FACIAL_HAIR;
+
+    public static final String BASENAME = "role";
+
+    private final String code;
+
+    private HeroAppearancePart() {
+        code = CodeUtils.generateCode(this);
+    }
+
+    @Override
+    public String getBasename() {
+        return BASENAME;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
 }
