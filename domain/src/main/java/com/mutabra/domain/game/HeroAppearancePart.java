@@ -13,9 +13,6 @@ import com.mutabra.domain.Translatable;
  * @since 1.0
  */
 public enum HeroAppearancePart implements Translatable {
-    NAME,
-    RACE,
-    SEX,
     EARS,
     FACE,
     EYES,
@@ -23,7 +20,10 @@ public enum HeroAppearancePart implements Translatable {
     NOSE,
     MOUTH,
     HAIR,
-    FACIAL_HAIR;
+    FACIAL_HAIR,
+    NAME,
+    RACE,
+    SEX;
 
     public static final String BASENAME = "face";
 

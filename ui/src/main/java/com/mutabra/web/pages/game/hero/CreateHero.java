@@ -13,15 +13,12 @@ import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.web.base.pages.AbstractPage;
-import com.mutabra.web.components.game.RaceSelect;
 import com.mutabra.web.internal.annotations.MainMenu;
 import com.mutabra.web.pages.game.GameHome;
 import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.ajax.MultiZoneUpdate;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -32,7 +29,6 @@ import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.mutabra.web.internal.annotations.MainMenuItem.HERO;

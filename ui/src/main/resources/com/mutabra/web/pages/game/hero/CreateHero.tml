@@ -8,7 +8,8 @@
         <div t:type="zone" t:id="faceMenu" id="faceMenu" class="col-md-3">
             <div class="list-group">
                 <t:loop source="faceParts" value="facePart" formState="none">
-                    <t:actionlink t:id="menuLink" context="facePart" zone="faceSelect" class="list-group-item${facePartCssClass}">
+                    <t:actionlink t:id="menuLink" context="facePart" zone="faceSelect"
+                                  class="list-group-item${facePartCssClass}">
                         ${facePartLabel}
                     </t:actionlink>
                 </t:loop>
@@ -16,15 +17,14 @@
         </div>
 
         <div class="col-md-5">
-            <t:hero.heroface id="face"
-                             appearance="hero.appearance"
-                             editable="true"
-                             width="350"
-                             height="350"
+            <t:hero.herofaceedit id="face"
+                                 appearance="hero.appearance"
+                                 width="350"
+                                 height="350"
                     />
 
             <span class="help-block">
-                Double click to generate random character.
+                ${message:hint.random-generation}
             </span>
         </div>
 
@@ -50,33 +50,36 @@
                 </div>
             </t:block>
             <t:block t:id="ears">
-                <t:hero.herofaceselect id="facePart" target="face" part="ears" count="1"/>
+                <t:hero.herofaceselect id="earsSelect" target="face" part="ears" count="1"/>
             </t:block>
             <t:block t:id="face">
-                <t:hero.herofaceselect id="facePart" target="face" part="face" count="7"/>
+                <t:hero.herofaceselect id="shapeSelect" target="face" part="face" count="7"/>
             </t:block>
             <t:block t:id="eyes">
-                <t:hero.herofaceselect id="facePart" target="face" part="eyes" count="2"/>
+                <t:hero.herofaceselect id="eyesSelect" target="face" part="eyes" count="2"/>
             </t:block>
             <t:block t:id="eyebrows">
-                <t:hero.herofaceselect id="facePart" target="face" part="eyebrows" count="1"/>
+                <t:hero.herofaceselect id="eyebrowsSelect" target="face" part="eyebrows" count="1"/>
             </t:block>
             <t:block t:id="nose">
-                <t:hero.herofaceselect id="facePart" target="face" part="nose" count="1"/>
+                <t:hero.herofaceselect id="noseSelect" target="face" part="nose" count="1"/>
             </t:block>
             <t:block t:id="mouth">
-                <t:hero.herofaceselect id="facePart" target="face" part="mouth" count="2"/>
+                <t:hero.herofaceselect id="mouthSelect" target="face" part="mouth" count="2"/>
             </t:block>
 
             <t:block t:id="name">
-                <input type="text" value="${hero.appearance.name}" class="form-control" data-toggle="face-title" data-target="#face" data-part="name"/>
+                <input type="text" value="${hero.appearance.name}" class="form-control"
+                       data-toggle="face-title" data-target="#face" data-part="name"/>
             </t:block>
         </div>
     </div>
 
     <hr/>
-    <t:submit value="message:button.create" class="btn btn-primary"/>
-    <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
+    <div class="btn-toolbar">
+        <t:submit value="message:button.create" class="btn btn-primary"/>
+        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
+    </div>
 
 </t:form>
 
