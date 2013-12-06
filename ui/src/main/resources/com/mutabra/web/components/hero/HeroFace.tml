@@ -66,4 +66,10 @@
                 />
     </t:block>
 
+    <t:block t:id="name">
+        <g data-part="name">
+            <text x="0" y="0" dx="2" dy="6" font-size="6px" fill="#333">${appearance.name}</text>
+        </g>
+    </t:block>
+
 </t:container>

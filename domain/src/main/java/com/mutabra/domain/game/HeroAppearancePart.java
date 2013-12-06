@@ -25,7 +25,7 @@ public enum HeroAppearancePart implements Translatable {
     HAIR,
     FACIAL_HAIR;
 
-    public static final String BASENAME = "role";
+    public static final String BASENAME = "face";
 
     private final String code;
 

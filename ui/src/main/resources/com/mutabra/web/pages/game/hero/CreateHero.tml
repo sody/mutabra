@@ -5,19 +5,18 @@
     <t:form.formerrors/>
 
     <div class="row">
-        <div class="col-md-3">
+        <div t:type="zone" t:id="faceMenu" id="faceMenu" class="col-md-3">
             <div class="list-group">
-                <a class="list-group-item" href="#">Race</a>
-                <a class="list-group-item" href="#">Sex</a>
-                <a class="list-group-item active" href="#">Face</a>
-                <a class="list-group-item" href="#">Eyes</a>
-                <a class="list-group-item" href="#">Mouth</a>
-                <a class="list-group-item" href="#">Name</a>
+                <t:loop source="faceParts" value="facePart" formState="none">
+                    <t:actionlink t:id="menuLink" context="facePart" zone="faceSelect" class="list-group-item${facePartCssClass}">
+                        ${facePartLabel}
+                    </t:actionlink>
+                </t:loop>
             </div>
         </div>
 
         <div class="col-md-5">
-            <t:hero.heroface id="heroFace"
+            <t:hero.heroface id="face"
                              appearance="hero.appearance"
                              editable="true"
                              width="350"
@@ -29,25 +28,49 @@
             </span>
         </div>
 
-        <div class="col-md-4">
-            <div class="face active" data-toggle="face" data-target="#heroFace" data-part="face" data-value="1">
-                <t:svg type="faces/face" image="literal:face_1" width="100" height="100"/>
-            </div>
-            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="2">
-                <t:svg type="faces/face" image="literal:face_2" width="100" height="100"/>
-            </div>
-            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="3">
-                <t:svg type="faces/face" image="literal:face_3" width="100" height="100"/>
-            </div>
-            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="4">
-                <t:svg type="faces/face" image="literal:face_4" width="100" height="100"/>
-            </div>
-            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="5">
-                <t:svg type="faces/face" image="literal:face_5" width="100" height="100"/>
-            </div>
-            <div class="face" data-toggle="face" data-target="#heroFace" data-part="face" data-value="6">
-                <t:svg type="faces/face" image="literal:face_6" width="100" height="100"/>
-            </div>
+        <div t:type="zone" t:id="faceSelect" id="faceSelect" class="col-md-4">
+            <t:delegate to="facePartContent"/>
+
+            <t:block t:id="race">
+                <div class="face" data-toggle="face" data-target="#face" data-part="race" data-value="plunger">
+                    <t:svg type="races" image="literal:plunger" width="100" height="100"/>
+                </div>
+
+                <div class="face" data-toggle="face" data-target="#face" data-part="race" data-value="flyer">
+                    <t:svg type="races" image="literal:flyer" width="100" height="100"/>
+                </div>
+            </t:block>
+            <t:block t:id="sex">
+                <div class="face" data-toggle="face" data-target="#face" data-part="sex" data-value="male">
+                    <t:svg type="faces/sex" image="literal:male" width="100" height="100"/>
+                </div>
+
+                <div class="face" data-toggle="face" data-target="#face" data-part="sex" data-value="female">
+                    <t:svg type="faces/sex" image="literal:female" width="100" height="100"/>
+                </div>
+            </t:block>
+            <t:block t:id="ears">
+                <t:hero.herofaceselect id="facePart" target="face" part="ears" count="1"/>
+            </t:block>
+            <t:block t:id="face">
+                <t:hero.herofaceselect id="facePart" target="face" part="face" count="7"/>
+            </t:block>
+            <t:block t:id="eyes">
+                <t:hero.herofaceselect id="facePart" target="face" part="eyes" count="2"/>
+            </t:block>
+            <t:block t:id="eyebrows">
+                <t:hero.herofaceselect id="facePart" target="face" part="eyebrows" count="1"/>
+            </t:block>
+            <t:block t:id="nose">
+                <t:hero.herofaceselect id="facePart" target="face" part="nose" count="1"/>
+            </t:block>
+            <t:block t:id="mouth">
+                <t:hero.herofaceselect id="facePart" target="face" part="mouth" count="2"/>
+            </t:block>
+
+            <t:block t:id="name">
+                <input type="text" value="${hero.appearance.name}" class="form-control" data-toggle="face-title" data-target="#face" data-part="name"/>
+            </t:block>
         </div>
     </div>
 

@@ -1,0 +1,23 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:zone t:id="menu" id="prop:clientId">
+        <t:loop source="items" value="item" formState="none">
+            <div class="face" data-toggle="face" data-target="#${target}" data-part="${part}" data-value="${item}">
+                <t:svg type="faces/${part}" image="${part}_${item}" width="100" height="100"/>
+            </div>
+        </t:loop>
+
+        <br/>
+
+        <ul class="pagination">
+            <t:loop source="pages" value="page" formState="none">
+                <li class="${pageCssClass}">
+                    <t:actionlink t:id="pageLink" context="page" zone="prop:clientId">
+                        ${page}
+                    </t:actionlink>
+                </li>
+            </t:loop>
+        </ul>
+    </t:zone>
+
+</t:container>
