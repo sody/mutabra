@@ -13,24 +13,31 @@ import com.mutabra.domain.Translatable;
  * @since 1.0
  */
 public enum HeroAppearancePart implements Translatable {
-    EARS,
-    FACE,
-    EYES,
-    EYEBROWS,
-    NOSE,
-    MOUTH,
-    HAIR,
-    FACIAL_HAIR,
-    NAME,
-    RACE,
-    SEX;
+    EARS(1),
+    FACE(7),
+    EYES(2),
+    EYEBROWS(1),
+    NOSE(1),
+    MOUTH(2),
+    HAIR(0),
+    FACIAL_HAIR(0),
+    NAME(0),
+    RACE(0),
+    SEX(0);
 
     public static final String BASENAME = "face";
 
     private final String code;
+    private final int count;
 
-    private HeroAppearancePart() {
+    private HeroAppearancePart(final int count) {
+        this.count = count;
+
         code = CodeUtils.generateCode(this);
+    }
+
+    public int getCount() {
+        return count;
     }
 
     @Override

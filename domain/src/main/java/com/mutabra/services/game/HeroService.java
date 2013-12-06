@@ -22,6 +22,8 @@ public interface HeroService extends BaseEntityService<Hero> {
 
     List<Hero> getAll(Account account);
 
+    void randomize(Hero hero);
+
     void create(Account account, Hero hero, Race race);
 
     void enter(Account account, Hero hero);

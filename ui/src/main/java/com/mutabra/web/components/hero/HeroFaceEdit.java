@@ -15,6 +15,7 @@ import org.apache.tapestry5.annotations.CleanupRender;
 import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.json.JSONObject;
@@ -27,6 +28,7 @@ import java.util.EnumSet;
  * @author Ivan Khalopik
  * @since 1.0
  */
+@SupportsInformalParameters
 public class HeroFaceEdit extends AbstractField {
 
     @Parameter(required = true, allowNull = false)
@@ -65,6 +67,8 @@ public class HeroFaceEdit extends AbstractField {
         writer.element("div",
                 "id", getClientId(),
                 "class", "face-display");
+
+        getResources().renderInformalParameters(writer);
 
         // assign control name
         final String submitted = tracker.getInput(this);
