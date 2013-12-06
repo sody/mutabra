@@ -5,6 +5,7 @@
 
 package com.mutabra.web.components.hero;
 
+import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.web.base.components.AbstractClientElement;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -28,10 +29,7 @@ public class HeroFaceSelect extends AbstractClientElement {
 
     @Property
     @Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
-    private String part;
-
-    @Parameter
-    private int count;
+    private HeroAppearancePart part;
 
     private int pageSize = 6;
     private int currentPage = 1;
@@ -49,7 +47,7 @@ public class HeroFaceSelect extends AbstractClientElement {
         final List<Integer> items = new ArrayList<>(pageSize);
 
         final int startIndex = (currentPage - 1) * pageSize;
-        final int endIndex = Math.min(startIndex + pageSize, count);
+        final int endIndex = Math.min(startIndex + pageSize, part.getCount());
         for (int i = startIndex; i < endIndex; i++) {
             items.add(i);
         }
@@ -60,7 +58,7 @@ public class HeroFaceSelect extends AbstractClientElement {
     public List<Integer> getPages() {
         final List<Integer> pages = new ArrayList<>();
 
-        final int pageCount = (count - 1) / pageSize + 1;
+        final int pageCount = (part.getCount() - 1) / pageSize + 1;
         for (int i = 1; i <= pageCount; i++) {
             pages.add(i);
         }

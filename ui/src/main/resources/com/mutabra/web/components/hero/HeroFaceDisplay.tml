@@ -50,6 +50,14 @@
                 />
     </t:block>
 
+    <t:block t:id="hair">
+        <t:svg type="faces/hair" image="hair_${appearance.hair}"
+               width="100" height="100"
+               inline="true"
+               data-part="hair"
+                />
+    </t:block>
+
     <t:block t:id="sex">
         <t:svg type="faces/sex" image="${appearance.sex.code}"
                x="0" y="80" width="20" height="20"

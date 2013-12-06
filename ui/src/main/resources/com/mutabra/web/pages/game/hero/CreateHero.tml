@@ -50,22 +50,25 @@
                 </div>
             </t:block>
             <t:block t:id="ears">
-                <t:hero.herofaceselect id="earsSelect" target="face" part="ears" count="1"/>
+                <t:hero.herofaceselect id="earsSelect" target="face" part="ears"/>
             </t:block>
             <t:block t:id="face">
-                <t:hero.herofaceselect id="shapeSelect" target="face" part="face" count="7"/>
+                <t:hero.herofaceselect id="shapeSelect" target="face" part="face"/>
             </t:block>
             <t:block t:id="eyes">
-                <t:hero.herofaceselect id="eyesSelect" target="face" part="eyes" count="2"/>
+                <t:hero.herofaceselect id="eyesSelect" target="face" part="eyes"/>
             </t:block>
             <t:block t:id="eyebrows">
-                <t:hero.herofaceselect id="eyebrowsSelect" target="face" part="eyebrows" count="1"/>
+                <t:hero.herofaceselect id="eyebrowsSelect" target="face" part="eyebrows"/>
             </t:block>
             <t:block t:id="nose">
-                <t:hero.herofaceselect id="noseSelect" target="face" part="nose" count="1"/>
+                <t:hero.herofaceselect id="noseSelect" target="face" part="nose"/>
             </t:block>
             <t:block t:id="mouth">
-                <t:hero.herofaceselect id="mouthSelect" target="face" part="mouth" count="2"/>
+                <t:hero.herofaceselect id="mouthSelect" target="face" part="mouth"/>
+            </t:block>
+            <t:block t:id="hair">
+                <t:hero.herofaceselect id="hairSelect" target="face" part="hair"/>
             </t:block>
 
             <t:block t:id="name">

@@ -2,8 +2,8 @@
 
     <t:zone t:id="menu" id="prop:clientId">
         <t:loop source="items" value="item" formState="none">
-            <div class="face" data-toggle="face" data-target="#${target}" data-part="${part}" data-value="${item}">
-                <t:svg type="faces/${part}" image="${part}_${item}" width="100" height="100"/>
+            <div class="face" data-toggle="face" data-target="#${target}" data-part="${part.code}" data-value="${item}">
+                <t:svg type="faces/${part.code}" image="${part.code}_${item}" width="100" height="100"/>
             </div>
         </t:loop>
 

@@ -19,7 +19,7 @@ public enum HeroAppearancePart implements Translatable {
     EYEBROWS(1),
     NOSE(1),
     MOUTH(2),
-    HAIR(0),
+    HAIR(4),
     FACIAL_HAIR(0),
     NAME(0),
     RACE(0),

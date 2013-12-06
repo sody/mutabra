@@ -19,14 +19,12 @@ import org.apache.tapestry5.annotations.SetupRender;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Set;
 
 /**
  * @author Ivan Khalopik
  * @since 1.0
  */
 public class HeroFaceDisplay extends AbstractClientElement {
-    private static final Set<HeroAppearancePart> DISPLAY_PARTS = EnumSet.range(HeroAppearancePart.EARS, HeroAppearancePart.FACIAL_HAIR);
 
     @Parameter(required = true, allowNull = false)
     private HeroAppearance appearance;

@@ -79,7 +79,7 @@ public class CreateHero extends AbstractPage {
 //                HeroAppearancePart.EYEBROWS,
 //                HeroAppearancePart.NOSE,
                 HeroAppearancePart.MOUTH,
-//                HeroAppearancePart.HAIR,
+                HeroAppearancePart.HAIR,
 //                HeroAppearancePart.FACIAL_HAIR,
                 HeroAppearancePart.NAME);
     }
