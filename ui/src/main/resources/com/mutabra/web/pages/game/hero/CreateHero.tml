@@ -33,11 +33,11 @@
 
             <t:block t:id="race">
                 <div class="face" data-toggle="face" data-target="#face" data-part="race" data-value="plunger">
-                    <t:svg type="races" image="literal:plunger" width="100" height="100"/>
+                    <t:svg type="faces/race" image="literal:plunger" width="100" height="100"/>
                 </div>
 
                 <div class="face" data-toggle="face" data-target="#face" data-part="race" data-value="flyer">
-                    <t:svg type="races" image="literal:flyer" width="100" height="100"/>
+                    <t:svg type="faces/race" image="literal:flyer" width="100" height="100"/>
                 </div>
             </t:block>
             <t:block t:id="sex">

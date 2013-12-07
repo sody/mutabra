@@ -81,7 +81,7 @@
     </t:block>
 
     <t:block t:id="race">
-        <t:svg type="races" image="${appearance.race}"
+        <t:svg type="faces/race" image="${appearance.race}"
                x="80" y="80" width="20" height="20"
                inline="true"
                data-part="race"
