@@ -1,1 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--  ~ Copyright (c) 2008-2013 Ivan Khalopik.  ~ All rights reserved.  --><svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">  <title>Elf Race Icon</title>  <desc>Elf Race Icon</desc>  <g>    <path fill="#333"          d="m 55,6             c -28,-5 -50,19 -50,44             s 20,45 45,45               49,-22 44,-50             c 0,13 -14,30 -34,30             s -35,-15 -35,-35               17,-34 30,-34             z"/>  </g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+    <g stroke="#000" fill="#000">
+        <path stroke="none"
+              d="m55,6c-28-5-50,19-50,44s20,45,45,45,49-22,44-50c0,13-14,30-34,30s-35-15-35-35,17-34,30-34z"/>
+    </g>
+</svg>

@@ -18,6 +18,7 @@ public class HeroAppearance {
     private String name;
     private String race;
     private Sex sex;
+
     private int face;
     private int eyes;
     private int eyebrows;
@@ -26,6 +27,10 @@ public class HeroAppearance {
     private int mouth;
     private int hair;
     private int facialHair;
+
+    private String skinColor = "#c3996b"; // tan skin
+    private String eyeColor = "#38101c";  // brown eyes
+    private String hairColor = "#222";    // dark hair
 
     public String getName() {
         return name;
@@ -115,6 +120,30 @@ public class HeroAppearance {
         this.facialHair = facialHair;
     }
 
+    public String getSkinColor() {
+        return skinColor;
+    }
+
+    public void setSkinColor(final String skinColor) {
+        this.skinColor = skinColor;
+    }
+
+    public String getEyeColor() {
+        return eyeColor;
+    }
+
+    public void setEyeColor(final String eyeColor) {
+        this.eyeColor = eyeColor;
+    }
+
+    public String getHairColor() {
+        return hairColor;
+    }
+
+    public void setHairColor(final String hairColor) {
+        this.hairColor = hairColor;
+    }
+
     public void fill(final HeroAppearance appearance) {
         this.name = appearance.name;
         this.race = appearance.race;
@@ -127,5 +156,8 @@ public class HeroAppearance {
         this.mouth = appearance.mouth;
         this.hair = appearance.hair;
         this.facialHair = appearance.facialHair;
+        this.skinColor = appearance.skinColor;
+        this.eyeColor = appearance.eyeColor;
+        this.hairColor = appearance.hairColor;
     }
 }

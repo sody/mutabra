@@ -8,6 +8,7 @@ package com.mutabra.web.components.hero;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.web.base.components.AbstractClientElement;
+import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
@@ -47,6 +48,9 @@ public class HeroFaceDisplay extends AbstractClientElement {
     @Parameter
     private boolean inline;
 
+    @Parameter(value = "#333", defaultPrefix = BindingConstants.LITERAL)
+    private String stroke;
+
     private Iterator<HeroAppearancePart> iterator;
 
     Iterable<HeroAppearancePart> defaultParts() {
@@ -55,6 +59,10 @@ public class HeroFaceDisplay extends AbstractClientElement {
 
     public HeroAppearance getAppearance() {
         return appearance;
+    }
+
+    public String getStrokeColor() {
+        return stroke;
     }
 
     @SetupRender

@@ -4,8 +4,9 @@
         <t:svg type="faces/ears" image="ears_${appearance.ears}"
                width="100" height="100"
                inline="true"
-               fill="#c3996b"
                data-part="ears"
+               stroke="prop:strokeColor"
+               fill="prop:appearance.skinColor"
                 />
     </t:block>
 
@@ -13,8 +14,9 @@
         <t:svg type="faces/face" image="face_${appearance.face}"
                width="100" height="100"
                inline="true"
-               fill="#c3996b"
                data-part="face"
+               stroke="prop:strokeColor"
+               fill="prop:appearance.skinColor"
                 />
     </t:block>
 
@@ -23,6 +25,8 @@
                width="100" height="100"
                inline="true"
                data-part="eyes"
+               stroke="prop:strokeColor"
+               fill="prop:appearance.eyeColor"
                 />
     </t:block>
 
@@ -31,6 +35,8 @@
                width="100" height="100"
                inline="true"
                data-part="eyebrows"
+               stroke="prop:appearance.hairColor"
+               fill="prop:appearance.hairColor"
                 />
     </t:block>
 
@@ -39,6 +45,8 @@
                width="100" height="100"
                inline="true"
                data-part="nose"
+               stroke="prop:strokeColor"
+               fill="prop:strokeColor"
                 />
     </t:block>
 
@@ -47,6 +55,8 @@
                width="100" height="100"
                inline="true"
                data-part="mouth"
+               stroke="prop:strokeColor"
+               fill="prop:strokeColor"
                 />
     </t:block>
 
@@ -55,6 +65,8 @@
                width="100" height="100"
                inline="true"
                data-part="hair"
+               stroke="prop:appearance.hairColor"
+               fill="prop:appearance.hairColor"
                 />
     </t:block>
 
@@ -63,6 +75,8 @@
                x="0" y="80" width="20" height="20"
                inline="true"
                data-part="sex"
+               stroke="prop:strokeColor"
+               fill="prop:strokeColor"
                 />
     </t:block>
 
@@ -71,12 +85,18 @@
                x="80" y="80" width="20" height="20"
                inline="true"
                data-part="race"
+               stroke="prop:strokeColor"
+               fill="prop:strokeColor"
                 />
     </t:block>
 
     <t:block t:id="name">
-        <g data-part="name">
-            <text x="0" y="0" dx="2" dy="6" font-size="6px" fill="#333">${appearance.name}</text>
+        <g data-part="name"
+           stroke="none"
+           fill="${strokeColor}">
+            <text x="0" y="0" dx="2" dy="6" font-size="6px">
+                ${appearance.name}
+            </text>
         </g>
     </t:block>
 

@@ -1,16 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-    <g>
-        <path fill="#000"
-              d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"/>
-        <path stroke="#000" fill="none"
+    <g stroke="#000" fill="#000">
+        <path d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"/>
+        <path fill="none"
               d="m43,42,0,7"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m25,42-1,4"/>
 
-        <path fill="#000" d="m52,49c7,0,7-4,19-4l-1-4c-11,0-12,4-18,4v4z"/>
-        <path stroke="#000" fill="none"
+        <path d="m52,49c7,0,7-4,19-4l-1-4c-11,0-12,4-18,4v4z"/>
+        <path fill="none"
               d="m52,42,0,7"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m72,41,1,4"/>
     </g>
 </svg>

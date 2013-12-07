@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-    <g>
-        <path stroke="#000" fill="none"
+    <g stroke="#000" fill="#000">
+        <path fill="none"
               d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m44,83c3-1,6.7841-2.0095,7,1"/>
     </g>
 </svg>

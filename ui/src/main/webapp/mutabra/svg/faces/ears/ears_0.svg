@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
-    <g fill="none">
-        <path stroke="#000" stroke-width="2px"
+    <g stroke="#000" fill="#c3996b">
+        <path stroke-width="2px"
               d="m80,50c1-1.1954,2-2.0753,4-2,2,0,3,7,3,12,0,4-5,12-8,12-2,0-3,0-3-2z"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m84,55c0-5-2-3-4,2-1,3,2,6-1,8-1,1-2,4,1,2"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m82,59c0-2,0-4-1-4"/>
 
-        <path stroke="#000" stroke-width="2px"
+        <path stroke-width="2px"
               d="m17,50c-1-1-2-2-4-2s-3,7-3,12c0,4,5,12,7,12s4,0,4-2z"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m13,55c0-5,2-3,4,2,1,3-2,6,1,8,2,1,2,4-1,2"/>
-        <path stroke="#000" fill="none"
+        <path fill="none"
               d="m15,59c0-2,0-4,1-4"/>
     </g>
 </svg>
