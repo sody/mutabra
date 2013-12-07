@@ -52,6 +52,7 @@ public class HeroFaceDisplay extends AbstractClientElement {
     private String stroke;
 
     private Iterator<HeroAppearancePart> iterator;
+    private HeroAppearancePart part;
 
     Iterable<HeroAppearancePart> defaultParts() {
         return EnumSet.range(HeroAppearancePart.EARS, HeroAppearancePart.FACIAL_HAIR);
@@ -63,6 +64,10 @@ public class HeroFaceDisplay extends AbstractClientElement {
 
     public String getStrokeColor() {
         return stroke;
+    }
+
+    public HeroAppearancePart getPart() {
+        return part;
     }
 
     @SetupRender
@@ -88,6 +93,11 @@ public class HeroFaceDisplay extends AbstractClientElement {
                 "width", String.valueOf(width),
                 "height", String.valueOf(height),
                 "transform", transform.toString());
+
+        // render name as title
+        writer.element("title");
+        writer.write(appearance.getName());
+        writer.end();
 
         iterator = parts.iterator();
     }
