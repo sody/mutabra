@@ -6,12 +6,14 @@
 package com.mutabra.services.game;
 
 import com.mutabra.domain.common.Race;
+import com.mutabra.domain.common.Sex;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.AccountHero;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.services.BaseEntityServiceImpl;
+import com.mutabra.services.CodedEntityService;
 import org.mongodb.morphia.Datastore;
 
 import java.util.List;
@@ -25,8 +27,12 @@ public class HeroServiceImpl
         extends BaseEntityServiceImpl<Hero>
         implements HeroService {
 
-    public HeroServiceImpl(final Datastore datastore) {
+    private final CodedEntityService<Race> raceService;
+
+    public HeroServiceImpl(final Datastore datastore, final CodedEntityService<Race> raceService) {
         super(datastore, Hero.class);
+
+        this.raceService = raceService;
     }
 
     public Hero get(final Account account) {
@@ -73,6 +79,19 @@ public class HeroServiceImpl
                     break;
                 case FACIAL_HAIR:
                     appearance.setFacialHair(value);
+                    break;
+                case NAME:
+                    final String randomName = Names.generate();
+                    appearance.setName(randomName);
+                    break;
+                case SEX:
+                    final Sex randomSex = Sex.values()[random.nextInt(Sex.values().length)];
+                    appearance.setSex(randomSex);
+                    break;
+                case RACE:
+                    final int raceCount = (int) raceService.query().countAll();
+                    final Race randomRace = raceService.query().offset(random.nextInt(raceCount)).limit(1).get();
+                    appearance.setRace(randomRace.getCode());
                     break;
             }
         }

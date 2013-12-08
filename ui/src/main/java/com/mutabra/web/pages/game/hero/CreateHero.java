@@ -99,11 +99,7 @@ public class CreateHero extends AbstractPage {
     @OnEvent(EventConstants.ACTIVATE)
     void activate() {
         hero = new Hero();
-
         heroService.randomize(hero);
-        hero.getAppearance().setName("Vasya Pupkin");
-        hero.getAppearance().setRace("plunger");
-        hero.getAppearance().setSex(Sex.MALE);
     }
 
     @OnEvent(component = "menuLink")
