@@ -71,7 +71,7 @@
     </t:block>
 
     <t:block t:id="sex">
-        <t:svg type="faces/sex" image="${appearance.sex.code}"
+        <t:svg type="faces/sex" image="sex_${appearance.sex.code}"
                x="0" y="80" width="20" height="20"
                inline="true"
                data-part="sex"
@@ -81,7 +81,7 @@
     </t:block>
 
     <t:block t:id="race">
-        <t:svg type="faces/race" image="${appearance.race}"
+        <t:svg type="faces/race" image="race_${appearance.race}"
                x="80" y="80" width="20" height="20"
                inline="true"
                data-part="race"

@@ -32,43 +32,31 @@
             <t:delegate to="facePartContent"/>
 
             <t:block t:id="race">
-                <div class="face" data-toggle="face" data-target="#face" data-part="race" data-value="plunger">
-                    <t:svg type="faces/race" image="literal:plunger" width="100" height="100"/>
-                </div>
-
-                <div class="face" data-toggle="face" data-target="#face" data-part="race" data-value="flyer">
-                    <t:svg type="faces/race" image="literal:flyer" width="100" height="100"/>
-                </div>
+                <t:hero.herofaceselect id="raceSelect" source="raceDataSource" target="face" part="race"/>
             </t:block>
             <t:block t:id="sex">
-                <div class="face" data-toggle="face" data-target="#face" data-part="sex" data-value="male">
-                    <t:svg type="faces/sex" image="literal:male" width="100" height="100"/>
-                </div>
-
-                <div class="face" data-toggle="face" data-target="#face" data-part="sex" data-value="female">
-                    <t:svg type="faces/sex" image="literal:female" width="100" height="100"/>
-                </div>
+                <t:hero.herofaceselect id="sexSelect" source="sexDataSource" target="face" part="sex"/>
             </t:block>
             <t:block t:id="ears">
-                <t:hero.herofaceselect id="earsSelect" target="face" part="ears"/>
+                <t:hero.herofaceselect id="earsSelect" source="facePartDataSource" target="face" part="ears"/>
             </t:block>
             <t:block t:id="face">
-                <t:hero.herofaceselect id="shapeSelect" target="face" part="face"/>
+                <t:hero.herofaceselect id="shapeSelect" source="facePartDataSource" target="face" part="face"/>
             </t:block>
             <t:block t:id="eyes">
-                <t:hero.herofaceselect id="eyesSelect" target="face" part="eyes"/>
+                <t:hero.herofaceselect id="eyesSelect" source="facePartDataSource" target="face" part="eyes"/>
             </t:block>
             <t:block t:id="eyebrows">
-                <t:hero.herofaceselect id="eyebrowsSelect" target="face" part="eyebrows"/>
+                <t:hero.herofaceselect id="eyebrowsSelect" source="facePartDataSource" target="face" part="eyebrows"/>
             </t:block>
             <t:block t:id="nose">
-                <t:hero.herofaceselect id="noseSelect" target="face" part="nose"/>
+                <t:hero.herofaceselect id="noseSelect" source="facePartDataSource" target="face" part="nose"/>
             </t:block>
             <t:block t:id="mouth">
-                <t:hero.herofaceselect id="mouthSelect" target="face" part="mouth"/>
+                <t:hero.herofaceselect id="mouthSelect" source="facePartDataSource" target="face" part="mouth"/>
             </t:block>
             <t:block t:id="hair">
-                <t:hero.herofaceselect id="hairSelect" target="face" part="hair"/>
+                <t:hero.herofaceselect id="hairSelect" source="facePartDataSource" target="face" part="hair"/>
             </t:block>
 
             <t:block t:id="name">
