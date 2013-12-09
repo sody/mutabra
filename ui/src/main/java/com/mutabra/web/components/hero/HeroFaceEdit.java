@@ -66,7 +66,7 @@ public class HeroFaceEdit extends AbstractField {
         // render container element
         writer.element("div",
                 "id", getClientId(),
-                "class", "face-display");
+                "class", "face-editor");
 
         getResources().renderInformalParameters(writer);
 

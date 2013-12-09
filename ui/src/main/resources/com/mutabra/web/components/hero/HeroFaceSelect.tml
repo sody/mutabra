@@ -1,30 +1,17 @@
-<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+        xmlns:p="tapestry:parameter">
 
-    <t:zone t:id="menu" id="prop:clientId">
-        <t:loop source="items" value="item" formState="none">
-            <div class="face" data-toggle="face" data-target="#${target}" data-part="${part.code}" data-value="${itemValue}">
-                <t:svg type="faces/${part.code}" image="${part.code}_${itemValue}" width="100" height="100"/>
-            </div>
-        </t:loop>
+    <t:paginator t:id="paginator" id="prop:clientId" source="inherit:source" value="item">
+        <div class="face" data-toggle="face" data-target="#${target}" data-part="${part.code}" data-value="${itemValue}">
+            <t:svg type="faces/${part.code}" image="${part.code}_${itemValue}" width="100" height="100"/>
+        </div>
 
-        <t:loop source="placeholders" formState="none">
+        <p:placeholder>
             <div class="face disabled">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                 </svg>
             </div>
-        </t:loop>
-
-        <br/>
-
-        <ul class="pagination">
-            <t:loop source="pages" value="page" formState="none">
-                <li class="${pageCssClass}">
-                    <t:actionlink t:id="pageLink" context="page" zone="prop:clientId">
-                        ${page}
-                    </t:actionlink>
-                </li>
-            </t:loop>
-        </ul>
-    </t:zone>
+        </p:placeholder>
+    </t:paginator>
 
 </t:container>
