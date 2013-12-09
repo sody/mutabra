@@ -9,6 +9,7 @@ import com.mutabra.domain.common.Race;
 import com.mutabra.domain.common.Sex;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
+import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.services.CodedEntityService;
 import com.mutabra.services.game.HeroService;
@@ -31,9 +32,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 
 import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 import static com.mutabra.web.internal.annotations.MainMenuItem.HERO;
 
@@ -118,6 +117,15 @@ public class CreateHero extends AbstractPage {
         return encode(getFacePartDataSource().getRowType(), facePartItem);
     }
 
+    public String getFacePartItemCssClass() {
+        final Object activeValue = getActiveValue(facePart);
+        if (facePart == HeroAppearancePart.RACE) {
+            // races are compared by code
+            return Objects.equals(activeValue, ((Race) facePartItem).getCode()) ? "face active" : "face";
+        }
+        return Objects.equals(activeValue, facePartItem) ? "face active" : "face";
+    }
+
     @OnEvent(EventConstants.ACTIVATE)
     void activate() {
         hero = new Hero();
@@ -134,5 +142,35 @@ public class CreateHero extends AbstractPage {
         heroService.enter(account, hero);
 
         return GameHome.class;
+    }
+
+    private Object getActiveValue(final HeroAppearancePart facePart) {
+        final HeroAppearance appearance = hero.getAppearance();
+        switch (facePart) {
+            case NAME:
+                return appearance.getName();
+            case RACE:
+                return appearance.getRace();
+            case SEX:
+                return appearance.getSex();
+            case EARS:
+                return appearance.getEars();
+            case FACE:
+                return appearance.getFace();
+            case EYES:
+                return appearance.getEyes();
+            case EYEBROWS:
+                return appearance.getEyebrows();
+            case NOSE:
+                return appearance.getNose();
+            case MOUTH:
+                return appearance.getMouth();
+            case HAIR:
+                return appearance.getHair();
+            case FACIAL_HAIR:
+                return appearance.getFacialHair();
+            default:
+                return null;
+        }
     }
 }
