@@ -37,6 +37,10 @@ public class Paginator extends AbstractClientElement {
     @Parameter
     private Block placeholder;
 
+    @Property(write = false)
+    @Parameter
+    private boolean offline;
+
     private int pageSize = 6;
     private int currentPage = 1;
 
@@ -51,11 +55,11 @@ public class Paginator extends AbstractClientElement {
         return source.getAvailableRows();
     }
 
-    @Cached
     public List<Object> getSource() {
         final List<Object> items = new ArrayList<>(pageSize);
 
-        final int startIndex = (currentPage - 1) * pageSize;
+        final int renderedPage = offline ? page : currentPage;
+        final int startIndex = (renderedPage - 1) * pageSize;
         final int endIndex = Math.min(startIndex + pageSize, getCount());
 
         source.prepare(startIndex, endIndex - 1, Collections.<SortConstraint>emptyList());
@@ -66,11 +70,11 @@ public class Paginator extends AbstractClientElement {
         return items;
     }
 
-    @Cached
     public List<Integer> getPlaceholders() {
         final List<Integer> items = new ArrayList<>(pageSize);
 
-        final int startIndex = (currentPage - 1) * pageSize;
+        final int renderedPage = offline ? page : currentPage;
+        final int startIndex = (renderedPage - 1) * pageSize;
         final int endIndex = Math.min(startIndex + pageSize, getCount());
         for (int i = endIndex; i < startIndex + pageSize; i++) {
             items.add(i);
@@ -89,6 +93,14 @@ public class Paginator extends AbstractClientElement {
         }
 
         return pages;
+    }
+
+    public String getPageContentId() {
+        return getClientId() + "-" + page;
+    }
+
+    public String getPageContentCssClass() {
+        return page == currentPage ? "tab-pane active" : "tab-pane";
     }
 
     public String getPageMenuCssClass() {
