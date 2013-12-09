@@ -7,6 +7,7 @@ package com.mutabra.web.base.components;
 
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
+import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
@@ -26,13 +27,15 @@ public abstract class AbstractClientElement extends AbstractComponent implements
     @Environmental
     private JavaScriptSupport jsSupport;
 
-    @Override
+    public String getBoundId() {
+        // just for caching
+        return idParameter;
+    }
+
+    @Cached(watch = "boundId")
     public String getClientId() {
-        if (clientId == null) {
-            // calculate client id
-            clientId = getResources().isBound("id") ? idParameter : jsSupport.allocateClientId(getResources());
-        }
-        return clientId;
+        // calculate client id
+        return getResources().isBound("id") ? idParameter : jsSupport.allocateClientId(getResources());
     }
 
     public JavaScriptSupport getJavaScriptSupport() {
