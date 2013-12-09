@@ -8,16 +8,19 @@ package com.mutabra.web.components.hero;
 import com.mutabra.domain.common.Sex;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
+import com.mutabra.services.game.Names;
 import com.mutabra.web.base.components.AbstractField;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.ValidationTracker;
 import org.apache.tapestry5.annotations.CleanupRender;
 import org.apache.tapestry5.annotations.Environmental;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
+import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.ComponentDefaultProvider;
 import org.apache.tapestry5.services.Request;
@@ -29,6 +32,7 @@ import java.util.EnumSet;
  * @since 1.0
  */
 @SupportsInformalParameters
+@Import(library = "context:/mutabra/js/face-generator.js")
 public class HeroFaceEdit extends AbstractField {
 
     @Parameter(required = true, allowNull = false)
@@ -39,6 +43,9 @@ public class HeroFaceEdit extends AbstractField {
 
     @Parameter(value = "350")
     private int height;
+
+    @Parameter(value = "50")
+    private int nameCount;
 
     @Environmental(false)
     private ValidationTracker tracker;
@@ -66,7 +73,8 @@ public class HeroFaceEdit extends AbstractField {
         // render container element
         writer.element("div",
                 "id", getClientId(),
-                "class", "face-editor");
+                "class", "face-editor",
+                "data-toggle", "face-random");
 
         getResources().renderInformalParameters(writer);
 
@@ -93,6 +101,13 @@ public class HeroFaceEdit extends AbstractField {
     @CleanupRender
     void cleanup(final MarkupWriter writer) {
         writer.end(); // div container
+
+        final JSONArray names = new JSONArray();
+        for (int i = 0; i < nameCount; i++) {
+            names.put(Names.generate());
+        }
+        getJavaScriptSupport().addScript("jQuery('#%s').faceRandom(%s)", getClientId(), new JSONObject()
+                .put("names", names));
     }
 
     @Override

@@ -136,7 +136,7 @@
             </div>
 
             <div class="col-md-5">
-                <div class="face-editor" id="hero-face">
+                <div class="face-editor" id="hero-face" data-toggle="face-random">
                     <input id="ears-input" name="ears" value="0" type="hidden" data-part="ears"/>
                     <input id="face-input" name="face" value="0" type="hidden" data-part="face"/>
                     <input id="eyes-input" name="eyes" value="0" type="hidden" data-part="eyes"/>
@@ -613,8 +613,8 @@
 
         <hr/>
         <div class="btn-toolbar">
-            <input type="submit" value="Create" class="btn btn-primary"/>
-            <input type="button" value="Cancel" class="btn btn-default"/>
+            <a href="battle.html" class="btn btn-primary">Create</a>
+            <a href="switch_hero.html" class="btn btn-default">Cancel</a>
         </div>
     </section>
 
@@ -661,8 +661,8 @@
                 $selected.addClass('active');
             });
 
-            var names = {
-                male: [
+            $('[data-toggle=face-random]').faceRandom({
+                names: [
                     'Fidel Kenison',
                     'Clifton Bias',
                     'Judson Kellog',
@@ -712,9 +712,7 @@
                     'Sang Matsunaga',
                     'Tobias Munroe',
                     'Benito Dillahunty',
-                    'Emilio Mcwaters'
-                ],
-                female: [
+                    'Emilio Mcwaters',
                     'Lawanda Yokoyama',
                     'Sharilyn Wasden',
                     'Krissy Minnifield',
@@ -766,30 +764,6 @@
                     'Cheryll Dafoe',
                     'Jacquiline Nakasone'
                 ]
-            };
-
-            // random face generation
-            $(document).on('dblclick', '.face-editor', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                // generate face
-                $('.tab-pane').each(function() {
-                    var $choices = $(this).find('.face');
-
-                    if ($choices.length) {
-                        var randomChoice = Math.floor(Math.random() * $choices.length);
-                        $choices.eq(randomChoice).click();
-                    }
-                });
-
-                // generate name
-                var choices = names[$('#sex-input').val()];
-                if (choices) {
-                    var randomChoice = Math.floor(Math.random() * choices.length);
-                    var name = choices[randomChoice];
-                    $('[data-toggle=face-title]').val(name).change();
-                }
             });
         });
     })(jQuery);

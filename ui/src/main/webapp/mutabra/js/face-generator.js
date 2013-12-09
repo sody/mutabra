@@ -38,8 +38,8 @@
      * ========================== */
     $.fn.faceGenerator = function (option) {
         return this.each(function () {
-            var $this = $(this),
-                data = $this.data('faceGenerator');
+            var $this = $(this);
+            var data = $this.data('faceGenerator');
             if (!data) $this.data('faceGenerator', (data = new FaceGenerator(this)));
             if (typeof option == 'string') data[option]();
         });
@@ -76,14 +76,78 @@
      * ========================== */
     $.fn.faceTitle = function (option) {
         return this.each(function () {
-            var $this = $(this),
-                data = $this.data('faceTitle');
+            var $this = $(this);
+            var data = $this.data('faceTitle');
             if (!data) $this.data('faceTitle', (data = new FaceTitle(this)));
             if (typeof option == 'string') data[option]();
         });
     };
 
     $.fn.faceTitle.Constructor = FaceTitle;
+
+    /* FACE TITLE CLASS DEFINITION
+     * ========================= */
+    var FaceRandom = function (element, options) {
+        this.$element = $(element);
+        this.names = options.names || [];
+    };
+
+    FaceRandom.prototype = {
+        constructor: FaceRandom,
+
+        randomize: function () {
+            var self = this;
+            var $choices = $('[data-toggle=face][data-target=#' + this.$element.attr('id') + ']');
+            var parts = [];
+            $choices.each(function () {
+                var $this = $(this);
+                var part = $this.data('part');
+
+                if ($.inArray(part, parts) < 0) {
+                    parts.push(part);
+                }
+            });
+
+            $.each(parts, function () {
+                self._randomize($choices, this);
+            });
+
+            this._randomizeTitle();
+        },
+
+        _randomize: function ($all, part) {
+            var $choices = $all.filter('[data-part=' + part + ']');
+
+            var randomChoice = Math.floor(Math.random() * $choices.length);
+            $choices.eq(randomChoice)
+                .faceGenerator('show');
+        },
+
+        _randomizeTitle: function () {
+            if (this.names) {
+                var randomChoice = Math.floor(Math.random() * this.names.length);
+                var name = this.names[randomChoice];
+                $('[data-toggle=face-title][data-target=#' + this.$element.attr('id') + ']')
+                    .val(name)
+                    .faceTitle('refresh');
+            }
+        }
+    };
+
+    /* FACE TITLE PLUGIN DEFINITION
+     * ========================== */
+    $.fn.faceRandom = function (option) {
+        return this.each(function () {
+            var $this = $(this);
+            var data = $this.data('faceRandom');
+            var options = $.extend({}, $this.data(), typeof option == 'object' && option);
+
+            if (!data) $this.data('faceRandom', (data = new FaceRandom(this, options)));
+            if (typeof option == 'string') data[option]();
+        });
+    };
+
+    $.fn.faceRandom.Constructor = FaceRandom;
 
     /* DATA-API
      * ============== */
@@ -98,6 +162,9 @@
             .on('change.mutabra.data-api', '[data-toggle=face-title]', function () {
                 $(this).faceTitle('refresh');
             })
+            .on('dblclick.mutabra.data-api', '[data-toggle=face-random]', function () {
+                $(this).faceRandom('randomize');
+            });
     });
 
 }(window.jQuery);
