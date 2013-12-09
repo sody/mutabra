@@ -10,13 +10,13 @@
     var FaceGenerator = function (element) {
         this.$element = $(element);
 
+        this.part = this.$element.data('part');
         this.value = this.$element.data('value');
         this.$picture = this.$element.find('svg > g');
 
-        var part = this.$element.data('part');
         var selector = this.$element.data('target');
-        this.$target = selector && $(selector).find('g[data-part=' + part + ']');
-        this.$input = selector && $(selector).find('input[data-part=' + part + ']');
+        this.$target = selector && $(selector).find('g[data-part=' + this.part + ']');
+        this.$input = selector && $(selector).find('input[data-part=' + this.part + ']');
     };
 
     FaceGenerator.prototype = {
@@ -29,7 +29,7 @@
             this.$input && this.$input.val(this.value);
 
             // activate new menu item
-            this.$element.siblings('.active').removeClass('active');
+            $('.active[data-toggle=face][data-part=' + this.part + ']').removeClass('active');
             this.$element.addClass('active');
         }
     };

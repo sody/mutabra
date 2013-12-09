@@ -1,17 +1,17 @@
 <html t:type="layout/default"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 
 <t:form class="form-horizontal">
     <t:form.formerrors/>
 
     <div class="row">
-        <div t:type="zone" t:id="faceMenu" id="faceMenu" class="col-md-3">
+        <div class="col-md-3">
             <div class="list-group">
                 <t:loop source="faceParts" value="facePart" formState="none">
-                    <t:actionlink t:id="menuLink" context="facePart" zone="faceSelect"
-                                  class="list-group-item${facePartCssClass}">
+                    <a href="#${facePartContentId}" class="list-group-item${facePartCssClass}" data-toggle="tab">
                         ${facePartLabel}
-                    </t:actionlink>
+                    </a>
                 </t:loop>
             </div>
         </div>
@@ -28,40 +28,31 @@
             </span>
         </div>
 
-        <div t:type="zone" t:id="faceSelect" id="faceSelect" class="col-md-4">
-            <t:delegate to="facePartContent"/>
+        <div class="col-md-4 tab-content">
+            <t:loop source="faceParts" value="facePart" formState="none">
+                <t:delegate to="facePartContent"/>
+            </t:loop>
 
-            <t:block t:id="race">
-                <t:hero.herofaceselect id="raceSelect" source="raceDataSource" target="face" part="race"/>
-            </t:block>
-            <t:block t:id="sex">
-                <t:hero.herofaceselect id="sexSelect" source="sexDataSource" target="face" part="sex"/>
-            </t:block>
-            <t:block t:id="ears">
-                <t:hero.herofaceselect id="earsSelect" source="facePartDataSource" target="face" part="ears"/>
-            </t:block>
-            <t:block t:id="face">
-                <t:hero.herofaceselect id="shapeSelect" source="facePartDataSource" target="face" part="face"/>
-            </t:block>
-            <t:block t:id="eyes">
-                <t:hero.herofaceselect id="eyesSelect" source="facePartDataSource" target="face" part="eyes"/>
-            </t:block>
-            <t:block t:id="eyebrows">
-                <t:hero.herofaceselect id="eyebrowsSelect" source="facePartDataSource" target="face" part="eyebrows"/>
-            </t:block>
-            <t:block t:id="nose">
-                <t:hero.herofaceselect id="noseSelect" source="facePartDataSource" target="face" part="nose"/>
-            </t:block>
-            <t:block t:id="mouth">
-                <t:hero.herofaceselect id="mouthSelect" source="facePartDataSource" target="face" part="mouth"/>
-            </t:block>
-            <t:block t:id="hair">
-                <t:hero.herofaceselect id="hairSelect" source="facePartDataSource" target="face" part="hair"/>
+            <t:block t:id="facePartContent">
+                <t:paginator t:id="paginator" source="facePartDataSource" value="facePartItem" offline="true"
+                             id="prop:facePartContentId" class="tab-pane${facePartCssClass}">
+                    <div class="face" data-toggle="face" data-target="#face" data-part="${facePart.code}" data-value="${facePartItemValue}">
+                        <t:svg type="faces/${facePart.code}" image="${facePart.code}_${facePartItemValue}" width="100" height="100"/>
+                    </div>
+
+                    <p:placeholder>
+                        <div class="face disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+                    </p:placeholder>
+                </t:paginator>
             </t:block>
 
-            <t:block t:id="name">
-                <input type="text" value="${hero.appearance.name}" class="form-control"
-                       data-toggle="face-title" data-target="#face" data-part="name"/>
+            <t:block t:id="nameContent">
+                <div id="${facePartContentId}" class="tab-pane${facePartCssClass}" style="height: 475px;">
+                    <input type="text" value="${hero.appearance.name}" class="form-control" data-toggle="face-title" data-target="#face" data-part="name"/>
+                </div>
             </t:block>
         </div>
     </div>

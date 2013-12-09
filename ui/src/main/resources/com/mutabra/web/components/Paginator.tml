@@ -9,7 +9,7 @@
     </t:if>
 
     <t:block t:id="online">
-        <t:zone t:id="pageZone" id="prop:clientId">
+        <t:zone t:id="pageZone" id="prop:clientId" class="${containerCssClass}">
             <t:delegate to="block:content"/>
 
             <br/>
@@ -27,7 +27,7 @@
     </t:block>
 
     <t:block t:id="offline">
-        <div id="${clientId}" class="tab-content">
+        <div id="${clientId}" class="${containerCssClass}">
             <t:loop source="pages" value="page" formState="none">
                 <div id="${pageContentId}" class="${pageContentCssClass}">
                     <t:delegate to="block:content"/>

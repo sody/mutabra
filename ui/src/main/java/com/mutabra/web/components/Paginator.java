@@ -12,6 +12,7 @@ import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.grid.SortConstraint;
@@ -24,6 +25,7 @@ import java.util.List;
  * @author Ivan Khalopik
  * @since 1.0
  */
+@SupportsInformalParameters
 public class Paginator extends AbstractClientElement {
 
     @Parameter(required = true, allowNull = false)
@@ -41,6 +43,9 @@ public class Paginator extends AbstractClientElement {
     @Parameter
     private boolean offline;
 
+    @Parameter(name = "class")
+    private String cssClass;
+
     private int pageSize = 6;
     private int currentPage = 1;
 
@@ -49,11 +54,6 @@ public class Paginator extends AbstractClientElement {
 
     @InjectComponent
     private Zone pageZone;
-
-    @Cached
-    public int getCount() {
-        return source.getAvailableRows();
-    }
 
     public List<Object> getSource() {
         final List<Object> items = new ArrayList<>(pageSize);
@@ -83,7 +83,7 @@ public class Paginator extends AbstractClientElement {
         return items;
     }
 
-    @Cached
+    @Cached(watch = "clientId")
     public List<Integer> getPages() {
         final List<Integer> pages = new ArrayList<>();
 
@@ -95,8 +95,17 @@ public class Paginator extends AbstractClientElement {
         return pages;
     }
 
+    @Cached(watch = "clientId")
+    public int getCount() {
+        return source.getAvailableRows();
+    }
+
     public String getPageContentId() {
         return getClientId() + "-" + page;
+    }
+
+    public String getContainerCssClass() {
+        return cssClass != null ? "tab-content " + cssClass : "tab-content";
     }
 
     public String getPageContentCssClass() {
