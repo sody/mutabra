@@ -22,7 +22,6 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry5.services.ComponentDefaultProvider;
 import org.apache.tapestry5.services.Request;
 
 import java.util.EnumSet;
@@ -51,14 +50,7 @@ public class HeroFaceEdit extends AbstractField {
     private ValidationTracker tracker;
 
     @Inject
-    private ComponentDefaultProvider defaultProvider;
-
-    @Inject
     private Request request;
-
-    String defaultLabel() {
-        return defaultProvider.defaultLabel(getResources());
-    }
 
     public HeroAppearance getAppearance() {
         return appearance;
@@ -116,10 +108,6 @@ public class HeroFaceEdit extends AbstractField {
         for (HeroAppearancePart facePart : HeroAppearancePart.values()) {
             final String submitted = request.getParameter(controlName + "_" + facePart.getCode());
             submittedValue.put(facePart.getCode(), submitted);
-
-            if (submitted != null) {
-                setValue(facePart, submitted);
-            }
         }
         tracker.recordInput(this, submittedValue.toCompactString());
 

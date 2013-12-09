@@ -23,7 +23,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
@@ -43,7 +42,6 @@ import static com.mutabra.web.internal.annotations.MainMenuItem.HERO;
 @RequiresUser
 @RequiresPermissions("game:play")
 @MainMenu(HERO)
-@Import(library = "context:/mutabra/js/face-generator.js")
 public class CreateHero extends AbstractPage {
 
     @Property

@@ -46,10 +46,15 @@ public class SwitchHero extends AbstractPage {
     private Hero hero;
 
     @Property
-    private Hero row;
+    private Hero activeHero;
 
-    @Property
-    private int index;
+    public String getHeroItemCssClass() {
+        return hero.equals(activeHero) ? "face active" : "face";
+    }
+
+    public String getHeroItemValue() {
+        return encode(Hero.class, hero);
+    }
 
     @OnEvent(EventConstants.ACTIVATE)
     Object activate() {
@@ -64,7 +69,7 @@ public class SwitchHero extends AbstractPage {
         if (currentHeroId != null) {
             for (Hero accountHero : source) {
                 if (currentHeroId.equals(accountHero.getId())) {
-                    hero = accountHero;
+                    activeHero = accountHero;
                 }
             }
         }
@@ -75,7 +80,7 @@ public class SwitchHero extends AbstractPage {
     Object enter() {
         // enter the game with just created character
         final Account account = accountContext.getAccount();
-        heroService.enter(account, hero);
+        heroService.enter(account, activeHero);
 
         return GameHome.class;
     }

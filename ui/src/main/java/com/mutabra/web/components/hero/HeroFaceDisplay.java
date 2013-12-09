@@ -92,7 +92,8 @@ public class HeroFaceDisplay extends AbstractClientElement {
         writer.elementNS("http://www.w3.org/2000/svg", "g").attributes(
                 "width", String.valueOf(width),
                 "height", String.valueOf(height),
-                "transform", transform.toString());
+                "transform", transform.toString(),
+                "data-part", "all");
 
         // render name as title
         writer.element("title");
