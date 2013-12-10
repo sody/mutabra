@@ -60,7 +60,7 @@
     <hr/>
     <div class="btn-toolbar">
         <t:submit value="message:button.create" class="btn btn-primary"/>
-        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
+        <t:pagelink page="game/hero/switchhero" class="btn btn-default">${message:button.cancel}</t:pagelink>
     </div>
 
 </t:form>

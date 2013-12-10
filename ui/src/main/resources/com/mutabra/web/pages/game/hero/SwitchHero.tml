@@ -8,32 +8,47 @@
     <div class="row">
         <div class="col-md-3">
             <t:loop source="source" value="hero" formState="none">
-                <div class="face-info${heroItemCssClass}" data-value="${heroItemValue}">
-                    <dl class="dl-horizontal">
-                        <dt>${message:label.name}:</dt>
-                        <dd>${hero.appearance.name}</dd>
-
-                        <dt>${message:label.race}:</dt>
-                        <dd>${hero.appearance.race}</dd>
-
-                        <dt>${message:label.level}:</dt>
-                        <dd>${hero.level.code}</dd>
-
-                        <dt>${message:label.rating}:</dt>
-                        <dd>${hero.level.rating}</dd>
-
-                        <dt>${message:label.next-level}:</dt>
-                        <dd>${hero.level.nextLevelRating}</dd>
-
-                        <dt>${message:label.health}:</dt>
-                        <dd>${hero.health}</dd>
-
-                        <dt>${message:label.mental-power}:</dt>
-                        <dd>${hero.mentalPower}</dd>
-
-                        <dt>${message:label.deck}:</dt>
-                        <dd>${hero.cards.size()}</dd>
-                    </dl>
+                <div t:type="if" test="hero" class="face-info${heroItemCssClass}" data-value="${heroItemValue}">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 1%;"/>
+                            <col style="width: 100%;"/>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th>${message:label.name}:</th>
+                            <td>${hero.appearance.name}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.race}:</th>
+                            <td>${hero.appearance.race}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.level}:</th>
+                            <td>${hero.level.code}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.rating}:</th>
+                            <td>${hero.level.rating}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.next-level}:</th>
+                            <td>${hero.level.nextLevelRating}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.health}:</th>
+                            <td>${hero.health}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.mental-power}:</th>
+                            <td>${hero.mentalPower}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.deck}:</th>
+                            <td>${hero.cards.size()}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </t:loop>
         </div>
@@ -48,12 +63,24 @@
         <div class="col-md-4">
             <t:paginator t:id="paginator" source="source" value="hero" offline="true"
                          id="paginator-hero">
-                <div class="face${heroItemCssClass}" data-toggle="face-part" data-target="#hero" data-part="all" data-value="${heroItemValue}">
-                    <t:hero.herofacedisplay appearance="hero.appearance"
-                                            parts="heroItemFaceParts"
-                                            width="100" height="100"
-                            />
-                </div>
+                <t:if test="hero">
+                    <div class="face${heroItemCssClass}" data-toggle="face-part" data-target="#hero" data-part="all" data-value="${heroItemValue}">
+                        <t:hero.herofacedisplay appearance="hero.appearance"
+                                                parts="heroItemFaceParts"
+                                                width="100" height="100"
+                                />
+                    </div>
+
+                    <p:else>
+                        <t:pagelink page="game/hero/createhero" class="face">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g>
+                                    <text font-size="14px" dy="7" x="50" y="50" text-anchor="middle" stroke="#333">${message:button.create}</text>
+                                </g>
+                            </svg>
+                        </t:pagelink>
+                    </p:else>
+                </t:if>
 
                 <p:placeholder>
                     <div class="face disabled">
@@ -67,8 +94,8 @@
 
     <hr/>
     <div class="btn-toolbar">
-        <t:submit value="message:button.enter" class="btn btn-default"/>
-        <t:pagelink page="game/hero/createhero" class="btn btn-default">${message:button.create}</t:pagelink>
+        <t:submit value="message:button.enter" class="btn btn-primary"/>
+        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
     </div>
 
 </t:form>

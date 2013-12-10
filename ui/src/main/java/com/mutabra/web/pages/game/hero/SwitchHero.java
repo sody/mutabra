@@ -21,6 +21,7 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -65,15 +66,17 @@ public class SwitchHero extends AbstractPage {
     @OnEvent(EventConstants.ACTIVATE)
     Object activate() {
         final Account account = accountContext.getAccount();
-        source = heroService.getAll(account);
-        if (source.isEmpty()) {
+        List<Hero> heroes = heroService.getAll(account);
+        if (heroes.isEmpty()) {
             return CreateHero.class;
         }
+        source = new ArrayList<>(heroes);
+        source.add(null);
 
         // setup selected hero
         final ObjectId currentHeroId = account.getHero() != null ? account.getHero().getId() : null;
         if (currentHeroId != null) {
-            for (Hero accountHero : source) {
+            for (Hero accountHero : heroes) {
                 if (currentHeroId.equals(accountHero.getId())) {
                     activeHero = accountHero;
                 }
