@@ -7,7 +7,35 @@
 
     <div class="row">
         <div class="col-md-3">
-            Parameters goes here
+            <t:loop source="source" value="hero" formState="none">
+                <div class="face-info${heroItemCssClass}" data-value="${heroItemValue}">
+                    <dl class="dl-horizontal">
+                        <dt>${message:label.name}:</dt>
+                        <dd>${hero.appearance.name}</dd>
+
+                        <dt>${message:label.race}:</dt>
+                        <dd>${hero.appearance.race}</dd>
+
+                        <dt>${message:label.level}:</dt>
+                        <dd>${hero.level.code}</dd>
+
+                        <dt>${message:label.rating}:</dt>
+                        <dd>${hero.level.rating}</dd>
+
+                        <dt>${message:label.next-level}:</dt>
+                        <dd>${hero.level.nextLevelRating}</dd>
+
+                        <dt>${message:label.health}:</dt>
+                        <dd>${hero.health}</dd>
+
+                        <dt>${message:label.mental-power}:</dt>
+                        <dd>${hero.mentalPower}</dd>
+
+                        <dt>${message:label.deck}:</dt>
+                        <dd>${hero.cards.size()}</dd>
+                    </dl>
+                </div>
+            </t:loop>
         </div>
 
         <div class="col-md-5">
@@ -20,8 +48,9 @@
         <div class="col-md-4">
             <t:paginator t:id="paginator" source="source" value="hero" offline="true"
                          id="paginator-hero">
-                <div class="${heroItemCssClass}" data-toggle="face" data-target="#hero" data-part="all" data-value="${heroItemValue}">
+                <div class="face${heroItemCssClass}" data-toggle="face-part" data-target="#hero" data-part="all" data-value="${heroItemValue}">
                     <t:hero.herofacedisplay appearance="hero.appearance"
+                                            parts="heroItemFaceParts"
                                             width="100" height="100"
                             />
                 </div>

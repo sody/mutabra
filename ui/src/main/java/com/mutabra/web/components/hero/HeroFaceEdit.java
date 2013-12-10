@@ -66,7 +66,7 @@ public class HeroFaceEdit extends AbstractField {
         writer.element("div",
                 "id", getClientId(),
                 "class", "face-editor",
-                "data-toggle", "face-random");
+                "data-toggle", "face-generator");
 
         getResources().renderInformalParameters(writer);
 
@@ -98,7 +98,7 @@ public class HeroFaceEdit extends AbstractField {
         for (int i = 0; i < nameCount; i++) {
             names.put(Names.generate());
         }
-        getJavaScriptSupport().addScript("jQuery('#%s').faceRandom(%s)", getClientId(), new JSONObject()
+        getJavaScriptSupport().addScript("jQuery('#%s').faceGenerator(%s)", getClientId(), new JSONObject()
                 .put("names", names));
     }
 
