@@ -27,6 +27,7 @@
 
   &:hover {
     background-color: @face-hover-bg;
+    text-decoration: none;
   }
 
   &.active {
@@ -38,6 +39,25 @@
     background-color: @face-disabled-bg;
     cursor: default;
     .opacity(.65);
+  }
+}
+
+.face-info {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    .dl-horizontal {
+      dt {
+        width: (@face-info-offset - 20);
+      }
+      dd {
+        margin-left: @face-info-offset;
+      }
+    }
   }
 }
 

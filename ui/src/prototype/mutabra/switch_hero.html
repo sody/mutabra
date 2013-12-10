@@ -110,7 +110,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="settings.html">Settings</a></li>
-                        <li><a href="switch.html">Switch</a></li>
+                        <li><a href="switch_hero.html">Switch</a></li>
                         <li><a href="layout.html">Sign Out</a></li>
                     </ul>
                 </li>
@@ -123,8 +123,108 @@
             <h1>Switch Hero</h1>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                Parameters
+            <div class="col-md-3 tab-content">
+                <div class="face-info" data-value="heretic">
+                    <dl class="dl-horizontal">
+                        <dt>Name:</dt>
+                        <dd>Heretic</dd>
+
+                        <dt>Race:</dt>
+                        <dd>Plunger</dd>
+
+                        <dt>Class:</dt>
+                        <dd>Warrior</dd>
+
+                        <dt>Level:</dt>
+                        <dd>3</dd>
+
+                        <dt>Rating:</dt>
+                        <dd>1492</dd>
+
+                        <dt>Next Level:</dt>
+                        <dd>1500</dd>
+
+                        <dt>Wins/Loses/:</dt>
+                        <dd>15/0/0</dd>
+
+                        <dt>Health:</dt>
+                        <dd>50</dd>
+
+                        <dt>Mental Power:</dt>
+                        <dd>10</dd>
+
+                        <dt>Deck:</dt>
+                        <dd>33</dd>
+                    </dl>
+                </div>
+
+                <div class="face-info active" data-value="hermes">
+                    <dl class="dl-horizontal">
+                        <dt>Name:</dt>
+                        <dd>Hermes</dd>
+
+                        <dt>Race:</dt>
+                        <dd>Plunger</dd>
+
+                        <dt>Class:</dt>
+                        <dd>Ranger</dd>
+
+                        <dt>Level:</dt>
+                        <dd>60</dd>
+
+                        <dt>Rating:</dt>
+                        <dd>149999</dd>
+
+                        <dt>Next Level:</dt>
+                        <dd>150000</dd>
+
+                        <dt>Wins/Loses/:</dt>
+                        <dd>1520/820/65</dd>
+
+                        <dt>Health:</dt>
+                        <dd>100</dd>
+
+                        <dt>Mental Power:</dt>
+                        <dd>19</dd>
+
+                        <dt>Deck:</dt>
+                        <dd>42</dd>
+                    </dl>
+                </div>
+
+                <div class="face-info" data-value="ikar">
+                    <dl class="dl-horizontal">
+                        <dt>Name:</dt>
+                        <dd>Ikar</dd>
+
+                        <dt>Race:</dt>
+                        <dd>Flyer</dd>
+
+                        <dt>Class:</dt>
+                        <dd>Wizard</dd>
+
+                        <dt>Level:</dt>
+                        <dd>1</dd>
+
+                        <dt>Rating:</dt>
+                        <dd>0</dd>
+
+                        <dt>Next Level:</dt>
+                        <dd>100</dd>
+
+                        <dt>Wins/Loses/:</dt>
+                        <dd>0/0/0</dd>
+
+                        <dt>Health:</dt>
+                        <dd>40</dd>
+
+                        <dt>Mental Power:</dt>
+                        <dd>10</dd>
+
+                        <dt>Deck:</dt>
+                        <dd>15</dd>
+                    </dl>
+                </div>
             </div>
 
             <div class="col-md-5">
@@ -219,7 +319,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="face" data-toggle="face" data-target="#hero-face" data-part="all" data-value="heretic">
+                <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="all" data-value="heretic">
                     <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                         <g>
                             <title>Heretic</title>
@@ -293,7 +393,7 @@
                     </svg>
                 </div>
 
-                <div class="face active" data-toggle="face" data-target="#hero-face" data-part="all" data-value="hermes">
+                <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="all" data-value="hermes">
                     <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                         <g>
                             <title>Hermes</title>
@@ -380,7 +480,7 @@
                     </svg>
                 </div>
 
-                <div class="face" data-toggle="face" data-target="#hero-face" data-part="all" data-value="ikar">
+                <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="all" data-value="ikar">
                     <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                         <g>
                             <title>Ikar</title>
@@ -466,14 +566,37 @@
                         </g>
                     </svg>
                 </div>
-            </div>
 
+                <a class="face" href="create_hero.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        <g>
+                            <text font-size="14px" dy="7" x="50" y="50" text-anchor="middle" stroke="#333" style="text-decoration:none !important;">CREATE</text>
+                        </g>
+                    </svg>
+                </a>
+
+                <div class="face disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                    </svg>
+                </div>
+
+                <div class="face disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                    </svg>
+                </div>
+
+                <br/>
+                <ul class="pagination">
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                </ul>
+            </div>
         </div>
 
         <hr/>
         <div class="btn-toolbar">
-            <input type="submit" value="Enter" class="btn btn-primary"/>
-            <input type="button" value="Cancel" class="btn btn-default"/>
+            <a href="battle.html" class="btn btn-primary">Enter</a>
+            <a href="battle.html" class="btn btn-default">Cancel</a>
         </div>
     </section>
 

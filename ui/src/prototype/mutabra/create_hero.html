@@ -110,7 +110,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="settings.html">Settings</a></li>
-                        <li><a href="switch.html">Switch</a></li>
+                        <li><a href="switch_hero.html">Switch</a></li>
                         <li><a href="layout.html">Sign Out</a></li>
                     </ul>
                 </li>
@@ -136,7 +136,7 @@
             </div>
 
             <div class="col-md-5">
-                <div class="face-editor" id="hero-face" data-toggle="face-random">
+                <div class="face-editor" id="hero-face" data-toggle="face-generator">
                     <input id="ears-input" name="ears" value="0" type="hidden" data-part="ears"/>
                     <input id="face-input" name="face" value="0" type="hidden" data-part="face"/>
                     <input id="eyes-input" name="eyes" value="0" type="hidden" data-part="eyes"/>
@@ -243,7 +243,7 @@
             <div class="col-md-4 tab-content">
 
                 <div id="race-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="race" data-value="plunger">
+                    <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="race" data-value="plunger">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke="none"
@@ -252,7 +252,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="race" data-value="flyer">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="race" data-value="flyer">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke="none"
@@ -288,7 +288,7 @@
                 </div>
 
                 <div id="sex-tab" class="tab-pane">
-                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="sex" data-value="male">
+                    <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="sex" data-value="male">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke-width="5px" fill="none"
@@ -301,7 +301,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="sex" data-value="female">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="sex" data-value="female">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke-width="5px" fill="none"
@@ -343,7 +343,7 @@
                 <div id="face-tab" class="tab-content tab-pane active">
 
                     <div id="face-tab-1" class="tab-pane active">
-                        <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="0">
+                        <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="0">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -352,7 +352,7 @@
                             </svg>
                         </div>
 
-                        <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="1">
+                        <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="1">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -361,7 +361,7 @@
                             </svg>
                         </div>
 
-                        <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="2">
+                        <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="2">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -370,7 +370,7 @@
                             </svg>
                         </div>
 
-                        <div class="face active" data-toggle="face" data-target="#hero-face" data-part="face" data-value="3">
+                        <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="3">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -381,7 +381,7 @@
                             </svg>
                         </div>
 
-                        <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="4">
+                        <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="4">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -390,7 +390,7 @@
                             </svg>
                         </div>
 
-                        <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="5">
+                        <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="5">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -401,7 +401,7 @@
                     </div>
 
                     <div id="face-tab-2" class="tab-pane">
-                        <div class="face" data-toggle="face" data-target="#hero-face" data-part="face" data-value="6">
+                        <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="6">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g stroke="#000" fill="#c3996b">
                                     <path stroke-width="2px"
@@ -443,7 +443,7 @@
                 </div>
 
                 <div id="eyes-tab" class="tab-pane">
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="eyes" data-value="0">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="eyes" data-value="0">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#38101c">
                                 <path fill="none"
@@ -454,7 +454,7 @@
                         </svg>
                     </div>
 
-                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="eyes" data-value="1">
+                    <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="eyes" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#38101c">
                                 <path stroke="none" fill="#fff"
@@ -505,7 +505,7 @@
                 </div>
 
                 <div id="mouth-tab" class="tab-pane">
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="mouth" data-value="0">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="mouth" data-value="0">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path fill="none"
@@ -516,7 +516,7 @@
                         </svg>
                     </div>
 
-                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="mouth" data-value="1">
+                    <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="mouth" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path fill="none"
@@ -554,14 +554,14 @@
                 </div>
 
                 <div id="hair-tab" class="tab-pane">
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="hair" data-value="0">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="0">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                             </g>
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="hair" data-value="1">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="1">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke="none"
@@ -570,7 +570,7 @@
                         </svg>
                     </div>
 
-                    <div class="face" data-toggle="face" data-target="#hero-face" data-part="hair" data-value="2">
+                    <div class="face" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke="none"
@@ -579,7 +579,7 @@
                         </svg>
                     </div>
 
-                    <div class="face active" data-toggle="face" data-target="#hero-face" data-part="hair" data-value="3">
+                    <div class="face active" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="3">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                             <g stroke="#000" fill="#000">
                                 <path stroke="none"
@@ -648,20 +648,7 @@
 <script type="text/javascript">
     (function ($) {
         $(function () {
-            // hack for list-group to work as tabs
-            $(document).on('click', '.list-group-item[data-toggle=tab]', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                var $selected = $(e.target).closest('.list-group-item');
-                var $menu = $selected.closest('.list-group');
-                var $active = $menu.find('.list-group-item.active');
-
-                $active.removeClass('active');
-                $selected.addClass('active');
-            });
-
-            $('[data-toggle=face-random]').faceRandom({
+            $('[data-toggle=face-generator]').faceGenerator({
                 names: [
                     'Fidel Kenison',
                     'Clifton Bias',

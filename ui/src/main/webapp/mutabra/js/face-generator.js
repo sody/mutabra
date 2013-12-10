@@ -5,9 +5,9 @@
 
 !function ($) {
 
-    /* FACE GENERATOR CLASS DEFINITION
+    /* FACE PART CLASS DEFINITION
      * ========================= */
-    var FaceGenerator = function (element) {
+    var FacePart = function (element) {
         this.$element = $(element);
 
         this.part = this.$element.data('part');
@@ -19,8 +19,8 @@
         this.$input = selector && $(selector).find('input[data-part=' + this.part + ']');
     };
 
-    FaceGenerator.prototype = {
-        constructor: FaceGenerator,
+    FacePart.prototype = {
+        constructor: FacePart,
 
         show: function () {
             // redraw face with new part
@@ -29,23 +29,23 @@
             this.$input && this.$input.val(this.value);
 
             // activate new menu item
-            $('.active[data-toggle=face][data-part=' + this.part + ']').removeClass('active');
+            $('.active[data-toggle=face-part][data-part=' + this.part + ']').removeClass('active');
             this.$element.addClass('active');
         }
     };
 
-    /* FACE GENERATOR PLUGIN DEFINITION
+    /* FACE PART PLUGIN DEFINITION
      * ========================== */
-    $.fn.faceGenerator = function (option) {
+    $.fn.facePart = function (option) {
         return this.each(function () {
             var $this = $(this);
-            var data = $this.data('faceGenerator');
-            if (!data) $this.data('faceGenerator', (data = new FaceGenerator(this)));
+            var data = $this.data('facePart');
+            if (!data) $this.data('facePart', (data = new FacePart(this)));
             if (typeof option == 'string') data[option]();
         });
     };
 
-    $.fn.faceGenerator.Constructor = FaceGenerator;
+    $.fn.facePart.Constructor = FacePart;
 
 
     /* FACE TITLE CLASS DEFINITION
@@ -85,19 +85,19 @@
 
     $.fn.faceTitle.Constructor = FaceTitle;
 
-    /* FACE TITLE CLASS DEFINITION
+    /* FACE GENERATOR CLASS DEFINITION
      * ========================= */
-    var FaceRandom = function (element, options) {
+    var FaceGenerator = function (element, options) {
         this.$element = $(element);
         this.names = options.names || [];
     };
 
-    FaceRandom.prototype = {
-        constructor: FaceRandom,
+    FaceGenerator.prototype = {
+        constructor: FaceGenerator,
 
         randomize: function () {
             var self = this;
-            var $choices = $('[data-toggle=face][data-target=#' + this.$element.attr('id') + ']');
+            var $choices = $('[data-toggle=face-part][data-target=#' + this.$element.attr('id') + ']');
             var parts = [];
             $choices.each(function () {
                 var $this = $(this);
@@ -120,7 +120,7 @@
 
             var randomChoice = Math.floor(Math.random() * $choices.length);
             $choices.eq(randomChoice)
-                .faceGenerator('show');
+                .facePart('show');
         },
 
         _randomizeTitle: function () {
@@ -134,36 +134,44 @@
         }
     };
 
-    /* FACE TITLE PLUGIN DEFINITION
+    /* FACE GENERATOR PLUGIN DEFINITION
      * ========================== */
-    $.fn.faceRandom = function (option) {
+    $.fn.faceGenerator = function (option) {
         return this.each(function () {
             var $this = $(this);
-            var data = $this.data('faceRandom');
+            var data = $this.data('faceGenerator');
             var options = $.extend({}, $this.data(), typeof option == 'object' && option);
 
-            if (!data) $this.data('faceRandom', (data = new FaceRandom(this, options)));
+            if (!data) $this.data('faceGenerator', (data = new FaceGenerator(this, options)));
             if (typeof option == 'string') data[option]();
         });
     };
 
-    $.fn.faceRandom.Constructor = FaceRandom;
+    $.fn.faceGenerator.Constructor = FaceGenerator;
 
     /* DATA-API
      * ============== */
     $(function () {
         $(document)
-            .on('click.mutabra.data-api', '[data-toggle=face]', function () {
+            .on('click.mutabra.data-api', '[data-toggle=face-part]', function () {
                 var $this = $(this);
-                var $selected = $this.closest('[data-toggle=face]') || $this;
+                var $selected = $this.closest('[data-toggle=face-part]') || $this;
 
-                $selected.faceGenerator('show');
+                $selected.facePart('show');
             })
             .on('change.mutabra.data-api', '[data-toggle=face-title]', function () {
                 $(this).faceTitle('refresh');
             })
-            .on('dblclick.mutabra.data-api', '[data-toggle=face-random]', function () {
-                $(this).faceRandom('randomize');
+            .on('dblclick.mutabra.data-api', '[data-toggle=face-generator]', function () {
+                $(this).faceGenerator('randomize');
+            })
+            .on('click.mutabra.data-api', '[data-toggle=face-part][data-part=all]', function() {
+                var $this = $(this);
+                var value = $this.data('value');
+                var $selected = $('[data-value=' + value +']');
+
+                $selected.siblings('.active').removeClass('active');
+                $selected.addClass('active');
             });
     });
 
