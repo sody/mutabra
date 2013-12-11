@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-md-5">
-            <t:hero.herofaceedit id="face"
+            <t:hero.herofaceedit t:id="face" id="face"
                                  appearance="hero.appearance"
                                  width="350"
                                  height="350"

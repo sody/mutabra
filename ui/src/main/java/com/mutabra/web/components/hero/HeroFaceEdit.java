@@ -10,7 +10,9 @@ import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.services.game.Names;
 import com.mutabra.web.base.components.AbstractField;
+import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.ValidationTracker;
 import org.apache.tapestry5.annotations.CleanupRender;
 import org.apache.tapestry5.annotations.Environmental;
@@ -20,6 +22,8 @@ import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
+import org.apache.tapestry5.ioc.services.PropertyAccess;
+import org.apache.tapestry5.ioc.util.ExceptionUtils;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.Request;
@@ -50,6 +54,9 @@ public class HeroFaceEdit extends AbstractField {
     private ValidationTracker tracker;
 
     @Inject
+    private PropertyAccess propertyAccess;
+
+    @Inject
     private Request request;
 
     public HeroAppearance getAppearance() {
@@ -78,7 +85,7 @@ public class HeroFaceEdit extends AbstractField {
         for (HeroAppearancePart facePart : getParts()) {
             final String value = submittedValue != null ?
                     submittedValue.getString(facePart.getCode()) :
-                    getValue(facePart);
+                    toClient(facePart, getValue(facePart));
 
             writer.element("input",
                     "type", "hidden",
@@ -116,73 +123,115 @@ public class HeroFaceEdit extends AbstractField {
             final String submitted = submittedValue.getString(facePart.getCode());
 
             if (submitted != null) {
-                setValue(facePart, submitted);
+                try {
+                    final Object selected = InternalUtils.isBlank(submitted) ? null : toValue(facePart, submitted);
+                    // validate submitted value
+                    getResources().triggerEvent(EventConstants.VALIDATE, new Object[]{facePart, selected}, null);
+                    setValue(facePart, selected);
+                } catch (ValidationException ex) {
+                    tracker.recordError(ex.getMessage());
+                } catch (RuntimeException ex) {
+                    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+                    final ValidationException ve = ExceptionUtils.findCause(ex, ValidationException.class, propertyAccess);
+                    if (ve == null) {
+                        throw ex;
+                    }
+                    tracker.recordError(ve.getMessage());
+                }
             }
         }
     }
 
-    private void setValue(final HeroAppearancePart facePart, final String value) {
+    private Object toValue(final HeroAppearancePart part, final String client) throws ValidationException {
+        try {
+            switch (part) {
+                case NAME:
+                case RACE:
+                    return client;
+                case SEX:
+                    return decode(Sex.class, client);
+                default:
+                    return decode(Integer.class, client);
+            }
+        } catch (RuntimeException ex) {
+            throw new ValidationException(format("error.wrong-part", translate(part)));
+        }
+    }
+
+    private String toClient(final HeroAppearancePart part, final Object value) {
+        switch (part) {
+            case NAME:
+            case RACE:
+                return (String) value;
+            case SEX:
+                return encode(Sex.class, (Sex) value);
+            default:
+                return encode(Integer.class, (Integer) value);
+        }
+    }
+
+    private void setValue(final HeroAppearancePart facePart, final Object value) {
         switch (facePart) {
             case NAME:
-                appearance.setName(value);
+                appearance.setName((String) value);
                 break;
             case RACE:
-                appearance.setRace(value);
+                appearance.setRace((String) value);
                 break;
             case SEX:
-                appearance.setSex(decode(Sex.class, value));
+                appearance.setSex((Sex) value);
                 break;
             case EARS:
-                appearance.setEars(decode(Integer.class, value));
+                appearance.setEars((Integer) value);
                 break;
             case FACE:
-                appearance.setFace(decode(Integer.class, value));
+                appearance.setFace((Integer) value);
                 break;
             case EYES:
-                appearance.setEyes(decode(Integer.class, value));
+                appearance.setEyes((Integer) value);
                 break;
             case EYEBROWS:
-                appearance.setEyebrows(decode(Integer.class, value));
+                appearance.setEyebrows((Integer) value);
                 break;
             case NOSE:
-                appearance.setNose(decode(Integer.class, value));
+                appearance.setNose((Integer) value);
                 break;
             case MOUTH:
-                appearance.setMouth(decode(Integer.class, value));
+                appearance.setMouth((Integer) value);
                 break;
             case HAIR:
-                appearance.setHair(decode(Integer.class, value));
+                appearance.setHair((Integer) value);
                 break;
             case FACIAL_HAIR:
-                appearance.setFacialHair(decode(Integer.class, value));
+                appearance.setFacialHair((Integer) value);
                 break;
         }
     }
 
-    private String getValue(final HeroAppearancePart facePart) {
+    private Object getValue(final HeroAppearancePart facePart) {
         switch (facePart) {
             case NAME:
                 return appearance.getName();
             case RACE:
                 return appearance.getRace();
             case SEX:
-                return encode(Sex.class, appearance.getSex());
+                return appearance.getSex();
             case EARS:
-                return String.valueOf(appearance.getEars());
+                return appearance.getEars();
             case FACE:
-                return String.valueOf(appearance.getFace());
+                return appearance.getFace();
             case EYES:
-                return String.valueOf(appearance.getEyes());
+                return appearance.getEyes();
             case EYEBROWS:
-                return String.valueOf(appearance.getEyebrows());
+                return appearance.getEyebrows();
             case NOSE:
-                return String.valueOf(appearance.getNose());
+                return appearance.getNose();
             case MOUTH:
-                return String.valueOf(appearance.getMouth());
+                return appearance.getMouth();
             case HAIR:
-                return String.valueOf(appearance.getHair());
+                return appearance.getHair();
             case FACIAL_HAIR:
-                return String.valueOf(appearance.getFacialHair());
+                return appearance.getFacialHair();
             default:
                 return null;
         }

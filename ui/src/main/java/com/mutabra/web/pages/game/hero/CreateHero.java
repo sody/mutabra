@@ -24,6 +24,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
@@ -45,6 +46,7 @@ import static com.mutabra.web.internal.annotations.MainMenuItem.HERO;
 @MainMenu(HERO)
 public class CreateHero extends AbstractPage {
 
+    public static final int MAX_NAME_LENGTH = 20;
     @Property
     private Hero hero;
 
@@ -137,6 +139,36 @@ public class CreateHero extends AbstractPage {
     void activate() {
         hero = new Hero();
         heroService.randomize(hero);
+    }
+
+    @OnEvent(value = EventConstants.VALIDATE, component = "face")
+    void validateHero(final HeroAppearancePart part, final Object value) throws ValidationException {
+        if (value == null) {
+            throw new ValidationException(format("error.required", translate(part)));
+        }
+
+        switch (part) {
+            case NAME:
+                final String nameValue = (String) value;
+                if (nameValue.length() > MAX_NAME_LENGTH) {
+                    throw new ValidationException(format("error.wrong-name", MAX_NAME_LENGTH));
+                }
+                break;
+            case RACE:
+                final String raceValue = (String) value;
+                try {
+                    decode(Race.class, raceValue);
+                } catch (RuntimeException ex) {
+                    throw new ValidationException(format("error.wrong-part", translate(part)));
+                }
+            case SEX:
+                break;
+            default:
+                final int intValue = (Integer) value;
+                if (intValue < 0 || intValue >= part.getCount()) {
+                    throw new ValidationException(format("error.wrong-part", translate(part)));
+                }
+        }
     }
 
     @OnEvent(value = EventConstants.SUCCESS)
