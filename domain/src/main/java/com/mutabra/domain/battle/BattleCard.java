@@ -5,12 +5,12 @@
 
 package com.mutabra.domain.battle;
 
-import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Transient;
 import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
 import com.mutabra.domain.common.TargetType;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Transient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,14 @@ public class BattleCard implements BattleSpell, Translatable {
     protected BattleCard() {
     }
 
-    public BattleCard(final BattleHero hero) {
+    public BattleCard(final BattleHero hero, final Card card) {
         this.hero = hero;
         this.id = hero.getBattle().nextId();
+
+        code = card.getCode();
+        targetType = card.getTargetType();
+        bloodCost = card.getBloodCost();
+        effects.addAll(card.getEffects());
     }
 
     public Long getId() {

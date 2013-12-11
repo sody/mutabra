@@ -9,7 +9,7 @@
         class="table">
 
     <p:pictureCell>
-        <t:svg type="races" image="row.code"/>
+        <t:svg type="faces/race" image="row.code"/>
     </p:pictureCell>
     <p:linksCell>
         <t:eventlink event="edit" zone="entityDialog" context="row">${message:button.edit}</t:eventlink>

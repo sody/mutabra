@@ -165,7 +165,7 @@ public class ApplicationModule {
         configuration.add("bootstrap-tab.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/tab.js"));
         configuration.add("bootstrap-alert.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/alert.js"));
         configuration.add("bootstrap-modal.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/modal.js"));
-        configuration.add("bootstrap-carousel.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/carousel.js"));
+        configuration.add("bootstrap-tooltip.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/bootstrap/tooltip.js"));
 
         // project plugins
         configuration.add("mutabra-battle.js", new StackExtension(StackExtensionType.LIBRARY, "${mutabra.asset.root}/js/mutabra-battle.js"));

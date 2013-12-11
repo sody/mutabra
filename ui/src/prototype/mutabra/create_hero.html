@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2008-2013 Ivan Khalopik.
+  ~ All rights reserved.
+  -->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mutabra Create Hero Prototype</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="../mutabra/css/mutabra.css" rel="stylesheet">
+    <link href="css/test.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<a href="#content" class="sr-only">Skip navigation</a>
+
+<div id="page" class="page container">
+    <header id="header" class="navbar navbar-default navbar-static-top" role="banner">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">UTABRA</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <nav id="nav" class="collapse navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">User Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+                <li class="active"><a href="#">Hero</a></li>
+                <li><a href="#">Journal</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Accounts</a></li>
+                        <li><a href="#">Levels</a></li>
+                        <li><a href="#">Races</a></li>
+                        <li><a href="#">Cards</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="userpic dropdown-toggle" data-toggle="dropdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="80" width="80" version="1.1">
+                            <g transform="scale(0.800, 0.800)">
+                                <g stroke="#333" fill="#c3996b" data-part="ears">
+                                    <path d="m80,50c1-1.1954,2-2.0753,4-2,2,0,3,7,3,12,0,4-5,12-8,12-2,0-3,0-3-2z" stroke-width="2px"></path>
+                                    <path d="m84,55c0-5-2-3-4,2-1,3,2,6-1,8-1,1-2,4,1,2" fill="none"></path>
+                                    <path d="m82,59c0-2,0-4-1-4" fill="none"></path>
+                                    <path d="m17,50c-1-1-2-2-4-2s-3,7-3,12c0,4,5,12,7,12s4,0,4-2z" stroke-width="2px"></path>
+                                    <path d="m13,55c0-5,2-3,4,2,1,3-2,6,1,8,2,1,2,4-1,2" fill="none"></path>
+                                    <path d="m15,59c0-2,0-4,1-4" fill="none"></path>
+                                </g>
+                                <g stroke="#333" fill="#c3996b" data-part="face">
+                                    <path d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29-1,5-4,0-16,12-3,3-11,4-10-1,1,5-8,4-11,1-8-11-13-8-14-13-2-8-5-28-5-28z" stroke-width="2px"></path>
+                                    <path d="m44,90c3-1,4,0,7,0" fill="none" stroke-width="1px"></path>
+                                </g>
+                                <g stroke="#333" fill="#38101c" data-part="eyes">
+                                    <path d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z" fill="#fff" stroke="none"></path>
+                                    <path d="m38,58-9,0" fill="none"></path>
+                                    <path d="m27,51,1-1,11,0,1,1" fill="none"></path>
+                                    <path d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z" stroke="none"></path>
+                                    <path d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z" fill="#fff" stroke="none"></path>
+                                    <path d="m59,58,9,0" fill="none"></path>
+                                    <path d="m57,51,1-1,11,0,1,1" fill="none"></path>
+                                    <path d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z" stroke="none"></path>
+                                </g>
+                                <g stroke="#222" fill="#222" data-part="eyebrows">
+                                    <path d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"></path>
+                                    <path d="m43,42,0,7" fill="none"></path>
+                                    <path d="m25,42-1,4" fill="none"></path>
+                                    <path d="m52,49c7,0,7-4,19-4l-1-4c-11,0-12,4-18,4v4z"></path>
+                                    <path d="m52,42,0,7" fill="none"></path>
+                                    <path d="m72,41,1,4" fill="none"></path>
+                                </g>
+                                <g stroke="#333" fill="#333" data-part="nose">
+                                    <path d="m47,62-5,5,5,4-2-4z" stroke="none"></path>
+                                </g>
+                                <g stroke="#333" fill="#333" data-part="mouth">
+                                    <path d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2" fill="none"></path>
+                                    <path d="m44,83c3-1,6.7841-2.0095,7,1" fill="none"></path>
+                                </g>
+                                <g stroke="#222" fill="#222" data-part="hair">
+                                    <path d="m8,40,4,0-4-7,6,2-3-8,3,0-3-10,7,1-4-5,6,0-3-5,11,2-1-4,10,2-1-2,7,1,5,1,5-1,7-1-1,2,9-2-1,4,11-4-1,9,5-2-2,7,5,3-4,5,6,0-5,4,8,0-5,8,3,0c-4,4-7,9-8,15h-5l2-5-1-4,2-1-3-5,1-5-5-7h-2l1-2h-2v-2l-15,1-3,2-1-1-1,3-1-3-1,1-3-2-15-1-2,1,1,1-2,1h2l-3,2-3,6,1,5-2,5,2,1-1,4,2,5h-5c-2-7-5-12-10-15z" stroke="none"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="switch_hero.html">Switch</a></li>
+                        <li><a href="layout.html">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="content" class="wrapper" role="main">
+        <div class="page-header">
+            <h1>Create Hero</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a class="list-group-item" href="#race-tab" data-toggle="tab">Race</a>
+                    <a class="list-group-item" href="#sex-tab" data-toggle="tab">Sex</a>
+                    <a class="list-group-item active" href="#face-tab" data-toggle="tab">Face</a>
+                    <a class="list-group-item" href="#eyes-tab" data-toggle="tab">Eyes</a>
+                    <a class="list-group-item" href="#mouth-tab" data-toggle="tab">Mouth</a>
+                    <a class="list-group-item" href="#hair-tab" data-toggle="tab">Hair</a>
+                    <a class="list-group-item" href="#name-tab" data-toggle="tab">Name</a>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="face-editor" id="hero-face" data-toggle="face-generator">
+                    <input id="ears-input" name="ears" value="0" type="hidden" data-part="ears"/>
+                    <input id="face-input" name="face" value="0" type="hidden" data-part="face"/>
+                    <input id="eyes-input" name="eyes" value="0" type="hidden" data-part="eyes"/>
+                    <input id="eyebrows-input" name="eyebrows" value="0" type="hidden" data-part="eyebrows"/>
+                    <input id="nose-input" name="nose" value="0" type="hidden" data-part="nose"/>
+                    <input id="mouth-input" name="mouth" value="0" type="hidden" data-part="mouth"/>
+                    <input id="hair-input" name="hair" value="0" type="hidden" data-part="hair"/>
+                    <input id="facial-hair-input" name="facial-hair" value="0" type="hidden" data-part="facial-hair"/>
+                    <input id="name-input" name="name" value="Hermes" type="hidden" data-part="name"/>
+                    <input id="sex-input" name="sex" value="male" type="hidden" data-part="sex"/>
+                    <input id="race-input" name="race" value="plunger" type="hidden" data-part="race"/>
+
+                    <svg version="1.1" width="350" height="350" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="scale(3.500,3.500)">
+                            <g stroke="#333" fill="#c3996b" data-part="ears">
+                                <path d="m80,50c1-1.1954,2-2.0753,4-2,2,0,3,7,3,12,0,4-5,12-8,12-2,0-3,0-3-2z"
+                                      stroke-width="2px"/>
+                                <path d="m84,55c0-5-2-3-4,2-1,3,2,6-1,8-1,1-2,4,1,2"
+                                      fill="none"/>
+                                <path d="m82,59c0-2,0-4-1-4"
+                                      fill="none"/>
+                                <path d="m17,50c-1-1-2-2-4-2s-3,7-3,12c0,4,5,12,7,12s4,0,4-2z"
+                                      stroke-width="2px"/>
+                                <path d="m13,55c0-5,2-3,4,2,1,3-2,6,1,8,2,1,2,4-1,2"
+                                      fill="none"/>
+                                <path d="m15,59c0-2,0-4,1-4"
+                                      fill="none"/>
+                            </g>
+                            <g stroke="#333" fill="#c3996b" data-part="face">
+                                <path d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29-1,5-4,0-16,12-3,3-11,4-10-1,1,5-8,4-11,1-8-11-13-8-14-13-2-8-5-28-5-28z"
+                                      stroke-width="2px"/>
+                                <path d="m44,90c3-1,4,0,7,0"
+                                      fill="none" stroke-width="1px"/>
+                            </g>
+                            <g stroke="#333" fill="#38101c" data-part="eyes">
+                                <path d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"
+                                      fill="#fff" stroke="none"/>
+                                <path d="m38,58-9,0"
+                                      fill="none"/>
+                                <path d="m27,51,1-1,11,0,1,1"
+                                      fill="none"/>
+                                <path d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"
+                                      stroke="none"/>
+                                <path d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"
+                                      fill="#fff" stroke="none"/>
+                                <path d="m59,58,9,0"
+                                      fill="none"/>
+                                <path d="m57,51,1-1,11,0,1,1"
+                                      fill="none"/>
+                                <path d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"
+                                      stroke="none"/>
+                            </g>
+                            <g stroke="#222" fill="#222" data-part="eyebrows">
+                                <path d="m43,49c-8,0-8-3-17-3l1-4c8,0,8,3,16,3v4z"/>
+                                <path d="m43,42,0,7"
+                                      fill="none"/>
+                                <path d="m25,42-1,4"
+                                      fill="none"/>
+                                <path d="m52,49c7,0,7-4,19-4l-1-4c-11,0-12,4-18,4v4z"/>
+                                <path d="m52,42,0,7"
+                                      fill="none"/>
+                                <path d="m72,41,1,4"
+                                      fill="none"/>
+                            </g>
+                            <g stroke="#333" fill="#333" data-part="nose">
+                                <path d="m47,62-5,5,5,4-2-4z"
+                                      stroke="none"/>
+                            </g>
+                            <g stroke="#333" fill="#333" data-part="mouth">
+                                <path d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"
+                                      fill="none"/>
+                                <path d="m44,83c3-1,6.7841-2.0095,7,1"
+                                      fill="none"/>
+                            </g>
+                            <g stroke="#222" fill="#222" data-part="hair">
+                                <path d="m8,40,4,0-4-7,6,2-3-8,3,0-3-10,7,1-4-5,6,0-3-5,11,2-1-4,10,2-1-2,7,1,5,1,5-1,7-1-1,2,9-2-1,4,11-4-1,9,5-2-2,7,5,3-4,5,6,0-5,4,8,0-5,8,3,0c-4,4-7,9-8,15h-5l2-5-1-4,2-1-3-5,1-5-5-7h-2l1-2h-2v-2l-15,1-3,2-1-1-1,3-1-3-1,1-3-2-15-1-2,1,1,1-2,1h2l-3,2-3,6,1,5-2,5,2,1-1,4,2,5h-5c-2-7-5-12-10-15z"
+                                      stroke="none"/>
+                            </g>
+                            <g fill="#333" stroke="none" data-part="name">
+                                <text font-size="6px" dy="6" dx="2" y="0" x="0">Hermes</text>
+                            </g>
+                            <g transform="translate(80,80) scale(0.200,0.200)" stroke="#333" fill="#333" data-part="race">
+                                <path d="m53,5,0,49c0,5,14,8,14,3v-14c0-3-3-1-5,1l10-19v35c0,5-19,3-19,8v27h-6v-13c0-5-19-2-19-7v-37l10,21c-2-2-5-5-5-2v15c0,5,14,2,14-3v-44c0-3-3,0-5,2z"
+                                      stroke="none"/>
+                            </g>
+                            <g transform="translate(0,80) scale(0.200,0.200)" stroke="#333" fill="#333" data-part="sex">
+                                <path d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"
+                                      fill="none" stroke-width="5px"/>
+                                <path d="m80,20,-17,17"
+                                      fill="none" stroke-width="5px"/>
+                                <path d="m65,20,15,0,0,15"
+                                      fill="none" stroke-width="5px"/>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+                <span class="help-block">
+                    Double click to generate random character.
+                </span>
+            </div>
+
+            <div class="col-md-4 tab-content">
+
+                <div id="race-tab" class="tab-pane">
+                    <div class="face-part active" data-toggle="face-part" data-target="#hero-face" data-part="race" data-value="plunger" title="Plunger">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke="none"
+                                      d="m53,5,0,49c0,5,14,8,14,3v-14c0-3-3-1-5,1l10-19v35c0,5-19,3-19,8v27h-6v-13c0-5-19-2-19-7v-37l10,21c-2-2-5-5-5-2v15c0,5,14,2,14-3v-44c0-3-3,0-5,2z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="race" data-value="flyer" title="Flyer">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke="none"
+                                      d="m47,5,6,0c4,0,3,7,3,12h-3l3,4c7-1,11-6,13-13,17,12,23,32,26,48-7-12-11-13-17-4-2-7-6-7-11,0-2-5-5-5-5,3l8,40h-40l8-40c0-8-3-8-5-3-5-7-9-7-11,0-6-9-10-8-17,4,3-16,9-36,26-48,2,7,6,12,13,13l3-4h-3c0-5-1-12,3-12z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <br/>
+                    <ul class="pagination invisible">
+                        <li class="active"><a href="#">1</a></li>
+                    </ul>
+                </div>
+
+                <div id="sex-tab" class="tab-pane">
+                    <div class="face-part active" data-toggle="face-part" data-target="#hero-face" data-part="sex" data-value="male" title="Male">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke-width="5px" fill="none"
+                                      d="m20,55a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
+                                <path stroke-width="5px" fill="none"
+                                      d="m80,20,-17,17"/>
+                                <path stroke-width="5px" fill="none"
+                                      d="m65,20,15,0,0,15"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="sex" data-value="female" title="Female">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke-width="5px" fill="none"
+                                      d="m25,40a25,25,0,1,0,50,0a25,25,0,1,0,-50,0z"/>
+                                <path stroke-width="5px" fill="none"
+                                      d="m50,65,0,20"/>
+                                <path stroke-width="5px" fill="none"
+                                      d="m40,75,20,0"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <br/>
+                    <ul class="pagination invisible">
+                        <li class="active"><a href="#">1</a></li>
+                    </ul>
+                </div>
+
+                <div id="face-tab" class="tab-content tab-pane active">
+
+                    <div id="face-tab-1" class="tab-pane active">
+                        <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="0" title="Face 0">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-1,4-2,12-8,35-53,35-58,0-1-8-2-12-2-12z"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="1" title="Face 1">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-19,11-19,11h-15s-17-10-17-12c-2-8-5-28-5-28z"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="2" title="Face 2">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-2,15-5,23,0,5-18,17-27,17s-26-12-26-17c-2-8-4-23-4-23z"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="face-part active" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="3" title="Face 3">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29-1,5-4,0-16,12-3,3-11,4-10-1,1,5-8,4-11,1-8-11-13-8-14-13-2-8-5-28-5-28z"/>
+                                    <path stroke-width="1px" fill="none"
+                                          d="m44,90c3-1,4,0,7,0"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="4" title="Face 4">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-4,18-4,25,0,21-54,21-54,0,0-7-4-25-4-25z"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="5" title="Face 5">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-1,4-2,12-1,15,0,20-23,28h-15c-20-8-19-13-20-28-1-8-2-12-2-12z"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div id="face-tab-2" class="tab-pane">
+                        <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="face" data-value="6" title="Face 6">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g stroke="#000" fill="#c3996b">
+                                    <path stroke-width="2px"
+                                          d="m18,50c-1-27,11-40,30-40,16,0,34,8,32,40,0,0-3,20-6,29,0,2-12,7-12,7,0,8-27,8-27,0,0,0-12-6-12-8-2-8-5-28-5-28z"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="face-part disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+
+                        <div class="face-part disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+
+                        <div class="face-part disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+
+                        <div class="face-part disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+
+                        <div class="face-part disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+                    </div>
+
+                    <ul class="pagination">
+                        <li class="active"><a href="#face-tab-1" data-toggle="tab">1</a></li>
+                        <li><a href="#face-tab-2" data-toggle="tab">2</a></li>
+                    </ul>
+                </div>
+
+                <div id="eyes-tab" class="tab-pane">
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="eyes" data-value="0" title="Eyes 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#38101c">
+                                <path fill="none"
+                                      d="m34,53c0.3733-0.56671,0.89522,0.53835,0.3392,0.79444-0.56225,0.54759-1.5271,0.12847-1.7629-0.55271-0.42466-0.98816,0.41572-2.1139,1.4237-2.2417,1.3678-0.24181,2.6215,1.0834,2.5181,2.4208-0.04706,1.5397-1.5909,2.7602-3.0953,2.5848-1.7382-0.13285-3.0974-1.8629-2.928-3.5769,0.12046-1.9571,2.0018-3.5396,3.9386-3.4395,2.1225,0.03586,3.9508,1.9167,4.0665,4.0109,0.18917,2.2029-1.4501,4.3091-3.5621,4.8452-2.0208,0.56914-4.2887-0.35377-5.4596-2.0702-1.2437-1.6956-1.3022-4.1131-0.211-5.8964,0.977-1.661,2.804-2.786,4.733-2.878"/>
+                                <path fill="none"
+                                      d="m63,53c-0.3733,0.56671-0.89522-0.53835-0.3392-0.79444,0.56225-0.54759,1.5271-0.12847,1.7629,0.55271,0.42466,0.98816-0.41572,2.1139-1.4237,2.2417-1.3678,0.24181-2.6215-1.0834-2.5181-2.4208,0.04706-1.5397,1.591-2.7602,3.0953-2.5848,1.7382,0.13285,3.0974,1.8629,2.928,3.5769-0.12046,1.9571-2.0018,3.5396-3.9386,3.4395-2.1225-0.03586-3.9508-1.9167-4.0665-4.0109-0.18917-2.2029,1.4501-4.3091,3.5621-4.8452,2.0208-0.56914,4.2887,0.35377,5.4596,2.0703,1.2437,1.6956,1.3022,4.1131,0.21099,5.8964-0.977,1.661-2.804,2.786-4.733,2.878"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part active" data-toggle="face-part" data-target="#hero-face" data-part="eyes" data-value="1" title="Eyes 1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#38101c">
+                                <path stroke="none" fill="#fff"
+                                      d="m38,50-9,0c-3,1-4,7,3,8h5c5-1,4-7,1-8z"/>
+                                <path fill="none"
+                                      d="m38,58-9,0"/>
+                                <path fill="none"
+                                      d="m27,51,1-1,11,0,1,1"/>
+                                <path stroke="none"
+                                      d="m37,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+
+                                <path stroke="none" fill="#fff"
+                                      d="m59,50,9,0c3,1,4,7-3,8h-4c-7-1-5-7-2-8z"/>
+                                <path fill="none"
+                                      d="m59,58,9,0"/>
+                                <path fill="none"
+                                      d="m57,51,1-1,11,0,1,1"/>
+                                <path stroke="none"
+                                      d="m66,53a3,3,0,1,1,-6,0,3,3,0,1,1,6,0z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <br/>
+                    <ul class="pagination invisible">
+                        <li class="active"><a href="#">1</a></li>
+                    </ul>
+                </div>
+
+                <div id="mouth-tab" class="tab-pane">
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="mouth" data-value="0" title="Mouth 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path fill="none"
+                                      d="m44,83c3-1,6.7841-2.0095,7,1"/>
+                                <path fill="none"
+                                      d="m35,75c8,3,18,3,26,0"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part active" data-toggle="face-part" data-target="#hero-face" data-part="mouth" data-value="1" title="Mouth 1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path fill="none"
+                                      d="m44,74c-2,1-4,3-3,4,7,0,8,1,14,2"/>
+                                <path fill="none"
+                                      d="m44,83c3-1,6.7841-2.0095,7,1"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <br/>
+                    <ul class="pagination invisible">
+                        <li class="active"><a href="#">1</a></li>
+                    </ul>
+                </div>
+
+                <div id="hair-tab" class="tab-pane">
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="0" title="Hair 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="1" title="Hair 1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke="none"
+                                      d="m17,50c-5-30,12-41,31-41,16,0,37,6,33,41l-1,5-4,3c1-5,3-13,0-13,3-10-6-23-14-23-7,0-7,5-14,5s-7-5-14-5c-9,0-15,13-13,23-3,0,0,9,1,13l-4-3z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="2" title="Hair 2">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke="none"
+                                      d="m20,28c3-11,15-19,28-19,15,0,28,9,30,19-5,1-9-2-16-1s-7-1-14,0-8-1-14,0c-4,1-10,1-14,1z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part active" data-toggle="face-part" data-target="#hero-face" data-part="hair" data-value="3" title="Hair 3">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            <g stroke="#000" fill="#000">
+                                <path stroke="none"
+                                      d="m8,40,4,0-4-7,6,2-3-8,3,0-3-10,7,1-4-5,6,0-3-5,11,2-1-4,10,2-1-2,7,1,5,1,5-1,7-1-1,2,9-2-1,4,11-4-1,9,5-2-2,7,5,3-4,5,6,0-5,4,8,0-5,8,3,0c-4,4-7,9-8,15h-5l2-5-1-4,2-1-3-5,1-5-5-7h-2l1-2h-2v-2l-15,1-3,2-1-1-1,3-1-3-1,1-3-2-15-1-2,1,1,1-2,1h2l-3,2-3,6,1,5-2,5,2,1-1,4,2,5h-5c-2-7-5-12-10-15z"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+
+                    <br/>
+                    <ul class="pagination invisible">
+                        <li class="active"><a href="#">1</a></li>
+                    </ul>
+                </div>
+
+                <div id="name-tab" class="tab-pane">
+                    <input type="text" value="Hermes" class="form-control" data-toggle="face-title" data-target="#hero-face" data-part="name"/>
+                </div>
+            </div>
+
+        </div>
+
+        <hr/>
+        <div class="btn-toolbar">
+            <a href="battle.html" class="btn btn-primary">Create</a>
+            <a href="switch_hero.html" class="btn btn-default">Cancel</a>
+        </div>
+    </section>
+
+    <div class="buffer"></div>
+</div>
+
+<footer id="footer" class="footer container">
+    Copyright © 2013 "Mutabra". All rights reserved. <br>
+    App Version: 1.0-SNAPSHOT, Tapestry Version: 5.4.0 <br>
+    <a href="mailto:support@mutabra.com">Contact Us</a>
+</footer>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery/jquery.js"></script>
+<script src="js/bootstrap/transition.js"></script>
+<script src="js/bootstrap/alert.js"></script>
+<script src="js/bootstrap/modal.js"></script>
+<script src="js/bootstrap/dropdown.js"></script>
+<script src="js/bootstrap/scrollspy.js"></script>
+<script src="js/bootstrap/tab.js"></script>
+<script src="js/bootstrap/tooltip.js"></script>
+<script src="js/bootstrap/popover.js"></script>
+<script src="js/bootstrap/button.js"></script>
+<script src="js/bootstrap/collapse.js"></script>
+<script src="js/bootstrap/carousel.js"></script>
+<script src="js/bootstrap/affix.js"></script>
+<script src="js/face-generator.js"></script>
+
+<script type="text/javascript">
+    (function ($) {
+        $(function () {
+            $('[data-toggle=face-generator]').faceGenerator({
+                names: [
+                    'Fidel Kenison',
+                    'Clifton Bias',
+                    'Judson Kellog',
+                    'Domenic Henton',
+                    'Isaiah Beckmann',
+                    'Chuck Horsman',
+                    'Delmer Bald',
+                    'Charley Wafer',
+                    'Abel Toussaint',
+                    'Louie Dalke',
+                    'Sal Malmberg',
+                    'Peter Byfield',
+                    'Sergio Clausen',
+                    'Dwain Mattern',
+                    'Aurelio Berryman',
+                    'Curt Streetman',
+                    'Jerald Abadie',
+                    'Jessie Straughan',
+                    'Lorenzo Glassman',
+                    'Mohamed Rupe',
+                    'Michale Winward',
+                    'Major Silveria',
+                    'Ulysses Angelos',
+                    'Edmond Dinges',
+                    'Norris Fiske',
+                    'Doyle Salmon',
+                    'Jacques Brendle',
+                    'Kirby Coulter',
+                    'Eloy Kruse',
+                    'Asa Herrington',
+                    'Elliot Tilson',
+                    'Colton March',
+                    'Blaine Smolka',
+                    'Rod Calvo',
+                    'Allen Castor',
+                    'Alan Lonergan',
+                    'Marty Rahn',
+                    'Lyle Pai',
+                    'Keven Gallaher',
+                    'Demetrius Ernest',
+                    'Caleb Neuman',
+                    'Kenneth Schimpf',
+                    'Lucio Kleven',
+                    'Cedric Pomerantz',
+                    'Hugh Cerniglia',
+                    'Leo Arledge',
+                    'Sang Matsunaga',
+                    'Tobias Munroe',
+                    'Benito Dillahunty',
+                    'Emilio Mcwaters',
+                    'Lawanda Yokoyama',
+                    'Sharilyn Wasden',
+                    'Krissy Minnifield',
+                    'Emelda Noland',
+                    'Chantelle Jett',
+                    'Junie Nathanson',
+                    'Britney Najarro',
+                    'Lelah Stang',
+                    'Manda Stringfield',
+                    'Cyrstal Vallarta',
+                    'Rosalva Smelser',
+                    'Irina Borgen',
+                    'Antonina Lanz',
+                    'Yuki Parrinello',
+                    'Yoko Banner',
+                    'Jodee Sidhu',
+                    'Leatha Gwinn',
+                    'Joellen Koening',
+                    'Shoshana Keenum',
+                    'Tonie Bettencourt',
+                    'Lakiesha Herzig',
+                    'Piper Sumners',
+                    'Ruthann Woolwine',
+                    'Waltraud Stricklin',
+                    'Oralia Kesner',
+                    'Alysia Gunnell',
+                    'Louanne Aponte',
+                    'Jeannette Hannan',
+                    'Adrien Buchheit',
+                    'Domitila Pohl',
+                    'Elke Bottoms',
+                    'Roberta Yong',
+                    'Lia Keown',
+                    'Brittanie Ballance',
+                    'Latasha Wischmeier',
+                    'Violeta Woods',
+                    'Shanda Schuler',
+                    'Lorrine Loth',
+                    'Socorro Kindel',
+                    'Brigida Morfin',
+                    'Julie Tocci',
+                    'Cecila Pyatt',
+                    'Pearlie Engh',
+                    'Polly Sciacca',
+                    'Denisse Rosebrook',
+                    'Dell Collington',
+                    'Marianna Diller',
+                    'Barb Bran',
+                    'Cheryll Dafoe',
+                    'Jacquiline Nakasone'
+                ]
+            });
+        });
+    })(jQuery);
+</script>
+
+</body>
+
+</html>

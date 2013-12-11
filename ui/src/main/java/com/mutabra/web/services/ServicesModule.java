@@ -5,6 +5,7 @@
 
 package com.mutabra.web.services;
 
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.mongodb.morphia.Datastore;
 import com.mutabra.domain.common.*;
 import com.mutabra.domain.game.Account;
@@ -30,7 +31,6 @@ import org.apache.tapestry5.ioc.annotations.Contribute;
 public class ServicesModule {
 
     public static void bind(final ServiceBinder binder) {
-        binder.bind(HeroService.class, HeroServiceImpl.class);
         binder.bind(BattleService.class, BattleServiceImpl.class);
         binder.bind(ScriptEngine.class, ScriptEngineImpl.class);
     }
@@ -53,6 +53,11 @@ public class ServicesModule {
 
     public BaseEntityService<Account> buildAccountService(final Datastore datastore) {
         return new BaseEntityServiceImpl<Account>(datastore, Account.class);
+    }
+
+    public HeroService buildHeroService(final Datastore datastore,
+                                        final @InjectService("raceService") CodedEntityService<Race> raceService) {
+        return new HeroServiceImpl(datastore, raceService);
     }
 
     @Contribute(ScriptEngine.class)
