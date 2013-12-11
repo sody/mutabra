@@ -173,6 +173,9 @@
                 $selected.siblings('.active').removeClass('active');
                 $selected.addClass('active');
             });
+
+        // face parts with title should be as tooltip
+        $('.face-part[title]').tooltip();
     });
 
 }(window.jQuery);

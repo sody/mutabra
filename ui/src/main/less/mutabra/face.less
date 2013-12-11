@@ -11,7 +11,7 @@
 }
 
 // Chooser
-.face {
+.face-part {
   display: inline-block;
   border: 1px solid @face-border;
   border-radius: @face-border-radius;
@@ -25,7 +25,8 @@
     vertical-align: top;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: @face-hover-bg;
     text-decoration: none;
   }
@@ -39,25 +40,6 @@
     background-color: @face-disabled-bg;
     cursor: default;
     .opacity(.65);
-  }
-}
-
-.face-info {
-  display: none;
-
-  &.active {
-    display: block;
-  }
-
-  @media (min-width: @grid-float-breakpoint) {
-    .dl-horizontal {
-      dt {
-        width: (@face-info-offset - 20);
-      }
-      dd {
-        margin-left: @face-info-offset;
-      }
-    }
   }
 }
 
