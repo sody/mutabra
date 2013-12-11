@@ -114,13 +114,21 @@ public class HeroSelect extends AbstractField {
         final String submitted = request.getParameter(controlName);
         tracker.recordInput(this, submitted);
 
-        final Hero selected = InternalUtils.isBlank(submitted) ? null : encoder.toValue(submitted);
         try {
+            final Hero selected = InternalUtils.isBlank(submitted) ? null : toValue(submitted);
             // validate submitted value
             fieldValidationSupport.validate(selected, getResources(), validate);
             value = selected;
         } catch (ValidationException ex) {
             tracker.recordError(this, ex.getMessage());
+        }
+    }
+
+    private Hero toValue(final String submitted) throws ValidationException {
+        try {
+            return encoder.toValue(submitted);
+        } catch (RuntimeException ex) {
+            throw new ValidationException(message("error.wrong-hero"));
         }
     }
 }
