@@ -1,0 +1,59 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+             xmlns:p="tapestry:parameter">
+
+    <t:if test="offline">
+        <t:delegate to="block:offline"/>
+        <p:else>
+            <t:delegate to="block:online"/>
+        </p:else>
+    </t:if>
+
+    <t:block t:id="online">
+        <t:zone t:id="pageZone" id="prop:clientId" class="${containerCssClass}">
+            <t:delegate to="block:content"/>
+
+            <br/>
+
+            <ul class="${pageMenuCssClass}">
+                <t:loop source="pages" value="page" formState="none">
+                    <li class="${pageCssClass}">
+                        <t:actionlink t:id="changePage" context="page" zone="prop:clientId">
+                            ${page}
+                        </t:actionlink>
+                    </li>
+                </t:loop>
+            </ul>
+        </t:zone>
+    </t:block>
+
+    <t:block t:id="offline">
+        <div id="${clientId}" class="${containerCssClass}">
+            <t:loop source="pages" value="page" formState="none">
+                <div id="${pageContentId}" class="${pageContentCssClass}">
+                    <t:delegate to="block:content"/>
+                </div>
+            </t:loop>
+
+            <ul class="${pageMenuCssClass}">
+                <t:loop source="pages" value="page" formState="none">
+                    <li class="${pageCssClass}">
+                        <a href="#${pageContentId}" data-toggle="tab">${page}</a>
+                    </li>
+                </t:loop>
+            </ul>
+        </div>
+    </t:block>
+
+    <t:block t:id="content">
+        <t:loop source="source" value="value" formState="none">
+            <t:body/>
+        </t:loop>
+
+        <t:if test="placeholder">
+            <t:loop source="placeholders" formState="none">
+                <t:delegate to="placeholder"/>
+            </t:loop>
+        </t:if>
+    </t:block>
+
+</t:container>

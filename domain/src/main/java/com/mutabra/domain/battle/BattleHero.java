@@ -5,6 +5,7 @@
 
 package com.mutabra.domain.battle;
 
+import com.mutabra.domain.game.Hero;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Transient;
@@ -40,9 +41,11 @@ public class BattleHero implements BattleUnit {
     protected BattleHero() {
     }
 
-    public BattleHero(final Battle battle, final ObjectId id) {
+    public BattleHero(final Battle battle, final Hero hero) {
         this.battle = battle;
-        this.id = id;
+        this.id = hero.getId();
+
+        fill(hero);
     }
 
     public ObjectId getId() {
@@ -142,6 +145,13 @@ public class BattleHero implements BattleUnit {
             }
         }
         return graveyard;
+    }
+
+    public void fill(final Hero hero) {
+        health = hero.getHealth();
+        mentalPower = hero.getMentalPower();
+        appearance.fill(hero.getAppearance());
+        level.fill(hero.getLevel());
     }
 
     /* HELPER METHODS */

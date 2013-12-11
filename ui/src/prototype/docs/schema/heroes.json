@@ -4,8 +4,16 @@
     "account_id": 10,
     "appearance": {
       "name": "John Snow",
-      "face": "trollface",
-      "race": "plunger"
+      "race": "plunger",
+      "sex": "male",
+      "face": 1,
+      "eyes": 2,
+      "eyebrows": 3,
+      "ears": 2,
+      "nose": 4,
+      "mouth": 13,
+      "hair": 0,
+      "facial_hair": 0
     },
     "level": {
       "code": "newbie",

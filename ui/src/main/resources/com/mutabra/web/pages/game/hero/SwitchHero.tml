@@ -1,21 +1,111 @@
 <html t:type="layout/default"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 
 <t:form class="form-horizontal">
-
     <t:form.formerrors/>
 
-    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
-        <t:carousel source="source" row="row" value="hero" class="span4">
-            <t:svg type="faces" image="row.appearance.face" width="100" height="100" style="margin:auto; display:block;"/>
-        </t:carousel>
-    </t:form.formrow>
+    <div class="row">
+        <div class="col-md-3 tab-content">
+            <t:loop source="source" value="hero" formState="none">
+                <div t:type="if" test="hero" class="tab-pane${heroItemCssClass}" data-value="${heroItemValue}">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 50%;"/>
+                            <col style="width: 100%;"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>${message:label.name}:</th>
+                            <th>${hero.appearance.name}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>${message:label.race}:</th>
+                            <td>${heroItemRaceLabel}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.level}:</th>
+                            <td>${heroItemLevelLabel}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.rating}:</th>
+                            <td>${hero.level.rating}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.next-level}:</th>
+                            <td>${hero.level.nextLevelRating}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.health}:</th>
+                            <td>${hero.health}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.mental-power}:</th>
+                            <td>${hero.mentalPower}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.deck}:</th>
+                            <td>${hero.cards.size()}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t:loop>
+        </div>
 
-    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
-        <t:submit value="message:button.enter" class="btn btn-default"/>
+        <div class="col-md-5">
+            <t:hero.heroselect t:id="hero" id="hero"
+                               value="activeHero"
+                               validate="required"
+                               width="350" height="350"
+                    />
+        </div>
 
-        <t:pagelink page="game/hero/createhero" class="btn btn-default">${message:button.create}</t:pagelink>
-    </t:form.formrow>
+        <div class="col-md-4">
+            <t:paginator t:id="paginator" source="source" value="hero" offline="true"
+                         id="paginator-hero">
+                <t:if test="hero">
+                    <div class="face-part${heroItemCssClass}"
+                         data-toggle="face-part"
+                         data-target="#hero"
+                         data-part="all"
+                         data-value="${heroItemValue}"
+                         title="${hero.appearance.name}">
+                        <t:hero.herofacedisplay appearance="hero.appearance"
+                                                parts="heroItemFaceParts"
+                                                width="100" height="100"
+                                />
+                    </div>
+
+                    <p:else>
+                        <t:pagelink page="game/hero/createhero" class="face-part" title="message:hint.create">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                                <g>
+                                    <text font-size="14px" dy="7" x="50" y="50" text-anchor="middle" stroke="#333">${message:button.create}</text>
+                                </g>
+                            </svg>
+                        </t:pagelink>
+                    </p:else>
+                </t:if>
+
+                <p:placeholder>
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+                </p:placeholder>
+            </t:paginator>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="btn-toolbar">
+        <t:submit value="message:button.enter" class="btn btn-primary"/>
+        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
+    </div>
+
 </t:form>
 
 </html>

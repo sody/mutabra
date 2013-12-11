@@ -5,7 +5,7 @@
         <li class="dropdown">
             <a href="#" class="userpic dropdown-toggle" data-toggle="dropdown">
                 <t:if test="account.hero">
-                    <t:svg type="faces" image="account.hero.appearance.face" width="80" height="80"/>
+                    <t:hero.herofacedisplay appearance="account.hero.appearance" width="80" height="80"/>
                     <p:else>
                         <t:svg image="literal:unknown" width="80" height="80"/>
                     </p:else>

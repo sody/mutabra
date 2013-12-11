@@ -41,4 +41,10 @@ public class HeroLevel {
     public void setNextLevelRating(final long rating) {
         next = rating;
     }
+
+    public void fill(final HeroLevel level) {
+        this.code = level.code;
+        this.rating = level.rating;
+        this.next = level.next;
+    }
 }

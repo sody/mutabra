@@ -7,8 +7,10 @@
             <t:loop source="field.get()" value="point">
                 <t:battle.battlefieldpointdisplay point="point">
                     <t:if test="point.hasHero()">
-                        <t:svg type="faces" image="point.hero.appearance.face" inline="true"
-                               width="90" height="90" x="50" y="5"/>
+                        <t:hero.herofacedisplay appearance="point.hero.appearance"
+                                                width="90" height="90" x="50" y="5"
+                                                inline="true"
+                                />
                     </t:if>
                     <t:if test="point.hasCreature()">
                         <t:svg type="creatures" image="point.creature.code" inline="true"

@@ -71,7 +71,9 @@ public class Svg extends AbstractComponent {
                             break;
                         case END_ELEMENT:
                             final Element element = writer.getElement();
-                            if (!inline && "svg".equals(element.getName())) {
+                            if ((!inline && "svg".equals(element.getName())) ||
+                                    (inline && "g".equals(element.getName()) &&
+                                            "svg".equals(element.getContainer().getName())) ) {
                                 getResources().renderInformalParameters(writer);
                             }
                             writer.end();
@@ -97,12 +99,7 @@ public class Svg extends AbstractComponent {
                                 }
                             } else if ("svg".equals(element.getName())) {
                                 if (inline) {
-                                    Element g = element.find("g");
-                                    while (g != null) {
-                                        g.moveBefore(element);
-                                        g = element.find("g");
-                                    }
-                                    element.remove();
+                                    element.pop();
                                 } else {
                                     element.forceAttributes(
                                             "width", String.valueOf(width),

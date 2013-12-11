@@ -1,0 +1,8 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+    <t:hero.herofacedisplay appearance="appearance"
+                            parts="parts"
+                            width="inherit:width" height="inherit:height"
+            />
+
+</t:container>

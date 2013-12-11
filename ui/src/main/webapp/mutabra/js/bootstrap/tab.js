@@ -132,4 +132,17 @@
     $(this).tab('show')
   })
 
+  //CHANGED: fixed for list-group
+  $(document).on('click', '.list-group-item[data-toggle=tab]', function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    var $selected = $(e.target).closest('.list-group-item')
+    var $menu = $selected.closest('.list-group')
+    var $active = $menu.find('.list-group-item.active')
+
+    $active.removeClass('active')
+    $selected.addClass('active')
+  })
+
 }(window.jQuery);

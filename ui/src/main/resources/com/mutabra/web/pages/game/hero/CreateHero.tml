@@ -1,32 +1,76 @@
 <html t:type="layout/default"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-        >
+      xmlns:p="tapestry:parameter">
 
 <t:form class="form-horizontal">
-
     <t:form.formerrors/>
 
-    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
-        <t:game.raceselect value="race"/>
-    </t:form.formrow>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <t:loop source="faceParts" value="facePart" formState="none">
+                    <a href="#${facePartContentId}" class="list-group-item${facePartCssClass}" data-toggle="tab">
+                        ${facePartLabel}
+                    </a>
+                </t:loop>
+            </div>
+        </div>
 
-    <t:form.formrow fieldClass="col-sm-6 col-sm-offset-4">
-        <t:game.faceselect value="face"/>
-    </t:form.formrow>
+        <div class="col-md-5">
+            <t:hero.herofaceedit t:id="face" id="face"
+                                 appearance="hero.appearance"
+                                 width="350"
+                                 height="350"
+                    />
 
-    <t:form.formrow for="name" labelClass="control-label col-sm-4" fieldClass="col-sm-6">
-        <t:textfield t:id="name" class="form-control"
-                     label="message:label.name"
-                     value="name"
-                     validate="required"
-                />
-    </t:form.formrow>
+            <span class="help-block">
+                ${message:hint.random-generation}
+            </span>
+        </div>
 
-    <t:form.formrow fieldClass="col-sm-8 col-sm-offset-4">
-        <t:submit value="message:button.create" class="btn btn-default"/>
+        <div class="col-md-4 tab-content">
+            <t:loop source="faceParts" value="facePart" formState="none">
+                <t:delegate to="facePartContent"/>
+            </t:loop>
 
-        <t:pagelink page="game/gamehome" class="btn btn-default">${message:button.cancel}</t:pagelink>
-    </t:form.formrow>
+            <t:block t:id="facePartContent">
+                <t:paginator t:id="paginator" source="facePartDataSource" value="facePartItem" offline="true"
+                             id="prop:facePartContentId" class="tab-pane${facePartCssClass}">
+                    <div class="face-part${facePartItemCssClass}"
+                         data-toggle="face-part"
+                         data-target="#face"
+                         data-part="${facePart.code}"
+                         data-value="${facePartItemValue}"
+                         title="${facePartItemLabel}">
+                        <t:svg type="faces/${facePart.code}" image="${facePart.code}_${facePartItemValue}" width="100" height="100"/>
+                    </div>
+
+                    <p:placeholder>
+                        <div class="face-part disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                            </svg>
+                        </div>
+                    </p:placeholder>
+                </t:paginator>
+            </t:block>
+
+            <t:block t:id="nameContent">
+                <div id="${facePartContentId}" class="tab-pane${facePartCssClass}" style="height: 475px;">
+                    <input type="text" value="${hero.appearance.name}" class="form-control"
+                           data-toggle="face-title"
+                           data-target="#face"
+                           data-part="name"
+                            />
+                </div>
+            </t:block>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="btn-toolbar">
+        <t:submit value="message:button.create" class="btn btn-primary"/>
+        <t:pagelink page="game/hero/switchhero" class="btn btn-default">${message:button.cancel}</t:pagelink>
+    </div>
 
 </t:form>
 
