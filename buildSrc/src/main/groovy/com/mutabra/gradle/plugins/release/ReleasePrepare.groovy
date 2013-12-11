@@ -135,6 +135,10 @@ public class ReleasePrepare extends SourceTask {
         if (message) {
             failOn(isFailOnSnapshotDependencies(), "You have snapshot dependencies: ${message}")
         }
+
+        // commit changes and tag release
+        scm.add(source.files)
+        scm.commit("[RELEASE]: Project version updated to ${releaseVersion}")
     }
 
     void failOn(boolean condition, String message) {

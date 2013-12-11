@@ -44,10 +44,6 @@ class ReleaseFinish extends SourceTask {
         def commits = 0
         def tagAdded = false
         try {
-            // commit changes and tag release
-            scm.add(source.files)
-            scm.commit("[RELEASE]: Project version updated to ${oldVersion}")
-            commits++
             scm.tag("${tagName}", "[RELEASE]: Created tag ${tagName}")
             tagAdded = true
 

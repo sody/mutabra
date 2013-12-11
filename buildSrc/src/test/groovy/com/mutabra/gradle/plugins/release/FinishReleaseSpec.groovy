@@ -7,52 +7,6 @@ import org.gradle.api.GradleException
  */
 class FinishReleaseSpec extends GitSpecification {
 
-    def "should fail if there are no changes in defined files"() {
-        given: 'pre-configured project'
-        rootProject.apply plugin: ReleasePlugin
-        rootProject.version = '1.0'
-        rootProject.release {
-            update {
-                tagName 'v0.0.1'
-                nextVersion '0.0.2-SNAPSHOT'
-                automaticVersions true
-                source 'build.gradle'
-            }
-        }
-        //there are no changes
-
-        when: 'finishRelease task executed'
-        rootProject.finishRelease.execute()
-        then:
-        thrown(GradleException)
-    }
-
-    def "should not fail if there are changes in defined files"() {
-        given: 'pre-configured project'
-        rootProject.apply plugin: ReleasePlugin
-        rootProject.version = '1.0'
-        rootProject.release {
-            update {
-                tagName 'v0.0.2'
-                nextVersion '0.0.3-SNAPSHOT'
-                automaticVersions true
-                source 'build.gradle'
-            }
-        }
-        // fake changes
-        rootProject.file('build.gradle').withWriterAppend {
-            it << '\n\n'
-        }
-
-        when: 'finishRelease task executed'
-        rootProject.finishRelease.execute()
-        then:
-        noExceptionThrown()
-
-        cleanup:
-        localGit.removeTag('v0.0.2')
-    }
-
     def "should fail if defined tag already exists"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
@@ -111,19 +65,16 @@ class FinishReleaseSpec extends GitSpecification {
     def "should fail if next version matches current"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
-        rootProject.version = '1.0'
+        rootProject.version = '1.0-SNAPSHOT'
         rootProject.release {
             update {
                 tagName 'v0.0.5'
-                nextVersion '1.0'
+                nextVersion '1.0-SNAPSHOT'
                 automaticVersions true
                 source 'build.gradle'
             }
         }
-        // fake changes
-        rootProject.file('build.gradle').withWriterAppend {
-            it << '\n\n'
-        }
+        // there are no changes
 
         when: 'finishRelease task executed'
         rootProject.finishRelease.execute()
@@ -134,7 +85,7 @@ class FinishReleaseSpec extends GitSpecification {
     def "should update project version to the next snapshot"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
-        rootProject.version = '1.0'
+        rootProject.version = '1.0-SNAPSHOT'
         rootProject.release {
             update {
                 tagName 'v0.0.5'

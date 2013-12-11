@@ -353,7 +353,7 @@ class PrepareReleaseSpec extends GitSpecification {
     def "should determine project release version by closure at the moment of execution"() {
         given: 'pre-configured project'
         rootProject.apply plugin: ReleasePlugin
-        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.version = '1.1-SNAPSHOT'
         rootProject.release {
             update {
                 releaseVersion { project.version - '-SNAPSHOT' + '-alpha-1' }
@@ -363,10 +363,48 @@ class PrepareReleaseSpec extends GitSpecification {
         }
 
         when: 'project version changes'
-        rootProject.version = '1.1'
+        rootProject.version = '1.0-SNAPSHOT'
         and: 'prepareRelease task executed'
         rootProject.prepareRelease.execute()
         then:
-        rootProject.version == '1.1-alpha-1'
+        rootProject.version == '1.0-alpha-1'
+    }
+
+    def "should fail if there are no changes in defined files"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion '1.0-SNAPSHOT'
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+        //there are no changes
+
+        when: 'prepareRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        thrown(GradleException)
+    }
+
+    def "should not fail if there are changes in defined files"() {
+        given: 'pre-configured project'
+        rootProject.apply plugin: ReleasePlugin
+        rootProject.version = '1.0-SNAPSHOT'
+        rootProject.release {
+            update {
+                releaseVersion '1.0-beta-2'
+                automaticVersions true
+                source 'build.gradle'
+            }
+        }
+        //there are version changes
+
+        when: 'finishRelease task executed'
+        rootProject.prepareRelease.execute()
+        then:
+        noExceptionThrown()
     }
 }
