@@ -27,7 +27,7 @@ import java.util.Locale;
  */
 public class HeroFaceDisplay extends AbstractClientElement {
 
-    @Parameter(required = true, allowNull = false)
+    @Parameter(required = true)
     private HeroAppearance appearance;
 
     @Parameter
@@ -71,7 +71,7 @@ public class HeroFaceDisplay extends AbstractClientElement {
     }
 
     @SetupRender
-    void setup(final MarkupWriter writer) {
+    boolean setup(final MarkupWriter writer) {
         // calculate attributes
         final double scaleX = (double) width / 100;
         final double scaleY = (double) height / 100;
@@ -96,6 +96,8 @@ public class HeroFaceDisplay extends AbstractClientElement {
                 "data-part", "all");
 
         iterator = parts.iterator();
+
+        return appearance != null;
     }
 
     @BeginRender

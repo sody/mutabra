@@ -3,6 +3,6 @@
     <t:hero.herofacedisplay appearance="appearance"
                             parts="parts"
                             width="inherit:width" height="inherit:height"
-                            />
+            />
 
 </t:container>

@@ -9,7 +9,12 @@ import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.domain.game.HeroAppearancePart;
 import com.mutabra.web.base.components.AbstractField;
+import org.apache.tapestry5.Binding;
+import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.FieldValidationSupport;
+import org.apache.tapestry5.FieldValidator;
 import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.ValidationTracker;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.annotations.CleanupRender;
@@ -19,6 +24,7 @@ import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.util.InternalUtils;
 import org.apache.tapestry5.services.ComponentDefaultProvider;
 import org.apache.tapestry5.services.Request;
 
@@ -32,11 +38,14 @@ import java.util.EnumSet;
 @Import(library = "context:/mutabra/js/face-generator.js")
 public class HeroSelect extends AbstractField {
 
-    @Parameter(required = true, allowNull = false)
+    @Parameter(required = true)
     private Hero value;
 
     @Parameter
     private ValueEncoder<Hero> encoder;
+
+    @Parameter(defaultPrefix = BindingConstants.VALIDATE)
+    private FieldValidator<Hero> validate;
 
     @Parameter(value = "350")
     private int width;
@@ -48,6 +57,9 @@ public class HeroSelect extends AbstractField {
     private ValidationTracker tracker;
 
     @Inject
+    private FieldValidationSupport fieldValidationSupport;
+
+    @Inject
     private ComponentDefaultProvider defaultProvider;
 
     @Inject
@@ -57,8 +69,12 @@ public class HeroSelect extends AbstractField {
         return defaultProvider.defaultValueEncoder("value", getResources());
     }
 
+    Binding defaultValidate() {
+        return defaultProvider.defaultValidatorBinding("value", getResources());
+    }
+
     public HeroAppearance getAppearance() {
-        return value.getAppearance();
+        return value != null ? value.getAppearance() : null;
     }
 
     public Iterable<HeroAppearancePart> getParts() {
@@ -98,6 +114,13 @@ public class HeroSelect extends AbstractField {
         final String submitted = request.getParameter(controlName);
         tracker.recordInput(this, submitted);
 
-        value = encoder.toValue(submitted);
+        final Hero selected = InternalUtils.isBlank(submitted) ? null : encoder.toValue(submitted);
+        try {
+            // validate submitted value
+            fieldValidationSupport.validate(selected, getResources(), validate);
+            value = selected;
+        } catch (ValidationException ex) {
+            tracker.recordError(this, ex.getMessage());
+        }
     }
 }

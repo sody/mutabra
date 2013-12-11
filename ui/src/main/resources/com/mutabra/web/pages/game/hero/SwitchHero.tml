@@ -56,8 +56,9 @@
         </div>
 
         <div class="col-md-5">
-            <t:hero.heroselect id="hero"
+            <t:hero.heroselect t:id="hero" id="hero"
                                value="activeHero"
+                               validate="required"
                                width="350" height="350"
                     />
         </div>

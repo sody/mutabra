@@ -19,6 +19,7 @@ import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -27,6 +28,7 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 import static com.mutabra.web.internal.annotations.MainMenuItem.HERO;
 
@@ -94,6 +96,15 @@ public class SwitchHero extends AbstractPage {
             }
         }
         return null;
+    }
+
+    @OnEvent(value = EventConstants.VALIDATE, component = "hero")
+    void validateHero(final Hero value) throws ValidationException {
+        final Account account = accountContext.getAccount();
+        final Account heroAccount = value != null ? value.getAccount() : null;
+        if (!Objects.equals(account, heroAccount)) {
+            throw new ValidationException(message("error.wrong-hero"));
+        }
     }
 
     @OnEvent(value = EventConstants.SUCCESS)
