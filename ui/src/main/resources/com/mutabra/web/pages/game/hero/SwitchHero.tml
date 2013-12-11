@@ -6,26 +6,28 @@
     <t:form.formerrors/>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 tab-content">
             <t:loop source="source" value="hero" formState="none">
-                <div t:type="if" test="hero" class="face-info${heroItemCssClass}" data-value="${heroItemValue}">
+                <div t:type="if" test="hero" class="tab-pane${heroItemCssClass}" data-value="${heroItemValue}">
                     <table class="table">
                         <colgroup>
-                            <col style="width: 1%;"/>
+                            <col style="width: 50%;"/>
                             <col style="width: 100%;"/>
                         </colgroup>
-                        <tbody>
+                        <thead>
                         <tr>
                             <th>${message:label.name}:</th>
-                            <td>${hero.appearance.name}</td>
+                            <th>${hero.appearance.name}</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr>
                             <th>${message:label.race}:</th>
-                            <td>${hero.appearance.race}</td>
+                            <td>${heroItemRaceLabel}</td>
                         </tr>
                         <tr>
                             <th>${message:label.level}:</th>
-                            <td>${hero.level.code}</td>
+                            <td>${heroItemLevelLabel}</td>
                         </tr>
                         <tr>
                             <th>${message:label.rating}:</th>
@@ -64,7 +66,12 @@
             <t:paginator t:id="paginator" source="source" value="hero" offline="true"
                          id="paginator-hero">
                 <t:if test="hero">
-                    <div class="face${heroItemCssClass}" data-toggle="face-part" data-target="#hero" data-part="all" data-value="${heroItemValue}">
+                    <div class="face-part${heroItemCssClass}"
+                         data-toggle="face-part"
+                         data-target="#hero"
+                         data-part="all"
+                         data-value="${heroItemValue}"
+                         title="${hero.appearance.name}">
                         <t:hero.herofacedisplay appearance="hero.appearance"
                                                 parts="heroItemFaceParts"
                                                 width="100" height="100"
@@ -72,7 +79,7 @@
                     </div>
 
                     <p:else>
-                        <t:pagelink page="game/hero/createhero" class="face">
+                        <t:pagelink page="game/hero/createhero" class="face-part" title="message:hint.create">
                             <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                                 <g>
                                     <text font-size="14px" dy="7" x="50" y="50" text-anchor="middle" stroke="#333">${message:button.create}</text>
@@ -83,7 +90,7 @@
                 </t:if>
 
                 <p:placeholder>
-                    <div class="face disabled">
+                    <div class="face-part disabled">
                         <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
                         </svg>
                     </div>

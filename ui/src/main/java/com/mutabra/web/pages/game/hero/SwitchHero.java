@@ -5,6 +5,9 @@
 
 package com.mutabra.web.pages.game.hero;
 
+import com.mutabra.domain.Translatable;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.domain.game.Hero;
 import com.mutabra.domain.game.HeroAppearancePart;
@@ -61,6 +64,14 @@ public class SwitchHero extends AbstractPage {
 
     public String getHeroItemValue() {
         return encode(Hero.class, hero);
+    }
+
+    public String getHeroItemRaceLabel() {
+        return message(Race.BASENAME + "." + hero.getAppearance().getRace() + "." + Translatable.NAME);
+    }
+
+    public String getHeroItemLevelLabel() {
+        return message(Level.BASENAME + "." + hero.getLevel().getCode() + "." + Translatable.NAME);
     }
 
     @OnEvent(EventConstants.ACTIVATE)

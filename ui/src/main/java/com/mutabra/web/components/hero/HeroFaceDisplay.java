@@ -95,11 +95,6 @@ public class HeroFaceDisplay extends AbstractClientElement {
                 "transform", transform.toString(),
                 "data-part", "all");
 
-        // render name as title
-        writer.element("title");
-        writer.write(appearance.getName());
-        writer.end();
-
         iterator = parts.iterator();
     }
 

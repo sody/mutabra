@@ -5,6 +5,7 @@
 
 package com.mutabra.web.pages.game.hero;
 
+import com.mutabra.domain.Translatable;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.common.Sex;
 import com.mutabra.domain.game.Account;
@@ -53,7 +54,7 @@ public class CreateHero extends AbstractPage {
     @Property
     private HeroAppearancePart facePart;
 
-    private HeroAppearancePart currentPart = HeroAppearancePart.FACE;
+    private HeroAppearancePart currentPart = HeroAppearancePart.RACE;
 
     @Inject
     private Block facePartContent;
@@ -115,13 +116,21 @@ public class CreateHero extends AbstractPage {
         return encode(getFacePartDataSource().getRowType(), facePartItem);
     }
 
+    public String getFacePartItemLabel() {
+        if (facePart == HeroAppearancePart.RACE || facePart == HeroAppearancePart.SEX) {
+            return translate((Translatable) facePartItem, Translatable.NAME);
+        }
+
+        return format("hint.face-part", getFacePartLabel(), facePartItem);
+    }
+
     public String getFacePartItemCssClass() {
         final Object activeValue = getActiveValue(facePart);
         if (facePart == HeroAppearancePart.RACE) {
             // races are compared by code
-            return Objects.equals(activeValue, ((Race) facePartItem).getCode()) ? "face active" : "face";
+            return Objects.equals(activeValue, ((Race) facePartItem).getCode()) ? " active" : "";
         }
-        return Objects.equals(activeValue, facePartItem) ? "face active" : "face";
+        return Objects.equals(activeValue, facePartItem) ? " active" : "";
     }
 
     @OnEvent(EventConstants.ACTIVATE)
