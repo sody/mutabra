@@ -60,15 +60,16 @@ task stage(type: Sync) {
     rename 'jetty-runner(.*)\\.jar', 'jetty-runner.jar'
 }
 
-task herokuRelease {
+task herokuRelease << {
     scm.exec('checkout', '--orphan', 'heroku-release')
-    scm.exec('push', '-f', 'heroku', 'heroku-release:master')
+    scm.exec('commit', '-a', '-m', '[RELEASE]')
+    scm.exec('push', 'heroku', '+HEAD:refs/heads/master')
     scm.exec('checkout', 'master')
     scm.exec('branch', '-D', 'heroku-release')
 }
 
 release {
-    releaseTasks 'build'
+    releaseTasks 'herokuRelease'
 }
 
 allprojects {
