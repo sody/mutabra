@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
     <g stroke="#000" fill="#000">
-        <path fill="none"
-              d="m44,83c3-1,6.7841-2.0095,7,1"/>
+        <!--<path fill="none"-->
+              <!--d="m44,83c3-1,6.7841-2.0095,7,1"/>-->
         <path fill="none"
               d="m35,75c8,3,18,3,26,0"/>
     </g>
