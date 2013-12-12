@@ -42,7 +42,7 @@
                          data-part="${facePart.code}"
                          data-value="${facePartItemValue}"
                          title="${facePartItemLabel}">
-                        <t:svg type="faces/${facePart.code}" image="${facePart.code}_${facePartItemValue}" width="100" height="100"/>
+                        <t:svg type="faces/${facePart.code}" image="${facePart.code}_${facePartItemValue.toLowerCase()}" width="100" height="100"/>
                     </div>
 
                     <p:placeholder>
