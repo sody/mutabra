@@ -8,7 +8,7 @@ apply plugin: 'release'
 apply from: 'gradle/ide-settings.gradle'
 
 group = 'com.mutabra'
-version = '1.0-pre-alpha-15'
+version = '1.0-pre-alpha-16-SNAPSHOT'
 description = 'Mutabra CCG'
 
 ext {
