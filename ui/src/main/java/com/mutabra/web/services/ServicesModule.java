@@ -5,9 +5,10 @@
 
 package com.mutabra.web.services;
 
-import org.apache.tapestry5.ioc.annotations.InjectService;
-import org.mongodb.morphia.Datastore;
-import com.mutabra.domain.common.*;
+import com.mutabra.domain.common.Card;
+import com.mutabra.domain.common.EffectType;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
 import com.mutabra.services.BaseEntityService;
 import com.mutabra.services.BaseEntityServiceImpl;
@@ -17,12 +18,19 @@ import com.mutabra.services.battle.BattleService;
 import com.mutabra.services.battle.BattleServiceImpl;
 import com.mutabra.services.battle.ScriptEngine;
 import com.mutabra.services.battle.ScriptEngineImpl;
-import com.mutabra.services.battle.scripts.*;
+import com.mutabra.services.battle.scripts.AttackScript;
+import com.mutabra.services.battle.scripts.CastScript;
+import com.mutabra.services.battle.scripts.EffectScript;
+import com.mutabra.services.battle.scripts.HealScript;
+import com.mutabra.services.battle.scripts.MoveScript;
+import com.mutabra.services.battle.scripts.SummonScript;
 import com.mutabra.services.game.HeroService;
 import com.mutabra.services.game.HeroServiceImpl;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.InjectService;
+import org.mongodb.morphia.Datastore;
 
 /**
  * @author Ivan Khalopik
@@ -37,10 +45,6 @@ public class ServicesModule {
 
     public CodedEntityService<Level> buildLevelService(final Datastore datastore) {
         return new CodedEntityServiceImpl<Level>(datastore, Level.class);
-    }
-
-    public CodedEntityService<Face> buildFaceService(final Datastore datastore) {
-        return new CodedEntityServiceImpl<Face>(datastore, Face.class);
     }
 
     public CodedEntityService<Race> buildRaceService(final Datastore datastore) {

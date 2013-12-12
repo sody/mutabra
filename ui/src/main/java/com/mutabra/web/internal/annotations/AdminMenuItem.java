@@ -7,7 +7,6 @@ package com.mutabra.web.internal.annotations;
 
 import com.mutabra.web.pages.admin.Accounts;
 import com.mutabra.web.pages.admin.Cards;
-import com.mutabra.web.pages.admin.Faces;
 import com.mutabra.web.pages.admin.Levels;
 import com.mutabra.web.pages.admin.Races;
 import com.mutabra.web.services.MenuModelSource;
@@ -19,7 +18,6 @@ public enum AdminMenuItem implements MenuModelSource.Item {
     ACCOUNTS(Accounts.class),
     LEVELS(Levels.class),
     RACES(Races.class),
-    FACES(Faces.class),
     CARDS(Cards.class);
 
     private final Class<?> pageClass;
