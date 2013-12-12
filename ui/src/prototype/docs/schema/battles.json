@@ -18,7 +18,10 @@
           "nose": 4,
           "mouth": 13,
           "hair": 0,
-          "facial_hair": 0
+          "facial_hair": 0,
+          "skin_color": "#c3996b",
+          "eye_color": "#38101c",
+          "hair_color": "#222"
         },
         "level": {
           "code": "newbie",
@@ -178,7 +181,10 @@
           "nose": 4,
           "mouth": 13,
           "hair": 0,
-          "facial_hair": 0
+          "facial_hair": 0,
+          "skin_color": "#c3996b",
+          "eye_color": "#38101c",
+          "hair_color": "#222"
         },
         "level": {
           "code": "newbie",
