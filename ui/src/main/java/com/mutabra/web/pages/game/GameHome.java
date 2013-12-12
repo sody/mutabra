@@ -5,7 +5,12 @@
 
 package com.mutabra.web.pages.game;
 
+import com.mutabra.domain.Translatable;
 import com.mutabra.domain.battle.Battle;
+import com.mutabra.domain.battle.BattleHero;
+import com.mutabra.domain.common.Level;
+import com.mutabra.domain.common.Race;
+import com.mutabra.domain.game.HeroAppearance;
 import com.mutabra.services.battle.BattleService;
 import com.mutabra.web.base.pages.AbstractPage;
 import com.mutabra.web.internal.annotations.MainMenu;
@@ -14,6 +19,8 @@ import com.mutabra.web.services.AccountContext;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.tapestry5.EventConstants;
+import org.apache.tapestry5.ValidationException;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -29,6 +36,7 @@ import static com.mutabra.web.internal.annotations.MainMenuItem.HOME;
 @RequiresUser
 @RequiresPermissions("game:play")
 @MainMenu(HOME)
+@Import(library = "context:/mutabra/js/face-generator.js")
 public class GameHome extends AbstractPage {
     private static final int EXPIRATION_TIME = 60000;
 
@@ -42,10 +50,33 @@ public class GameHome extends AbstractPage {
     private Battle battle;
 
     @Property
+    private Battle activeBattle;
+
+    @Property
     private boolean canApplyBattle;
 
-    public List<Battle> getBattles() {
+    public List<Battle> getSource() {
         return battleService.findBattles(EXPIRATION_TIME);
+    }
+
+    public BattleHero getHero() {
+        return battle.getHeroes().get(0);
+    }
+
+    public String getBattleItemValue() {
+        return encode(Battle.class, battle);
+    }
+
+    public String getHeroRaceLabel() {
+        return message(Race.BASENAME + "." + getHero().getAppearance().getRace() + "." + Translatable.NAME);
+    }
+
+    public String getHeroLevelLabel() {
+        return message(Level.BASENAME + "." + getHero().getLevel().getCode() + "." + Translatable.NAME);
+    }
+
+    public HeroAppearance getFakeAppearance() {
+        return null;
     }
 
     @OnEvent(EventConstants.ACTIVATE)
@@ -72,24 +103,31 @@ public class GameHome extends AbstractPage {
         return null;
     }
 
-    @OnEvent("create")
+    @OnEvent(component = "create")
     void create() {
         if (canApplyBattle) {
             battleService.create(accountContext.getHero());
         }
     }
 
-    @OnEvent("cancel")
+    @OnEvent(component = "cancel")
     void cancel() {
         if (!canApplyBattle) {
             battleService.delete(accountContext.getBattle());
         }
     }
 
-    @OnEvent("apply")
-    void apply(final Battle battle) {
-        if (canApplyBattle && !battle.isActive()) {
-            battleService.apply(battle, accountContext.getHero());
+    @OnEvent(value = EventConstants.VALIDATE, component = "battleForm")
+    void validateBattle() throws ValidationException {
+        if (!canApplyBattle || activeBattle == null || activeBattle.isActive()) {
+            throw new ValidationException(message("error.wrong-battle"));
+        }
+    }
+
+    @OnEvent(value = EventConstants.SUCCESS, component = "battleForm")
+    void apply() {
+        if (canApplyBattle && !activeBattle.isActive()) {
+            battleService.apply(activeBattle, accountContext.getHero());
         }
     }
 }

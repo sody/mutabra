@@ -2,22 +2,104 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
-<t:loop source="battles" value="battle">
-    <t:eventlink event="apply" context="battle" disabled="!canApplyBattle">
-        <div>
-            ${message:label.name}: ${battle.heroes.get(0).appearance.name}
-            <br/>
-            <t:hero.herofacedisplay appearance="battle.heroes.get(0).appearance" width="100" height="100"/>
-        </div>
-    </t:eventlink>
-</t:loop>
+<t:form t:id="battleForm" class="form-horizontal">
+    <t:form.formerrors/>
 
-<t:if test="canApplyBattle">
-    <t:eventlink event="create" class="btn btn-default">${message:button.create}</t:eventlink>
-    <p:else>
-        <t:eventlink event="cancel" class="btn btn-default">${message:button.cancel}</t:eventlink>
-        <t:game.updatechecker/>
-    </p:else>
-</t:if>
+    <div class="row">
+        <div class="col-md-3 tab-content">
+            <t:loop source="source" value="battle" formState="none">
+                <div class="tab-pane" data-value="${battleItemValue}">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 50%;"/>
+                            <col style="width: 100%;"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>${message:label.name}:</th>
+                            <th>${hero.appearance.name}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>${message:label.race}:</th>
+                            <td>${heroRaceLabel}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.level}:</th>
+                            <td>${heroLevelLabel}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.rating}:</th>
+                            <td>${hero.level.rating}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.next-level}:</th>
+                            <td>${hero.level.nextLevelRating}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.health}:</th>
+                            <td>${hero.health}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.mental-power}:</th>
+                            <td>${hero.mentalPower}</td>
+                        </tr>
+                        <tr>
+                            <th>${message:label.deck}:</th>
+                            <td>${hero.cards.size()}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t:loop>
+        </div>
+
+        <div class="col-md-5">
+            <div id="battle" class="face-editor">
+                <t:hidden t:id="activeBattle" value="activeBattle" data-part="all"/>
+
+                <t:hero.herofacedisplay appearance="fakeAppearance" width="350" height="350"/>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <t:paginator t:id="paginator" source="source" value="battle" offline="true"
+                         id="paginator-battle">
+                <div class="face-part"
+                     data-toggle="face-part"
+                     data-target="#battle"
+                     data-part="all"
+                     data-value="${battleItemValue}"
+                     title="${hero.appearance.name}">
+                    <t:hero.herofacedisplay appearance="hero.appearance"
+                                            width="100" height="100"
+                            />
+                </div>
+
+                <p:placeholder>
+                    <div class="face-part disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" version="1.1">
+                        </svg>
+                    </div>
+                </p:placeholder>
+            </t:paginator>
+        </div>
+    </div>
+
+    <hr/>
+    <div class="btn-toolbar">
+        <t:if test="canApplyBattle">
+            <t:submit value="message:button.battle" class="btn btn-primary"/>
+            <t:actionlink t:id="create" class="btn btn-default">${message:button.create}</t:actionlink>
+            <p:else>
+                <t:actionlink t:id="cancel" class="btn btn-default">${message:button.cancel}</t:actionlink>
+
+                <t:game.updatechecker/>
+            </p:else>
+        </t:if>
+    </div>
+
+</t:form>
 
 </html>

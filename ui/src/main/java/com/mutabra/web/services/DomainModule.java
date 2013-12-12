@@ -17,7 +17,6 @@ import com.mutabra.domain.battle.BattleTarget;
 import com.mutabra.domain.common.Ability;
 import com.mutabra.domain.common.Card;
 import com.mutabra.domain.common.Effect;
-import com.mutabra.domain.common.Face;
 import com.mutabra.domain.common.Level;
 import com.mutabra.domain.common.Race;
 import com.mutabra.domain.game.Account;
@@ -54,7 +53,6 @@ public class DomainModule {
         configuration.add(Ability.class);
         configuration.add(Card.class);
         configuration.add(Effect.class);
-        configuration.add(Face.class);
         configuration.add(Level.class);
         configuration.add(Race.class);
         configuration.add(Account.class);

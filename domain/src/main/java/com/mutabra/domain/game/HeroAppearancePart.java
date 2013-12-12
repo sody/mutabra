@@ -15,10 +15,10 @@ import com.mutabra.domain.Translatable;
 public enum HeroAppearancePart implements Translatable {
     EARS(1),
     FACE(7),
-    EYES(2),
+    EYES(4),
     EYEBROWS(1),
     NOSE(1),
-    MOUTH(2),
+    MOUTH(3),
     HAIR(4),
     FACIAL_HAIR(1),
     NAME(0),
